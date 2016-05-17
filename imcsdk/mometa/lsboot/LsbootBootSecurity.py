@@ -1,0 +1,48 @@
+"""This module contains the general information for LsbootBootSecurity ManagedObject."""
+
+from ...imcmo import ManagedObject
+from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imcmeta import VersionMeta
+
+
+class LsbootBootSecurityConsts():
+    SECURE_BOOT_DISABLED = "Disabled"
+    SECURE_BOOT_ENABLED = "Enabled"
+    SECURE_BOOT_DISABLE = "disable"
+    SECURE_BOOT_DISABLED = "disabled"
+    SECURE_BOOT_ENABLE = "enable"
+    SECURE_BOOT_ENABLED = "enabled"
+
+
+class LsbootBootSecurity(ManagedObject):
+    """This is LsbootBootSecurity class."""
+
+    consts = LsbootBootSecurityConsts()
+    naming_props = set([])
+
+    mo_meta = MoMeta("LsbootBootSecurity", "lsbootBootSecurity", "boot-security", VersionMeta.Version201a, "InputOutput", 0x1f, [], ["admin", "user"], [u'lsbootDef'], [], ["Get", "Set"])
+
+    prop_meta = {
+        "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version201a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+        "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
+        "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
+        "secure_boot": MoPropertyMeta("secure_boot", "secureBoot", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["Disabled", "Enabled", "disable", "disabled", "enable", "enabled"], []), 
+        "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+    }
+
+    prop_map = {
+        "childAction": "child_action", 
+        "dn": "dn", 
+        "rn": "rn", 
+        "secureBoot": "secure_boot", 
+        "status": "status", 
+    }
+
+    def __init__(self, parent_mo_or_dn, **kwargs):
+        self._dirty_mask = 0
+        self.child_action = None
+        self.secure_boot = None
+        self.status = None
+
+        ManagedObject.__init__(self, "LsbootBootSecurity", parent_mo_or_dn, **kwargs)
+

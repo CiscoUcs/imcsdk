@@ -1,0 +1,55 @@
+"""This module contains the general information for BiosVfDCUPrefetch ManagedObject."""
+
+from ...imcmo import ManagedObject
+from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imcmeta import VersionMeta
+
+
+class BiosVfDCUPrefetchConsts():
+    VP_IPPREFETCH_DISABLED = "Disabled"
+    VP_IPPREFETCH_ENABLED = "Enabled"
+    VP_IPPREFETCH_DISABLED = "disabled"
+    VP_IPPREFETCH_ENABLED = "enabled"
+    VP_IPPREFETCH_PLATFORM_DEFAULT = "platform-default"
+    VP_STREAMER_PREFETCH_DISABLED = "Disabled"
+    VP_STREAMER_PREFETCH_ENABLED = "Enabled"
+    VP_STREAMER_PREFETCH_DISABLED = "disabled"
+    VP_STREAMER_PREFETCH_ENABLED = "enabled"
+    VP_STREAMER_PREFETCH_PLATFORM_DEFAULT = "platform-default"
+
+
+class BiosVfDCUPrefetch(ManagedObject):
+    """This is BiosVfDCUPrefetch class."""
+
+    consts = BiosVfDCUPrefetchConsts()
+    naming_props = set([])
+
+    mo_meta = MoMeta("BiosVfDCUPrefetch", "biosVfDCUPrefetch", "DCU-Prefetch", VersionMeta.Version151f, "InputOutput", 0x3f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
+
+    prop_meta = {
+        "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+        "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
+        "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
+        "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+        "vp_ip_prefetch": MoPropertyMeta("vp_ip_prefetch", "vpIPPrefetch", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []), 
+        "vp_streamer_prefetch": MoPropertyMeta("vp_streamer_prefetch", "vpStreamerPrefetch", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []), 
+    }
+
+    prop_map = {
+        "childAction": "child_action", 
+        "dn": "dn", 
+        "rn": "rn", 
+        "status": "status", 
+        "vpIPPrefetch": "vp_ip_prefetch", 
+        "vpStreamerPrefetch": "vp_streamer_prefetch", 
+    }
+
+    def __init__(self, parent_mo_or_dn, **kwargs):
+        self._dirty_mask = 0
+        self.child_action = None
+        self.status = None
+        self.vp_ip_prefetch = None
+        self.vp_streamer_prefetch = None
+
+        ManagedObject.__init__(self, "BiosVfDCUPrefetch", parent_mo_or_dn, **kwargs)
+

@@ -1,0 +1,191 @@
+"""This module contains the general information for MgmtIf ManagedObject."""
+
+from ...imcmo import ManagedObject
+from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imcmeta import VersionMeta
+
+
+class MgmtIfConsts():
+    ADMIN_DUPLEX_NA = "NA"
+    ADMIN_DUPLEX_AUTO = "auto"
+    ADMIN_DUPLEX_FULL = "full"
+    ADMIN_DUPLEX_HALF = "half"
+    ADMIN_NET_SPEED_100_MBPS = "100Mbps"
+    ADMIN_NET_SPEED_10_MBPS = "10Mbps"
+    ADMIN_NET_SPEED_1_GBPS = "1Gbps"
+    ADMIN_NET_SPEED_NA = "NA"
+    ADMIN_NET_SPEED_AUTO = "auto"
+    IF_TYPE_PHYSICAL = "physical"
+    NIC_MODE_CISCO_CARD = "cisco_card"
+    NIC_MODE_DEDICATED = "dedicated"
+    NIC_MODE_SHARED_LOM = "shared_lom"
+    NIC_MODE_SHARED_LOM_10G = "shared_lom_10g"
+    NIC_MODE_SHARED_LOM_EXT = "shared_lom_ext"
+    NIC_MODE_SHIPPING = "shipping"
+    NIC_REDUNDANCY_ACTIVE_ACTIVE = "active-active"
+    NIC_REDUNDANCY_ACTIVE_STANDBY = "active-standby"
+    NIC_REDUNDANCY_NONE = "none"
+    OPER_DUPLEX_NA = "NA"
+    OPER_DUPLEX_AUTO = "auto"
+    OPER_DUPLEX_FULL = "full"
+    OPER_DUPLEX_HALF = "half"
+    OPER_NET_SPEED_100_MBPS = "100Mbps"
+    OPER_NET_SPEED_10_MBPS = "10Mbps"
+    OPER_NET_SPEED_1_GBPS = "1Gbps"
+    OPER_NET_SPEED_NA = "NA"
+    OPER_NET_SPEED_AUTO = "auto"
+    VIC_SLOT_0 = "0"
+    VIC_SLOT_1 = "1"
+    VIC_SLOT_10 = "10"
+    VIC_SLOT_2 = "2"
+    VIC_SLOT_4 = "4"
+    VIC_SLOT_5 = "5"
+    VIC_SLOT_9 = "9"
+    VIC_SLOT_FLEX_LOM = "flex-lom"
+    VIC_SLOT_RISER1 = "riser1"
+    VIC_SLOT_RISER2 = "riser2"
+
+
+class MgmtIf(ManagedObject):
+    """This is MgmtIf class."""
+
+    consts = MgmtIfConsts()
+    naming_props = set([])
+
+    mo_meta = MoMeta("MgmtIf", "mgmtIf", "if-1", VersionMeta.Version151f, "InputOutput", 0xffffffff, [], ["admin", "read-only", "user"], [u'mgmtController'], [u'ipBlocking'], ["Get", "Set"])
+
+    prop_meta = {
+        "admin_duplex": MoPropertyMeta("admin_duplex", "adminDuplex", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["NA", "auto", "full", "half"], []), 
+        "admin_net_speed": MoPropertyMeta("admin_net_speed", "adminNetSpeed", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["100Mbps", "10Mbps", "1Gbps", "NA", "auto"], []), 
+        "auto_neg": MoPropertyMeta("auto_neg", "autoNeg", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
+        "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+        "ddns_domain": MoPropertyMeta("ddns_domain", "ddnsDomain", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
+        "ddns_enable": MoPropertyMeta("ddns_enable", "ddnsEnable", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["No", "Yes", "false", "no", "true", "yes"], []), 
+        "description": MoPropertyMeta("description", "description", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
+        "dhcp_enable": MoPropertyMeta("dhcp_enable", "dhcpEnable", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["No", "Yes", "false", "no", "true", "yes"], []), 
+        "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x80, 0, 255, None, [], []), 
+        "dns_alternate": MoPropertyMeta("dns_alternate", "dnsAlternate", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x100, 0, 256, r"""(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)""", [], []), 
+        "dns_preferred": MoPropertyMeta("dns_preferred", "dnsPreferred", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x200, 0, 256, r"""(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)""", [], []), 
+        "dns_using_dhcp": MoPropertyMeta("dns_using_dhcp", "dnsUsingDhcp", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x400, None, None, None, ["No", "Yes", "false", "no", "true", "yes"], []), 
+        "ext_enabled": MoPropertyMeta("ext_enabled", "extEnabled", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
+        "ext_gw": MoPropertyMeta("ext_gw", "extGw", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x800, 0, 256, r"""(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)""", [], []), 
+        "ext_ip": MoPropertyMeta("ext_ip", "extIp", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x1000, 0, 256, r"""(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)""", [], []), 
+        "ext_mask": MoPropertyMeta("ext_mask", "extMask", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2000, 0, 256, r"""(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)""", [], []), 
+        "hostname": MoPropertyMeta("hostname", "hostname", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4000, 0, 63, r"""(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])""", [], []), 
+        "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
+        "if_type": MoPropertyMeta("if_type", "ifType", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["physical"], []), 
+        "mac": MoPropertyMeta("mac", "mac", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
+        "nic_mode": MoPropertyMeta("nic_mode", "nicMode", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8000, None, None, None, ["cisco_card", "dedicated", "shared_lom", "shared_lom_10g", "shared_lom_ext", "shipping"], []), 
+        "nic_redundancy": MoPropertyMeta("nic_redundancy", "nicRedundancy", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10000, None, None, None, ["active-active", "active-standby", "none"], []), 
+        "oper_duplex": MoPropertyMeta("oper_duplex", "operDuplex", "string", VersionMeta.Version209c, MoPropertyMeta.READ_ONLY, None, None, None, None, ["NA", "auto", "full", "half"], []), 
+        "oper_net_speed": MoPropertyMeta("oper_net_speed", "operNetSpeed", "string", VersionMeta.Version209c, MoPropertyMeta.READ_ONLY, None, None, None, None, ["100Mbps", "10Mbps", "1Gbps", "NA", "auto"], []), 
+        "port_profile": MoPropertyMeta("port_profile", "portProfile", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x20000, None, None, r"""[a-zA-Z0-9_\-]{0,80}""", [], []), 
+        "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x40000, 0, 255, None, [], []), 
+        "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x80000, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+        "subject": MoPropertyMeta("subject", "subject", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
+        "v6_slaac_ip": MoPropertyMeta("v6_slaac_ip", "v6SlaacIp", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, None, 0, 255, r"""([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:""", [], []), 
+        "v6dhcp_enable": MoPropertyMeta("v6dhcp_enable", "v6dhcpEnable", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x100000, None, None, None, ["No", "Yes", "false", "no", "true", "yes"], []), 
+        "v6dns_alternate": MoPropertyMeta("v6dns_alternate", "v6dnsAlternate", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x200000, 0, 255, r"""([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:""", [], []), 
+        "v6dns_preferred": MoPropertyMeta("v6dns_preferred", "v6dnsPreferred", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x400000, 0, 255, r"""([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:""", [], []), 
+        "v6dns_using_dhcp": MoPropertyMeta("v6dns_using_dhcp", "v6dnsUsingDhcp", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x800000, None, None, None, ["No", "Yes", "false", "no", "true", "yes"], []), 
+        "v6ext_enabled": MoPropertyMeta("v6ext_enabled", "v6extEnabled", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x1000000, None, None, None, ["No", "Yes", "false", "no", "true", "yes"], []), 
+        "v6ext_gw": MoPropertyMeta("v6ext_gw", "v6extGw", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x2000000, 0, 255, r"""([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:""", [], []), 
+        "v6ext_ip": MoPropertyMeta("v6ext_ip", "v6extIp", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x4000000, 0, 255, r"""([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:""", [], []), 
+        "v6link_local": MoPropertyMeta("v6link_local", "v6linkLocal", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 255, r"""([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:""", [], []), 
+        "v6prefix": MoPropertyMeta("v6prefix", "v6prefix", "uint", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x8000000, None, None, None, [], ["1-128"]), 
+        "vic_slot": MoPropertyMeta("vic_slot", "vicSlot", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x10000000, None, None, None, ["0", "1", "10", "2", "4", "5", "9", "flex-lom", "riser1", "riser2"], []), 
+        "vlan_enable": MoPropertyMeta("vlan_enable", "vlanEnable", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x20000000, None, None, None, ["No", "Yes", "false", "no", "true", "yes"], []), 
+        "vlan_id": MoPropertyMeta("vlan_id", "vlanId", "uint", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x40000000, None, None, None, [], ["1-4094"]), 
+        "vlan_priority": MoPropertyMeta("vlan_priority", "vlanPriority", "uint", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x80000000, None, None, None, [], ["0-7"]), 
+    }
+
+    prop_map = {
+        "adminDuplex": "admin_duplex", 
+        "adminNetSpeed": "admin_net_speed", 
+        "autoNeg": "auto_neg", 
+        "childAction": "child_action", 
+        "ddnsDomain": "ddns_domain", 
+        "ddnsEnable": "ddns_enable", 
+        "description": "description", 
+        "dhcpEnable": "dhcp_enable", 
+        "dn": "dn", 
+        "dnsAlternate": "dns_alternate", 
+        "dnsPreferred": "dns_preferred", 
+        "dnsUsingDhcp": "dns_using_dhcp", 
+        "extEnabled": "ext_enabled", 
+        "extGw": "ext_gw", 
+        "extIp": "ext_ip", 
+        "extMask": "ext_mask", 
+        "hostname": "hostname", 
+        "id": "id", 
+        "ifType": "if_type", 
+        "mac": "mac", 
+        "nicMode": "nic_mode", 
+        "nicRedundancy": "nic_redundancy", 
+        "operDuplex": "oper_duplex", 
+        "operNetSpeed": "oper_net_speed", 
+        "portProfile": "port_profile", 
+        "rn": "rn", 
+        "status": "status", 
+        "subject": "subject", 
+        "v6SlaacIp": "v6_slaac_ip", 
+        "v6dhcpEnable": "v6dhcp_enable", 
+        "v6dnsAlternate": "v6dns_alternate", 
+        "v6dnsPreferred": "v6dns_preferred", 
+        "v6dnsUsingDhcp": "v6dns_using_dhcp", 
+        "v6extEnabled": "v6ext_enabled", 
+        "v6extGw": "v6ext_gw", 
+        "v6extIp": "v6ext_ip", 
+        "v6linkLocal": "v6link_local", 
+        "v6prefix": "v6prefix", 
+        "vicSlot": "vic_slot", 
+        "vlanEnable": "vlan_enable", 
+        "vlanId": "vlan_id", 
+        "vlanPriority": "vlan_priority", 
+    }
+
+    def __init__(self, parent_mo_or_dn, **kwargs):
+        self._dirty_mask = 0
+        self.admin_duplex = None
+        self.admin_net_speed = None
+        self.auto_neg = None
+        self.child_action = None
+        self.ddns_domain = None
+        self.ddns_enable = None
+        self.description = None
+        self.dhcp_enable = None
+        self.dns_alternate = None
+        self.dns_preferred = None
+        self.dns_using_dhcp = None
+        self.ext_enabled = None
+        self.ext_gw = None
+        self.ext_ip = None
+        self.ext_mask = None
+        self.hostname = None
+        self.id = None
+        self.if_type = None
+        self.mac = None
+        self.nic_mode = None
+        self.nic_redundancy = None
+        self.oper_duplex = None
+        self.oper_net_speed = None
+        self.port_profile = None
+        self.status = None
+        self.subject = None
+        self.v6_slaac_ip = None
+        self.v6dhcp_enable = None
+        self.v6dns_alternate = None
+        self.v6dns_preferred = None
+        self.v6dns_using_dhcp = None
+        self.v6ext_enabled = None
+        self.v6ext_gw = None
+        self.v6ext_ip = None
+        self.v6link_local = None
+        self.v6prefix = None
+        self.vic_slot = None
+        self.vlan_enable = None
+        self.vlan_id = None
+        self.vlan_priority = None
+
+        ManagedObject.__init__(self, "MgmtIf", parent_mo_or_dn, **kwargs)
+

@@ -1,0 +1,47 @@
+"""This module contains the general information for BiosVfDRAMClockThrottling ManagedObject."""
+
+from ...imcmo import ManagedObject
+from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imcmeta import VersionMeta
+
+
+class BiosVfDRAMClockThrottlingConsts():
+    VP_DRAMCLOCK_THROTTLING_AUTO = "Auto"
+    VP_DRAMCLOCK_THROTTLING_BALANCED = "Balanced"
+    VP_DRAMCLOCK_THROTTLING_ENERGY_EFFICIENT = "Energy Efficient"
+    VP_DRAMCLOCK_THROTTLING_PERFORMANCE = "Performance"
+    VP_DRAMCLOCK_THROTTLING_PLATFORM_DEFAULT = "platform-default"
+
+
+class BiosVfDRAMClockThrottling(ManagedObject):
+    """This is BiosVfDRAMClockThrottling class."""
+
+    consts = BiosVfDRAMClockThrottlingConsts()
+    naming_props = set([])
+
+    mo_meta = MoMeta("BiosVfDRAMClockThrottling", "biosVfDRAMClockThrottling", "DRAM-Clock-Throttling", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
+
+    prop_meta = {
+        "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+        "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
+        "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
+        "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+        "vp_dram_clock_throttling": MoPropertyMeta("vp_dram_clock_throttling", "vpDRAMClockThrottling", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Auto", "Balanced", "Energy Efficient", "Performance", "platform-default"], []), 
+    }
+
+    prop_map = {
+        "childAction": "child_action", 
+        "dn": "dn", 
+        "rn": "rn", 
+        "status": "status", 
+        "vpDRAMClockThrottling": "vp_dram_clock_throttling", 
+    }
+
+    def __init__(self, parent_mo_or_dn, **kwargs):
+        self._dirty_mask = 0
+        self.child_action = None
+        self.status = None
+        self.vp_dram_clock_throttling = None
+
+        ManagedObject.__init__(self, "BiosVfDRAMClockThrottling", parent_mo_or_dn, **kwargs)
+

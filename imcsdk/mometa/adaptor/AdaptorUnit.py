@@ -1,0 +1,77 @@
+"""This module contains the general information for AdaptorUnit ManagedObject."""
+
+from ...imcmo import ManagedObject
+from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imcmeta import VersionMeta
+
+
+class AdaptorUnitConsts():
+    ADMIN_STATE_ADAPTOR_RESET = "adaptor-reset"
+    ADMIN_STATE_ADAPTOR_RESET_DEFAULT = "adaptor-reset-default"
+    ADMIN_STATE_POLICY = "policy"
+    PRESENCE_EMPTY = "empty"
+    PRESENCE_EQUIPPED = "equipped"
+    PRESENCE_MISSING = "missing"
+    PRESENCE_NOT_SUPPORTED = "not-supported"
+    PRESENCE_UNKNOWN = "unknown"
+
+
+class AdaptorUnit(ManagedObject):
+    """This is AdaptorUnit class."""
+
+    consts = AdaptorUnitConsts()
+    naming_props = set([u'id'])
+
+    mo_meta = MoMeta("AdaptorUnit", "adaptorUnit", "adaptor-[id]", VersionMeta.Version151f, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'computeRackUnit'], [u'adaptorCfgBackup', u'adaptorCfgImporter', u'adaptorExtEthIf', u'adaptorHostEthIf', u'adaptorHostFcIf', u'adaptorVMFexEthIf', u'faultInst', u'mgmtController'], ["Get", "Set"])
+
+    prop_meta = {
+        "admin_state": MoPropertyMeta("admin_state", "adminState", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["adaptor-reset", "adaptor-reset-default", "policy"], []), 
+        "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+        "cimc_management_enabled": MoPropertyMeta("cimc_management_enabled", "cimcManagementEnabled", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
+        "description": MoPropertyMeta("description", "description", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, 0, 64, None, [], []), 
+        "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
+        "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version151f, MoPropertyMeta.NAMING, 0x10, None, None, None, [], ["0-20"]), 
+        "model": MoPropertyMeta("model", "model", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+        "pci_addr": MoPropertyMeta("pci_addr", "pciAddr", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+        "pci_slot": MoPropertyMeta("pci_slot", "pciSlot", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+        "presence": MoPropertyMeta("presence", "presence", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["empty", "equipped", "missing", "not-supported", "unknown"], []), 
+        "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, None, [], []), 
+        "serial": MoPropertyMeta("serial", "serial", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+        "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+        "vendor": MoPropertyMeta("vendor", "vendor", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+    }
+
+    prop_map = {
+        "adminState": "admin_state", 
+        "childAction": "child_action", 
+        "cimcManagementEnabled": "cimc_management_enabled", 
+        "description": "description", 
+        "dn": "dn", 
+        "id": "id", 
+        "model": "model", 
+        "pciAddr": "pci_addr", 
+        "pciSlot": "pci_slot", 
+        "presence": "presence", 
+        "rn": "rn", 
+        "serial": "serial", 
+        "status": "status", 
+        "vendor": "vendor", 
+    }
+
+    def __init__(self, parent_mo_or_dn, id, **kwargs):
+        self._dirty_mask = 0
+        self.id = id
+        self.admin_state = None
+        self.child_action = None
+        self.cimc_management_enabled = None
+        self.description = None
+        self.model = None
+        self.pci_addr = None
+        self.pci_slot = None
+        self.presence = None
+        self.serial = None
+        self.status = None
+        self.vendor = None
+
+        ManagedObject.__init__(self, "AdaptorUnit", parent_mo_or_dn, **kwargs)
+

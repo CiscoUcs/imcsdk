@@ -1,0 +1,47 @@
+"""This module contains the general information for BiosVfCPUEnergyPerformance ManagedObject."""
+
+from ...imcmo import ManagedObject
+from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imcmeta import VersionMeta
+
+
+class BiosVfCPUEnergyPerformanceConsts():
+    VP_CPUENERGY_PERFORMANCE_BALANCED_ENERGY = "balanced-energy"
+    VP_CPUENERGY_PERFORMANCE_BALANCED_PERFORMANCE = "balanced-performance"
+    VP_CPUENERGY_PERFORMANCE_ENERGY_EFFICIENT = "energy-efficient"
+    VP_CPUENERGY_PERFORMANCE_PERFORMANCE = "performance"
+    VP_CPUENERGY_PERFORMANCE_PLATFORM_DEFAULT = "platform-default"
+
+
+class BiosVfCPUEnergyPerformance(ManagedObject):
+    """This is BiosVfCPUEnergyPerformance class."""
+
+    consts = BiosVfCPUEnergyPerformanceConsts()
+    naming_props = set([])
+
+    mo_meta = MoMeta("BiosVfCPUEnergyPerformance", "biosVfCPUEnergyPerformance", "CPU-EngPerfBias", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
+
+    prop_meta = {
+        "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+        "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
+        "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
+        "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+        "vp_cpu_energy_performance": MoPropertyMeta("vp_cpu_energy_performance", "vpCPUEnergyPerformance", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["balanced-energy", "balanced-performance", "energy-efficient", "performance", "platform-default"], []), 
+    }
+
+    prop_map = {
+        "childAction": "child_action", 
+        "dn": "dn", 
+        "rn": "rn", 
+        "status": "status", 
+        "vpCPUEnergyPerformance": "vp_cpu_energy_performance", 
+    }
+
+    def __init__(self, parent_mo_or_dn, **kwargs):
+        self._dirty_mask = 0
+        self.child_action = None
+        self.status = None
+        self.vp_cpu_energy_performance = None
+
+        ManagedObject.__init__(self, "BiosVfCPUEnergyPerformance", parent_mo_or_dn, **kwargs)
+
