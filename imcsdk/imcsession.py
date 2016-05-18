@@ -17,7 +17,7 @@ import time
 from threading import Timer
 
 from .imcdriver import ImcDriver
-from .imcexception import ImcException
+from .imcexception import ImcException, ImcLoginError
 
 log = logging.getLogger('imc')
 
@@ -391,6 +391,20 @@ class ImcSession(object):
         self.__start_refresh_timer()
         return True
 
+    def __is_fabric_interconnect(self):
+        from .imcmethodfactory import config_resolve_class
+
+        nw_elem = config_resolve_class(cookie=self.__cookie,
+                                       class_id="networkElement")
+        try:
+            nw_elem_response = self.post_elem(nw_elem)
+            if nw_elem_response.error_code == 0:
+                return True
+            else:
+                return False
+        except:
+            return False
+
     def __validate_connection(self):
         """
         Internal method to validate if needs to reconnect or if exist use the
@@ -415,36 +429,31 @@ class ImcSession(object):
 
     def __validate_imc(self):
         """ ValidateIMC method validates if a given host is valid IMC Server."""
+
         from .imcmethodfactory import config_resolve_class
+
         valid_models = ("R460-4640810", "C260-BASE-2646")
         model_validated = False
 
         rack_elem = config_resolve_class(cookie=self.__cookie,
                                          class_id="computeRackUnit")
-
         rack_elem_response = self.post_elem(rack_elem)
-
         if rack_elem_response.error_code == 0:
-            rack = rack_elem_response.out_configs.child[0]
-            model_name = rack.model
-            if model_name.startswith("UCSC"):
-                model_validated = True
-            elif model_name.startswith("UCS-E"):
-                model_validated = True
-            elif model_name in valid_models:
-                model_validated = True
-        if not model_validated:
+            for rack in rack_elem_response.out_configs.child:
+                model_name = rack.model
+                if model_name.startswith("UCSC"):
+                    model_validated = True
+                elif model_name.startswith("UCS-E"):
+                    model_validated = True
+                elif model_name in valid_models:
+                    model_validated = True
+            if not model_validated:
+                self._logout()
+                return False
+
+        if self.__is_fabric_interconnect():
+            self._logout()
             return False
-
-        # nw_elem = self.config_resolve_class(cookie=self.__cookie,
-        #                                class_id="networkElement")
-        #
-        # nw_elem_response = self.post_elem(nw_elem)
-        # # To Do - returns error tag
-        # if nw_elem_response.error_code == 0:
-        #     self.__clear()
-        #     return False
-
         return True
 
     def _login(self, auto_refresh=False, force=False):
@@ -480,8 +489,7 @@ class ImcSession(object):
 
         # Verify not to connect to IMC
         if not self.__validate_imc():
-            self.__clear()
-            return False
+            raise ImcLoginError("Not a supported server.")
 
         top_system = TopSystem()
         if response.out_version is None or response.out_version == "":

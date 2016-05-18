@@ -16,7 +16,6 @@
 from .imccoremeta import ImcVersion
 from .imccoremeta import MoMeta
 
-
 class VersionMeta:
     """ This class contains all the ImcVersion supported by this package."""
     Version151f = ImcVersion("1.5(1f)")
