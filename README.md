@@ -1,5 +1,6 @@
 [![](https://ucspython.herokuapp.com/badge.svg)](https://ucspython.herokuapp.com)
-[![Code Climate](https://codeclimate.com/github/CiscoUcs/ucsmsdk/badges/gpa.svg)](https://codeclimate.com/github/CiscoUcs/ucsmsdk)
+[![Code Health](https://landscape.io/github/CiscoUcs/imcsdk/master/landscape.svg?style=flat)](https://landscape.io/github/CiscoUcs/imcsdk/master)
+
 
 # Python SDK for Cisco IMC
 
