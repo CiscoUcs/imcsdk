@@ -199,7 +199,7 @@ class ManagedObject(ImcBase):
                 prop = "[X]" + str(prop)
             out_str += str(prop).ljust(ts * 4) + ':' + str(
                 prop_value) + "\n"
-  
+
         out_str += "\n"
         return out_str
 
@@ -220,7 +220,6 @@ class ManagedObject(ImcBase):
 
         return self._dirty_mask != 0 or self.child_is_dirty()
 
-  
     def make_rn(self):
         """
         This method returns the Rn for a managed object.

@@ -285,10 +285,17 @@ def extract_molist_from_method_response(method_response,
     """
 
     mo_list = []
-    if len(method_response.out_configs.child) == 0:
-        return mo_list
+    if hasattr(method_response, "out_config"):
+        if len(method_response.out_config.child) == 0:
+            return mo_list
+    else:
+        if len(method_response.out_configs.child) == 0:
+            return mo_list
     if in_hierarchical:
-        current_mo_list = method_response.out_configs.child
+        if hasattr(method_response, "out_config"):
+            current_mo_list = method_response.out_config.child
+        else:
+            current_mo_list = method_response.out_configs.child
         while len(current_mo_list) > 0:
             child_mo_list = []
             for mo in current_mo_list:
