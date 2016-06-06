@@ -106,13 +106,11 @@ class ParseFilter(object):
         return or_filter
 
     @staticmethod
-    def not_operator(self, str_, loc, toks):
+    def not_operator(str_, loc, toks):
         """
         method to support logical 'and' operator expression
         """
 
-        # print str_, loc, toks
-        # print toks[0][1:]
         not_filter = NotFilter()
 
         for op_filter in toks[0][1:]:
@@ -120,7 +118,8 @@ class ParseFilter(object):
         return not_filter
 
 
-prop = pp.WordStart(pp.alphas) + pp.Word(pp.alphanums).setResultsName("prop")
+prop = pp.WordStart(pp.alphas) + pp.Word(pp.alphanums +
+                                         "_").setResultsName("prop")
 value = (pp.QuotedString("'") | pp.QuotedString('"') | pp.Word(
     pp.printables, excludeChars=",")).setResultsName("value")
 types_ = pp.oneOf("re eq ne gt ge lt le").setResultsName("types")
@@ -184,8 +183,8 @@ def handle_filter_max_component_limit(handle, l_filter):
     count of filters can be reduced.
     """
 
-    from imccore import AbstractFilter
-    from imcfiltertype import AndFilter, OrFilter
+    from .imccore import AbstractFilter
+    from .imcfiltertype import AndFilter, OrFilter
 
     max_components = 10
     if l_filter is None or l_filter.child_count() <= max_components:
@@ -200,7 +199,7 @@ def handle_filter_max_component_limit(handle, l_filter):
         parent_filter = AndFilter()
         child_filter = AndFilter()
         parent_filter.child_add(child_filter)
-        for childf in l_filter.GetChild():
+        for childf in l_filter.child:
             if isinstance(childf, AbstractFilter):
                 if child_filter.child_count() == max_components:
                     child_filter = AndFilter()
@@ -211,7 +210,7 @@ def handle_filter_max_component_limit(handle, l_filter):
         parent_filter = OrFilter()
         child_filter = OrFilter()
         parent_filter.child_add(child_filter)
-        for childf in l_filter.GetChild():
+        for childf in l_filter.child:
             if isinstance(childf, AbstractFilter):
                 if child_filter.child_count() == max_components:
                     child_filter = OrFilter()
@@ -226,10 +225,10 @@ def create_basic_filter(filter_name, **kwargs):
     Loads filter class
     """
 
-    import imcmeta
+    from . import imcmeta
     fq_module_name = imcmeta.OTHER_TYPE_CLASS_ID[filter_name]
     module_import = __import__(fq_module_name, globals(), locals(),
-                               [filter_name])
+                               [filter_name], level=1)
     filter_obj = getattr(module_import, filter_name)()
     filter_obj.create(**kwargs)
     return filter_obj
