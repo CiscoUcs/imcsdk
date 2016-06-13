@@ -302,7 +302,6 @@ class ImcHandle(ImcSession):
             mo_list = handle.query_children(in_dn=dn, class_id="classid")\n
         """
 
-        from .imcmeta import MO_CLASS_ID
         from .imcmethodfactory import config_resolve_children
 
         if not in_mo and not in_dn:
@@ -314,9 +313,9 @@ class ImcHandle(ImcSession):
             parent_dn = in_dn
 
         if class_id:
-            if imcgenutils.word_u(class_id) in MO_CLASS_ID:
-                meta_class_id = imcgenutils.word_l(class_id)
-            else:
+            meta_class_id = imccoreutils.find_class_id_in_mo_meta_ignore_case(
+                class_id)
+            if not meta_class_id:
                 meta_class_id = class_id
         else:
             meta_class_id = class_id
@@ -432,7 +431,7 @@ class ImcHandle(ImcSession):
         from .imcmethodfactory import config_conf_mo
         mo_dict = self.__to_commit
         if not mo_dict:
-            log.debug("No Mo to be Committed")
+            log.debug("Commit Buffer is Empty")
             return None
 
         config_map = ConfigMap()
