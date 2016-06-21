@@ -69,6 +69,7 @@ def from_xml_str(xml_str, handle=None):
 
     Args:
         xml_str (str): xml string
+        handle : ImcHandle
 
     Returns:
         object (external method or managed object or generic managed object)

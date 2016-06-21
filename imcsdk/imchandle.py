@@ -123,9 +123,9 @@ class ImcHandle(ImcSession):
             mo list or external method object
 
         Example:
-            elem = imcmethodfactory.config_find_dns_by_class_id(cookie=
-                handle.cookie, class_id="LsServer", in_filter=None)\n
-            dn_objs = handle.process_xml_elem(elem)
+            elem = imcmethodfactory.config_resolve_class(cookie=
+                handle.cookie, class_id="computeRackUnit")\n
+            objs = handle.process_xml_elem(elem)
         """
 
         response = self.post_elem(elem)
@@ -189,10 +189,11 @@ class ImcHandle(ImcSession):
             externalmethod object   if need_response=True\n
 
         Example:
-            obj = handle.lookup_by_dn("fabric/lan/net-100")\n
-            obj = handle.lookup_by_dn("fabric/lan/net-100", hierarchy=True)\n
-            obj = handle.lookup_by_dn("fabric/lan/net-100", need_response=True)\n
-            obj = handle.lookup_by_dn("fabric/lan/net-100", hierarchy=True, need_response=True)\n
+            obj = handle.query_dn("sys/rack-unit-1")\n
+            obj = handle.query_dn("sys/rack-unit-1", hierarchy=True)\n
+            obj = handle.query_dn("sys/rack-unit-1", need_response=True\n
+            obj = handle.query_dn("sys/rack-unit-1", hierarchy=True,
+            need_response=True)\n
         """
 
         from .imcmethodfactory import config_resolve_dn
@@ -200,7 +201,7 @@ class ImcHandle(ImcSession):
         if not dn:
             raise ValueError("Provide dn.")
 
-        elem = config_resolve_dn(cookie=self.cookie,dn=dn,
+        elem = config_resolve_dn(cookie=self.cookie, dn=dn,
                                  in_hierarchical=hierarchy)
         response = self.post_elem(elem)
         if response.error_code != 0:
@@ -240,9 +241,11 @@ class ImcHandle(ImcSession):
             methodresponse              if need_response=True\n
 
         Example:
-            obj = handle.query_classid(class_id="LsServer")\n
-            obj = handle.query_classid(class_id="LsServer", hierarchy=True)\n
-            obj = handle.query_classid(class_id="LsServer", need_response=True)\n
+            obj = handle.query_classid(class_id="computeRackUnit")\n
+            obj = handle.query_classid(class_id="computeRackUnit",
+                hierarchy=True)\n
+            obj = handle.query_classid(class_id="computeRackUnit",
+                need_response=True)\n
 
         """
 
@@ -337,10 +340,7 @@ class ImcHandle(ImcSession):
 
     def add_mo(self, mo, modify_present=False):
         """
-        Adds a managed object to the ImcHandle commit buffer.
-        This method does not trigger a commit by itself.
-        This needs to be followed by a handle.commit() either immediately or
-        after more operations to ensure successful addition of object on server
+        Adds a managed object.
 
         Args:
             mo (managedobject): ManagedObject to be added.
@@ -366,10 +366,6 @@ class ImcHandle(ImcSession):
         """
         Modifies a managed object and adds it to ImcHandle commit buffer (if
          not already in it).
-        This method does not trigger a commit by itself.
-        This needs to be followed by a handle.commit() either immediately or
-        after more operations to ensure successful modification of object on
-        server.
 
         Args:
             mo (managedobject): Managed object with modified properties.
@@ -388,10 +384,6 @@ class ImcHandle(ImcSession):
     def remove_mo(self, mo):
         """
         Removes a managed object.
-        This method does not trigger a commit by itself.
-        This needs to be followed by a handle.commit() either immediately or
-        after more operations to ensure successful removal of object from the
-        server.
 
         Args:
             mo (managedobject): Managed object to be removed.
@@ -415,7 +407,7 @@ class ImcHandle(ImcSession):
         Commit the buffer to the server. Pushes all the configuration changes
         so far to the server.
         Configuration could be added to the commit buffer using add_mo(),
-        set_mo(), remove_mo() prior to making a handle.commit()
+        set_mo(), remove_mo().
 
         Args:
             None

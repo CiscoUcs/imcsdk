@@ -21,10 +21,10 @@ from . import imcgenutils
 from . import imccoreutils
 
 try:
-    import xml.etree.cElementTree as ET
+    import xml.etree.cElementTree as Et
     from xml.etree.cElementTree import Element, SubElement
 except ImportError:
-    import cElementTree as ET
+    import cElementTree as Et
     from cElementTree import Element, SubElement
 
 log = logging.getLogger('imc')
@@ -146,8 +146,8 @@ class AbstractFilter(ImcBase):
     def to_xml(self, xml_doc=None, option=None, elem_name=None):
         """This method writes the xml representation of the Method object."""
         xml_obj = self.elem_create(class_tag=self._tag_name,
-                                       xml_doc=xml_doc,
-                                       override_tag=elem_name)
+                                   xml_doc=xml_doc,
+                                   override_tag=elem_name)
         for key in self.__dict__:
             if key.startswith("_"):
                 continue
@@ -170,8 +170,8 @@ class BaseObject(ImcBase):
     def to_xml(self, xml_doc=None, option=None, elem_name=None):
         """This method writes the xml representation of the Method object."""
         xml_obj = self.elem_create(class_tag=self._tag_name,
-                                       xml_doc=xml_doc,
-                                       override_tag=elem_name)
+                                   xml_doc=xml_doc,
+                                   override_tag=elem_name)
         for key in self.__dict__:
             if key.startswith("_"):
                 continue
@@ -188,13 +188,13 @@ class BaseObject(ImcBase):
         self._handle = handle
         if elem.attrib:
             for attr_name, attr_value in imcgenutils.iteritems(elem.attrib):
-                self.attr_set(imcgenutils.convert_to_python_var_name(attr_name)
-                            , str(attr_value))
+                self.attr_set(imcgenutils.convert_to_python_var_name(attr_name),
+                              str(attr_value))
 
         child_elems = elem.getchildren()
         if child_elems:
             for child_elem in child_elems:
-                if not ET.iselement(child_elem):
+                if not Et.iselement(child_elem):
                     continue
 
                 cln = imcgenutils.word_u(child_elem.tag)

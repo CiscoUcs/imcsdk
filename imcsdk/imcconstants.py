@@ -1143,4 +1143,3 @@ class SyslogSeverity:
     INFORMATIONAL = "informational"
     NOTICE = "notice"
     WARNING = "warning"
-
