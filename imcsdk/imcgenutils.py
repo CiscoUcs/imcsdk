@@ -31,7 +31,6 @@ import logging
 log = logging.getLogger('imc')
 
 
-
 AFFIRMATIVE_LIST = ['true', 'True', 'TRUE', True, 'yes', 'Yes', 'YES']
 
 reserved_keywords = [
@@ -164,7 +163,8 @@ def download_file(driver, file_url, file_dir, file_name):
 
     Example:
         driver = ImcDriver()\n
-        download_file(driver=ImcDriver(), file_url="http://fileurl", file_dir='/home/user/backup', file_name='my_config_backup.xml')
+        download_file(driver=ImcDriver(), file_url="http://fileurl",
+            file_dir='/home/user/backup', file_name='my_config_backup.xml')
     """
 
     import os

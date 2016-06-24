@@ -118,10 +118,10 @@ class ExternalMethod(ImcBase):
         self.child_to_xml(xml_obj, option)
         return xml_obj
 
-    def from_xml(self, elem, handle=None):  # , handle, modify_self=False, mo=None):
+    def from_xml(self, elem, handle=None):
         """Method updates/fills the object from the xml representation
         of the external method object. """
-		
+
         self._handle = handle
         if elem.attrib:
             for attr_name, attr_value in imcgenutils.iteritems(elem.attrib):

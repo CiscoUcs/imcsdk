@@ -138,8 +138,7 @@ class ImcEventHandle(object):
         try:
             xml_query = '<eventSubscribe cookie="%s"/>' % self.__handle.cookie
             self.__event_chan_resp = \
-                self.__handle.post_xml(xml_str=xml_query.encode(),
-                                                            read=False)
+                self.__handle.post_xml(xml_str=xml_query.encode(), read=False)
         except Exception:
             raise
 
@@ -349,7 +348,6 @@ class ImcEventHandle(object):
         self.__dequeue_thread = Thread(name="dequeue_thread",
                                        target=self.__dequeue_function)
         self.__dequeue_thread.start()
-
 
     def watch_block_add(self, params,
                         filter_callback,

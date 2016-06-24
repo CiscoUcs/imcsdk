@@ -150,7 +150,7 @@ def load_mo(elem):
     This loads the managed object  into the current name space
 
     Args:
-        class_id (str): class_id
+        elem (str): element
 
     Returns:
         MangedObject
@@ -223,7 +223,7 @@ def get_mo_property_meta(class_id, key):
         Object of type MoPropertyMeta
 
     Example:
-        prop_meta = get_mo_property_meta(class_id="LsServer", key="usr_lbl")
+        prop_meta = get_mo_property_meta(class_id="aaaUser", key="usr_lbl")
     """
 
     class_obj = load_class(class_id)
@@ -276,7 +276,7 @@ def extract_molist_from_method_response(method_response,
         List of ManagedObjects
 
     Example:
-        response = handle.query_dn("org-root", need_response=True)\n
+        response = handle.query_dn("sys/rack-unit-1", need_response=True)\n
         molist = extract_molist_from_method_response(method_response=response,
                 in_hierarchical=True)
     """
@@ -328,7 +328,7 @@ def write_mo_tree(mo, level=0, break_level=None, show_level=[],
         dictionary
 
     Example:
-        mo=handle.query_dn("org-root")\n
+        mo=handle.query_dn("sys/rack-unit-1")\n
         tree_dict = write_mo_tree(mo, break_level=3, show_level=[1, 3])\n
     """
 
@@ -405,7 +405,7 @@ def extract_mo_tree_from_config_method_response(method_response,
         dictionary
 
     Example:
-        response=handle.query_dn("org-root", need_response=True)\n
+        response=handle.query_dn("sys/rack-unit-1", need_response=True)\n
         tree_dict = write_mo_tree(response, break_level=3, show_level=[1, 3])\n
     """
 
@@ -429,11 +429,10 @@ def print_mo_hierarchy(class_id, level=0, break_level=None, show_level=[]):
         show_level (int list): levels to display
 
     Returns:
-        dictionary
+        None
 
     Example:
-        response=handle.query_dn("org-root", need_response=True)\n
-        tree_dict = write_mo_tree(response, break_level=3, show_level=[1, 3])\n
+        print_mo_hierarchy(class_id, level=0, break_level=3, show_level=[1,3])\n
     """
 
     indent = " "
@@ -473,8 +472,8 @@ def get_naming_props(rn_str, rn_pattern):
         dictionary
 
     Example:
-        naming_props = get_naming_props(rn_str="ls-test_sp",
-                    rn_pattern="ls-[name]")
+        naming_props = get_naming_props(rn_str="psu-2",
+                    rn_pattern="psu-[id]")
     """
 
     rn_regex = re.sub(r"\[(.+?)\]", r"(?P<\1>.+)", rn_pattern)
@@ -580,7 +579,7 @@ def search_class_id(class_id):
         (str) or None
 
     Example:
-        class_ids = search_class_id(class_id="ls")
+        class_ids = search_class_id(class_id="aaa")
     """
 
     from . import imcmeta
@@ -630,10 +629,10 @@ def get_meta_info(class_id, include_prop=True,
                             props : {property_name : MoPropertyMeta Object}
 
     Example:
-        meta = get_meta_info(class_id="lsserver")
-        meta = get_meta_info(class_id="lsserver", break_level=2)
-        meta = get_meta_info(class_id="lsserver", include_prop=False)
-        meta = get_meta_info(class_id="lsserver", show_tree=False)
+        meta = get_meta_info(class_id="computerackunit")
+        meta = get_meta_info(class_id="computerackunit", break_level=2)
+        meta = get_meta_info(class_id="computerackunit", include_prop=False)
+        meta = get_meta_info(class_id="computerackunit", show_tree=False)
 
         print(meta.xml_attribute)
         print(meta.children)

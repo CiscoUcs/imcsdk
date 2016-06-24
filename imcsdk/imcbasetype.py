@@ -75,4 +75,3 @@ class Pair(BaseObject):
         if kwargs:
             for n, v in kwargs.iteritems():
                 self.attr_set(n, v)
-

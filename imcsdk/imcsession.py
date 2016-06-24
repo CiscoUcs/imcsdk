@@ -286,7 +286,7 @@ class ImcSession(object):
 
         Example:
             file_download(url_suffix='backupfile/config_backup.xml',
-            dest_dir='/home/user/backup', file_name='my_config_backup.xml')
+            file_dir='/home/user/backup', file_name='my_config_backup.xml')
         """
 
         from .imcgenutils import download_file
@@ -310,17 +310,17 @@ class ImcSession(object):
         Args:
             url_suffix (str): suffix url to be appended to
                 http\https://host:port/ to locate the file on the server
-            source_dir (str): The directory to upload from
+            file_dir (str): The directory to upload from
             file_name (str): The destination file name for the download
 
         Returns:
             None
 
         Example:
-            source_dir = "/home/user/backup"\n
+            file_dir = "/home/user/backup"\n
             file_name = "config_backup.xml"\n
             uri_suffix = "operations/file-%s/importconfig.txt" % file_name\n
-            file_upload(url_suffix=uri_suffix, source_dir=source_dir,
+            file_upload(url_suffix=uri_suffix, file_dir=file_dir,
             file_name=file_name)
         """
 
@@ -371,9 +371,7 @@ class ImcSession(object):
 
         self.__stop_refresh_timer()
 
-        elem = aaa_refresh(self.__cookie,
-                              self.__username,
-                              self.__password)
+        elem = aaa_refresh(self.__cookie, self.__username, self.__password)
         response = self.post_elem(elem)
         if response.error_code != 0:
             self.__cookie = None
@@ -475,7 +473,7 @@ class ImcSession(object):
             FirmwareRunningConsts
         from .imccoremeta import ImcVersion
         from .imcmethodfactory import aaa_login
-        from .imcmethodfactory import config_resolve_dn, config_resolve_class
+        from .imcmethodfactory import config_resolve_dn
 
         if self.__validate_connection():
             return True
@@ -495,8 +493,7 @@ class ImcSession(object):
         if response.out_version is None or response.out_version == "":
             firmware = FirmwareRunning(top_system,
                                        FirmwareRunningConsts.DEPLOYMENT_SYSTEM)
-            elem = config_resolve_dn(cookie=self.__cookie,
-                                        dn=firmware.dn)
+            elem = config_resolve_dn(cookie=self.__cookie, dn=firmware.dn)
             response = self.post_elem(elem)
             if response.error_code != 0:
                 raise ImcException(response.error_code,
@@ -539,10 +536,8 @@ class ImcSession(object):
             self.__refresh_timer.cancel()
 
         if self.__cookie:
-            #elem = aaa_logout(self.__cookie, 301)
             elem = aaa_logout(self.__cookie)
             response = self.post_elem(elem)
-
 
             if response.error_code == "555":
                 return True
