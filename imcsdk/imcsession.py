@@ -12,12 +12,13 @@
 # limitations under the License.
 
 
-import logging
 import time
+import logging
 from threading import Timer
 
-from .imcdriver import ImcDriver
 from .imcexception import ImcException, ImcLoginError
+from .imcdriver import ImcDriver
+from .imcgenutils import Progress
 
 log = logging.getLogger('imc')
 
@@ -120,7 +121,7 @@ class ImcSession(object):
         Generates IMC URI used for connection
 
         Args:
-            port (int): port The port number to be used during connection
+            port (int or None): The port number to be used during connection
             secure (bool or None): True for secure connection otherwise False
 
         Returns:
@@ -130,34 +131,10 @@ class ImcSession(object):
             uri = __create_uri(port=443, secure=True)
         """
 
-        if secure is not None and port is not None:
-            self.__secure = secure
-            self.__port = int(port)
-        elif secure is not None and port is None:
-            if secure:
-                self.__port = 443
-                self.__secure = True
-            else:
-                self.__port = 80
-                self.__secure = False
-        elif secure is None and port is not None:
-            if int(port) == 80:
-                self.__secure = False
-                self.__port = 80
-            elif int(port) == 443:
-                self.__secure = True
-                self.__port = 443
-            else:
-                self.__secure = True
-                self.__port = int(port)
-        else:
-            self.__secure = True
-            self.__port = 443
+        port = _get_port(port, secure)
+        protocol = _get_proto(port, secure)
 
-        https_or_http = ("http", "https")[self.__secure]
-        host = self.__ip
-        port = str(self.__port)
-        uri = "%s://%s%s%s" % (https_or_http, host, ":", port)
+        uri = "%s://%s%s%s" % (protocol, self.__ip, ":", str(port))
         return uri
 
     def __clear(self):
@@ -231,6 +208,25 @@ class ImcSession(object):
 
         return response_str
 
+    def dump_xml_request(self, elem):
+        from . import imcxmlcodec as xc
+        if not self.__dump_xml:
+            return
+
+        if elem.tag == "aaaLogin":
+            elem.attrib['inPassword'] = "*********"
+            xml_str = xc.to_xml_str(elem)
+            log.debug('%s ====> %s' % (self.__uri, xml_str))
+            elem.attrib['inPassword'] = self.__password
+            xml_str = xc.to_xml_str(elem)
+        else:
+            xml_str = xc.to_xml_str(elem)
+            log.debug('%s ====> %s' % (self.__uri, xml_str))
+
+    def dump_xml_response(self, resp):
+        if self.__dump_xml:
+            log.debug('%s <==== %s' % (self.__uri, resp))
+
     def post_elem(self, elem):
         """
         sends the request and receives the response from imc server using xml
@@ -247,31 +243,35 @@ class ImcSession(object):
         """
 
         from . import imcxmlcodec as xc
-        dump_xml = self.__dump_xml
-        if dump_xml:
-            if elem.tag == "aaaLogin":
-                elem.attrib['inPassword'] = "*********"
-                xml_str = xc.to_xml_str(elem)
-                log.debug('%s ====> %s' % (self.__uri, xml_str))
-                elem.attrib['inPassword'] = self.__password
-                xml_str = xc.to_xml_str(elem)
-            else:
-                xml_str = xc.to_xml_str(elem)
-                log.debug('%s ====> %s' % (self.__uri, xml_str))
-        else:
-            xml_str = xc.to_xml_str(elem)
+
+        if self._is_stale_cookie(elem):
+            elem.attrib['cookie'] = self.cookie
+
+        self.dump_xml_request(elem)
+        xml_str = xc.to_xml_str(elem)
 
         response_str = self.post_xml(xml_str)
-        if dump_xml:
-            log.debug('%s <==== %s' % (self.__uri, response_str))
+        self.dump_xml_response(response_str)
 
         if response_str:
             response = xc.from_xml_str(response_str, self)
+
+            # Cookie update should happen with-in the lock
+            # this ensures that the next packet goes out
+            # with the new cookie
+            if elem.tag == "aaaRefresh":
+                self._update_cookie(response)
+
             return response
 
         return None
 
-    def file_download(self, url_suffix, file_dir, file_name):
+    def file_download(
+            self,
+            url_suffix,
+            file_dir,
+            file_name,
+            progress=Progress()):
         """
         Downloads the file from imc server
 
@@ -280,6 +280,7 @@ class ImcSession(object):
                     http\https://host:port/ to locate the file on the server
             file_dir (str): The directory to download to
             file_name (str): The destination file name for the download
+            progress (imcgenutils.Progress): Class that has method to display progress
 
         Returns:
             None
@@ -299,11 +300,17 @@ class ImcSession(object):
         download_file(driver=self.__driver,
                       file_url=file_url,
                       file_dir=file_dir,
-                      file_name=file_name)
+                      file_name=file_name,
+                      progress=progress)
 
         self.__driver.remove_header('Cookie')
 
-    def file_upload(self, url_suffix, file_dir, file_name):
+    def file_upload(
+            self,
+            url_suffix,
+            file_dir,
+            file_name,
+            progress=Progress()):
         """
         Uploads the file on IMC server.
 
@@ -312,6 +319,7 @@ class ImcSession(object):
                 http\https://host:port/ to locate the file on the server
             file_dir (str): The directory to upload from
             file_name (str): The destination file name for the download
+            progress (imcgenutils.Progress): Class that has method to display progress
 
         Returns:
             None
@@ -334,7 +342,8 @@ class ImcSession(object):
         upload_file(self.__driver,
                     uri=file_url,
                     file_dir=file_dir,
-                    file_name=file_name)
+                    file_name=file_name,
+                    progress=progress)
 
         self.__driver.remove_header('Cookie')
 
@@ -348,7 +357,6 @@ class ImcSession(object):
         else:
             interval = 60
         self.__refresh_timer = Timer(interval, self._refresh)
-        # TODO:handle exit and logout active connections. revert from daemon
         self.__refresh_timer.setDaemon(True)
         self.__refresh_timer.start()
 
@@ -361,6 +369,15 @@ class ImcSession(object):
             self.__refresh_timer.cancel()
             self.__refresh_timer = None
 
+    def _update_cookie(self, response):
+        if response.error_code != 0:
+            return
+        self.__cookie = response.out_cookie
+
+    def _is_stale_cookie(self, elem):
+        return 'cookie' in elem.attrib and elem.attrib[
+            'cookie'] != "" and elem.attrib['cookie'] != self.cookie
+
     def _refresh(self, auto_relogin=False):
         """
         Sends the aaaRefresh query to the imc to refresh the connection
@@ -371,7 +388,9 @@ class ImcSession(object):
 
         self.__stop_refresh_timer()
 
-        elem = aaa_refresh(self.__cookie, self.__username, self.__password)
+        elem = aaa_refresh(self.__cookie,
+                           self.__username,
+                           self.__password)
         response = self.post_elem(elem)
         if response.error_code != 0:
             self.__cookie = None
@@ -454,6 +473,45 @@ class ImcSession(object):
             return False
         return True
 
+    def _update_version(self, response=None):
+        from .imccoremeta import ImcVersion
+        from .imcmethodfactory import config_resolve_dn
+        from .mometa.top.TopSystem import TopSystem
+        from .mometa.firmware.FirmwareRunning import FirmwareRunning, \
+            FirmwareRunningConsts
+
+        # If the aaaLogin response has the version populated, we do not
+        # need to query for it
+        # There are cases where version is missing from aaaLogin response
+        # In such cases the later part of this method populates it
+        if response.out_version is not None and response.out_version != "":
+            return
+
+        top_system = TopSystem()
+        firmware = FirmwareRunning(top_system,
+                                   FirmwareRunningConsts.DEPLOYMENT_SYSTEM)
+        elem = config_resolve_dn(cookie=self.__cookie,
+                                 dn=firmware.dn)
+        response = self.post_elem(elem)
+        if response.error_code != 0:
+            raise ImcException(response.error_code,
+                               response.error_descr)
+        firmware = response.out_config.child[0]
+        self.__version = ImcVersion(firmware.version)
+
+    def _update_domain_name_and_ip(self):
+        from .imcmethodfactory import config_resolve_dn
+        from .mometa.top.TopSystem import TopSystem
+
+        top_system = TopSystem()
+        elem = config_resolve_dn(cookie=self.__cookie, dn=top_system.dn)
+        response = self.post_elem(elem)
+        if response.error_code != 0:
+            raise ImcException(response.error_code, response.error_descr)
+        top_system = response.out_config.child[0]
+        self.__imc = top_system.name
+        self.__virtual_ipv4_address = top_system.address
+
     def _login(self, auto_refresh=False, force=False):
         """
         Internal method responsible to do a login on imc server.
@@ -467,18 +525,15 @@ class ImcSession(object):
         Returns:
             True on successful connect
         """
-
-        from .mometa.top.TopSystem import TopSystem
-        from .mometa.firmware.FirmwareRunning import FirmwareRunning, \
-            FirmwareRunningConsts
-        from .imccoremeta import ImcVersion
         from .imcmethodfactory import aaa_login
-        from .imcmethodfactory import config_resolve_dn
+
+        self.__force = force
 
         if self.__validate_connection():
             return True
 
-        elem = aaa_login(in_name=self.__username, in_password=self.__password)
+        elem = aaa_login(in_name=self.__username,
+                         in_password=self.__password)
         response = self.post_elem(elem)
         if response.error_code != 0:
             self.__clear()
@@ -489,26 +544,8 @@ class ImcSession(object):
         if not self.__validate_imc():
             raise ImcLoginError("Not a supported server.")
 
-        top_system = TopSystem()
-        if response.out_version is None or response.out_version == "":
-            firmware = FirmwareRunning(top_system,
-                                       FirmwareRunningConsts.DEPLOYMENT_SYSTEM)
-            elem = config_resolve_dn(cookie=self.__cookie, dn=firmware.dn)
-            response = self.post_elem(elem)
-            if response.error_code != 0:
-                raise ImcException(response.error_code,
-                                   response.error_descr)
-            firmware = response.out_config.child[0]
-            self._version = ImcVersion(firmware.version)
-
-        top_system = TopSystem()
-        elem = config_resolve_dn(cookie=self.__cookie, dn=top_system.dn)
-        response = self.post_elem(elem)
-        if response.error_code != 0:
-            raise ImcException(response.error_code, response.error_descr)
-        top_system = response.out_config.child[0]
-        self._imc = top_system.name
-        self.__virtual_ipv4_address = top_system.address
+        self._update_version(response)
+        self._update_domain_name_and_ip()
 
         if auto_refresh:
             self.__start_refresh_timer()
@@ -535,20 +572,19 @@ class ImcSession(object):
         if self.__refresh_timer:
             self.__refresh_timer.cancel()
 
-        if self.__cookie:
-            elem = aaa_logout(self.__cookie)
-            response = self.post_elem(elem)
+        elem = aaa_logout(self.__cookie)
+        response = self.post_elem(elem)
 
-            if response.error_code == "555":
-                return True
-
-            if response.error_code != 0:
-                raise ImcException(response.error_code,
-                                   response.error_descr)
-
-            self.__clear()
-
+        if response.error_code == "555":
             return True
+
+        if response.error_code != 0:
+            raise ImcException(response.error_code,
+                               response.error_descr)
+
+        self.__clear()
+
+        return True
 
     def _set_dump_xml(self):
         """
@@ -561,3 +597,21 @@ class ImcSession(object):
         Internal method to set dump_xml to False
         """
         self.__dump_xml = False
+
+
+def _get_port(port, secure):
+    if port is not None:
+        return int(port)
+
+    if secure is False:
+        return 80
+    return 443
+
+
+def _get_proto(port, secure):
+    if secure is None:
+        if port == "80":
+            return "http"
+    elif secure is False:
+        return "http"
+    return "https"
