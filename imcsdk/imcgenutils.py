@@ -19,7 +19,6 @@ This module contains the SDK general utilities.
 from __future__ import print_function
 from __future__ import unicode_literals
 
-from .imcexception import ImcWarning, ImcValidationException
 import os
 import sys
 import platform
@@ -30,6 +29,7 @@ import logging
 
 log = logging.getLogger('imc')
 
+from .imcexception import ImcWarning, ImcValidationException
 
 AFFIRMATIVE_LIST = ['true', 'True', 'TRUE', True, 'yes', 'Yes', 'YES']
 
@@ -110,45 +110,53 @@ def make_dn(rn_array):
     return '/'.join(rn_array)
 
 
-class Progress(object):
-    """Internal class to show the progress of upload/download file."""
-
-    def __init__(self):
-        self._seen = 0.0
-
-    def update(self, total, size, name):
-        """Internal method to show the progress of upload/download file."""
-
-        from sys import stdout
-
-        self._seen += size
-        status = r"%10d  [%3.2f%%]" % (self._seen, self._seen * 100 / total)
-        status = status + chr(8) * (len(status) + 1)
-        stdout.write("\r%s" % status)
-        stdout.flush()
-
-
-class FileWithCallback(object):
+class FileReadStream(object):
     """Internal class to show the progress while reading file."""
 
-    def __init__(self, path, mode, callback, *args):
-        self.file_handle = open(path, mode)
-        self.file_handle.seek(0, 2)
-        self._total = self.file_handle.tell()
-        self.file_handle.seek(0)
-        self._callback = callback
-        self._args = args
+    def __init__(self, path, progress_cb):
+        self._fhandle = open(path, 'rb')
+        # Set the seek positin to the end of the file
+        # and calcualte the total file size
+        self._fhandle.seek(0, os.SEEK_END)
+        self._tsize = self._fhandle.tell()
+
+        # Reset the position to the beginning of the file
+        self._fhandle.seek(0)
+
+        self._progress_cb = progress_cb
 
     def __len__(self):
-        return self._total
+        return self._tsize
 
     def read(self, size):
-        data = self.file_handle.read(size)
-        self._callback(self._total, len(data), *self._args)
+        data = self._fhandle.read(size)
+        self._progress_cb(self._tsize, size)
         return data
 
 
-def download_file(driver, file_url, file_dir, file_name):
+class Progress(object):
+    """ Internal class to show the progress in chunks of custom percentage """
+
+    def __init__(self, interval=10):
+        self._seen = 0.0
+        self._interval = interval
+        self._percent = interval
+
+    def update(self, total, size, name=None):
+        from sys import stdout
+
+        self._seen += size
+        percent = self._seen * 100 / total
+        if percent < self._percent:
+            return
+        status = r"%10d  [%3.2f%%]" % (self._seen, percent)
+        status = status + chr(8) * (len(status) + 1)
+        stdout.write("\r%s" % status)
+        stdout.flush()
+        self._percent += self._interval
+
+
+def download_file(driver, file_url, file_dir, file_name, progress=Progress()):
     """
     Downloads the file from web server
 
@@ -180,32 +188,22 @@ def download_file(driver, file_url, file_dir, file_name):
         # Python 2 code in this block
         file_size = int(response.info().getheaders("Content-Length")[0])
 
-    # meta = response.info()
-    # log.debug(meta)
-    # file_size = int(meta.getheaders("Content-Length")[0])
     print("Downloading: %s Bytes: %s" % (file_name, file_size))
 
     file_handle = open(destination_file, 'wb')
-    file_size_dl = 0
-    #block_sz = 64L
     block_sz = 64
     while True:
         r_buffer = response.read(128 * block_sz)
         if not r_buffer:
             break
 
-        file_size_dl += len(r_buffer)
         file_handle.write(r_buffer)
-        status = r"%10d  [%3.2f%%]" % (
-            file_size_dl, file_size_dl * 100. / file_size)
-        status += chr(8) * (len(status) + 1)
-        stdout.write("\r%s" % status)
-        stdout.flush()
+        progress.update(file_size, len(r_buffer))
     print('Downloading Finished.')
     file_handle.close()
 
 
-def upload_file(driver, uri, file_dir, file_name):
+def upload_file(driver, uri, file_dir, file_name, progress=Progress()):
     """
     Uploads the file on web server
 
@@ -223,17 +221,10 @@ def upload_file(driver, uri, file_dir, file_name):
         upload_file(driver=ImcDriver(), uri="http://fileurl",
             file_dir='/home/user/backup', file_name='my_config_backup.xml')
     """
-
-    progress = Progress()
-    full_path = os.path.join(file_dir, file_name)
-    stream = FileWithCallback(full_path,
-                              'rb',
-                              progress.update,
-                              full_path)
-
+    stream = FileReadStream(os.path.join(file_dir, file_name), progress.update)
     response = driver.post(uri, data=stream)
     if not response:
-        raise ValueError("failed to upload.")
+        raise ValueError("File upload failed.")
 
 
 def check_registry_key(java_key):
