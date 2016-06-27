@@ -11,7 +11,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from nose.tools import *
+from nose.tools import assert_equal
 from imcsdk.imchandle import ImcHandle
 
 

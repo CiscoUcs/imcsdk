@@ -19,7 +19,7 @@ obj = None
 
 def setup_func():
     global obj
-    obj = ComputeRackUnit(parent_mo_or_dn="sys",server_id="1")
+    obj = ComputeRackUnit(parent_mo_or_dn="sys", server_id="1")
 
 def teardown_func():
     pass
@@ -46,4 +46,3 @@ def test_003_set_naming_property():
     # This is a naming property. so, it is create only
     # Should fail with an exception
     obj.server_id = "15"
-

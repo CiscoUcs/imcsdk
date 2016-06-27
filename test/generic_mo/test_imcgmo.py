@@ -11,20 +11,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from nose.tools import *
+from nose.tools import assert_equal
 
 import imcsdk.imcxmlcodec as xc
 import imcsdk.imcmo as imcmo
 
 handle = None
-
-
-def setup():
-    pass
-
-
-def teardown():
-    pass
 
 
 def test_001_create_gmo_from_xml():
