@@ -1,15 +1,15 @@
 """This module contains the general information for BiosVfOutOfBandMgmtPort ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfOutOfBandMgmtPortConsts():
+class BiosVfOutOfBandMgmtPortConsts:
     VP_OUT_OF_BAND_MGMT_PORT_DISABLED = "Disabled"
     VP_OUT_OF_BAND_MGMT_PORT_ENABLED = "Enabled"
-    VP_OUT_OF_BAND_MGMT_PORT_DISABLED = "disabled"
-    VP_OUT_OF_BAND_MGMT_PORT_ENABLED = "enabled"
+    _VP_OUT_OF_BAND_MGMT_PORT_DISABLED = "disabled"
+    _VP_OUT_OF_BAND_MGMT_PORT_ENABLED = "enabled"
     VP_OUT_OF_BAND_MGMT_PORT_PLATFORM_DEFAULT = "platform-default"
 
 

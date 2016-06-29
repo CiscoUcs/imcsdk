@@ -13,7 +13,7 @@
 
 """
 This is an auto-generated module.
-It contains supporting classes for Filter and External Method.
+It contains supporting classes for External Method.
 
 """
 

@@ -1,11 +1,11 @@
 """This module contains the general information for CommSnmpTrap ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class CommSnmpTrapConsts():
+class CommSnmpTrapConsts:
     ADMIN_ACTION_CLEAR = "clear"
     ADMIN_STATE_DISABLED = "disabled"
     ADMIN_STATE_ENABLED = "enabled"

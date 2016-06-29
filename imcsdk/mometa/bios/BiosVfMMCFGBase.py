@@ -1,11 +1,11 @@
 """This module contains the general information for BiosVfMMCFGBase ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfMMCFGBaseConsts():
+class BiosVfMMCFGBaseConsts:
     VP_MMCFGBASE_1_GB = "1 GB"
     VP_MMCFGBASE_2_GB = "2 GB"
     VP_MMCFGBASE_2_5_GB = "2.5 GB"

@@ -1,15 +1,15 @@
 """This module contains the general information for BiosVfCPUFrequencyFloor ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfCPUFrequencyFloorConsts():
+class BiosVfCPUFrequencyFloorConsts:
     VP_CPUFREQUENCY_FLOOR_DISABLED = "Disabled"
     VP_CPUFREQUENCY_FLOOR_ENABLED = "Enabled"
-    VP_CPUFREQUENCY_FLOOR_DISABLED = "disabled"
-    VP_CPUFREQUENCY_FLOOR_ENABLED = "enabled"
+    _VP_CPUFREQUENCY_FLOOR_DISABLED = "disabled"
+    _VP_CPUFREQUENCY_FLOOR_ENABLED = "enabled"
     VP_CPUFREQUENCY_FLOOR_PLATFORM_DEFAULT = "platform-default"
 
 

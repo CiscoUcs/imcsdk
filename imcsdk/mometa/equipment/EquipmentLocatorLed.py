@@ -1,11 +1,11 @@
 """This module contains the general information for EquipmentLocatorLed ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class EquipmentLocatorLedConsts():
+class EquipmentLocatorLedConsts:
     ADMIN_STATE_INACTIVE = "inactive"
     ADMIN_STATE_OFF = "off"
     ADMIN_STATE_ON = "on"

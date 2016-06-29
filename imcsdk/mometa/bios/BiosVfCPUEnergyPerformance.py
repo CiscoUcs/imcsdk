@@ -1,11 +1,11 @@
 """This module contains the general information for BiosVfCPUEnergyPerformance ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfCPUEnergyPerformanceConsts():
+class BiosVfCPUEnergyPerformanceConsts:
     VP_CPUENERGY_PERFORMANCE_BALANCED_ENERGY = "balanced-energy"
     VP_CPUENERGY_PERFORMANCE_BALANCED_PERFORMANCE = "balanced-performance"
     VP_CPUENERGY_PERFORMANCE_ENERGY_EFFICIENT = "energy-efficient"

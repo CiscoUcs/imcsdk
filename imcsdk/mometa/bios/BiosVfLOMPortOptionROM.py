@@ -1,43 +1,43 @@
 """This module contains the general information for BiosVfLOMPortOptionROM ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfLOMPortOptionROMConsts():
+class BiosVfLOMPortOptionROMConsts:
     VP_LOMPORT0_STATE_DISABLED = "Disabled"
     VP_LOMPORT0_STATE_ENABLED = "Enabled"
     VP_LOMPORT0_STATE_LEGACY_ONLY = "Legacy Only"
     VP_LOMPORT0_STATE_UEFI_ONLY = "UEFI Only"
-    VP_LOMPORT0_STATE_DISABLED = "disabled"
-    VP_LOMPORT0_STATE_ENABLED = "enabled"
+    _VP_LOMPORT0_STATE_DISABLED = "disabled"
+    _VP_LOMPORT0_STATE_ENABLED = "enabled"
     VP_LOMPORT0_STATE_PLATFORM_DEFAULT = "platform-default"
     VP_LOMPORT1_STATE_DISABLED = "Disabled"
     VP_LOMPORT1_STATE_ENABLED = "Enabled"
     VP_LOMPORT1_STATE_LEGACY_ONLY = "Legacy Only"
     VP_LOMPORT1_STATE_UEFI_ONLY = "UEFI Only"
-    VP_LOMPORT1_STATE_DISABLED = "disabled"
-    VP_LOMPORT1_STATE_ENABLED = "enabled"
+    _VP_LOMPORT1_STATE_DISABLED = "disabled"
+    _VP_LOMPORT1_STATE_ENABLED = "enabled"
     VP_LOMPORT1_STATE_PLATFORM_DEFAULT = "platform-default"
     VP_LOMPORT2_STATE_DISABLED = "Disabled"
     VP_LOMPORT2_STATE_ENABLED = "Enabled"
     VP_LOMPORT2_STATE_LEGACY_ONLY = "Legacy Only"
     VP_LOMPORT2_STATE_UEFI_ONLY = "UEFI Only"
-    VP_LOMPORT2_STATE_DISABLED = "disabled"
-    VP_LOMPORT2_STATE_ENABLED = "enabled"
+    _VP_LOMPORT2_STATE_DISABLED = "disabled"
+    _VP_LOMPORT2_STATE_ENABLED = "enabled"
     VP_LOMPORT2_STATE_PLATFORM_DEFAULT = "platform-default"
     VP_LOMPORT3_STATE_DISABLED = "Disabled"
     VP_LOMPORT3_STATE_ENABLED = "Enabled"
     VP_LOMPORT3_STATE_LEGACY_ONLY = "Legacy Only"
     VP_LOMPORT3_STATE_UEFI_ONLY = "UEFI Only"
-    VP_LOMPORT3_STATE_DISABLED = "disabled"
-    VP_LOMPORT3_STATE_ENABLED = "enabled"
+    _VP_LOMPORT3_STATE_DISABLED = "disabled"
+    _VP_LOMPORT3_STATE_ENABLED = "enabled"
     VP_LOMPORT3_STATE_PLATFORM_DEFAULT = "platform-default"
     VP_LOMPORTS_ALL_STATE_DISABLED = "Disabled"
     VP_LOMPORTS_ALL_STATE_ENABLED = "Enabled"
-    VP_LOMPORTS_ALL_STATE_DISABLED = "disabled"
-    VP_LOMPORTS_ALL_STATE_ENABLED = "enabled"
+    _VP_LOMPORTS_ALL_STATE_DISABLED = "disabled"
+    _VP_LOMPORTS_ALL_STATE_ENABLED = "enabled"
     VP_LOMPORTS_ALL_STATE_PLATFORM_DEFAULT = "platform-default"
 
 

@@ -1,11 +1,11 @@
 """This module contains the general information for LsbootPxe ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class LsbootPxeConsts():
+class LsbootPxeConsts:
     STATE_DISABLED = "Disabled"
     STATE_ENABLED = "Enabled"
     SUBTYPE_PXE = "PXE"

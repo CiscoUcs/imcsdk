@@ -1,11 +1,11 @@
 """This module contains the general information for LsbootPchStorage ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class LsbootPchStorageConsts():
+class LsbootPchStorageConsts:
     STATE_DISABLED = "Disabled"
     STATE_ENABLED = "Enabled"
     TYPE_PCHSTORAGE = "PCHSTORAGE"

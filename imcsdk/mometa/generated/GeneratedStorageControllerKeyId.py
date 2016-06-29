@@ -1,11 +1,11 @@
 """This module contains the general information for GeneratedStorageControllerKeyId ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class GeneratedStorageControllerKeyIdConsts():
+class GeneratedStorageControllerKeyIdConsts:
     pass
 
 
@@ -15,7 +15,7 @@ class GeneratedStorageControllerKeyId(ManagedObject):
     consts = GeneratedStorageControllerKeyIdConsts()
     naming_props = set([])
 
-    mo_meta = MoMeta("GeneratedStorageControllerKeyId", "generatedStorageControllerKeyId", "gen-key-id", VersionMeta.Version209c, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageController'], [], [None])
+    mo_meta = MoMeta("GeneratedStorageControllerKeyId", "generatedStorageControllerKeyId", "gen-key-id", VersionMeta.Version209c, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageController'], [], ["Get"])
 
     prop_meta = {
         "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version209c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 

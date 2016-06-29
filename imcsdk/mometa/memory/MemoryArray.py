@@ -1,18 +1,18 @@
 """This module contains the general information for MemoryArray ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class MemoryArrayConsts():
+class MemoryArrayConsts:
     CURR_CAPACITY_UNSPECIFIED = "unspecified"
     DIMM_BLACK_LIST_DISABLED = "Disabled"
     DIMM_BLACK_LIST_ENABLED = "Enabled"
     DIMM_BLACK_LIST_DISABLE = "disable"
-    DIMM_BLACK_LIST_DISABLED = "disabled"
+    _DIMM_BLACK_LIST_DISABLED = "disabled"
     DIMM_BLACK_LIST_ENABLE = "enable"
-    DIMM_BLACK_LIST_ENABLED = "enabled"
+    _DIMM_BLACK_LIST_ENABLED = "enabled"
     FAILED_MEMORY_UNSPECIFIED = "unspecified"
     IGNORED_MEMORY_UNSPECIFIED = "unspecified"
     MAX_DEVICES_UNSPECIFIED = "unspecified"

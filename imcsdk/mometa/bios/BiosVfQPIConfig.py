@@ -1,11 +1,11 @@
 """This module contains the general information for BiosVfQPIConfig ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfQPIConfigConsts():
+class BiosVfQPIConfigConsts:
     VP_QPILINK_FREQUENCY_6_4_GT_S = "6.4-gt/s"
     VP_QPILINK_FREQUENCY_7_2_GT_S = "7.2-gt/s"
     VP_QPILINK_FREQUENCY_8_0_GT_S = "8.0-gt/s"

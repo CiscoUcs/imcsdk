@@ -1,11 +1,11 @@
 """This module contains the general information for BiosVfOSBootWatchdogTimerPolicy ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfOSBootWatchdogTimerPolicyConsts():
+class BiosVfOSBootWatchdogTimerPolicyConsts:
     VP_OSBOOT_WATCHDOG_TIMER_POLICY_DO_NOTHING = "do-nothing"
     VP_OSBOOT_WATCHDOG_TIMER_POLICY_PLATFORM_DEFAULT = "platform-default"
     VP_OSBOOT_WATCHDOG_TIMER_POLICY_POWER_OFF = "power-off"

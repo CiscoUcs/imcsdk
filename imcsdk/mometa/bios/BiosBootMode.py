@@ -1,11 +1,11 @@
 """This module contains the general information for BiosBootMode ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosBootModeConsts():
+class BiosBootModeConsts:
     ACTUAL_BOOT_MODE_LEGACY = "Legacy"
     ACTUAL_BOOT_MODE_UEFI = "Uefi"
     ACTUAL_BOOT_MODE_UNKNOWN = "Unknown"

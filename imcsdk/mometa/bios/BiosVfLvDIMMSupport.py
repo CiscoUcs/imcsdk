@@ -1,11 +1,11 @@
 """This module contains the general information for BiosVfLvDIMMSupport ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfLvDIMMSupportConsts():
+class BiosVfLvDIMMSupportConsts:
     VP_LV_DDRMODE_AUTO = "auto"
     VP_LV_DDRMODE_PERFORMANCE_MODE = "performance-mode"
     VP_LV_DDRMODE_PLATFORM_DEFAULT = "platform-default"

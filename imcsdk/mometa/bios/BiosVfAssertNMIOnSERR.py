@@ -1,15 +1,15 @@
 """This module contains the general information for BiosVfAssertNMIOnSERR ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfAssertNMIOnSERRConsts():
+class BiosVfAssertNMIOnSERRConsts:
     VP_ASSERT_NMION_SERR_DISABLED = "Disabled"
     VP_ASSERT_NMION_SERR_ENABLED = "Enabled"
-    VP_ASSERT_NMION_SERR_DISABLED = "disabled"
-    VP_ASSERT_NMION_SERR_ENABLED = "enabled"
+    _VP_ASSERT_NMION_SERR_DISABLED = "disabled"
+    _VP_ASSERT_NMION_SERR_ENABLED = "enabled"
     VP_ASSERT_NMION_SERR_PLATFORM_DEFAULT = "platform-default"
 
 

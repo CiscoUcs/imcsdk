@@ -1,11 +1,11 @@
 """This module contains the general information for CommSyslogClient ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class CommSyslogClientConsts():
+class CommSyslogClientConsts:
     ADMIN_ACTION_CLEAR = "clear"
     ADMIN_STATE_DISABLED = "disabled"
     ADMIN_STATE_ENABLED = "enabled"

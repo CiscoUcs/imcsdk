@@ -1,11 +1,11 @@
 """This module contains the general information for StorageControllerSettings ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class StorageControllerSettingsConsts():
+class StorageControllerSettingsConsts:
     pass
 
 

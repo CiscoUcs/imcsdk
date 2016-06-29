@@ -1,11 +1,11 @@
 """This module contains the general information for FirmwareBootDefinition ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class FirmwareBootDefinitionConsts():
+class FirmwareBootDefinitionConsts:
     TYPE_ADAPTOR = "adaptor"
     TYPE_BLADE_BIOS = "blade-bios"
     TYPE_BLADE_CONTROLLER = "blade-controller"

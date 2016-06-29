@@ -1,15 +1,15 @@
 """This module contains the general information for BiosVfAdjacentCacheLinePrefetch ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfAdjacentCacheLinePrefetchConsts():
+class BiosVfAdjacentCacheLinePrefetchConsts:
     VP_ADJACENT_CACHE_LINE_PREFETCH_DISABLED = "Disabled"
     VP_ADJACENT_CACHE_LINE_PREFETCH_ENABLED = "Enabled"
-    VP_ADJACENT_CACHE_LINE_PREFETCH_DISABLED = "disabled"
-    VP_ADJACENT_CACHE_LINE_PREFETCH_ENABLED = "enabled"
+    _VP_ADJACENT_CACHE_LINE_PREFETCH_DISABLED = "disabled"
+    _VP_ADJACENT_CACHE_LINE_PREFETCH_ENABLED = "enabled"
     VP_ADJACENT_CACHE_LINE_PREFETCH_PLATFORM_DEFAULT = "platform-default"
 
 

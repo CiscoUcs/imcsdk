@@ -1,11 +1,11 @@
 """This module contains the general information for CertificateManagement ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class CertificateManagementConsts():
+class CertificateManagementConsts:
     pass
 
 
@@ -15,7 +15,7 @@ class CertificateManagement(ManagedObject):
     consts = CertificateManagementConsts()
     naming_props = set([])
 
-    mo_meta = MoMeta("CertificateManagement", "certificateManagement", "cert-mgmt", VersionMeta.Version209c, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'topSystem'], [u'currentCertificate', u'generateCertificateSigningRequest', u'uploadCertificate'], [None])
+    mo_meta = MoMeta("CertificateManagement", "certificateManagement", "cert-mgmt", VersionMeta.Version209c, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'topSystem'], [u'currentCertificate', u'generateCertificateSigningRequest', u'uploadCertificate'], ["Get"])
 
     prop_meta = {
         "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version209c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 

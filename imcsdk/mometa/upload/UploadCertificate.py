@@ -1,11 +1,11 @@
 """This module contains the general information for UploadCertificate ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class UploadCertificateConsts():
+class UploadCertificateConsts:
     ADMIN_ACTION_REMOTE_CERT_UPLOAD = "remote-cert-upload"
     PROTOCOL_FTP = "ftp"
     PROTOCOL_HTTP = "http"

@@ -1,11 +1,11 @@
 """This module contains the general information for AdaptorUnit ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class AdaptorUnitConsts():
+class AdaptorUnitConsts:
     ADMIN_STATE_ADAPTOR_RESET = "adaptor-reset"
     ADMIN_STATE_ADAPTOR_RESET_DEFAULT = "adaptor-reset-default"
     ADMIN_STATE_POLICY = "policy"

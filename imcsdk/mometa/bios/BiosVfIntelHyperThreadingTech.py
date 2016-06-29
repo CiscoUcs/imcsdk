@@ -1,15 +1,15 @@
 """This module contains the general information for BiosVfIntelHyperThreadingTech ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfIntelHyperThreadingTechConsts():
+class BiosVfIntelHyperThreadingTechConsts:
     VP_INTEL_HYPER_THREADING_TECH_DISABLED = "Disabled"
     VP_INTEL_HYPER_THREADING_TECH_ENABLED = "Enabled"
-    VP_INTEL_HYPER_THREADING_TECH_DISABLED = "disabled"
-    VP_INTEL_HYPER_THREADING_TECH_ENABLED = "enabled"
+    _VP_INTEL_HYPER_THREADING_TECH_DISABLED = "disabled"
+    _VP_INTEL_HYPER_THREADING_TECH_ENABLED = "enabled"
     VP_INTEL_HYPER_THREADING_TECH_PLATFORM_DEFAULT = "platform-default"
 
 

@@ -1,11 +1,11 @@
 """This module contains the general information for StorageVirtualDrive ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class StorageVirtualDriveConsts():
+class StorageVirtualDriveConsts:
     ACCESS_POLICY_ = ""
     ACCESS_POLICY_BLOCKED = "blocked"
     ACCESS_POLICY_DEFAULT = "default"
@@ -38,10 +38,10 @@ class StorageVirtualDriveConsts():
     REQUESTED_WRITE_CACHE_POLICY_ALWAYS_WRITE_BACK = "Always Write Back"
     REQUESTED_WRITE_CACHE_POLICY_WRITE_BACK_GOOD_BBU = "Write Back Good BBU"
     REQUESTED_WRITE_CACHE_POLICY_WRITE_THROUGH = "Write Through"
-    REQUESTED_WRITE_CACHE_POLICY_ALWAYS_WRITE_BACK = "always-write-back"
+    _REQUESTED_WRITE_CACHE_POLICY_ALWAYS_WRITE_BACK = "always-write-back"
     REQUESTED_WRITE_CACHE_POLICY_DEFAULT = "default"
-    REQUESTED_WRITE_CACHE_POLICY_WRITE_BACK_GOOD_BBU = "write-back-good-bbu"
-    REQUESTED_WRITE_CACHE_POLICY_WRITE_THROUGH = "write-through"
+    _REQUESTED_WRITE_CACHE_POLICY_WRITE_BACK_GOOD_BBU = "write-back-good-bbu"
+    _REQUESTED_WRITE_CACHE_POLICY_WRITE_THROUGH = "write-through"
     STRIP_SIZE_ = ""
     STRIP_SIZE_1024K = "1024k"
     STRIP_SIZE_128K = "128k"
@@ -59,7 +59,7 @@ class StorageVirtualDrive(ManagedObject):
     consts = StorageVirtualDriveConsts()
     naming_props = set([u'id'])
 
-    mo_meta = MoMeta("StorageVirtualDrive", "storageVirtualDrive", "vd-[id]", VersionMeta.Version151f, "InputOutput", 0x3fff, [], ["admin", "read-only", "user"], [u'storageController'], [u'faultInst', u'storageLocalDiskUsage', u'storageOperation'], ["Get", "Set"])
+    mo_meta = MoMeta("StorageVirtualDrive", "storageVirtualDrive", "vd-[id]", VersionMeta.Version151f, "InputOutput", 0x3fff, [], ["admin", "read-only", "user"], [u'storageController'], [u'faultInst', u'storageLocalDiskUsage', u'storageOperation'], ["Get", "Remove", "Set"])
 
     prop_meta = {
         "access_policy": MoPropertyMeta("access_policy", "accessPolicy", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["", "blocked", "default", "hidden", "read-only", "read-write"], []), 

@@ -1,11 +1,11 @@
 """This module contains the general information for PowerBudget ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class PowerBudgetConsts():
+class PowerBudgetConsts:
     ADMIN_ACTION_RESET_POWER_PROFILE_DEFAULT = "reset-power-profile-default"
     ADMIN_ACTION_START_POWER_CHAR = "start-power-char"
 

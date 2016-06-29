@@ -1,11 +1,11 @@
 """This module contains the general information for BiosVfASPMSupport ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfASPMSupportConsts():
+class BiosVfASPMSupportConsts:
     VP_ASPMSUPPORT_AUTO = "Auto"
     VP_ASPMSUPPORT_DISABLED = "Disabled"
     VP_ASPMSUPPORT_FORCE_L0S = "Force L0s"

@@ -1,15 +1,15 @@
 """This module contains the general information for BiosVfFRB2Enable ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfFRB2EnableConsts():
+class BiosVfFRB2EnableConsts:
     VP_FRB2_ENABLE_DISABLED = "Disabled"
     VP_FRB2_ENABLE_ENABLED = "Enabled"
-    VP_FRB2_ENABLE_DISABLED = "disabled"
-    VP_FRB2_ENABLE_ENABLED = "enabled"
+    _VP_FRB2_ENABLE_DISABLED = "disabled"
+    _VP_FRB2_ENABLE_ENABLED = "enabled"
     VP_FRB2_ENABLE_PLATFORM_DEFAULT = "platform-default"
 
 

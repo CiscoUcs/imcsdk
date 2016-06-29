@@ -1,11 +1,11 @@
 """This module contains the general information for FirmwareBootUnit ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class FirmwareBootUnitConsts():
+class FirmwareBootUnitConsts:
     ADMIN_STATE_TRIGGER = "trigger"
     ADMIN_STATE_TRIGGERED = "triggered"
     IGNORE_COMP_CHECK_FALSE = "false"
@@ -27,9 +27,9 @@ class FirmwareBootUnitConsts():
     RESET_ON_ACTIVATE_NO = "No"
     RESET_ON_ACTIVATE_YES = "Yes"
     RESET_ON_ACTIVATE_FALSE = "false"
-    RESET_ON_ACTIVATE_NO = "no"
+    _RESET_ON_ACTIVATE_NO = "no"
     RESET_ON_ACTIVATE_TRUE = "true"
-    RESET_ON_ACTIVATE_YES = "yes"
+    _RESET_ON_ACTIVATE_YES = "yes"
 
 
 class FirmwareBootUnit(ManagedObject):

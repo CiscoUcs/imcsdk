@@ -1,11 +1,11 @@
 """This module contains the general information for MemoryUnit ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class MemoryUnitConsts():
+class MemoryUnitConsts:
     CAPACITY_UNSPECIFIED = "unspecified"
     CLOCK_UNSPECIFIED = "unspecified"
     FORM_FACTOR_DIMM = "DIMM"

@@ -1,11 +1,11 @@
 """This module contains the general information for BiosVfVgaPriority ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfVgaPriorityConsts():
+class BiosVfVgaPriorityConsts:
     VP_VGA_PRIORITY_OFFBOARD = "Offboard"
     VP_VGA_PRIORITY_ONBOARD = "Onboard"
     VP_VGA_PRIORITY_ONBOARD_VGA_DISABLED = "Onboard VGA Disabled"

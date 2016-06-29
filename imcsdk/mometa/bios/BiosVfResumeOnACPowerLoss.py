@@ -1,11 +1,11 @@
 """This module contains the general information for BiosVfResumeOnACPowerLoss ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfResumeOnACPowerLossConsts():
+class BiosVfResumeOnACPowerLossConsts:
     DELAY_TYPE_FIXED = "fixed"
     DELAY_TYPE_RANDOM = "random"
     VP_RESUME_ON_ACPOWER_LOSS_LAST_STATE = "last-state"

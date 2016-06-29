@@ -1,11 +1,11 @@
 """This module contains the general information for BiosVfMirroringMode ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfMirroringModeConsts():
+class BiosVfMirroringModeConsts:
     VP_MIRRORING_MODE_INTER_SOCKET = "inter-socket"
     VP_MIRRORING_MODE_INTRA_SOCKET = "intra-socket"
     VP_MIRRORING_MODE_PLATFORM_DEFAULT = "platform-default"

@@ -1,11 +1,11 @@
 """This module contains the general information for StorageVirtualDriveCreatorUsingUnusedPhysicalDrive ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class StorageVirtualDriveCreatorUsingUnusedPhysicalDriveConsts():
+class StorageVirtualDriveCreatorUsingUnusedPhysicalDriveConsts:
     ACCESS_POLICY_ = ""
     ACCESS_POLICY_BLOCKED = "blocked"
     ACCESS_POLICY_DEFAULT = "default"
@@ -50,10 +50,10 @@ class StorageVirtualDriveCreatorUsingUnusedPhysicalDriveConsts():
     WRITE_POLICY_ALWAYS_WRITE_BACK = "Always Write Back"
     WRITE_POLICY_WRITE_BACK_GOOD_BBU = "Write Back Good BBU"
     WRITE_POLICY_WRITE_THROUGH = "Write Through"
-    WRITE_POLICY_ALWAYS_WRITE_BACK = "always-write-back"
+    _WRITE_POLICY_ALWAYS_WRITE_BACK = "always-write-back"
     WRITE_POLICY_DEFAULT = "default"
-    WRITE_POLICY_WRITE_BACK_GOOD_BBU = "write-back-good-bbu"
-    WRITE_POLICY_WRITE_THROUGH = "write-through"
+    _WRITE_POLICY_WRITE_BACK_GOOD_BBU = "write-back-good-bbu"
+    _WRITE_POLICY_WRITE_THROUGH = "write-through"
 
 
 class StorageVirtualDriveCreatorUsingUnusedPhysicalDrive(ManagedObject):

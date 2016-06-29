@@ -1,17 +1,17 @@
 """This module contains the general information for BiosVfPCIOptionROMs ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfPCIOptionROMsConsts():
+class BiosVfPCIOptionROMsConsts:
     VP_PCIOPTION_ROMS_DISABLED = "Disabled"
     VP_PCIOPTION_ROMS_ENABLED = "Enabled"
     VP_PCIOPTION_ROMS_LEGACY_ONLY = "Legacy Only"
     VP_PCIOPTION_ROMS_UEFI_ONLY = "UEFI Only"
-    VP_PCIOPTION_ROMS_DISABLED = "disabled"
-    VP_PCIOPTION_ROMS_ENABLED = "enabled"
+    _VP_PCIOPTION_ROMS_DISABLED = "disabled"
+    _VP_PCIOPTION_ROMS_ENABLED = "enabled"
     VP_PCIOPTION_ROMS_PLATFORM_DEFAULT = "platform-default"
 
 

@@ -1,11 +1,11 @@
 """This module contains the general information for SysdebugMEpLog ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class SysdebugMEpLogConsts():
+class SysdebugMEpLogConsts:
     ADMIN_STATE_BACKUP = "backup"
     ADMIN_STATE_CLEAR = "clear"
     ADMIN_STATE_POLICY = "policy"

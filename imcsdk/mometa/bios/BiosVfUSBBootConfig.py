@@ -1,15 +1,15 @@
 """This module contains the general information for BiosVfUSBBootConfig ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfUSBBootConfigConsts():
+class BiosVfUSBBootConfigConsts:
     VP_MAKE_DEVICE_NON_BOOTABLE_DISABLED = "Disabled"
     VP_MAKE_DEVICE_NON_BOOTABLE_ENABLED = "Enabled"
-    VP_MAKE_DEVICE_NON_BOOTABLE_DISABLED = "disabled"
-    VP_MAKE_DEVICE_NON_BOOTABLE_ENABLED = "enabled"
+    _VP_MAKE_DEVICE_NON_BOOTABLE_DISABLED = "disabled"
+    _VP_MAKE_DEVICE_NON_BOOTABLE_ENABLED = "enabled"
     VP_MAKE_DEVICE_NON_BOOTABLE_PLATFORM_DEFAULT = "platform-default"
 
 

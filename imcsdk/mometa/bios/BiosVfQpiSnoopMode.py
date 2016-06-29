@@ -1,11 +1,11 @@
 """This module contains the general information for BiosVfQpiSnoopMode ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfQpiSnoopModeConsts():
+class BiosVfQpiSnoopModeConsts:
     VP_QPI_SNOOP_MODE_AUTO = "auto"
     VP_QPI_SNOOP_MODE_CLUSTER_ON_DIE = "cluster-on-die"
     VP_QPI_SNOOP_MODE_EARLY_SNOOP = "early-snoop"

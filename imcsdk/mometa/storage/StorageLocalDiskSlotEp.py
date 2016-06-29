@@ -1,11 +1,11 @@
 """This module contains the general information for StorageLocalDiskSlotEp ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class StorageLocalDiskSlotEpConsts():
+class StorageLocalDiskSlotEpConsts:
     OPERABILITY_ACCESSIBILITY_PROBLEM = "accessibility-problem"
     OPERABILITY_AUTO_UPGRADE = "auto-upgrade"
     OPERABILITY_BIOS_POST_TIMEOUT = "bios-post-timeout"

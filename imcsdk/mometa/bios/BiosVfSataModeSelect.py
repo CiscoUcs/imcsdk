@@ -1,11 +1,11 @@
 """This module contains the general information for BiosVfSataModeSelect ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfSataModeSelectConsts():
+class BiosVfSataModeSelectConsts:
     VP_SATA_MODE_SELECT_AHCI = "AHCI"
     VP_SATA_MODE_SELECT_DISABLED = "Disabled"
     VP_SATA_MODE_SELECT_LSI_SW_RAID = "LSI SW RAID"

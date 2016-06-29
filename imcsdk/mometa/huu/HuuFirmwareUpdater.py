@@ -1,11 +1,11 @@
 """This module contains the general information for HuuFirmwareUpdater ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class HuuFirmwareUpdaterConsts():
+class HuuFirmwareUpdaterConsts:
     ADMIN_STATE_TRIGGER = "trigger"
     ADMIN_STATE_TRIGGERED = "triggered"
     MAP_TYPE_CIFS = "cifs"

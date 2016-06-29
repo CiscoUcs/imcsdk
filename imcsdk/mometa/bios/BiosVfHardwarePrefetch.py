@@ -1,15 +1,15 @@
 """This module contains the general information for BiosVfHardwarePrefetch ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfHardwarePrefetchConsts():
+class BiosVfHardwarePrefetchConsts:
     VP_HARDWARE_PREFETCH_DISABLED = "Disabled"
     VP_HARDWARE_PREFETCH_ENABLED = "Enabled"
-    VP_HARDWARE_PREFETCH_DISABLED = "disabled"
-    VP_HARDWARE_PREFETCH_ENABLED = "enabled"
+    _VP_HARDWARE_PREFETCH_DISABLED = "disabled"
+    _VP_HARDWARE_PREFETCH_ENABLED = "enabled"
     VP_HARDWARE_PREFETCH_PLATFORM_DEFAULT = "platform-default"
 
 

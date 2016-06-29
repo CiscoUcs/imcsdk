@@ -1,11 +1,11 @@
 """This module contains the general information for ComputeRackUnit ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class ComputeRackUnitConsts():
+class ComputeRackUnitConsts:
     ADMIN_POWER_BMC_RESET_DEFAULT = "bmc-reset-default"
     ADMIN_POWER_BMC_RESET_IMMEDIATE = "bmc-reset-immediate"
     ADMIN_POWER_CMOS_RESET_IMMEDIATE = "cmos-reset-immediate"

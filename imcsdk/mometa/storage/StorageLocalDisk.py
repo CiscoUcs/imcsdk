@@ -1,11 +1,11 @@
 """This module contains the general information for StorageLocalDisk ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class StorageLocalDiskConsts():
+class StorageLocalDiskConsts:
     ADMIN_ACTION_DISABLE_SED_FOREIGN_DRIVES = "disable-sed-foreign-drives"
     ADMIN_ACTION_DISABLE_SELF_ENCRYPT = "disable-self-encrypt"
     ADMIN_ACTION_ENABLE_SELF_ENCRYPT = "enable-self-encrypt"

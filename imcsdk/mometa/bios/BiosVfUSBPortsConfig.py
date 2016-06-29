@@ -1,45 +1,45 @@
 """This module contains the general information for BiosVfUSBPortsConfig ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfUSBPortsConfigConsts():
+class BiosVfUSBPortsConfigConsts:
     VP_ALL_USB_DEVICES_DISABLED = "Disabled"
     VP_ALL_USB_DEVICES_ENABLED = "Enabled"
-    VP_ALL_USB_DEVICES_DISABLED = "disabled"
-    VP_ALL_USB_DEVICES_ENABLED = "enabled"
+    _VP_ALL_USB_DEVICES_DISABLED = "disabled"
+    _VP_ALL_USB_DEVICES_ENABLED = "enabled"
     VP_ALL_USB_DEVICES_PLATFORM_DEFAULT = "platform-default"
     VP_USB_PORT_FRONT_DISABLED = "Disabled"
     VP_USB_PORT_FRONT_ENABLED = "Enabled"
-    VP_USB_PORT_FRONT_DISABLED = "disabled"
-    VP_USB_PORT_FRONT_ENABLED = "enabled"
+    _VP_USB_PORT_FRONT_DISABLED = "disabled"
+    _VP_USB_PORT_FRONT_ENABLED = "enabled"
     VP_USB_PORT_FRONT_PLATFORM_DEFAULT = "platform-default"
     VP_USB_PORT_INTERNAL_DISABLED = "Disabled"
     VP_USB_PORT_INTERNAL_ENABLED = "Enabled"
-    VP_USB_PORT_INTERNAL_DISABLED = "disabled"
-    VP_USB_PORT_INTERNAL_ENABLED = "enabled"
+    _VP_USB_PORT_INTERNAL_DISABLED = "disabled"
+    _VP_USB_PORT_INTERNAL_ENABLED = "enabled"
     VP_USB_PORT_INTERNAL_PLATFORM_DEFAULT = "platform-default"
     VP_USB_PORT_KVM_DISABLED = "Disabled"
     VP_USB_PORT_KVM_ENABLED = "Enabled"
-    VP_USB_PORT_KVM_DISABLED = "disabled"
-    VP_USB_PORT_KVM_ENABLED = "enabled"
+    _VP_USB_PORT_KVM_DISABLED = "disabled"
+    _VP_USB_PORT_KVM_ENABLED = "enabled"
     VP_USB_PORT_KVM_PLATFORM_DEFAULT = "platform-default"
     VP_USB_PORT_REAR_DISABLED = "Disabled"
     VP_USB_PORT_REAR_ENABLED = "Enabled"
-    VP_USB_PORT_REAR_DISABLED = "disabled"
-    VP_USB_PORT_REAR_ENABLED = "enabled"
+    _VP_USB_PORT_REAR_DISABLED = "disabled"
+    _VP_USB_PORT_REAR_ENABLED = "enabled"
     VP_USB_PORT_REAR_PLATFORM_DEFAULT = "platform-default"
     VP_USB_PORT_SDCARD_DISABLED = "Disabled"
     VP_USB_PORT_SDCARD_ENABLED = "Enabled"
-    VP_USB_PORT_SDCARD_DISABLED = "disabled"
-    VP_USB_PORT_SDCARD_ENABLED = "enabled"
+    _VP_USB_PORT_SDCARD_DISABLED = "disabled"
+    _VP_USB_PORT_SDCARD_ENABLED = "enabled"
     VP_USB_PORT_SDCARD_PLATFORM_DEFAULT = "platform-default"
     VP_USB_PORT_VMEDIA_DISABLED = "Disabled"
     VP_USB_PORT_VMEDIA_ENABLED = "Enabled"
-    VP_USB_PORT_VMEDIA_DISABLED = "disabled"
-    VP_USB_PORT_VMEDIA_ENABLED = "enabled"
+    _VP_USB_PORT_VMEDIA_DISABLED = "disabled"
+    _VP_USB_PORT_VMEDIA_ENABLED = "enabled"
     VP_USB_PORT_VMEDIA_PLATFORM_DEFAULT = "platform-default"
 
 

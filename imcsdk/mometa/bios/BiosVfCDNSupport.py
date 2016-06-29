@@ -1,11 +1,11 @@
 """This module contains the general information for BiosVfCDNSupport ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfCDNSupportConsts():
+class BiosVfCDNSupportConsts:
     VP_CDNSUPPORT_DISABLED = "Disabled"
     VP_CDNSUPPORT_LOMS_ONLY = "LOMs Only"
     VP_CDNSUPPORT_PLATFORM_DEFAULT = "platform-default"

@@ -1,15 +1,15 @@
 """This module contains the general information for BiosVfOSBootWatchdogTimer ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfOSBootWatchdogTimerConsts():
+class BiosVfOSBootWatchdogTimerConsts:
     VP_OSBOOT_WATCHDOG_TIMER_DISABLED = "Disabled"
     VP_OSBOOT_WATCHDOG_TIMER_ENABLED = "Enabled"
-    VP_OSBOOT_WATCHDOG_TIMER_DISABLED = "disabled"
-    VP_OSBOOT_WATCHDOG_TIMER_ENABLED = "enabled"
+    _VP_OSBOOT_WATCHDOG_TIMER_DISABLED = "disabled"
+    _VP_OSBOOT_WATCHDOG_TIMER_ENABLED = "enabled"
     VP_OSBOOT_WATCHDOG_TIMER_PLATFORM_DEFAULT = "platform-default"
 
 

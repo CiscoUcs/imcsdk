@@ -1,15 +1,15 @@
 """This module contains the general information for BiosVfExecuteDisableBit ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfExecuteDisableBitConsts():
+class BiosVfExecuteDisableBitConsts:
     VP_EXECUTE_DISABLE_BIT_DISABLED = "Disabled"
     VP_EXECUTE_DISABLE_BIT_ENABLED = "Enabled"
-    VP_EXECUTE_DISABLE_BIT_DISABLED = "disabled"
-    VP_EXECUTE_DISABLE_BIT_ENABLED = "enabled"
+    _VP_EXECUTE_DISABLE_BIT_DISABLED = "disabled"
+    _VP_EXECUTE_DISABLE_BIT_ENABLED = "enabled"
     VP_EXECUTE_DISABLE_BIT_PLATFORM_DEFAULT = "platform-default"
 
 

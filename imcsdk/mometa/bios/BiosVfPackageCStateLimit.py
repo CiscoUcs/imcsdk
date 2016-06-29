@@ -1,11 +1,11 @@
 """This module contains the general information for BiosVfPackageCStateLimit ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfPackageCStateLimitConsts():
+class BiosVfPackageCStateLimitConsts:
     VP_PACKAGE_CSTATE_LIMIT_C0_C1 = "C0/C1"
     VP_PACKAGE_CSTATE_LIMIT_C2 = "C2"
     VP_PACKAGE_CSTATE_LIMIT_C6_RETENTION = "C6 Retention"

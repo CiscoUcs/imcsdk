@@ -1,11 +1,11 @@
 """This module contains the general information for BiosVfPCISlotOptionROMEnable ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfPCISlotOptionROMEnableConsts():
+class BiosVfPCISlotOptionROMEnableConsts:
     VP_SLOT10_LINK_SPEED_AUTO = "Auto"
     VP_SLOT10_LINK_SPEED_DISABLED = "Disabled"
     VP_SLOT10_LINK_SPEED_GEN1 = "GEN1"
@@ -16,8 +16,8 @@ class BiosVfPCISlotOptionROMEnableConsts():
     VP_SLOT10_STATE_ENABLED = "Enabled"
     VP_SLOT10_STATE_LEGACY_ONLY = "Legacy Only"
     VP_SLOT10_STATE_UEFI_ONLY = "UEFI Only"
-    VP_SLOT10_STATE_DISABLED = "disabled"
-    VP_SLOT10_STATE_ENABLED = "enabled"
+    _VP_SLOT10_STATE_DISABLED = "disabled"
+    _VP_SLOT10_STATE_ENABLED = "enabled"
     VP_SLOT10_STATE_PLATFORM_DEFAULT = "platform-default"
     VP_SLOT1_LINK_SPEED_AUTO = "Auto"
     VP_SLOT1_LINK_SPEED_DISABLED = "Disabled"
@@ -29,8 +29,8 @@ class BiosVfPCISlotOptionROMEnableConsts():
     VP_SLOT1_STATE_ENABLED = "Enabled"
     VP_SLOT1_STATE_LEGACY_ONLY = "Legacy Only"
     VP_SLOT1_STATE_UEFI_ONLY = "UEFI Only"
-    VP_SLOT1_STATE_DISABLED = "disabled"
-    VP_SLOT1_STATE_ENABLED = "enabled"
+    _VP_SLOT1_STATE_DISABLED = "disabled"
+    _VP_SLOT1_STATE_ENABLED = "enabled"
     VP_SLOT1_STATE_PLATFORM_DEFAULT = "platform-default"
     VP_SLOT2_LINK_SPEED_AUTO = "Auto"
     VP_SLOT2_LINK_SPEED_DISABLED = "Disabled"
@@ -42,8 +42,8 @@ class BiosVfPCISlotOptionROMEnableConsts():
     VP_SLOT2_STATE_ENABLED = "Enabled"
     VP_SLOT2_STATE_LEGACY_ONLY = "Legacy Only"
     VP_SLOT2_STATE_UEFI_ONLY = "UEFI Only"
-    VP_SLOT2_STATE_DISABLED = "disabled"
-    VP_SLOT2_STATE_ENABLED = "enabled"
+    _VP_SLOT2_STATE_DISABLED = "disabled"
+    _VP_SLOT2_STATE_ENABLED = "enabled"
     VP_SLOT2_STATE_PLATFORM_DEFAULT = "platform-default"
     VP_SLOT3_LINK_SPEED_AUTO = "Auto"
     VP_SLOT3_LINK_SPEED_DISABLED = "Disabled"
@@ -55,8 +55,8 @@ class BiosVfPCISlotOptionROMEnableConsts():
     VP_SLOT3_STATE_ENABLED = "Enabled"
     VP_SLOT3_STATE_LEGACY_ONLY = "Legacy Only"
     VP_SLOT3_STATE_UEFI_ONLY = "UEFI Only"
-    VP_SLOT3_STATE_DISABLED = "disabled"
-    VP_SLOT3_STATE_ENABLED = "enabled"
+    _VP_SLOT3_STATE_DISABLED = "disabled"
+    _VP_SLOT3_STATE_ENABLED = "enabled"
     VP_SLOT3_STATE_PLATFORM_DEFAULT = "platform-default"
     VP_SLOT4_LINK_SPEED_AUTO = "Auto"
     VP_SLOT4_LINK_SPEED_DISABLED = "Disabled"
@@ -68,8 +68,8 @@ class BiosVfPCISlotOptionROMEnableConsts():
     VP_SLOT4_STATE_ENABLED = "Enabled"
     VP_SLOT4_STATE_LEGACY_ONLY = "Legacy Only"
     VP_SLOT4_STATE_UEFI_ONLY = "UEFI Only"
-    VP_SLOT4_STATE_DISABLED = "disabled"
-    VP_SLOT4_STATE_ENABLED = "enabled"
+    _VP_SLOT4_STATE_DISABLED = "disabled"
+    _VP_SLOT4_STATE_ENABLED = "enabled"
     VP_SLOT4_STATE_PLATFORM_DEFAULT = "platform-default"
     VP_SLOT5_LINK_SPEED_AUTO = "Auto"
     VP_SLOT5_LINK_SPEED_DISABLED = "Disabled"
@@ -81,8 +81,8 @@ class BiosVfPCISlotOptionROMEnableConsts():
     VP_SLOT5_STATE_ENABLED = "Enabled"
     VP_SLOT5_STATE_LEGACY_ONLY = "Legacy Only"
     VP_SLOT5_STATE_UEFI_ONLY = "UEFI Only"
-    VP_SLOT5_STATE_DISABLED = "disabled"
-    VP_SLOT5_STATE_ENABLED = "enabled"
+    _VP_SLOT5_STATE_DISABLED = "disabled"
+    _VP_SLOT5_STATE_ENABLED = "enabled"
     VP_SLOT5_STATE_PLATFORM_DEFAULT = "platform-default"
     VP_SLOT6_LINK_SPEED_AUTO = "Auto"
     VP_SLOT6_LINK_SPEED_DISABLED = "Disabled"
@@ -94,8 +94,8 @@ class BiosVfPCISlotOptionROMEnableConsts():
     VP_SLOT6_STATE_ENABLED = "Enabled"
     VP_SLOT6_STATE_LEGACY_ONLY = "Legacy Only"
     VP_SLOT6_STATE_UEFI_ONLY = "UEFI Only"
-    VP_SLOT6_STATE_DISABLED = "disabled"
-    VP_SLOT6_STATE_ENABLED = "enabled"
+    _VP_SLOT6_STATE_DISABLED = "disabled"
+    _VP_SLOT6_STATE_ENABLED = "enabled"
     VP_SLOT6_STATE_PLATFORM_DEFAULT = "platform-default"
     VP_SLOT7_LINK_SPEED_AUTO = "Auto"
     VP_SLOT7_LINK_SPEED_DISABLED = "Disabled"
@@ -107,8 +107,8 @@ class BiosVfPCISlotOptionROMEnableConsts():
     VP_SLOT7_STATE_ENABLED = "Enabled"
     VP_SLOT7_STATE_LEGACY_ONLY = "Legacy Only"
     VP_SLOT7_STATE_UEFI_ONLY = "UEFI Only"
-    VP_SLOT7_STATE_DISABLED = "disabled"
-    VP_SLOT7_STATE_ENABLED = "enabled"
+    _VP_SLOT7_STATE_DISABLED = "disabled"
+    _VP_SLOT7_STATE_ENABLED = "enabled"
     VP_SLOT7_STATE_PLATFORM_DEFAULT = "platform-default"
     VP_SLOT8_LINK_SPEED_AUTO = "Auto"
     VP_SLOT8_LINK_SPEED_DISABLED = "Disabled"
@@ -120,8 +120,8 @@ class BiosVfPCISlotOptionROMEnableConsts():
     VP_SLOT8_STATE_ENABLED = "Enabled"
     VP_SLOT8_STATE_LEGACY_ONLY = "Legacy Only"
     VP_SLOT8_STATE_UEFI_ONLY = "UEFI Only"
-    VP_SLOT8_STATE_DISABLED = "disabled"
-    VP_SLOT8_STATE_ENABLED = "enabled"
+    _VP_SLOT8_STATE_DISABLED = "disabled"
+    _VP_SLOT8_STATE_ENABLED = "enabled"
     VP_SLOT8_STATE_PLATFORM_DEFAULT = "platform-default"
     VP_SLOT9_LINK_SPEED_AUTO = "Auto"
     VP_SLOT9_LINK_SPEED_DISABLED = "Disabled"
@@ -133,9 +133,27 @@ class BiosVfPCISlotOptionROMEnableConsts():
     VP_SLOT9_STATE_ENABLED = "Enabled"
     VP_SLOT9_STATE_LEGACY_ONLY = "Legacy Only"
     VP_SLOT9_STATE_UEFI_ONLY = "UEFI Only"
-    VP_SLOT9_STATE_DISABLED = "disabled"
-    VP_SLOT9_STATE_ENABLED = "enabled"
+    _VP_SLOT9_STATE_DISABLED = "disabled"
+    _VP_SLOT9_STATE_ENABLED = "enabled"
     VP_SLOT9_STATE_PLATFORM_DEFAULT = "platform-default"
+    VP_SLOT_FLOMLINK_SPEED_AUTO = "Auto"
+    VP_SLOT_FLOMLINK_SPEED_DISABLED = "Disabled"
+    VP_SLOT_FLOMLINK_SPEED_GEN1 = "GEN1"
+    VP_SLOT_FLOMLINK_SPEED_GEN2 = "GEN2"
+    VP_SLOT_FLOMLINK_SPEED_GEN3 = "GEN3"
+    VP_SLOT_FLOMLINK_SPEED_PLATFORM_DEFAULT = "platform-default"
+    VP_SLOT_FRONT_SLOT5_LINK_SPEED_AUTO = "Auto"
+    VP_SLOT_FRONT_SLOT5_LINK_SPEED_DISABLED = "Disabled"
+    VP_SLOT_FRONT_SLOT5_LINK_SPEED_GEN1 = "GEN1"
+    VP_SLOT_FRONT_SLOT5_LINK_SPEED_GEN2 = "GEN2"
+    VP_SLOT_FRONT_SLOT5_LINK_SPEED_GEN3 = "GEN3"
+    VP_SLOT_FRONT_SLOT5_LINK_SPEED_PLATFORM_DEFAULT = "platform-default"
+    VP_SLOT_FRONT_SLOT6_LINK_SPEED_AUTO = "Auto"
+    VP_SLOT_FRONT_SLOT6_LINK_SPEED_DISABLED = "Disabled"
+    VP_SLOT_FRONT_SLOT6_LINK_SPEED_GEN1 = "GEN1"
+    VP_SLOT_FRONT_SLOT6_LINK_SPEED_GEN2 = "GEN2"
+    VP_SLOT_FRONT_SLOT6_LINK_SPEED_GEN3 = "GEN3"
+    VP_SLOT_FRONT_SLOT6_LINK_SPEED_PLATFORM_DEFAULT = "platform-default"
     VP_SLOT_HBALINK_SPEED_AUTO = "Auto"
     VP_SLOT_HBALINK_SPEED_DISABLED = "Disabled"
     VP_SLOT_HBALINK_SPEED_GEN1 = "GEN1"
@@ -146,44 +164,110 @@ class BiosVfPCISlotOptionROMEnableConsts():
     VP_SLOT_HBASTATE_ENABLED = "Enabled"
     VP_SLOT_HBASTATE_LEGACY_ONLY = "Legacy Only"
     VP_SLOT_HBASTATE_UEFI_ONLY = "UEFI Only"
-    VP_SLOT_HBASTATE_DISABLED = "disabled"
-    VP_SLOT_HBASTATE_ENABLED = "enabled"
+    _VP_SLOT_HBASTATE_DISABLED = "disabled"
+    _VP_SLOT_HBASTATE_ENABLED = "enabled"
     VP_SLOT_HBASTATE_PLATFORM_DEFAULT = "platform-default"
+    VP_SLOT_MLOMLINK_SPEED_AUTO = "Auto"
+    VP_SLOT_MLOMLINK_SPEED_DISABLED = "Disabled"
+    VP_SLOT_MLOMLINK_SPEED_GEN1 = "GEN1"
+    VP_SLOT_MLOMLINK_SPEED_GEN2 = "GEN2"
+    VP_SLOT_MLOMLINK_SPEED_GEN3 = "GEN3"
+    VP_SLOT_MLOMLINK_SPEED_PLATFORM_DEFAULT = "platform-default"
     VP_SLOT_MLOMSTATE_DISABLED = "Disabled"
     VP_SLOT_MLOMSTATE_ENABLED = "Enabled"
     VP_SLOT_MLOMSTATE_LEGACY_ONLY = "Legacy Only"
     VP_SLOT_MLOMSTATE_UEFI_ONLY = "UEFI Only"
-    VP_SLOT_MLOMSTATE_DISABLED = "disabled"
-    VP_SLOT_MLOMSTATE_ENABLED = "enabled"
+    _VP_SLOT_MLOMSTATE_DISABLED = "disabled"
+    _VP_SLOT_MLOMSTATE_ENABLED = "enabled"
     VP_SLOT_MLOMSTATE_PLATFORM_DEFAULT = "platform-default"
     VP_SLOT_MEZZ_STATE_DISABLED = "Disabled"
     VP_SLOT_MEZZ_STATE_ENABLED = "Enabled"
     VP_SLOT_MEZZ_STATE_LEGACY_ONLY = "Legacy Only"
     VP_SLOT_MEZZ_STATE_UEFI_ONLY = "UEFI Only"
-    VP_SLOT_MEZZ_STATE_DISABLED = "disabled"
-    VP_SLOT_MEZZ_STATE_ENABLED = "enabled"
+    _VP_SLOT_MEZZ_STATE_DISABLED = "disabled"
+    _VP_SLOT_MEZZ_STATE_ENABLED = "enabled"
     VP_SLOT_MEZZ_STATE_PLATFORM_DEFAULT = "platform-default"
     VP_SLOT_N1_STATE_DISABLED = "Disabled"
     VP_SLOT_N1_STATE_ENABLED = "Enabled"
     VP_SLOT_N1_STATE_LEGACY_ONLY = "Legacy Only"
     VP_SLOT_N1_STATE_UEFI_ONLY = "UEFI Only"
-    VP_SLOT_N1_STATE_DISABLED = "disabled"
-    VP_SLOT_N1_STATE_ENABLED = "enabled"
+    _VP_SLOT_N1_STATE_DISABLED = "disabled"
+    _VP_SLOT_N1_STATE_ENABLED = "enabled"
     VP_SLOT_N1_STATE_PLATFORM_DEFAULT = "platform-default"
     VP_SLOT_N2_STATE_DISABLED = "Disabled"
     VP_SLOT_N2_STATE_ENABLED = "Enabled"
     VP_SLOT_N2_STATE_LEGACY_ONLY = "Legacy Only"
     VP_SLOT_N2_STATE_UEFI_ONLY = "UEFI Only"
-    VP_SLOT_N2_STATE_DISABLED = "disabled"
-    VP_SLOT_N2_STATE_ENABLED = "enabled"
+    _VP_SLOT_N2_STATE_DISABLED = "disabled"
+    _VP_SLOT_N2_STATE_ENABLED = "enabled"
     VP_SLOT_N2_STATE_PLATFORM_DEFAULT = "platform-default"
+    VP_SLOT_RISER1_LINK_SPEED_AUTO = "Auto"
+    VP_SLOT_RISER1_LINK_SPEED_DISABLED = "Disabled"
+    VP_SLOT_RISER1_LINK_SPEED_GEN1 = "GEN1"
+    VP_SLOT_RISER1_LINK_SPEED_GEN2 = "GEN2"
+    VP_SLOT_RISER1_LINK_SPEED_GEN3 = "GEN3"
+    VP_SLOT_RISER1_LINK_SPEED_PLATFORM_DEFAULT = "platform-default"
+    VP_SLOT_RISER1_SLOT1_LINK_SPEED_AUTO = "Auto"
+    VP_SLOT_RISER1_SLOT1_LINK_SPEED_DISABLED = "Disabled"
+    VP_SLOT_RISER1_SLOT1_LINK_SPEED_GEN1 = "GEN1"
+    VP_SLOT_RISER1_SLOT1_LINK_SPEED_GEN2 = "GEN2"
+    VP_SLOT_RISER1_SLOT1_LINK_SPEED_GEN3 = "GEN3"
+    VP_SLOT_RISER1_SLOT1_LINK_SPEED_PLATFORM_DEFAULT = "platform-default"
+    VP_SLOT_RISER1_SLOT2_LINK_SPEED_AUTO = "Auto"
+    VP_SLOT_RISER1_SLOT2_LINK_SPEED_DISABLED = "Disabled"
+    VP_SLOT_RISER1_SLOT2_LINK_SPEED_GEN1 = "GEN1"
+    VP_SLOT_RISER1_SLOT2_LINK_SPEED_GEN2 = "GEN2"
+    VP_SLOT_RISER1_SLOT2_LINK_SPEED_GEN3 = "GEN3"
+    VP_SLOT_RISER1_SLOT2_LINK_SPEED_PLATFORM_DEFAULT = "platform-default"
+    VP_SLOT_RISER1_SLOT3_LINK_SPEED_AUTO = "Auto"
+    VP_SLOT_RISER1_SLOT3_LINK_SPEED_DISABLED = "Disabled"
+    VP_SLOT_RISER1_SLOT3_LINK_SPEED_GEN1 = "GEN1"
+    VP_SLOT_RISER1_SLOT3_LINK_SPEED_GEN2 = "GEN2"
+    VP_SLOT_RISER1_SLOT3_LINK_SPEED_GEN3 = "GEN3"
+    VP_SLOT_RISER1_SLOT3_LINK_SPEED_PLATFORM_DEFAULT = "platform-default"
+    VP_SLOT_RISER2_LINK_SPEED_AUTO = "Auto"
+    VP_SLOT_RISER2_LINK_SPEED_DISABLED = "Disabled"
+    VP_SLOT_RISER2_LINK_SPEED_GEN1 = "GEN1"
+    VP_SLOT_RISER2_LINK_SPEED_GEN2 = "GEN2"
+    VP_SLOT_RISER2_LINK_SPEED_GEN3 = "GEN3"
+    VP_SLOT_RISER2_LINK_SPEED_PLATFORM_DEFAULT = "platform-default"
+    VP_SLOT_RISER2_SLOT4_LINK_SPEED_AUTO = "Auto"
+    VP_SLOT_RISER2_SLOT4_LINK_SPEED_DISABLED = "Disabled"
+    VP_SLOT_RISER2_SLOT4_LINK_SPEED_GEN1 = "GEN1"
+    VP_SLOT_RISER2_SLOT4_LINK_SPEED_GEN2 = "GEN2"
+    VP_SLOT_RISER2_SLOT4_LINK_SPEED_GEN3 = "GEN3"
+    VP_SLOT_RISER2_SLOT4_LINK_SPEED_PLATFORM_DEFAULT = "platform-default"
+    VP_SLOT_RISER2_SLOT5_LINK_SPEED_AUTO = "Auto"
+    VP_SLOT_RISER2_SLOT5_LINK_SPEED_DISABLED = "Disabled"
+    VP_SLOT_RISER2_SLOT5_LINK_SPEED_GEN1 = "GEN1"
+    VP_SLOT_RISER2_SLOT5_LINK_SPEED_GEN2 = "GEN2"
+    VP_SLOT_RISER2_SLOT5_LINK_SPEED_GEN3 = "GEN3"
+    VP_SLOT_RISER2_SLOT5_LINK_SPEED_PLATFORM_DEFAULT = "platform-default"
+    VP_SLOT_RISER2_SLOT6_LINK_SPEED_AUTO = "Auto"
+    VP_SLOT_RISER2_SLOT6_LINK_SPEED_DISABLED = "Disabled"
+    VP_SLOT_RISER2_SLOT6_LINK_SPEED_GEN1 = "GEN1"
+    VP_SLOT_RISER2_SLOT6_LINK_SPEED_GEN2 = "GEN2"
+    VP_SLOT_RISER2_SLOT6_LINK_SPEED_GEN3 = "GEN3"
+    VP_SLOT_RISER2_SLOT6_LINK_SPEED_PLATFORM_DEFAULT = "platform-default"
     VP_SLOT_SASSTATE_DISABLED = "Disabled"
     VP_SLOT_SASSTATE_ENABLED = "Enabled"
     VP_SLOT_SASSTATE_LEGACY_ONLY = "Legacy Only"
     VP_SLOT_SASSTATE_UEFI_ONLY = "UEFI Only"
-    VP_SLOT_SASSTATE_DISABLED = "disabled"
-    VP_SLOT_SASSTATE_ENABLED = "enabled"
+    _VP_SLOT_SASSTATE_DISABLED = "disabled"
+    _VP_SLOT_SASSTATE_ENABLED = "enabled"
     VP_SLOT_SASSTATE_PLATFORM_DEFAULT = "platform-default"
+    VP_SLOT_SSDSLOT1_LINK_SPEED_AUTO = "Auto"
+    VP_SLOT_SSDSLOT1_LINK_SPEED_DISABLED = "Disabled"
+    VP_SLOT_SSDSLOT1_LINK_SPEED_GEN1 = "GEN1"
+    VP_SLOT_SSDSLOT1_LINK_SPEED_GEN2 = "GEN2"
+    VP_SLOT_SSDSLOT1_LINK_SPEED_GEN3 = "GEN3"
+    VP_SLOT_SSDSLOT1_LINK_SPEED_PLATFORM_DEFAULT = "platform-default"
+    VP_SLOT_SSDSLOT2_LINK_SPEED_AUTO = "Auto"
+    VP_SLOT_SSDSLOT2_LINK_SPEED_DISABLED = "Disabled"
+    VP_SLOT_SSDSLOT2_LINK_SPEED_GEN1 = "GEN1"
+    VP_SLOT_SSDSLOT2_LINK_SPEED_GEN2 = "GEN2"
+    VP_SLOT_SSDSLOT2_LINK_SPEED_GEN3 = "GEN3"
+    VP_SLOT_SSDSLOT2_LINK_SPEED_PLATFORM_DEFAULT = "platform-default"
 
 
 class BiosVfPCISlotOptionROMEnable(ManagedObject):
@@ -192,7 +276,7 @@ class BiosVfPCISlotOptionROMEnable(ManagedObject):
     consts = BiosVfPCISlotOptionROMEnableConsts()
     naming_props = set([])
 
-    mo_meta = MoMeta("BiosVfPCISlotOptionROMEnable", "biosVfPCISlotOptionROMEnable", "PCI-Slot-OptionROM-Enable", VersionMeta.Version151f, "InputOutput", 0x7fffffff, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
+    mo_meta = MoMeta("BiosVfPCISlotOptionROMEnable", "biosVfPCISlotOptionROMEnable", "PCI-Slot-OptionROM-Enable", VersionMeta.Version151f, "InputOutput", 0x1fffffffffff, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
 
     prop_meta = {
         "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
@@ -219,13 +303,27 @@ class BiosVfPCISlotOptionROMEnable(ManagedObject):
         "vp_slot8_state": MoPropertyMeta("vp_slot8_state", "vpSlot8State", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x200000, None, None, None, ["Disabled", "Enabled", "Legacy Only", "UEFI Only", "disabled", "enabled", "platform-default"], []), 
         "vp_slot9_link_speed": MoPropertyMeta("vp_slot9_link_speed", "vpSlot9LinkSpeed", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x400000, None, None, None, ["Auto", "Disabled", "GEN1", "GEN2", "GEN3", "platform-default"], []), 
         "vp_slot9_state": MoPropertyMeta("vp_slot9_state", "vpSlot9State", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x800000, None, None, None, ["Disabled", "Enabled", "Legacy Only", "UEFI Only", "disabled", "enabled", "platform-default"], []), 
-        "vp_slot_hba_link_speed": MoPropertyMeta("vp_slot_hba_link_speed", "vpSlotHBALinkSpeed", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x1000000, None, None, None, ["Auto", "Disabled", "GEN1", "GEN2", "GEN3", "platform-default"], []), 
-        "vp_slot_hba_state": MoPropertyMeta("vp_slot_hba_state", "vpSlotHBAState", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x2000000, None, None, None, ["Disabled", "Enabled", "Legacy Only", "UEFI Only", "disabled", "enabled", "platform-default"], []), 
-        "vp_slot_mlom_state": MoPropertyMeta("vp_slot_mlom_state", "vpSlotMLOMState", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x4000000, None, None, None, ["Disabled", "Enabled", "Legacy Only", "UEFI Only", "disabled", "enabled", "platform-default"], []), 
-        "vp_slot_mezz_state": MoPropertyMeta("vp_slot_mezz_state", "vpSlotMezzState", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8000000, None, None, None, ["Disabled", "Enabled", "Legacy Only", "UEFI Only", "disabled", "enabled", "platform-default"], []), 
-        "vp_slot_n1_state": MoPropertyMeta("vp_slot_n1_state", "vpSlotN1State", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x10000000, None, None, None, ["Disabled", "Enabled", "Legacy Only", "UEFI Only", "disabled", "enabled", "platform-default"], []), 
-        "vp_slot_n2_state": MoPropertyMeta("vp_slot_n2_state", "vpSlotN2State", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x20000000, None, None, None, ["Disabled", "Enabled", "Legacy Only", "UEFI Only", "disabled", "enabled", "platform-default"], []), 
-        "vp_slot_sas_state": MoPropertyMeta("vp_slot_sas_state", "vpSlotSASState", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x40000000, None, None, None, ["Disabled", "Enabled", "Legacy Only", "UEFI Only", "disabled", "enabled", "platform-default"], []), 
+        "vp_slot_flom_link_speed": MoPropertyMeta("vp_slot_flom_link_speed", "vpSlotFLOMLinkSpeed", "string", VersionMeta.Version2010b, MoPropertyMeta.READ_WRITE, 0x1000000, None, None, None, ["Auto", "Disabled", "GEN1", "GEN2", "GEN3", "platform-default"], []), 
+        "vp_slot_front_slot5_link_speed": MoPropertyMeta("vp_slot_front_slot5_link_speed", "vpSlotFrontSlot5LinkSpeed", "string", VersionMeta.Version2010b, MoPropertyMeta.READ_WRITE, 0x2000000, None, None, None, ["Auto", "Disabled", "GEN1", "GEN2", "GEN3", "platform-default"], []), 
+        "vp_slot_front_slot6_link_speed": MoPropertyMeta("vp_slot_front_slot6_link_speed", "vpSlotFrontSlot6LinkSpeed", "string", VersionMeta.Version2010b, MoPropertyMeta.READ_WRITE, 0x4000000, None, None, None, ["Auto", "Disabled", "GEN1", "GEN2", "GEN3", "platform-default"], []), 
+        "vp_slot_hba_link_speed": MoPropertyMeta("vp_slot_hba_link_speed", "vpSlotHBALinkSpeed", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x8000000, None, None, None, ["Auto", "Disabled", "GEN1", "GEN2", "GEN3", "platform-default"], []), 
+        "vp_slot_hba_state": MoPropertyMeta("vp_slot_hba_state", "vpSlotHBAState", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x10000000, None, None, None, ["Disabled", "Enabled", "Legacy Only", "UEFI Only", "disabled", "enabled", "platform-default"], []), 
+        "vp_slot_mlom_link_speed": MoPropertyMeta("vp_slot_mlom_link_speed", "vpSlotMLOMLinkSpeed", "string", VersionMeta.Version2010b, MoPropertyMeta.READ_WRITE, 0x20000000, None, None, None, ["Auto", "Disabled", "GEN1", "GEN2", "GEN3", "platform-default"], []), 
+        "vp_slot_mlom_state": MoPropertyMeta("vp_slot_mlom_state", "vpSlotMLOMState", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x40000000, None, None, None, ["Disabled", "Enabled", "Legacy Only", "UEFI Only", "disabled", "enabled", "platform-default"], []), 
+        "vp_slot_mezz_state": MoPropertyMeta("vp_slot_mezz_state", "vpSlotMezzState", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x80000000, None, None, None, ["Disabled", "Enabled", "Legacy Only", "UEFI Only", "disabled", "enabled", "platform-default"], []), 
+        "vp_slot_n1_state": MoPropertyMeta("vp_slot_n1_state", "vpSlotN1State", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x100000000, None, None, None, ["Disabled", "Enabled", "Legacy Only", "UEFI Only", "disabled", "enabled", "platform-default"], []), 
+        "vp_slot_n2_state": MoPropertyMeta("vp_slot_n2_state", "vpSlotN2State", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x200000000, None, None, None, ["Disabled", "Enabled", "Legacy Only", "UEFI Only", "disabled", "enabled", "platform-default"], []), 
+        "vp_slot_riser1_link_speed": MoPropertyMeta("vp_slot_riser1_link_speed", "vpSlotRiser1LinkSpeed", "string", VersionMeta.Version2010b, MoPropertyMeta.READ_WRITE, 0x400000000, None, None, None, ["Auto", "Disabled", "GEN1", "GEN2", "GEN3", "platform-default"], []), 
+        "vp_slot_riser1_slot1_link_speed": MoPropertyMeta("vp_slot_riser1_slot1_link_speed", "vpSlotRiser1Slot1LinkSpeed", "string", VersionMeta.Version2010b, MoPropertyMeta.READ_WRITE, 0x800000000, None, None, None, ["Auto", "Disabled", "GEN1", "GEN2", "GEN3", "platform-default"], []), 
+        "vp_slot_riser1_slot2_link_speed": MoPropertyMeta("vp_slot_riser1_slot2_link_speed", "vpSlotRiser1Slot2LinkSpeed", "string", VersionMeta.Version2010b, MoPropertyMeta.READ_WRITE, 0x1000000000, None, None, None, ["Auto", "Disabled", "GEN1", "GEN2", "GEN3", "platform-default"], []), 
+        "vp_slot_riser1_slot3_link_speed": MoPropertyMeta("vp_slot_riser1_slot3_link_speed", "vpSlotRiser1Slot3LinkSpeed", "string", VersionMeta.Version2010b, MoPropertyMeta.READ_WRITE, 0x2000000000, None, None, None, ["Auto", "Disabled", "GEN1", "GEN2", "GEN3", "platform-default"], []), 
+        "vp_slot_riser2_link_speed": MoPropertyMeta("vp_slot_riser2_link_speed", "vpSlotRiser2LinkSpeed", "string", VersionMeta.Version2010b, MoPropertyMeta.READ_WRITE, 0x4000000000, None, None, None, ["Auto", "Disabled", "GEN1", "GEN2", "GEN3", "platform-default"], []), 
+        "vp_slot_riser2_slot4_link_speed": MoPropertyMeta("vp_slot_riser2_slot4_link_speed", "vpSlotRiser2Slot4LinkSpeed", "string", VersionMeta.Version2010b, MoPropertyMeta.READ_WRITE, 0x8000000000, None, None, None, ["Auto", "Disabled", "GEN1", "GEN2", "GEN3", "platform-default"], []), 
+        "vp_slot_riser2_slot5_link_speed": MoPropertyMeta("vp_slot_riser2_slot5_link_speed", "vpSlotRiser2Slot5LinkSpeed", "string", VersionMeta.Version2010b, MoPropertyMeta.READ_WRITE, 0x10000000000, None, None, None, ["Auto", "Disabled", "GEN1", "GEN2", "GEN3", "platform-default"], []), 
+        "vp_slot_riser2_slot6_link_speed": MoPropertyMeta("vp_slot_riser2_slot6_link_speed", "vpSlotRiser2Slot6LinkSpeed", "string", VersionMeta.Version2010b, MoPropertyMeta.READ_WRITE, 0x20000000000, None, None, None, ["Auto", "Disabled", "GEN1", "GEN2", "GEN3", "platform-default"], []), 
+        "vp_slot_sas_state": MoPropertyMeta("vp_slot_sas_state", "vpSlotSASState", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x40000000000, None, None, None, ["Disabled", "Enabled", "Legacy Only", "UEFI Only", "disabled", "enabled", "platform-default"], []), 
+        "vp_slot_ssd_slot1_link_speed": MoPropertyMeta("vp_slot_ssd_slot1_link_speed", "vpSlotSSDSlot1LinkSpeed", "string", VersionMeta.Version2010b, MoPropertyMeta.READ_WRITE, 0x80000000000, None, None, None, ["Auto", "Disabled", "GEN1", "GEN2", "GEN3", "platform-default"], []), 
+        "vp_slot_ssd_slot2_link_speed": MoPropertyMeta("vp_slot_ssd_slot2_link_speed", "vpSlotSSDSlot2LinkSpeed", "string", VersionMeta.Version2010b, MoPropertyMeta.READ_WRITE, 0x100000000000, None, None, None, ["Auto", "Disabled", "GEN1", "GEN2", "GEN3", "platform-default"], []), 
     }
 
     prop_map = {
@@ -253,13 +351,27 @@ class BiosVfPCISlotOptionROMEnable(ManagedObject):
         "vpSlot8State": "vp_slot8_state", 
         "vpSlot9LinkSpeed": "vp_slot9_link_speed", 
         "vpSlot9State": "vp_slot9_state", 
+        "vpSlotFLOMLinkSpeed": "vp_slot_flom_link_speed", 
+        "vpSlotFrontSlot5LinkSpeed": "vp_slot_front_slot5_link_speed", 
+        "vpSlotFrontSlot6LinkSpeed": "vp_slot_front_slot6_link_speed", 
         "vpSlotHBALinkSpeed": "vp_slot_hba_link_speed", 
         "vpSlotHBAState": "vp_slot_hba_state", 
+        "vpSlotMLOMLinkSpeed": "vp_slot_mlom_link_speed", 
         "vpSlotMLOMState": "vp_slot_mlom_state", 
         "vpSlotMezzState": "vp_slot_mezz_state", 
         "vpSlotN1State": "vp_slot_n1_state", 
         "vpSlotN2State": "vp_slot_n2_state", 
+        "vpSlotRiser1LinkSpeed": "vp_slot_riser1_link_speed", 
+        "vpSlotRiser1Slot1LinkSpeed": "vp_slot_riser1_slot1_link_speed", 
+        "vpSlotRiser1Slot2LinkSpeed": "vp_slot_riser1_slot2_link_speed", 
+        "vpSlotRiser1Slot3LinkSpeed": "vp_slot_riser1_slot3_link_speed", 
+        "vpSlotRiser2LinkSpeed": "vp_slot_riser2_link_speed", 
+        "vpSlotRiser2Slot4LinkSpeed": "vp_slot_riser2_slot4_link_speed", 
+        "vpSlotRiser2Slot5LinkSpeed": "vp_slot_riser2_slot5_link_speed", 
+        "vpSlotRiser2Slot6LinkSpeed": "vp_slot_riser2_slot6_link_speed", 
         "vpSlotSASState": "vp_slot_sas_state", 
+        "vpSlotSSDSlot1LinkSpeed": "vp_slot_ssd_slot1_link_speed", 
+        "vpSlotSSDSlot2LinkSpeed": "vp_slot_ssd_slot2_link_speed", 
     }
 
     def __init__(self, parent_mo_or_dn, **kwargs):
@@ -286,13 +398,27 @@ class BiosVfPCISlotOptionROMEnable(ManagedObject):
         self.vp_slot8_state = None
         self.vp_slot9_link_speed = None
         self.vp_slot9_state = None
+        self.vp_slot_flom_link_speed = None
+        self.vp_slot_front_slot5_link_speed = None
+        self.vp_slot_front_slot6_link_speed = None
         self.vp_slot_hba_link_speed = None
         self.vp_slot_hba_state = None
+        self.vp_slot_mlom_link_speed = None
         self.vp_slot_mlom_state = None
         self.vp_slot_mezz_state = None
         self.vp_slot_n1_state = None
         self.vp_slot_n2_state = None
+        self.vp_slot_riser1_link_speed = None
+        self.vp_slot_riser1_slot1_link_speed = None
+        self.vp_slot_riser1_slot2_link_speed = None
+        self.vp_slot_riser1_slot3_link_speed = None
+        self.vp_slot_riser2_link_speed = None
+        self.vp_slot_riser2_slot4_link_speed = None
+        self.vp_slot_riser2_slot5_link_speed = None
+        self.vp_slot_riser2_slot6_link_speed = None
         self.vp_slot_sas_state = None
+        self.vp_slot_ssd_slot1_link_speed = None
+        self.vp_slot_ssd_slot2_link_speed = None
 
         ManagedObject.__init__(self, "BiosVfPCISlotOptionROMEnable", parent_mo_or_dn, **kwargs)
 

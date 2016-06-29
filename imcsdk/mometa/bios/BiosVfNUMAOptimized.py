@@ -1,15 +1,15 @@
 """This module contains the general information for BiosVfNUMAOptimized ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfNUMAOptimizedConsts():
+class BiosVfNUMAOptimizedConsts:
     VP_NUMAOPTIMIZED_DISABLED = "Disabled"
     VP_NUMAOPTIMIZED_ENABLED = "Enabled"
-    VP_NUMAOPTIMIZED_DISABLED = "disabled"
-    VP_NUMAOPTIMIZED_ENABLED = "enabled"
+    _VP_NUMAOPTIMIZED_DISABLED = "disabled"
+    _VP_NUMAOPTIMIZED_ENABLED = "enabled"
     VP_NUMAOPTIMIZED_PLATFORM_DEFAULT = "platform-default"
 
 

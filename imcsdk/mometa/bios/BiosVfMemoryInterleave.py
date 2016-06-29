@@ -1,11 +1,11 @@
 """This module contains the general information for BiosVfMemoryInterleave ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfMemoryInterleaveConsts():
+class BiosVfMemoryInterleaveConsts:
     VP_CHANNEL_INTER_LEAVE_1_WAY = "1-way"
     VP_CHANNEL_INTER_LEAVE_2_WAY = "2-way"
     VP_CHANNEL_INTER_LEAVE_3_WAY = "3-way"
@@ -18,8 +18,8 @@ class BiosVfMemoryInterleaveConsts():
     VP_MEMORY_INTER_LEAVE_8_WAY_NODE_INTERLEAVE = "8 Way Node Interleave"
     VP_MEMORY_INTER_LEAVE_DISABLED = "Disabled"
     VP_MEMORY_INTER_LEAVE_ENABLED = "Enabled"
-    VP_MEMORY_INTER_LEAVE_DISABLED = "disabled"
-    VP_MEMORY_INTER_LEAVE_ENABLED = "enabled"
+    _VP_MEMORY_INTER_LEAVE_DISABLED = "disabled"
+    _VP_MEMORY_INTER_LEAVE_ENABLED = "enabled"
     VP_MEMORY_INTER_LEAVE_PLATFORM_DEFAULT = "platform-default"
     VP_RANK_INTER_LEAVE_1_WAY = "1-way"
     VP_RANK_INTER_LEAVE_2_WAY = "2-way"

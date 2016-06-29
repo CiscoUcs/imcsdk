@@ -1,13 +1,13 @@
 """This module contains the general information for AdvancedPowerProfile ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class AdvancedPowerProfileConsts():
+class AdvancedPowerProfileConsts:
     CORR_ACTION_ALERT = "alert"
-    CORR_ACTION_ALERT,SHUTDOWN = "alert,shutdown"
+    CORR_ACTION_ALERT_SHUTDOWN = "alert,shutdown"
     CORR_ACTION_NONE = "none"
     CORR_ACTION_SHUTDOWN = "shutdown"
 

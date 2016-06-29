@@ -1,11 +1,11 @@
 """This module contains the general information for AdaptorFcPortFLogiProfile ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class AdaptorFcPortFLogiProfileConsts():
+class AdaptorFcPortFLogiProfileConsts:
     RETRIES_INFINITE = "INFINITE"
 
 

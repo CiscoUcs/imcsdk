@@ -1,15 +1,15 @@
 """This module contains the general information for BiosVfMemoryMappedIOAbove4GB ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfMemoryMappedIOAbove4GBConsts():
+class BiosVfMemoryMappedIOAbove4GBConsts:
     VP_MEMORY_MAPPED_IOABOVE4_GB_DISABLED = "Disabled"
     VP_MEMORY_MAPPED_IOABOVE4_GB_ENABLED = "Enabled"
-    VP_MEMORY_MAPPED_IOABOVE4_GB_DISABLED = "disabled"
-    VP_MEMORY_MAPPED_IOABOVE4_GB_ENABLED = "enabled"
+    _VP_MEMORY_MAPPED_IOABOVE4_GB_DISABLED = "disabled"
+    _VP_MEMORY_MAPPED_IOABOVE4_GB_ENABLED = "enabled"
     VP_MEMORY_MAPPED_IOABOVE4_GB_PLATFORM_DEFAULT = "platform-default"
 
 

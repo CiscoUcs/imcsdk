@@ -1,11 +1,11 @@
 """This module contains the general information for PowerMonitor ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class PowerMonitorConsts():
+class PowerMonitorConsts:
     DOMAIN_CPU = "CPU"
     DOMAIN_MEMORY = "Memory"
     DOMAIN_PLATFORM = "Platform"

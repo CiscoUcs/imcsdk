@@ -1,11 +1,11 @@
 """This module contains the general information for AaaUser ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class AaaUserConsts():
+class AaaUserConsts:
     ACCOUNT_STATUS_ACTIVE = "active"
     ACCOUNT_STATUS_INACTIVE = "inactive"
     ADMIN_ACTION_CLEAR = "clear"

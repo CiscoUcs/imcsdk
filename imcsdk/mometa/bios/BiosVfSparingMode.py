@@ -1,11 +1,11 @@
 """This module contains the general information for BiosVfSparingMode ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfSparingModeConsts():
+class BiosVfSparingModeConsts:
     VP_SPARING_MODE_DIMM_SPARING = "dimm-sparing"
     VP_SPARING_MODE_PLATFORM_DEFAULT = "platform-default"
     VP_SPARING_MODE_RANK_SPARING = "rank-sparing"

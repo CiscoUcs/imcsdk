@@ -1,11 +1,11 @@
 """This module contains the general information for BiosVfDRAMClockThrottling ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfDRAMClockThrottlingConsts():
+class BiosVfDRAMClockThrottlingConsts:
     VP_DRAMCLOCK_THROTTLING_AUTO = "Auto"
     VP_DRAMCLOCK_THROTTLING_BALANCED = "Balanced"
     VP_DRAMCLOCK_THROTTLING_ENERGY_EFFICIENT = "Energy Efficient"

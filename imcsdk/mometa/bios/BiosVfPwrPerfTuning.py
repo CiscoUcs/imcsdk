@@ -1,11 +1,11 @@
 """This module contains the general information for BiosVfPwrPerfTuning ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfPwrPerfTuningConsts():
+class BiosVfPwrPerfTuningConsts:
     VP_PWR_PERF_TUNING_BIOS = "bios"
     VP_PWR_PERF_TUNING_OS = "os"
     VP_PWR_PERF_TUNING_PLATFORM_DEFAULT = "platform-default"

@@ -1,17 +1,17 @@
 """This module contains the general information for LsbootBootSecurity ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class LsbootBootSecurityConsts():
+class LsbootBootSecurityConsts:
     SECURE_BOOT_DISABLED = "Disabled"
     SECURE_BOOT_ENABLED = "Enabled"
     SECURE_BOOT_DISABLE = "disable"
-    SECURE_BOOT_DISABLED = "disabled"
+    _SECURE_BOOT_DISABLED = "disabled"
     SECURE_BOOT_ENABLE = "enable"
-    SECURE_BOOT_ENABLED = "enabled"
+    _SECURE_BOOT_ENABLED = "enabled"
 
 
 class LsbootBootSecurity(ManagedObject):

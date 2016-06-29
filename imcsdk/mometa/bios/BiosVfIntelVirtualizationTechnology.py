@@ -1,15 +1,15 @@
 """This module contains the general information for BiosVfIntelVirtualizationTechnology ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfIntelVirtualizationTechnologyConsts():
+class BiosVfIntelVirtualizationTechnologyConsts:
     VP_INTEL_VIRTUALIZATION_TECHNOLOGY_DISABLED = "Disabled"
     VP_INTEL_VIRTUALIZATION_TECHNOLOGY_ENABLED = "Enabled"
-    VP_INTEL_VIRTUALIZATION_TECHNOLOGY_DISABLED = "disabled"
-    VP_INTEL_VIRTUALIZATION_TECHNOLOGY_ENABLED = "enabled"
+    _VP_INTEL_VIRTUALIZATION_TECHNOLOGY_DISABLED = "disabled"
+    _VP_INTEL_VIRTUALIZATION_TECHNOLOGY_ENABLED = "enabled"
     VP_INTEL_VIRTUALIZATION_TECHNOLOGY_PLATFORM_DEFAULT = "platform-default"
 
 

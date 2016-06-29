@@ -1,11 +1,11 @@
 """This module contains the general information for LsbootVirtualMedia ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class LsbootVirtualMediaConsts():
+class LsbootVirtualMediaConsts:
     ACCESS_READ_ONLY = "read-only"
     ACCESS_READ_WRITE = "read-write"
     TYPE_VIRTUAL_MEDIA = "virtual-media"

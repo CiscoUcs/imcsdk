@@ -1,11 +1,11 @@
 """This module contains the general information for BiosVfWorkLoadConfig ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfWorkLoadConfigConsts():
+class BiosVfWorkLoadConfigConsts:
     VP_WORK_LOAD_CONFIG_BALANCED = "Balanced"
     VP_WORK_LOAD_CONFIG_I_O_SENSITIVE = "I/O Sensitive"
     VP_WORK_LOAD_CONFIG_PLATFORM_DEFAULT = "platform-default"

@@ -1,11 +1,11 @@
 """This module contains the general information for GenerateCertificateSigningRequest ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class GenerateCertificateSigningRequestConsts():
+class GenerateCertificateSigningRequestConsts:
     COUNTRY_CODE_ALBANIA = "Albania"
     COUNTRY_CODE_ALGERIA = "Algeria"
     COUNTRY_CODE_AMERICAN_SAMOA = "American Samoa"
@@ -56,7 +56,7 @@ class GenerateCertificateSigningRequestConsts():
     COUNTRY_CODE_CONGO = "Congo"
     COUNTRY_CODE_COOK_ISLANDS = "Cook Islands"
     COUNTRY_CODE_COSTA_RICA = "Costa Rica"
-    COUNTRY_CODE_COTE_DIVOIRE_IVORY_COAST = "Cote D'Ivoire (Ivory Coast)"
+    COUNTRY_CODE_COTE_D_IVOIRE_IVORY_COAST = "Cote D'Ivoire (Ivory Coast)"
     COUNTRY_CODE_CROATIA_HRVATSKA = "Croatia (Hrvatska)"
     COUNTRY_CODE_CUBA = "Cuba"
     COUNTRY_CODE_CYPRUS = "Cyprus"
@@ -79,7 +79,7 @@ class GenerateCertificateSigningRequestConsts():
     COUNTRY_CODE_FIJI = "Fiji"
     COUNTRY_CODE_FINLAND = "Finland"
     COUNTRY_CODE_FRANCE = "France"
-    COUNTRY_CODE_FRANCE,_METROPOLITAN = "France, Metropolitan"
+    COUNTRY_CODE_FRANCE_METROPOLITAN = "France, Metropolitan"
     COUNTRY_CODE_FRENCH_GUIANA = "French Guiana"
     COUNTRY_CODE_FRENCH_POLYNESIA = "French Polynesia"
     COUNTRY_CODE_FRENCH_SOUTHERN_TERRITORIES = "French Southern Territories"
@@ -240,7 +240,7 @@ class GenerateCertificateSigningRequestConsts():
     COUNTRY_CODE_VENEZUELA = "Venezuela"
     COUNTRY_CODE_VIET_NAM = "Viet Nam"
     COUNTRY_CODE_VIRGIN_ISLANDS_BRITISH = "Virgin Islands (British)"
-    COUNTRY_CODE_VIRGIN_ISLANDS_U_S = "Virgin Islands (U.S.)"
+    COUNTRY_CODE_VIRGIN_ISLANDS_U_S_ = "Virgin Islands (U.S.)"
     COUNTRY_CODE_WALLIS_AND_FUTUNA_ISLANDS = "Wallis and Futuna Islands"
     COUNTRY_CODE_WESTERN_SAHARA = "Western Sahara"
     COUNTRY_CODE_YEMEN = "Yemen"
@@ -256,8 +256,8 @@ class GenerateCertificateSigningRequestConsts():
     PROTOCOL_TFTP = "tftp"
     SELF_SIGNED_NO = "No"
     SELF_SIGNED_YES = "Yes"
-    SELF_SIGNED_NO = "no"
-    SELF_SIGNED_YES = "yes"
+    _SELF_SIGNED_NO = "no"
+    _SELF_SIGNED_YES = "yes"
 
 
 class GenerateCertificateSigningRequest(ManagedObject):

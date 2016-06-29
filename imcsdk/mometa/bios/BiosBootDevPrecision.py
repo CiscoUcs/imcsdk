@@ -1,11 +1,11 @@
 """This module contains the general information for BiosBootDevPrecision ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosBootDevPrecisionConsts():
+class BiosBootDevPrecisionConsts:
     SUBTYPE_CIMC_MAPPED_DVD = "cimc-mapped-dvd"
     SUBTYPE_CIMC_MAPPED_HDD = "cimc-mapped-hdd"
     SUBTYPE_KVM_MAPPED_DVD = "kvm-mapped-dvd"

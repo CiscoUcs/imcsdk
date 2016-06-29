@@ -1,15 +1,15 @@
 """This module contains the general information for BiosVfAssertNMIOnPERR ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfAssertNMIOnPERRConsts():
+class BiosVfAssertNMIOnPERRConsts:
     VP_ASSERT_NMION_PERR_DISABLED = "Disabled"
     VP_ASSERT_NMION_PERR_ENABLED = "Enabled"
-    VP_ASSERT_NMION_PERR_DISABLED = "disabled"
-    VP_ASSERT_NMION_PERR_ENABLED = "enabled"
+    _VP_ASSERT_NMION_PERR_DISABLED = "disabled"
+    _VP_ASSERT_NMION_PERR_ENABLED = "enabled"
     VP_ASSERT_NMION_PERR_PLATFORM_DEFAULT = "platform-default"
 
 

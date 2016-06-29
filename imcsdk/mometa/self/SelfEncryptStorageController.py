@@ -1,11 +1,11 @@
 """This module contains the general information for SelfEncryptStorageController ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class SelfEncryptStorageControllerConsts():
+class SelfEncryptStorageControllerConsts:
     ADMIN_ACTION_DISABLE_SELF_ENCRYPT = "disable-self-encrypt"
     ADMIN_ACTION_ENABLE_SELF_ENCRYPT = "enable-self-encrypt"
     ADMIN_ACTION_MODIFY_SELF_ENCRYPT = "modify-self-encrypt"
@@ -18,7 +18,7 @@ class SelfEncryptStorageController(ManagedObject):
     consts = SelfEncryptStorageControllerConsts()
     naming_props = set([])
 
-    mo_meta = MoMeta("SelfEncryptStorageController", "selfEncryptStorageController", "ctr-self-encrypt", VersionMeta.Version209c, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'storageController'], [], [None])
+    mo_meta = MoMeta("SelfEncryptStorageController", "selfEncryptStorageController", "ctr-self-encrypt", VersionMeta.Version209c, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'storageController'], [], ["Get", "Set"])
 
     prop_meta = {
         "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["disable-self-encrypt", "enable-self-encrypt", "modify-self-encrypt", "unlock-secured-drives"], []), 

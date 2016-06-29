@@ -15,8 +15,6 @@
 This is an auto-generated module.
 It contains supporting classes for Filter and External Method.
 
-ClassFactory Method: It returns the object of type ManagedObject, ExternalMethod
-or supporting classes available in this module for a given className.
 """
 
 from .imccore import BaseObject
@@ -75,3 +73,4 @@ class Pair(BaseObject):
         if kwargs:
             for n, v in kwargs.iteritems():
                 self.attr_set(n, v)
+

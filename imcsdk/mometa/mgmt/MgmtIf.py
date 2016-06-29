@@ -1,11 +1,11 @@
 """This module contains the general information for MgmtIf ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class MgmtIfConsts():
+class MgmtIfConsts:
     ADMIN_DUPLEX_NA = "NA"
     ADMIN_DUPLEX_AUTO = "auto"
     ADMIN_DUPLEX_FULL = "full"

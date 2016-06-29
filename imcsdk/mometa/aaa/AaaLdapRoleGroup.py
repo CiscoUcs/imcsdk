@@ -1,11 +1,11 @@
 """This module contains the general information for AaaLdapRoleGroup ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class AaaLdapRoleGroupConsts():
+class AaaLdapRoleGroupConsts:
     ADMIN_ACTION_CLEAR = "clear"
     ROLE_ = ""
     ROLE_ADMIN = "admin"

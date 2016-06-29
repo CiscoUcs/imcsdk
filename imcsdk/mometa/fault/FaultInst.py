@@ -1,11 +1,11 @@
 """This module contains the general information for FaultInst ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class FaultInstConsts():
+class FaultInstConsts:
     ACK_FALSE = "false"
     ACK_NO = "no"
     ACK_TRUE = "true"

@@ -1,16 +1,16 @@
 """This module contains the general information for AdaptorVMFexEthIf ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class AdaptorVMFexEthIfConsts():
+class AdaptorVMFexEthIfConsts:
     IF_TYPE_VIRTUAL = "virtual"
     UPLINK_FAILOVER_DISABLED = "Disabled"
     UPLINK_FAILOVER_ENABLED = "Enabled"
-    UPLINK_FAILOVER_DISABLED = "disabled"
-    UPLINK_FAILOVER_ENABLED = "enabled"
+    _UPLINK_FAILOVER_DISABLED = "disabled"
+    _UPLINK_FAILOVER_ENABLED = "enabled"
     UPLINK_PORT_0 = "0"
     UPLINK_PORT_1 = "1"
 

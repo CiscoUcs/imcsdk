@@ -1,11 +1,11 @@
 """This module contains the general information for CommVMediaMap ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class CommVMediaMapConsts():
+class CommVMediaMapConsts:
     DRIVE_TYPE_CD = "cd"
     DRIVE_TYPE_FLOPPY = "floppy"
     MAP_CIFS = "cifs"

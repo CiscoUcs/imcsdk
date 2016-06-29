@@ -1,11 +1,11 @@
 """This module contains the general information for NetworkAdapterUnit ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class NetworkAdapterUnitConsts():
+class NetworkAdapterUnitConsts:
     PRESENCE_EMPTY = "empty"
     PRESENCE_EQUIPPED = "equipped"
     PRESENCE_MISSING = "missing"

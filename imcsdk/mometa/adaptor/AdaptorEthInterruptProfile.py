@@ -1,11 +1,11 @@
 """This module contains the general information for AdaptorEthInterruptProfile ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class AdaptorEthInterruptProfileConsts():
+class AdaptorEthInterruptProfileConsts:
     COALESCING_TYPE_IDLE = "IDLE"
     COALESCING_TYPE_MIN = "MIN"
     MODE_INTX = "INTx"

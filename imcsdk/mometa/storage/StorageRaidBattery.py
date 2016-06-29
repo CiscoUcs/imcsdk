@@ -1,11 +1,11 @@
 """This module contains the general information for StorageRaidBattery ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class StorageRaidBatteryConsts():
+class StorageRaidBatteryConsts:
     ADMIN_ACTION_DISABLE_AUTO_LEARN = "disable-auto-learn"
     ADMIN_ACTION_ENABLE_AUTO_LEARN = "enable-auto-learn"
     ADMIN_ACTION_START_LEARN_CYCLE = "start-learn-cycle"

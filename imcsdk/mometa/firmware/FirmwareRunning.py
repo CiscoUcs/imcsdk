@@ -1,11 +1,11 @@
 """This module contains the general information for FirmwareRunning ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class FirmwareRunningConsts():
+class FirmwareRunningConsts:
     DEPLOYMENT_BOOT_LOADER = "boot-loader"
     DEPLOYMENT_KERNEL = "kernel"
     DEPLOYMENT_SYSTEM = "system"

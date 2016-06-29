@@ -1,20 +1,20 @@
 """This module contains the general information for BiosVfOnboardNIC ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfOnboardNICConsts():
+class BiosVfOnboardNICConsts:
     VP_ONBOARD10_GBIT_LOM_DISABLED = "Disabled"
     VP_ONBOARD10_GBIT_LOM_ENABLED = "Enabled"
-    VP_ONBOARD10_GBIT_LOM_DISABLED = "disabled"
-    VP_ONBOARD10_GBIT_LOM_ENABLED = "enabled"
+    _VP_ONBOARD10_GBIT_LOM_DISABLED = "disabled"
+    _VP_ONBOARD10_GBIT_LOM_ENABLED = "enabled"
     VP_ONBOARD10_GBIT_LOM_PLATFORM_DEFAULT = "platform-default"
     VP_ONBOARD_GBIT_LOM_DISABLED = "Disabled"
     VP_ONBOARD_GBIT_LOM_ENABLED = "Enabled"
-    VP_ONBOARD_GBIT_LOM_DISABLED = "disabled"
-    VP_ONBOARD_GBIT_LOM_ENABLED = "enabled"
+    _VP_ONBOARD_GBIT_LOM_DISABLED = "disabled"
+    _VP_ONBOARD_GBIT_LOM_ENABLED = "enabled"
     VP_ONBOARD_GBIT_LOM_PLATFORM_DEFAULT = "platform-default"
 
 

@@ -16,12 +16,14 @@
 from .imccoremeta import ImcVersion
 from .imccoremeta import MoMeta
 
+
 class VersionMeta:
     """ This class contains all the ImcVersion supported by this package."""
     Version151f = ImcVersion("1.5(1f)")
     Version152 = ImcVersion("152")
     Version153 = ImcVersion("153")
     Version154 = ImcVersion("154")
+    Version2010b = ImcVersion("2.0(10b)")
     Version201a = ImcVersion("2.0(1a)")
     Version202c = ImcVersion("2.0(2c)")
     Version203d = ImcVersion("2.0(3d)")
@@ -86,6 +88,7 @@ MO_CLASS_ID = frozenset([
     "BiosVfAltitude",
     "BiosVfAssertNMIOnPERR",
     "BiosVfAssertNMIOnSERR",
+    "BiosVfAutonumousCstateEnable",
     "BiosVfBootOptionRetry",
     "BiosVfCDNEnable",
     "BiosVfCDNSupport",
@@ -105,6 +108,7 @@ MO_CLASS_ID = frozenset([
     "BiosVfExecuteDisableBit",
     "BiosVfExtendedAPIC",
     "BiosVfFRB2Enable",
+    "BiosVfHWPMEnable",
     "BiosVfHardwarePrefetch",
     "BiosVfIOHResource",
     "BiosVfIntelHyperThreadingTech",
@@ -281,7 +285,7 @@ MO_CLASS_META = {
     "AaaSession": MoMeta("AaaSession", "aaaSession", "term-[id]", VersionMeta.Version151f, "OutputOnly", 0x1, [], ["admin", "read-only", "user"], [u'aaaUserEp'], [], ["Get"]),
     "AaaUser": MoMeta("AaaUser", "aaaUser", "user-[id]", VersionMeta.Version151f, "InputOutput", 0x1, [], ["admin", "read-only", "user"], [u'aaaUserEp'], [], ["Get", "Set"]),
     "AaaUserEp": MoMeta("AaaUserEp", "aaaUserEp", "user-ext", VersionMeta.Version151f, "OutputOnly", 0x1, [], ["admin", "read-only", "user"], [u'topSystem'], [u'aaaSession', u'aaaUser', u'aaaUserPolicy'], ["Get"]),
-    "AaaUserPolicy": MoMeta("AaaUserPolicy", "aaaUserPolicy", "policy", VersionMeta.Version209c, "InputOutput", 0x1, [], ["admin", "user"], [u'aaaUserEp'], [], [None]),
+    "AaaUserPolicy": MoMeta("AaaUserPolicy", "aaaUserPolicy", "policy", VersionMeta.Version209c, "InputOutput", 0x1, [], ["admin", "user"], [u'aaaUserEp'], [], ["Get", "Set"]),
     "AdaptorCfgBackup": MoMeta("AdaptorCfgBackup", "adaptorCfgBackup", "export-config", VersionMeta.Version151f, "InputOutput", 0x1, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [], ["Get", "Set"]),
     "AdaptorCfgImporter": MoMeta("AdaptorCfgImporter", "adaptorCfgImporter", "import-config", VersionMeta.Version151f, "InputOutput", 0x1, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [], ["Get", "Set"]),
     "AdaptorConnectorInfo": MoMeta("AdaptorConnectorInfo", "adaptorConnectorInfo", "connector-info", VersionMeta.Version204c, "OutputOnly", 0x1, [], ["admin", "read-only", "user"], [u'adaptorExtEthIf'], [], ["Get"]),
@@ -323,8 +327,8 @@ MO_CLASS_META = {
     "BiosBootDevGrp": MoMeta("BiosBootDevGrp", "biosBootDevGrp", "bdg-[order]", VersionMeta.Version151f, "OutputOnly", 0x1, [], ["admin", "read-only", "user"], [u'biosBOT'], [u'biosBootDev'], ["Get"]),
     "BiosBootDevPrecision": MoMeta("BiosBootDevPrecision", "biosBootDevPrecision", "bdvp-[order]", VersionMeta.Version201a, "OutputOnly", 0x1, [], ["admin", "read-only", "user"], [u'biosBOT'], [], ["Get"]),
     "BiosBootMode": MoMeta("BiosBootMode", "biosBootMode", "boot-mode", VersionMeta.Version201a, "OutputOnly", 0x1, [], ["admin", "user"], [u'biosBOT'], [], ["Get"]),
-    "BiosPassword": MoMeta("BiosPassword", "biosPassword", "bios-pw", None, "InputOutput", 0x1, [], ["admin"], [], [], [None]),
-    "BiosPlatformDefaults": MoMeta("BiosPlatformDefaults", "biosPlatformDefaults", "bios-defaults", VersionMeta.Version152, "OutputOnly", 0x1, [], ["admin", "read-only", "user"], [u'biosUnit'], [u'biosVfASPMSupport', u'biosVfAdjacentCacheLinePrefetch', u'biosVfAltitude', u'biosVfAssertNMIOnPERR', u'biosVfAssertNMIOnSERR', u'biosVfBootOptionRetry', u'biosVfCDNEnable', u'biosVfCDNSupport', u'biosVfCPUEnergyPerformance', u'biosVfCPUFrequencyFloor', u'biosVfCPUPerformance', u'biosVfCPUPowerManagement', u'biosVfCkeLowPolicy', u'biosVfConsoleRedirection', u'biosVfCoreMultiProcessing', u'biosVfDCUPrefetch', u'biosVfDRAMClockThrottling', u'biosVfDemandScrub', u'biosVfDirectCacheAccess', u'biosVfDramRefreshRate', u'biosVfEnhancedIntelSpeedStepTech', u'biosVfExecuteDisableBit', u'biosVfExtendedAPIC', u'biosVfFRB2Enable', u'biosVfHardwarePrefetch', u'biosVfIOHResource', u'biosVfIntelHyperThreadingTech', u'biosVfIntelTurboBoostTech', u'biosVfIntelVTForDirectedIO', u'biosVfIntelVirtualizationTechnology', u'biosVfLOMPortOptionROM', u'biosVfLegacyUSBSupport', u'biosVfLvDIMMSupport', u'biosVfMMCFGBase', u'biosVfMemoryInterleave', u'biosVfMemoryMappedIOAbove4GB', u'biosVfMirroringMode', u'biosVfNUMAOptimized', u'biosVfOSBootWatchdogTimer', u'biosVfOSBootWatchdogTimerPolicy', u'biosVfOSBootWatchdogTimerTimeout', u'biosVfOnboardNIC', u'biosVfOnboardStorage', u'biosVfOnboardStorageSWStack', u'biosVfOutOfBandMgmtPort', u'biosVfPCIOptionROMs', u'biosVfPCISlotOptionROMEnable', u'biosVfPOSTErrorPause', u'biosVfPStateCoordType', u'biosVfPackageCStateLimit', u'biosVfPatrolScrub', u'biosVfPatrolScrubDuration', u'biosVfPchUsb30Mode', u'biosVfPciRomClp', u'biosVfProcessorC1E', u'biosVfProcessorC3Report', u'biosVfProcessorC6Report', u'biosVfProcessorCState', u'biosVfPwrPerfTuning', u'biosVfQPIConfig', u'biosVfQpiSnoopMode', u'biosVfSataModeSelect', u'biosVfSelectMemoryRASConfiguration', u'biosVfSerialPortAEnable', u'biosVfSparingMode', u'biosVfSrIov', u'biosVfTPMSupport', u'biosVfUCSMBootOrderRuleControl', u'biosVfUSBBootConfig', u'biosVfUSBEmulation', u'biosVfUSBPortsConfig', u'biosVfVgaPriority', u'biosVfWorkLoadConfig'], ["Get"]),
+    "BiosPassword": MoMeta("BiosPassword", "biosPassword", "bios-pw", VersionMeta.Version2010b, "InputOutput", 0x1, [], ["admin"], [], [], [None]),
+    "BiosPlatformDefaults": MoMeta("BiosPlatformDefaults", "biosPlatformDefaults", "bios-defaults", VersionMeta.Version152, "OutputOnly", 0x1, [], ["admin", "read-only", "user"], [u'biosUnit'], [u'biosVfASPMSupport', u'biosVfAdjacentCacheLinePrefetch', u'biosVfAltitude', u'biosVfAssertNMIOnPERR', u'biosVfAssertNMIOnSERR', u'biosVfAutonumousCstateEnable', u'biosVfBootOptionRetry', u'biosVfCDNEnable', u'biosVfCDNSupport', u'biosVfCPUEnergyPerformance', u'biosVfCPUFrequencyFloor', u'biosVfCPUPerformance', u'biosVfCPUPowerManagement', u'biosVfCkeLowPolicy', u'biosVfConsoleRedirection', u'biosVfCoreMultiProcessing', u'biosVfDCUPrefetch', u'biosVfDRAMClockThrottling', u'biosVfDemandScrub', u'biosVfDirectCacheAccess', u'biosVfDramRefreshRate', u'biosVfEnhancedIntelSpeedStepTech', u'biosVfExecuteDisableBit', u'biosVfExtendedAPIC', u'biosVfFRB2Enable', u'biosVfHWPMEnable', u'biosVfHardwarePrefetch', u'biosVfIOHResource', u'biosVfIntelHyperThreadingTech', u'biosVfIntelTurboBoostTech', u'biosVfIntelVTForDirectedIO', u'biosVfIntelVirtualizationTechnology', u'biosVfLOMPortOptionROM', u'biosVfLegacyUSBSupport', u'biosVfLvDIMMSupport', u'biosVfMMCFGBase', u'biosVfMemoryInterleave', u'biosVfMemoryMappedIOAbove4GB', u'biosVfMirroringMode', u'biosVfNUMAOptimized', u'biosVfOSBootWatchdogTimer', u'biosVfOSBootWatchdogTimerPolicy', u'biosVfOSBootWatchdogTimerTimeout', u'biosVfOnboardNIC', u'biosVfOnboardStorage', u'biosVfOnboardStorageSWStack', u'biosVfOutOfBandMgmtPort', u'biosVfPCIOptionROMs', u'biosVfPCISlotOptionROMEnable', u'biosVfPOSTErrorPause', u'biosVfPStateCoordType', u'biosVfPackageCStateLimit', u'biosVfPatrolScrub', u'biosVfPatrolScrubDuration', u'biosVfPchUsb30Mode', u'biosVfPciRomClp', u'biosVfProcessorC1E', u'biosVfProcessorC3Report', u'biosVfProcessorC6Report', u'biosVfProcessorCState', u'biosVfPwrPerfTuning', u'biosVfQPIConfig', u'biosVfQpiSnoopMode', u'biosVfSataModeSelect', u'biosVfSelectMemoryRASConfiguration', u'biosVfSerialPortAEnable', u'biosVfSparingMode', u'biosVfSrIov', u'biosVfTPMSupport', u'biosVfUCSMBootOrderRuleControl', u'biosVfUSBBootConfig', u'biosVfUSBEmulation', u'biosVfUSBPortsConfig', u'biosVfVgaPriority', u'biosVfWorkLoadConfig'], ["Get"]),
     "BiosSettings": MoMeta("BiosSettings", "biosSettings", "bios-settings", VersionMeta.Version151f, "InputOutput", 0x1, [], ["admin", "read-only", "user"], [u'biosUnit'], [], ["Get"]),
     "BiosUnit": MoMeta("BiosUnit", "biosUnit", "bios", VersionMeta.Version151f, "InputOutput", 0x1, [], ["admin", "read-only", "user"], [u'computeRackUnit'], [u'biosBOT', u'biosPlatformDefaults', u'biosSettings', u'firmwareBootDefinition', u'firmwareRunning', u'firmwareUpdatable'], ["Get", "Set"]),
     "BiosVfASPMSupport": MoMeta("BiosVfASPMSupport", "biosVfASPMSupport", "ASPM-Support", VersionMeta.Version151f, "InputOutput", 0x1, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
@@ -332,6 +336,7 @@ MO_CLASS_META = {
     "BiosVfAltitude": MoMeta("BiosVfAltitude", "biosVfAltitude", "Altitude-Param", VersionMeta.Version151f, "InputOutput", 0x1, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
     "BiosVfAssertNMIOnPERR": MoMeta("BiosVfAssertNMIOnPERR", "biosVfAssertNMIOnPERR", "Assert-NMI-on-PERR", VersionMeta.Version151f, "InputOutput", 0x1, [], ["admin", "read-only", "user"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
     "BiosVfAssertNMIOnSERR": MoMeta("BiosVfAssertNMIOnSERR", "biosVfAssertNMIOnSERR", "Assert-NMI-on-SERR", VersionMeta.Version151f, "InputOutput", 0x1, [], ["admin", "read-only", "user"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
+    "BiosVfAutonumousCstateEnable": MoMeta("BiosVfAutonumousCstateEnable", "biosVfAutonumousCstateEnable", "Autonumous-Cstate-Enable", VersionMeta.Version2010b, "InputOutput", 0x1, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
     "BiosVfBootOptionRetry": MoMeta("BiosVfBootOptionRetry", "biosVfBootOptionRetry", "Boot-option-retry", VersionMeta.Version151f, "InputOutput", 0x1, [], ["admin", "read-only", "user"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
     "BiosVfCDNEnable": MoMeta("BiosVfCDNEnable", "biosVfCDNEnable", "CDN-Enable", VersionMeta.Version204c, "InputOutput", 0x1, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
     "BiosVfCDNSupport": MoMeta("BiosVfCDNSupport", "biosVfCDNSupport", "CDN-Support", VersionMeta.Version201a, "InputOutput", 0x1, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
@@ -351,6 +356,7 @@ MO_CLASS_META = {
     "BiosVfExecuteDisableBit": MoMeta("BiosVfExecuteDisableBit", "biosVfExecuteDisableBit", "Execute-Disable-Bit", VersionMeta.Version151f, "InputOutput", 0x1, [], ["admin", "read-only", "user"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
     "BiosVfExtendedAPIC": MoMeta("BiosVfExtendedAPIC", "biosVfExtendedAPIC", "Extended-APIC", VersionMeta.Version201a, "InputOutput", 0x1, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
     "BiosVfFRB2Enable": MoMeta("BiosVfFRB2Enable", "biosVfFRB2Enable", "FRB2-Enable", VersionMeta.Version151f, "InputOutput", 0x1, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
+    "BiosVfHWPMEnable": MoMeta("BiosVfHWPMEnable", "biosVfHWPMEnable", "HWPM-Enable", VersionMeta.Version2010b, "InputOutput", 0x1, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
     "BiosVfHardwarePrefetch": MoMeta("BiosVfHardwarePrefetch", "biosVfHardwarePrefetch", "Hardware-Prefetch", VersionMeta.Version151f, "InputOutput", 0x1, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
     "BiosVfIOHResource": MoMeta("BiosVfIOHResource", "biosVfIOHResource", "ioh-resource", VersionMeta.Version151f, "InputOutput", 0x1, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
     "BiosVfIntelHyperThreadingTech": MoMeta("BiosVfIntelHyperThreadingTech", "biosVfIntelHyperThreadingTech", "Intel-HyperThreading-Tech", VersionMeta.Version151f, "InputOutput", 0x1, [], ["admin", "read-only", "user"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
@@ -401,7 +407,7 @@ MO_CLASS_META = {
     "BiosVfUSBPortsConfig": MoMeta("BiosVfUSBPortsConfig", "biosVfUSBPortsConfig", "USB-Ports-Config", VersionMeta.Version151f, "InputOutput", 0x1, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
     "BiosVfVgaPriority": MoMeta("BiosVfVgaPriority", "biosVfVgaPriority", "VgaPriority", VersionMeta.Version151f, "InputOutput", 0x1, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
     "BiosVfWorkLoadConfig": MoMeta("BiosVfWorkLoadConfig", "biosVfWorkLoadConfig", "work-load-config", VersionMeta.Version204c, "InputOutput", 0x1, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-    "CertificateManagement": MoMeta("CertificateManagement", "certificateManagement", "cert-mgmt", VersionMeta.Version209c, "OutputOnly", 0x1, [], ["admin", "read-only", "user"], [u'topSystem'], [u'currentCertificate', u'generateCertificateSigningRequest', u'uploadCertificate'], [None]),
+    "CertificateManagement": MoMeta("CertificateManagement", "certificateManagement", "cert-mgmt", VersionMeta.Version209c, "OutputOnly", 0x1, [], ["admin", "read-only", "user"], [u'topSystem'], [u'currentCertificate', u'generateCertificateSigningRequest', u'uploadCertificate'], ["Get"]),
     "CommHttp": MoMeta("CommHttp", "commHttp", "http-svc", VersionMeta.Version151f, "InputOutput", 0x1, [], ["admin", "read-only", "user"], [u'commSvcEp'], [], ["Get", "Set"]),
     "CommHttps": MoMeta("CommHttps", "commHttps", "https-svc", VersionMeta.Version151f, "InputOutput", 0x1, [], ["admin", "read-only", "user"], [u'commSvcEp'], [], ["Get", "Set"]),
     "CommIpmiLan": MoMeta("CommIpmiLan", "commIpmiLan", "ipmi-lan-svc", VersionMeta.Version151f, "InputOutput", 0x1, [], ["admin", "read-only", "user"], [u'commSvcEp'], [], ["Get", "Set"]),
@@ -436,7 +442,7 @@ MO_CLASS_META = {
     "FirmwareRunning": MoMeta("FirmwareRunning", "firmwareRunning", "fw-[deployment]", VersionMeta.Version151f, "OutputOnly", 0x1, [], ["admin", "read-only", "user"], [u'biosUnit', u'mgmtController', u'storageController', u'systemIOController'], [], ["Get"]),
     "FirmwareUpdatable": MoMeta("FirmwareUpdatable", "firmwareUpdatable", "fw-updatable", VersionMeta.Version151f, "InputOutput", 0x1, [], ["admin", "read-only", "user"], [u'biosUnit', u'mgmtController', u'systemIOController'], [], ["Get"]),
     "GenerateCertificateSigningRequest": MoMeta("GenerateCertificateSigningRequest", "generateCertificateSigningRequest", "gen-csr-req", VersionMeta.Version209c, "InputOutput", 0x1, [], ["admin", "read-only", "user"], [u'certificateManagement'], [], [None]),
-    "GeneratedStorageControllerKeyId": MoMeta("GeneratedStorageControllerKeyId", "generatedStorageControllerKeyId", "gen-key-id", VersionMeta.Version209c, "OutputOnly", 0x1, [], ["admin", "read-only", "user"], [u'storageController'], [], [None]),
+    "GeneratedStorageControllerKeyId": MoMeta("GeneratedStorageControllerKeyId", "generatedStorageControllerKeyId", "gen-key-id", VersionMeta.Version209c, "OutputOnly", 0x1, [], ["admin", "read-only", "user"], [u'storageController'], [], ["Get"]),
     "HuuController": MoMeta("HuuController", "huuController", "huu", VersionMeta.Version151f, "OutputOnly", 0x1, [], ["admin", "read-only", "user"], [u'topSystem'], [u'huuFirmwareCatalog', u'huuFirmwareRunning', u'huuFirmwareUpdateCancel', u'huuFirmwareUpdater'], ["Get"]),
     "HuuFirmwareCatalog": MoMeta("HuuFirmwareCatalog", "huuFirmwareCatalog", "firmwareCatalog", VersionMeta.Version151f, "OutputOnly", 0x1, [], ["admin", "read-only", "user"], [u'huuController'], [u'huuFirmwareCatalogComponent'], ["Get"]),
     "HuuFirmwareCatalogComponent": MoMeta("HuuFirmwareCatalogComponent", "huuFirmwareCatalogComponent", "id-[id]", VersionMeta.Version151f, "OutputOnly", 0x1, [], ["admin", "read-only", "user"], [u'huuFirmwareCatalog'], [], ["Get"]),
@@ -488,7 +494,7 @@ MO_CLASS_META = {
     "PowerMonitor": MoMeta("PowerMonitor", "powerMonitor", "pwrmonitor-[domain]", VersionMeta.Version202c, "InputOutput", 0x1, [], ["admin", "read-only", "user"], [u'computeRackUnit'], [], ["Get"]),
     "ProcessorEnvStats": MoMeta("ProcessorEnvStats", "processorEnvStats", "env-stats", VersionMeta.Version151f, "OutputOnly", 0x1, [], ["admin", "read-only", "user"], [u'processorUnit'], [], ["Get"]),
     "ProcessorUnit": MoMeta("ProcessorUnit", "processorUnit", "cpu-[id]", VersionMeta.Version151f, "OutputOnly", 0x1, [], ["admin", "read-only", "user"], [u'computeBoard'], [u'faultInst', u'processorEnvStats'], ["Get"]),
-    "SelfEncryptStorageController": MoMeta("SelfEncryptStorageController", "selfEncryptStorageController", "ctr-self-encrypt", VersionMeta.Version209c, "InputOutput", 0x1, [], ["admin", "read-only", "user"], [u'storageController'], [], [None]),
+    "SelfEncryptStorageController": MoMeta("SelfEncryptStorageController", "selfEncryptStorageController", "ctr-self-encrypt", VersionMeta.Version209c, "InputOutput", 0x1, [], ["admin", "read-only", "user"], [u'storageController'], [], ["Get", "Set"]),
     "ServerUtilization": MoMeta("ServerUtilization", "serverUtilization", "utilization", VersionMeta.Version202c, "OutputOnly", 0x1, [], ["admin", "read-only", "user"], [u'computeRackUnit'], [], ["Get"]),
     "SolIf": MoMeta("SolIf", "solIf", "sol-if", VersionMeta.Version151f, "InputOutput", 0x1, [], ["admin", "read-only", "user"], [u'computeRackUnit'], [], ["Get", "Set"]),
     "StandardPowerProfile": MoMeta("StandardPowerProfile", "standardPowerProfile", "stdpwrprof", VersionMeta.Version202c, "InputOutput", 0x1, [], ["admin", "read-only", "user"], [u'powerBudget'], [], ["Get", "Set"]),
@@ -508,11 +514,11 @@ MO_CLASS_META = {
     "StorageOperation": MoMeta("StorageOperation", "storageOperation", "storage-operation", VersionMeta.Version201a, "OutputOnly", 0x1, [], ["admin", "read-only", "user"], [u'storageLocalDisk', u'storageRaidBattery', u'storageVirtualDrive'], [], ["Get"]),
     "StorageRaidBattery": MoMeta("StorageRaidBattery", "storageRaidBattery", "raid-battery", VersionMeta.Version151f, "InputOutput", 0x1, [], ["admin", "read-only", "user"], [u'storageController'], [u'faultInst', u'storageOperation'], ["Get", "Set"]),
     "StorageUnusedLocalDisk": MoMeta("StorageUnusedLocalDisk", "storageUnusedLocalDisk", "pd-[id]", VersionMeta.Version201a, "InputOutput", 0x1, [], ["admin", "read-only", "user"], [u'storageVirtualDriveCreatorUsingUnusedPhysicalDrive'], [], ["Get"]),
-    "StorageVirtualDrive": MoMeta("StorageVirtualDrive", "storageVirtualDrive", "vd-[id]", VersionMeta.Version151f, "InputOutput", 0x1, [], ["admin", "read-only", "user"], [u'storageController'], [u'faultInst', u'storageLocalDiskUsage', u'storageOperation'], ["Get", "Set"]),
+    "StorageVirtualDrive": MoMeta("StorageVirtualDrive", "storageVirtualDrive", "vd-[id]", VersionMeta.Version151f, "InputOutput", 0x1, [], ["admin", "read-only", "user"], [u'storageController'], [u'faultInst', u'storageLocalDiskUsage', u'storageOperation'], ["Get", "Remove", "Set"]),
     "StorageVirtualDriveCreatorUsingUnusedPhysicalDrive": MoMeta("StorageVirtualDriveCreatorUsingUnusedPhysicalDrive", "storageVirtualDriveCreatorUsingUnusedPhysicalDrive", "virtual-drive-create", VersionMeta.Version201a, "InputOutput", 0x1, [], ["admin"], [u'storageController'], [u'storageUnusedLocalDisk'], ["Get", "Set"]),
     "StorageVirtualDriveCreatorUsingVirtualDriveGroup": MoMeta("StorageVirtualDriveCreatorUsingVirtualDriveGroup", "storageVirtualDriveCreatorUsingVirtualDriveGroup", "virtual-drive-carve", VersionMeta.Version201a, "InputOutput", 0x1, [], ["admin"], [u'storageController'], [u'storageVirtualDriveWithDriveGroupSpace'], ["Get", "Set"]),
     "StorageVirtualDriveWithDriveGroupSpace": MoMeta("StorageVirtualDriveWithDriveGroupSpace", "storageVirtualDriveWithDriveGroupSpace", "vd-[id]", VersionMeta.Version201a, "InputOutput", 0x1, [], ["admin", "read-only", "user"], [u'storageVirtualDriveCreatorUsingVirtualDriveGroup'], [], ["Get"]),
-    "SuggestedStorageControllerSecurityKey": MoMeta("SuggestedStorageControllerSecurityKey", "suggestedStorageControllerSecurityKey", "suggested-sec-key", VersionMeta.Version209c, "OutputOnly", 0x1, [], ["admin", "read-only", "user"], [u'storageController'], [], [None]),
+    "SuggestedStorageControllerSecurityKey": MoMeta("SuggestedStorageControllerSecurityKey", "suggestedStorageControllerSecurityKey", "suggested-sec-key", VersionMeta.Version209c, "OutputOnly", 0x1, [], ["admin", "read-only", "user"], [u'storageController'], [], ["Get"]),
     "SysdebugMEpLog": MoMeta("SysdebugMEpLog", "sysdebugMEpLog", "log-[type]-[id]", VersionMeta.Version151f, "InputOutput", 0x1, [], ["admin", "read-only", "user"], [u'mgmtController'], [u'faultInst'], ["Get", "Set"]),
     "SysdebugTechSupportExport": MoMeta("SysdebugTechSupportExport", "sysdebugTechSupportExport", "tech-support", VersionMeta.Version151f, "InputOutput", 0x1, [], ["admin", "read-only", "user"], [u'computeRackUnit'], [], [None]),
     "SystemIOController": MoMeta("SystemIOController", "systemIOController", "sioc-[id]", VersionMeta.Version202c, "OutputOnly", 0x1, [], ["read-only"], [u'computeRackUnit'], [u'firmwareBootDefinition', u'firmwareRunning', u'firmwareUpdatable'], ["Get"]),

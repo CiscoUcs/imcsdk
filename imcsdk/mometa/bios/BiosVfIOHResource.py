@@ -1,11 +1,11 @@
 """This module contains the general information for BiosVfIOHResource ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfIOHResourceConsts():
+class BiosVfIOHResourceConsts:
     VP_IOHRESOURCE_IOH0_24K_IOH1_40K = "IOH0 24k IOH1 40k"
     VP_IOHRESOURCE_IOH0_32K_IOH1_32K = "IOH0 32k IOH1 32k"
     VP_IOHRESOURCE_IOH0_40K_IOH1_24K = "IOH0 40k IOH1 24k"
