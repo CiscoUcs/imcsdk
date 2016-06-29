@@ -1,11 +1,11 @@
 """This module contains the general information for OneTimeBootDevice ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class OneTimeBootDeviceConsts():
+class OneTimeBootDeviceConsts:
     DEVICE_HUU = "huu"
     DEVICE_HV = "hv"
     DEVICE_NONE = "none"

@@ -1,11 +1,11 @@
 """This module contains the general information for BiosVfAltitude ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfAltitudeConsts():
+class BiosVfAltitudeConsts:
     VP_ALTITUDE_1500_M = "1500-m"
     VP_ALTITUDE_300_M = "300-m"
     VP_ALTITUDE_3000_M = "3000-m"

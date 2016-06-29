@@ -1,11 +1,11 @@
 """This module contains the general information for HuuFirmwareUpdateCancel ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class HuuFirmwareUpdateCancelConsts():
+class HuuFirmwareUpdateCancelConsts:
     ADMIN_STATE_TRIGGER = "trigger"
     ADMIN_STATE_TRIGGERED = "triggered"
 

@@ -1,15 +1,15 @@
 """This module contains the general information for BiosVfEnhancedIntelSpeedStepTech ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfEnhancedIntelSpeedStepTechConsts():
+class BiosVfEnhancedIntelSpeedStepTechConsts:
     VP_ENHANCED_INTEL_SPEED_STEP_TECH_DISABLED = "Disabled"
     VP_ENHANCED_INTEL_SPEED_STEP_TECH_ENABLED = "Enabled"
-    VP_ENHANCED_INTEL_SPEED_STEP_TECH_DISABLED = "disabled"
-    VP_ENHANCED_INTEL_SPEED_STEP_TECH_ENABLED = "enabled"
+    _VP_ENHANCED_INTEL_SPEED_STEP_TECH_DISABLED = "disabled"
+    _VP_ENHANCED_INTEL_SPEED_STEP_TECH_ENABLED = "enabled"
     VP_ENHANCED_INTEL_SPEED_STEP_TECH_PLATFORM_DEFAULT = "platform-default"
 
 

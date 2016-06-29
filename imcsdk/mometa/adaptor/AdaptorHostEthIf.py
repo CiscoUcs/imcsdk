@@ -1,11 +1,11 @@
 """This module contains the general information for AdaptorHostEthIf ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class AdaptorHostEthIfConsts():
+class AdaptorHostEthIfConsts:
     IF_TYPE_VIRTUAL = "virtual"
     MAC_AUTO = "AUTO"
     UPLINK_PORT_0 = "0"

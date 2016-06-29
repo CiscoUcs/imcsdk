@@ -1,11 +1,11 @@
 """This module contains the general information for TopSystem ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class TopSystemConsts():
+class TopSystemConsts:
     MODE_CLUSTER = "cluster"
     MODE_STAND_ALONE = "stand-alone"
     MODE_UNSPECIFIED = "unspecified"

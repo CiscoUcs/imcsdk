@@ -1,15 +1,15 @@
 """This module contains the general information for BiosVfCDNEnable ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfCDNEnableConsts():
+class BiosVfCDNEnableConsts:
     VP_CDNENABLE_DISABLED = "Disabled"
     VP_CDNENABLE_ENABLED = "Enabled"
-    VP_CDNENABLE_DISABLED = "disabled"
-    VP_CDNENABLE_ENABLED = "enabled"
+    _VP_CDNENABLE_DISABLED = "disabled"
+    _VP_CDNENABLE_ENABLED = "enabled"
     VP_CDNENABLE_PLATFORM_DEFAULT = "platform-default"
 
 

@@ -1,11 +1,11 @@
 """This module contains the general information for ProcessorUnit ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class ProcessorUnitConsts():
+class ProcessorUnitConsts:
     ARCH_DUAL_CORE_OPTERON = "Dual-Core_Opteron"
     ARCH_INTEL_P4_C = "Intel_P4_C"
     ARCH_OPTERON = "Opteron"

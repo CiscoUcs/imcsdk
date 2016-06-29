@@ -1,17 +1,17 @@
 """This module contains the general information for BiosVfLegacyUSBSupport ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfLegacyUSBSupportConsts():
+class BiosVfLegacyUSBSupportConsts:
     VP_LEGACY_USBSUPPORT_AUTO = "Auto"
     VP_LEGACY_USBSUPPORT_DISABLED = "Disabled"
     VP_LEGACY_USBSUPPORT_ENABLED = "Enabled"
-    VP_LEGACY_USBSUPPORT_AUTO = "auto"
-    VP_LEGACY_USBSUPPORT_DISABLED = "disabled"
-    VP_LEGACY_USBSUPPORT_ENABLED = "enabled"
+    _VP_LEGACY_USBSUPPORT_AUTO = "auto"
+    _VP_LEGACY_USBSUPPORT_DISABLED = "disabled"
+    _VP_LEGACY_USBSUPPORT_ENABLED = "enabled"
     VP_LEGACY_USBSUPPORT_PLATFORM_DEFAULT = "platform-default"
 
 

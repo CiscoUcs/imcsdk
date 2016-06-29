@@ -1,15 +1,15 @@
 """This module contains the general information for BiosVfProcessorC3Report ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfProcessorC3ReportConsts():
+class BiosVfProcessorC3ReportConsts:
     VP_PROCESSOR_C3_REPORT_DISABLED = "Disabled"
     VP_PROCESSOR_C3_REPORT_ENABLED = "Enabled"
-    VP_PROCESSOR_C3_REPORT_DISABLED = "disabled"
-    VP_PROCESSOR_C3_REPORT_ENABLED = "enabled"
+    _VP_PROCESSOR_C3_REPORT_DISABLED = "disabled"
+    _VP_PROCESSOR_C3_REPORT_ENABLED = "enabled"
     VP_PROCESSOR_C3_REPORT_PLATFORM_DEFAULT = "platform-default"
 
 

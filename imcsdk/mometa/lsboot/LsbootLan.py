@@ -1,11 +1,11 @@
 """This module contains the general information for LsbootLan ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class LsbootLanConsts():
+class LsbootLanConsts:
     ACCESS_READ_ONLY = "read-only"
     PROT_GPXE = "gpxe"
     PROT_I_SCSI = "iSCSI"

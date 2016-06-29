@@ -1,11 +1,11 @@
 """This module contains the general information for BiosVfCPUPowerManagement ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfCPUPowerManagementConsts():
+class BiosVfCPUPowerManagementConsts:
     VP_CPUPOWER_MANAGEMENT_CUSTOM = "custom"
     VP_CPUPOWER_MANAGEMENT_DISABLED = "disabled"
     VP_CPUPOWER_MANAGEMENT_ENERGY_EFFICIENT = "energy-efficient"

@@ -1,11 +1,11 @@
 """This module contains the general information for AdaptorCfgImporter ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class AdaptorCfgImporterConsts():
+class AdaptorCfgImporterConsts:
     ADMIN_STATE_TRIGGER = "trigger"
     ADMIN_STATE_TRIGGERED = "triggered"
     PROTO_FTP = "ftp"

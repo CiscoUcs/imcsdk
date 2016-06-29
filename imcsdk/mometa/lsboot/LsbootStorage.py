@@ -1,11 +1,11 @@
 """This module contains the general information for LsbootStorage ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class LsbootStorageConsts():
+class LsbootStorageConsts:
     ACCESS_READ_WRITE = "read-write"
     TYPE_STORAGE = "storage"
 

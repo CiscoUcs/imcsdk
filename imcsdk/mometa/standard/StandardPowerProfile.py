@@ -1,13 +1,13 @@
 """This module contains the general information for StandardPowerProfile ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class StandardPowerProfileConsts():
+class StandardPowerProfileConsts:
     CORR_ACTION_ALERT = "alert"
-    CORR_ACTION_ALERT,SHUTDOWN = "alert,shutdown"
+    CORR_ACTION_ALERT_SHUTDOWN = "alert,shutdown"
     CORR_ACTION_NONE = "none"
     CORR_ACTION_SHUTDOWN = "shutdown"
 

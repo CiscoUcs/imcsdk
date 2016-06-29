@@ -1,15 +1,15 @@
 """This module contains the general information for BiosVfIntelTurboBoostTech ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfIntelTurboBoostTechConsts():
+class BiosVfIntelTurboBoostTechConsts:
     VP_INTEL_TURBO_BOOST_TECH_DISABLED = "Disabled"
     VP_INTEL_TURBO_BOOST_TECH_ENABLED = "Enabled"
-    VP_INTEL_TURBO_BOOST_TECH_DISABLED = "disabled"
-    VP_INTEL_TURBO_BOOST_TECH_ENABLED = "enabled"
+    _VP_INTEL_TURBO_BOOST_TECH_DISABLED = "disabled"
+    _VP_INTEL_TURBO_BOOST_TECH_ENABLED = "enabled"
     VP_INTEL_TURBO_BOOST_TECH_PLATFORM_DEFAULT = "platform-default"
 
 

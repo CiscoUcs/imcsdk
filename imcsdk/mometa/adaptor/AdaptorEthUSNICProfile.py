@@ -1,11 +1,11 @@
 """This module contains the general information for AdaptorEthUSNICProfile ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class AdaptorEthUSNICProfileConsts():
+class AdaptorEthUSNICProfileConsts:
     COALESCING_TYPE_IDLE = "IDLE"
     COALESCING_TYPE_MIN = "MIN"
 

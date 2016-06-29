@@ -1,11 +1,11 @@
 """This module contains the general information for AdaptorIpV6RssHashProfile ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class AdaptorIpV6RssHashProfileConsts():
+class AdaptorIpV6RssHashProfileConsts:
     pass
 
 

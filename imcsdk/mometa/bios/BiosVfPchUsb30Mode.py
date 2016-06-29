@@ -1,15 +1,15 @@
 """This module contains the general information for BiosVfPchUsb30Mode ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfPchUsb30ModeConsts():
+class BiosVfPchUsb30ModeConsts:
     VP_PCH_USB30_MODE_DISABLED = "Disabled"
     VP_PCH_USB30_MODE_ENABLED = "Enabled"
-    VP_PCH_USB30_MODE_DISABLED = "disabled"
-    VP_PCH_USB30_MODE_ENABLED = "enabled"
+    _VP_PCH_USB30_MODE_DISABLED = "disabled"
+    _VP_PCH_USB30_MODE_ENABLED = "enabled"
     VP_PCH_USB30_MODE_PLATFORM_DEFAULT = "platform-default"
 
 

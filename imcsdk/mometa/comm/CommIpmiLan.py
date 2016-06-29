@@ -1,11 +1,11 @@
 """This module contains the general information for CommIpmiLan ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class CommIpmiLanConsts():
+class CommIpmiLanConsts:
     PRIV_ADMIN = "admin"
     PRIV_READ_ONLY = "read-only"
     PRIV_USER = "user"

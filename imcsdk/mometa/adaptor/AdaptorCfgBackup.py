@@ -1,11 +1,11 @@
 """This module contains the general information for AdaptorCfgBackup ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class AdaptorCfgBackupConsts():
+class AdaptorCfgBackupConsts:
     ADMIN_STATE_TRIGGER = "trigger"
     ADMIN_STATE_TRIGGERED = "triggered"
     PROTO_FTP = "ftp"

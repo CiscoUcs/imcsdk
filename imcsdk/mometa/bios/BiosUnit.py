@@ -1,11 +1,11 @@
 """This module contains the general information for BiosUnit ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosUnitConsts():
+class BiosUnitConsts:
     ADMIN_ACTION_ENTER_BIOS_SETUP = "enter-bios-setup"
 
 

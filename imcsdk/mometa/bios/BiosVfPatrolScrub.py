@@ -1,15 +1,15 @@
 """This module contains the general information for BiosVfPatrolScrub ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfPatrolScrubConsts():
+class BiosVfPatrolScrubConsts:
     VP_PATROL_SCRUB_DISABLED = "Disabled"
     VP_PATROL_SCRUB_ENABLED = "Enabled"
-    VP_PATROL_SCRUB_DISABLED = "disabled"
-    VP_PATROL_SCRUB_ENABLED = "enabled"
+    _VP_PATROL_SCRUB_DISABLED = "disabled"
+    _VP_PATROL_SCRUB_ENABLED = "enabled"
     VP_PATROL_SCRUB_PLATFORM_DEFAULT = "platform-default"
 
 

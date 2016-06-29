@@ -1,15 +1,15 @@
 """This module contains the general information for BiosVfProcessorC1E ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfProcessorC1EConsts():
+class BiosVfProcessorC1EConsts:
     VP_PROCESSOR_C1_E_DISABLED = "Disabled"
     VP_PROCESSOR_C1_E_ENABLED = "Enabled"
-    VP_PROCESSOR_C1_E_DISABLED = "disabled"
-    VP_PROCESSOR_C1_E_ENABLED = "enabled"
+    _VP_PROCESSOR_C1_E_DISABLED = "disabled"
+    _VP_PROCESSOR_C1_E_ENABLED = "enabled"
     VP_PROCESSOR_C1_E_PLATFORM_DEFAULT = "platform-default"
 
 

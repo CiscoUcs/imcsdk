@@ -1,11 +1,11 @@
 """This module contains the general information for SysdebugTechSupportExport ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class SysdebugTechSupportExportConsts():
+class SysdebugTechSupportExportConsts:
     PROTOCOL_FTP = "ftp"
     PROTOCOL_HTTP = "http"
     PROTOCOL_SCP = "scp"

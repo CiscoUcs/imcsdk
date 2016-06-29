@@ -1,11 +1,11 @@
 """This module contains the general information for StorageFlexFlashVirtualDriveImageMap ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class StorageFlexFlashVirtualDriveImageMapConsts():
+class StorageFlexFlashVirtualDriveImageMapConsts:
     ADMIN_ACTION_MAP = "map"
     ADMIN_ACTION_UNMAP = "unmap"
     MAP_CIFS = "cifs"

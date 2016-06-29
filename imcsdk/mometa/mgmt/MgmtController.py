@@ -1,11 +1,11 @@
 """This module contains the general information for MgmtController ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class MgmtControllerConsts():
+class MgmtControllerConsts:
     SUBJECT_ADAPTOR = "adaptor"
     SUBJECT_BLADE = "blade"
     SUBJECT_BOARD_CONTROLLER = "board-controller"

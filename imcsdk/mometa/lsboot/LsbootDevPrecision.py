@@ -1,11 +1,11 @@
 """This module contains the general information for LsbootDevPrecision ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class LsbootDevPrecisionConsts():
+class LsbootDevPrecisionConsts:
     CONFIGURED_BOOT_MODE_LEGACY = "Legacy"
     CONFIGURED_BOOT_MODE_NONE = "None"
     CONFIGURED_BOOT_MODE_UEFI = "Uefi"

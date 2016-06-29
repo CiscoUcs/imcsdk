@@ -1,11 +1,11 @@
 """This module contains the general information for StorageController ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class StorageControllerConsts():
+class StorageControllerConsts:
     ADMIN_ACTION_CLEAR_BOOT_DRIVE = "clear-boot-drive"
     ADMIN_ACTION_CLEAR_FOREIGN_CONFIG = "clear-foreign-config"
     ADMIN_ACTION_DELETE_ALL_VDS_RESET_PDS = "delete-all-vds-reset-pds"

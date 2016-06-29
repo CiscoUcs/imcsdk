@@ -1,11 +1,11 @@
 """This module contains the general information for BiosVfCPUPerformance ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfCPUPerformanceConsts():
+class BiosVfCPUPerformanceConsts:
     VP_CPUPERFORMANCE_CUSTOM = "custom"
     VP_CPUPERFORMANCE_ENTERPRISE = "enterprise"
     VP_CPUPERFORMANCE_HIGH_THROUGHPUT = "high-throughput"

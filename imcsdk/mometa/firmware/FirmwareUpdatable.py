@@ -1,11 +1,11 @@
 """This module contains the general information for FirmwareUpdatable ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class FirmwareUpdatableConsts():
+class FirmwareUpdatableConsts:
     ADMIN_STATE_TRIGGER = "trigger"
     ADMIN_STATE_TRIGGERED = "triggered"
     DEPLOYMENT_BACKUP = "backup"
@@ -30,9 +30,9 @@ class FirmwareUpdatableConsts():
     SECURE_BOOT_DISABLED = "Disabled"
     SECURE_BOOT_ENABLED = "Enabled"
     SECURE_BOOT_DISABLE = "disable"
-    SECURE_BOOT_DISABLED = "disabled"
+    _SECURE_BOOT_DISABLED = "disabled"
     SECURE_BOOT_ENABLE = "enable"
-    SECURE_BOOT_ENABLED = "enabled"
+    _SECURE_BOOT_ENABLED = "enabled"
     TYPE_ADAPTOR = "adaptor"
     TYPE_BLADE_BIOS = "blade-bios"
     TYPE_BLADE_CONTROLLER = "blade-controller"

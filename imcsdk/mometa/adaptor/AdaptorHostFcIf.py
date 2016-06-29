@@ -1,11 +1,11 @@
 """This module contains the general information for AdaptorHostFcIf ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class AdaptorHostFcIfConsts():
+class AdaptorHostFcIfConsts:
     ADMIN_PERSISTENT_BINDINGS_POLICY = "policy"
     ADMIN_PERSISTENT_BINDINGS_REBUILD = "rebuild"
     IF_TYPE_VIRTUAL = "virtual"

@@ -1,15 +1,15 @@
 """This module contains the general information for BiosVfSrIov ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfSrIovConsts():
+class BiosVfSrIovConsts:
     VP_SR_IOV_DISABLED = "Disabled"
     VP_SR_IOV_ENABLED = "Enabled"
-    VP_SR_IOV_DISABLED = "disabled"
-    VP_SR_IOV_ENABLED = "enabled"
+    _VP_SR_IOV_DISABLED = "disabled"
+    _VP_SR_IOV_ENABLED = "enabled"
     VP_SR_IOV_PLATFORM_DEFAULT = "platform-default"
 
 

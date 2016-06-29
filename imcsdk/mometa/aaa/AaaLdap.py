@@ -1,11 +1,11 @@
 """This module contains the general information for AaaLdap ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class AaaLdapConsts():
+class AaaLdapConsts:
     BIND_METHOD_ANONYMOUS = "anonymous"
     BIND_METHOD_CONFIGURED_CREDENTIALS = "configured-credentials"
     BIND_METHOD_LOGIN_CREDENTIALS = "login-credentials"

@@ -1,17 +1,17 @@
 """This module contains the general information for SolIf ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class SolIfConsts():
+class SolIfConsts:
     ADMIN_STATE_DISABLED = "Disabled"
     ADMIN_STATE_ENABLED = "Enabled"
     ADMIN_STATE_DISABLE = "disable"
-    ADMIN_STATE_DISABLED = "disabled"
+    _ADMIN_STATE_DISABLED = "disabled"
     ADMIN_STATE_ENABLE = "enable"
-    ADMIN_STATE_ENABLED = "enabled"
+    _ADMIN_STATE_ENABLED = "enabled"
     COMPORT_COM0 = "com0"
     COMPORT_COM1 = "com1"
     SPEED_115200 = "115200"

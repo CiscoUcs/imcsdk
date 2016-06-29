@@ -1,15 +1,15 @@
 """This module contains the general information for BiosVfTPMSupport ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfTPMSupportConsts():
+class BiosVfTPMSupportConsts:
     VP_TPMSUPPORT_DISABLED = "Disabled"
     VP_TPMSUPPORT_ENABLED = "Enabled"
-    VP_TPMSUPPORT_DISABLED = "disabled"
-    VP_TPMSUPPORT_ENABLED = "enabled"
+    _VP_TPMSUPPORT_DISABLED = "disabled"
+    _VP_TPMSUPPORT_ENABLED = "enabled"
     VP_TPMSUPPORT_PLATFORM_DEFAULT = "platform-default"
 
 

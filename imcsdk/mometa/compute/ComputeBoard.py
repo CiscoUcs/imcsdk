@@ -1,11 +1,11 @@
 """This module contains the general information for ComputeBoard ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class ComputeBoardConsts():
+class ComputeBoardConsts:
     OPER_POWER_DEGRADED = "degraded"
     OPER_POWER_ERROR = "error"
     OPER_POWER_NOT_SUPPORTED = "not-supported"

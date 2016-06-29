@@ -1,11 +1,11 @@
 """This module contains the general information for BiosVfPStateCoordType ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfPStateCoordTypeConsts():
+class BiosVfPStateCoordTypeConsts:
     VP_PSTATE_COORD_TYPE_HW_ALL = "HW ALL"
     VP_PSTATE_COORD_TYPE_SW_ALL = "SW ALL"
     VP_PSTATE_COORD_TYPE_SW_ANY = "SW ANY"

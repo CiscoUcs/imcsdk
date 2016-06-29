@@ -1,11 +1,11 @@
 """This module contains the general information for LsbootSan ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class LsbootSanConsts():
+class LsbootSanConsts:
     STATE_DISABLED = "Disabled"
     STATE_ENABLED = "Enabled"
     SUBTYPE_SAN = "SAN"

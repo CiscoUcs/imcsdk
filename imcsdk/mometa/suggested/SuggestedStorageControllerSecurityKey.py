@@ -1,11 +1,11 @@
 """This module contains the general information for SuggestedStorageControllerSecurityKey ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class SuggestedStorageControllerSecurityKeyConsts():
+class SuggestedStorageControllerSecurityKeyConsts:
     pass
 
 
@@ -15,7 +15,7 @@ class SuggestedStorageControllerSecurityKey(ManagedObject):
     consts = SuggestedStorageControllerSecurityKeyConsts()
     naming_props = set([])
 
-    mo_meta = MoMeta("SuggestedStorageControllerSecurityKey", "suggestedStorageControllerSecurityKey", "suggested-sec-key", VersionMeta.Version209c, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageController'], [], [None])
+    mo_meta = MoMeta("SuggestedStorageControllerSecurityKey", "suggestedStorageControllerSecurityKey", "suggested-sec-key", VersionMeta.Version209c, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageController'], [], ["Get"])
 
     prop_meta = {
         "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version209c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 

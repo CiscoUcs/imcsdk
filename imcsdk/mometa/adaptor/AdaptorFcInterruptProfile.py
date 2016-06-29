@@ -1,11 +1,11 @@
 """This module contains the general information for AdaptorFcInterruptProfile ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class AdaptorFcInterruptProfileConsts():
+class AdaptorFcInterruptProfileConsts:
     MODE_INTX = "INTx"
     MODE_MSI = "MSI"
     MODE_MSIX = "MSIx"

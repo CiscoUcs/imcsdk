@@ -1,15 +1,15 @@
 """This module contains the general information for BiosVfProcessorCState ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfProcessorCStateConsts():
+class BiosVfProcessorCStateConsts:
     VP_PROCESSOR_CSTATE_DISABLED = "Disabled"
     VP_PROCESSOR_CSTATE_ENABLED = "Enabled"
-    VP_PROCESSOR_CSTATE_DISABLED = "disabled"
-    VP_PROCESSOR_CSTATE_ENABLED = "enabled"
+    _VP_PROCESSOR_CSTATE_DISABLED = "disabled"
+    _VP_PROCESSOR_CSTATE_ENABLED = "enabled"
     VP_PROCESSOR_CSTATE_PLATFORM_DEFAULT = "platform-default"
 
 

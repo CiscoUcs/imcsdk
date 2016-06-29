@@ -1,15 +1,15 @@
 """This module contains the general information for BiosVfSerialPortAEnable ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfSerialPortAEnableConsts():
+class BiosVfSerialPortAEnableConsts:
     VP_SERIAL_PORT_AENABLE_DISABLED = "Disabled"
     VP_SERIAL_PORT_AENABLE_ENABLED = "Enabled"
-    VP_SERIAL_PORT_AENABLE_DISABLED = "disabled"
-    VP_SERIAL_PORT_AENABLE_ENABLED = "enabled"
+    _VP_SERIAL_PORT_AENABLE_DISABLED = "disabled"
+    _VP_SERIAL_PORT_AENABLE_ENABLED = "enabled"
     VP_SERIAL_PORT_AENABLE_PLATFORM_DEFAULT = "platform-default"
 
 

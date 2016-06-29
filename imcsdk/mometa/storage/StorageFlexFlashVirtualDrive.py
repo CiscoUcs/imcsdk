@@ -1,11 +1,11 @@
 """This module contains the general information for StorageFlexFlashVirtualDrive ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class StorageFlexFlashVirtualDriveConsts():
+class StorageFlexFlashVirtualDriveConsts:
     ADMIN_ACTION_DISABLE_VD = "disable-vd"
     ADMIN_ACTION_ENABLE_VD = "enable-vd"
     ADMIN_ACTION_ERASE_VD = "erase-vd"

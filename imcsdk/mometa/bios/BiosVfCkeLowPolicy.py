@@ -1,11 +1,11 @@
 """This module contains the general information for BiosVfCkeLowPolicy ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfCkeLowPolicyConsts():
+class BiosVfCkeLowPolicyConsts:
     VP_CKE_LOW_POLICY_AUTO = "auto"
     VP_CKE_LOW_POLICY_DISABLED = "disabled"
     VP_CKE_LOW_POLICY_FAST = "fast"

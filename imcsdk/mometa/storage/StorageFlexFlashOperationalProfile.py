@@ -1,11 +1,11 @@
 """This module contains the general information for StorageFlexFlashOperationalProfile ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class StorageFlexFlashOperationalProfileConsts():
+class StorageFlexFlashOperationalProfileConsts:
     ADMIN_ACTION_CLEAR_ERRORS = "clear-errors"
     RAID_PRIMARY_MEMBER_SLOT_1 = "slot-1"
     RAID_PRIMARY_MEMBER_SLOT_2 = "slot-2"

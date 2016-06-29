@@ -1,11 +1,11 @@
 """This module contains the general information for ComputeRackUnitMbTempStats ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class ComputeRackUnitMbTempStatsConsts():
+class ComputeRackUnitMbTempStatsConsts:
     AMBIENT_TEMP_ = ""
     FRONT_TEMP_ = ""
     IOH1_TEMP_ = ""

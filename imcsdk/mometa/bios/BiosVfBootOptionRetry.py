@@ -1,15 +1,15 @@
 """This module contains the general information for BiosVfBootOptionRetry ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfBootOptionRetryConsts():
+class BiosVfBootOptionRetryConsts:
     VP_BOOT_OPTION_RETRY_DISABLED = "Disabled"
     VP_BOOT_OPTION_RETRY_ENABLED = "Enabled"
-    VP_BOOT_OPTION_RETRY_DISABLED = "disabled"
-    VP_BOOT_OPTION_RETRY_ENABLED = "enabled"
+    _VP_BOOT_OPTION_RETRY_DISABLED = "disabled"
+    _VP_BOOT_OPTION_RETRY_ENABLED = "enabled"
     VP_BOOT_OPTION_RETRY_PLATFORM_DEFAULT = "platform-default"
 
 

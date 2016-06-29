@@ -1,11 +1,11 @@
 """This module contains the general information for BiosVfExtendedAPIC ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfExtendedAPICConsts():
+class BiosVfExtendedAPICConsts:
     VP_EXTENDED_APIC_DISABLED = "Disabled"
     VP_EXTENDED_APIC_ENABLED = "Enabled"
     VP_EXTENDED_APIC_X2_APIC = "X2APIC"

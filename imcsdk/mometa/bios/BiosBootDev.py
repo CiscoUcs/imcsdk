@@ -1,11 +1,11 @@
 """This module contains the general information for BiosBootDev ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosBootDevConsts():
+class BiosBootDevConsts:
     ORDER_1 = "1"
     ORDER_10 = "10"
     ORDER_11 = "11"

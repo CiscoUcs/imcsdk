@@ -1,11 +1,11 @@
 """This module contains the general information for EquipmentTpm ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class EquipmentTpmConsts():
+class EquipmentTpmConsts:
     ACTIVE_STATUS_ACTIVATED = "activated"
     ACTIVE_STATUS_DEACTIVATED = "deactivated"
     ACTIVE_STATUS_UNKNOWN = "unknown"

@@ -1,11 +1,11 @@
 """This module contains the general information for CommSnmpUser ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class CommSnmpUserConsts():
+class CommSnmpUserConsts:
     ADMIN_ACTION_CLEAR = "clear"
     AUTH_ = ""
     AUTH_MD5 = "MD5"

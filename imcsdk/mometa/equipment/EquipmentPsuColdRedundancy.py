@@ -1,11 +1,11 @@
 """This module contains the general information for EquipmentPsuColdRedundancy ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class EquipmentPsuColdRedundancyConsts():
+class EquipmentPsuColdRedundancyConsts:
     pass
 
 

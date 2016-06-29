@@ -1,11 +1,11 @@
 """This module contains the general information for BiosVfConsoleRedirection ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfConsoleRedirectionConsts():
+class BiosVfConsoleRedirectionConsts:
     VP_BAUD_RATE_115200 = "115200"
     VP_BAUD_RATE_19200 = "19200"
     VP_BAUD_RATE_38400 = "38400"
@@ -23,8 +23,8 @@ class BiosVfConsoleRedirectionConsts():
     VP_FLOW_CONTROL_RTS_CTS = "rts-cts"
     VP_LEGACY_OSREDIRECTION_DISABLED = "Disabled"
     VP_LEGACY_OSREDIRECTION_ENABLED = "Enabled"
-    VP_LEGACY_OSREDIRECTION_DISABLED = "disabled"
-    VP_LEGACY_OSREDIRECTION_ENABLED = "enabled"
+    _VP_LEGACY_OSREDIRECTION_DISABLED = "disabled"
+    _VP_LEGACY_OSREDIRECTION_ENABLED = "enabled"
     VP_LEGACY_OSREDIRECTION_PLATFORM_DEFAULT = "platform-default"
     VP_PUTTY_KEY_PAD_ESCN = "ESCN"
     VP_PUTTY_KEY_PAD_LINUX = "LINUX"

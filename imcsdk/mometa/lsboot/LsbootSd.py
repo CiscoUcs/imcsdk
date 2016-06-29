@@ -1,11 +1,11 @@
 """This module contains the general information for LsbootSd ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class LsbootSdConsts():
+class LsbootSdConsts:
     STATE_DISABLED = "Disabled"
     STATE_ENABLED = "Enabled"
     SUBTYPE_SDCARD = "SDCARD"

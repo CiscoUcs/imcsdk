@@ -1,11 +1,11 @@
 """This module contains the general information for BiosVfOnboardStorageSWStack ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfOnboardStorageSWStackConsts():
+class BiosVfOnboardStorageSWStackConsts:
     VP_ONBOARD_SCUSTORAGE_SWSTACK_INTEL_RSTE = "Intel RSTe"
     VP_ONBOARD_SCUSTORAGE_SWSTACK_LSI_SW_RAID = "LSI SW RAID"
     VP_ONBOARD_SCUSTORAGE_SWSTACK_PLATFORM_DEFAULT = "platform-default"

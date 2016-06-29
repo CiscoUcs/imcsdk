@@ -1,11 +1,11 @@
 """This module contains the general information for LsbootIscsi ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class LsbootIscsiConsts():
+class LsbootIscsiConsts:
     STATE_DISABLED = "Disabled"
     STATE_ENABLED = "Enabled"
     SUBTYPE_ISCSI = "ISCSI"

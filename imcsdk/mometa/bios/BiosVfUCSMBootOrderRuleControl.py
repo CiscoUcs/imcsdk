@@ -1,11 +1,11 @@
 """This module contains the general information for BiosVfUCSMBootOrderRuleControl ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfUCSMBootOrderRuleControlConsts():
+class BiosVfUCSMBootOrderRuleControlConsts:
     VP_UCSMBOOT_ORDER_RULE_LOOSE = "Loose"
     VP_UCSMBOOT_ORDER_RULE_STRICT = "Strict"
     VP_UCSMBOOT_ORDER_RULE_PLATFORM_DEFAULT = "platform-default"

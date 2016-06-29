@@ -1,11 +1,11 @@
 """This module contains the general information for AaaUserPolicy ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class AaaUserPolicyConsts():
+class AaaUserPolicyConsts:
     pass
 
 
@@ -15,7 +15,7 @@ class AaaUserPolicy(ManagedObject):
     consts = AaaUserPolicyConsts()
     naming_props = set([])
 
-    mo_meta = MoMeta("AaaUserPolicy", "aaaUserPolicy", "policy", VersionMeta.Version209c, "InputOutput", 0x1f, [], ["admin", "user"], [u'aaaUserEp'], [], [None])
+    mo_meta = MoMeta("AaaUserPolicy", "aaaUserPolicy", "policy", VersionMeta.Version209c, "InputOutput", 0x1f, [], ["admin", "user"], [u'aaaUserEp'], [], ["Get", "Set"])
 
     prop_meta = {
         "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version209c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 

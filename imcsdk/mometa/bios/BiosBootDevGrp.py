@@ -1,11 +1,11 @@
 """This module contains the general information for BiosBootDevGrp ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosBootDevGrpConsts():
+class BiosBootDevGrpConsts:
     TYPE_BEV_ORDER = "bev-order"
     TYPE_CD_ORDER = "cd-order"
     TYPE_FDD_ORDER = "fdd-order"

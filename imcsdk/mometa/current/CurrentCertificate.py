@@ -1,11 +1,11 @@
 """This module contains the general information for CurrentCertificate ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class CurrentCertificateConsts():
+class CurrentCertificateConsts:
     pass
 
 

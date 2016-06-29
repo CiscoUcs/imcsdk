@@ -1,11 +1,11 @@
 """This module contains the general information for LsbootDef ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class LsbootDefConsts():
+class LsbootDefConsts:
     PURPOSE_OPERATIONAL = "operational"
     PURPOSE_UTILITY = "utility"
     REBOOT_ON_UPDATE_FALSE = "false"

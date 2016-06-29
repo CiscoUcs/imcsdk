@@ -1,15 +1,15 @@
 """This module contains the general information for BiosVfPciRomClp ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfPciRomClpConsts():
+class BiosVfPciRomClpConsts:
     VP_PCI_ROM_CLP_DISABLED = "Disabled"
     VP_PCI_ROM_CLP_ENABLED = "Enabled"
-    VP_PCI_ROM_CLP_DISABLED = "disabled"
-    VP_PCI_ROM_CLP_ENABLED = "enabled"
+    _VP_PCI_ROM_CLP_DISABLED = "disabled"
+    _VP_PCI_ROM_CLP_ENABLED = "enabled"
     VP_PCI_ROM_CLP_PLATFORM_DEFAULT = "platform-default"
 
 

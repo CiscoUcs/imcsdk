@@ -1,15 +1,15 @@
 """This module contains the general information for BiosVfDemandScrub ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfDemandScrubConsts():
+class BiosVfDemandScrubConsts:
     VP_DEMAND_SCRUB_DISABLED = "Disabled"
     VP_DEMAND_SCRUB_ENABLED = "Enabled"
-    VP_DEMAND_SCRUB_DISABLED = "disabled"
-    VP_DEMAND_SCRUB_ENABLED = "enabled"
+    _VP_DEMAND_SCRUB_DISABLED = "disabled"
+    _VP_DEMAND_SCRUB_ENABLED = "enabled"
     VP_DEMAND_SCRUB_PLATFORM_DEFAULT = "platform-default"
 
 

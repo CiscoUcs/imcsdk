@@ -1,15 +1,15 @@
 """This module contains the general information for BiosVfPOSTErrorPause ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfPOSTErrorPauseConsts():
+class BiosVfPOSTErrorPauseConsts:
     VP_POSTERROR_PAUSE_DISABLED = "Disabled"
     VP_POSTERROR_PAUSE_ENABLED = "Enabled"
-    VP_POSTERROR_PAUSE_DISABLED = "disabled"
-    VP_POSTERROR_PAUSE_ENABLED = "enabled"
+    _VP_POSTERROR_PAUSE_DISABLED = "disabled"
+    _VP_POSTERROR_PAUSE_ENABLED = "enabled"
     VP_POSTERROR_PAUSE_PLATFORM_DEFAULT = "platform-default"
 
 

@@ -1,18 +1,26 @@
 """This module contains the general information for BiosVfCoreMultiProcessing ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfCoreMultiProcessingConsts():
+class BiosVfCoreMultiProcessingConsts:
     VP_CORE_MULTI_PROCESSING_1 = "1"
     VP_CORE_MULTI_PROCESSING_10 = "10"
     VP_CORE_MULTI_PROCESSING_11 = "11"
     VP_CORE_MULTI_PROCESSING_12 = "12"
     VP_CORE_MULTI_PROCESSING_13 = "13"
     VP_CORE_MULTI_PROCESSING_14 = "14"
+    VP_CORE_MULTI_PROCESSING_15 = "15"
+    VP_CORE_MULTI_PROCESSING_16 = "16"
+    VP_CORE_MULTI_PROCESSING_17 = "17"
+    VP_CORE_MULTI_PROCESSING_18 = "18"
+    VP_CORE_MULTI_PROCESSING_19 = "19"
     VP_CORE_MULTI_PROCESSING_2 = "2"
+    VP_CORE_MULTI_PROCESSING_20 = "20"
+    VP_CORE_MULTI_PROCESSING_21 = "21"
+    VP_CORE_MULTI_PROCESSING_22 = "22"
     VP_CORE_MULTI_PROCESSING_3 = "3"
     VP_CORE_MULTI_PROCESSING_4 = "4"
     VP_CORE_MULTI_PROCESSING_5 = "5"
@@ -37,7 +45,7 @@ class BiosVfCoreMultiProcessing(ManagedObject):
         "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
         "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
         "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-        "vp_core_multi_processing": MoPropertyMeta("vp_core_multi_processing", "vpCoreMultiProcessing", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["1", "10", "11", "12", "13", "14", "2", "3", "4", "5", "6", "7", "8", "9", "all", "platform-default"], []), 
+        "vp_core_multi_processing": MoPropertyMeta("vp_core_multi_processing", "vpCoreMultiProcessing", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["1", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "2", "20", "21", "22", "3", "4", "5", "6", "7", "8", "9", "all", "platform-default"], []), 
     }
 
     prop_map = {

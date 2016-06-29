@@ -1,11 +1,11 @@
 """This module contains the general information for AdaptorExtEthIf ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class AdaptorExtEthIfConsts():
+class AdaptorExtEthIfConsts:
     ADMIN_SPEED_ = "-"
     ADMIN_SPEED_10_GBPS = "10Gbps"
     ADMIN_SPEED_1_GBPS = "1Gbps"

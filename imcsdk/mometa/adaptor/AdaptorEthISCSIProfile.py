@@ -1,11 +1,11 @@
 """This module contains the general information for AdaptorEthISCSIProfile ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class AdaptorEthISCSIProfileConsts():
+class AdaptorEthISCSIProfileConsts:
     INITIATOR_PRIORITY_PRIMARY = "primary"
     INITIATOR_PRIORITY_SECONDARY = "secondary"
 

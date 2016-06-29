@@ -1,11 +1,11 @@
 """This module contains the general information for LsbootVMedia ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class LsbootVMediaConsts():
+class LsbootVMediaConsts:
     ACCESS_ = ""
     ACCESS_READ_ONLY_LOCAL = "read-only-local"
     ACCESS_READ_ONLY_REMOTE = "read-only-remote"

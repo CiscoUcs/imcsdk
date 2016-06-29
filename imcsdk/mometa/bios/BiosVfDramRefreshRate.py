@@ -1,11 +1,11 @@
 """This module contains the general information for BiosVfDramRefreshRate ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfDramRefreshRateConsts():
+class BiosVfDramRefreshRateConsts:
     VP_DRAM_REFRESH_RATE_1X = "1x"
     VP_DRAM_REFRESH_RATE_2X = "2x"
     VP_DRAM_REFRESH_RATE_3X = "3x"

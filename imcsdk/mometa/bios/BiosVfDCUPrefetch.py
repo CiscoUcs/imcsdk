@@ -1,20 +1,20 @@
 """This module contains the general information for BiosVfDCUPrefetch ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfDCUPrefetchConsts():
+class BiosVfDCUPrefetchConsts:
     VP_IPPREFETCH_DISABLED = "Disabled"
     VP_IPPREFETCH_ENABLED = "Enabled"
-    VP_IPPREFETCH_DISABLED = "disabled"
-    VP_IPPREFETCH_ENABLED = "enabled"
+    _VP_IPPREFETCH_DISABLED = "disabled"
+    _VP_IPPREFETCH_ENABLED = "enabled"
     VP_IPPREFETCH_PLATFORM_DEFAULT = "platform-default"
     VP_STREAMER_PREFETCH_DISABLED = "Disabled"
     VP_STREAMER_PREFETCH_ENABLED = "Enabled"
-    VP_STREAMER_PREFETCH_DISABLED = "disabled"
-    VP_STREAMER_PREFETCH_ENABLED = "enabled"
+    _VP_STREAMER_PREFETCH_DISABLED = "disabled"
+    _VP_STREAMER_PREFETCH_ENABLED = "enabled"
     VP_STREAMER_PREFETCH_PLATFORM_DEFAULT = "platform-default"
 
 

@@ -1,17 +1,17 @@
 """This module contains the general information for BiosVfDirectCacheAccess ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfDirectCacheAccessConsts():
+class BiosVfDirectCacheAccessConsts:
     VP_DIRECT_CACHE_ACCESS_AUTO = "Auto"
     VP_DIRECT_CACHE_ACCESS_DISABLED = "Disabled"
     VP_DIRECT_CACHE_ACCESS_ENABLED = "Enabled"
-    VP_DIRECT_CACHE_ACCESS_AUTO = "auto"
-    VP_DIRECT_CACHE_ACCESS_DISABLED = "disabled"
-    VP_DIRECT_CACHE_ACCESS_ENABLED = "enabled"
+    _VP_DIRECT_CACHE_ACCESS_AUTO = "auto"
+    _VP_DIRECT_CACHE_ACCESS_DISABLED = "disabled"
+    _VP_DIRECT_CACHE_ACCESS_ENABLED = "enabled"
     VP_DIRECT_CACHE_ACCESS_PLATFORM_DEFAULT = "platform-default"
 
 

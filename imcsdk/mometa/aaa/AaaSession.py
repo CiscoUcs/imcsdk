@@ -1,13 +1,14 @@
 """This module contains the general information for AaaSession ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class AaaSessionConsts():
+class AaaSessionConsts:
     UI_EP = "ep"
     UI_NONE = "none"
+    UI_SERIAL = "serial"
     UI_SHELL = "shell"
     UI_V_MEDIA = "vMedia"
     UI_WEB = "web"
@@ -28,7 +29,7 @@ class AaaSession(ManagedObject):
         "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version151f, MoPropertyMeta.NAMING, None, 1, 32, None, [], []), 
         "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
         "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x8, None, None, r"""((removed|created|modified|deleted),){0,3}(removed|created|modified|deleted){0,1}""", [], []), 
-        "ui": MoPropertyMeta("ui", "ui", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["ep", "none", "shell", "vMedia", "web"], []), 
+        "ui": MoPropertyMeta("ui", "ui", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["ep", "none", "serial", "shell", "vMedia", "web"], []), 
         "user": MoPropertyMeta("user", "user", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 255, None, [], []), 
     }
 

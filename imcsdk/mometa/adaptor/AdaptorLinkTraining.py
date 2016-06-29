@@ -1,11 +1,11 @@
 """This module contains the general information for AdaptorLinkTraining ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class AdaptorLinkTrainingConsts():
+class AdaptorLinkTrainingConsts:
     LINK_TRAINING_N_A = "n/a"
     LINK_TRAINING_OFF = "off"
     LINK_TRAINING_ON = "on"

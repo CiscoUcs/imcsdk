@@ -1,11 +1,11 @@
 """This module contains the general information for BiosVfSelectMemoryRASConfiguration ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfSelectMemoryRASConfigurationConsts():
+class BiosVfSelectMemoryRASConfigurationConsts:
     VP_SELECT_MEMORY_RASCONFIGURATION_LOCKSTEP = "lockstep"
     VP_SELECT_MEMORY_RASCONFIGURATION_MAXIMUM_PERFORMANCE = "maximum-performance"
     VP_SELECT_MEMORY_RASCONFIGURATION_MIRRORING = "mirroring"

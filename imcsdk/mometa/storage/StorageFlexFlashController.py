@@ -1,11 +1,11 @@
 """This module contains the general information for StorageFlexFlashController ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class StorageFlexFlashControllerConsts():
+class StorageFlexFlashControllerConsts:
     ADMIN_ACTION_CONFIGURE_CARDS = "configure-cards"
     ADMIN_ACTION_CONFIGURE_FIRMWARE_MODE = "configure-firmware-mode"
     ADMIN_ACTION_RESET_FLEXFLASH_CONTROLLER = "reset-flexflash-controller"

@@ -1,15 +1,15 @@
 """This module contains the general information for BiosVfOnboardStorage ManagedObject."""
 
 from ...imcmo import ManagedObject
-from ...imccoremeta import ImcVersion, MoPropertyMeta, MoMeta
+from ...imccoremeta import MoPropertyMeta, MoMeta
 from ...imcmeta import VersionMeta
 
 
-class BiosVfOnboardStorageConsts():
+class BiosVfOnboardStorageConsts:
     VP_ONBOARD_SCUSTORAGE_SUPPORT_DISABLED = "Disabled"
     VP_ONBOARD_SCUSTORAGE_SUPPORT_ENABLED = "Enabled"
-    VP_ONBOARD_SCUSTORAGE_SUPPORT_DISABLED = "disabled"
-    VP_ONBOARD_SCUSTORAGE_SUPPORT_ENABLED = "enabled"
+    _VP_ONBOARD_SCUSTORAGE_SUPPORT_DISABLED = "disabled"
+    _VP_ONBOARD_SCUSTORAGE_SUPPORT_ENABLED = "enabled"
     VP_ONBOARD_SCUSTORAGE_SUPPORT_PLATFORM_DEFAULT = "platform-default"
 
 
