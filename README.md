@@ -7,11 +7,15 @@
 
 * Apache License, Version 2.0 (the "License")
 
+## Documentation
+
+https://ciscoucs.github.io/imcsdk_docs/
+
 ## Installation
 ```
-    - Install pip (skip if pip is already available):
-        wget https://bootstrap.pypa.io/get-pip.py
-        python get-pip.py
+    # Install pip (skip if pip is already available):
+    wget https://bootstrap.pypa.io/get-pip.py
+    python get-pip.py
 
     git clone https://github.com/ciscoucs/imcsdk.git
     cd imcsdk
