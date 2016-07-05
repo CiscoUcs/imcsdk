@@ -66,7 +66,7 @@ coverage:
 docs:
 	rm -f docs/imcsdk.rst
 	rm -f docs/modules.rst
-	sphinx-apidoc -o docs/ imcsdk
+	sphinx-apidoc -o docs/ -d 1 -E imcsdk
 	$(MAKE) -C docs clean
 	$(MAKE) -C docs html
 	$(BROWSER) docs/_build/html/index.html

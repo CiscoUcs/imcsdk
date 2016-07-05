@@ -9,8 +9,9 @@ Welcome to imcsdk's documentation!
 Contents:
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 4
 
+   imcsdk_ug
    imcsdk
    readme
    installation
