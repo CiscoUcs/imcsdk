@@ -16,7 +16,7 @@ This module performs the operation related to admin power of Rack unit.
 """
 
 
-def current_admin_power_state(handle):
+def admin_power_state_status(handle):
     """
     Checks for Current Power State of rack unit
 

@@ -14,9 +14,14 @@
 """
 This module fetches the boot related information.
 """
+import logging
+
+logging.basicConfig()
+log = logging.getLogger('imc')
+log.setLevel(logging.DEBUG)
 
 
-def boot_order_precision(handle, dump=True):
+def get_boot_order_precision(handle, dump=True):
     """
     Gets the precession boot order.
 
@@ -56,7 +61,7 @@ def boot_order_precision(handle, dump=True):
         return boot_order_dict
 
 
-def boot_order(handle, dump=True):
+def get_boot_order(handle, dump=True):
     """
     Gets the boot order.
 
