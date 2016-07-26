@@ -428,13 +428,14 @@ class ImcHandle(ImcSession):
 
         config_map = ConfigMap()
         for mo_dn in mo_dict:
-        
+
             config_map.child_add(mo_dict[mo_dn])
             elem = config_conf_mo(self.cookie,dn=mo_dn,
                                   in_config=config_map,
                                   in_hierarchical=False)
             response = self.post_elem(elem)
             if response.error_code != 0:
+                self.__to_commit = {}
                 raise ImcException(response.error_code, response.error_descr)
 
             for pair_ in response.out_config.child:
