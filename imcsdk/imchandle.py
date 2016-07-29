@@ -355,7 +355,10 @@ class ImcHandle(ImcSession):
         """
 
         if modify_present in imcgenutils.AFFIRMATIVE_LIST:
-            mo.status = "modified"
+            if self.query_dn(mo.dn) is None:
+                mo.status = "created"
+            else:
+                mo.status = "modified"
         else:
             mo.status = "created"
 
