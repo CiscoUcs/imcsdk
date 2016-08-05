@@ -23,7 +23,7 @@ log = logging.getLogger('imc')
 
 
 def backup_imc(handle, remote_host, remote_file, protocol, username, password,
-               passphrase="", timeout_in_sec=600):
+               passphrase, timeout_in_sec=600):
     """
     backup_imc helps create and download Imc backups.
 
@@ -31,7 +31,7 @@ def backup_imc(handle, remote_host, remote_file, protocol, username, password,
         handle (ImcHandle): Imc Connection handle
         remote_host (str): IP or Hostname for the remote host.
         remote_file (str): Absolute path and name for the backup file
-        protocol (str) : "ftp", "http", "none", "scp", "sftp", "tftp"
+        protocol (str) : "ftp", "http", "scp", "sftp", "tftp"
         username (str) : Remote Host user name
         password (str) : Remote Host user credentials/password
         passphrase (str) : Password for the backup file.
@@ -47,6 +47,9 @@ def backup_imc(handle, remote_host, remote_file, protocol, username, password,
 
     from ..mometa.mgmt.MgmtBackup import MgmtBackup, MgmtBackupConsts
     from ..mometa.top.TopSystem import TopSystem
+
+    if password == "" or passphrase == "":
+        raise ImcValidationException("Invalid password or passphrase")
 
     top_system = TopSystem()
     mgmt_backup = MgmtBackup(parent_mo_or_dn=top_system,
@@ -92,7 +95,7 @@ def backup_imc(handle, remote_host, remote_file, protocol, username, password,
 
 
 def import_imc_backup(handle, remote_host, remote_file, protocol, username,
-                      password, passphrase=""):
+                      password, passphrase):
     """
     This operation uploads a Imc backup taken earlier via GUI
     or backup_imc operation for all configuration, system configuration,
@@ -117,6 +120,9 @@ def import_imc_backup(handle, remote_host, remote_file, protocol, username,
 
     from ..mometa.top.TopSystem import TopSystem
     from ..mometa.mgmt.MgmtImporter import MgmtImporter, MgmtImporterConsts
+
+    if password == "" or passphrase == "":
+        raise ImcValidationException("Invalid password or passphrase")
 
     # create MgmtImporter
     top_system = TopSystem()
