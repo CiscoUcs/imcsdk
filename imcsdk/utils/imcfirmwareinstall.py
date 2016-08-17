@@ -19,8 +19,41 @@ from imcsdk.imcgenutils import *
 
 def update_imc_firmware_huu(handle, remote_share, share_type, remote_ip,
                             username, password, update_component,
-                            stop_on_error=None, timeout=None,
-                            verify_update=None, cimc_secure_boot=None):
+                            stop_on_error="yes", timeout=240,
+                            verify_update="yes", cimc_secure_boot="no"):
+    """
+    This method can be used to upgrade the cimc firmware
+
+    Args:
+        handle (ImcHandle)
+        remote_share (string): Full path to the firmware file
+        share_type (string): "nfs", "www", "cifs"
+        remote_ip (string): IP address of the remote machine
+        username (string): username
+        password (string): password
+        update_component (string): component to be updated.
+            "all" for upgrading all components
+        stop_on_error (string): "yes", "no"
+        timeout (int): Timeout value. Range is 30-240 secs.
+        verify_update (string): "yes", "no"
+        cimc_secure_boot (string): "yes", "no"
+
+    Returns:
+        HuuFirmwareUpdater object
+
+    Examples:
+        update_imc_firmware_huu(handle=handle,
+                                remote_ip=ip,
+                                remote_share='nfsshare2/ucs-c460m4-huu-2.0.9l.iso',
+                                share_type='nfs',
+                                username=username,
+                                password=password,
+                                update_component='all',
+                                stop_on_error='yes',
+                                verify_update='no',
+                                cimc_secure_boot='no',
+                                timeout='60')
+    """
 
     from imcsdk.mometa.huu.HuuFirmwareUpdater import HuuFirmwareUpdater, \
         HuuFirmwareUpdaterConsts
@@ -40,7 +73,7 @@ def update_imc_firmware_huu(handle, remote_share, share_type, remote_ip,
                                               admin_state=
                                               HuuFirmwareUpdaterConsts.ADMIN_STATE_TRIGGER,
                                               stop_on_error=stop_on_error,
-                                              time_out=timeout,
+                                              time_out=str(timeout),
                                               verify_update=verify_update,
                                               cimc_secure_boot=cimc_secure_boot)
     handle.add_mo(huu_firmware_updater, modify_present=True)
@@ -66,20 +99,20 @@ def monitor_huu_firmware_update(handle, time_out=600):
             if (datetime.datetime.now() - start).total_seconds() > time_out:
                 log.error("TimeOut: Firmware Upgrade Timed Out")
                 break
-        except :
+        except:
             validate_connection(handle)
 
 
 def validate_connection(handle, timeout=15 * 60):
     """
-    Montiors IMC onnection, if connection exists return True else False
+    Monitors IMC connection, if connection exists return True, else False
     Args:
         handle (ImcHandle)
         timeout (number): timeout in seconds
     Returns:
         True/False(bool)
     Raises:
-        Exception if unable to connect to UCSM
+        Exception if unable to connect to IMC
     """
 
     connected = False
@@ -101,7 +134,7 @@ def validate_connection(handle, timeout=15 * 60):
                 handle.login(force=True)
                 log.debug("Login successful")
                 connected = True
-            except :
+            except:
                 log.debug("Login failed. Sleeping for 60 seconds")
                 time.sleep(60)
             if (datetime.datetime.now() - start).total_seconds() > timeout:
