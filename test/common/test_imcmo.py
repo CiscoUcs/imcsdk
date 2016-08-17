@@ -11,7 +11,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from nose.tools import assert_equal,raises
+from nose.tools import assert_equal, raises
 from imcsdk.imcmo import ManagedObject
 
 
@@ -26,8 +26,8 @@ def test_001_create_mo_directly():
 def test_002_create_specific_obj():
     # Create an object of type LsServer with parent dn specified
     # check if the object has the right values populated
-    from ucsmsdk.mometa.aaa.AaaUser import AaaUser
-    obj = AaaUser(parent_mo_or_dn="sys/user-ext",name="admin",pwd="12345")
+    from imcsdk.mometa.aaa.AaaUser import AaaUser
+    obj = AaaUser(parent_mo_or_dn="sys/user-ext", name="admin", pwd="12345")
     assert_equal(obj.name, "admin")
     assert_equal(obj.rn, "user-admin")
     assert_equal(obj.dn, "sys/user-ext/user-admin")
