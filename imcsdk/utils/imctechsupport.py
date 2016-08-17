@@ -67,7 +67,7 @@ def get_imc_tech_support(handle, remote_host, remote_file, protocol, username,
         pwd=password,
         user=username,
         remote_file=remote_file,
-        admin_state="Enabled")
+        admin_state="enabled")
 
     handle.add_mo(sys_debug_tech_support, modify_present=True)
 
