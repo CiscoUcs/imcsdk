@@ -49,7 +49,8 @@ class ImcHandle(ImcSession):
 
     def __init__(self, ip, username, password, port=None, secure=None,
                  proxy=None):
-        ImcSession.__init__(self, ip, username, password, port, secure, proxy)
+        ImcSession.__init__(self, ip, username, password, port,
+                            secure, proxy)
         self.__to_commit = {}
 
     def set_dump_xml(self):
@@ -66,7 +67,7 @@ class ImcHandle(ImcSession):
 
         self._unset_dump_xml()
 
-    def login(self, auto_refresh=False, force=False):
+    def login(self, auto_refresh=False, force=False, timeout=None):
         """
         Initiates a connection to the server referenced by the ImcHandle.
         A cookie is populated in the ImcHandle, if the login is successful.
@@ -76,6 +77,7 @@ class ImcHandle(ImcSession):
                 continuously
             force (bool): if set to True it reconnects even if cookie exists
                 and is valid for respective connection.
+            timeout (int): timeout value in secs
 
         Returns:
             True on successful connect
@@ -89,14 +91,15 @@ class ImcHandle(ImcSession):
             where handle is ImcHandle()
         """
 
-        return self._login(auto_refresh, force)
+        return self._login(auto_refresh, force, timeout=timeout)
 
-    def logout(self):
+    def logout(self, timeout=None):
         """
         Disconnects from the server referenced by the ImcHandle.
 
         Args:
             None
+            timeout (int): timeout value in secs
 
         Returns:
             True on successful disconnect
@@ -107,9 +110,9 @@ class ImcHandle(ImcSession):
             where handle is ImcHandle()
         """
 
-        return self._logout()
+        return self._logout(timeout=timeout)
 
-    def process_xml_elem(self, elem):
+    def process_xml_elem(self, elem, timeout=None):
         """
         process_xml_elem is a helper method which posts xml elements to the
         server and returns parsed response. It's role is to operate on the
@@ -128,7 +131,7 @@ class ImcHandle(ImcSession):
             objs = handle.process_xml_elem(elem)
         """
 
-        response = self.post_elem(elem)
+        response = self.post_elem(elem, timeout=timeout)
         if response.error_code != 0:
             raise ImcException(response.error_code, response.error_descr)
 
@@ -137,7 +140,7 @@ class ImcHandle(ImcSession):
         else:
             return response
 
-    def get_auth_token(self):
+    def get_auth_token(self, timeout=None):
         """
         Returns a token that is used for IMC authentication.
 
@@ -146,6 +149,7 @@ class ImcHandle(ImcSession):
 
         Returns:
             auth_token (str)
+            timeout (int): timeout value in secs
 
         Example:
             handle.get_auth_token()
@@ -161,7 +165,7 @@ class ImcHandle(ImcSession):
 
         if mo:
             elem = aaa_get_compute_auth_tokens(cookie=self.cookie)
-            response = self.post_elem(elem)
+            response = self.post_elem(elem, timeout=timeout)
             if response.error_code != 0:
                 raise ImcException(response.error_code,
                                    response.error_descr)
@@ -171,7 +175,7 @@ class ImcHandle(ImcSession):
 
         return auth_token
 
-    def query_dn(self, dn, hierarchy=False, need_response=False):
+    def query_dn(self, dn, hierarchy=False, need_response=False, timeout=None):
         """
         Finds an object using it's distinguished name.
 
@@ -182,6 +186,7 @@ class ImcHandle(ImcSession):
             need_response(bool): True/False,
                                 return the response xml node, instead of parsed
                                 objects
+            timeout (int): timeout value in secs
 
         Returns:
             managedobject or None   by default\n
@@ -203,7 +208,7 @@ class ImcHandle(ImcSession):
 
         elem = config_resolve_dn(cookie=self.cookie, dn=dn,
                                  in_hierarchical=hierarchy)
-        response = self.post_elem(elem)
+        response = self.post_elem(elem, timeout=timeout)
         if response.error_code != 0:
             raise ImcException(response.error_code, response.error_descr)
 
@@ -222,7 +227,7 @@ class ImcHandle(ImcSession):
         return mo
 
     def query_classid(self, class_id=None, hierarchy=False,
-                      need_response=False):
+                      need_response=False, timeout=None):
         """
         Finds an object using it's class id.
 
@@ -233,6 +238,7 @@ class ImcHandle(ImcSession):
                              hierarchical objects.
             need_response(bool): if set to True will return only response
                                 object.
+            timeout (int): timeout value in secs
 
 
         Returns:
@@ -263,7 +269,7 @@ class ImcHandle(ImcSession):
         elem = config_resolve_class(cookie=self.cookie,
                                     class_id=meta_class_id,
                                     in_hierarchical=hierarchy)
-        response = self.post_elem(elem)
+        response = self.post_elem(elem, timeout=timeout)
         if response.error_code != 0:
             raise ImcException(response.error_code, response.error_descr)
 
@@ -276,7 +282,7 @@ class ImcHandle(ImcSession):
         return out_mo_list
 
     def query_children(self, in_mo=None, in_dn=None, class_id=None,
-                       hierarchy=False):
+                       hierarchy=False, timeout=None):
         """
         Finds children of a given managed object or distinguished name.
         Arguments can be specified to query only a specific type(class_id)
@@ -293,6 +299,7 @@ class ImcHandle(ImcSession):
                             children object for a given class_id.
             hierarchy(bool): if set to True will return all the child
                               hierarchical objects.
+            timeout (int): timeout value in secs
 
         Returns:
             managedobjectlist or None   by default\n
@@ -328,7 +335,7 @@ class ImcHandle(ImcSession):
                                        in_dn=parent_dn,
                                        in_hierarchical=hierarchy)
 
-        response = self.post_elem(elem)
+        response = self.post_elem(elem, timeout=timeout)
         if response.error_code != 0:
             raise ImcException(response.error_code, response.error_descr)
 
@@ -338,7 +345,7 @@ class ImcHandle(ImcSession):
 
         return out_mo_list
 
-    def add_mo(self, mo, modify_present=False):
+    def add_mo(self, mo, modify_present=False, timeout=None):
         """
         Adds a managed object.
 
@@ -346,6 +353,7 @@ class ImcHandle(ImcSession):
             mo (managedobject): ManagedObject to be added.
             modify_present (bool): True/False,
                                     overwrite existing object if True
+            timeout (int): timeout value in secs
 
         Returns:
             None
@@ -363,15 +371,16 @@ class ImcHandle(ImcSession):
             mo.status = "created"
 
         self.__to_commit[mo.dn] = mo
-        self._commit()
+        self._commit(timeout=timeout)
 
-    def set_mo(self, mo):
+    def set_mo(self, mo, timeout=None):
         """
         Modifies a managed object and adds it to ImcHandle commit buffer (if
          not already in it).
 
         Args:
             mo (managedobject): Managed object with modified properties.
+            timeout (int): timeout value in secs
 
         Returns:
             None
@@ -382,14 +391,15 @@ class ImcHandle(ImcSession):
 
         mo.status = "modified"
         self.__to_commit[mo.dn] = mo
-        self._commit()
+        self._commit(timeout=timeout)
 
-    def remove_mo(self, mo):
+    def remove_mo(self, mo, timeout=None):
         """
         Removes a managed object.
 
         Args:
             mo (managedobject): Managed object to be removed.
+            timeout (int): timeout value in secs
 
         Returns:
             None
@@ -403,9 +413,9 @@ class ImcHandle(ImcSession):
             mo.parent_mo.child_remove(mo)
 
         self.__to_commit[mo.dn] = mo
-        self._commit()
+        self._commit(timeout=timeout)
 
-    def _commit(self):
+    def _commit(self, timeout=None):
         """
         Commit the buffer to the server. Pushes all the configuration changes
         so far to the server.
@@ -413,7 +423,7 @@ class ImcHandle(ImcSession):
         set_mo(), remove_mo().
 
         Args:
-            None
+            timeout (int): timeout value in secs
 
         Returns:
             None
@@ -436,7 +446,7 @@ class ImcHandle(ImcSession):
             elem = config_conf_mo(self.cookie,dn=mo_dn,
                                   in_config=config_map,
                                   in_hierarchical=False)
-            response = self.post_elem(elem)
+            response = self.post_elem(elem, timeout=timeout)
             if response.error_code != 0:
                 self.__to_commit = {}
                 raise ImcException(response.error_code, response.error_descr)

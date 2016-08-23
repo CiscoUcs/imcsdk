@@ -169,7 +169,7 @@ class ImcSession(object):
         self.__evt_channel = response.out_evt_channel
         self.__last_update_time = str(time.asctime())
 
-    def post(self, uri, data=None, read=True):
+    def post(self, uri, data=None, read=True, timeout=None):
         """
         sends the request and receives the response from imcm server
 
@@ -184,15 +184,17 @@ class ImcSession(object):
             response = post("http://192.168.1.1:80", data=xml_str)
         """
 
-        response = self.__driver.post(uri=uri, data=data, read=read)
+        response = self.__driver.post(uri=uri, data=data, read=read, timeout=timeout)
         return response
 
-    def post_xml(self, xml_str, read=True):
+    def post_xml(self, xml_str, read=True, timeout=None):
         """
         sends the xml request and receives the response from imc server
 
         Args:
             xml_str (str): xml string
+            read (bool): if True, returns response.read() else returns object.
+            timeout (int): if set, this will be used as timeout in secs for urllib2
 
         Returns:
             response xml string
@@ -202,7 +204,7 @@ class ImcSession(object):
         """
 
         imc_uri = self.__uri + "/nuova"
-        response_str = self.post(uri=imc_uri, data=xml_str, read=read)
+        response_str = self.post(uri=imc_uri, data=xml_str, read=read, timeout=timeout)
         if self.__driver.redirect_uri:
             self.__uri = self.__driver.redirect_uri
 
@@ -227,13 +229,14 @@ class ImcSession(object):
         if self.__dump_xml:
             log.debug('%s <==== %s' % (self.__uri, resp))
 
-    def post_elem(self, elem):
+    def post_elem(self, elem, timeout=None):
         """
         sends the request and receives the response from imc server using xml
         element
 
         Args:
             elem (xml element)
+            timeout (int): if set, it is used as timeout in secs for urllib2
 
         Returns:
             response xml string
@@ -250,7 +253,7 @@ class ImcSession(object):
         self.dump_xml_request(elem)
         xml_str = xc.to_xml_str(elem)
 
-        response_str = self.post_xml(xml_str)
+        response_str = self.post_xml(xml_str, timeout=timeout)
         self.dump_xml_response(response_str)
 
         if response_str:
@@ -512,7 +515,7 @@ class ImcSession(object):
         self.__imc = top_system.name
         self.__virtual_ipv4_address = top_system.address
 
-    def _login(self, auto_refresh=False, force=False):
+    def _login(self, auto_refresh=False, force=False, timeout=None):
         """
         Internal method responsible to do a login on imc server.
 
@@ -534,7 +537,7 @@ class ImcSession(object):
 
         elem = aaa_login(in_name=self.__username,
                          in_password=self.__password)
-        response = self.post_elem(elem)
+        response = self.post_elem(elem, timeout=timeout)
         if response.error_code != 0:
             self.__clear()
             raise ImcException(response.error_code, response.error_descr)
@@ -552,7 +555,7 @@ class ImcSession(object):
 
         return True
 
-    def _logout(self):
+    def _logout(self, timeout=None):
         """
         Internal method to disconnect from imc server.
 
@@ -573,7 +576,7 @@ class ImcSession(object):
             self.__refresh_timer.cancel()
 
         elem = aaa_logout(self.__cookie)
-        response = self.post_elem(elem)
+        response = self.post_elem(elem, timeout=timeout)
 
         if response.error_code == "555":
             return True

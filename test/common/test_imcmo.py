@@ -24,11 +24,9 @@ def test_001_create_mo_directly():
 
 
 def test_002_create_specific_obj():
-    # Create an object of type LsServer with parent dn specified
+    # Create an object of type AaaUser with parent dn specified
     # check if the object has the right values populated
     from imcsdk.mometa.aaa.AaaUser import AaaUser
-    obj = AaaUser(parent_mo_or_dn="sys/user-ext", name="admin", pwd="12345")
-    assert_equal(obj.name, "admin")
-    assert_equal(obj.rn, "user-admin")
-    assert_equal(obj.dn, "sys/user-ext/user-admin")
-    assert_equal(obj.pwd, "12345")
+    obj = AaaUser(parent_mo_or_dn="sys/user-ext", id="10")
+    assert_equal(obj.id, "10")
+    assert_equal(obj.dn, "sys/user-ext/user-10")

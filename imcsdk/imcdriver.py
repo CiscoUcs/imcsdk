@@ -179,7 +179,7 @@ class ImcDriver(object):
     def get(self, uri):
         pass
 
-    def post(self, uri, data=None, dump_xml=False, read=True):
+    def post(self, uri, data=None, dump_xml=False, read=True, timeout=None):
         """
         sends the web request and receives the response from imc server
 
@@ -188,6 +188,7 @@ class ImcDriver(object):
             data (str): request data to send via post request
             dump_xml (bool): if True, displays request and response
             read (bool): if True, returns response.read() else returns object.
+            timeout (int): if set, this will be used as timeout in secs for urllib2
 
         Returns:
             response xml string or response object
@@ -204,7 +205,7 @@ class ImcDriver(object):
                 log.debug('%s ====> %s' % (uri, data))
 
             opener = urllib2.build_opener(*self.__handlers)
-            response = opener.open(request)
+            response = opener.open(request, timeout=timeout)
 
             if type(response) is list:
                 if len(response) == 2 and \
@@ -217,7 +218,7 @@ class ImcDriver(object):
                         log.debug('%s <==== %s' % (uri, data))
 
                     opener = urllib2.build_opener(*self.__handlers)
-                    response = opener.open(request)
+                    response = opener.open(request, timeout=timeout)
                     # response = urllib2.urlopen(request)
             if read:
                 response = response.read().decode('utf-8')

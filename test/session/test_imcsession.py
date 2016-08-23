@@ -11,42 +11,80 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from nose.tools import assert_equal
+from nose.tools import assert_equal, raises
 from imcsdk.imchandle import ImcHandle
+from ..connection.info import custom_setup, custom_teardown
+
+
+def setup_module():
+    global handle
+    handle = custom_setup()
+
+
+def teardown_module():
+    global handle
+    custom_teardown(handle)
 
 
 def test_001_create_uri():
     # Create an object of type LsServer with parent dn specified
     # check if the object has the right values populated
-    handle = ImcHandle("192.168.1.1", "admin", "password")
+    temp_handle = ImcHandle("192.168.1.1", "admin", "password")
 
     assert_equal(
-        handle._ImcSession__create_uri(
+        temp_handle._ImcSession__create_uri(
             port=None,
             secure=None),
         'https://192.168.1.1:443')
 
     assert_equal(
-        handle._ImcSession__create_uri(
+        temp_handle._ImcSession__create_uri(
             port=8080,
             secure=None),
         'https://192.168.1.1:8080')
 
     assert_equal(
-        handle._ImcSession__create_uri(
+        temp_handle._ImcSession__create_uri(
             port=None,
             secure=True),
         'https://192.168.1.1:443')
 
     assert_equal(
-        handle._ImcSession__create_uri(
+        temp_handle._ImcSession__create_uri(
             port=None,
             secure=False),
         'http://192.168.1.1:80')
 
     assert_equal(
-        handle._ImcSession__create_uri(
+        temp_handle._ImcSession__create_uri(
             port=444,
             secure=False),
         'http://192.168.1.1:444')
 
+
+def test_imc_no_timeout():
+
+    global handle
+    mo = handle.query_dn("sys/rack-unit-1", timeout=600)
+    usr_lbl = "test-lbl1"
+    mo.usr_lbl = usr_lbl
+    handle.set_mo(mo, timeout=600)
+
+    mo = handle.query_dn("sys/rack-unit-1")
+    assert_equal(mo.usr_lbl, usr_lbl)
+
+
+@raises(Exception)
+def test_imc_timeout():
+
+    import urllib2
+
+    global handle
+    mo = handle.query_dn("sys/rack-unit-1", timeout=600)
+    usr_lbl = "test-lbl2"
+    mo.usr_lbl = usr_lbl
+    try:
+        handle.set_mo(mo, timeout=1)
+    except urllib2.URLError as e:
+        print "Hit expected error"
+        raise Exception
