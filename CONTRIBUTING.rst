@@ -1,5 +1,3 @@
-.. highlight:: shell
-
 ============
 Contributing
 ============
@@ -23,24 +21,49 @@ If you are reporting a bug, please include:
 * Any details about your local setup that might be helpful in troubleshooting.
 * Detailed steps to reproduce the bug.
 
-Fix Bugs
-~~~~~~~~
+Submitting pull requests to change the documentation or code
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Look through the GitHub issues for bugs. Anything tagged with "bug"
-is open to whoever wants to implement it.
+Changes can be proposed by sending a pull request (PR). A maintainer will
+review the changes and provide feedback.
 
-Implement Features
-~~~~~~~~~~~~~~~~~~
+The pull request will be merged into the master branch after discussion.
 
-Look through the GitHub issues for features. Anything tagged with "feature"
-is open to whoever wants to implement it.
+Please make sure to run the tests and that the tests pass before submitting the
+PR. Please keep in mind that some changes might not be merged if the
+maintainers decide they can't be merged.
 
-Write Documentation
-~~~~~~~~~~~~~~~~~~~
+Please squash your commits to one commit per fix or feature. The resulting
+commit should have a single meaningful message.
 
-imcsdk could always use more documentation, whether as part of the
-official imcsdk docs, in docstrings, or even on the web in blog posts,
-articles, and such.
+Commit message guidelines
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The short summary should include the name of the directory or file affected by
+the commit (e.g.: utils: added a new utility method to get status).
+
+A longer description of what the commit does should start on the third line
+when such a description is deemed necessary.
+
+If you have trouble with the appropriate git commands to handle these
+requirements, please let us know! We're happy to help.
+
+Legal Stuff: Sign your work
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You must sign off on your work by adding your signature at the end of the
+commit message. Your signature certifies that you wrote the patch or otherwise
+have the right to pass it on as an open-source patch.
+
+If you set your user.name and user.email git configuration options, you can
+sign your commits automatically with `git commit -s`.
+
+    git config user.name "Joe Smith"
+
+    git config user.email joe.smith@email.com
+
+`git commit -s` should be used now to sign the commits automatically, instead of
+git commit.
 
 Submit Feedback
 ~~~~~~~~~~~~~~~
@@ -54,61 +77,3 @@ If you are proposing a feature:
 * Remember that this is a volunteer-driven project, and that contributions
   are welcome :)
 
-Get Started!
-------------
-
-Ready to contribute? Here's how to set up `imcsdk` for local development.
-
-1. Fork the `imcsdk` repo on GitHub.
-2. Clone your fork locally::
-
-    $ git clone git@github.com:your_name_here/imcsdk.git
-
-3. Install your local copy into a virtualenv. Assuming you have virtualenvwrapper installed, this is how you set up your fork for local development::
-
-    $ mkvirtualenv imcsdk
-    $ cd imcsdk/
-    $ python setup.py develop
-
-4. Create a branch for local development::
-
-    $ git checkout -b name-of-your-bugfix-or-feature
-
-   Now you can make your changes locally.
-
-5. When you're done making changes, check that your changes pass flake8 and the tests, including testing other Python versions with tox::
-
-    $ flake8 imcsdk tests
-    $ python setup.py test or py.test
-    $ tox
-
-   To get flake8 and tox, just pip install them into your virtualenv.
-
-6. Commit your changes and push your branch to GitHub::
-
-    $ git add .
-    $ git commit -m "Your detailed description of your changes."
-    $ git push origin name-of-your-bugfix-or-feature
-
-7. Submit a pull request through the GitHub website.
-
-Pull Request Guidelines
------------------------
-
-Before you submit a pull request, check that it meets these guidelines:
-
-1. The pull request should include tests.
-2. If the pull request adds functionality, the docs should be updated. Put
-   your new functionality into a function with a docstring, and add the
-   feature to the list in README.rst.
-3. The pull request should work for Python 2.6, 2.7, 3.3, 3.4 and 3.5, and for PyPy. Check
-   https://travis-ci.org/ciscoucs/imcsdk/pull_requests
-   and make sure that the tests pass for all supported Python versions.
-
-Tips
-----
-
-To run a subset of tests::
-
-
-    $ python -m unittest tests.test_imcsdk
