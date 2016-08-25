@@ -2,8 +2,8 @@
 History
 =======
 
-0.9.0.0 (2016-05-17)
-------------------
+0.9.0.0 (2016-08-25)
+--------------------
 * Python SDK for IMC rack server management and related automation
 * Supports every Managed Object exposed by IMC
 * APIs for CRUD operations simplified
