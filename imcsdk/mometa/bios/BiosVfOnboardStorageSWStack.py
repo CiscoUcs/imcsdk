@@ -17,13 +17,13 @@ class BiosVfOnboardStorageSWStack(ManagedObject):
     consts = BiosVfOnboardStorageSWStackConsts()
     naming_props = set([])
 
-    mo_meta = MoMeta("BiosVfOnboardStorageSWStack", "biosVfOnboardStorageSWStack", "Onboard-SCU-Storage-SWStack", VersionMeta.Version152, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
+    mo_meta = MoMeta("BiosVfOnboardStorageSWStack", "biosVfOnboardStorageSWStack", "Onboard-SCU-Storage-SWStack", VersionMeta.Version151x, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
 
     prop_meta = {
-        "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version152, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
-        "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version152, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
-        "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version152, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-        "vp_onboard_scu_storage_sw_stack": MoPropertyMeta("vp_onboard_scu_storage_sw_stack", "vpOnboardSCUStorageSWStack", "string", VersionMeta.Version152, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Intel RSTe", "LSI SW RAID", "platform-default"], []), 
+        "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151x, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
+        "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151x, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
+        "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151x, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+        "vp_onboard_scu_storage_sw_stack": MoPropertyMeta("vp_onboard_scu_storage_sw_stack", "vpOnboardSCUStorageSWStack", "string", VersionMeta.Version151x, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Intel RSTe", "LSI SW RAID", "platform-default"], []), 
     }
 
     prop_map = {

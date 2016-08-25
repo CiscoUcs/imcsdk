@@ -24,7 +24,7 @@ class StandardPowerProfile(ManagedObject):
         "allow_throttle": MoPropertyMeta("allow_throttle", "allowThrottle", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["No", "Yes", "false", "no", "true", "yes"], []), 
         "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version202c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
         "corr_action": MoPropertyMeta("corr_action", "corrAction", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["alert", "alert,shutdown", "none", "shutdown"], []), 
-        "corr_time": MoPropertyMeta("corr_time", "corrTime", "uint", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x8, 0, 510, None, [], ["0-4294967295"]), 
+        "corr_time": MoPropertyMeta("corr_time", "corrTime", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x8, 0, 510, None, [], ["0-4294967295"]), 
         "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
         "hard_cap": MoPropertyMeta("hard_cap", "hardCap", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["No", "Yes", "false", "no", "true", "yes"], []), 
         "power_limit": MoPropertyMeta("power_limit", "powerLimit", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x40, 0, 510, None, [], ["0-4294967295"]), 
