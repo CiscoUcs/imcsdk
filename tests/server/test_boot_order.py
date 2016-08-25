@@ -14,7 +14,7 @@
 from nose.tools import assert_equal
 from ..connection.info import custom_setup, custom_teardown
 
-from apis.server.bios import get_boot_order_precision, \
+from imcsdk.apis.server.bios import get_boot_order_precision, \
     set_boot_order_precision, set_boot_order_policy, get_boot_order_policy
 
 handle = None

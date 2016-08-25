@@ -13,7 +13,7 @@
 
 from nose.tools import assert_equal, assert_not_equal
 from ..connection.info import custom_setup, custom_teardown
-from apis.server.adaptor import setup_vic_adaptor_properties, \
+from imcsdk.apis.server.adaptor import setup_vic_adaptor_properties, \
     get_vic_adaptor_properties, create_vnic, delete_vnic, get_vnic, \
     create_vhba, delete_vhba, get_vhba
 

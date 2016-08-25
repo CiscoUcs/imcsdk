@@ -5,7 +5,7 @@ include LICENSE
 include README.md
 
 recursive-include tests *
-recursive-include apis *
+recursive-include imcsdk/apis *
 recursive-include imcsdk/mometa *
 recursive-include imcsdk/methodmeta *
 recursive-include imcsdk/utils *
