@@ -36,7 +36,7 @@ class AdaptorHostEthIf(ManagedObject):
         "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x400, 0, 255, None, [], []), 
         "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x800, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
         "uplink_port": MoPropertyMeta("uplink_port", "uplinkPort", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x1000, None, None, None, ["0", "1"], []), 
-        "usnic_count": MoPropertyMeta("usnic_count", "usnicCount", "uint", VersionMeta.Version152, MoPropertyMeta.READ_ONLY, None, None, None, None, [], ["0-225"]), 
+        "usnic_count": MoPropertyMeta("usnic_count", "usnicCount", "uint", VersionMeta.Version151x, MoPropertyMeta.READ_ONLY, None, None, None, None, [], ["0-225"]), 
     }
 
     prop_map = {

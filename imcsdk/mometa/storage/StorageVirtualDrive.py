@@ -78,7 +78,7 @@ class StorageVirtualDrive(ManagedObject):
         "fde_capable": MoPropertyMeta("fde_capable", "fdeCapable", "string", VersionMeta.Version209c, MoPropertyMeta.READ_ONLY, None, None, None, None, ["No", "Yes", "false", "no", "true", "yes"], []), 
         "fde_enabled": MoPropertyMeta("fde_enabled", "fdeEnabled", "string", VersionMeta.Version209c, MoPropertyMeta.READ_ONLY, None, None, None, None, ["No", "Yes", "false", "no", "true", "yes"], []), 
         "health": MoPropertyMeta("health", "health", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-        "id": MoPropertyMeta("id", "id", "uint", VersionMeta.Version151f, MoPropertyMeta.NAMING, 0x40, 0, 510, None, [], ["0-4294967295"]), 
+        "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version151f, MoPropertyMeta.NAMING, 0x40, 0, 510, None, [], ["0-4294967295"]), 
         "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
         "physical_drives_list": MoPropertyMeta("physical_drives_list", "physicalDrivesList", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x80, 1, 510, r"""(\d+(,\d+)*)""", [], []), 
         "raid_level": MoPropertyMeta("raid_level", "raidLevel", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x100, 0, 510, None, ["0", "1", "5", "6"], []), 
