@@ -13,8 +13,8 @@
 
 from nose.tools import assert_equal
 from ..connection.info import custom_setup, custom_teardown
-from samples.admin.user import create_local_user, delete_local_user, user_exists
-from samples.admin.snmp import snmp_enable, snmp_disable, snmp_enabled, \
+from apis.admin.user import create_local_user, delete_local_user, user_exists
+from apis.admin.snmp import snmp_enable, snmp_disable, snmp_enabled, \
     snmp_user_add, snmp_user_exists, snmp_user_remove, \
     snmp_trap_add, snmp_trap_exists, snmp_trap_remove
 

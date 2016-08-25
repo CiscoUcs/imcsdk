@@ -2,6 +2,14 @@
 History
 =======
 
+0.9.0.2 (2016-08-25)
+--------------------
+* Added APIs layer to the sdk
+
+0.9.0.1 (2016-08-25)
+--------------------
+* Fixed an issue with pip install
+
 0.9.0.0 (2016-08-25)
 --------------------
 * Python SDK for IMC rack server management and related automation

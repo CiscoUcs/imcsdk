@@ -13,7 +13,7 @@
 
 from nose.tools import assert_equal
 from ..connection.info import custom_setup, custom_teardown
-from samples.server.serveractions import power_down_server, power_up_server, power_cycle_server, get_server_power_state
+from apis.server.serveractions import power_down_server, power_up_server, power_cycle_server, get_server_power_state
 from imcsdk.mometa.compute.ComputeRackUnit import ComputeRackUnitConsts
 from time import sleep
 

@@ -2,9 +2,10 @@ include AUTHORS.rst
 include CONTRIBUTING.rst
 include HISTORY.rst
 include LICENSE
-include README.rst
+include README.md
 
 recursive-include tests *
+recursive-include apis *
 recursive-include imcsdk/mometa *
 recursive-include imcsdk/methodmeta *
 recursive-include imcsdk/utils *
