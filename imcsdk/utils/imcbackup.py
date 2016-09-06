@@ -63,7 +63,7 @@ def backup_imc(handle, remote_host, remote_file, protocol, username, password,
 
     handle.add_mo(mgmt_backup, modify_present=True)
 
-    # Checking for the backup to compete.
+    # Checking for the backup to complete.
     time.sleep(10)
     duration = timeout_in_sec
     poll_interval = 2

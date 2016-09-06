@@ -94,8 +94,11 @@ def _has_upgrade_finished(update):
     return update.update_end_time != "NA"
 
 
-def _print_component_upgrade_summary():
-    pass
+def _print_component_upgrade_summary(handle):
+    update_objs = handle.query_classid("HuuUpdateComponentStatus")
+    log.info("Component Update Summary:-")
+    for obj in update_objs:
+        log.info("%20s: %s" % (obj.component, obj.update_status))
 
 
 def monitor_huu_firmware_update(handle, timeout=60, interval=10):
@@ -124,7 +127,7 @@ def monitor_huu_firmware_update(handle, timeout=60, interval=10):
             if _has_upgrade_finished(update_obj):
                 log_progress("Firmware upgrade has finished",
                              update_obj.overall_status)
-                _print_component_upgrade_summary()
+                _print_component_upgrade_summary(handle)
                 break
             elif update_obj.overall_status not in current_status:
                 log_progress("Firmware Upgrade is still running",
