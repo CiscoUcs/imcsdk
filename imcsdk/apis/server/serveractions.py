@@ -32,12 +32,15 @@ def get_server_power_state(handle):
     return rack_mo.oper_power
 
 
-def power_up_server(handle):
+def power_up_server(handle, timeout=60, interval=5):
     """
-    This method will power up the rack server
+    This method will send the server the power up signal, and then polls
+    the server every $interval until either $timeout or it comes online.
 
     Args:
         handle(ImcHandle)
+        timeout(int)
+        interval(int)
 
     Returns:
         ComputeRackUnit object
@@ -46,22 +49,42 @@ def power_up_server(handle):
         power_up_server(handle)
     """
 
+    import time
     from imcsdk.mometa.compute.ComputeRackUnit import ComputeRackUnit,\
         ComputeRackUnitConsts
 
-    rack_mo = ComputeRackUnit(parent_mo_or_dn="sys", server_id="1")
-    rack_mo.admin_power = ComputeRackUnitConsts.ADMIN_POWER_UP
-    handle.set_mo(rack_mo)
-    return rack_mo
+    # Turn power on only if not already powered up
+    if get_server_power_state(handle) != "on":
+        rack_mo = ComputeRackUnit(parent_mo_or_dn="sys", server_id="1")
+        rack_mo.admin_power = ComputeRackUnitConsts.ADMIN_POWER_UP
+        handle.set_mo(rack_mo)
+
+    # Poll until the server is powered up
+    wait_time = 0
+    while get_server_power_state(handle) != "on":
+        # Raise error if we've reached timeout
+        if wait_time > timeout:
+            raise RuntimeError(
+                '{0}: ERROR - Power up did not complete within ' +
+                '{1} sec'.format(handle.ip, timeout)
+            )
+        # Wait interval sec between checks
+        time.sleep(interval)
+        wait_time += interval
+
+    return handle.query_dn("sys/rack-unit-1")
 
 
-def power_down_server(handle):
+def power_down_server(handle, timeout=60, interval=5):
     """
-    This method will power down the rack server,
-    even if tasks are still running on it
+    This method will power down the rack server, even if tasks are still
+    running on it.  Then polls the server every $interval until either $timeout
+    or it comes online.
 
     Args:
         handle(ImcHandle)
+        timeout(int)
+        interval(int)
 
     Returns:
         ComputeRackUnit object
@@ -70,13 +93,30 @@ def power_down_server(handle):
         power_down_server(handle)
     """
 
+    import time
     from imcsdk.mometa.compute.ComputeRackUnit import ComputeRackUnit,\
         ComputeRackUnitConsts
 
-    rack_mo = ComputeRackUnit(parent_mo_or_dn="sys", server_id="1")
-    rack_mo.admin_power = ComputeRackUnitConsts.ADMIN_POWER_DOWN
-    handle.set_mo(rack_mo)
-    return rack_mo
+    # Turn power off only if not already powered down
+    if get_server_power_state(handle) != "off":
+        rack_mo = ComputeRackUnit(parent_mo_or_dn="sys", server_id="1")
+        rack_mo.admin_power = ComputeRackUnitConsts.ADMIN_POWER_DOWN
+        handle.set_mo(rack_mo)
+
+    # Poll until the server is powered up
+    wait_time = 0
+    while get_server_power_state(handle) != "off":
+        # Raise error if we've reached timeout
+        if wait_time > timeout:
+            raise RuntimeError(
+                '{0}: ERROR - Power down did not complete within ' +
+                '{1} sec'.format(handle.ip, timeout)
+            )
+        # Wait interval sec between checks
+        time.sleep(interval)
+        wait_time += interval
+
+    return handle.query_dn("sys/rack-unit-1")
 
 
 def power_down_server_gracefully(handle):
