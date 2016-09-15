@@ -32,6 +32,41 @@ def get_server_power_state(handle):
     return rack_mo.oper_power
 
 
+def _wait_for_power_state(handle, state, timeout=60, interval=5):
+    """
+    This method should be called after a power state change has been triggered.
+    It will poll the server and return when the desired state is achieved.
+
+    Args:
+        handle(ImcHandle)
+        state(str)
+
+    Returns:
+        bool
+    """
+    import time
+
+    # Verify desired state is valid
+    if state not in ("on", "off"):
+        raise ValueError("ERROR invalid state: {0}".format(state))
+
+    # Verify interval not set to zero
+    if interval < 1 or type(interval) is not int:
+        raise ValueError("ERROR: interval must be positive integer")
+
+    wait_time = 0
+    while get_server_power_state(handle) != state:
+        # Raise error if we've reached timeout
+        if wait_time > timeout:
+            raise RuntimeError(
+                '{0}: ERROR - Power up did not complete within ' +
+                '{1} sec'.format(handle.ip, timeout)
+            )
+        # Wait interval sec between checks
+        time.sleep(interval)
+        wait_time += interval
+
+
 def power_up_server(handle, timeout=60, interval=5):
     """
     This method will send the server the power up signal, and then polls
@@ -49,7 +84,6 @@ def power_up_server(handle, timeout=60, interval=5):
         power_up_server(handle)
     """
 
-    import time
     from imcsdk.mometa.compute.ComputeRackUnit import ComputeRackUnit,\
         ComputeRackUnitConsts
 
@@ -60,18 +94,9 @@ def power_up_server(handle, timeout=60, interval=5):
         handle.set_mo(rack_mo)
 
     # Poll until the server is powered up
-    wait_time = 0
-    while get_server_power_state(handle) != "on":
-        # Raise error if we've reached timeout
-        if wait_time > timeout:
-            raise RuntimeError(
-                '{0}: ERROR - Power up did not complete within ' +
-                '{1} sec'.format(handle.ip, timeout)
-            )
-        # Wait interval sec between checks
-        time.sleep(interval)
-        wait_time += interval
+    _wait_for_power_state(handle, "on", timeout=60, interval=5)
 
+    # Return object with current state
     return handle.query_dn("sys/rack-unit-1")
 
 
@@ -93,7 +118,6 @@ def power_down_server(handle, timeout=60, interval=5):
         power_down_server(handle)
     """
 
-    import time
     from imcsdk.mometa.compute.ComputeRackUnit import ComputeRackUnit,\
         ComputeRackUnitConsts
 
@@ -104,17 +128,7 @@ def power_down_server(handle, timeout=60, interval=5):
         handle.set_mo(rack_mo)
 
     # Poll until the server is powered up
-    wait_time = 0
-    while get_server_power_state(handle) != "off":
-        # Raise error if we've reached timeout
-        if wait_time > timeout:
-            raise RuntimeError(
-                '{0}: ERROR - Power down did not complete within ' +
-                '{1} sec'.format(handle.ip, timeout)
-            )
-        # Wait interval sec between checks
-        time.sleep(interval)
-        wait_time += interval
+    _wait_for_power_state(handle, "off", timeout=60, interval=5)
 
     return handle.query_dn("sys/rack-unit-1")
 
