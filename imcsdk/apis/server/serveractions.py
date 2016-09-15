@@ -45,6 +45,7 @@ def _wait_for_power_state(handle, state, timeout=60, interval=5):
         bool
     """
     import time
+    from imcsdk.imcexception import ImcOperationError
 
     # Verify desired state is valid
     if state not in ("on", "off"):
@@ -58,9 +59,10 @@ def _wait_for_power_state(handle, state, timeout=60, interval=5):
     while get_server_power_state(handle) != state:
         # Raise error if we've reached timeout
         if wait_time > timeout:
-            raise RuntimeError(
-                '{0}: ERROR - Power up did not complete within ' +
-                '{1} sec'.format(handle.ip, timeout)
+            raise ImcOperationError(
+                'Power State Change',
+                '{0}: ERROR - Power {1} did not complete within ' +
+                '{2} sec'.format(handle.ip, state, timeout)
             )
         # Wait interval sec between checks
         time.sleep(interval)
