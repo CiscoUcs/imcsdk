@@ -150,10 +150,16 @@ def power_down_server_gracefully(handle):
     from imcsdk.mometa.compute.ComputeRackUnit import ComputeRackUnit,\
         ComputeRackUnitConsts
 
-    rack_mo = ComputeRackUnit(parent_mo_or_dn="sys", server_id="1")
-    rack_mo.admin_power = ComputeRackUnitConsts.ADMIN_POWER_SOFT_SHUT_DOWN
-    handle.set_mo(rack_mo)
-    return rack_mo
+    # Gracefully power off only if not already powered down
+    if get_server_power_state(handle) != "off":
+        rack_mo = ComputeRackUnit(parent_mo_or_dn="sys", server_id="1")
+        rack_mo.admin_power = ComputeRackUnitConsts.ADMIN_POWER_SOFT_SHUT_DOWN
+        handle.set_mo(rack_mo)
+
+    # Poll until the server is powered up
+    _wait_for_power_state(handle, "off", timeout=60, interval=5)
+
+    return handle.query_dn("sys/rack-unit-1")
 
 
 def power_cycle_server(handle):
@@ -176,7 +182,11 @@ def power_cycle_server(handle):
     rack_mo = ComputeRackUnit(parent_mo_or_dn="sys", server_id="1")
     rack_mo.admin_power = ComputeRackUnitConsts.ADMIN_POWER_CYCLE_IMMEDIATE
     handle.set_mo(rack_mo)
-    return rack_mo
+
+    # Poll until the server is powered up
+    _wait_for_power_state(handle, "on", timeout=60, interval=5)
+
+    return handle.query_dn("sys/rack-unit-1")
 
 
 def locator_led_on(handle):
