@@ -57,7 +57,8 @@ def power_up_server(handle):
 
 def power_down_server(handle):
     """
-    This method will power down the rack server, even if tasks are running on it
+    This method will power down the rack server,
+    even if tasks are still running on it
 
     Args:
         handle(ImcHandle)
@@ -138,8 +139,8 @@ def locator_led_on(handle):
         locator_led_on(handle)
     """
 
-    from imcsdk.mometa.equipment.EquipmentLocatorLed import EquipmentLocatorLed,\
-        EquipmentLocatorLedConsts
+    from imcsdk.mometa.equipment.EquipmentLocatorLed \
+        import EquipmentLocatorLed, EquipmentLocatorLedConsts
 
     led_mo = EquipmentLocatorLed(parent_mo_or_dn="sys/rack-unit-1")
     led_mo.admin_state = EquipmentLocatorLedConsts.ADMIN_STATE_ON
@@ -160,8 +161,8 @@ def locator_led_off(handle):
         locator_led_off(handle)
     """
 
-    from imcsdk.mometa.equipment.EquipmentLocatorLed import EquipmentLocatorLed,\
-        EquipmentLocatorLedConsts
+    from imcsdk.mometa.equipment.EquipmentLocatorLed \
+        import EquipmentLocatorLed, EquipmentLocatorLedConsts
 
     led_mo = EquipmentLocatorLed(parent_mo_or_dn="sys/rack-unit-1")
     led_mo.admin_state = EquipmentLocatorLedConsts.ADMIN_STATE_OFF
