@@ -127,8 +127,7 @@ def vmedia_disable(handle):
     handle.set_mo(vmedia_mo)
 
 
-def vmedia_mount_add(handle, volume_name,
-                     device_type, mount_protocol,
+def vmedia_mount_add(handle, volume_name, mount_protocol,
                      mount_options, remote_share,
                      remote_file, user_id, password):
     """
@@ -136,7 +135,6 @@ def vmedia_mount_add(handle, volume_name,
     Args:
         handle (ImcHandle)
         volume_name (string): Name of the volume or identity of the image
-        device_type (string): "cd", "floppy"
         mount_protocol (string): "cifs", "nfs", "www"
         mount_options (string): Options to be passed while mounting the image
         remote_share (string): URI of the image
@@ -151,7 +149,6 @@ def vmedia_mount_add(handle, volume_name,
         vmedia_mount_add(
             handle,
             volume_name="c",
-            device_type="cd",
             mount_protocol="www",
             mount_options="noauto", "nolock" etc.
             remote_share="http://10.127.150.13/files",
@@ -163,7 +160,6 @@ def vmedia_mount_add(handle, volume_name,
     vmediamap_mo = CommVMediaMap(
         parent_mo_or_dn="sys/svc-ext/vmedia-svc",
         volume_name=volume_name)
-    vmediamap_mo.drive_type = device_type
     vmediamap_mo.map = mount_protocol
     vmediamap_mo.mount_options = mount_options
     vmediamap_mo.remote_share = remote_share
