@@ -15,6 +15,12 @@
 """
 This module implements all the server actions
 """
+import time
+from imcsdk.imcexception import ImcOperationError
+from imcsdk.mometa.compute.ComputeRackUnit \
+    import ComputeRackUnit, ComputeRackUnitConsts
+from imcsdk.mometa.equipment.EquipmentLocatorLed \
+    import EquipmentLocatorLed, EquipmentLocatorLedConsts
 
 
 def get_server_power_state(handle):
@@ -44,9 +50,6 @@ def _wait_for_power_state(handle, state, timeout=60, interval=5):
     Returns:
         bool
     """
-    import time
-    from imcsdk.imcexception import ImcOperationError
-
     # Verify desired state is valid
     if state not in ("on", "off"):
         raise ValueError("ERROR invalid state: {0}".format(state))
@@ -86,9 +89,6 @@ def power_up_server(handle, timeout=60, interval=5):
         power_up_server(handle)
     """
 
-    from imcsdk.mometa.compute.ComputeRackUnit import ComputeRackUnit,\
-        ComputeRackUnitConsts
-
     # Turn power on only if not already powered up
     if get_server_power_state(handle) != "on":
         rack_mo = ComputeRackUnit(parent_mo_or_dn="sys", server_id="1")
@@ -120,9 +120,6 @@ def power_down_server(handle, timeout=60, interval=5):
         power_down_server(handle)
     """
 
-    from imcsdk.mometa.compute.ComputeRackUnit import ComputeRackUnit,\
-        ComputeRackUnitConsts
-
     # Turn power off only if not already powered down
     if get_server_power_state(handle) != "off":
         rack_mo = ComputeRackUnit(parent_mo_or_dn="sys", server_id="1")
@@ -148,9 +145,6 @@ def power_down_server_gracefully(handle):
     Example:
         power_down_server_gracefully(handle)
     """
-
-    from imcsdk.mometa.compute.ComputeRackUnit import ComputeRackUnit,\
-        ComputeRackUnitConsts
 
     # Gracefully power off only if not already powered down
     if get_server_power_state(handle) != "off":
@@ -178,9 +172,6 @@ def power_cycle_server(handle):
         power_cycle_server(handle)
     """
 
-    from imcsdk.mometa.compute.ComputeRackUnit import ComputeRackUnit,\
-        ComputeRackUnitConsts
-
     rack_mo = ComputeRackUnit(parent_mo_or_dn="sys", server_id="1")
     rack_mo.admin_power = ComputeRackUnitConsts.ADMIN_POWER_CYCLE_IMMEDIATE
     handle.set_mo(rack_mo)
@@ -205,9 +196,6 @@ def locator_led_on(handle):
         locator_led_on(handle)
     """
 
-    from imcsdk.mometa.equipment.EquipmentLocatorLed \
-        import EquipmentLocatorLed, EquipmentLocatorLedConsts
-
     led_mo = EquipmentLocatorLed(parent_mo_or_dn="sys/rack-unit-1")
     led_mo.admin_state = EquipmentLocatorLedConsts.ADMIN_STATE_ON
     handle.set_mo(led_mo)
@@ -226,9 +214,6 @@ def locator_led_off(handle):
     Example:
         locator_led_off(handle)
     """
-
-    from imcsdk.mometa.equipment.EquipmentLocatorLed \
-        import EquipmentLocatorLed, EquipmentLocatorLedConsts
 
     led_mo = EquipmentLocatorLed(parent_mo_or_dn="sys/rack-unit-1")
     led_mo.admin_state = EquipmentLocatorLedConsts.ADMIN_STATE_OFF
