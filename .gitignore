@@ -27,6 +27,9 @@ pip-log.txt
 nosetests.xml
 htmlcov
 
+# Developer's testbed info
+tests/connection/connection.cfg
+
 # Translations
 *.mo
 
