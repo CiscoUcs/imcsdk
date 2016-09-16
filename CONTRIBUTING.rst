@@ -38,9 +38,9 @@ commit should have a single meaningful message.
 
 Testing your code
 ~~~~~~~~~~~~~~~~~
-Test cases are written to be run against live hardware.  You will need a server
-available.  Edit the tests/connection/connection.cfg file and set
-the hostname, username, and password to match your server.  e.g.
+Some test cases are written to be run against live hardware.  You will need a
+real server available to run them.  Edit the tests/connection/connection.cfg
+file and set the hostname, username, and password to match your server.  e.g.
 
     [imc]
     hostname=192.168.1.1

@@ -13,9 +13,9 @@
 
 from nose.tools import assert_equal
 from ..connection.info import custom_setup, custom_teardown
-from imcsdk.apis.server.serveractions import power_down_server, power_up_server, power_cycle_server, get_server_power_state
+from imcsdk.apis.server.serveractions import power_down_server, \
+    power_up_server, power_cycle_server, get_server_power_state
 from imcsdk.mometa.compute.ComputeRackUnit import ComputeRackUnitConsts
-from time import sleep
 
 handle = None
 
@@ -33,7 +33,6 @@ def teardown_module():
 def test_power_down_server():
     global handle
     power_down_server(handle)
-    sleep(1)
     assert_equal(get_server_power_state(handle),
                  ComputeRackUnitConsts.OPER_POWER_OFF)
 
@@ -41,14 +40,13 @@ def test_power_down_server():
 def test_power_up_server():
     global handle
     power_up_server(handle)
-    sleep(1)
+
     assert_equal(get_server_power_state(handle),
                  ComputeRackUnitConsts.OPER_POWER_ON)
 
-'''
+
 def test_power_cycle_server():
     global handle
     power_cycle_server(handle)
-    sleep(10)
-    assert_equal(get_server_power_state(handle), ComputeRackUnitConsts.OPER_POWER_ON)
-'''
+    assert_equal(get_server_power_state(handle),
+                 ComputeRackUnitConsts.OPER_POWER_ON)
