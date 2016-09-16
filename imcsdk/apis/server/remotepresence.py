@@ -15,6 +15,10 @@
 """
 This module implements all the kvm and sol related samples
 """
+from imcsdk.mometa.comm.CommKvm import CommKvm
+from imcsdk.mometa.comm.CommVMedia import CommVMedia
+from imcsdk.mometa.comm.CommVMediaMap import CommVMediaMap
+from imcsdk.mometa.sol.SolIf import SolIf, SolIfConsts
 
 
 def kvm_setup(handle, max_sessions=1, port=2068,
@@ -39,8 +43,6 @@ def kvm_setup(handle, max_sessions=1, port=2068,
                   encrypt=True,
                   mirror_locally=False)
     """
-
-    from imcsdk.mometa.comm.CommKvm import CommKvm
 
     kvm_mo = CommKvm(parent_mo_or_dn="sys/svc-ext")
     kvm_mo.admin_state = "enabled"
@@ -70,8 +72,6 @@ def kvm_disable(handle):
         None
     """
 
-    from imcsdk.mometa.comm.CommKvm import CommKvm
-
     kvm_mo = CommKvm(parent_mo_or_dn="sys/svc-ext")
     kvm_mo.admin_state = "disabled"
 
@@ -93,8 +93,6 @@ def vmedia_setup(handle, encrypt=False, low_power_usb=False):
     Examples:
         vmedia_setup(handle, True, True)
     """
-
-    from imcsdk.mometa.comm.CommVMedia import CommVMedia
 
     vmedia_mo = CommVMedia(parent_mo_or_dn="sys/svc-ext")
     vmedia_mo.admin_state = "enabled"
@@ -122,8 +120,6 @@ def vmedia_disable(handle):
     Returns:
         None
     """
-
-    from imcsdk.mometa.comm.CommVMedia import CommVMedia
 
     vmedia_mo = CommVMedia(parent_mo_or_dn="sys/svc-ext")
     vmedia_mo.admin_state = "disabled"
@@ -164,8 +160,6 @@ def vmedia_mount_add(handle, volume_name,
             password="xyz")
     """
 
-    from imcsdk.mometa.comm.CommVMediaMap import CommVMediaMap
-
     vmediamap_mo = CommVMediaMap(
         parent_mo_or_dn="sys/svc-ext/vmedia-svc",
         volume_name=volume_name)
@@ -199,8 +193,6 @@ def vmedia_mount_remove(handle, volume_name):
         vmedia_mount_remove(handle, volume_name="c")
     """
 
-    from imcsdk.mometa.comm.CommVMediaMap import CommVMediaMap
-
     vmediamap_mo = CommVMediaMap(
         parent_mo_or_dn="sys/svc-ext/vmedia-svc",
         volume_name=volume_name)
@@ -225,8 +217,6 @@ def sol_setup(handle, speed, com_port, ssh_port):
         SolIf object
     """
 
-    from imcsdk.mometa.sol.SolIf import SolIf, SolIfConsts
-
     solif_mo = SolIf(parent_mo_or_dn="sys/rack-unit-1")
     solif_mo.admin_state = SolIfConsts.ADMIN_STATE_ENABLE
     solif_mo.speed = speed
@@ -246,8 +236,6 @@ def sol_disable(handle):
     Returns:
         None
     """
-
-    from imcsdk.mometa.sol.SolIf import SolIf, SolIfConsts
 
     solif_mo = SolIf(parent_mo_or_dn="sys/rack-unit-1")
     solif_mo.admin_state = SolIfConsts.ADMIN_STATE_DISABLE
