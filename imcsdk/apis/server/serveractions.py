@@ -96,7 +96,7 @@ def power_up_server(handle, timeout=60, interval=5):
         handle.set_mo(rack_mo)
 
     # Poll until the server is powered up
-    _wait_for_power_state(handle, "on", timeout=60, interval=5)
+    _wait_for_power_state(handle, "on", timeout=timeout, interval=interval)
 
     # Return object with current state
     return handle.query_dn("sys/rack-unit-1")
@@ -130,7 +130,7 @@ def power_down_server(handle, timeout=60, interval=5):
         handle.set_mo(rack_mo)
 
     # Poll until the server is powered up
-    _wait_for_power_state(handle, "off", timeout=60, interval=5)
+    _wait_for_power_state(handle, "off", timeout=timeout, interval=interval)
 
     return handle.query_dn("sys/rack-unit-1")
 
