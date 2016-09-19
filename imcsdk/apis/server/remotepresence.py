@@ -19,6 +19,7 @@ from imcsdk.mometa.comm.CommKvm import CommKvm
 from imcsdk.mometa.comm.CommVMedia import CommVMedia
 from imcsdk.mometa.comm.CommVMediaMap import CommVMediaMap
 from imcsdk.mometa.sol.SolIf import SolIf, SolIfConsts
+from imcsdk.imcexception import ImcOperationError
 
 
 def kvm_setup(handle, max_sessions=1, port=2068,
@@ -197,6 +198,38 @@ def vmedia_mount_remove(handle, volume_name):
         raise ValueError("Volume '%s' does not exist" % volume_name)
 
     handle.remove_mo(vmediamap_mo)
+
+
+def vmedia_mount_remove_all(handle):
+    """
+    This method will remove all the vmedia mappings
+
+    Args:
+        handle (ImcHandle)
+
+    Raises:
+        Exception if mapping is able to be removed
+
+    Returns:
+        True
+
+    Examples:
+        vmedia_mount_remove_all(handle)
+    """
+
+    # Get all current virtually mapped ISOs
+    virt_media_maps = handle.query_children(in_dn="sys/svc-ext/vmedia-svc")
+    # Loop over each mapped ISO
+    for virt_media in virt_media_maps:
+        # Remove the mapped ISO
+        handle.remove_mo(virt_media)
+    # Raise error if all mappings not removed
+    if len(handle.query_children(in_dn="sys/svc-ext/vmedia-svc")) > 0:
+        raise ImcOperationError('Remove Virtual Media',
+                                '{0}: ERROR - Unable remove all virtual' +
+                                'media mappings'.format(handle.ip))
+    # Return True if all mapppings removed
+    return True
 
 
 def sol_setup(handle, speed, com_port, ssh_port):
