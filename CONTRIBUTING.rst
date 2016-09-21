@@ -36,6 +36,25 @@ maintainers decide they can't be merged.
 Please squash your commits to one commit per fix or feature. The resulting
 commit should have a single meaningful message.
 
+Testing your code
+~~~~~~~~~~~~~~~~~
+Some test cases are written to be run against live hardware.  You will need a
+real server available to run them.  Edit the tests/connection/connection.cfg
+file and set the hostname, username, and password to match your server.  e.g.
+
+    [imc]
+    hostname=192.168.1.1
+    username=admin
+    password=password
+
+The test suite is typically run via nose as follows:
+
+    nosetests -vs
+
+or if you only want to run tests in a specific file (e.g. test_power.py):
+
+    nosetests -vs tests/server/test_power.py
+
 Commit message guidelines
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -76,4 +95,3 @@ If you are proposing a feature:
 * Keep the scope as narrow as possible, to make it easier to implement.
 * Remember that this is a volunteer-driven project, and that contributions
   are welcome :)
-
