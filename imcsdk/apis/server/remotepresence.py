@@ -15,6 +15,17 @@
 """
 This module implements all the kvm and sol related samples
 """
+import os
+import time
+import urlparse
+import re
+from imcsdk.mometa.comm.CommKvm import CommKvm
+from imcsdk.mometa.comm.CommVMedia import CommVMedia
+from imcsdk.mometa.comm.CommVMediaMap import CommVMediaMap
+from imcsdk.mometa.sol.SolIf import SolIf, SolIfConsts
+from imcsdk.imcexception import ImcOperationError
+CIFS_URI_PATTERN = re.compile('^//\d+\.\d+\.\d+\.\d+\/')
+NFS_URI_PATTERN = re.compile('^\d+\.\d+\.\d+\.\d+\:\/')
 
 
 def kvm_setup(handle, max_sessions=1, port=2068,
@@ -39,8 +50,6 @@ def kvm_setup(handle, max_sessions=1, port=2068,
                   encrypt=True,
                   mirror_locally=False)
     """
-
-    from imcsdk.mometa.comm.CommKvm import CommKvm
 
     kvm_mo = CommKvm(parent_mo_or_dn="sys/svc-ext")
     kvm_mo.admin_state = "enabled"
@@ -70,8 +79,6 @@ def kvm_disable(handle):
         None
     """
 
-    from imcsdk.mometa.comm.CommKvm import CommKvm
-
     kvm_mo = CommKvm(parent_mo_or_dn="sys/svc-ext")
     kvm_mo.admin_state = "disabled"
 
@@ -93,8 +100,6 @@ def vmedia_setup(handle, encrypt=False, low_power_usb=False):
     Examples:
         vmedia_setup(handle, True, True)
     """
-
-    from imcsdk.mometa.comm.CommVMedia import CommVMedia
 
     vmedia_mo = CommVMedia(parent_mo_or_dn="sys/svc-ext")
     vmedia_mo.admin_state = "enabled"
@@ -123,16 +128,47 @@ def vmedia_disable(handle):
         None
     """
 
-    from imcsdk.mometa.comm.CommVMedia import CommVMedia
-
     vmedia_mo = CommVMedia(parent_mo_or_dn="sys/svc-ext")
     vmedia_mo.admin_state = "disabled"
 
     handle.set_mo(vmedia_mo)
 
 
-def vmedia_mount_add(handle, volume_name,
-                     device_type, mount_protocol,
+def vmedia_get_existing_uri(handle):
+    """
+    This method will return list of URIs of existing mountd media
+    Args:
+        handle (ImcHandle)
+
+    Returns:
+        List of URIs of currently mounted virtual media
+
+    Examples:
+        vmedia_get_existing_uri(handle)
+    """
+    # Create list of URIs of all current virtually mapped ISOs
+    return [virt_media.remote_share + virt_media.remote_file for virt_media
+            in handle.query_children(in_dn="sys/svc-ext/vmedia-svc")]
+
+
+def vmedia_get_existing_status(handle):
+    """
+    This method will return list of status of existing mountd media
+    Args:
+        handle (ImcHandle)
+
+    Returns:
+        List of Status of currently mounted virtual media
+
+    Examples:
+        vmedia_get_existing_uri(handle)
+    """
+    # Create list of URIs of all current virtually mapped ISOs
+    return [virt_media.mapping_status for virt_media
+            in handle.query_children(in_dn="sys/svc-ext/vmedia-svc")]
+
+
+def vmedia_mount_add(handle, volume_name, mount_protocol,
                      mount_options, remote_share,
                      remote_file, user_id, password):
     """
@@ -140,7 +176,6 @@ def vmedia_mount_add(handle, volume_name,
     Args:
         handle (ImcHandle)
         volume_name (string): Name of the volume or identity of the image
-        device_type (string): "cd", "floppy"
         mount_protocol (string): "cifs", "nfs", "www"
         mount_options (string): Options to be passed while mounting the image
         remote_share (string): URI of the image
@@ -155,7 +190,6 @@ def vmedia_mount_add(handle, volume_name,
         vmedia_mount_add(
             handle,
             volume_name="c",
-            device_type="cd",
             mount_protocol="www",
             mount_options="noauto", "nolock" etc.
             remote_share="http://10.127.150.13/files",
@@ -164,12 +198,9 @@ def vmedia_mount_add(handle, volume_name,
             password="xyz")
     """
 
-    from imcsdk.mometa.comm.CommVMediaMap import CommVMediaMap
-
     vmediamap_mo = CommVMediaMap(
         parent_mo_or_dn="sys/svc-ext/vmedia-svc",
         volume_name=volume_name)
-    vmediamap_mo.drive_type = device_type
     vmediamap_mo.map = mount_protocol
     vmediamap_mo.mount_options = mount_options
     vmediamap_mo.remote_share = remote_share
@@ -179,6 +210,106 @@ def vmedia_mount_add(handle, volume_name,
 
     handle.add_mo(vmediamap_mo, modify_present="True")
     return vmediamap_mo
+
+
+def vmedia_mount_iso_uri(handle, uri, user_id=None, password=None,
+                         timeout=60, interval=5):
+    """
+    This method will setup the vmedia mapping
+    Args:
+        handle (ImcHandle)
+        uri (string): URI of the ISO image
+        user_id (string): optional username
+        password (string): optional password
+        timeout (int): optional timeout to wait for ISO map status to be 'OK'
+        interval (int): optional interval to query ISO status
+
+    Raises:
+        Exception if invalid protocol in URI
+        Exception when the mapping doesn't reach 'OK' status
+
+    Returns:
+        True if mapping succeeded
+
+    Examples:
+        vmedia_mount_add(
+            handle,
+            uri="http://10.127.150.13/files/ubuntu-14.04.2-server-amd64.iso"
+        )
+    """
+
+    # Verify interval not set to zero
+    if interval < 1 or type(interval) is not int:
+        raise ValueError("ERROR: interval must be positive integer")
+
+    # Parse file/path from URI
+    remote_file = os.path.basename(uri)
+    remote_share = os.path.dirname(uri) + "/"
+    mount_options = "noauto"
+
+    # Set the Map based on the protocol
+    if urlparse.urlsplit(uri).scheme == 'http':
+        mount_protocol = "www"
+    elif urlparse.urlsplit(uri).scheme == 'https':
+        mount_protocol = "www"
+    elif CIFS_URI_PATTERN.match(uri):
+        mount_protocol = "cifs"
+    elif NFS_URI_PATTERN.match(uri):
+        mount_protocol = "nfs"
+    else:
+        # Raise ValueError and bail
+        raise ValueError("Unsupported protocol: " +
+                         urlparse.urlsplit(uri).scheme)
+
+    # Convert no user/pass to blank strings
+    if not user_id:
+        user_id = ''
+    if not password:
+        password = ''
+
+    # Map the ISO
+    vmedia_mount_add(
+        handle,
+        volume_name=remote_file,
+        mount_protocol=mount_protocol,
+        mount_options=mount_options,
+        remote_share=remote_share,
+        remote_file=remote_file,
+        user_id=user_id,
+        password=password)
+
+    # Verify correct URL was mapped
+    if uri in vmedia_get_existing_uri(handle):
+        # Loop until mapping moves out of 'In Progress' state
+        wait_time = 0
+        status_list = vmedia_get_existing_status(handle)
+        while 'In Progress' in status_list:
+            # Raise error if we've reached timeout
+            if wait_time > timeout:
+                raise ImcOperationError(
+                    'Mount Virtual Media',
+                    '{0}: ERROR - Mapped ISO status stuck at ' +
+                    '[In Progress]'.format(handle.ip)
+                )
+            # Wait interval sec between checks
+            time.sleep(interval)
+            status_list = vmedia_get_existing_status(handle)
+            wait_time += interval
+        else:
+            # Verify mapping transitioned to 'OK' state
+            if 'OK' in status_list:
+                return True
+            else:
+                raise ImcOperationError(
+                    'Mount Virtual Media',
+                    '{0}: ERROR - Mapped ISO status ' +
+                    'is {1}'.format(handle.ip, status_list)
+                )
+    else:
+        raise ImcOperationError(
+            'Mount Virtual Media',
+            '{0}: ERROR - ISO {1} did not get mapped.'.format(handle.ip, uri)
+        )
 
 
 def vmedia_mount_remove(handle, volume_name):
@@ -199,8 +330,6 @@ def vmedia_mount_remove(handle, volume_name):
         vmedia_mount_remove(handle, volume_name="c")
     """
 
-    from imcsdk.mometa.comm.CommVMediaMap import CommVMediaMap
-
     vmediamap_mo = CommVMediaMap(
         parent_mo_or_dn="sys/svc-ext/vmedia-svc",
         volume_name=volume_name)
@@ -209,6 +338,38 @@ def vmedia_mount_remove(handle, volume_name):
         raise ValueError("Volume '%s' does not exist" % volume_name)
 
     handle.remove_mo(vmediamap_mo)
+
+
+def vmedia_mount_remove_all(handle):
+    """
+    This method will remove all the vmedia mappings
+
+    Args:
+        handle (ImcHandle)
+
+    Raises:
+        Exception if mapping is able to be removed
+
+    Returns:
+        True
+
+    Examples:
+        vmedia_mount_remove_all(handle)
+    """
+
+    # Get all current virtually mapped ISOs
+    virt_media_maps = handle.query_children(in_dn="sys/svc-ext/vmedia-svc")
+    # Loop over each mapped ISO
+    for virt_media in virt_media_maps:
+        # Remove the mapped ISO
+        handle.remove_mo(virt_media)
+    # Raise error if all mappings not removed
+    if len(handle.query_children(in_dn="sys/svc-ext/vmedia-svc")) > 0:
+        raise ImcOperationError('Remove Virtual Media',
+                                '{0}: ERROR - Unable remove all virtual' +
+                                'media mappings'.format(handle.ip))
+    # Return True if all mapppings removed
+    return True
 
 
 def sol_setup(handle, speed, com_port, ssh_port):
@@ -224,8 +385,6 @@ def sol_setup(handle, speed, com_port, ssh_port):
     Returns:
         SolIf object
     """
-
-    from imcsdk.mometa.sol.SolIf import SolIf, SolIfConsts
 
     solif_mo = SolIf(parent_mo_or_dn="sys/rack-unit-1")
     solif_mo.admin_state = SolIfConsts.ADMIN_STATE_ENABLE
@@ -246,8 +405,6 @@ def sol_disable(handle):
     Returns:
         None
     """
-
-    from imcsdk.mometa.sol.SolIf import SolIf, SolIfConsts
 
     solif_mo = SolIf(parent_mo_or_dn="sys/rack-unit-1")
     solif_mo.admin_state = SolIfConsts.ADMIN_STATE_DISABLE
