@@ -15,32 +15,70 @@ class PciEquipSlot(ManagedObject):
     consts = PciEquipSlotConsts()
     naming_props = set([u'id'])
 
-    mo_meta = MoMeta("PciEquipSlot", "pciEquipSlot", "equipped-slot-[id]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeRackUnit'], [u'faultInst'], ["Get"])
+    mo_meta = {
+        "classic": MoMeta("PciEquipSlot", "pciEquipSlot", "equipped-slot-[id]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeRackUnit'], [u'faultInst'], ["Get"]),
+        "modular": MoMeta("PciEquipSlot", "pciEquipSlot", "equipped-slot-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeServerNode'], [u'faultInst'], [None])
+    }
+
 
     prop_meta = {
-        "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-        "controller_reported": MoPropertyMeta("controller_reported", "controllerReported", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-        "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
-        "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version151f, MoPropertyMeta.NAMING, None, None, None, None, [], []), 
-        "model": MoPropertyMeta("model", "model", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-        "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
-        "smbios_id": MoPropertyMeta("smbios_id", "smbiosId", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
-        "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x8, None, None, r"""((removed|created|modified|deleted),){0,3}(removed|created|modified|deleted){0,1}""", [], []), 
-        "vendor": MoPropertyMeta("vendor", "vendor", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-        "version": MoPropertyMeta("version", "version", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+
+        "classic": {
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "controller_reported": MoPropertyMeta("controller_reported", "controllerReported", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
+            "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version151f, MoPropertyMeta.NAMING, None, None, None, None, [], []), 
+            "model": MoPropertyMeta("model", "model", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
+            "smbios_id": MoPropertyMeta("smbios_id", "smbiosId", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x8, None, None, r"""((removed|created|modified|deleted),){0,3}(removed|created|modified|deleted){0,1}""", [], []), 
+            "vendor": MoPropertyMeta("vendor", "vendor", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "version": MoPropertyMeta("version", "version", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+        },
+
+        "modular": {
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "controller_reported": MoPropertyMeta("controller_reported", "controllerReported", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
+            "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version2013e, MoPropertyMeta.NAMING, None, None, None, None, [], []), 
+            "model": MoPropertyMeta("model", "model", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
+            "smbios_id": MoPropertyMeta("smbios_id", "smbiosId", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x8, None, None, r"""((removed|created|modified|deleted),){0,3}(removed|created|modified|deleted){0,1}""", [], []), 
+            "vendor": MoPropertyMeta("vendor", "vendor", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "version": MoPropertyMeta("version", "version", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+        },
+
     }
 
     prop_map = {
-        "childAction": "child_action", 
-        "controllerReported": "controller_reported", 
-        "dn": "dn", 
-        "id": "id", 
-        "model": "model", 
-        "rn": "rn", 
-        "smbiosId": "smbios_id", 
-        "status": "status", 
-        "vendor": "vendor", 
-        "version": "version", 
+
+        "classic": {
+            "childAction": "child_action", 
+            "controllerReported": "controller_reported", 
+            "dn": "dn", 
+            "id": "id", 
+            "model": "model", 
+            "rn": "rn", 
+            "smbiosId": "smbios_id", 
+            "status": "status", 
+            "vendor": "vendor", 
+            "version": "version", 
+        },
+
+        "modular": {
+            "childAction": "child_action", 
+            "controllerReported": "controller_reported", 
+            "dn": "dn", 
+            "id": "id", 
+            "model": "model", 
+            "rn": "rn", 
+            "smbiosId": "smbios_id", 
+            "status": "status", 
+            "vendor": "vendor", 
+            "version": "version", 
+        },
+
     }
 
     def __init__(self, parent_mo_or_dn, id, **kwargs):

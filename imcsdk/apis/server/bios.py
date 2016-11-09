@@ -17,13 +17,14 @@ This module provides APIs for bios related configuration like boot order
 """
 
 import logging
+import imcsdk.imccoreutils as imccoreutils
 
 logging.basicConfig()
 log = logging.getLogger('imc')
 log.setLevel(logging.DEBUG)
 
 
-def get_boot_order_precision(handle, dump=False):
+def get_boot_order_precision(handle, dump=False, server_id=1):
     """
     Gets the precision boot order.
     This is supported from EP release onwards only
@@ -31,6 +32,7 @@ def get_boot_order_precision(handle, dump=False):
     Args:
         handle (ImcHandle)
         dump (bool): True or False
+        server_id (int): Id of the server in case of C3X60 platforms
 
     Returns:
         List of tuples of the format:
@@ -40,9 +42,12 @@ def get_boot_order_precision(handle, dump=False):
         boot_order_precision(handle, dump=False)
     """
 
+    server_dn = imccoreutils.get_server_dn(handle, server_id)
+    parent_dn = server_dn + "/bios/bdgep"
+
     boot_order_list = []
     boot_device_list = handle.query_children(
-        in_dn="sys/rack-unit-1/bios/bdgep", class_id="BiosBootDevPrecision")
+        in_dn=parent_dn, class_id="BiosBootDevPrecision")
 
     for device in boot_device_list:
         device_tuple = (device.order, device.type, device.name)
@@ -55,7 +60,8 @@ def get_boot_order_precision(handle, dump=False):
         log.info("Precision Boot Order is [Order, Type, Name]:")
         log.info("--------------------------------------------")
         for device in sorted_boot_order_list:
-            log.info(" %s \t%s \t%s" % (device[0], device[1], device[2]))
+            log.info(" %s %s %s" % (device[0].ljust(5),
+                                    device[1].ljust(10), device[2].ljust(20)))
 
     return sorted_boot_order_list
 
@@ -81,21 +87,29 @@ policy_device_dict = {
 }
 
 
+def _is_boot_order_precision(dn):
+    return dn.find("precision") != -1
+
+
+def _is_boot_order_policy(dn):
+    return dn.find("policy") != -1
+
+
 def _get_boot_device_obj(parent_dn, device_type, device_name):
     from imcsdk.imccoreutils import load_class
 
-    if parent_dn == "sys/rack-unit-1/boot-precision":
+    if _is_boot_order_precision(parent_dn):
         if device_type not in precision_device_dict.keys():
             return None
         class_struct = load_class(precision_device_dict[device_type])
-    elif parent_dn == "sys/rack-unit-1/boot-policy":
+    elif _is_boot_order_policy(parent_dn):
         if device_type not in policy_device_dict.keys():
             return None
         class_struct = load_class(policy_device_dict[device_type])
     else:
         return None
 
-    if "name" in class_struct.prop_map.keys():
+    if imccoreutils.property_exists_in_prop_map(class_struct, "name"):
         class_obj = class_struct(parent_mo_or_dn=parent_dn, name=device_name)
     else:
         class_obj = class_struct(parent_mo_or_dn=parent_dn)
@@ -131,7 +145,8 @@ def _add_boot_device(handle, parent_dn, boot_device):
 
 
 def set_boot_order_precision(
-        handle, reboot_on_update="yes", boot_mode="Legacy", boot_devices=[]):
+        handle, reboot_on_update="yes", boot_mode="Legacy",
+        boot_devices=[], server_id=1):
     """
     This method will replace the existing boot order precision with the new one
         and also set the boot mode
@@ -144,8 +159,12 @@ def set_boot_order_precision(
         boot_devices (list of tuples): format
             [(boot-order, boot-device-type, boot-device-name)]
             boot-order(string): Order
-            boot-device-type(string): "hdd", "iscsi", "pchstorage", "pxe", "san", "sdcard", "uefishell", "usb", "vmedia"
+            boot-device-type(string): "hdd", "iscsi", "pchstorage", "pxe",
+                                      "san", "sdcard", "uefishell", "usb",
+                                      "vmedia"
             boot-device-name(string): Unique label for the boot device
+        server_id (int): Id of the server to perform
+                         this operation on C3x60 platforms
 
     Returns:
         LsBootDevPrecision object
@@ -162,8 +181,9 @@ def set_boot_order_precision(
 
     from imcsdk.mometa.lsboot.LsbootDevPrecision import LsbootDevPrecision
 
+    server_dn = imccoreutils.get_server_dn(handle, server_id)
     lsbootdevprecision_mo = LsbootDevPrecision(
-        parent_mo_or_dn="sys/rack-unit-1")
+        parent_mo_or_dn=server_dn)
     lsbootdevprecision_mo.reboot_on_update = reboot_on_update
     lsbootdevprecision_mo.configured_boot_mode = boot_mode
 
@@ -181,13 +201,15 @@ def set_boot_order_precision(
     return lsbootdevprecision_mo
 
 
-def get_boot_order_policy(handle, dump=False):
+def get_boot_order_policy(handle, dump=False, server_id=1):
     """
     Gets the boot order. This is the legacy boot order
 
     Args:
         handle (ImcHandle)
         dump (bool): True or False
+        server_id (int): Id of the server to perform
+                         this operation on C3x60 platforms
 
     Returns:
         List of tuples of the format:
@@ -199,11 +221,14 @@ def get_boot_order_policy(handle, dump=False):
 
     from imcsdk.mometa.lsboot.LsbootBootSecurity import LsbootBootSecurity
 
+    server_dn = imccoreutils.get_server_dn(handle, server_id)
+    parent_dn = server_dn + "/boot-policy"
+
     boot_order_list = []
     child_mo_list = handle.query_children(
-        in_dn="sys/rack-unit-1/boot-policy")
+        in_dn=parent_dn)
     boot_security_policy = LsbootBootSecurity(
-        parent_mo_or_dn="sys/rack-unit-1/boot-policy")
+        parent_mo_or_dn=parent_dn)
 
     for mo in child_mo_list:
         if mo.dn == boot_security_policy.dn:
@@ -223,16 +248,16 @@ def get_boot_order_policy(handle, dump=False):
 
         for device_tuple in sorted_boot_order_list:
             log.info(
-                " %s \t%s \t%s" %
-                (device_tuple[0],
-                 device_tuple[1],
-                 device_tuple[2]))
+                " %s %s %s" %
+                (device_tuple[0].ljust(5),
+                 device_tuple[1].center(10),
+                 device_tuple[2].center(20)))
 
     return sorted_boot_order_list
 
 
 def set_boot_order_policy(handle, reboot_on_update="yes",
-                          secure_boot=False, boot_devices=[]):
+                          secure_boot=False, boot_devices=[], server_id=1):
     """
     This method will set the boot order policy passed from the user
     This is the deprecated way of setting the boot order
@@ -247,22 +272,26 @@ def set_boot_order_policy(handle, reboot_on_update="yes",
             boot-order(string): Order
             boot-device-type(string): "efi", "lan", "storage", "vmedia"
             boot-device-name(string): Unique label for the boot device
-
+        server_id (int): Id of the server to perform
+                         this operation on C3x60 platforms
     Returns:
         LsBootDef object
 
     Examples:
         set_boot_order_policy(
             handle,
-             reboot_on_update="yes",
-             secure_boot="yes"
-             boot_devices = [("1", "storage", "ext-hdd1"), ("2", "lan", "office-lan")])
+            reboot_on_update="yes",
+            secure_boot=True,
+            boot_devices = [("1", "storage", "ext-hdd1"),
+                            ("2", "lan", "office-lan")])
     """
 
     from imcsdk.mometa.lsboot.LsbootDef import LsbootDef
     from imcsdk.mometa.lsboot.LsbootBootSecurity import LsbootBootSecurity
 
-    boot_policy = LsbootDef(parent_mo_or_dn="sys/rack-unit-1")
+    server_dn = imccoreutils.get_server_dn(handle, server_id)
+
+    boot_policy = LsbootDef(parent_mo_or_dn=server_dn)
     boot_policy.reboot_on_update = reboot_on_update
     handle.set_mo(boot_policy)
 

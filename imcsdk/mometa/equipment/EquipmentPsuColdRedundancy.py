@@ -15,22 +15,33 @@ class EquipmentPsuColdRedundancy(ManagedObject):
     consts = EquipmentPsuColdRedundancyConsts()
     naming_props = set([])
 
-    mo_meta = MoMeta("EquipmentPsuColdRedundancy", "equipmentPsuColdRedundancy", "psu-cold-redundancy", VersionMeta.Version204c, "InputOutput", 0x1f, [], ["admin"], [u'computeRackUnit'], [], ["Get", "Set"])
+    mo_meta = {
+        "classic": MoMeta("EquipmentPsuColdRedundancy", "equipmentPsuColdRedundancy", "psu-cold-redundancy", VersionMeta.Version204c, "InputOutput", 0x1f, [], ["admin"], [u'computeRackUnit'], [], ["Get", "Set"]),
+    }
+
 
     prop_meta = {
-        "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
-        "enabled": MoPropertyMeta("enabled", "enabled", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["No", "Yes", "false", "no", "true", "yes"], []), 
-        "overall_status": MoPropertyMeta("overall_status", "overallStatus", "string", VersionMeta.Version208d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-        "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
-        "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+
+        "classic": {
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
+            "enabled": MoPropertyMeta("enabled", "enabled", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["No", "Yes", "false", "no", "true", "yes"], []), 
+            "overall_status": MoPropertyMeta("overall_status", "overallStatus", "string", VersionMeta.Version208d, MoPropertyMeta.READ_ONLY, None, 0, 710, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+        },
+
     }
 
     prop_map = {
-        "dn": "dn", 
-        "enabled": "enabled", 
-        "overallStatus": "overall_status", 
-        "rn": "rn", 
-        "status": "status", 
+
+        "classic": {
+            "dn": "dn", 
+            "enabled": "enabled", 
+            "overallStatus": "overall_status", 
+            "rn": "rn", 
+            "status": "status", 
+        },
+
     }
 
     def __init__(self, parent_mo_or_dn, **kwargs):

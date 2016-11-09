@@ -11,6 +11,7 @@ class BiosVfQPIConfigConsts:
     VP_QPILINK_FREQUENCY_8_0_GT_S = "8.0-gt/s"
     VP_QPILINK_FREQUENCY_AUTO = "auto"
     VP_QPILINK_FREQUENCY_PLATFORM_DEFAULT = "platform-default"
+    VP_QPILINK_FREQUENCY_9_6_GT_S = "9.6-gt/s"
 
 
 class BiosVfQPIConfig(ManagedObject):
@@ -19,22 +20,50 @@ class BiosVfQPIConfig(ManagedObject):
     consts = BiosVfQPIConfigConsts()
     naming_props = set([])
 
-    mo_meta = MoMeta("BiosVfQPIConfig", "biosVfQPIConfig", "QPI-Config", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
+    mo_meta = {
+        "classic": MoMeta("BiosVfQPIConfig", "biosVfQPIConfig", "QPI-Config", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
+        "modular": MoMeta("BiosVfQPIConfig", "biosVfQPIConfig", "QPI-Config", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
+    }
+
 
     prop_meta = {
-        "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-        "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
-        "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
-        "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-        "vp_qpi_link_frequency": MoPropertyMeta("vp_qpi_link_frequency", "vpQPILinkFrequency", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["6.4-gt/s", "7.2-gt/s", "8.0-gt/s", "auto", "platform-default"], []), 
+
+        "classic": {
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "vp_qpi_link_frequency": MoPropertyMeta("vp_qpi_link_frequency", "vpQPILinkFrequency", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["6.4-gt/s", "7.2-gt/s", "8.0-gt/s", "auto", "platform-default"], []), 
+        },
+
+        "modular": {
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "vp_qpi_link_frequency": MoPropertyMeta("vp_qpi_link_frequency", "vpQPILinkFrequency", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["6.4-gt/s", "7.2-gt/s", "8.0-gt/s", "auto", "platform-default"], []), 
+        },
+
     }
 
     prop_map = {
-        "childAction": "child_action", 
-        "dn": "dn", 
-        "rn": "rn", 
-        "status": "status", 
-        "vpQPILinkFrequency": "vp_qpi_link_frequency", 
+
+        "classic": {
+            "childAction": "child_action", 
+            "dn": "dn", 
+            "rn": "rn", 
+            "status": "status", 
+            "vpQPILinkFrequency": "vp_qpi_link_frequency", 
+        },
+
+        "modular": {
+            "childAction": "child_action", 
+            "dn": "dn", 
+            "rn": "rn", 
+            "status": "status", 
+            "vpQPILinkFrequency": "vp_qpi_link_frequency", 
+        },
+
     }
 
     def __init__(self, parent_mo_or_dn, **kwargs):

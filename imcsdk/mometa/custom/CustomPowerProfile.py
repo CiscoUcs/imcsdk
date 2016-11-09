@@ -25,16 +25,16 @@ class CustomPowerProfile(ManagedObject):
     prop_meta = {
 
         "modular": {
-            "allow_throttle": MoPropertyMeta("allow_throttle", "allowThrottle", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["No", "Yes", "no", "yes"], []), 
+            "allow_throttle": MoPropertyMeta("allow_throttle", "allowThrottle", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["No", "Yes", "no", "yes"], []), 
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-            "corr_action": MoPropertyMeta("corr_action", "corrAction", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["alert", "alert,shutdown", "none"], []), 
-            "corr_time": MoPropertyMeta("corr_time", "corrTime", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, 0, 510, None, [], ["0-4294967295"]), 
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, 0, 255, None, [], []), 
-            "power_limit": MoPropertyMeta("power_limit", "powerLimit", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, 0, 510, None, [], ["0-4294967295"]), 
-            "profile_enabled": MoPropertyMeta("profile_enabled", "profileEnabled", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["No", "Yes", "no", "yes"], []), 
+            "corr_action": MoPropertyMeta("corr_action", "corrAction", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["alert", "alert,shutdown", "none"], []), 
+            "corr_time": MoPropertyMeta("corr_time", "corrTime", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, 0, 510, None, [], ["0-4294967295"]), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
+            "power_limit": MoPropertyMeta("power_limit", "powerLimit", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, 0, 510, None, [], ["0-4294967295"]), 
+            "profile_enabled": MoPropertyMeta("profile_enabled", "profileEnabled", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["No", "Yes", "no", "yes"], []), 
             "profile_type": MoPropertyMeta("profile_type", "profileType", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, 0, 255, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "suspend_period": MoPropertyMeta("suspend_period", "suspendPeriod", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, 0, 510, None, [], []), 
         },
 

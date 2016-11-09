@@ -27,30 +27,64 @@ class SolIf(ManagedObject):
     consts = SolIfConsts()
     naming_props = set([])
 
-    mo_meta = MoMeta("SolIf", "solIf", "sol-if", VersionMeta.Version151f, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'computeRackUnit'], [], ["Get", "Set"])
+    mo_meta = {
+        "classic": MoMeta("SolIf", "solIf", "sol-if", VersionMeta.Version151f, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'computeRackUnit'], [], ["Get", "Set"]),
+        "modular": MoMeta("SolIf", "solIf", "sol-if", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'computeServerNode'], [], [None])
+    }
+
 
     prop_meta = {
-        "admin_state": MoPropertyMeta("admin_state", "adminState", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["Disabled", "Enabled", "disable", "disabled", "enable", "enabled"], []), 
-        "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-        "comport": MoPropertyMeta("comport", "comport", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["com0", "com1"], []), 
-        "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
-        "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, r"""[\-\.:_a-zA-Z0-9]{0,16}""", [], []), 
-        "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
-        "speed": MoPropertyMeta("speed", "speed", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["115200", "19200", "38400", "57600", "9600"], []), 
-        "ssh_port": MoPropertyMeta("ssh_port", "sshPort", "uint", VersionMeta.Version208d, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, [], ["1024-65535"]), 
-        "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+
+        "classic": {
+            "admin_state": MoPropertyMeta("admin_state", "adminState", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["Disabled", "Enabled", "disable", "disabled", "enable", "enabled"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "comport": MoPropertyMeta("comport", "comport", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["com0", "com1"], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
+            "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, r"""[\-\.:_a-zA-Z0-9]{0,16}""", [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
+            "speed": MoPropertyMeta("speed", "speed", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["115200", "19200", "38400", "57600", "9600"], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "ssh_port": MoPropertyMeta("ssh_port", "sshPort", "uint", VersionMeta.Version208d, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, [], ["1024-65535"]), 
+        },
+
+        "modular": {
+            "admin_state": MoPropertyMeta("admin_state", "adminState", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["Disabled", "Enabled", "disable", "disabled", "enable", "enabled"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "comport": MoPropertyMeta("comport", "comport", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["com0", "com1"], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
+            "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, r"""[\-\.:_a-zA-Z0-9]{0,16}""", [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
+            "speed": MoPropertyMeta("speed", "speed", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["115200", "19200", "38400", "57600", "9600"], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+        },
+
     }
 
     prop_map = {
-        "adminState": "admin_state", 
-        "childAction": "child_action", 
-        "comport": "comport", 
-        "dn": "dn", 
-        "name": "name", 
-        "rn": "rn", 
-        "speed": "speed", 
-        "sshPort": "ssh_port", 
-        "status": "status", 
+
+        "classic": {
+            "adminState": "admin_state", 
+            "childAction": "child_action", 
+            "comport": "comport", 
+            "dn": "dn", 
+            "name": "name", 
+            "rn": "rn", 
+            "speed": "speed", 
+            "status": "status", 
+            "sshPort": "ssh_port", 
+        },
+
+        "modular": {
+            "adminState": "admin_state", 
+            "childAction": "child_action", 
+            "comport": "comport", 
+            "dn": "dn", 
+            "name": "name", 
+            "rn": "rn", 
+            "speed": "speed", 
+            "status": "status", 
+        },
+
     }
 
     def __init__(self, parent_mo_or_dn, **kwargs):
@@ -60,8 +94,8 @@ class SolIf(ManagedObject):
         self.comport = None
         self.name = None
         self.speed = None
-        self.ssh_port = None
         self.status = None
+        self.ssh_port = None
 
         ManagedObject.__init__(self, "SolIf", parent_mo_or_dn, **kwargs)
 

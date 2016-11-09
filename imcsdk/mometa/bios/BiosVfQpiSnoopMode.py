@@ -21,20 +21,46 @@ class BiosVfQpiSnoopMode(ManagedObject):
     consts = BiosVfQpiSnoopModeConsts()
     naming_props = set([])
 
-    mo_meta = MoMeta("BiosVfQpiSnoopMode", "biosVfQpiSnoopMode", "QPI-Snoop-Mode", VersionMeta.Version204c, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
+    mo_meta = {
+        "classic": MoMeta("BiosVfQpiSnoopMode", "biosVfQpiSnoopMode", "QPI-Snoop-Mode", VersionMeta.Version204c, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
+        "modular": MoMeta("BiosVfQpiSnoopMode", "biosVfQpiSnoopMode", "QPI-Snoop-Mode", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
+    }
+
 
     prop_meta = {
-        "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
-        "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
-        "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-        "vp_qpi_snoop_mode": MoPropertyMeta("vp_qpi_snoop_mode", "vpQpiSnoopMode", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["auto", "cluster-on-die", "early-snoop", "home-directory-snoop", "home-directory-snoop-with-osb", "home-snoop", "platform-default"], []), 
+
+        "classic": {
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "vp_qpi_snoop_mode": MoPropertyMeta("vp_qpi_snoop_mode", "vpQpiSnoopMode", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["auto", "cluster-on-die", "early-snoop", "home-directory-snoop", "home-directory-snoop-with-osb", "home-snoop", "platform-default"], []), 
+        },
+
+        "modular": {
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "vp_qpi_snoop_mode": MoPropertyMeta("vp_qpi_snoop_mode", "vpQpiSnoopMode", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["auto", "cluster-on-die", "early-snoop", "home-directory-snoop", "home-directory-snoop-with-osb", "home-snoop", "platform-default"], []), 
+        },
+
     }
 
     prop_map = {
-        "dn": "dn", 
-        "rn": "rn", 
-        "status": "status", 
-        "vpQpiSnoopMode": "vp_qpi_snoop_mode", 
+
+        "classic": {
+            "dn": "dn", 
+            "rn": "rn", 
+            "status": "status", 
+            "vpQpiSnoopMode": "vp_qpi_snoop_mode", 
+        },
+
+        "modular": {
+            "dn": "dn", 
+            "rn": "rn", 
+            "status": "status", 
+            "vpQpiSnoopMode": "vp_qpi_snoop_mode", 
+        },
+
     }
 
     def __init__(self, parent_mo_or_dn, **kwargs):

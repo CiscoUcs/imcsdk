@@ -36,6 +36,7 @@ class ImcSession(object):
         self.__password = password
         self.__proxy = proxy
         self.__uri = self.__create_uri(port, secure)
+        self.__platform = None
 
         self.__imc = ip
         self.__name = None
@@ -115,6 +116,10 @@ class ImcSession(object):
     @property
     def last_update_time(self):
         return self.__last_update_time
+
+    @property
+    def platform(self):
+        return self.__platform
 
     def __create_uri(self, port, secure):
         """
@@ -381,7 +386,7 @@ class ImcSession(object):
         return 'cookie' in elem.attrib and elem.attrib[
             'cookie'] != "" and elem.attrib['cookie'] != self.cookie
 
-    def _refresh(self, auto_relogin=False):
+    def _refresh(self, auto_relogin=True):
         """
         Sends the aaaRefresh query to the imc to refresh the connection
         (to prevent session expiration).
@@ -398,7 +403,7 @@ class ImcSession(object):
         if response.error_code != 0:
             self.__cookie = None
             if auto_relogin:
-                return self._login()
+                return self._login(auto_refresh=True)
             return False
 
         self.__cookie = response.out_cookie
@@ -456,11 +461,17 @@ class ImcSession(object):
         model_validated = False
 
         rack_elem = config_resolve_class(cookie=self.__cookie,
-                                         class_id="computeRackUnit")
+                                         class_id="biosUnit")
         rack_elem_response = self.post_elem(rack_elem)
         if rack_elem_response.error_code == 0:
             for rack in rack_elem_response.out_configs.child:
                 model_name = rack.model
+
+                if model_name.startswith("UCSC-C3"):
+                    self.__platform = "modular"
+                else:
+                    self.__platform = "classic"
+
                 if model_name.startswith("UCSC"):
                     model_validated = True
                 elif model_name.startswith("UCS-E"):
@@ -471,9 +482,9 @@ class ImcSession(object):
                 self._logout()
                 return False
 
-        if self.__is_fabric_interconnect():
-            self._logout()
-            return False
+        # if self.__is_fabric_interconnect():
+        #     self._logout()
+        #     return False
         return True
 
     def _update_version(self, response=None):
@@ -543,7 +554,7 @@ class ImcSession(object):
             raise ImcException(response.error_code, response.error_descr)
         self.__update(response)
 
-        # Verify not to connect to IMC
+        # Verify to connect to IMC only
         if not self.__validate_imc():
             raise ImcLoginError("Not a supported server.")
 

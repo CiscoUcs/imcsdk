@@ -35,38 +35,82 @@ class EquipmentTpm(ManagedObject):
     consts = EquipmentTpmConsts()
     naming_props = set([])
 
-    mo_meta = MoMeta("EquipmentTpm", "equipmentTpm", "tpm", VersionMeta.Version201a, "OutputOnly", 0xf, [], ["read-only"], [u'computeBoard'], [], ["Get"])
+    mo_meta = {
+        "classic": MoMeta("EquipmentTpm", "equipmentTpm", "tpm", VersionMeta.Version201a, "OutputOnly", 0xf, [], ["read-only"], [u'computeBoard'], [], ["Get"]),
+        "modular": MoMeta("EquipmentTpm", "equipmentTpm", "tpm", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["read-only"], [u'computeBoard'], [], [None])
+    }
+
 
     prop_meta = {
-        "active_status": MoPropertyMeta("active_status", "activeStatus", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["activated", "deactivated", "unknown"], []), 
-        "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version201a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-        "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
-        "enabled_status": MoPropertyMeta("enabled_status", "enabledStatus", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["disabled", "enabled", "unknown"], []), 
-        "model": MoPropertyMeta("model", "model", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-        "ownership": MoPropertyMeta("ownership", "ownership", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["owned", "unknown", "unowned"], []), 
-        "presence": MoPropertyMeta("presence", "presence", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["empty", "equipped", "equipped-identity-unestablishable", "equipped-not-primary", "equipped-with-malformed-fru", "inaccessible", "mismatch", "mismatch-identity-unestablishable", "missing", "not-supported", "unauthorized", "unknown"], []), 
-        "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
-        "serial": MoPropertyMeta("serial", "serial", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-        "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, 0x8, None, None, r"""((removed|created|modified|deleted),){0,3}(removed|created|modified|deleted){0,1}""", [], []), 
-        "tpm_revision": MoPropertyMeta("tpm_revision", "tpmRevision", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
-        "vendor": MoPropertyMeta("vendor", "vendor", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-        "version": MoPropertyMeta("version", "version", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+
+        "classic": {
+            "active_status": MoPropertyMeta("active_status", "activeStatus", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["activated", "deactivated", "unknown"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version201a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
+            "enabled_status": MoPropertyMeta("enabled_status", "enabledStatus", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["disabled", "enabled", "unknown"], []), 
+            "model": MoPropertyMeta("model", "model", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "ownership": MoPropertyMeta("ownership", "ownership", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["owned", "unknown", "unowned"], []), 
+            "presence": MoPropertyMeta("presence", "presence", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["empty", "equipped", "equipped-identity-unestablishable", "equipped-not-primary", "equipped-with-malformed-fru", "inaccessible", "mismatch", "mismatch-identity-unestablishable", "missing", "not-supported", "unauthorized", "unknown"], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
+            "serial": MoPropertyMeta("serial", "serial", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, 0x8, None, None, r"""((removed|created|modified|deleted),){0,3}(removed|created|modified|deleted){0,1}""", [], []), 
+            "tpm_revision": MoPropertyMeta("tpm_revision", "tpmRevision", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
+            "vendor": MoPropertyMeta("vendor", "vendor", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "version": MoPropertyMeta("version", "version", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+        },
+
+        "modular": {
+            "active_status": MoPropertyMeta("active_status", "activeStatus", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["activated", "deactivated", "unknown"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
+            "enabled_status": MoPropertyMeta("enabled_status", "enabledStatus", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["disabled", "enabled", "unknown"], []), 
+            "model": MoPropertyMeta("model", "model", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "ownership": MoPropertyMeta("ownership", "ownership", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["owned", "unknown", "unowned"], []), 
+            "presence": MoPropertyMeta("presence", "presence", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["empty", "equipped", "equipped-identity-unestablishable", "equipped-not-primary", "equipped-with-malformed-fru", "inaccessible", "mismatch", "mismatch-identity-unestablishable", "missing", "not-supported", "unauthorized", "unknown"], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
+            "serial": MoPropertyMeta("serial", "serial", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x8, None, None, r"""((removed|created|modified|deleted),){0,3}(removed|created|modified|deleted){0,1}""", [], []), 
+            "tpm_revision": MoPropertyMeta("tpm_revision", "tpmRevision", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
+            "vendor": MoPropertyMeta("vendor", "vendor", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "version": MoPropertyMeta("version", "version", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+        },
+
     }
 
     prop_map = {
-        "activeStatus": "active_status", 
-        "childAction": "child_action", 
-        "dn": "dn", 
-        "enabledStatus": "enabled_status", 
-        "model": "model", 
-        "ownership": "ownership", 
-        "presence": "presence", 
-        "rn": "rn", 
-        "serial": "serial", 
-        "status": "status", 
-        "tpmRevision": "tpm_revision", 
-        "vendor": "vendor", 
-        "version": "version", 
+
+        "classic": {
+            "activeStatus": "active_status", 
+            "childAction": "child_action", 
+            "dn": "dn", 
+            "enabledStatus": "enabled_status", 
+            "model": "model", 
+            "ownership": "ownership", 
+            "presence": "presence", 
+            "rn": "rn", 
+            "serial": "serial", 
+            "status": "status", 
+            "tpmRevision": "tpm_revision", 
+            "vendor": "vendor", 
+            "version": "version", 
+        },
+
+        "modular": {
+            "activeStatus": "active_status", 
+            "childAction": "child_action", 
+            "dn": "dn", 
+            "enabledStatus": "enabled_status", 
+            "model": "model", 
+            "ownership": "ownership", 
+            "presence": "presence", 
+            "rn": "rn", 
+            "serial": "serial", 
+            "status": "status", 
+            "tpmRevision": "tpm_revision", 
+            "vendor": "vendor", 
+            "version": "version", 
+        },
+
     }
 
     def __init__(self, parent_mo_or_dn, **kwargs):

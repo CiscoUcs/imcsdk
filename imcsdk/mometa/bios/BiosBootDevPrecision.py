@@ -31,36 +31,78 @@ class BiosBootDevPrecision(ManagedObject):
     consts = BiosBootDevPrecisionConsts()
     naming_props = set([u'order'])
 
-    mo_meta = MoMeta("BiosBootDevPrecision", "biosBootDevPrecision", "bdvp-[order]", VersionMeta.Version201a, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'biosBOT'], [], ["Get"])
+    mo_meta = {
+        "classic": MoMeta("BiosBootDevPrecision", "biosBootDevPrecision", "bdvp-[order]", VersionMeta.Version201a, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'biosBOT'], [], ["Get"]),
+        "modular": MoMeta("BiosBootDevPrecision", "biosBootDevPrecision", "bdvp-[order]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'biosBOT'], [], [None])
+    }
+
 
     prop_meta = {
-        "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version201a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-        "descr": MoPropertyMeta("descr", "descr", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 256, None, [], []), 
-        "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
-        "lun": MoPropertyMeta("lun", "lun", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
-        "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 256, None, [], []), 
-        "order": MoPropertyMeta("order", "order", "uint", VersionMeta.Version201a, MoPropertyMeta.NAMING, None, None, None, None, [], ["1-255"]), 
-        "port": MoPropertyMeta("port", "port", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
-        "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
-        "slot": MoPropertyMeta("slot", "slot", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
-        "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, 0x8, None, None, r"""((removed|created|modified|deleted),){0,3}(removed|created|modified|deleted){0,1}""", [], []), 
-        "subtype": MoPropertyMeta("subtype", "subtype", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["cimc-mapped-dvd", "cimc-mapped-hdd", "kvm-mapped-dvd", "kvm-mapped-fdd", "kvm-mapped-hdd", "usb-cd", "usb-fdd", "usb-hdd"], []), 
-        "type": MoPropertyMeta("type", "type", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["EFI", "HDD", "ISCSI", "PCHSTORAGE", "PXE", "SAN", "SDCARD", "USB", "VMEDIA"], []), 
+
+        "classic": {
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version201a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "descr": MoPropertyMeta("descr", "descr", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 256, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
+            "lun": MoPropertyMeta("lun", "lun", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
+            "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 256, None, [], []), 
+            "order": MoPropertyMeta("order", "order", "uint", VersionMeta.Version201a, MoPropertyMeta.NAMING, None, None, None, None, [], ["1-255"]), 
+            "port": MoPropertyMeta("port", "port", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
+            "slot": MoPropertyMeta("slot", "slot", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, 0x8, None, None, r"""((removed|created|modified|deleted),){0,3}(removed|created|modified|deleted){0,1}""", [], []), 
+            "subtype": MoPropertyMeta("subtype", "subtype", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["cimc-mapped-dvd", "cimc-mapped-hdd", "kvm-mapped-dvd", "kvm-mapped-fdd", "kvm-mapped-hdd", "usb-cd", "usb-fdd", "usb-hdd"], []), 
+            "type": MoPropertyMeta("type", "type", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["EFI", "HDD", "ISCSI", "PCHSTORAGE", "PXE", "SAN", "SDCARD", "USB", "VMEDIA"], []), 
+        },
+
+        "modular": {
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "descr": MoPropertyMeta("descr", "descr", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 256, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
+            "lun": MoPropertyMeta("lun", "lun", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
+            "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 256, None, [], []), 
+            "order": MoPropertyMeta("order", "order", "uint", VersionMeta.Version2013e, MoPropertyMeta.NAMING, None, None, None, None, [], ["1-255"]), 
+            "port": MoPropertyMeta("port", "port", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
+            "slot": MoPropertyMeta("slot", "slot", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x8, None, None, r"""((removed|created|modified|deleted),){0,3}(removed|created|modified|deleted){0,1}""", [], []), 
+            "subtype": MoPropertyMeta("subtype", "subtype", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["cimc-mapped-dvd", "cimc-mapped-hdd", "kvm-mapped-dvd", "kvm-mapped-fdd", "kvm-mapped-hdd", "usb-cd", "usb-fdd", "usb-hdd"], []), 
+            "type": MoPropertyMeta("type", "type", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["EFI", "HDD", "ISCSI", "PCHSTORAGE", "PXE", "SAN", "SDCARD", "USB", "VMEDIA"], []), 
+        },
+
     }
 
     prop_map = {
-        "childAction": "child_action", 
-        "descr": "descr", 
-        "dn": "dn", 
-        "lun": "lun", 
-        "name": "name", 
-        "order": "order", 
-        "port": "port", 
-        "rn": "rn", 
-        "slot": "slot", 
-        "status": "status", 
-        "subtype": "subtype", 
-        "type": "type", 
+
+        "classic": {
+            "childAction": "child_action", 
+            "descr": "descr", 
+            "dn": "dn", 
+            "lun": "lun", 
+            "name": "name", 
+            "order": "order", 
+            "port": "port", 
+            "rn": "rn", 
+            "slot": "slot", 
+            "status": "status", 
+            "subtype": "subtype", 
+            "type": "type", 
+        },
+
+        "modular": {
+            "childAction": "child_action", 
+            "descr": "descr", 
+            "dn": "dn", 
+            "lun": "lun", 
+            "name": "name", 
+            "order": "order", 
+            "port": "port", 
+            "rn": "rn", 
+            "slot": "slot", 
+            "status": "status", 
+            "subtype": "subtype", 
+            "type": "type", 
+        },
+
     }
 
     def __init__(self, parent_mo_or_dn, order, **kwargs):

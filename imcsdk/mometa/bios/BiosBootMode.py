@@ -17,22 +17,50 @@ class BiosBootMode(ManagedObject):
     consts = BiosBootModeConsts()
     naming_props = set([])
 
-    mo_meta = MoMeta("BiosBootMode", "biosBootMode", "boot-mode", VersionMeta.Version201a, "OutputOnly", 0xf, [], ["admin", "user"], [u'biosBOT'], [], ["Get"])
+    mo_meta = {
+        "classic": MoMeta("BiosBootMode", "biosBootMode", "boot-mode", VersionMeta.Version201a, "OutputOnly", 0xf, [], ["admin", "user"], [u'biosBOT'], [], ["Get"]),
+        "modular": MoMeta("BiosBootMode", "biosBootMode", "boot-mode", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "user"], [u'biosBOT'], [], [None])
+    }
+
 
     prop_meta = {
-        "actual_boot_mode": MoPropertyMeta("actual_boot_mode", "actualBootMode", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["Legacy", "Uefi", "Unknown"], []), 
-        "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version201a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-        "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
-        "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
-        "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, 0x8, None, None, r"""((removed|created|modified|deleted),){0,3}(removed|created|modified|deleted){0,1}""", [], []), 
+
+        "classic": {
+            "actual_boot_mode": MoPropertyMeta("actual_boot_mode", "actualBootMode", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["Legacy", "Uefi", "Unknown"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version201a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, 0x8, None, None, r"""((removed|created|modified|deleted),){0,3}(removed|created|modified|deleted){0,1}""", [], []), 
+        },
+
+        "modular": {
+            "actual_boot_mode": MoPropertyMeta("actual_boot_mode", "actualBootMode", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["Legacy", "Uefi", "Unknown"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x8, None, None, r"""((removed|created|modified|deleted),){0,3}(removed|created|modified|deleted){0,1}""", [], []), 
+        },
+
     }
 
     prop_map = {
-        "actualBootMode": "actual_boot_mode", 
-        "childAction": "child_action", 
-        "dn": "dn", 
-        "rn": "rn", 
-        "status": "status", 
+
+        "classic": {
+            "actualBootMode": "actual_boot_mode", 
+            "childAction": "child_action", 
+            "dn": "dn", 
+            "rn": "rn", 
+            "status": "status", 
+        },
+
+        "modular": {
+            "actualBootMode": "actual_boot_mode", 
+            "childAction": "child_action", 
+            "dn": "dn", 
+            "rn": "rn", 
+            "status": "status", 
+        },
+
     }
 
     def __init__(self, parent_mo_or_dn, **kwargs):

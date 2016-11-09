@@ -24,8 +24,8 @@ class StorageSasUplink(ManagedObject):
 
         "modular": {
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x200, 0, 255, None, [], []), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x200, 0, 255, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
             "server1_uplink1_speed": MoPropertyMeta("server1_uplink1_speed", "server1Uplink1Speed", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
             "server1_uplink2_speed": MoPropertyMeta("server1_uplink2_speed", "server1Uplink2Speed", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
             "server1_uplink3_speed": MoPropertyMeta("server1_uplink3_speed", "server1Uplink3Speed", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
@@ -38,7 +38,7 @@ class StorageSasUplink(ManagedObject):
             "server2_uplink4_speed": MoPropertyMeta("server2_uplink4_speed", "server2Uplink4Speed", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
             "server2_uplink5_speed": MoPropertyMeta("server2_uplink5_speed", "server2Uplink5Speed", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
             "server2_uplink6_speed": MoPropertyMeta("server2_uplink6_speed", "server2Uplink6Speed", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x200, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
         },
 
     }

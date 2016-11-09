@@ -18,28 +18,39 @@ class SelfEncryptStorageController(ManagedObject):
     consts = SelfEncryptStorageControllerConsts()
     naming_props = set([])
 
-    mo_meta = MoMeta("SelfEncryptStorageController", "selfEncryptStorageController", "ctr-self-encrypt", VersionMeta.Version209c, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'storageController'], [], ["Get", "Set"])
+    mo_meta = {
+        "classic": MoMeta("SelfEncryptStorageController", "selfEncryptStorageController", "ctr-self-encrypt", VersionMeta.Version209c, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'storageController'], [], ["Get", "Set"]),
+    }
+
 
     prop_meta = {
-        "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["disable-self-encrypt", "enable-self-encrypt", "modify-self-encrypt", "unlock-secured-drives"], []), 
-        "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version209c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-        "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
-        "existing_security_key": MoPropertyMeta("existing_security_key", "existingSecurityKey", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x8, 1, 32, None, [], []), 
-        "key_id": MoPropertyMeta("key_id", "keyId", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x10, 1, 255, None, [], []), 
-        "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, None, [], []), 
-        "security_key": MoPropertyMeta("security_key", "securityKey", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x40, 1, 32, None, [], []), 
-        "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+
+        "classic": {
+            "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["disable-self-encrypt", "enable-self-encrypt", "modify-self-encrypt", "unlock-secured-drives"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version209c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
+            "existing_security_key": MoPropertyMeta("existing_security_key", "existingSecurityKey", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x8, 1, 32, None, [], []), 
+            "key_id": MoPropertyMeta("key_id", "keyId", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x10, 1, 255, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, None, [], []), 
+            "security_key": MoPropertyMeta("security_key", "securityKey", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x40, 1, 32, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+        },
+
     }
 
     prop_map = {
-        "adminAction": "admin_action", 
-        "childAction": "child_action", 
-        "dn": "dn", 
-        "existingSecurityKey": "existing_security_key", 
-        "keyId": "key_id", 
-        "rn": "rn", 
-        "securityKey": "security_key", 
-        "status": "status", 
+
+        "classic": {
+            "adminAction": "admin_action", 
+            "childAction": "child_action", 
+            "dn": "dn", 
+            "existingSecurityKey": "existing_security_key", 
+            "keyId": "key_id", 
+            "rn": "rn", 
+            "securityKey": "security_key", 
+            "status": "status", 
+        },
+
     }
 
     def __init__(self, parent_mo_or_dn, **kwargs):

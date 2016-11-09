@@ -443,7 +443,7 @@ class ImcHandle(ImcSession):
         for mo_dn in mo_dict:
 
             config_map.child_add(mo_dict[mo_dn])
-            elem = config_conf_mo(self.cookie,dn=mo_dn,
+            elem = config_conf_mo(self.cookie, dn=mo_dn,
                                   in_config=config_map,
                                   in_hierarchical=False)
             response = self.post_elem(elem, timeout=timeout)

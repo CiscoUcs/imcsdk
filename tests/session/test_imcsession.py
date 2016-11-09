@@ -14,6 +14,7 @@
 from nose.tools import assert_equal, raises
 from imcsdk.imchandle import ImcHandle
 from ..connection.info import custom_setup, custom_teardown
+from imcsdk.imccoreutils import get_server_dn
 
 
 def setup_module():
@@ -65,12 +66,13 @@ def test_001_create_uri():
 def test_imc_no_timeout():
 
     global handle
-    mo = handle.query_dn("sys/rack-unit-1", timeout=600)
+    server_dn = get_server_dn(handle)
+    mo = handle.query_dn(server_dn, timeout=600)
     usr_lbl = "test-lbl1"
     mo.usr_lbl = usr_lbl
     handle.set_mo(mo, timeout=600)
 
-    mo = handle.query_dn("sys/rack-unit-1")
+    mo = handle.query_dn(server_dn)
     assert_equal(mo.usr_lbl, usr_lbl)
 
 
@@ -80,11 +82,12 @@ def test_imc_timeout():
     import urllib2
 
     global handle
-    mo = handle.query_dn("sys/rack-unit-1", timeout=600)
+    server_dn = get_server_dn(handle)
+    mo = handle.query_dn(server_dn, timeout=600)
     usr_lbl = "test-lbl2"
     mo.usr_lbl = usr_lbl
     try:
         handle.set_mo(mo, timeout=1)
     except urllib2.URLError as e:
-        print "Hit expected error"
+        print("Hit expected error")
         raise Exception

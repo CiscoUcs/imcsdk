@@ -17,9 +17,23 @@ This module provides apis for inventory of the server
 """
 
 import csv
+import re
+from imcsdk.imccoreutils import IMC_PLATFORM
 
 INVENTORY_TXT_FILE = "inventory.txt"
 INVENTORY_CSV_FILE = "inventory.csv"
+
+
+def _extract_server_id_from_dn(handle, dn):
+    if handle.platform == IMC_PLATFORM.TYPE_CLASSIC:
+        return "1"
+
+    if handle.platform == IMC_PLATFORM.TYPE_MODULAR:
+        match = re.search(r"server-([\d])/([\w]+)", dn)
+        if match:
+            return match.group(1)
+
+    return "--"
 
 
 def write_to_txt_file(temp_str):
@@ -33,7 +47,12 @@ def get_rack_info_csv(handle):
         writer = csv.DictWriter(write_handle, fieldnames=fieldnames)
         writer.writeheader()
 
-        racks = handle.query_classid("ComputeRackUnit")
+        if handle.platform == IMC_PLATFORM.TYPE_CLASSIC:
+            class_id = "ComputeRackUnit"
+        elif handle.platform == IMC_PLATFORM.TYPE_MODULAR:
+            class_id = "ComputeServerNode"
+
+        racks = handle.query_classid(class_id)
         for rack in racks:
             if rack.presence == "missing":
                 continue
@@ -71,6 +90,7 @@ def get_rack_info(handle, file_format):
 def get_cpu_info_csv(handle):
     with open(INVENTORY_CSV_FILE, "a") as write_handle:
         fieldnames = [
+            'Server-Id',
             'Cpu-Id',
             'Vendor',
             'Model',
@@ -87,6 +107,7 @@ def get_cpu_info_csv(handle):
             if cpu.presence == "missing":
                 continue
             writer.writerow({
+                'Server-Id': _extract_server_id_from_dn(handle, cpu.dn),
                 'Cpu-Id': cpu.id,
                 'Vendor': cpu.vendor,
                 'Model': cpu.model,
@@ -123,6 +144,7 @@ def get_cpu_info(handle, file_format):
 def get_mem_info_csv(handle):
     with open(INVENTORY_CSV_FILE, "a") as write_handle:
         fieldnames = [
+            'Server-Id',
             'Dimm-Id',
             'Vendor',
             'Model',
@@ -137,6 +159,7 @@ def get_mem_info_csv(handle):
             if dimm.presence == "missing":
                 continue
             writer.writerow({
+                'Server-Id': _extract_server_id_from_dn(handle, dimm.dn),
                 'Dimm-Id': dimm.id,
                 'Vendor': dimm.vendor,
                 'Model': dimm.model,
@@ -214,13 +237,14 @@ def get_psu_info(handle, file_format):
 
 def get_pci_info_csv(handle):
     with open(INVENTORY_CSV_FILE, "a") as write_handle:
-        fieldnames = ['Pci-Id', 'Vendor', 'Model', 'FW-version']
+        fieldnames = ['Server-Id', 'Pci-Id', 'Vendor', 'Model', 'FW-version']
         writer = csv.DictWriter(write_handle, fieldnames=fieldnames)
         writer.writeheader()
 
         pci_devices = handle.query_classid("PciEquipSlot")
         for device in pci_devices:
             writer.writerow({
+                'Server-Id': _extract_server_id_from_dn(handle, device.dn),
                 'Pci-Id': device.id,
                 'Vendor': device.vendor,
                 'Model': device.model,
@@ -253,13 +277,15 @@ def get_pci_info(handle, file_format):
 
 def get_vic_info_csv(handle):
     with open(INVENTORY_CSV_FILE, "a") as write_handle:
-        fieldnames = ['Adaptor-Id', 'Vendor', 'Model', 'Serial', 'PCI-Slot']
+        fieldnames = ['Server-Id', 'Adaptor-Id', 'Vendor',
+                      'Model', 'Serial', 'PCI-Slot']
         writer = csv.DictWriter(write_handle, fieldnames=fieldnames)
         writer.writeheader()
 
         adaptors = handle.query_classid("AdaptorUnit")
         for adaptor in adaptors:
             writer.writerow({
+                'Server-Id': _extract_server_id_from_dn(handle, adaptor.dn),
                 'Adaptor-Id': adaptor.id,
                 'Vendor': adaptor.vendor,
                 'Model': adaptor.model,
@@ -291,7 +317,8 @@ def get_vic_info(handle, file_format):
 
 def get_lom_info_csv(handle):
     with open(INVENTORY_CSV_FILE, "a") as write_handle:
-        fieldnames = ['LOM-Adaptor-Id', 'Model', 'PCI-Slot', 'No. Interfaces']
+        fieldnames = ['Server-Id', 'LOM-Adaptor-Id',
+                      'Model', 'PCI-Slot', 'No. Interfaces']
         writer = csv.DictWriter(write_handle, fieldnames=fieldnames)
         writer.writeheader()
 
@@ -299,6 +326,7 @@ def get_lom_info_csv(handle):
         ctr = 1
         for adaptor in adaptors:
             writer.writerow({
+                'Server-Id': _extract_server_id_from_dn(handle, adaptor.dn),
                 'LOM-Adaptor-Id': str(ctr),
                 'Model': adaptor.model,
                 'PCI-Slot': adaptor.slot,
@@ -333,6 +361,7 @@ def get_lom_info(handle, file_format):
 def get_storage_info_csv(handle):
     with open(INVENTORY_CSV_FILE, "a") as write_handle:
         fieldnames = [
+            'Server-Id',
             'Controller-Id',
             'Type',
             'Vendor',
@@ -349,6 +378,7 @@ def get_storage_info_csv(handle):
             prop = handle.query_children(in_dn=controller.dn,
                                          class_id="StorageControllerProps")
             writer.writerow({
+                'Server-Id': _extract_server_id_from_dn(handle, controller.dn),
                 'Controller-Id': str(ctr),
                 'Type': controller.type,
                 'Vendor': controller.vendor,
@@ -362,6 +392,7 @@ def get_storage_info_csv(handle):
         flex_controllers = handle.query_classid("StorageFlexFlashController")
         for controller in flex_controllers:
             writer.writerow({
+                'Server-Id': _extract_server_id_from_dn(handle, controller.dn),
                 'Controller-Id': str(ctr),
                 'Type': controller.product_name,
                 'Vendor': controller.vendor,
@@ -387,7 +418,8 @@ def get_storage_info_txt(handle):
             in_dn=controller.dn,
             class_id="StorageControllerProps")
         write_to_txt_file(
-            " %s      %.10s        %.10s   %.30s     %.10s   %.5s     %.10s\n" %
+            " %s      %.10s        %.10s   "
+            "%.30s     %.10s   %.5s     %.10s\n" %
             (str(ctr),
              controller.type,
              controller.vendor,
@@ -400,7 +432,8 @@ def get_storage_info_txt(handle):
     flex_controllers = handle.query_classid("StorageFlexFlashController")
     for controller in flex_controllers:
         write_to_txt_file(
-            " %s      %.10s     %.10s   %.30s     %.10s   %.5s        %.10s\n" %
+            " %s      %.10s     %.10s   %.30s"
+            "     %.10s   %.5s        %.10s\n" %
             (str(ctr),
              controller.product_name,
              controller.vendor,
@@ -421,7 +454,8 @@ def get_storage_info(handle, file_format):
 
 def get_tpm_info_csv(handle):
     with open(INVENTORY_CSV_FILE, "a") as write_handle:
-        fieldnames = ['Tpm-Id', 'Vendor', 'Model', 'Serial', 'Revision']
+        fieldnames = ['Server-Id', 'Tpm-Id', 'Vendor',
+                      'Model', 'Serial', 'Revision']
         writer = csv.DictWriter(write_handle, fieldnames=fieldnames)
         writer.writeheader()
 
@@ -431,6 +465,7 @@ def get_tpm_info_csv(handle):
             if tpm.presence in ['missing', 'empty']:
                 continue
             writer.writerow({
+                'Server-Id': _extract_server_id_from_dn(handle, tpm.dn),
                 'Tpm-Id': str(ctr),
                 'Vendor': tpm.vendor,
                 'Model': tpm.model,
@@ -522,7 +557,7 @@ def get_inventory(handle, types="all", file_format="csv"):
     for item in item_list:
         try:
             callback_dict[item](handle, file_format)
-        except KeyError as error:
+        except KeyError:
             print('Unknown type \'%s\' found' % item)
             print('Valid types for inventory are :-')
             print(callback_dict.keys())

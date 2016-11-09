@@ -21,26 +21,58 @@ class BiosBootDevGrp(ManagedObject):
     consts = BiosBootDevGrpConsts()
     naming_props = set([u'order'])
 
-    mo_meta = MoMeta("BiosBootDevGrp", "biosBootDevGrp", "bdg-[order]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'biosBOT'], [u'biosBootDev'], ["Get"])
+    mo_meta = {
+        "classic": MoMeta("BiosBootDevGrp", "biosBootDevGrp", "bdg-[order]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'biosBOT'], [u'biosBootDev'], ["Get"]),
+        "modular": MoMeta("BiosBootDevGrp", "biosBootDevGrp", "bdg-[order]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'biosBOT'], [u'biosBootDev'], [None])
+    }
+
 
     prop_meta = {
-        "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-        "descr": MoPropertyMeta("descr", "descr", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 256, None, [], []), 
-        "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
-        "order": MoPropertyMeta("order", "order", "string", VersionMeta.Version151f, MoPropertyMeta.NAMING, None, None, None, None, [], []), 
-        "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
-        "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x8, None, None, r"""((removed|created|modified|deleted),){0,3}(removed|created|modified|deleted){0,1}""", [], []), 
-        "type": MoPropertyMeta("type", "type", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["bev-order", "cd-order", "fdd-order", "hdd-order", "internal-efi-shell", "network-device-order", "system-boot-order"], []), 
+
+        "classic": {
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "descr": MoPropertyMeta("descr", "descr", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 256, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
+            "order": MoPropertyMeta("order", "order", "string", VersionMeta.Version151f, MoPropertyMeta.NAMING, None, None, None, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x8, None, None, r"""((removed|created|modified|deleted),){0,3}(removed|created|modified|deleted){0,1}""", [], []), 
+            "type": MoPropertyMeta("type", "type", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["bev-order", "cd-order", "fdd-order", "hdd-order", "internal-efi-shell", "network-device-order", "system-boot-order"], []), 
+        },
+
+        "modular": {
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "descr": MoPropertyMeta("descr", "descr", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 256, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
+            "order": MoPropertyMeta("order", "order", "string", VersionMeta.Version2013e, MoPropertyMeta.NAMING, None, None, None, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x8, None, None, r"""((removed|created|modified|deleted),){0,3}(removed|created|modified|deleted){0,1}""", [], []), 
+            "type": MoPropertyMeta("type", "type", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["bev-order", "cd-order", "fdd-order", "hdd-order", "internal-efi-shell", "network-device-order", "system-boot-order"], []), 
+        },
+
     }
 
     prop_map = {
-        "childAction": "child_action", 
-        "descr": "descr", 
-        "dn": "dn", 
-        "order": "order", 
-        "rn": "rn", 
-        "status": "status", 
-        "type": "type", 
+
+        "classic": {
+            "childAction": "child_action", 
+            "descr": "descr", 
+            "dn": "dn", 
+            "order": "order", 
+            "rn": "rn", 
+            "status": "status", 
+            "type": "type", 
+        },
+
+        "modular": {
+            "childAction": "child_action", 
+            "descr": "descr", 
+            "dn": "dn", 
+            "order": "order", 
+            "rn": "rn", 
+            "status": "status", 
+            "type": "type", 
+        },
+
     }
 
     def __init__(self, parent_mo_or_dn, order, **kwargs):

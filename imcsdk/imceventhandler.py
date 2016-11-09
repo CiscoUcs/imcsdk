@@ -420,7 +420,7 @@ class ImcEventHandle(object):
         return watch__type_filter
 
     def _add_mo_watch(self, managed_object, prop=None, success_value=[],
-                      poll_sec=None):
+                      poll_sec=None, platform=None):
         if imccoreutils.find_class_id_in_mo_meta_ignore_case(
                 managed_object.get_class_id()) is None:
             raise ImcValidationException(
@@ -429,7 +429,7 @@ class ImcEventHandle(object):
 
         if prop is not None:
             mo_property_meta = imccoreutils.get_mo_property_meta(
-                managed_object.get_class_id(), prop)
+                managed_object.get_class_id(), prop, platform)
             if mo_property_meta is None:
                 raise ImcValidationException(
                     "Unknown Property %s provided." % prop)
@@ -466,7 +466,8 @@ class ImcEventHandle(object):
             poll_sec=None,
             timeout_sec=None,
             call_back=None,
-            context=None):
+            context=None,
+            platform=None):
         """
         Adds an event handler.
 
@@ -494,7 +495,8 @@ class ImcEventHandle(object):
             filter_callback = self._add_class_id_watch(class_id)
         elif managed_object is not None:
             filter_callback = self._add_mo_watch(managed_object, prop,
-                                                 success_value, poll_sec)
+                                                 success_value, poll_sec,
+                                                 platform)
         else:
             def watch_all_filter(mce):
                 """
