@@ -1,0 +1,79 @@
+"""This module contains the general information for StorageEnclosureDiskFwHelper ManagedObject."""
+
+from ...imcmo import ManagedObject
+from ...imccoremeta import MoPropertyMeta, MoMeta
+from ...imcmeta import VersionMeta
+
+
+class StorageEnclosureDiskFwHelperConsts:
+    ADMIN_STATE_TRIGGER = "trigger"
+    ADMIN_STATE_TRIGGERED = "triggered"
+    PROTOCOL_FTP = "ftp"
+    PROTOCOL_HTTP = "http"
+    PROTOCOL_NONE = "none"
+    PROTOCOL_SCP = "scp"
+    PROTOCOL_SFTP = "sftp"
+    PROTOCOL_TFTP = "tftp"
+
+
+class StorageEnclosureDiskFwHelper(ManagedObject):
+    """This is StorageEnclosureDiskFwHelper class."""
+
+    consts = StorageEnclosureDiskFwHelperConsts()
+    naming_props = set([])
+
+    mo_meta = {
+        "modular": MoMeta("StorageEnclosureDiskFwHelper", "storageEnclosureDiskFwHelper", "drive-fw-update", VersionMeta.Version2013e, "InputOutput", 0x7ff, [], ["admin"], [u'storageEnclosure'], [], [None])
+    }
+
+
+    prop_meta = {
+
+        "modular": {
+            "admin_state": MoPropertyMeta("admin_state", "adminState", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["trigger", "triggered"], []), 
+            "description": MoPropertyMeta("description", "description", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, 0, 255, None, [], []), 
+            "protocol": MoPropertyMeta("protocol", "protocol", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["ftp", "http", "none", "scp", "sftp", "tftp"], []), 
+            "pwd": MoPropertyMeta("pwd", "pwd", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, 0, 256, None, [], []), 
+            "remote_path": MoPropertyMeta("remote_path", "remotePath", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, None, None, r"""[^\(\)~`'\?\\"";<>\|&\*\^$%]{0,128}""", [], []), 
+            "remote_server": MoPropertyMeta("remote_server", "remoteServer", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, 0, 255, r"""([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:""", [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, 0, 255, None, [], []), 
+            "slot_list": MoPropertyMeta("slot_list", "slotList", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, 1, 512, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "user": MoPropertyMeta("user", "user", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, 0, 256, None, [], []), 
+        },
+
+    }
+
+    prop_map = {
+
+        "modular": {
+            "adminState": "admin_state", 
+            "description": "description", 
+            "dn": "dn", 
+            "protocol": "protocol", 
+            "pwd": "pwd", 
+            "remotePath": "remote_path", 
+            "remoteServer": "remote_server", 
+            "rn": "rn", 
+            "slotList": "slot_list", 
+            "status": "status", 
+            "user": "user", 
+        },
+
+    }
+
+    def __init__(self, parent_mo_or_dn, **kwargs):
+        self._dirty_mask = 0
+        self.admin_state = None
+        self.description = None
+        self.protocol = None
+        self.pwd = None
+        self.remote_path = None
+        self.remote_server = None
+        self.slot_list = None
+        self.status = None
+        self.user = None
+
+        ManagedObject.__init__(self, "StorageEnclosureDiskFwHelper", parent_mo_or_dn, **kwargs)
+
