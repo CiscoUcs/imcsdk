@@ -55,7 +55,7 @@ def get_vic_adaptor_properties(handle, adaptor_slot, server_id=1, **kwargs):
     This method is used to get the vic adaptor properties
     Args:
         handle (ImcHandle)
-        adaptor_slot (str): PCI slot of the vic adaptor
+        adaptor_slot (string): PCI slot of the vic adaptor
         server_id (int): Server Id to be specified for C3x60 platforms
         kwargs: key=value paired arguments
 
@@ -89,7 +89,7 @@ def setup_vic_adaptor_properties(handle, adaptor_slot, fip_mode=None,
     A reboot will be required when these properties are changed
     Args:
         handle (ImcHandle)
-        adaptor_slot (str): PCI slot number of the adaptor
+        adaptor_slot (string): PCI slot number of the adaptor
         fip_mode (bool): Enable fip mode
         vntag_mode (bool): Enable vntag mode
         num_vmfex_ifs (int): Number of vmfex interfaces to be configured when \
@@ -144,7 +144,7 @@ def get_vnic(handle, adaptor_slot, name, server_id=1, **kwargs):
     This method is used to get a vnic
     Args:
         handle (ImcHandle)
-        adaptor_slot (int): PCI slot number of the adaptor
+        adaptor_slot (string): PCI slot number of the adaptor
         name (string): Name for the vnic to be deleted
         server_id (int): Server Id for C3x60 platforms
         kwargs: key=value paired arguments
@@ -176,7 +176,7 @@ def create_vnic(handle, adaptor_slot, name, channel_number, mac, mtu, cos="",
     This method is used to create a new vnic
     Args:
         handle (ImcHandle)
-        adaptor_slot (str): PCI slot number of the adaptor
+        adaptor_slot (string): PCI slot number of the adaptor
         name (string): Name for the vnic
         channel_number (int): channel number for the vnic
         cos (string): class of service
@@ -241,7 +241,7 @@ def delete_vnic(handle, adaptor_slot, name, server_id=1, **kwargs):
     This method is used to delete a vnic
     Args:
         handle (ImcHandle)
-        adaptor_slot (str): PCI slot number of the adaptor
+        adaptor_slot (string): PCI slot number of the adaptor
         name (string): Name for the vnic to be deleted
         server_id (int): Server Id for C3x60 platforms
         kwargs: key=value paired arguments
@@ -342,7 +342,7 @@ def delete_vhba(handle, adaptor_slot, name, server_id=1, **kwargs):
     This method is used to delete a vnic
     Args:
         handle (ImcHandle)
-        adaptor_slot (int): PCI slot number of the adaptor
+        adaptor_slot (string): PCI slot number of the adaptor
         name (string): Name for the vhba to be deleted
         server_id (int): Server Id for C3x60 platforms
         kwargs: key=value paired arguments
