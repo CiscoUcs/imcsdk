@@ -39,30 +39,66 @@ class BiosVfIntelVTForDirectedIO(ManagedObject):
     consts = BiosVfIntelVTForDirectedIOConsts()
     naming_props = set([])
 
-    mo_meta = MoMeta("BiosVfIntelVTForDirectedIO", "biosVfIntelVTForDirectedIO", "Intel-VT-for-directed-IO", VersionMeta.Version151f, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
+    mo_meta = {
+        "classic": MoMeta("BiosVfIntelVTForDirectedIO", "biosVfIntelVTForDirectedIO", "Intel-VT-for-directed-IO", VersionMeta.Version151f, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
+        "modular": MoMeta("BiosVfIntelVTForDirectedIO", "biosVfIntelVTForDirectedIO", "Intel-VT-for-directed-IO", VersionMeta.Version2013e, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
+    }
+
 
     prop_meta = {
-        "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-        "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
-        "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
-        "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-        "vp_intel_vtdats_support": MoPropertyMeta("vp_intel_vtdats_support", "vpIntelVTDATSSupport", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []), 
-        "vp_intel_vtd_coherency_support": MoPropertyMeta("vp_intel_vtd_coherency_support", "vpIntelVTDCoherencySupport", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []), 
-        "vp_intel_vtd_interrupt_remapping": MoPropertyMeta("vp_intel_vtd_interrupt_remapping", "vpIntelVTDInterruptRemapping", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []), 
-        "vp_intel_vtd_pass_through_dma_support": MoPropertyMeta("vp_intel_vtd_pass_through_dma_support", "vpIntelVTDPassThroughDMASupport", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []), 
-        "vp_intel_vt_for_directed_io": MoPropertyMeta("vp_intel_vt_for_directed_io", "vpIntelVTForDirectedIO", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []), 
+
+        "classic": {
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "vp_intel_vtdats_support": MoPropertyMeta("vp_intel_vtdats_support", "vpIntelVTDATSSupport", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []), 
+            "vp_intel_vtd_coherency_support": MoPropertyMeta("vp_intel_vtd_coherency_support", "vpIntelVTDCoherencySupport", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []), 
+            "vp_intel_vtd_interrupt_remapping": MoPropertyMeta("vp_intel_vtd_interrupt_remapping", "vpIntelVTDInterruptRemapping", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []), 
+            "vp_intel_vtd_pass_through_dma_support": MoPropertyMeta("vp_intel_vtd_pass_through_dma_support", "vpIntelVTDPassThroughDMASupport", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []), 
+            "vp_intel_vt_for_directed_io": MoPropertyMeta("vp_intel_vt_for_directed_io", "vpIntelVTForDirectedIO", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []), 
+        },
+
+        "modular": {
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "vp_intel_vtdats_support": MoPropertyMeta("vp_intel_vtdats_support", "vpIntelVTDATSSupport", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []), 
+            "vp_intel_vtd_coherency_support": MoPropertyMeta("vp_intel_vtd_coherency_support", "vpIntelVTDCoherencySupport", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []), 
+            "vp_intel_vtd_interrupt_remapping": MoPropertyMeta("vp_intel_vtd_interrupt_remapping", "vpIntelVTDInterruptRemapping", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []), 
+            "vp_intel_vtd_pass_through_dma_support": MoPropertyMeta("vp_intel_vtd_pass_through_dma_support", "vpIntelVTDPassThroughDMASupport", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []), 
+            "vp_intel_vt_for_directed_io": MoPropertyMeta("vp_intel_vt_for_directed_io", "vpIntelVTForDirectedIO", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []), 
+        },
+
     }
 
     prop_map = {
-        "childAction": "child_action", 
-        "dn": "dn", 
-        "rn": "rn", 
-        "status": "status", 
-        "vpIntelVTDATSSupport": "vp_intel_vtdats_support", 
-        "vpIntelVTDCoherencySupport": "vp_intel_vtd_coherency_support", 
-        "vpIntelVTDInterruptRemapping": "vp_intel_vtd_interrupt_remapping", 
-        "vpIntelVTDPassThroughDMASupport": "vp_intel_vtd_pass_through_dma_support", 
-        "vpIntelVTForDirectedIO": "vp_intel_vt_for_directed_io", 
+
+        "classic": {
+            "childAction": "child_action", 
+            "dn": "dn", 
+            "rn": "rn", 
+            "status": "status", 
+            "vpIntelVTDATSSupport": "vp_intel_vtdats_support", 
+            "vpIntelVTDCoherencySupport": "vp_intel_vtd_coherency_support", 
+            "vpIntelVTDInterruptRemapping": "vp_intel_vtd_interrupt_remapping", 
+            "vpIntelVTDPassThroughDMASupport": "vp_intel_vtd_pass_through_dma_support", 
+            "vpIntelVTForDirectedIO": "vp_intel_vt_for_directed_io", 
+        },
+
+        "modular": {
+            "childAction": "child_action", 
+            "dn": "dn", 
+            "rn": "rn", 
+            "status": "status", 
+            "vpIntelVTDATSSupport": "vp_intel_vtdats_support", 
+            "vpIntelVTDCoherencySupport": "vp_intel_vtd_coherency_support", 
+            "vpIntelVTDInterruptRemapping": "vp_intel_vtd_interrupt_remapping", 
+            "vpIntelVTDPassThroughDMASupport": "vp_intel_vtd_pass_through_dma_support", 
+            "vpIntelVTForDirectedIO": "vp_intel_vt_for_directed_io", 
+        },
+
     }
 
     def __init__(self, parent_mo_or_dn, **kwargs):

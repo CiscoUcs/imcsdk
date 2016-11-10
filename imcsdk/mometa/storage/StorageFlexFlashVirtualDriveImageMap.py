@@ -18,38 +18,82 @@ class StorageFlexFlashVirtualDriveImageMap(ManagedObject):
     consts = StorageFlexFlashVirtualDriveImageMapConsts()
     naming_props = set([u'virtualDrive'])
 
-    mo_meta = MoMeta("StorageFlexFlashVirtualDriveImageMap", "storageFlexFlashVirtualDriveImageMap", "vdrive-map-[virtual_drive]", VersionMeta.Version202c, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'storageFlexFlashController'], [], ["Get", "Set"])
+    mo_meta = {
+        "classic": MoMeta("StorageFlexFlashVirtualDriveImageMap", "storageFlexFlashVirtualDriveImageMap", "vdrive-map-[virtual_drive]", VersionMeta.Version202c, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'storageFlexFlashController'], [], ["Get", "Set"]),
+        "modular": MoMeta("StorageFlexFlashVirtualDriveImageMap", "storageFlexFlashVirtualDriveImageMap", "vdrive-map-[virtual_drive]", VersionMeta.Version2013e, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'storageFlexFlashController'], [], [None])
+    }
+
 
     prop_meta = {
-        "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["map", "unmap"], []), 
-        "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version202c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-        "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
-        "map": MoPropertyMeta("map", "map", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x8, 0, 510, None, ["cifs", "nfs"], []), 
-        "mount_options": MoPropertyMeta("mount_options", "mountOptions", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x10, 1, 510, None, [], []), 
-        "password": MoPropertyMeta("password", "password", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x20, 0, 510, None, [], []), 
-        "remote_file": MoPropertyMeta("remote_file", "remoteFile", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x40, 0, 510, r"""[ !#$%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}~a-zA-Z0-9]{1,235}""", [], []), 
-        "remote_share": MoPropertyMeta("remote_share", "remoteShare", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x80, 0, 510, r"""[ !#$%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}~a-zA-Z0-9]{1,235}""", [], []), 
-        "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x100, 0, 255, None, [], []), 
-        "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-        "to_enable_mapping": MoPropertyMeta("to_enable_mapping", "toEnableMapping", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, 0x400, None, None, None, ["No", "Yes", "false", "no", "true", "yes"], []), 
-        "username": MoPropertyMeta("username", "username", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x800, 0, 510, None, [], []), 
-        "virtual_drive": MoPropertyMeta("virtual_drive", "virtualDrive", "string", VersionMeta.Version202c, MoPropertyMeta.NAMING, None, 0, 510, None, [], []), 
+
+        "classic": {
+            "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["map", "unmap"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version202c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
+            "map": MoPropertyMeta("map", "map", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x8, 0, 510, None, ["cifs", "nfs"], []), 
+            "mount_options": MoPropertyMeta("mount_options", "mountOptions", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x10, 1, 510, None, [], []), 
+            "password": MoPropertyMeta("password", "password", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x20, 0, 510, None, [], []), 
+            "remote_file": MoPropertyMeta("remote_file", "remoteFile", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x40, 0, 510, r"""[ !#$%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}~a-zA-Z0-9]{1,235}""", [], []), 
+            "remote_share": MoPropertyMeta("remote_share", "remoteShare", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x80, 0, 510, r"""[ !#$%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}~a-zA-Z0-9]{1,235}""", [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x100, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "to_enable_mapping": MoPropertyMeta("to_enable_mapping", "toEnableMapping", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, 0x400, None, None, None, ["No", "Yes", "false", "no", "true", "yes"], []), 
+            "username": MoPropertyMeta("username", "username", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x800, 0, 510, None, [], []), 
+            "virtual_drive": MoPropertyMeta("virtual_drive", "virtualDrive", "string", VersionMeta.Version202c, MoPropertyMeta.NAMING, None, 0, 510, None, [], []), 
+        },
+
+        "modular": {
+            "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["map", "unmap"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
+            "map": MoPropertyMeta("map", "map", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, 0, 510, None, ["cifs", "nfs"], []), 
+            "mount_options": MoPropertyMeta("mount_options", "mountOptions", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, 1, 510, None, [], []), 
+            "password": MoPropertyMeta("password", "password", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, 0, 510, None, [], []), 
+            "remote_file": MoPropertyMeta("remote_file", "remoteFile", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, 0, 510, r"""[ !#$%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}~a-zA-Z0-9]{1,235}""", [], []), 
+            "remote_share": MoPropertyMeta("remote_share", "remoteShare", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, 0, 510, r"""[ !#$%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}~a-zA-Z0-9]{1,235}""", [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x100, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "to_enable_mapping": MoPropertyMeta("to_enable_mapping", "toEnableMapping", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x400, None, None, None, ["No", "Yes", "no", "yes"], []), 
+            "username": MoPropertyMeta("username", "username", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x800, 0, 510, None, [], []), 
+            "virtual_drive": MoPropertyMeta("virtual_drive", "virtualDrive", "string", VersionMeta.Version2013e, MoPropertyMeta.NAMING, None, 0, 510, None, [], []), 
+        },
+
     }
 
     prop_map = {
-        "adminAction": "admin_action", 
-        "childAction": "child_action", 
-        "dn": "dn", 
-        "map": "map", 
-        "mountOptions": "mount_options", 
-        "password": "password", 
-        "remoteFile": "remote_file", 
-        "remoteShare": "remote_share", 
-        "rn": "rn", 
-        "status": "status", 
-        "toEnableMapping": "to_enable_mapping", 
-        "username": "username", 
-        "virtualDrive": "virtual_drive", 
+
+        "classic": {
+            "adminAction": "admin_action", 
+            "childAction": "child_action", 
+            "dn": "dn", 
+            "map": "map", 
+            "mountOptions": "mount_options", 
+            "password": "password", 
+            "remoteFile": "remote_file", 
+            "remoteShare": "remote_share", 
+            "rn": "rn", 
+            "status": "status", 
+            "toEnableMapping": "to_enable_mapping", 
+            "username": "username", 
+            "virtualDrive": "virtual_drive", 
+        },
+
+        "modular": {
+            "adminAction": "admin_action", 
+            "childAction": "child_action", 
+            "dn": "dn", 
+            "map": "map", 
+            "mountOptions": "mount_options", 
+            "password": "password", 
+            "remoteFile": "remote_file", 
+            "remoteShare": "remote_share", 
+            "rn": "rn", 
+            "status": "status", 
+            "toEnableMapping": "to_enable_mapping", 
+            "username": "username", 
+            "virtualDrive": "virtual_drive", 
+        },
+
     }
 
     def __init__(self, parent_mo_or_dn, virtual_drive, **kwargs):

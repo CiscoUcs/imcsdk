@@ -15,20 +15,31 @@ class BiosPassword(ManagedObject):
     consts = BiosPasswordConsts()
     naming_props = set([])
 
-    mo_meta = MoMeta("BiosPassword", "biosPassword", "bios-pw", None, "InputOutput", 0x1f, [], ["admin"], [], [], [None])
+    mo_meta = {
+        "classic": MoMeta("BiosPassword", "biosPassword", "bios-pw", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [], [], [None]),
+    }
+
 
     prop_meta = {
-        "dn": MoPropertyMeta("dn", "dn", "string", None, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
-        "password": MoPropertyMeta("password", "password", "string", None, MoPropertyMeta.READ_WRITE, 0x4, None, None, r"""[\S+]{0,20}""", [], []), 
-        "rn": MoPropertyMeta("rn", "rn", "string", None, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
-        "status": MoPropertyMeta("status", "status", "string", None, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+
+        "classic": {
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
+            "password": MoPropertyMeta("password", "password", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, None, None, r"""[\S+]{0,20}""", [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+        },
+
     }
 
     prop_map = {
-        "dn": "dn", 
-        "password": "password", 
-        "rn": "rn", 
-        "status": "status", 
+
+        "classic": {
+            "dn": "dn", 
+            "password": "password", 
+            "rn": "rn", 
+            "status": "status", 
+        },
+
     }
 
     def __init__(self, parent_mo_or_dn, **kwargs):

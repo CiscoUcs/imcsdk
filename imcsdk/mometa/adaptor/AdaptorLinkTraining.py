@@ -17,22 +17,33 @@ class AdaptorLinkTraining(ManagedObject):
     consts = AdaptorLinkTrainingConsts()
     naming_props = set([])
 
-    mo_meta = MoMeta("AdaptorLinkTraining", "adaptorLinkTraining", "link-training", VersionMeta.Version204c, "InputOutput", 0x3f, [], ["admin", "user"], [u'adaptorExtEthIf'], [], ["Get", "Set"])
+    mo_meta = {
+        "classic": MoMeta("AdaptorLinkTraining", "adaptorLinkTraining", "link-training", VersionMeta.Version204c, "InputOutput", 0x3f, [], ["admin", "user"], [u'adaptorExtEthIf'], [], ["Get", "Set"]),
+    }
+
 
     prop_meta = {
-        "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version204c, MoPropertyMeta.INTERNAL, 0x2, None, None, None, [], []), 
-        "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
-        "link_training": MoPropertyMeta("link_training", "linkTraining", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["n/a", "off", "on"], []), 
-        "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
-        "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+
+        "classic": {
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version204c, MoPropertyMeta.INTERNAL, 0x2, None, None, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
+            "link_training": MoPropertyMeta("link_training", "linkTraining", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["n/a", "off", "on"], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+        },
+
     }
 
     prop_map = {
-        "childAction": "child_action", 
-        "dn": "dn", 
-        "linkTraining": "link_training", 
-        "rn": "rn", 
-        "status": "status", 
+
+        "classic": {
+            "childAction": "child_action", 
+            "dn": "dn", 
+            "linkTraining": "link_training", 
+            "rn": "rn", 
+            "status": "status", 
+        },
+
     }
 
     def __init__(self, parent_mo_or_dn, **kwargs):

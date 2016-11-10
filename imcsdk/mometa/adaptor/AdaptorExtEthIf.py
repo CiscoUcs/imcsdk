@@ -39,34 +39,74 @@ class AdaptorExtEthIf(ManagedObject):
     consts = AdaptorExtEthIfConsts()
     naming_props = set([u'portId'])
 
-    mo_meta = MoMeta("AdaptorExtEthIf", "adaptorExtEthIf", "ext-eth-[port_id]", VersionMeta.Version151f, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [u'adaptorConnectorInfo', u'adaptorLinkTraining', u'adaptorPortProfiles'], ["Get", "Set"])
+    mo_meta = {
+        "classic": MoMeta("AdaptorExtEthIf", "adaptorExtEthIf", "ext-eth-[port_id]", VersionMeta.Version151f, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [u'adaptorConnectorInfo', u'adaptorLinkTraining', u'adaptorPortProfiles'], ["Get", "Set"]),
+        "modular": MoMeta("AdaptorExtEthIf", "adaptorExtEthIf", "ext-eth-[port_id]", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [u'adaptorPortProfiles'], [None])
+    }
+
 
     prop_meta = {
-        "admin_speed": MoPropertyMeta("admin_speed", "adminSpeed", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["-", "10Gbps", "1Gbps", "40Gbps", "4x10Gbps", "Auto"], []), 
-        "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-        "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
-        "if_type": MoPropertyMeta("if_type", "ifType", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["aggregation", "physical", "unknown", "virtual"], []), 
-        "link_state": MoPropertyMeta("link_state", "linkState", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["admin-down", "down", "error", "unallocated", "unavailable", "unknown", "up"], []), 
-        "mac": MoPropertyMeta("mac", "mac", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, r"""(([0-9a-fA-F][0-9a-fA-F]:){5}([0-9a-fA-F][0-9a-fA-F]))|0""", [], []), 
-        "oper_speed": MoPropertyMeta("oper_speed", "operSpeed", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["-", "10Gbps", "1Gbps", "40Gbps", "4x10Gbps", "Auto"], []), 
-        "port_id": MoPropertyMeta("port_id", "portId", "string", VersionMeta.Version151f, MoPropertyMeta.NAMING, 0x8, None, None, None, ["0", "1"], []), 
-        "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
-        "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-        "transport": MoPropertyMeta("transport", "transport", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
+
+        "classic": {
+            "admin_speed": MoPropertyMeta("admin_speed", "adminSpeed", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["-", "10Gbps", "1Gbps", "40Gbps", "4x10Gbps", "Auto"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
+            "if_type": MoPropertyMeta("if_type", "ifType", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["aggregation", "physical", "unknown", "virtual"], []), 
+            "link_state": MoPropertyMeta("link_state", "linkState", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["admin-down", "down", "error", "unallocated", "unavailable", "unknown", "up"], []), 
+            "mac": MoPropertyMeta("mac", "mac", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, r"""(([0-9a-fA-F][0-9a-fA-F]:){5}([0-9a-fA-F][0-9a-fA-F]))|0""", [], []), 
+            "oper_speed": MoPropertyMeta("oper_speed", "operSpeed", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["-", "10Gbps", "1Gbps", "40Gbps", "4x10Gbps", "Auto"], []), 
+            "port_id": MoPropertyMeta("port_id", "portId", "string", VersionMeta.Version151f, MoPropertyMeta.NAMING, 0x8, None, None, None, ["0", "1"], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "transport": MoPropertyMeta("transport", "transport", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
+        },
+
+        "modular": {
+            "admin_speed": MoPropertyMeta("admin_speed", "adminSpeed", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["-", "10Gbps", "1Gbps", "40Gbps", "4x10Gbps", "Auto"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
+            "if_type": MoPropertyMeta("if_type", "ifType", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["aggregation", "physical", "unknown", "virtual"], []), 
+            "link_state": MoPropertyMeta("link_state", "linkState", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["admin-down", "down", "error", "unallocated", "unavailable", "unknown", "up"], []), 
+            "mac": MoPropertyMeta("mac", "mac", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, r"""(([0-9a-fA-F][0-9a-fA-F]:){5}([0-9a-fA-F][0-9a-fA-F]))|0""", [], []), 
+            "oper_speed": MoPropertyMeta("oper_speed", "operSpeed", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["-", "10Gbps", "1Gbps", "40Gbps", "4x10Gbps", "Auto"], []), 
+            "port_id": MoPropertyMeta("port_id", "portId", "string", VersionMeta.Version2013e, MoPropertyMeta.NAMING, 0x8, None, None, None, ["0", "1"], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "transport": MoPropertyMeta("transport", "transport", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
+        },
+
     }
 
     prop_map = {
-        "adminSpeed": "admin_speed", 
-        "childAction": "child_action", 
-        "dn": "dn", 
-        "ifType": "if_type", 
-        "linkState": "link_state", 
-        "mac": "mac", 
-        "operSpeed": "oper_speed", 
-        "portId": "port_id", 
-        "rn": "rn", 
-        "status": "status", 
-        "transport": "transport", 
+
+        "classic": {
+            "adminSpeed": "admin_speed", 
+            "childAction": "child_action", 
+            "dn": "dn", 
+            "ifType": "if_type", 
+            "linkState": "link_state", 
+            "mac": "mac", 
+            "operSpeed": "oper_speed", 
+            "portId": "port_id", 
+            "rn": "rn", 
+            "status": "status", 
+            "transport": "transport", 
+        },
+
+        "modular": {
+            "adminSpeed": "admin_speed", 
+            "childAction": "child_action", 
+            "dn": "dn", 
+            "ifType": "if_type", 
+            "linkState": "link_state", 
+            "mac": "mac", 
+            "operSpeed": "oper_speed", 
+            "portId": "port_id", 
+            "rn": "rn", 
+            "status": "status", 
+            "transport": "transport", 
+        },
+
     }
 
     def __init__(self, parent_mo_or_dn, port_id, **kwargs):

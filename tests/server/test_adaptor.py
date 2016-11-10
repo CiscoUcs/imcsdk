@@ -19,6 +19,8 @@ from imcsdk.apis.server.adaptor import setup_vic_adaptor_properties, \
 
 
 handle = None
+ADAPTOR_ID = "1"
+# ADAPTOR_ID = "MLOM"
 
 
 def setup_module():
@@ -32,20 +34,19 @@ def teardown_module():
 
 def test_enable_adaptor_properties():
     global handle
-    setup_vic_adaptor_properties(handle, adaptor_slot=1, fip_mode=True,
+    setup_vic_adaptor_properties(handle, adaptor_slot=ADAPTOR_ID, fip_mode=True,
                                  vntag_mode=True, num_vmfex_ifs=5)
-    mo = get_vic_adaptor_properties(handle, adaptor_slot=1)
+    mo = get_vic_adaptor_properties(handle, adaptor_slot=ADAPTOR_ID)
     assert_equal(mo.vntag_mode.lower(), "enabled")
     assert_equal(mo.fip_mode.lower(), "enabled")
 
 
 def test_create_vnic():
     global handle
-    vnic_mo = create_vnic(handle, adaptor_slot=1, name="sdk-test-vnic",
-                          channel_number=100, cos="", mac="00:11:22:33:44:55",
-                          mtu=1500, port_profile="",
-                          pxe_boot=True, uplink_port=0)
-    rcvd_mo = get_vnic(handle, adaptor_slot=1, name="sdk-test-vnic")
+    vnic_mo = create_vnic(handle, adaptor_slot=ADAPTOR_ID, name="sdk-test-vnic",
+                          channel_number=100, mac="00:11:22:33:44:55",
+                          mtu=1500, pxe_boot=True, uplink_port=0)
+    rcvd_mo = get_vnic(handle, adaptor_slot=ADAPTOR_ID, name="sdk-test-vnic")
     assert_not_equal(rcvd_mo, None)
     assert_equal(vnic_mo.name, rcvd_mo.name)
     assert_equal(vnic_mo.channel_number, rcvd_mo.channel_number)
@@ -53,17 +54,17 @@ def test_create_vnic():
 
 def test_delete_vnic():
     global handle
-    delete_vnic(handle, adaptor_slot=1, name="sdk-test-vnic")
-    assert_equal(get_vnic(handle, adaptor_slot=1, name="sdk-test-vnic"), None)
+    delete_vnic(handle, adaptor_slot=ADAPTOR_ID, name="sdk-test-vnic")
+    assert_equal(get_vnic(handle, adaptor_slot=ADAPTOR_ID, name="sdk-test-vnic"), None)
 
 
 def test_create_vhba():
     global handle
-    vhba_mo = create_vhba(handle, adaptor_slot=1, name="sdk-test-vhba",
+    vhba_mo = create_vhba(handle, adaptor_slot=ADAPTOR_ID, name="sdk-test-vhba",
                           channel_number=101, wwnn="10:00:11:3A:7D:D0:9A:43",
-                          wwpn="20:00:11:3A:7D:D0:9A:43", port_profile="",
+                          wwpn="20:00:11:3A:7D:D0:9A:43",
                           san_boot=True, uplink_port=0)
-    rcvd_mo = get_vhba(handle, adaptor_slot=1, name="sdk-test-vhba")
+    rcvd_mo = get_vhba(handle, adaptor_slot=ADAPTOR_ID, name="sdk-test-vhba")
     assert_not_equal(rcvd_mo, None)
     assert_equal(vhba_mo.name, rcvd_mo.name)
     assert_equal(vhba_mo.channel_number, rcvd_mo.channel_number)
@@ -71,14 +72,14 @@ def test_create_vhba():
 
 def test_delete_vhba():
     global handle
-    delete_vhba(handle, adaptor_slot=1, name="sdk-test-vhba")
-    assert_equal(get_vhba(handle, adaptor_slot=1, name="sdk-test-vhba"), None)
+    delete_vhba(handle, adaptor_slot=ADAPTOR_ID, name="sdk-test-vhba")
+    assert_equal(get_vhba(handle, adaptor_slot=ADAPTOR_ID, name="sdk-test-vhba"), None)
 
 
 def test_disable_adaptor_properties():
     global handle
-    setup_vic_adaptor_properties(handle, adaptor_slot=1, fip_mode=False,
+    setup_vic_adaptor_properties(handle, adaptor_slot=ADAPTOR_ID, fip_mode=False,
                                  vntag_mode=False, num_vmfex_ifs=5)
-    mo = get_vic_adaptor_properties(handle, adaptor_slot=1)
+    mo = get_vic_adaptor_properties(handle, adaptor_slot=ADAPTOR_ID)
     assert_equal(mo.vntag_mode.lower(), "disabled")
     assert_equal(mo.fip_mode.lower(), "disabled")
