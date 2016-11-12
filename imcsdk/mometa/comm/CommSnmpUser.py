@@ -17,6 +17,7 @@ class CommSnmpUserConsts:
     SECURITY_LEVEL_AUTHNOPRIV = "authnopriv"
     SECURITY_LEVEL_AUTHPRIV = "authpriv"
     SECURITY_LEVEL_NOAUTHNOPRIV = "noauthnopriv"
+    PRIVACY_SHA = "SHA"
 
 
 class CommSnmpUser(ManagedObject):
@@ -25,36 +26,78 @@ class CommSnmpUser(ManagedObject):
     consts = CommSnmpUserConsts()
     naming_props = set([u'id'])
 
-    mo_meta = MoMeta("CommSnmpUser", "commSnmpUser", "snmpv3-user-[id]", VersionMeta.Version151f, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'commSnmp'], [], ["Get", "Set"])
+    mo_meta = {
+        "classic": MoMeta("CommSnmpUser", "commSnmpUser", "snmpv3-user-[id]", VersionMeta.Version151f, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'commSnmp'], [], ["Get", "Set"]),
+        "modular": MoMeta("CommSnmpUser", "commSnmpUser", "snmpv3-user-[id]", VersionMeta.Version2013e, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'commSnmp'], [], [None])
+    }
+
 
     prop_meta = {
-        "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version208d, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["clear"], []), 
-        "auth": MoPropertyMeta("auth", "auth", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["", "MD5", "SHA"], []), 
-        "auth_pwd": MoPropertyMeta("auth_pwd", "authPwd", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, r"""(.{8,64})?""", [], []), 
-        "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-        "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
-        "id": MoPropertyMeta("id", "id", "uint", VersionMeta.Version151f, MoPropertyMeta.NAMING, 0x20, None, None, None, [], ["1-15"]), 
-        "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x40, 0, 31, None, [], []), 
-        "privacy": MoPropertyMeta("privacy", "privacy", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["", "AES", "DES"], []), 
-        "privacy_pwd": MoPropertyMeta("privacy_pwd", "privacyPwd", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x100, None, None, r"""(.{8,64})?""", [], []), 
-        "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x200, 0, 255, None, [], []), 
-        "security_level": MoPropertyMeta("security_level", "securityLevel", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x400, None, None, None, ["", "authnopriv", "authpriv", "noauthnopriv"], []), 
-        "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x800, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+
+        "classic": {
+            "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version208d, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["clear"], []), 
+            "auth": MoPropertyMeta("auth", "auth", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["", "MD5", "SHA"], []), 
+            "auth_pwd": MoPropertyMeta("auth_pwd", "authPwd", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, r"""(.{8,64})?""", [], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
+            "id": MoPropertyMeta("id", "id", "uint", VersionMeta.Version151f, MoPropertyMeta.NAMING, 0x20, None, None, None, [], ["1-15"]), 
+            "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x40, 0, 31, None, [], []), 
+            "privacy": MoPropertyMeta("privacy", "privacy", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["", "AES", "DES"], []), 
+            "privacy_pwd": MoPropertyMeta("privacy_pwd", "privacyPwd", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x100, None, None, r"""(.{8,64})?""", [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x200, 0, 255, None, [], []), 
+            "security_level": MoPropertyMeta("security_level", "securityLevel", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x400, None, None, None, ["", "authnopriv", "authpriv", "noauthnopriv"], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x800, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+        },
+
+        "modular": {
+            "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["clear"], []), 
+            "auth": MoPropertyMeta("auth", "auth", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["", "MD5", "SHA"], []), 
+            "auth_pwd": MoPropertyMeta("auth_pwd", "authPwd", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, None, None, r"""(.{8,64})?""", [], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
+            "id": MoPropertyMeta("id", "id", "uint", VersionMeta.Version2013e, MoPropertyMeta.NAMING, 0x20, None, None, None, [], ["1-15"]), 
+            "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, 0, 31, None, [], []), 
+            "privacy": MoPropertyMeta("privacy", "privacy", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["", "AES", "DES"], []), 
+            "privacy_pwd": MoPropertyMeta("privacy_pwd", "privacyPwd", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x100, None, None, r"""(.{8,64})?""", [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, 0, 255, None, [], []), 
+            "security_level": MoPropertyMeta("security_level", "securityLevel", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x400, None, None, None, ["", "authnopriv", "authpriv", "noauthnopriv"], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x800, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+        },
+
     }
 
     prop_map = {
-        "adminAction": "admin_action", 
-        "auth": "auth", 
-        "authPwd": "auth_pwd", 
-        "childAction": "child_action", 
-        "dn": "dn", 
-        "id": "id", 
-        "name": "name", 
-        "privacy": "privacy", 
-        "privacyPwd": "privacy_pwd", 
-        "rn": "rn", 
-        "securityLevel": "security_level", 
-        "status": "status", 
+
+        "classic": {
+            "adminAction": "admin_action", 
+            "auth": "auth", 
+            "authPwd": "auth_pwd", 
+            "childAction": "child_action", 
+            "dn": "dn", 
+            "id": "id", 
+            "name": "name", 
+            "privacy": "privacy", 
+            "privacyPwd": "privacy_pwd", 
+            "rn": "rn", 
+            "securityLevel": "security_level", 
+            "status": "status", 
+        },
+
+        "modular": {
+            "adminAction": "admin_action", 
+            "auth": "auth", 
+            "authPwd": "auth_pwd", 
+            "childAction": "child_action", 
+            "dn": "dn", 
+            "id": "id", 
+            "name": "name", 
+            "privacy": "privacy", 
+            "privacyPwd": "privacy_pwd", 
+            "rn": "rn", 
+            "securityLevel": "security_level", 
+            "status": "status", 
+        },
+
     }
 
     def __init__(self, parent_mo_or_dn, id, **kwargs):

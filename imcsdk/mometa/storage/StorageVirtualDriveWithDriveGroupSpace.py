@@ -15,34 +15,74 @@ class StorageVirtualDriveWithDriveGroupSpace(ManagedObject):
     consts = StorageVirtualDriveWithDriveGroupSpaceConsts()
     naming_props = set([u'id'])
 
-    mo_meta = MoMeta("StorageVirtualDriveWithDriveGroupSpace", "storageVirtualDriveWithDriveGroupSpace", "vd-[id]", VersionMeta.Version201a, "InputOutput", 0xf, [], ["admin", "read-only", "user"], [u'storageVirtualDriveCreatorUsingVirtualDriveGroup'], [], ["Get"])
+    mo_meta = {
+        "classic": MoMeta("StorageVirtualDriveWithDriveGroupSpace", "storageVirtualDriveWithDriveGroupSpace", "vd-[id]", VersionMeta.Version201a, "InputOutput", 0xf, [], ["admin", "read-only", "user"], [u'storageVirtualDriveCreatorUsingVirtualDriveGroup'], [], ["Get"]),
+        "modular": MoMeta("StorageVirtualDriveWithDriveGroupSpace", "storageVirtualDriveWithDriveGroupSpace", "vd-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageVirtualDriveCreatorUsingVirtualDriveGroup'], [], [None])
+    }
+
 
     prop_meta = {
-        "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version201a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-        "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
-        "health": MoPropertyMeta("health", "health", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-        "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version201a, MoPropertyMeta.NAMING, None, 0, 510, None, [], []), 
-        "max_available_space": MoPropertyMeta("max_available_space", "maxAvailableSpace", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-        "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-        "raid_level": MoPropertyMeta("raid_level", "raidLevel", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-        "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
-        "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-        "used_physical_drive_ids": MoPropertyMeta("used_physical_drive_ids", "usedPhysicalDriveIds", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-        "vd_status": MoPropertyMeta("vd_status", "vdStatus", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+
+        "classic": {
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version201a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
+            "health": MoPropertyMeta("health", "health", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version201a, MoPropertyMeta.NAMING, None, 0, 510, None, [], []), 
+            "max_available_space": MoPropertyMeta("max_available_space", "maxAvailableSpace", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "raid_level": MoPropertyMeta("raid_level", "raidLevel", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "used_physical_drive_ids": MoPropertyMeta("used_physical_drive_ids", "usedPhysicalDriveIds", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "vd_status": MoPropertyMeta("vd_status", "vdStatus", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+        },
+
+        "modular": {
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
+            "health": MoPropertyMeta("health", "health", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version2013e, MoPropertyMeta.NAMING, None, 0, 510, None, [], []), 
+            "max_available_space": MoPropertyMeta("max_available_space", "maxAvailableSpace", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "raid_level": MoPropertyMeta("raid_level", "raidLevel", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "used_physical_drive_ids": MoPropertyMeta("used_physical_drive_ids", "usedPhysicalDriveIds", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "vd_status": MoPropertyMeta("vd_status", "vdStatus", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+        },
+
     }
 
     prop_map = {
-        "childAction": "child_action", 
-        "dn": "dn", 
-        "health": "health", 
-        "id": "id", 
-        "maxAvailableSpace": "max_available_space", 
-        "name": "name", 
-        "raidLevel": "raid_level", 
-        "rn": "rn", 
-        "status": "status", 
-        "usedPhysicalDriveIds": "used_physical_drive_ids", 
-        "vdStatus": "vd_status", 
+
+        "classic": {
+            "childAction": "child_action", 
+            "dn": "dn", 
+            "health": "health", 
+            "id": "id", 
+            "maxAvailableSpace": "max_available_space", 
+            "name": "name", 
+            "raidLevel": "raid_level", 
+            "rn": "rn", 
+            "status": "status", 
+            "usedPhysicalDriveIds": "used_physical_drive_ids", 
+            "vdStatus": "vd_status", 
+        },
+
+        "modular": {
+            "childAction": "child_action", 
+            "dn": "dn", 
+            "health": "health", 
+            "id": "id", 
+            "maxAvailableSpace": "max_available_space", 
+            "name": "name", 
+            "raidLevel": "raid_level", 
+            "rn": "rn", 
+            "status": "status", 
+            "usedPhysicalDriveIds": "used_physical_drive_ids", 
+            "vdStatus": "vd_status", 
+        },
+
     }
 
     def __init__(self, parent_mo_or_dn, id, **kwargs):

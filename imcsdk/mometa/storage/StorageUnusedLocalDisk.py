@@ -15,32 +15,70 @@ class StorageUnusedLocalDisk(ManagedObject):
     consts = StorageUnusedLocalDiskConsts()
     naming_props = set([u'id'])
 
-    mo_meta = MoMeta("StorageUnusedLocalDisk", "storageUnusedLocalDisk", "pd-[id]", VersionMeta.Version201a, "InputOutput", 0xf, [], ["admin", "read-only", "user"], [u'storageVirtualDriveCreatorUsingUnusedPhysicalDrive'], [], ["Get"])
+    mo_meta = {
+        "classic": MoMeta("StorageUnusedLocalDisk", "storageUnusedLocalDisk", "pd-[id]", VersionMeta.Version201a, "InputOutput", 0xf, [], ["admin", "read-only", "user"], [u'storageVirtualDriveCreatorUsingUnusedPhysicalDrive'], [], ["Get"]),
+        "modular": MoMeta("StorageUnusedLocalDisk", "storageUnusedLocalDisk", "pd-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageVirtualDriveCreatorUsingUnusedPhysicalDrive'], [], [None])
+    }
+
 
     prop_meta = {
-        "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version201a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-        "coerced_size": MoPropertyMeta("coerced_size", "coercedSize", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-        "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
-        "health": MoPropertyMeta("health", "health", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-        "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version201a, MoPropertyMeta.NAMING, None, 0, 510, None, [], []), 
-        "media_type": MoPropertyMeta("media_type", "mediaType", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-        "pd_status": MoPropertyMeta("pd_status", "pdStatus", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-        "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
-        "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-        "vendor": MoPropertyMeta("vendor", "vendor", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+
+        "classic": {
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version201a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "coerced_size": MoPropertyMeta("coerced_size", "coercedSize", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
+            "health": MoPropertyMeta("health", "health", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version201a, MoPropertyMeta.NAMING, None, 0, 510, None, [], []), 
+            "media_type": MoPropertyMeta("media_type", "mediaType", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "pd_status": MoPropertyMeta("pd_status", "pdStatus", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "vendor": MoPropertyMeta("vendor", "vendor", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+        },
+
+        "modular": {
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "coerced_size": MoPropertyMeta("coerced_size", "coercedSize", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
+            "health": MoPropertyMeta("health", "health", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version2013e, MoPropertyMeta.NAMING, None, 0, 510, None, [], []), 
+            "media_type": MoPropertyMeta("media_type", "mediaType", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "pd_status": MoPropertyMeta("pd_status", "pdStatus", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "vendor": MoPropertyMeta("vendor", "vendor", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+        },
+
     }
 
     prop_map = {
-        "childAction": "child_action", 
-        "coercedSize": "coerced_size", 
-        "dn": "dn", 
-        "health": "health", 
-        "id": "id", 
-        "mediaType": "media_type", 
-        "pdStatus": "pd_status", 
-        "rn": "rn", 
-        "status": "status", 
-        "vendor": "vendor", 
+
+        "classic": {
+            "childAction": "child_action", 
+            "coercedSize": "coerced_size", 
+            "dn": "dn", 
+            "health": "health", 
+            "id": "id", 
+            "mediaType": "media_type", 
+            "pdStatus": "pd_status", 
+            "rn": "rn", 
+            "status": "status", 
+            "vendor": "vendor", 
+        },
+
+        "modular": {
+            "childAction": "child_action", 
+            "coercedSize": "coerced_size", 
+            "dn": "dn", 
+            "health": "health", 
+            "id": "id", 
+            "mediaType": "media_type", 
+            "pdStatus": "pd_status", 
+            "rn": "rn", 
+            "status": "status", 
+            "vendor": "vendor", 
+        },
+
     }
 
     def __init__(self, parent_mo_or_dn, id, **kwargs):
