@@ -362,6 +362,10 @@ class ImcHandle(ImcSession):
             obj = handle.add_mo(mo)
         """
 
+        from imccoreutils import validate_mo_version
+
+        validate_mo_version(self, mo)
+
         if modify_present in imcgenutils.AFFIRMATIVE_LIST:
             if self.query_dn(mo.dn) is None:
                 mo.status = "created"
@@ -388,6 +392,10 @@ class ImcHandle(ImcSession):
         Example:
             obj = handle.set_mo(mo)
         """
+
+        from imccoreutils import validate_mo_version
+
+        validate_mo_version(self, mo)
 
         mo.status = "modified"
         self.__to_commit[mo.dn] = mo
@@ -443,7 +451,7 @@ class ImcHandle(ImcSession):
         for mo_dn in mo_dict:
 
             config_map.child_add(mo_dict[mo_dn])
-            elem = config_conf_mo(self.cookie,dn=mo_dn,
+            elem = config_conf_mo(self.cookie, dn=mo_dn,
                                   in_config=config_map,
                                   in_hierarchical=False)
             response = self.post_elem(elem, timeout=timeout)

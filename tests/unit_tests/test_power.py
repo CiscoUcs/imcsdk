@@ -16,6 +16,7 @@ from nose.tools import assert_raises
 from imcsdk.imchandle import ImcHandle
 from imcsdk.imcexception import ImcOperationError
 from imcsdk.apis.server.serveractions import power_down_server, power_up_server
+from imcsdk.imccoreutils import IMC_PLATFORM
 
 
 @patch.object(ImcHandle, 'set_mo')
@@ -34,6 +35,7 @@ def test_valid_power_down_server(login_mock, query_dn_mock, set_mo_mock):
     test_cimc = ImcHandle(ip='169.254.1.1',
                           username='admin',
                           password='right')
+    test_cimc._set_platform_type(IMC_PLATFORM.TYPE_CLASSIC)
 
     # Scenario: server starts powered off
     query_dn_mock.return_value = pwrd_off_mock
@@ -61,6 +63,7 @@ def test_invalid_power_down_server(login_mock, query_dn_mock, set_mo_mock):
     test_cimc = ImcHandle(ip='169.254.1.1',
                           username='admin',
                           password='right')
+    test_cimc._set_platform_type(IMC_PLATFORM.TYPE_CLASSIC)
 
     # Scenario: Zero value passed in as check interval
     assert_raises(ValueError, power_down_server, test_cimc, 0, 0)
@@ -86,6 +89,7 @@ def test_valid_power_up_server(login_mock, query_dn_mock, set_mo_mock):
     test_cimc = ImcHandle(ip='169.254.1.1',
                           username='admin',
                           password='right')
+    test_cimc._set_platform_type(IMC_PLATFORM.TYPE_CLASSIC)
 
     # Scenario: server starts powered on
     query_dn_mock.return_value = pwrd_on_mock
@@ -112,6 +116,7 @@ def test_invalid_power_up_server(login_mock, query_dn_mock, set_mo_mock):
     test_cimc = ImcHandle(ip='169.254.1.1',
                           username='admin',
                           password='right')
+    test_cimc._set_platform_type(IMC_PLATFORM.TYPE_CLASSIC)
 
     # Scenario: Zero value passed in as check interval
     assert_raises(ValueError, power_up_server, test_cimc, 0, 0)

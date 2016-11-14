@@ -36,6 +36,7 @@ class ImcSession(object):
         self.__password = password
         self.__proxy = proxy
         self.__uri = self.__create_uri(port, secure)
+        self.__platform = None
 
         self.__imc = ip
         self.__name = None
@@ -115,6 +116,14 @@ class ImcSession(object):
     @property
     def last_update_time(self):
         return self.__last_update_time
+
+    @property
+    def platform(self):
+        return self.__platform
+
+    @property
+    def version(self):
+        return self.__version
 
     def __create_uri(self, port, secure):
         """
@@ -350,7 +359,7 @@ class ImcSession(object):
 
         self.__driver.remove_header('Cookie')
 
-    def __start_refresh_timer(self):
+    def _start_refresh_timer(self):
         """
         Internal method to support auto-refresh functionality.
         """
@@ -363,7 +372,7 @@ class ImcSession(object):
         self.__refresh_timer.setDaemon(True)
         self.__refresh_timer.start()
 
-    def __stop_refresh_timer(self):
+    def _stop_refresh_timer(self):
         """
         Internal method to support auto-refresh functionality.
         """
@@ -381,7 +390,7 @@ class ImcSession(object):
         return 'cookie' in elem.attrib and elem.attrib[
             'cookie'] != "" and elem.attrib['cookie'] != self.cookie
 
-    def _refresh(self, auto_relogin=False):
+    def _refresh(self, auto_relogin=True):
         """
         Sends the aaaRefresh query to the imc to refresh the connection
         (to prevent session expiration).
@@ -389,7 +398,7 @@ class ImcSession(object):
 
         from .imcmethodfactory import aaa_refresh
 
-        self.__stop_refresh_timer()
+        self._stop_refresh_timer()
 
         elem = aaa_refresh(self.__cookie,
                            self.__username,
@@ -398,7 +407,7 @@ class ImcSession(object):
         if response.error_code != 0:
             self.__cookie = None
             if auto_relogin:
-                return self._login()
+                return self._login(auto_refresh=True)
             return False
 
         self.__cookie = response.out_cookie
@@ -408,10 +417,10 @@ class ImcSession(object):
         self.__last_update_time = str(time.asctime())
 
         # re-enable the timer
-        self.__start_refresh_timer()
+        self._start_refresh_timer()
         return True
 
-    def __is_fabric_interconnect(self):
+    def _is_fabric_interconnect(self):
         from .imcmethodfactory import config_resolve_class
 
         nw_elem = config_resolve_class(cookie=self.__cookie,
@@ -425,7 +434,7 @@ class ImcSession(object):
         except:
             return False
 
-    def __validate_connection(self):
+    def _validate_connection(self):
         """
         Internal method to validate if needs to reconnect or if exist use the
         existing connection.
@@ -447,33 +456,32 @@ class ImcSession(object):
                 self._logout()
         return False
 
-    def __validate_imc(self):
+    def _validate_imc(self):
         """ ValidateIMC method validates if a given host is valid IMC Server."""
 
         from .imcmethodfactory import config_resolve_class
+        from .imccoreutils import IMC_PLATFORM
 
         valid_models = ("R460-4640810", "C260-BASE-2646")
-        model_validated = False
 
         rack_elem = config_resolve_class(cookie=self.__cookie,
-                                         class_id="computeRackUnit")
+                                         class_id="biosUnit")
         rack_elem_response = self.post_elem(rack_elem)
         if rack_elem_response.error_code == 0:
             for rack in rack_elem_response.out_configs.child:
                 model_name = rack.model
-                if model_name.startswith("UCSC"):
-                    model_validated = True
-                elif model_name.startswith("UCS-E"):
-                    model_validated = True
-                elif model_name in valid_models:
-                    model_validated = True
-            if not model_validated:
-                self._logout()
-                return False
 
-        if self.__is_fabric_interconnect():
-            self._logout()
-            return False
+                if model_name.startswith("UCSC-C3X"):
+                    self.__platform = IMC_PLATFORM.TYPE_MODULAR
+                else:
+                    self.__platform = IMC_PLATFORM.TYPE_CLASSIC
+
+                if not (model_name.startswith("UCSC") or
+                        model_name.startswith("UCS-E") or
+                        model_name in valid_models):
+                    self._logout()
+                    return False
+
         return True
 
     def _update_version(self, response=None):
@@ -532,7 +540,7 @@ class ImcSession(object):
 
         self.__force = force
 
-        if self.__validate_connection():
+        if self._validate_connection():
             return True
 
         elem = aaa_login(in_name=self.__username,
@@ -543,15 +551,15 @@ class ImcSession(object):
             raise ImcException(response.error_code, response.error_descr)
         self.__update(response)
 
-        # Verify not to connect to IMC
-        if not self.__validate_imc():
+        # Verify to connect to IMC only
+        if not self._validate_imc():
             raise ImcLoginError("Not a supported server.")
 
         self._update_version(response)
         self._update_domain_name_and_ip()
 
         if auto_refresh:
-            self.__start_refresh_timer()
+            self._start_refresh_timer()
 
         return True
 
@@ -600,6 +608,13 @@ class ImcSession(object):
         Internal method to set dump_xml to False
         """
         self.__dump_xml = False
+
+    def _set_platform_type(self, platform):
+        """
+        Internal method to set the platform type
+        Not to be exposed at the handle
+        """
+        self.__platform = platform
 
 
 def _get_port(port, secure):
