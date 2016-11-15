@@ -133,8 +133,8 @@ def _wait_for_power_state(handle, state, timeout=60, interval=5, server_id=1):
         if wait_time > timeout:
             raise ImcOperationError(
                 'Power State Change',
-                '{0}: ERROR - Power {1} did not complete within ' +
-                '{2} sec'.format(handle.ip, state, timeout)
+                '{%s}: ERROR - Power {%s} did not complete within '
+                '{%s} sec' % (handle.ip, state, timeout)
             )
         # Wait interval sec between checks
         time.sleep(interval)

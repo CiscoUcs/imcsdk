@@ -377,7 +377,7 @@ class ImcSession(object):
         Internal method to support auto-refresh functionality.
         """
 
-        if self.__refresh_timer is not None:
+        if self.__refresh_timer:
             self.__refresh_timer.cancel()
             self.__refresh_timer = None
 
@@ -443,7 +443,7 @@ class ImcSession(object):
         from .mometa.top.TopSystem import TopSystem
         from .imcmethodfactory import config_resolve_dn
 
-        if self.__cookie is not None and self.__cookie != "":
+        if self.__cookie and self.__cookie != "":
             if not self.__force:
                 top_system = TopSystem()
                 elem = config_resolve_dn(cookie=self.__cookie,
@@ -495,7 +495,7 @@ class ImcSession(object):
         # need to query for it
         # There are cases where version is missing from aaaLogin response
         # In such cases the later part of this method populates it
-        if response.out_version is not None and response.out_version != "":
+        if response.out_version and response.out_version != "":
             return
 
         top_system = TopSystem()
@@ -618,7 +618,7 @@ class ImcSession(object):
 
 
 def _get_port(port, secure):
-    if port is not None:
+    if port:
         return int(port)
 
     if secure is False:

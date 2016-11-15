@@ -71,7 +71,7 @@ class ParseFilter(object):
 
         if self.is_meta_classid:
             class_obj = imccoreutils.load_class(self.class_id)
-            prop_ = imccoreutils.get_property_from_prop_meta(class_obj, prop_)
+            prop_ = imccoreutils.get_prop_meta(class_obj, prop_)
             prop_ = prop_.xml_attribute
 
         sub_filter = create_basic_filter(types[type_],

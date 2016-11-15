@@ -97,7 +97,7 @@ class ImcBase(object):
     def write_object(self):
         """Method writes the string representation of the object."""
         for child in self._child:
-            if child is not None:
+            if child:
                 child.write_object()
 
     def clone(self):

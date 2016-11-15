@@ -634,7 +634,7 @@ def search_class_id(class_id):
 
     meta_class_id = find_class_id_in_mo_meta_ignore_case(class_id=class_id)
 
-    if meta_class_id is not None:
+    if meta_class_id:
         return meta_class_id
 
     # if class_id not exists in meta
@@ -695,7 +695,7 @@ def get_meta_info(class_id, include_prop=True,
     return ClassIdMeta(meta_class_id, include_prop, show_tree, depth, platform)
 
 
-def property_exists_in_prop_meta(mo, prop_name):
+def prop_exists(mo, prop_name):
 
     for platform in IMC_PLATFORM_LIST:
         if platform in mo.prop_meta.keys() and \
@@ -714,7 +714,10 @@ def _get_property_from_prop_meta_for_platform(mo, prop, platform):
     return None
 
 
-def get_property_from_prop_meta(mo, prop, platform=None):
+def get_prop_meta(mo, prop, platform=None):
+    """
+    Internal Method that returns the property meta object
+    """
 
     if platform:
         return _get_property_from_prop_meta_for_platform(mo, prop, platform)
@@ -732,17 +735,15 @@ def get_property_from_prop_meta(mo, prop, platform=None):
 
 def validate_property_value(mo, prop, value):
 
-    result = []
     for platform in IMC_PLATFORM_LIST:
         prop_ = _get_property_from_prop_meta_for_platform(
                 mo,
                 prop,
                 platform)
-        if prop_:
-            passed = prop_.validate_property_value(value)
-            result.append(passed)
+        if prop_ and prop_.validate_property_value(value):
+            return True
 
-    return (True in result)
+    return False
 
 
 def property_exists_in_prop_map(mo, prop_name):
@@ -782,7 +783,7 @@ def get_property_from_prop_map(mo, prop, platform=None):
 
 def get_mo_meta(mo, platform=None):
 
-    if platform is not None:
+    if platform:
         return mo.mo_meta[platform]
 
     for platform in IMC_PLATFORM_LIST:
@@ -802,7 +803,7 @@ def validate_mo_version(handle, mo):
         raise ImcOperationError(
                 "Validate Version",
                 "Platform(version:%s) does not support "
-                "Managed Object:%s(version:%s)"
+                "Managed Object:%s(supported since version:%s)"
                 % (handle.version, mo.__class__.__name__, mo_version))
 
 

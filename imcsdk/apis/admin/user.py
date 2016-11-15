@@ -63,14 +63,17 @@ def get_local_users(handle, dump=False):
     aaa_users = handle.query_classid("AaaUser")
     active_users = []
     for user in aaa_users:
-        if user.account_status == AaaUserConsts.ACCOUNT_STATUS_ACTIVE:
+        # if user.account_status == AaaUserConsts.ACCOUNT_STATUS_ACTIVE:
+        if user.name != "":
             active_users.append(user)
     if dump:
-        log.info("List of active users (id, username, role):")
+        log.info("List of active users (id, username, role, status")
         log.info("------------------------------------------")
 
         for user in active_users:
-            log.info(" %s \t%s \t%s" % (user.id, user.name, user.priv))
+            log.info(" %s %s %s %s" %
+                    (user.id.rjust(3), user.name.center(15),
+                     user.priv.center(15), user.account_status.center(15)))
     return active_users
 
 

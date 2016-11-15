@@ -243,7 +243,7 @@ def delete_vnic(handle, adaptor_slot, name, server_id=1, **kwargs):
     """
 
     vnic_mo = get_vnic(handle, adaptor_slot, name, server_id, **kwargs)
-    if vnic_mo is not None:
+    if vnic_mo:
         handle.remove_mo(vnic_mo)
 
 
@@ -330,5 +330,5 @@ def delete_vhba(handle, adaptor_slot, name, server_id=1, **kwargs):
     """
 
     vhba_mo = get_vhba(handle, adaptor_slot, name, server_id, **kwargs)
-    if vhba_mo is not None:
+    if vhba_mo:
         handle.remove_mo(vhba_mo)

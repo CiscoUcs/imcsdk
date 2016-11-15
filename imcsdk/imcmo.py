@@ -68,7 +68,6 @@ class ManagedObject(ImcBase):
         self.__parent_dn = None
         self.__xtra_props = {}
         self.__xtra_props_dirty_mask = 0x1
-        self.__dirty_dict = {}
 
         if parent_mo_or_dn:
             if isinstance(parent_mo_or_dn, ManagedObject):
@@ -94,8 +93,7 @@ class ManagedObject(ImcBase):
 
         if kwargs:
             for prop_name, prop_value in imcgenutils.iteritems(kwargs):
-                if not imccoreutils.property_exists_in_prop_meta(self,
-                                                                 prop_name):
+                if not imccoreutils.prop_exists(self, prop_name):
                     log.debug("Unknown property %s" % prop_name)
                 self.__set_prop(prop_name, prop_value)
 
@@ -110,7 +108,7 @@ class ManagedObject(ImcBase):
         Internal method to set rn
         """
 
-        if "prop_meta" in dir(self) and imccoreutils.property_exists_in_prop_meta(self, "rn"):
+        if "prop_meta" in dir(self) and imccoreutils.prop_exists(self, "rn"):
             self.rn = self.make_rn()
         else:
             self.rn = ""
@@ -120,7 +118,7 @@ class ManagedObject(ImcBase):
         Internal method to set dn
         """
 
-        if "prop_meta" in dir(self) and imccoreutils.property_exists_in_prop_meta(self, "dn"):
+        if "prop_meta" in dir(self) and imccoreutils.prop_exists(self, "dn"):
             if self.__parent_dn:
                 self.dn = self.__parent_dn + '/' + self.rn
             else:
@@ -134,7 +132,7 @@ class ManagedObject(ImcBase):
         """
 
         if "prop_meta" in dir(self) and \
-                imccoreutils.property_exists_in_prop_meta(self, name):
+                imccoreutils.prop_exists(self, name):
             if name in dir(self):
                 self.__set_prop(name, value)
             else:
@@ -148,10 +146,9 @@ class ManagedObject(ImcBase):
                                             name,
                                             value))
                 object.__setattr__(self, name, value)
-                prop = imccoreutils.get_property_from_prop_meta(self, name)
-                mask = prop.mask
-                if mask is not None:
-                    self._dirty_mask = mask
+                prop = imccoreutils.get_prop_meta(self, name)
+                if prop.mask:
+                    self._dirty_mask |= prop.mask
         elif name.startswith("_"):
             object.__setattr__(self, name, value)
         else:
@@ -180,11 +177,10 @@ class ManagedObject(ImcBase):
         """
 
         if not forced:
-            prop = imccoreutils.get_property_from_prop_meta(self, name)
-            access = prop.access
-            if access != imccoremeta.MoPropertyMeta.READ_WRITE:
+            prop = imccoreutils.get_prop_meta(self, name)
+            if prop.access != imccoremeta.MoPropertyMeta.READ_WRITE:
                 if getattr(self, name) is not None or \
-                                access != \
+                                prop.access != \
                                 imccoremeta.MoPropertyMeta.CREATE_ONLY:
                     raise ValueError("%s is not a read-write property." % name)
             if not imccoreutils.validate_property_value(self, name, value):
@@ -248,7 +244,7 @@ class ManagedObject(ImcBase):
         mo_meta = imccoreutils.get_mo_meta(self)
         rn_pattern = mo_meta.rn
         for prop in re.findall(r"""\[([^\]]*)\]""", rn_pattern):
-            if imccoreutils.property_exists_in_prop_meta(self, prop):
+            if imccoreutils.prop_exists(self, prop):
                 if getattr(self, prop):
                     rn_pattern = re.sub(r"""\[%s\]""" % prop,
                                         '%s' % getattr(self, prop), rn_pattern)
@@ -280,17 +276,14 @@ class ManagedObject(ImcBase):
                                    override_tag=elem_name)
 
         for key in self.__dict__:
-            if key != 'rn' and imccoreutils.property_exists_in_prop_meta(self,
-                                                                         key):
-                prop = imccoreutils.get_property_from_prop_meta(self, key)
-                mask = prop.mask
-                xml_attr = prop.xml_attribute
+            if key != 'rn' and imccoreutils.prop_exists(self, key):
+                prop = imccoreutils.get_prop_meta(self, key)
                 if (option != WriteXmlOption.DIRTY or (
-                            mask is not None and
-                            self._dirty_mask & mask != 0)):
+                            prop.mask and
+                            self._dirty_mask & prop.mask != 0)):
                     value = getattr(self, key)
-                    if value is not None:
-                        xml_obj.set(xml_attr, value)
+                    if value:
+                        xml_obj.set(prop.xml_attribute, value)
             else:
                 if key not in self.__xtra_props:
                     # This is an internal property
@@ -304,7 +297,7 @@ class ManagedObject(ImcBase):
                 if option != WriteXmlOption.DIRTY or \
                         self.__xtra_props[key].is_dirty:
                     value = self.__xtra_props[key].value
-                    if value is not None:
+                    if value:
                         xml_obj.set(key, value)
 
         if 'dn' not in xml_obj.attrib:
@@ -469,7 +462,7 @@ class GenericMo(ImcBase):
         if 'rn' in dir(self) and 'dn' in dir(self):
             pass
         elif 'rn' in dir(self) and 'dn' not in dir(self):
-            if self.__parent_dn is not None and self.__parent_dn != "":
+            if self.__parent_dn and self.__parent_dn != "":
                 self.dn = self.__parent_dn + '/' + self.rn
                 self.__properties['dn'] = self.dn
             else:
@@ -557,7 +550,7 @@ class GenericMo(ImcBase):
         if self.rn and self.dn:
             pass
         elif self.rn and not self.dn:
-            if self.__parent_dn is not None and self.__parent_dn != "":
+            if self.__parent_dn and self.__parent_dn != "":
                 self.dn = self.__parent_dn + '/' + self.rn
                 self.__properties['dn'] = self.dn
             else:
@@ -591,7 +584,7 @@ class GenericMo(ImcBase):
         mo_class_params = inspect.getargspec(mo_class.__init__)[0][2:]
         mo_class_param_dict = {}
         for param in mo_class_params:
-            prop = imccoreutils.get_property_from_prop_meta(mo_class, param)
+            prop = imccoreutils.get_prop_meta(mo_class, param)
             mo_param = prop.xml_attribute
             if mo_param not in self.__properties:
                 if 'rn' in self.__properties:

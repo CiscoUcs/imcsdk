@@ -345,7 +345,7 @@ class ImcHandle(ImcSession):
 
         return out_mo_list
 
-    def add_mo(self, mo, modify_present=False, timeout=None):
+    def add_mo(self, mo, modify_present=True, timeout=None):
         """
         Adds a managed object.
 

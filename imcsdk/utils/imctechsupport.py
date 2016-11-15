@@ -28,7 +28,8 @@ def _is_valid_arg(param, kwargs):
 
 
 def get_imc_tech_support(handle, remote_host, remote_file, protocol, username,
-                         password, timeout_in_sec=600, **kwargs):
+                         password, timeout_in_sec=600,
+                         component="all", **kwargs):
     """
     This operation creates and downloads the technical support file for
     the specified Ucs server.
@@ -42,9 +43,9 @@ def get_imc_tech_support(handle, remote_host, remote_file, protocol, username,
         password (str) : Remote Host user credentials/password
         timeout_in_sec (number) : time in seconds for which method waits
                               for the backUp file to generate before it exits.
-    :   kwargs : key=value pairs relevant to the selected option
+    :   component (str) :"all" OR "cmc1 cmc2" OR "cimc1"
+    :   kwargs : key=value paired arguments
                  Values for component should be given with space as delimiter
-    :            component="all" OR component="cmc1 cmc2" OR component="cimc1"
 
     Example:
         remote_file = "/root/tech_sup_backup.tar.gz"
@@ -88,8 +89,7 @@ def get_imc_tech_support(handle, remote_host, remote_file, protocol, username,
         admin_state="enabled")
 
     if handle.platform == IMC_PLATFORM.TYPE_MODULAR:
-        if _is_valid_arg("component", kwargs):
-            sys_debug_tech_support.component = str(kwargs["component"])
+        sys_debug_tech_support.component = component
 
     handle.add_mo(sys_debug_tech_support, modify_present=True)
 

@@ -27,7 +27,7 @@ def _is_valid_arg(param, kwargs):
 
 
 def backup_imc(handle, remote_host, remote_file, protocol, username, password,
-               passphrase, timeout_in_sec=600, **kwargs):
+               passphrase, timeout_in_sec=600, entity="CMC", **kwargs):
     """
     backup_imc helps create and download Imc backups.
 
@@ -41,8 +41,8 @@ def backup_imc(handle, remote_host, remote_file, protocol, username, password,
         passphrase (str) : Password for the backup file.
         timeout_in_sec (number) : time in seconds for which method waits
                               for the backUp file to generate before it exits.
-        kwargs : key=value pairs relevant to the selected option
-            entity="CMC" OR entity="CIMC1" OR entity="CIMC2"
+        entity="CMC" OR entity="CIMC1" OR entity="CIMC2" for C3x60 platforms
+        kwargs : key=value paired arguments
 
     Example:
         remote_file = "/root/config_backup.xml"
@@ -52,7 +52,7 @@ def backup_imc(handle, remote_host, remote_file, protocol, username, password,
         backup_imc(handle, remote_file="/users/xyz/backup",
                    remote_host="1.1.1.1", protocol="scp",
                    username="admin", password="password",
-                   password="passphrase", timeout_in_sec=600, entity="cmc")
+                   passphrase="passphrase", timeout_in_sec=600, entity="CMC")
     """
 
     from ..mometa.mgmt.MgmtBackup import MgmtBackup, MgmtBackupConsts
@@ -83,8 +83,7 @@ def backup_imc(handle, remote_host, remote_file, protocol, username, password,
     mgmt_backup.admin_state = MgmtBackupConsts.ADMIN_STATE_ENABLED
 
     if handle.platform == IMC_PLATFORM.TYPE_MODULAR:
-        if _is_valid_arg("entity", kwargs):
-            mgmt_backup.entity = kwargs["entity"]
+        mgmt_backup.entity = entity
 
     handle.add_mo(mgmt_backup, modify_present=True)
 
@@ -120,7 +119,7 @@ def backup_imc(handle, remote_host, remote_file, protocol, username, password,
 
 
 def import_imc_backup(handle, remote_host, remote_file, protocol, username,
-                      password, passphrase, **kwargs):
+                      password, passphrase, entity="CMC", **kwargs):
     """
     This operation uploads a Imc backup taken earlier via GUI
     or backup_imc operation for all configuration, system configuration,
@@ -135,8 +134,8 @@ def import_imc_backup(handle, remote_host, remote_file, protocol, username,
         username (str) : Remote Host user name
         password (str) : Remote Host user credentials/password
         passphrase (str) : Password for the backup file.
-        kwargs : key=value pairs relevant to the selected option
-            entity="CMC" OR entity="CIMC1" OR entity="CIMC2"
+        entity="CMC" OR entity="CIMC1" OR entity="CIMC2"
+        kwargs : key=value paired arguments
 
     Example:
         remote_file = "/root/config_backup.xml"
@@ -146,7 +145,7 @@ def import_imc_backup(handle, remote_host, remote_file, protocol, username,
         import_imc_backup(handle, remote_file="/users/xyz/backup",
                    remote_host="1.1.1.1", protocol="scp",
                    username="admin", password="password",
-                   password="passphrase", timeout_in_sec=600, entity="cmc")
+                   passphrase="passphrase", timeout_in_sec=600, entity="CMC")
  """
 
     from ..mometa.top.TopSystem import TopSystem
@@ -176,8 +175,7 @@ def import_imc_backup(handle, remote_host, remote_file, protocol, username,
     mgmt_importer.admin_state = MgmtImporterConsts.ADMIN_STATE_ENABLED
 
     if handle.platform == IMC_PLATFORM.TYPE_MODULAR:
-        if _is_valid_arg("entity", kwargs):
-            mgmt_importer.entity = kwargs["entity"]
+        mgmt_importer.entity = entity
 
     handle.add_mo(mgmt_importer, modify_present=True)
 
