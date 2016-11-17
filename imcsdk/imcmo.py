@@ -271,7 +271,7 @@ class ManagedObject(ImcBase):
             return
 
         platform = None
-        if cookie is not None:
+        if cookie:
             handle = imccoreutils.get_handle_from_cookie(cookie)
             if handle:
                 platform = handle.platform

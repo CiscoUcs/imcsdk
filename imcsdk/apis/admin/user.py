@@ -23,7 +23,7 @@ log = logging.getLogger('imc')
 log.setLevel(logging.DEBUG)
 
 
-def set_strong_password(handle, enable=False):
+def set_strong_password(handle, enable=True):
     """
     This method will enable/disable strong password policy for users
 
@@ -35,7 +35,8 @@ def set_strong_password(handle, enable=False):
         AaaUserPolicy object
     """
 
-    user_policy = handle.query_classid("AaaUserPolicy")
+    mos = handle.query_classid("AaaUserPolicy")
+    user_policy = mos[0]
 
     if enable:
         user_policy.user_password_policy = "enabled"
@@ -44,6 +45,21 @@ def set_strong_password(handle, enable=False):
 
     handle.set_mo(user_policy)
     return user_policy
+
+
+def is_strong_password_set(handle):
+    """
+    This method will check if strong password policy is enabled
+
+    Args:
+        handle(ImcHandle)
+
+    Returns:
+        True if enabled, else False
+    """
+
+    mos = handle.query_classid("AaaUserPolicy")
+    return (mos[0].user_password_policy == "enabled")
 
 
 def get_local_users(handle, dump=False):
