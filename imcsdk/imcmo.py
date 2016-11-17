@@ -260,14 +260,21 @@ class ManagedObject(ImcBase):
 
         return rn_pattern
 
-    def to_xml(self, xml_doc=None, option=None, elem_name=None):
+    def to_xml(self, xml_doc=None, option=None, elem_name=None, cookie=None):
         """
         Method writes the xml representation of the managed object.
         """
 
+        unknown_properties = []
         if option == WriteXmlOption.DIRTY and not self.is_dirty():
             log.debug("Object is not dirty")
             return
+
+        platform = None
+        if cookie is not None:
+            handle = imccoreutils.get_handle_from_cookie(cookie)
+            if handle:
+                platform = handle.platform
 
         mo_meta = imccoreutils.get_mo_meta(self)
         xml_attribute = mo_meta.xml_attribute
@@ -276,8 +283,14 @@ class ManagedObject(ImcBase):
                                    override_tag=elem_name)
 
         for key in self.__dict__:
-            if key != 'rn' and imccoreutils.prop_exists(self, key):
-                prop = imccoreutils.get_prop_meta(self, key)
+            if key != 'rn' and imccoreutils.prop_exists(
+                                self,
+                                key,
+                                platform=platform):
+                prop = imccoreutils.get_prop_meta(
+                                self,
+                                key,
+                                platform=platform)
                 if (option != WriteXmlOption.DIRTY or (
                             prop.mask and
                             self._dirty_mask & prop.mask != 0)):
@@ -288,6 +301,10 @@ class ManagedObject(ImcBase):
                 if key not in self.__xtra_props:
                     # This is an internal property
                     # This should not be a part of the xml
+                    if key not in ManagedObject.__internal_prop and \
+                            key not in ['rn', 'dn'] and \
+                            not key.startswith("_"):
+                        unknown_properties.append(key)
                     continue
 
                 # This is an unknown property
@@ -303,7 +320,11 @@ class ManagedObject(ImcBase):
         if 'dn' not in xml_obj.attrib:
             xml_obj.set('dn', self.dn)
 
-        self.child_to_xml(xml_obj, option)
+        self.child_to_xml(xml_obj, option, cookie=cookie)
+        if unknown_properties:
+            log.info("List of properties not applicable for the current platform:")
+            log.info(unknown_properties)
+
         return xml_obj
 
     def from_xml(self, elem, handle=None):
@@ -478,7 +499,7 @@ class GenericMo(ImcBase):
         if self.__parent_mo:
             self.__parent_mo.child_add(self)
 
-    def to_xml(self, xml_doc=None, option=None):
+    def to_xml(self, xml_doc=None, option=None, cookie=None):
         """
         This method returns the xml element node for the current object
         with it's hierarchy.

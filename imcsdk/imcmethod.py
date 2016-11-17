@@ -111,11 +111,12 @@ class ExternalMethod(ImcBase):
             if prop_meta.is_complex_type:
                 if getattr(self, prop):
                     self.__dict__[prop].to_xml(xml_obj, option,
-                                               prop_meta.xml_attribute)
+                                               prop_meta.xml_attribute,
+                                               cookie=self.cookie)
             elif getattr(self, prop):
                 xml_obj.set(prop_meta.xml_attribute, getattr(self, prop))
 
-        self.child_to_xml(xml_obj, option)
+        self.child_to_xml(xml_obj, option, cookie=self.cookie)
         return xml_obj
 
     def from_xml(self, elem, handle=None):

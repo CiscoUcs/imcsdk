@@ -69,10 +69,10 @@ class ImcBase(object):
         """Method returns the child managed object count."""
         return len(self._child)
 
-    def child_to_xml(self, xml_doc, option=None):
+    def child_to_xml(self, xml_doc, option=None, cookie=None):
         """Method writes the xml representation for the object."""
         for child in self._child:
-            child.to_xml(xml_doc, option)
+            child.to_xml(xml_doc, option, cookie=cookie)
 
     def child_is_dirty(self):
         """Method checks whether the child object is dirty or not."""
@@ -143,7 +143,7 @@ class AbstractFilter(ImcBase):
         self._tag_name = tag_name
         ImcBase.__init__(self, class_id)
 
-    def to_xml(self, xml_doc=None, option=None, elem_name=None):
+    def to_xml(self, xml_doc=None, option=None, elem_name=None, cookie=None):
         """This method writes the xml representation of the Method object."""
         xml_obj = self.elem_create(class_tag=self._tag_name,
                                    xml_doc=xml_doc,
@@ -167,7 +167,7 @@ class BaseObject(ImcBase):
         self._tag_name = tag_name
         ImcBase.__init__(self, class_id)
 
-    def to_xml(self, xml_doc=None, option=None, elem_name=None):
+    def to_xml(self, xml_doc=None, option=None, elem_name=None, cookie=None):
         """This method writes the xml representation of the Method object."""
         xml_obj = self.elem_create(class_tag=self._tag_name,
                                    xml_doc=xml_doc,
@@ -178,7 +178,7 @@ class BaseObject(ImcBase):
             else:
                 xml_obj.set(key, self.attr_get(key))
 
-        self.child_to_xml(xml_obj, option)
+        self.child_to_xml(xml_obj, option, cookie=cookie)
         return xml_obj
 
     def from_xml(self, elem, handle=None):

@@ -86,7 +86,7 @@ def update_imc_firmware_huu(handle, remote_share, share_type, remote_ip,
         time_out=str(timeout),
         verify_update=verify_update,
         cimc_secure_boot=cimc_secure_boot)
-    handle.add_mo(huu_firmware_updater, modify_present=True)
+    handle.add_mo(huu_firmware_updater)
     return huu_firmware_updater
 
 

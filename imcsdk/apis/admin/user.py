@@ -58,23 +58,20 @@ def get_local_users(handle, dump=False):
         List of AaaUser objects corresponding to the active users
     """
 
-    from imcsdk.mometa.aaa.AaaUser import AaaUserConsts
-
     aaa_users = handle.query_classid("AaaUser")
-    active_users = []
+    users = []
     for user in aaa_users:
-        # if user.account_status == AaaUserConsts.ACCOUNT_STATUS_ACTIVE:
         if user.name != "":
-            active_users.append(user)
+            users.append(user)
     if dump:
-        log.info("List of active users (id, username, role, status")
-        log.info("------------------------------------------")
+        log.info("List of users (id, username, role, status")
+        log.info("-----------------------------------------")
 
-        for user in active_users:
+        for user in users:
             log.info(" %s %s %s %s" %
-                    (user.id.rjust(3), user.name.center(15),
-                     user.priv.center(15), user.account_status.center(15)))
-    return active_users
+                     (user.id.rjust(3), user.name.center(15),
+                      user.priv.center(15), user.account_status.center(15)))
+    return users
 
 
 def create_local_user(handle, username, password, privilege="read-only"):

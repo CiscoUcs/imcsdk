@@ -43,8 +43,15 @@ def get_imc_tech_support(handle, remote_host, remote_file, protocol, username,
         password (str) : Remote Host user credentials/password
         timeout_in_sec (number) : time in seconds for which method waits
                               for the backUp file to generate before it exits.
-    :   component (str) :"all" OR "cmc1 cmc2" OR "cimc1"
-    :   kwargs : key=value paired arguments
+        component (str) : For C3x60 platforms
+                          "all" for tech-support of all components 
+                          "cmc1" for tech-support of chassis related components on chassis controller-1
+                          "cmc2" for tech-support of chassis related components on chassis controller-2
+                          "cimc1" for tech-support of server related components on server-1
+                          "cimc2" for tech-support of server related components on server-2
+                          Combination of the above can also be given with space as separator
+                          "cmc1 cmc2" or "cimc1 cimc2"
+        kwargs : key=value paired arguments
                  Values for component should be given with space as delimiter
 
     Example:

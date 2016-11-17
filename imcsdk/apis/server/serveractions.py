@@ -32,27 +32,9 @@ def _is_valid_arg(param, kwargs):
 
 
 def _set_server_dn(handle, kwargs):
-    if _is_valid_arg("server_id", kwargs):
-        server_id = str(kwargs["server_id"])
-    else:
-        server_id = "1"
-
+    server_id = str(kwargs.get("server_id", "1"))
     server_dn = get_server_dn(handle, server_id)
     return server_dn
-
-
-def _set_timeout_and_interval(kwargs):
-    if _is_valid_arg("timeout", kwargs):
-        timeout = kwargs["timeout"]
-    else:
-        timeout = 60
-
-    if _is_valid_arg("interval", kwargs):
-        interval = kwargs["interval"]
-    else:
-        interval = 5
-
-    return timeout, interval
 
 
 def _set_power_state(handle, server_dn, state):

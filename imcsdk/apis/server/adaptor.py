@@ -25,31 +25,6 @@ def _is_valid_arg(param, kwargs):
     return param in kwargs and kwargs[param] is not None
 
 
-def _check_and_get_param(param, kwargs):
-    if _is_valid_arg(param, kwargs):
-        return kwargs[param]
-    else:
-        return None
-
-
-def _set_server_dn(handle, kwargs):
-    if _is_valid_arg("server_id", kwargs):
-        server_id = str(kwargs["server_id"])
-    else:
-        server_id = "1"
-
-    server_dn = get_server_dn(handle, server_id)
-    return server_dn
-
-
-def _set_adaptor_slot(handle, kwargs):
-    if _is_valid_arg("adaptor_slot", kwargs):
-        adaptor_slot = str(kwargs["adaptor_slot"])
-    else:
-        raise ValueError("Adaptor Slot is not specified as input")
-    return adaptor_slot
-
-
 def _get_adaptor(handle, adaptor_slot, server_id=1, **kwargs):
 
     server_dn = get_server_dn(handle, server_id)

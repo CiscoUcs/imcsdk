@@ -37,6 +37,7 @@ class IMC_PLATFORM:
 
 IMC_PLATFORM_LIST = [IMC_PLATFORM.TYPE_MODULAR,
                      IMC_PLATFORM.TYPE_CLASSIC]
+global_handles = []
 
 
 def get_imc_obj(class_id, elem, mo_obj=None):
@@ -695,7 +696,11 @@ def get_meta_info(class_id, include_prop=True,
     return ClassIdMeta(meta_class_id, include_prop, show_tree, depth, platform)
 
 
-def prop_exists(mo, prop_name):
+def prop_exists(mo, prop_name, platform=None):
+
+    if platform:
+        return(platform in mo.prop_meta.keys() and
+               prop_name in mo.prop_meta[platform].keys())
 
     for platform in IMC_PLATFORM_LIST:
         if platform in mo.prop_meta.keys() and \
@@ -847,3 +852,22 @@ def get_dn_prefix_for_platform(handle):
         return "sys/chassis-1"
     else:
         return ""
+
+
+def get_handle_from_cookie(cookie):
+
+    for handle in global_handles:
+        if handle.cookie == cookie:
+            return handle
+
+    return None
+
+
+def add_handle_to_list(handle):
+    if handle:
+        global_handles.append(handle)
+
+
+def remove_handle_from_list(handle):
+    if handle:
+        global_handles.remove(handle)

@@ -537,6 +537,7 @@ class ImcSession(object):
             True on successful connect
         """
         from .imcmethodfactory import aaa_login
+        from .imccoreutils import add_handle_to_list
 
         self.__force = force
 
@@ -561,6 +562,7 @@ class ImcSession(object):
         if auto_refresh:
             self._start_refresh_timer()
 
+        add_handle_to_list(self)
         return True
 
     def _logout(self, timeout=None):
@@ -576,6 +578,7 @@ class ImcSession(object):
         """
 
         from .imcmethodfactory import aaa_logout
+        from .imccoreutils import remove_handle_from_list
 
         if self.__cookie is None:
             return True
@@ -595,6 +598,7 @@ class ImcSession(object):
 
         self.__clear()
 
+        remove_handle_from_list(self)
         return True
 
     def _set_dump_xml(self):
