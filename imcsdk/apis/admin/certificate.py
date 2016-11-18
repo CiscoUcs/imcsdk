@@ -59,6 +59,13 @@ def generate_certificate_signing_request(handle, name, org, org_unit, country,
 
     Returns:
         None
+
+    Examples:
+        generate_certificate_signing_request(
+            handle, name="test-cert", org="test-org", org_unit="test-unit",
+            country=GenerateCertificateSigningRequestConsts.COUNTRY_CODE_UNITED_STATES,
+            state="California", locality="San Francisco", self_signed=True)
+
     """
 
     from imcsdk.mometa.generate.GenerateCertificateSigningRequest import \

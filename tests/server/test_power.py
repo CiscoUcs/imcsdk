@@ -40,13 +40,12 @@ def test_power_down_server():
 def test_power_up_server():
     global handle
     power_up_server(handle)
-
     assert_equal(get_server_power_state(handle),
                  ComputeRackUnitConsts.OPER_POWER_ON)
 
 
 def test_power_cycle_server():
     global handle
-    power_cycle_server(handle)
+    power_cycle_server(handle, timeout=180)
     assert_equal(get_server_power_state(handle),
                  ComputeRackUnitConsts.OPER_POWER_ON)

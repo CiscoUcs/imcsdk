@@ -26,8 +26,18 @@ from . import mometa
 from . import methodmeta
 from . imcmeta import MO_CLASS_ID, METHOD_CLASS_ID, OTHER_TYPE_CLASS_ID, \
     MO_CLASS_META
+from .imcexception import ImcOperationError, ImcValidationException
 
 log = logging.getLogger('imc')
+
+
+class IMC_PLATFORM:
+    TYPE_MODULAR = "modular"
+    TYPE_CLASSIC = "classic"
+
+IMC_PLATFORM_LIST = [IMC_PLATFORM.TYPE_MODULAR,
+                     IMC_PLATFORM.TYPE_CLASSIC]
+global_handles = []
 
 
 def get_imc_obj(class_id, elem, mo_obj=None):
@@ -63,7 +73,9 @@ def get_imc_obj(class_id, elem, mo_obj=None):
         elif "rn" in elem.attrib and mo_obj:
             p_dn = mo_obj.dn
 
-        if 'topRoot' in mo_class.mo_meta.parents:
+        mo_meta = get_mo_meta(mo_class)
+        class_parents = mo_meta.parents
+        if 'topRoot' in class_parents:
             mo_obj = mo_class(from_xml_response=True, **mo_class_param_dict)
         else:
             mo_obj = mo_class(parent_mo_or_dn=p_dn,
@@ -210,7 +222,7 @@ def find_class_id_in_method_meta_ignore_case(class_id):
     return None
 
 
-def get_mo_property_meta(class_id, key):
+def get_mo_property_meta(class_id, key, platform=None):
     """
     Methods returns the mo property meta of the provided key for the given
     class_id.
@@ -227,11 +239,15 @@ def get_mo_property_meta(class_id, key):
     """
 
     class_obj = load_class(class_id)
-    if key == "mo_meta":
-        return class_obj.mo_meta
 
-    prop_meta = class_obj.prop_meta
-    prop_map = class_obj.prop_map
+    if platform is None:
+        platform = IMC_PLATFORM.TYPE_CLASSIC
+
+    if key == "mo_meta":
+        return class_obj.mo_meta[platform]
+
+    prop_meta = class_obj.prop_meta[platform]
+    prop_map = class_obj.prop_map[platform]
     if key in prop_map:
         return prop_meta[prop_map[key]]
     elif key in prop_meta:
@@ -418,12 +434,14 @@ def extract_mo_tree_from_config_method_response(method_response,
     return tree_dict
 
 
-def print_mo_hierarchy(class_id, level=0, depth=None, show_level=[]):
+def print_mo_hierarchy(class_id, level=0, depth=None,
+                       show_level=[], platform=None):
     """
     print hierarchy of class_id
 
     Args:
         class_id (str): class id
+        platform (str): "classic" or "modular"
         level (int): by default zero
         depth (int or None): last level to process
         show_level (int list): levels to display
@@ -439,15 +457,18 @@ def print_mo_hierarchy(class_id, level=0, depth=None, show_level=[]):
     level_indent = "%s%s)" % (indent * level, level)
     class_id = imcgenutils.word_u(class_id)
 
+    if platform is None:
+        platform = "classic"
+
     if level == 0:
         parents = [imcgenutils.word_u(parent) for parent in
-                   MO_CLASS_META[class_id].parents]
+                   MO_CLASS_META[platform][class_id].parents]
         print("[%s]" % (", ".join(sorted(parents))))
 
     if level == 0 or not show_level or level in show_level:
         print("%s%s" % (level_indent, imcgenutils.word_u(class_id)))
 
-    children = sorted(MO_CLASS_META[class_id].children)
+    children = sorted(MO_CLASS_META[platform][class_id].children)
 
     level += 1
     if depth is None or level <= depth:
@@ -456,7 +477,7 @@ def print_mo_hierarchy(class_id, level=0, depth=None, show_level=[]):
             if child == class_id:
                 continue
             print_mo_hierarchy(child, level, depth,
-                               show_level)
+                               show_level, platform)
     level -= 1
 
 
@@ -494,8 +515,11 @@ class ClassIdMeta(object):
             class_id,
             include_prop=True,
             show_tree=True,
-            depth=None):
-        self.__mo_meta = MO_CLASS_META[class_id]
+            depth=None,
+            platform=None):
+        if platform is None:
+            platform = "classic"
+        self.__mo_meta = MO_CLASS_META[platform][class_id]
         self.class_id = class_id
         self.xml_attribute = self.__mo_meta.xml_attribute
         self.rn = self.__mo_meta.rn
@@ -510,11 +534,11 @@ class ClassIdMeta(object):
         self._str_props = "\n"
 
         if show_tree:
-            self._str_tree = _show_tree(class_id, depth)
+            self._str_tree = _show_tree(class_id, depth, platform=platform)
 
         if include_prop:
             class_obj = load_class(self.class_id)
-            self.props = class_obj.prop_meta
+            self.props = class_obj.prop_meta[platform]
             for prop in sorted(self.props):
                 self._str_props += str(self.props[prop]) + "\n"
 
@@ -551,13 +575,16 @@ class ClassIdMeta(object):
 
 
 def _show_tree(class_id, depth=None, level=0, ancestor_str="",
-               ancestor=[], last_child=True):
+               ancestor=[], last_child=True, platform=None):
 
     meta_class_id = imcgenutils.word_u(class_id)
 
     out_str = ""
+
+    if platform is None:
+        platform = "classic"
     if not ancestor:
-        for parent in sorted(MO_CLASS_META[meta_class_id].parents):
+        for parent in sorted(MO_CLASS_META[platform][meta_class_id].parents):
             out_str += "[" + imcgenutils.word_u(parent) + "]" + "\n"
 
     index = len(ancestor) + 1
@@ -569,7 +596,7 @@ def _show_tree(class_id, depth=None, level=0, ancestor_str="",
     else:
         ancestor.append(meta_class_id)
         out_str += ancestor_str + "  |-" + meta_class_id + "\n"
-        children = sorted(MO_CLASS_META[meta_class_id].children)
+        children = sorted(MO_CLASS_META[platform][meta_class_id].children)
         total = len(children)
         count = 0
         if depth is None or level < depth + 1:
@@ -582,7 +609,8 @@ def _show_tree(class_id, depth=None, level=0, ancestor_str="",
                     ancestor_str_ = ancestor_str + "  |"
 
                 out_str += _show_tree(child, depth, level,
-                                      ancestor_str_, ancestor, total == count)
+                                      ancestor_str_, ancestor, total == count,
+                                      platform=platform)
 
         ancestor.pop(index - 1)
     return out_str
@@ -607,7 +635,7 @@ def search_class_id(class_id):
 
     meta_class_id = find_class_id_in_mo_meta_ignore_case(class_id=class_id)
 
-    if meta_class_id is not None:
+    if meta_class_id:
         return meta_class_id
 
     # if class_id not exists in meta
@@ -625,7 +653,8 @@ def search_class_id(class_id):
 
 
 def get_meta_info(class_id, include_prop=True,
-                  show_tree=True, depth=None):
+                  show_tree=True, depth=None,
+                  platform=IMC_PLATFORM.TYPE_CLASSIC):
     """
     Gets class id meta information
 
@@ -664,4 +693,192 @@ def get_meta_info(class_id, include_prop=True,
     if not meta_class_id:
         return
 
-    return ClassIdMeta(meta_class_id, include_prop, show_tree, depth)
+    return ClassIdMeta(meta_class_id, include_prop, show_tree, depth, platform)
+
+
+def prop_exists(mo, prop_name, platform=None):
+
+    if platform:
+        return(platform in mo.prop_meta.keys() and
+               prop_name in mo.prop_meta[platform].keys())
+
+    for platform in IMC_PLATFORM_LIST:
+        if platform in mo.prop_meta.keys() and \
+                prop_name in mo.prop_meta[platform].keys():
+            return True
+
+    return False
+
+
+def _get_property_from_prop_meta_for_platform(mo, prop, platform):
+
+    if platform in mo.prop_meta.keys() and \
+            prop in mo.prop_meta[platform].keys():
+        return mo.prop_meta[platform][prop]
+
+    return None
+
+
+def get_prop_meta(mo, prop, platform=None):
+    """
+    Internal Method that returns the property meta object
+    """
+
+    if platform:
+        return _get_property_from_prop_meta_for_platform(mo, prop, platform)
+
+    for platform in IMC_PLATFORM_LIST:
+        prop_ = _get_property_from_prop_meta_for_platform(
+                mo,
+                prop,
+                platform)
+        if prop_:
+            return prop_
+
+    return None
+
+
+def validate_property_value(mo, prop, value):
+
+    for platform in IMC_PLATFORM_LIST:
+        prop_ = _get_property_from_prop_meta_for_platform(
+                mo,
+                prop,
+                platform)
+        if prop_ and prop_.validate_property_value(value):
+            return True
+
+    return False
+
+
+def property_exists_in_prop_map(mo, prop_name):
+
+    for platform in IMC_PLATFORM_LIST:
+        if platform in mo.prop_map.keys() and \
+                prop_name in mo.prop_map[platform].keys():
+            return True
+
+    return False
+
+
+def _get_property_from_prop_map_for_platform(mo, prop, platform):
+
+    if platform in mo.prop_map.keys() and \
+            prop in mo.prop_map[platform].keys():
+        return mo.prop_map[platform][prop]
+
+    return None
+
+
+def get_property_from_prop_map(mo, prop, platform=None):
+
+    if platform:
+        return _get_property_from_prop_map_for_platform(mo, prop, platform)
+
+    for platform in IMC_PLATFORM_LIST:
+        prop_ = _get_property_from_prop_map_for_platform(
+                mo,
+                prop,
+                platform)
+        if prop_:
+            return prop_
+
+    return None
+
+
+def get_mo_meta(mo, platform=None):
+
+    if platform:
+        try:
+            return mo.mo_meta[platform]
+        except KeyError:
+            raise ImcValidationException("The Managed Object:%s "
+                                         "does not exist for this platform"
+                                         % (mo.__class__.__name__))
+
+    for platform in IMC_PLATFORM_LIST:
+        if platform in mo.mo_meta.keys():
+            return mo.mo_meta[platform]
+
+    return None
+
+
+def validate_mo_version(handle, mo):
+    """
+    This is called from add_mo/set_mo to verify if the mo is supported on
+    the particular server
+    """
+
+    try:
+        mo_version = mo.get_version(platform=handle.platform)
+    except ImcValidationException:
+        raise ImcValidationException("This functionality is not supported "
+                                     "on the current platform")
+
+    if mo_version > handle.version:
+        raise ImcOperationError(
+                "Validate Version",
+                "Platform(version:%s) does not support "
+                "Managed Object:%s(supported since version:%s)"
+                % (handle.version, mo.__class__.__name__, mo_version))
+
+
+def get_server_dn(handle, server_id="1"):
+    """
+    This method gives the dn for a particular rack server based on
+    the type of platform
+
+    For classic: "sys/rack-unit-1"
+    For modular: "sys/chassis-1/server-<server_id>"
+    """
+
+    if handle.platform == IMC_PLATFORM.TYPE_CLASSIC:
+        return "sys/rack-unit-1"
+    elif handle.platform == IMC_PLATFORM.TYPE_MODULAR:
+        return "sys/chassis-1/server-" + str(server_id)
+    else:
+        raise ImcOperationError("Unknown platform type:%s detected" %
+                                handle.platform)
+
+
+def get_dn_prefix_for_platform(handle):
+    """
+    This method checks the platform property from handle and returns the prefix
+    for that specific platform
+
+    Args:
+        handle (ImcHandle)
+
+    Returns:
+        dn prefix in string format
+
+    Examples:
+        get_dn_prefix_for_platform(handle) => "sys/rack-unit-1/" for classic
+        get_dn_prefix_for_platform(handle) => "sys/chassis-1/" for modular
+    """
+
+    if handle.platform == IMC_PLATFORM.TYPE_CLASSIC:
+        return "sys/rack-unit-1"
+    elif handle.platform == IMC_PLATFORM.TYPE_MODULAR:
+        return "sys/chassis-1"
+    else:
+        return ""
+
+
+def get_handle_from_cookie(cookie):
+
+    for handle in global_handles:
+        if handle.cookie == cookie:
+            return handle
+
+    return None
+
+
+def add_handle_to_list(handle):
+    if handle:
+        global_handles.append(handle)
+
+
+def remove_handle_from_list(handle):
+    if handle:
+        global_handles.remove(handle)

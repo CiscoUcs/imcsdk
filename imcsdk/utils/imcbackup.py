@@ -22,8 +22,12 @@ from ..imcexception import ImcValidationException
 log = logging.getLogger('imc')
 
 
+def _is_valid_arg(param, kwargs):
+    return param in kwargs and kwargs[param] is not None
+
+
 def backup_imc(handle, remote_host, remote_file, protocol, username, password,
-               passphrase, timeout_in_sec=600):
+               passphrase, timeout_in_sec=600, entity="CMC", **kwargs):
     """
     backup_imc helps create and download Imc backups.
 
@@ -37,29 +41,52 @@ def backup_imc(handle, remote_host, remote_file, protocol, username, password,
         passphrase (str) : Password for the backup file.
         timeout_in_sec (number) : time in seconds for which method waits
                               for the backUp file to generate before it exits.
+        entity (str): For C3x60 platforms:
+                      "CMC" for backup of chassis related configuration and state  
+                      "CIMC1" for backup of server-1 related configuration and state
+                      "CIMC2" for backup of server-2 related configuration and state
+        kwargs : key=value paired arguments
 
     Example:
         remote_file = "/root/config_backup.xml"
         backup_imc(h,remote_file=remote_file,
                protocol="ftp",username="user",password="pass",
                remote_host="10.10.10.10",passphrase="xxxxxx")
+        backup_imc(handle, remote_file="/users/xyz/backup",
+                   remote_host="1.1.1.1", protocol="scp",
+                   username="admin", password="password",
+                   passphrase="passphrase", timeout_in_sec=600, entity="CMC")
     """
 
     from ..mometa.mgmt.MgmtBackup import MgmtBackup, MgmtBackupConsts
     from ..mometa.top.TopSystem import TopSystem
+    from ..mometa.equipment.EquipmentChassis import EquipmentChassis
+    from ..imccoreutils import IMC_PLATFORM
 
     if password == "" or passphrase == "":
         raise ImcValidationException("Invalid password or passphrase")
 
     top_system = TopSystem()
-    mgmt_backup = MgmtBackup(parent_mo_or_dn=top_system,
-                             hostname=remote_host,
-                             admin_state=MgmtBackupConsts.ADMIN_STATE_ENABLED,
-                             proto=protocol,
-                             pwd=password,
-                             user=username,
-                             passphrase=passphrase,
-                             remote_file=remote_file)
+    parent_mo = None
+    mgmt_backup = None
+
+    if handle.platform == IMC_PLATFORM.TYPE_CLASSIC:
+        parent_mo = top_system
+    elif handle.platform == IMC_PLATFORM.TYPE_MODULAR:
+        parent_mo = EquipmentChassis(parent_mo_or_dn=top_system)
+
+    mgmt_backup = MgmtBackup(parent_mo_or_dn=parent_mo)
+
+    mgmt_backup.hostname = remote_host
+    mgmt_backup.remote_file = remote_file
+    mgmt_backup.user = username
+    mgmt_backup.pwd = password
+    mgmt_backup.passphrase = passphrase
+    mgmt_backup.proto = protocol
+    mgmt_backup.admin_state = MgmtBackupConsts.ADMIN_STATE_ENABLED
+
+    if handle.platform == IMC_PLATFORM.TYPE_MODULAR:
+        mgmt_backup.entity = entity
 
     handle.add_mo(mgmt_backup, modify_present=True)
 
@@ -95,7 +122,7 @@ def backup_imc(handle, remote_host, remote_file, protocol, username, password,
 
 
 def import_imc_backup(handle, remote_host, remote_file, protocol, username,
-                      password, passphrase):
+                      password, passphrase, entity="CMC", **kwargs):
     """
     This operation uploads a Imc backup taken earlier via GUI
     or backup_imc operation for all configuration, system configuration,
@@ -110,30 +137,51 @@ def import_imc_backup(handle, remote_host, remote_file, protocol, username,
         username (str) : Remote Host user name
         password (str) : Remote Host user credentials/password
         passphrase (str) : Password for the backup file.
+        entity (str): For C3x60 platforms:
+                      "CMC" for importing chassis related configuration and state  
+                      "CIMC1" for importing server-1 related configuration and state
+                      "CIMC2" for importing server-2 related configuration and state
+        kwargs : key=value paired arguments
 
     Example:
         remote_file = "/root/config_backup.xml"
         import_imc_backup(h,remote_file=remote_file,
                protocol="ftp",username="user",password="pass",
                remote_host="10.10.10.10",passphrase="xxxxxx")
-    """
+        import_imc_backup(handle, remote_file="/users/xyz/backup",
+                   remote_host="1.1.1.1", protocol="scp",
+                   username="admin", password="password",
+                   passphrase="passphrase", timeout_in_sec=600, entity="CMC")
+ """
 
     from ..mometa.top.TopSystem import TopSystem
     from ..mometa.mgmt.MgmtImporter import MgmtImporter, MgmtImporterConsts
+    from ..mometa.equipment.EquipmentChassis import EquipmentChassis
+    from ..imccoreutils import IMC_PLATFORM
 
     if password == "" or passphrase == "":
         raise ImcValidationException("Invalid password or passphrase")
 
     # create MgmtImporter
     top_system = TopSystem()
-    mgmt_importer = MgmtImporter(parent_mo_or_dn=top_system,
-                                 hostname=remote_host,
-                                 remote_file=remote_file,
-                                 proto=protocol,
-                                 user=username,
-                                 pwd=password,
-                                 passphrase=passphrase,
-                                 admin_state=MgmtImporterConsts.ADMIN_STATE_ENABLED)
+    parent_mo = None
+
+    if handle.platform == IMC_PLATFORM.TYPE_CLASSIC:
+        parent_mo = top_system
+    elif handle.platform == IMC_PLATFORM.TYPE_MODULAR:
+        parent_mo = EquipmentChassis(parent_mo_or_dn=top_system)
+
+    mgmt_importer = MgmtImporter(parent_mo_or_dn=parent_mo)
+    mgmt_importer.hostname = remote_host
+    mgmt_importer.remote_file = remote_file
+    mgmt_importer.proto = protocol
+    mgmt_importer.user = username
+    mgmt_importer.pwd = password
+    mgmt_importer.passphrase = passphrase
+    mgmt_importer.admin_state = MgmtImporterConsts.ADMIN_STATE_ENABLED
+
+    if handle.platform == IMC_PLATFORM.TYPE_MODULAR:
+        mgmt_importer.entity = entity
 
     handle.add_mo(mgmt_importer, modify_present=True)
 
@@ -148,12 +196,13 @@ def import_imc_backup(handle, remote_host, remote_file, protocol, username,
             if mgmt_importer.fsm_stage_descr == "Completed successfully":
                 download_status = True
             if mgmt_importer.fsm_stage_descr == "Error":
-                raise ImcValidationException("Failed to import the CIMC "
-                                             "configuration file." +
-                                             "Error Code: " +
-                                             mgmt_importer.fsm_rmt_inv_err_code +
-                                             " Error Description: " +
-                                             mgmt_importer.fsm_rmt_inv_err_descr)
+                raise ImcValidationException(
+                        "Failed to import the CIMC "
+                        "configuration file." +
+                        "Error Code: " +
+                        mgmt_importer.fsm_rmt_inv_err_code +
+                        " Error Description: " +
+                        mgmt_importer.fsm_rmt_inv_err_descr)
         if download_status:
             break
 

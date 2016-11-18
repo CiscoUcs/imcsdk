@@ -13,10 +13,12 @@
 
 from nose.tools import assert_equal
 from ..connection.info import custom_setup, custom_teardown
-from imcsdk.apis.admin.user import create_local_user, delete_local_user, user_exists
+from imcsdk.apis.admin.user import create_local_user, delete_local_user, \
+    user_exists, set_strong_password, is_strong_password_set
 from imcsdk.apis.admin.snmp import snmp_enable, snmp_disable, snmp_enabled, \
     snmp_user_add, snmp_user_exists, snmp_user_remove, \
     snmp_trap_add, snmp_trap_exists, snmp_trap_remove
+
 
 handle = None
 snmp_trap_id = 0
@@ -30,6 +32,18 @@ def setup_module():
 def teardown_module():
     global handle
     custom_teardown(handle)
+
+
+def test_set_strong_password():
+    global handle
+    set_strong_password(handle)
+    assert_equal(is_strong_password_set(handle), True)
+
+
+def test_unset_strong_password():
+    global handle
+    set_strong_password(handle, enable=False)
+    assert_equal(is_strong_password_set(handle), False)
 
 
 def test_local_user_create():

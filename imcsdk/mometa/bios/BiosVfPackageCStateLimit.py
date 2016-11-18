@@ -16,6 +16,8 @@ class BiosVfPackageCStateLimitConsts:
     VP_PACKAGE_CSTATE_LIMIT_C6_STATE = "c6-state"
     VP_PACKAGE_CSTATE_LIMIT_NO_LIMIT = "no-limit"
     VP_PACKAGE_CSTATE_LIMIT_PLATFORM_DEFAULT = "platform-default"
+    __VP_PACKAGE_CSTATE_LIMIT_C6_NON_RETENTION = "c6-non-retention"
+    __VP_PACKAGE_CSTATE_LIMIT_C6_RETENTION = "c6-retention"
 
 
 class BiosVfPackageCStateLimit(ManagedObject):
@@ -24,22 +26,50 @@ class BiosVfPackageCStateLimit(ManagedObject):
     consts = BiosVfPackageCStateLimitConsts()
     naming_props = set([])
 
-    mo_meta = MoMeta("BiosVfPackageCStateLimit", "biosVfPackageCStateLimit", "Package-CState-Limit", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
+    mo_meta = {
+        "classic": MoMeta("BiosVfPackageCStateLimit", "biosVfPackageCStateLimit", "Package-CState-Limit", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
+        "modular": MoMeta("BiosVfPackageCStateLimit", "biosVfPackageCStateLimit", "Package-CState-Limit", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
+    }
+
 
     prop_meta = {
-        "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-        "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
-        "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
-        "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-        "vp_package_c_state_limit": MoPropertyMeta("vp_package_c_state_limit", "vpPackageCStateLimit", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["C0/C1", "C2", "C6 Retention", "C6 non Retention", "c0-state", "c1-state", "c3-state", "c6-state", "no-limit", "platform-default"], []), 
+
+        "classic": {
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "vp_package_c_state_limit": MoPropertyMeta("vp_package_c_state_limit", "vpPackageCStateLimit", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["C0/C1", "C2", "C6 Retention", "C6 non Retention", "c0-state", "c1-state", "c3-state", "c6-state", "no-limit", "platform-default"], []), 
+        },
+
+        "modular": {
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "vp_package_c_state_limit": MoPropertyMeta("vp_package_c_state_limit", "vpPackageCStateLimit", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["C0/C1", "C2", "C6 Retention", "C6 non Retention", "c0-state", "c1-state", "c3-state", "c6-state", "no-limit", "platform-default"], []), 
+        },
+
     }
 
     prop_map = {
-        "childAction": "child_action", 
-        "dn": "dn", 
-        "rn": "rn", 
-        "status": "status", 
-        "vpPackageCStateLimit": "vp_package_c_state_limit", 
+
+        "classic": {
+            "childAction": "child_action", 
+            "dn": "dn", 
+            "rn": "rn", 
+            "status": "status", 
+            "vpPackageCStateLimit": "vp_package_c_state_limit", 
+        },
+
+        "modular": {
+            "childAction": "child_action", 
+            "dn": "dn", 
+            "rn": "rn", 
+            "status": "status", 
+            "vpPackageCStateLimit": "vp_package_c_state_limit", 
+        },
+
     }
 
     def __init__(self, parent_mo_or_dn, **kwargs):

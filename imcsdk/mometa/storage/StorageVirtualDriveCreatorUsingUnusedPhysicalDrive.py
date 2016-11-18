@@ -62,56 +62,109 @@ class StorageVirtualDriveCreatorUsingUnusedPhysicalDrive(ManagedObject):
     consts = StorageVirtualDriveCreatorUsingUnusedPhysicalDriveConsts()
     naming_props = set([])
 
-    mo_meta = MoMeta("StorageVirtualDriveCreatorUsingUnusedPhysicalDrive", "storageVirtualDriveCreatorUsingUnusedPhysicalDrive", "virtual-drive-create", VersionMeta.Version201a, "InputOutput", 0xffff, [], ["admin"], [u'storageController'], [u'storageUnusedLocalDisk'], ["Get", "Set"])
+    mo_meta = {
+        "classic": MoMeta("StorageVirtualDriveCreatorUsingUnusedPhysicalDrive", "storageVirtualDriveCreatorUsingUnusedPhysicalDrive", "virtual-drive-create", VersionMeta.Version201a, "InputOutput", 0xffff, [], ["admin"], [u'storageController'], [u'storageUnusedLocalDisk'], ["Get", "Set"]),
+        "modular": MoMeta("StorageVirtualDriveCreatorUsingUnusedPhysicalDrive", "storageVirtualDriveCreatorUsingUnusedPhysicalDrive", "virtual-drive-create", VersionMeta.Version2013e, "InputOutput", 0x7fff, [], ["admin"], [u'storageController'], [u'storageUnusedLocalDisk'], [None])
+    }
+
 
     prop_meta = {
-        "access_policy": MoPropertyMeta("access_policy", "accessPolicy", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["", "blocked", "default", "hidden", "read-only", "read-write"], []), 
-        "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x4, 0, 510, None, ["enable-self-encrypt"], []), 
-        "admin_state": MoPropertyMeta("admin_state", "adminState", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["trigger", "triggered"], []), 
-        "cache_policy": MoPropertyMeta("cache_policy", "cachePolicy", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "cached-io", "default", "direct-io"], []), 
-        "created_virtual_drive_dn": MoPropertyMeta("created_virtual_drive_dn", "createdVirtualDriveDn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-        "description": MoPropertyMeta("description", "description", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-        "disk_cache_policy": MoPropertyMeta("disk_cache_policy", "diskCachePolicy", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["", "default", "disabled", "enabled", "unchanged"], []), 
-        "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x40, 0, 255, None, [], []), 
-        "drive_group": MoPropertyMeta("drive_group", "driveGroup", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x80, 1, 510, r"""((\[\d+(,\d+)*\])(\[\d+(,\d+)*\])*)""", [], []), 
-        "min_required_physical_drives": MoPropertyMeta("min_required_physical_drives", "minRequiredPhysicalDrives", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-        "oper_status": MoPropertyMeta("oper_status", "operStatus", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-        "raid_level": MoPropertyMeta("raid_level", "raidLevel", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["", "0", "1", "10", "5", "50", "6", "60"], []), 
-        "read_policy": MoPropertyMeta("read_policy", "readPolicy", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["", "always-read-ahead", "default", "no-read-ahead"], []), 
-        "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x400, 0, 255, None, [], []), 
-        "size": MoPropertyMeta("size", "size", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x800, 1, 510, r"""(\d+\s?([MGT]B)?)""", [], []), 
-        "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x1000, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-        "strip_size": MoPropertyMeta("strip_size", "stripSize", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x2000, None, None, None, ["", "1024k", "128k", "16k", "256k", "32k", "512k", "64k", "8k", "default"], []), 
-        "virtual_drive_name": MoPropertyMeta("virtual_drive_name", "virtualDriveName", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x4000, 0, 15, None, [], []), 
-        "write_policy": MoPropertyMeta("write_policy", "writePolicy", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x8000, None, None, None, ["", "Always Write Back", "Write Back Good BBU", "Write Through", "always-write-back", "default", "write-back-good-bbu", "write-through"], []), 
+
+        "classic": {
+            "access_policy": MoPropertyMeta("access_policy", "accessPolicy", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["", "blocked", "default", "hidden", "read-only", "read-write"], []), 
+            "admin_state": MoPropertyMeta("admin_state", "adminState", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["trigger", "triggered"], []), 
+            "cache_policy": MoPropertyMeta("cache_policy", "cachePolicy", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "cached-io", "default", "direct-io"], []), 
+            "created_virtual_drive_dn": MoPropertyMeta("created_virtual_drive_dn", "createdVirtualDriveDn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "description": MoPropertyMeta("description", "description", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "disk_cache_policy": MoPropertyMeta("disk_cache_policy", "diskCachePolicy", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "default", "disabled", "enabled", "unchanged"], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, None, [], []), 
+            "drive_group": MoPropertyMeta("drive_group", "driveGroup", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x40, 1, 510, r"""((\[\d+(,\d+)*\])(\[\d+(,\d+)*\])*)""", [], []), 
+            "min_required_physical_drives": MoPropertyMeta("min_required_physical_drives", "minRequiredPhysicalDrives", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "oper_status": MoPropertyMeta("oper_status", "operStatus", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "raid_level": MoPropertyMeta("raid_level", "raidLevel", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["", "0", "1", "10", "5", "50", "6", "60"], []), 
+            "read_policy": MoPropertyMeta("read_policy", "readPolicy", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["", "always-read-ahead", "default", "no-read-ahead"], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x200, 0, 255, None, [], []), 
+            "size": MoPropertyMeta("size", "size", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x400, 1, 510, r"""(\d+\s?([MGT]B)?)""", [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x800, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "strip_size": MoPropertyMeta("strip_size", "stripSize", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x1000, None, None, None, ["", "1024k", "128k", "16k", "256k", "32k", "512k", "64k", "8k", "default"], []), 
+            "virtual_drive_name": MoPropertyMeta("virtual_drive_name", "virtualDriveName", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x2000, 0, 15, None, [], []), 
+            "write_policy": MoPropertyMeta("write_policy", "writePolicy", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x4000, None, None, None, ["", "Always Write Back", "Write Back Good BBU", "Write Through", "always-write-back", "default", "write-back-good-bbu", "write-through"], []), 
+            "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x8000, 0, 510, None, ["enable-self-encrypt"], []), 
+        },
+
+        "modular": {
+            "access_policy": MoPropertyMeta("access_policy", "accessPolicy", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["", "blocked", "default", "hidden", "read-only", "read-write"], []), 
+            "admin_state": MoPropertyMeta("admin_state", "adminState", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["trigger", "triggered"], []), 
+            "cache_policy": MoPropertyMeta("cache_policy", "cachePolicy", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "cached-io", "default", "direct-io"], []), 
+            "created_virtual_drive_dn": MoPropertyMeta("created_virtual_drive_dn", "createdVirtualDriveDn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "description": MoPropertyMeta("description", "description", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "disk_cache_policy": MoPropertyMeta("disk_cache_policy", "diskCachePolicy", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "default", "disabled", "enabled", "unchanged"], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, None, [], []), 
+            "drive_group": MoPropertyMeta("drive_group", "driveGroup", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, 1, 510, r"""((\[\d+(,\d+)*\])(\[\d+(,\d+)*\])*)""", [], []), 
+            "min_required_physical_drives": MoPropertyMeta("min_required_physical_drives", "minRequiredPhysicalDrives", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "oper_status": MoPropertyMeta("oper_status", "operStatus", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "raid_level": MoPropertyMeta("raid_level", "raidLevel", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["", "0", "1", "10", "5", "50", "6", "60"], []), 
+            "read_policy": MoPropertyMeta("read_policy", "readPolicy", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["", "always-read-ahead", "default", "no-read-ahead"], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, 0, 255, None, [], []), 
+            "size": MoPropertyMeta("size", "size", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x400, 1, 510, r"""(\d+\s?([MGT]B)?)""", [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x800, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "strip_size": MoPropertyMeta("strip_size", "stripSize", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x1000, None, None, None, ["", "1024k", "128k", "16k", "256k", "32k", "512k", "64k", "8k", "default"], []), 
+            "virtual_drive_name": MoPropertyMeta("virtual_drive_name", "virtualDriveName", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2000, 0, 15, None, [], []), 
+            "write_policy": MoPropertyMeta("write_policy", "writePolicy", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4000, None, None, None, ["", "Always Write Back", "Write Back Good BBU", "Write Through", "always-write-back", "default", "write-back-good-bbu", "write-through"], []), 
+        },
+
     }
 
     prop_map = {
-        "accessPolicy": "access_policy", 
-        "adminAction": "admin_action", 
-        "adminState": "admin_state", 
-        "cachePolicy": "cache_policy", 
-        "createdVirtualDriveDn": "created_virtual_drive_dn", 
-        "description": "description", 
-        "diskCachePolicy": "disk_cache_policy", 
-        "dn": "dn", 
-        "driveGroup": "drive_group", 
-        "minRequiredPhysicalDrives": "min_required_physical_drives", 
-        "operStatus": "oper_status", 
-        "raidLevel": "raid_level", 
-        "readPolicy": "read_policy", 
-        "rn": "rn", 
-        "size": "size", 
-        "status": "status", 
-        "stripSize": "strip_size", 
-        "virtualDriveName": "virtual_drive_name", 
-        "writePolicy": "write_policy", 
+
+        "classic": {
+            "accessPolicy": "access_policy", 
+            "adminState": "admin_state", 
+            "cachePolicy": "cache_policy", 
+            "createdVirtualDriveDn": "created_virtual_drive_dn", 
+            "description": "description", 
+            "diskCachePolicy": "disk_cache_policy", 
+            "dn": "dn", 
+            "driveGroup": "drive_group", 
+            "minRequiredPhysicalDrives": "min_required_physical_drives", 
+            "operStatus": "oper_status", 
+            "raidLevel": "raid_level", 
+            "readPolicy": "read_policy", 
+            "rn": "rn", 
+            "size": "size", 
+            "status": "status", 
+            "stripSize": "strip_size", 
+            "virtualDriveName": "virtual_drive_name", 
+            "writePolicy": "write_policy", 
+            "adminAction": "admin_action", 
+        },
+
+        "modular": {
+            "accessPolicy": "access_policy", 
+            "adminState": "admin_state", 
+            "cachePolicy": "cache_policy", 
+            "createdVirtualDriveDn": "created_virtual_drive_dn", 
+            "description": "description", 
+            "diskCachePolicy": "disk_cache_policy", 
+            "dn": "dn", 
+            "driveGroup": "drive_group", 
+            "minRequiredPhysicalDrives": "min_required_physical_drives", 
+            "operStatus": "oper_status", 
+            "raidLevel": "raid_level", 
+            "readPolicy": "read_policy", 
+            "rn": "rn", 
+            "size": "size", 
+            "status": "status", 
+            "stripSize": "strip_size", 
+            "virtualDriveName": "virtual_drive_name", 
+            "writePolicy": "write_policy", 
+        },
+
     }
 
     def __init__(self, parent_mo_or_dn, **kwargs):
         self._dirty_mask = 0
         self.access_policy = None
-        self.admin_action = None
         self.admin_state = None
         self.cache_policy = None
         self.created_virtual_drive_dn = None
@@ -127,6 +180,7 @@ class StorageVirtualDriveCreatorUsingUnusedPhysicalDrive(ManagedObject):
         self.strip_size = None
         self.virtual_drive_name = None
         self.write_policy = None
+        self.admin_action = None
 
         ManagedObject.__init__(self, "StorageVirtualDriveCreatorUsingUnusedPhysicalDrive", parent_mo_or_dn, **kwargs)
 

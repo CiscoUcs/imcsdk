@@ -21,40 +21,86 @@ class AdaptorVMFexEthIf(ManagedObject):
     consts = AdaptorVMFexEthIfConsts()
     naming_props = set([u'name'])
 
-    mo_meta = MoMeta("AdaptorVMFexEthIf", "adaptorVMFexEthIf", "vmfex-eth-[name]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [], ["Get"])
+    mo_meta = {
+        "classic": MoMeta("AdaptorVMFexEthIf", "adaptorVMFexEthIf", "vmfex-eth-[name]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [], ["Get"]),
+        "modular": MoMeta("AdaptorVMFexEthIf", "adaptorVMFexEthIf", "vmfex-eth-[name]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [], [None])
+    }
+
 
     prop_meta = {
-        "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-        "class_of_service": MoPropertyMeta("class_of_service", "classOfService", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, r"""[0-6]""", [], []), 
-        "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
-        "if_type": MoPropertyMeta("if_type", "ifType", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["virtual"], []), 
-        "mtu": MoPropertyMeta("mtu", "mtu", "uint", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], ["1500-9000"]), 
-        "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version151f, MoPropertyMeta.NAMING, None, None, None, r"""[a-zA-Z0-9\-\._:]{1,32}""", [], []), 
-        "pxe_boot": MoPropertyMeta("pxe_boot", "pxeBoot", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
-        "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
-        "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-        "uplink_failback_timeout": MoPropertyMeta("uplink_failback_timeout", "uplinkFailbackTimeout", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-        "uplink_failover": MoPropertyMeta("uplink_failover", "uplinkFailover", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
-        "uplink_port": MoPropertyMeta("uplink_port", "uplinkPort", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["0", "1"], []), 
-        "vlan": MoPropertyMeta("vlan", "vlan", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
-        "vlan_mode": MoPropertyMeta("vlan_mode", "vlanMode", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
+
+        "classic": {
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "class_of_service": MoPropertyMeta("class_of_service", "classOfService", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, r"""[0-6]""", [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
+            "if_type": MoPropertyMeta("if_type", "ifType", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["virtual"], []), 
+            "mtu": MoPropertyMeta("mtu", "mtu", "uint", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], ["1500-9000"]), 
+            "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version151f, MoPropertyMeta.NAMING, None, None, None, r"""[a-zA-Z0-9\-\._:]{1,32}""", [], []), 
+            "pxe_boot": MoPropertyMeta("pxe_boot", "pxeBoot", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "uplink_failback_timeout": MoPropertyMeta("uplink_failback_timeout", "uplinkFailbackTimeout", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "uplink_failover": MoPropertyMeta("uplink_failover", "uplinkFailover", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
+            "uplink_port": MoPropertyMeta("uplink_port", "uplinkPort", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["0", "1"], []), 
+            "vlan": MoPropertyMeta("vlan", "vlan", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
+            "vlan_mode": MoPropertyMeta("vlan_mode", "vlanMode", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
+        },
+
+        "modular": {
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "class_of_service": MoPropertyMeta("class_of_service", "classOfService", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, r"""[0-6]""", [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
+            "if_type": MoPropertyMeta("if_type", "ifType", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["virtual"], []), 
+            "mtu": MoPropertyMeta("mtu", "mtu", "uint", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], ["1500-9000"]), 
+            "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version2013e, MoPropertyMeta.NAMING, None, None, None, r"""[a-zA-Z0-9\-\._:]{1,32}""", [], []), 
+            "pxe_boot": MoPropertyMeta("pxe_boot", "pxeBoot", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "uplink_failback_timeout": MoPropertyMeta("uplink_failback_timeout", "uplinkFailbackTimeout", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "uplink_failover": MoPropertyMeta("uplink_failover", "uplinkFailover", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
+            "uplink_port": MoPropertyMeta("uplink_port", "uplinkPort", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["0", "1"], []), 
+            "vlan": MoPropertyMeta("vlan", "vlan", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
+            "vlan_mode": MoPropertyMeta("vlan_mode", "vlanMode", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
+        },
+
     }
 
     prop_map = {
-        "childAction": "child_action", 
-        "classOfService": "class_of_service", 
-        "dn": "dn", 
-        "ifType": "if_type", 
-        "mtu": "mtu", 
-        "name": "name", 
-        "pxeBoot": "pxe_boot", 
-        "rn": "rn", 
-        "status": "status", 
-        "uplinkFailbackTimeout": "uplink_failback_timeout", 
-        "uplinkFailover": "uplink_failover", 
-        "uplinkPort": "uplink_port", 
-        "vlan": "vlan", 
-        "vlanMode": "vlan_mode", 
+
+        "classic": {
+            "childAction": "child_action", 
+            "classOfService": "class_of_service", 
+            "dn": "dn", 
+            "ifType": "if_type", 
+            "mtu": "mtu", 
+            "name": "name", 
+            "pxeBoot": "pxe_boot", 
+            "rn": "rn", 
+            "status": "status", 
+            "uplinkFailbackTimeout": "uplink_failback_timeout", 
+            "uplinkFailover": "uplink_failover", 
+            "uplinkPort": "uplink_port", 
+            "vlan": "vlan", 
+            "vlanMode": "vlan_mode", 
+        },
+
+        "modular": {
+            "childAction": "child_action", 
+            "classOfService": "class_of_service", 
+            "dn": "dn", 
+            "ifType": "if_type", 
+            "mtu": "mtu", 
+            "name": "name", 
+            "pxeBoot": "pxe_boot", 
+            "rn": "rn", 
+            "status": "status", 
+            "uplinkFailbackTimeout": "uplink_failback_timeout", 
+            "uplinkFailover": "uplink_failover", 
+            "uplinkPort": "uplink_port", 
+            "vlan": "vlan", 
+            "vlanMode": "vlan_mode", 
+        },
+
     }
 
     def __init__(self, parent_mo_or_dn, name, **kwargs):

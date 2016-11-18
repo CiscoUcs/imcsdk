@@ -8,7 +8,7 @@ from ...imcmeta import VersionMeta
 class BiosVfAutonumousCstateEnableConsts:
     VP_AUTONUMOUS_CSTATE_ENABLE_DISABLED = "Disabled"
     VP_AUTONUMOUS_CSTATE_ENABLE_ENABLED = "Enabled"
-    VP_AUTONUMOUS_CSTATE_ENABLE_DISBLED = "disbled"
+    _VP_AUTONUMOUS_CSTATE_ENABLE_DISABLED = "disabled"
     _VP_AUTONUMOUS_CSTATE_ENABLE_ENABLED = "enabled"
     VP_AUTONUMOUS_CSTATE_ENABLE_PLATFORM_DEFAULT = "platform-default"
 
@@ -19,22 +19,33 @@ class BiosVfAutonumousCstateEnable(ManagedObject):
     consts = BiosVfAutonumousCstateEnableConsts()
     naming_props = set([])
 
-    mo_meta = MoMeta("BiosVfAutonumousCstateEnable", "biosVfAutonumousCstateEnable", "Autonumous-Cstate-Enable", VersionMeta.Version2010b, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
+    mo_meta = {
+        "classic": MoMeta("BiosVfAutonumousCstateEnable", "biosVfAutonumousCstateEnable", "Autonumous-Cstate-Enable", VersionMeta.Version2010b, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
+    }
+
 
     prop_meta = {
-        "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2010b, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-        "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2010b, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
-        "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2010b, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
-        "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2010b, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-        "vp_autonumous_cstate_enable": MoPropertyMeta("vp_autonumous_cstate_enable", "vpAutonumousCstateEnable", "string", VersionMeta.Version2010b, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "disbled", "enabled", "platform-default"], []), 
+
+        "classic": {
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2010b, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2010b, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2010b, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2010b, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "vp_autonumous_cstate_enable": MoPropertyMeta("vp_autonumous_cstate_enable", "vpAutonumousCstateEnable", "string", VersionMeta.Version2010b, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []), 
+        },
+
     }
 
     prop_map = {
-        "childAction": "child_action", 
-        "dn": "dn", 
-        "rn": "rn", 
-        "status": "status", 
-        "vpAutonumousCstateEnable": "vp_autonumous_cstate_enable", 
+
+        "classic": {
+            "childAction": "child_action", 
+            "dn": "dn", 
+            "rn": "rn", 
+            "status": "status", 
+            "vpAutonumousCstateEnable": "vp_autonumous_cstate_enable", 
+        },
+
     }
 
     def __init__(self, parent_mo_or_dn, **kwargs):

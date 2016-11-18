@@ -15,12 +15,19 @@
 import time
 import datetime
 from imcsdk.imcgenutils import *
+from imcsdk.imccoreutils import IMC_PLATFORM, get_server_dn
+from imcsdk.mometa.huu.HuuFirmwareUpdater import HuuFirmwareUpdater, \
+    HuuFirmwareUpdaterConsts
+from imcsdk.mometa.huu.HuuFirmwareUpdateStatus import HuuFirmwareUpdateStatus
+from imcsdk.mometa.top.TopSystem import TopSystem
+from imcsdk.mometa.huu.HuuController import HuuController
 
 
 def update_imc_firmware_huu(handle, remote_share, share_type, remote_ip,
                             username="", password="", update_component="all",
                             stop_on_error="yes", timeout=240,
-                            verify_update="yes", cimc_secure_boot="no"):
+                            verify_update="yes", cimc_secure_boot="no",
+                            server_id=1):
     """
     This method can be used to upgrade the cimc firmware
 
@@ -38,6 +45,8 @@ def update_imc_firmware_huu(handle, remote_share, share_type, remote_ip,
         timeout (int): Timeout value. Range is 30-240 mins.
         verify_update (string): "yes", "no"
         cimc_secure_boot (string): "yes", "no"
+        server_id (int): Server id for which firmware is performed.
+                         This is relevant to C3x60 platforms.
 
     Returns:
         HuuFirmwareUpdater object
@@ -56,13 +65,13 @@ def update_imc_firmware_huu(handle, remote_share, share_type, remote_ip,
                                 timeout=60)
     """
 
-    from imcsdk.mometa.huu.HuuFirmwareUpdater import HuuFirmwareUpdater, \
-        HuuFirmwareUpdaterConsts
-    from imcsdk.mometa.top.TopSystem import TopSystem
-    from imcsdk.mometa.huu.HuuController import HuuController
-
     top_system = TopSystem()
-    huu = HuuController(top_system)
+    if handle.platform == IMC_PLATFORM.TYPE_CLASSIC:
+        parent_dn = top_system.dn
+    elif handle.platform == IMC_PLATFORM.TYPE_MODULAR:
+        parent_dn = get_server_dn(handle, str(server_id))
+
+    huu = HuuController(parent_mo_or_dn=parent_dn)
 
     huu_firmware_updater = HuuFirmwareUpdater(
         parent_mo_or_dn=huu,
@@ -77,7 +86,7 @@ def update_imc_firmware_huu(handle, remote_share, share_type, remote_ip,
         time_out=str(timeout),
         verify_update=verify_update,
         cimc_secure_boot=cimc_secure_boot)
-    handle.add_mo(huu_firmware_updater, modify_present=True)
+    handle.add_mo(huu_firmware_updater)
     return huu_firmware_updater
 
 
@@ -101,7 +110,7 @@ def _print_component_upgrade_summary(handle):
         log.info("%20s: %s" % (obj.component, obj.update_status))
 
 
-def monitor_huu_firmware_update(handle, timeout=60, interval=10):
+def monitor_huu_firmware_update(handle, timeout=60, interval=10, server_id=1):
     """
     This method monitors status of a firmware upgrade.
 
@@ -109,6 +118,7 @@ def monitor_huu_firmware_update(handle, timeout=60, interval=10):
         handle(ImcHandle)
         timeout(int): Timeout in minutes for monitor API.
         interval(int): frequency of monitoring in seconds
+        server_id(int): Server id for monitoring firmware upgrade
 
     Returns:
         None
@@ -118,9 +128,20 @@ def monitor_huu_firmware_update(handle, timeout=60, interval=10):
     """
     current_status = []
     start = datetime.datetime.now()
+
+    top_system = TopSystem()
+    if handle.platform == IMC_PLATFORM.TYPE_CLASSIC:
+        parent_dn = top_system.dn
+    elif handle.platform == IMC_PLATFORM.TYPE_MODULAR:
+        parent_dn = get_server_dn(handle, str(server_id))
+
+    huu = HuuController(parent_mo_or_dn=parent_dn)
+    huu_firmware_updater = HuuFirmwareUpdater(parent_mo_or_dn=huu.dn)
+    update_obj = HuuFirmwareUpdateStatus(
+            parent_mo_or_dn=huu_firmware_updater.dn)
+
     while True:
         try:
-            update_obj = (handle.query_classid("huuFirmwareUpdateStatus"))[0]
             if _has_upgrade_started(update_obj):
                 log_progress("Firmware upgrade is yet to start")
 

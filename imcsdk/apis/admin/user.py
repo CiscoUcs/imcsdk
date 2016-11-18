@@ -23,7 +23,7 @@ log = logging.getLogger('imc')
 log.setLevel(logging.DEBUG)
 
 
-def set_strong_password(handle, enable=False):
+def set_strong_password(handle, enable=True):
     """
     This method will enable/disable strong password policy for users
 
@@ -35,7 +35,8 @@ def set_strong_password(handle, enable=False):
         AaaUserPolicy object
     """
 
-    user_policy = handle.query_classid("AaaUserPolicy")
+    mos = handle.query_classid("AaaUserPolicy")
+    user_policy = mos[0]
 
     if enable:
         user_policy.user_password_policy = "enabled"
@@ -44,6 +45,21 @@ def set_strong_password(handle, enable=False):
 
     handle.set_mo(user_policy)
     return user_policy
+
+
+def is_strong_password_set(handle):
+    """
+    This method will check if strong password policy is enabled
+
+    Args:
+        handle(ImcHandle)
+
+    Returns:
+        True if enabled, else False
+    """
+
+    mos = handle.query_classid("AaaUserPolicy")
+    return (mos[0].user_password_policy == "enabled")
 
 
 def get_local_users(handle, dump=False):
@@ -58,20 +74,20 @@ def get_local_users(handle, dump=False):
         List of AaaUser objects corresponding to the active users
     """
 
-    from imcsdk.mometa.aaa.AaaUser import AaaUserConsts
-
     aaa_users = handle.query_classid("AaaUser")
-    active_users = []
+    users = []
     for user in aaa_users:
-        if user.account_status == AaaUserConsts.ACCOUNT_STATUS_ACTIVE:
-            active_users.append(user)
+        if user.name != "":
+            users.append(user)
     if dump:
-        log.info("List of active users (id, username, role):")
-        log.info("------------------------------------------")
+        log.info("List of users (id, username, role, status")
+        log.info("-----------------------------------------")
 
-        for user in active_users:
-            log.info(" %s \t%s \t%s" % (user.id, user.name, user.priv))
-    return active_users
+        for user in users:
+            log.info(" %s %s %s %s" %
+                     (user.id.rjust(3), user.name.center(15),
+                      user.priv.center(15), user.account_status.center(15)))
+    return users
 
 
 def create_local_user(handle, username, password, privilege="read-only"):

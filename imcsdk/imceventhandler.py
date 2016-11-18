@@ -241,7 +241,7 @@ class ImcEventHandle(object):
             ImcWarning('Mo ' + pmo.dn + ' not found.')
             return
 
-        if timeout_sec is not None and time_left is not None and time_left > 0:
+        if timeout_sec and time_left and time_left > 0:
             if time_left < poll_sec:
                 poll_sec = timeout_sec - time_left
 
@@ -284,7 +284,7 @@ class ImcEventHandle(object):
         if mce is None:
             return
 
-        if watch_block.callback is not None:
+        if watch_block.callback:
             watch_block.callback(mce)
 
         # watch mo until gets deleted
@@ -295,7 +295,7 @@ class ImcEventHandle(object):
 
         # dequeue mce
         mce = self.__dequeue_mce(time_left, watch_block)
-        if mce is not None and watch_block.callback is not None:
+        if mce and watch_block.callback:
             watch_block.callback(mce)
 
     def __dequeue_function(self):
@@ -316,20 +316,20 @@ class ImcEventHandle(object):
 
                     # checks if watch_block is not timed out, else remove
                     time_left = None
-                    if timeout_sec is not None:
+                    if timeout_sec:
                         time_left = self.__time_left(watch_block)
                         if time_left <= 0:
                             self.__wb_to_remove.append(watch_block)
                             continue
 
                     # poll for mo. Not to monitor event.
-                    if poll_sec is not None and mo is not None:
+                    if poll_sec and mo:
                         self.__dequeue_mo_prop_poll(mo, prop, poll_sec,
                                                     watch_block, timeout_sec,
                                                     time_left)
-                    elif mo is not None:
+                    elif mo:
                         # watch mo until prop_val changed to desired value
-                        if prop is not None:
+                        if prop:
                             self.__dequeue_mo_prop_event(prop, watch_block,
                                                          time_left)
                         # watch mo until it is removed
@@ -389,7 +389,7 @@ class ImcEventHandle(object):
                                  capacity,
                                  callback)  # Add a List of Watchers
 
-        if watch_block is not None and watch_block.callback is None:
+        if watch_block and watch_block.callback is None:
             watch_block.callback = watch_block.dequeue_default_callback
 
         self.__wbs.append(watch_block)
@@ -420,16 +420,16 @@ class ImcEventHandle(object):
         return watch__type_filter
 
     def _add_mo_watch(self, managed_object, prop=None, success_value=[],
-                      poll_sec=None):
+                      poll_sec=None, platform=None):
         if imccoreutils.find_class_id_in_mo_meta_ignore_case(
                 managed_object.get_class_id()) is None:
             raise ImcValidationException(
                 "Unknown ClassId %s provided." %
                 managed_object.get_class_id())
 
-        if prop is not None:
+        if prop:
             mo_property_meta = imccoreutils.get_mo_property_meta(
-                managed_object.get_class_id(), prop)
+                managed_object.get_class_id(), prop, platform)
             if mo_property_meta is None:
                 raise ImcValidationException(
                     "Unknown Property %s provided." % prop)
@@ -466,7 +466,8 @@ class ImcEventHandle(object):
             poll_sec=None,
             timeout_sec=None,
             call_back=None,
-            context=None):
+            context=None,
+            platform=None):
         """
         Adds an event handler.
 
@@ -486,15 +487,16 @@ class ImcEventHandle(object):
             call_back - call back method
         """
 
-        if class_id is not None and managed_object is not None:
+        if class_id and managed_object:
             raise ImcValidationException(
                 "Specify either class_id or managedObject, not both")
 
-        if class_id is not None:
+        if class_id:
             filter_callback = self._add_class_id_watch(class_id)
-        elif managed_object is not None:
+        elif managed_object:
             filter_callback = self._add_mo_watch(managed_object, prop,
-                                                 success_value, poll_sec)
+                                                 success_value, poll_sec,
+                                                 platform)
         else:
             def watch_all_filter(mce):
                 """
@@ -522,7 +524,7 @@ class ImcEventHandle(object):
                                            filter_callback=filter_callback,
                                            callback=call_back)
 
-        if watch_block is not None and len(self.__wbs) == 1:
+        if watch_block and len(self.__wbs) == 1:
             if poll_sec is None:
                 self.__thread_enqueue_start()
             self.__thread_dequeue_start()

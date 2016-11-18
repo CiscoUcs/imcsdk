@@ -24,24 +24,54 @@ class BiosVfOnboardNIC(ManagedObject):
     consts = BiosVfOnboardNICConsts()
     naming_props = set([])
 
-    mo_meta = MoMeta("BiosVfOnboardNIC", "biosVfOnboardNIC", "Onboard-NIC", VersionMeta.Version151f, "InputOutput", 0x3f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
+    mo_meta = {
+        "classic": MoMeta("BiosVfOnboardNIC", "biosVfOnboardNIC", "Onboard-NIC", VersionMeta.Version151f, "InputOutput", 0x3f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
+        "modular": MoMeta("BiosVfOnboardNIC", "biosVfOnboardNIC", "Onboard-NIC", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
+    }
+
 
     prop_meta = {
-        "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-        "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
-        "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
-        "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-        "vp_onboard10_gbit_lom": MoPropertyMeta("vp_onboard10_gbit_lom", "vpOnboard10GbitLOM", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []), 
-        "vp_onboard_gbit_lom": MoPropertyMeta("vp_onboard_gbit_lom", "vpOnboardGbitLOM", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []), 
+
+        "classic": {
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "vp_onboard10_gbit_lom": MoPropertyMeta("vp_onboard10_gbit_lom", "vpOnboard10GbitLOM", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []), 
+            "vp_onboard_gbit_lom": MoPropertyMeta("vp_onboard_gbit_lom", "vpOnboardGbitLOM", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []), 
+        },
+
+        "modular": {
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "vp_onboard10_gbit_lom": MoPropertyMeta("vp_onboard10_gbit_lom", "vpOnboard10GbitLOM", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []), 
+            "vp_onboard_gbit_lom": MoPropertyMeta("vp_onboard_gbit_lom", "vpOnboardGbitLOM", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []), 
+        },
+
     }
 
     prop_map = {
-        "childAction": "child_action", 
-        "dn": "dn", 
-        "rn": "rn", 
-        "status": "status", 
-        "vpOnboard10GbitLOM": "vp_onboard10_gbit_lom", 
-        "vpOnboardGbitLOM": "vp_onboard_gbit_lom", 
+
+        "classic": {
+            "childAction": "child_action", 
+            "dn": "dn", 
+            "rn": "rn", 
+            "status": "status", 
+            "vpOnboard10GbitLOM": "vp_onboard10_gbit_lom", 
+            "vpOnboardGbitLOM": "vp_onboard_gbit_lom", 
+        },
+
+        "modular": {
+            "childAction": "child_action", 
+            "dn": "dn", 
+            "rn": "rn", 
+            "status": "status", 
+            "vpOnboard10GbitLOM": "vp_onboard10_gbit_lom", 
+            "vpOnboardGbitLOM": "vp_onboard_gbit_lom", 
+        },
+
     }
 
     def __init__(self, parent_mo_or_dn, **kwargs):

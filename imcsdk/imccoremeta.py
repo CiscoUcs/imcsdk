@@ -315,7 +315,7 @@ class MoPropertyMeta(object):
             else:
                 error_msg = (str(self.name) + " valid values are " +
                              str(self.__restriction.value_set))
-        if error_msg is not None:
+        if error_msg:
             log.debug(error_msg)
             return False
         return True

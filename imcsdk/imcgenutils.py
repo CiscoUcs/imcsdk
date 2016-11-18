@@ -242,9 +242,9 @@ def check_registry_key(java_key):
         r_key = OpenKey(a_reg, java_key)
         for i_cnt in range(1024):
             current_version = QueryValueEx(r_key, "CurrentVersion")
-            if current_version is not None:
+            if current_version:
                 key = OpenKey(r_key, current_version[0])
-                if key is not None:
+                if key:
                     path = QueryValueEx(key, "JavaHome")
                     return path[0]
     except Exception:

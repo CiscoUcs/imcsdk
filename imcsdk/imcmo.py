@@ -82,7 +82,8 @@ class ManagedObject(ImcBase):
             self._rn_set()
             self._dn_set()
 
-        xml_attribute = self.mo_meta.xml_attribute
+        mo_meta = imccoreutils.get_mo_meta(self)
+        xml_attribute = mo_meta.xml_attribute
 
         ImcBase.__init__(self, imcgenutils.word_u(xml_attribute))
         # self.mark_dirty()
@@ -92,7 +93,7 @@ class ManagedObject(ImcBase):
 
         if kwargs:
             for prop_name, prop_value in imcgenutils.iteritems(kwargs):
-                if prop_name not in self.prop_meta:
+                if not imccoreutils.prop_exists(self, prop_name):
                     log.debug("Unknown property %s" % prop_name)
                 self.__set_prop(prop_name, prop_value)
 
@@ -107,7 +108,7 @@ class ManagedObject(ImcBase):
         Internal method to set rn
         """
 
-        if "prop_meta" in dir(self) and "rn" in self.prop_meta:
+        if "prop_meta" in dir(self) and imccoreutils.prop_exists(self, "rn"):
             self.rn = self.make_rn()
         else:
             self.rn = ""
@@ -117,7 +118,7 @@ class ManagedObject(ImcBase):
         Internal method to set dn
         """
 
-        if "prop_meta" in dir(self) and "dn" in self.prop_meta:
+        if "prop_meta" in dir(self) and imccoreutils.prop_exists(self, "dn"):
             if self.__parent_dn:
                 self.dn = self.__parent_dn + '/' + self.rn
             else:
@@ -130,20 +131,24 @@ class ManagedObject(ImcBase):
         overridden setattr method
         """
 
-        if "prop_meta" in dir(self) and name in self.prop_meta:
+        if "prop_meta" in dir(self) and \
+                imccoreutils.prop_exists(self, name):
             if name in dir(self):
                 self.__set_prop(name, value)
             else:
                 if value:
-                    if not self.prop_meta[name].validate_property_value(value):
+                    if not imccoreutils.validate_property_value(self,
+                                                                name,
+                                                                value):
                         raise ValueError("Invalid Value Exception - "
                                          "[%s]: Prop <%s>, Value<%s>. "
                                          % (self.__class__.__name__,
                                             name,
                                             value))
                 object.__setattr__(self, name, value)
-                if self.prop_meta[name].mask is not None:
-                    self._dirty_mask |= self.prop_meta[name].mask
+                prop = imccoreutils.get_prop_meta(self, name)
+                if prop.mask:
+                    self._dirty_mask |= prop.mask
         elif name.startswith("_"):
             object.__setattr__(self, name, value)
         else:
@@ -172,21 +177,22 @@ class ManagedObject(ImcBase):
         """
 
         if not forced:
-            prop_meta = self.prop_meta[name]
-            if prop_meta.access != imccoremeta.MoPropertyMeta.READ_WRITE:
+            prop = imccoreutils.get_prop_meta(self, name)
+            if prop.access != imccoremeta.MoPropertyMeta.READ_WRITE:
                 if getattr(self, name) is not None or \
-                                prop_meta.access != \
+                                prop.access != \
                                 imccoremeta.MoPropertyMeta.CREATE_ONLY:
                     raise ValueError("%s is not a read-write property." % name)
-            if not prop_meta.validate_property_value(value):
+            if not imccoreutils.validate_property_value(self, name, value):
                 raise ValueError("Invalid Value Exception - "
                                  "[%s]: Prop <%s>, Value<%s>. "
                                  % (self.__class__.__name__,
                                     name,
                                     value))
                 # return False
-            if prop_meta.mask and mark_dirty:
-                self._dirty_mask |= prop_meta.mask
+            mask = prop.mask
+            if mask and mark_dirty:
+                self._dirty_mask |= mask
         object.__setattr__(self, name, value)
 
     def __str__(self):
@@ -218,7 +224,8 @@ class ManagedObject(ImcBase):
         if self.__class__.__name__ == "ManagedObject" and not self.is_dirty():
             self._dirty_mask = ManagedObject.DUMMY_DIRTY
         elif "mo_meta" in dir(self):
-            self._dirty_mask = self.mo_meta.mask
+            mo_meta = imccoreutils.get_mo_meta(self)
+            self._dirty_mask = mo_meta.mask
 
     def is_dirty(self):
         """
@@ -234,9 +241,10 @@ class ManagedObject(ImcBase):
 
         import re
 
-        rn_pattern = self.mo_meta.rn
+        mo_meta = imccoreutils.get_mo_meta(self)
+        rn_pattern = mo_meta.rn
         for prop in re.findall(r"""\[([^\]]*)\]""", rn_pattern):
-            if prop in self.prop_meta:
+            if imccoreutils.prop_exists(self, prop):
                 if getattr(self, prop):
                     rn_pattern = re.sub(r"""\[%s\]""" % prop,
                                         '%s' % getattr(self, prop), rn_pattern)
@@ -252,32 +260,51 @@ class ManagedObject(ImcBase):
 
         return rn_pattern
 
-    def to_xml(self, xml_doc=None, option=None, elem_name=None):
+    def to_xml(self, xml_doc=None, option=None, elem_name=None, cookie=None):
         """
         Method writes the xml representation of the managed object.
         """
 
+        unknown_properties = []
         if option == WriteXmlOption.DIRTY and not self.is_dirty():
             log.debug("Object is not dirty")
             return
 
-        xml_obj = self.elem_create(class_tag=self.mo_meta.xml_attribute,
+        platform = None
+        if cookie:
+            handle = imccoreutils.get_handle_from_cookie(cookie)
+            if handle:
+                platform = handle.platform
+
+        mo_meta = imccoreutils.get_mo_meta(self)
+        xml_attribute = mo_meta.xml_attribute
+        xml_obj = self.elem_create(class_tag=xml_attribute,
                                    xml_doc=xml_doc,
                                    override_tag=elem_name)
 
         for key in self.__dict__:
-            if key != 'rn' and key in self.prop_meta:
-                mo_prop_meta = self.prop_meta[key]
+            if key != 'rn' and imccoreutils.prop_exists(
+                                self,
+                                key,
+                                platform=platform):
+                prop = imccoreutils.get_prop_meta(
+                                self,
+                                key,
+                                platform=platform)
                 if (option != WriteXmlOption.DIRTY or (
-                            mo_prop_meta.mask is not None and
-                            self._dirty_mask & mo_prop_meta.mask != 0)):
+                            prop.mask and
+                            self._dirty_mask & prop.mask != 0)):
                     value = getattr(self, key)
-                    if value is not None:
-                        xml_obj.set(mo_prop_meta.xml_attribute, value)
+                    if value:
+                        xml_obj.set(prop.xml_attribute, value)
             else:
                 if key not in self.__xtra_props:
                     # This is an internal property
                     # This should not be a part of the xml
+                    if key not in ManagedObject.__internal_prop and \
+                            key not in ['rn', 'dn'] and \
+                            not key.startswith("_"):
+                        unknown_properties.append(key)
                     continue
 
                 # This is an unknown property
@@ -287,13 +314,17 @@ class ManagedObject(ImcBase):
                 if option != WriteXmlOption.DIRTY or \
                         self.__xtra_props[key].is_dirty:
                     value = self.__xtra_props[key].value
-                    if value is not None:
+                    if value:
                         xml_obj.set(key, value)
 
         if 'dn' not in xml_obj.attrib:
             xml_obj.set('dn', self.dn)
 
-        self.child_to_xml(xml_obj, option)
+        self.child_to_xml(xml_obj, option, cookie=cookie)
+        if unknown_properties:
+            log.info("List of properties not applicable for the current platform:")
+            log.info(unknown_properties)
+
         return xml_obj
 
     def from_xml(self, elem, handle=None):
@@ -306,8 +337,11 @@ class ManagedObject(ImcBase):
         if elem.attrib:
             if self.__class__.__name__ != "ManagedObject":
                 for attr_name, attr_value in imcgenutils.iteritems(elem.attrib):
-                    if attr_name in self.prop_map:
-                        attr_name = self.prop_map[attr_name]
+                    if imccoreutils.property_exists_in_prop_map(self,
+                                                                attr_name):
+                        attr_name = \
+                            imccoreutils.get_property_from_prop_map(self,
+                                                                    attr_name)
                     else:
                         self.__xtra_props[attr_name] = _GenericProp(
                             attr_name,
@@ -330,9 +364,11 @@ class ManagedObject(ImcBase):
                 if not ET.iselement(child_elem):
                     continue
 
-                if self.__class__.__name__ != "ManagedObject" and (
-                            child_elem.tag in self.mo_meta.field_names):
-                    pass
+                if self.__class__.__name__ != "ManagedObject":
+                    mo_meta = imccoreutils.get_mo_meta(self)
+                    field_names = mo_meta.field_names
+                    if field_names and child_elem.tag in field_names:
+                        pass
 
                 class_id = imcgenutils.word_u(child_elem.tag)
                 child_obj = imccoreutils.get_imc_obj(class_id, child_elem,
@@ -366,7 +402,8 @@ class ManagedObject(ImcBase):
             level -= 1
         return None
 
-    def show_hierarchy(self, level=0, depth=None, show_level=[]):
+    def show_hierarchy(self, level=0, depth=None,
+                       show_level=[], platform=None):
         """
         Method to return string representation of a managed object.
         """
@@ -374,7 +411,16 @@ class ManagedObject(ImcBase):
         from .imccoreutils import print_mo_hierarchy
 
         print_mo_hierarchy(self._class_id, level, depth,
-                           show_level)
+                           show_level, platform)
+
+    def get_version(self, platform):
+        """
+        Method to get the IMC version from which this MO is supported
+        """
+
+        from .imccoreutils import get_mo_meta
+        mo_meta = get_mo_meta(self, platform)
+        return mo_meta.version
 
 
 def generic_mo_from_xml(xml_str):
@@ -437,7 +483,7 @@ class GenericMo(ImcBase):
         if 'rn' in dir(self) and 'dn' in dir(self):
             pass
         elif 'rn' in dir(self) and 'dn' not in dir(self):
-            if self.__parent_dn is not None and self.__parent_dn != "":
+            if self.__parent_dn and self.__parent_dn != "":
                 self.dn = self.__parent_dn + '/' + self.rn
                 self.__properties['dn'] = self.dn
             else:
@@ -453,7 +499,7 @@ class GenericMo(ImcBase):
         if self.__parent_mo:
             self.__parent_mo.child_add(self)
 
-    def to_xml(self, xml_doc=None, option=None):
+    def to_xml(self, xml_doc=None, option=None, cookie=None):
         """
         This method returns the xml element node for the current object
         with it's hierarchy.
@@ -525,7 +571,7 @@ class GenericMo(ImcBase):
         if self.rn and self.dn:
             pass
         elif self.rn and not self.dn:
-            if self.__parent_dn is not None and self.__parent_dn != "":
+            if self.__parent_dn and self.__parent_dn != "":
                 self.dn = self.__parent_dn + '/' + self.rn
                 self.__properties['dn'] = self.dn
             else:
@@ -559,14 +605,16 @@ class GenericMo(ImcBase):
         mo_class_params = inspect.getargspec(mo_class.__init__)[0][2:]
         mo_class_param_dict = {}
         for param in mo_class_params:
-            mo_param = mo_class.prop_meta[param].xml_attribute
+            prop = imccoreutils.get_prop_meta(mo_class, param)
+            mo_param = prop.xml_attribute
             if mo_param not in self.__properties:
                 if 'rn' in self.__properties:
                     rn_str = self.__properties['rn']
                 elif 'dn' in self.__properties:
                     rn_str = os.path.basename(self.__properties['dn'])
 
-                rn_pattern = mo_class.mo_meta.rn
+                mo_meta = imccoreutils.get_mo_meta(mo_class)
+                rn_pattern = mo_meta.rn
                 np_dict = imccoreutils.get_naming_props(rn_str, rn_pattern)
                 if param not in np_dict:
                     mo_class_param_dict[param] = ""
@@ -577,7 +625,9 @@ class GenericMo(ImcBase):
 
         p_dn = ""
 
-        if 'topRoot' in mo_class.mo_meta.parents:
+        mo_meta = imccoreutils.get_mo_meta(mo_class)
+        class_parents = mo_meta.parents
+        if 'topRoot' in class_parents:
             mo_obj = mo_class(**mo_class_param_dict)
         else:
             mo_obj = mo_class(parent_mo_or_dn=p_dn, **mo_class_param_dict)
@@ -599,8 +649,9 @@ class GenericMo(ImcBase):
             return None
 
         for prop in self.__properties:
-            if prop in mo.prop_map:
-                mo.__dict__[mo.prop_map[prop]] = self.__properties[prop]
+            if imccoreutils.property_exists_in_prop_map(mo, prop):
+                mo.__dict__[imccoreutils.get_property_from_prop_map(mo, prop)] = \
+                    self.__properties[prop]
             else:
                 ImcWarning("Property %s Not Exist in MO %s" % (
                     imcgenutils.word_u(prop), class_id))

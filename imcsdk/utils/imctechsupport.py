@@ -18,12 +18,18 @@ This module contains the APIs used to create and download tech_support file.
 import time
 import logging
 from ..imcexception import ImcValidationException, ImcWarning
+from ..imccoreutils import IMC_PLATFORM
 
 log = logging.getLogger('imc')
 
 
+def _is_valid_arg(param, kwargs):
+    return param in kwargs and kwargs[param] is not None
+
+
 def get_imc_tech_support(handle, remote_host, remote_file, protocol, username,
-                         password, timeout_in_sec=600):
+                         password, timeout_in_sec=600,
+                         component="all", **kwargs):
     """
     This operation creates and downloads the technical support file for
     the specified Ucs server.
@@ -37,16 +43,30 @@ def get_imc_tech_support(handle, remote_host, remote_file, protocol, username,
         password (str) : Remote Host user credentials/password
         timeout_in_sec (number) : time in seconds for which method waits
                               for the backUp file to generate before it exits.
+        component (str) : For C3x60 platforms
+                          "all" for tech-support of all components 
+                          "cmc1" for tech-support of chassis related components on chassis controller-1
+                          "cmc2" for tech-support of chassis related components on chassis controller-2
+                          "cimc1" for tech-support of server related components on server-1
+                          "cimc2" for tech-support of server related components on server-2
+                          Combination of the above can also be given with space as separator
+                          "cmc1 cmc2" or "cimc1 cimc2"
+        kwargs : key=value paired arguments
+                 Values for component should be given with space as delimiter
 
     Example:
         remote_file = "/root/tech_sup_backup.tar.gz"
         get_imc_tech_support(h,remote_file=remote_file,
                protocol="scp",username="user",password="pass",
                remote_host="10.10.10.10")
+        get_imc_tech_support(h,remote_file=remote_file,
+               protocol="scp",username="user",password="pass",
+               remote_host="10.10.10.10", component="all")
     """
 
     from ..mometa.top.TopSystem import TopSystem
     from ..mometa.compute.ComputeRackUnit import ComputeRackUnit
+    from ..mometa.equipment.EquipmentChassis import EquipmentChassis
     from ..mometa.sysdebug.SysdebugTechSupportExport import \
         SysdebugTechSupportExport
     if not remote_file.endswith('.tar.gz'):
@@ -59,15 +79,24 @@ def get_imc_tech_support(handle, remote_host, remote_file, protocol, username,
 
     # create SysdebugTechSupport
     top_system = TopSystem()
-    compute_rack = ComputeRackUnit(parent_mo_or_dn=top_system, server_id="1")
+    parent_mo = None
+
+    if handle.platform == IMC_PLATFORM.TYPE_CLASSIC:
+        parent_mo = ComputeRackUnit(parent_mo_or_dn=top_system, server_id="1")
+    elif handle.platform == IMC_PLATFORM.TYPE_MODULAR:
+        parent_mo = EquipmentChassis(parent_mo_or_dn=top_system)
+
     sys_debug_tech_support = SysdebugTechSupportExport(
-        parent_mo_or_dn=compute_rack,
+        parent_mo_or_dn=parent_mo,
         hostname=remote_host,
         protocol=protocol,
         pwd=password,
         user=username,
         remote_file=remote_file,
         admin_state="enabled")
+
+    if handle.platform == IMC_PLATFORM.TYPE_MODULAR:
+        sys_debug_tech_support.component = component
 
     handle.add_mo(sys_debug_tech_support, modify_present=True)
 

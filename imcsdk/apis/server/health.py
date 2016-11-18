@@ -37,7 +37,7 @@ def get_faults(handle, parent_class_id=None, dump=False):
 
     from imcsdk.imccoreutils import write_object
 
-    if parent_class_id is not None:
+    if parent_class_id:
         fault_list = []
         pmos = handle.query_classid(parent_class_id)
         for mo in pmos:

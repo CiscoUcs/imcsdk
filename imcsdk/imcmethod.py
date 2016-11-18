@@ -109,13 +109,14 @@ class ExternalMethod(ImcBase):
             if prop_meta.inp_out == "Output":
                 continue
             if prop_meta.is_complex_type:
-                if getattr(self, prop) is not None:
+                if getattr(self, prop):
                     self.__dict__[prop].to_xml(xml_obj, option,
-                                               prop_meta.xml_attribute)
-            elif getattr(self, prop) is not None:
+                                               prop_meta.xml_attribute,
+                                               cookie=self.cookie)
+            elif getattr(self, prop):
                 xml_obj.set(prop_meta.xml_attribute, getattr(self, prop))
 
-        self.child_to_xml(xml_obj, option)
+        self.child_to_xml(xml_obj, option, cookie=self.cookie)
         return xml_obj
 
     def from_xml(self, elem, handle=None):
@@ -152,7 +153,7 @@ class ExternalMethod(ImcBase):
                         child_obj = imccoreutils.get_imc_obj(
                             method_prop_meta.field_type,
                             child_elem)
-                        if child_obj is not None:
+                        if child_obj:
                             self.set_attr(child_name,
                                           child_obj)
                             # print child_method_obj.__dict__

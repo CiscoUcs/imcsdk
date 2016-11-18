@@ -19,20 +19,46 @@ class BiosVfCDNEnable(ManagedObject):
     consts = BiosVfCDNEnableConsts()
     naming_props = set([])
 
-    mo_meta = MoMeta("BiosVfCDNEnable", "biosVfCDNEnable", "CDN-Enable", VersionMeta.Version204c, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
+    mo_meta = {
+        "classic": MoMeta("BiosVfCDNEnable", "biosVfCDNEnable", "CDN-Enable", VersionMeta.Version204c, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
+        "modular": MoMeta("BiosVfCDNEnable", "biosVfCDNEnable", "CDN-Enable", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
+    }
+
 
     prop_meta = {
-        "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
-        "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
-        "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-        "vp_cdn_enable": MoPropertyMeta("vp_cdn_enable", "vpCDNEnable", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []), 
+
+        "classic": {
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "vp_cdn_enable": MoPropertyMeta("vp_cdn_enable", "vpCDNEnable", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []), 
+        },
+
+        "modular": {
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "vp_cdn_enable": MoPropertyMeta("vp_cdn_enable", "vpCDNEnable", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []), 
+        },
+
     }
 
     prop_map = {
-        "dn": "dn", 
-        "rn": "rn", 
-        "status": "status", 
-        "vpCDNEnable": "vp_cdn_enable", 
+
+        "classic": {
+            "dn": "dn", 
+            "rn": "rn", 
+            "status": "status", 
+            "vpCDNEnable": "vp_cdn_enable", 
+        },
+
+        "modular": {
+            "dn": "dn", 
+            "rn": "rn", 
+            "status": "status", 
+            "vpCDNEnable": "vp_cdn_enable", 
+        },
+
     }
 
     def __init__(self, parent_mo_or_dn, **kwargs):

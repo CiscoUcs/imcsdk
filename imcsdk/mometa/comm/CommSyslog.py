@@ -36,34 +36,74 @@ class CommSyslog(ManagedObject):
     consts = CommSyslogConsts()
     naming_props = set([])
 
-    mo_meta = MoMeta("CommSyslog", "commSyslog", "syslog", VersionMeta.Version151f, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'commSvcEp'], [u'commSyslogClient'], ["Get", "Set"])
+    mo_meta = {
+        "classic": MoMeta("CommSyslog", "commSyslog", "syslog", VersionMeta.Version151f, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'commSvcEp'], [u'commSyslogClient'], ["Get", "Set"]),
+        "modular": MoMeta("CommSyslog", "commSyslog", "syslog", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'commSvcEp'], [u'commSyslogClient'], [None])
+    }
+
 
     prop_meta = {
-        "admin_state": MoPropertyMeta("admin_state", "adminState", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["disabled", "enabled"], []), 
-        "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-        "descr": MoPropertyMeta("descr", "descr", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, r"""[ !#$%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}~a-zA-Z0-9]{0,256}""", [], []), 
-        "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
-        "local_severity": MoPropertyMeta("local_severity", "localSeverity", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["alert", "critical", "debug", "emergency", "error", "informational", "notice", "warning"], []), 
-        "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, r"""[\-\.:_a-zA-Z0-9]{0,16}""", [], []), 
-        "port": MoPropertyMeta("port", "port", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], ["0-65535"]), 
-        "proto": MoPropertyMeta("proto", "proto", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["all", "none", "tcp", "udp"], []), 
-        "remote_severity": MoPropertyMeta("remote_severity", "remoteSeverity", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["alert", "critical", "debug", "emergency", "error", "informational", "notice", "warning"], []), 
-        "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
-        "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+
+        "classic": {
+            "admin_state": MoPropertyMeta("admin_state", "adminState", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["disabled", "enabled"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "descr": MoPropertyMeta("descr", "descr", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, r"""[ !#$%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}~a-zA-Z0-9]{0,256}""", [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
+            "local_severity": MoPropertyMeta("local_severity", "localSeverity", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["alert", "critical", "debug", "emergency", "error", "informational", "notice", "warning"], []), 
+            "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, r"""[\-\.:_a-zA-Z0-9]{0,16}""", [], []), 
+            "port": MoPropertyMeta("port", "port", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], ["0-65535"]), 
+            "proto": MoPropertyMeta("proto", "proto", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["all", "none", "tcp", "udp"], []), 
+            "remote_severity": MoPropertyMeta("remote_severity", "remoteSeverity", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["alert", "critical", "debug", "emergency", "error", "informational", "notice", "warning"], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+        },
+
+        "modular": {
+            "admin_state": MoPropertyMeta("admin_state", "adminState", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["disabled", "enabled"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "descr": MoPropertyMeta("descr", "descr", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, r"""[ !#$%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}~a-zA-Z0-9]{0,256}""", [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
+            "local_severity": MoPropertyMeta("local_severity", "localSeverity", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["alert", "critical", "debug", "emergency", "error", "informational", "notice", "warning"], []), 
+            "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, r"""[\-\.:_a-zA-Z0-9]{0,16}""", [], []), 
+            "port": MoPropertyMeta("port", "port", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], ["0-65535"]), 
+            "proto": MoPropertyMeta("proto", "proto", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["all", "none", "tcp", "udp"], []), 
+            "remote_severity": MoPropertyMeta("remote_severity", "remoteSeverity", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["alert", "critical", "debug", "emergency", "error", "informational", "notice", "warning"], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+        },
+
     }
 
     prop_map = {
-        "adminState": "admin_state", 
-        "childAction": "child_action", 
-        "descr": "descr", 
-        "dn": "dn", 
-        "localSeverity": "local_severity", 
-        "name": "name", 
-        "port": "port", 
-        "proto": "proto", 
-        "remoteSeverity": "remote_severity", 
-        "rn": "rn", 
-        "status": "status", 
+
+        "classic": {
+            "adminState": "admin_state", 
+            "childAction": "child_action", 
+            "descr": "descr", 
+            "dn": "dn", 
+            "localSeverity": "local_severity", 
+            "name": "name", 
+            "port": "port", 
+            "proto": "proto", 
+            "remoteSeverity": "remote_severity", 
+            "rn": "rn", 
+            "status": "status", 
+        },
+
+        "modular": {
+            "adminState": "admin_state", 
+            "childAction": "child_action", 
+            "descr": "descr", 
+            "dn": "dn", 
+            "localSeverity": "local_severity", 
+            "name": "name", 
+            "port": "port", 
+            "proto": "proto", 
+            "remoteSeverity": "remote_severity", 
+            "rn": "rn", 
+            "status": "status", 
+        },
+
     }
 
     def __init__(self, parent_mo_or_dn, **kwargs):

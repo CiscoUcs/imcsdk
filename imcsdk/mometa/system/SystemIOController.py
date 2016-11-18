@@ -15,24 +15,35 @@ class SystemIOController(ManagedObject):
     consts = SystemIOControllerConsts()
     naming_props = set([u'id'])
 
-    mo_meta = MoMeta("SystemIOController", "systemIOController", "sioc-[id]", VersionMeta.Version202c, "OutputOnly", 0xf, [], ["read-only"], [u'computeRackUnit'], [u'firmwareBootDefinition', u'firmwareRunning', u'firmwareUpdatable'], ["Get"])
+    mo_meta = {
+        "classic": MoMeta("SystemIOController", "systemIOController", "sioc-[id]", VersionMeta.Version202c, "OutputOnly", 0xf, [], ["read-only"], [u'computeRackUnit'], [u'firmwareBootDefinition', u'firmwareRunning', u'firmwareUpdatable'], ["Get"]),
+    }
+
 
     prop_meta = {
-        "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version202c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-        "description": MoPropertyMeta("description", "description", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-        "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
-        "id": MoPropertyMeta("id", "id", "uint", VersionMeta.Version202c, MoPropertyMeta.NAMING, None, None, None, None, [], ["0-999"]), 
-        "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
-        "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+
+        "classic": {
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version202c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "description": MoPropertyMeta("description", "description", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
+            "id": MoPropertyMeta("id", "id", "uint", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, None, None, None, None, [], ["0-999"]), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+        },
+
     }
 
     prop_map = {
-        "childAction": "child_action", 
-        "description": "description", 
-        "dn": "dn", 
-        "id": "id", 
-        "rn": "rn", 
-        "status": "status", 
+
+        "classic": {
+            "childAction": "child_action", 
+            "description": "description", 
+            "dn": "dn", 
+            "id": "id", 
+            "rn": "rn", 
+            "status": "status", 
+        },
+
     }
 
     def __init__(self, parent_mo_or_dn, id, **kwargs):
