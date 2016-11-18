@@ -28,7 +28,7 @@ from imcsdk.imccoreutils import get_server_dn, IMC_PLATFORM
 
 
 def _is_valid_arg(param, kwargs):
-    return param in kwargs and kwargs[param] is not None
+    return kwargs.get(param) is not None
 
 
 def _set_server_dn(handle, kwargs):
@@ -281,12 +281,13 @@ def locator_led_on(handle, **kwargs):
         chassis_dn = "sys/chassis-" + chassis_id
         led_mo = EquipmentChassisLocatorLed(parent_mo_or_dn=chassis_dn)
         led_mo.admin_state = EquipmentChassisLocatorLedConsts.ADMIN_STATE_ON
-    else:
+        handle.set_mo(led_mo)
+
+    if _is_valid_arg("server_id", kwargs):
         server_dn = _set_server_dn(handle, kwargs)
         led_mo = EquipmentLocatorLed(parent_mo_or_dn=server_dn)
         led_mo.admin_state = EquipmentLocatorLedConsts.ADMIN_STATE_ON
-
-    handle.set_mo(led_mo)
+        handle.set_mo(led_mo)
 
 
 def locator_led_off(handle, **kwargs):
@@ -314,9 +315,10 @@ def locator_led_off(handle, **kwargs):
         chassis_dn = "sys/chassis-" + chassis_id
         led_mo = EquipmentChassisLocatorLed(parent_mo_or_dn=chassis_dn)
         led_mo.admin_state = EquipmentChassisLocatorLedConsts.ADMIN_STATE_OFF
-    else:
+        handle.set_mo(led_mo)
+
+    if _is_valid_arg("server_id", kwargs):
         server_dn = _set_server_dn(handle, kwargs)
         led_mo = EquipmentLocatorLed(parent_mo_or_dn=server_dn)
         led_mo.admin_state = EquipmentLocatorLedConsts.ADMIN_STATE_OFF
-
-    handle.set_mo(led_mo)
+        handle.set_mo(led_mo)

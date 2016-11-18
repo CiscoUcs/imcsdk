@@ -26,7 +26,7 @@ from . import mometa
 from . import methodmeta
 from . imcmeta import MO_CLASS_ID, METHOD_CLASS_ID, OTHER_TYPE_CLASS_ID, \
     MO_CLASS_META
-from .imcexception import ImcOperationError
+from .imcexception import ImcOperationError, ImcValidationException
 
 log = logging.getLogger('imc')
 
@@ -789,7 +789,12 @@ def get_property_from_prop_map(mo, prop, platform=None):
 def get_mo_meta(mo, platform=None):
 
     if platform:
-        return mo.mo_meta[platform]
+        try:
+            return mo.mo_meta[platform]
+        except KeyError:
+            raise ImcValidationException("The Managed Object:%s "
+                                         "does not exist for this platform"
+                                         % (mo.__class__.__name__))
 
     for platform in IMC_PLATFORM_LIST:
         if platform in mo.mo_meta.keys():
@@ -803,7 +808,13 @@ def validate_mo_version(handle, mo):
     This is called from add_mo/set_mo to verify if the mo is supported on
     the particular server
     """
-    mo_version = mo.get_version(platform=handle.platform)
+
+    try:
+        mo_version = mo.get_version(platform=handle.platform)
+    except ImcValidationException:
+        raise ImcValidationException("This functionality is not supported "
+                                     "on the current platform")
+
     if mo_version > handle.version:
         raise ImcOperationError(
                 "Validate Version",

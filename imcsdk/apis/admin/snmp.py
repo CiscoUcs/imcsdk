@@ -182,14 +182,15 @@ def snmp_trap_add(handle, hostname, port, version="v3",
     mo.port = port
     mo.version = version
     mo.notification_type = notification_type
-    mo.user = user
+    if version != "v2c":
+        mo.user = user
 
     handle.set_mo(mo)
     return mo
 
 
 def snmp_trap_exists(handle, hostname, port, version="v3",
-                     notification_type="traps", user=None):
+                     notification_type="traps", user="unknown"):
     """
     checks if snmp trap exists
 
@@ -216,6 +217,9 @@ def snmp_trap_exists(handle, hostname, port, version="v3",
 
     traps = handle.query_children(in_dn="sys/svc-ext/snmp-svc",
                                   class_id="CommSnmpTrap")
+    if version == "v2c":
+        user = "unknown"
+
     for trap in traps:
         if ((trap.hostname == hostname) and
                 (trap.port == port) and

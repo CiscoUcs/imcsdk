@@ -24,6 +24,7 @@ from imcsdk.mometa.comm.CommVMedia import CommVMedia
 from imcsdk.mometa.comm.CommVMediaMap import CommVMediaMap
 from imcsdk.mometa.sol.SolIf import SolIf, SolIfConsts
 from imcsdk.imcexception import ImcOperationError
+from imcsdk.imccoreutils import get_server_dn
 CIFS_URI_PATTERN = re.compile('^//\d+\.\d+\.\d+\.\d+\/')
 NFS_URI_PATTERN = re.compile('^\d+\.\d+\.\d+\.\d+\:\/')
 
@@ -192,7 +193,7 @@ def vmedia_mount_add(handle, volume_name, mount_protocol,
             volume_name="c",
             mount_protocol="www",
             mount_options="noauto", "nolock" etc.
-            remote_share="http://10.127.150.13/files",
+            remote_share="http://1.1.1.1/files",
             remote_file="ubuntu-14.04.2-server-amd64.iso",
             user_id="abcd",
             password="xyz")
@@ -234,7 +235,7 @@ def vmedia_mount_iso_uri(handle, uri, user_id=None, password=None,
     Examples:
         vmedia_mount_add(
             handle,
-            uri="http://10.127.150.13/files/ubuntu-14.04.2-server-amd64.iso"
+            uri="http://1.1.1.1/files/ubuntu-14.04.2-server-amd64.iso"
         )
     """
 
@@ -372,7 +373,7 @@ def vmedia_mount_remove_all(handle):
     return True
 
 
-def sol_setup(handle, speed, com_port, ssh_port):
+def sol_setup(handle, speed, com_port, ssh_port, server_id=1):
     """
     This method will setup serial over lan connection
 
@@ -381,12 +382,14 @@ def sol_setup(handle, speed, com_port, ssh_port):
         speed (string): "9600", "19200", "38400", "57600", "115200"
         com_port (string): "com0", "com1"
         ssh_port (int): port for ssh
+        server_id (int): Server Id to be specified for C3x60 platforms
 
     Returns:
         SolIf object
     """
 
-    solif_mo = SolIf(parent_mo_or_dn="sys/rack-unit-1")
+    server_dn = get_server_dn(handle, server_id)
+    solif_mo = SolIf(parent_mo_or_dn=server_dn)
     solif_mo.admin_state = SolIfConsts.ADMIN_STATE_ENABLE
     solif_mo.speed = speed
     solif_mo.comport = com_port
@@ -395,18 +398,20 @@ def sol_setup(handle, speed, com_port, ssh_port):
     handle.set_mo(solif_mo)
 
 
-def sol_disable(handle):
+def sol_disable(handle, server_id=1):
     """
     This method will disable Serial over Lan connection
 
     Args:
         handle (ImcHandle)
+        server_id (int): Server Id to be specified for C3x60 platforms
 
     Returns:
         None
     """
 
-    solif_mo = SolIf(parent_mo_or_dn="sys/rack-unit-1")
+    server_dn = get_server_dn(handle, server_id)
+    solif_mo = SolIf(parent_mo_or_dn=server_dn)
     solif_mo.admin_state = SolIfConsts.ADMIN_STATE_DISABLE
 
     handle.set_mo(solif_mo)

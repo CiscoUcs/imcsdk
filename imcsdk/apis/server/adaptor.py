@@ -22,7 +22,7 @@ from imcsdk.imcexception import ImcOperationError
 
 
 def _is_valid_arg(param, kwargs):
-    return param in kwargs and kwargs[param] is not None
+    return kwargs.get(param) is not None
 
 
 def _get_adaptor(handle, adaptor_slot, server_id=1, **kwargs):
@@ -88,7 +88,7 @@ def setup_vic_adaptor_properties(handle, adaptor_slot, fip_mode=None,
 
     Examples:
         For non-C3x60 platforms:-
-        setup_vic_adaptor_properties(handle, adaptor_slot=1,
+        setup_vic_adaptor_properties(handle, adaptor_slot="1",
                                      fip_mode=True)
 
         For C3x60 platforms:-
@@ -143,8 +143,8 @@ def get_vnic(handle, adaptor_slot, name, server_id=1, **kwargs):
     return vnic_mo
 
 
-def create_vnic(handle, adaptor_slot, name, channel_number, mac, mtu, cos="",
-                port_profile="", pxe_boot=False, uplink_port=0,
+def create_vnic(handle, adaptor_slot, name, channel_number, mac, mtu=1500,
+                cos="", port_profile="", pxe_boot=False, uplink_port=0,
                 server_id=1, **kwargs):
     """
     This method is used to create a new vnic
@@ -182,11 +182,11 @@ def create_vnic(handle, adaptor_slot, name, channel_number, mac, mtu, cos="",
     mo = _get_adaptor(handle, adaptor_slot, server_id, **kwargs)
     vnic_mo = AdaptorHostEthIf(parent_mo_or_dn=mo.dn, name=name)
     vnic_mo.channel_number = str(channel_number)
-    if cos is not "":
+    if cos:
         vnic_mo.class_of_service = cos
     vnic_mo.mac = mac
     vnic_mo.mtu = str(mtu)
-    if port_profile is not "":
+    if port_profile:
         vnic_mo.port_profile = port_profile
     if pxe_boot:
         vnic_mo.pxe_boot = "enabled"
@@ -264,6 +264,17 @@ def create_vhba(handle, adaptor_slot, name, channel_number, wwnn, wwpn,
         kwargs: key=value paired arguments
     Returns:
         AdaptorHostFcIf object
+    Examples:
+        For non-3x60 platforms:
+        create_vhba(handle, adaptor_slot="1", name="test-vhba",
+                    channel_number=101, wwnn="10:00:11:3A:7D:D0:9A:43",
+                    wwpn="20:00:11:3A:7D:D0:9A:43",
+                    san_boot=True, uplink_port=0)
+        For 3x60 platforms:
+        create_vhba(handle, adaptor_slot="2", name="test-vhba",
+                    channel_number=100, wwnn="10:00:11:3A:7D:D0:9A:43",
+                    wwpn="20:00:11:3A:7D:D0:9A:43",
+                    san_boot=True, uplink_port=0, server_id=2)
     """
 
     from imcsdk.mometa.adaptor.AdaptorHostFcIf import AdaptorHostFcIf
@@ -273,7 +284,7 @@ def create_vhba(handle, adaptor_slot, name, channel_number, wwnn, wwpn,
     vhba_mo.channel_number = str(channel_number)
     vhba_mo.wwnn = wwnn
     vhba_mo.wwpn = wwpn
-    if port_profile is not "":
+    if port_profile:
         vhba_mo.port_profile = port_profile
     if san_boot:
         vhba_mo.san_boot = "enabled"

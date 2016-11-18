@@ -15,36 +15,48 @@
 This module implements apis for power policy and power cap related config
 """
 
+from imcsdk.imccoreutils import get_server_dn
+from imcsdk.imcexception import ImcOperationError
 
-def get_power_budget(handle):
+
+def get_power_budget(handle, server_id=1):
     """
     This api gets the min and max power limits for the platform, cpu and memory
         for this specific server
 
     Args:
         handle (ImcHandle)
+        server_id (int): Server Id to be specified for C3x60 platforms
 
     Returns:
         PowerBudget object
     """
 
-    power_budget_mo = handle.query_classid("PowerBudget")
+    server_dn = get_server_dn(handle, server_id)
+    power_budget_mo = handle.query_children(in_dn=server_dn,
+                                            class_id="PowerBudget")
+    if not power_budget_mo:
+        raise ImcOperationError("Get Power Budget",
+                                "Invalid Server Id configured")
+
     return power_budget_mo[0]
 
 
-def set_power_characterization(handle, run_at_boot="yes"):
+def set_power_characterization(handle, run_at_boot="yes", server_id=1):
     """
     This api sets the property
     Args:
         handle (ImcHandle)
         run_at_boot (string) : "yes", "no"
+        server_id (int): Server Id to be specified for C3x60 platforms
 
     Returns:
         PowerBudget object
     """
 
     from imcsdk.mometa.power.PowerBudget import PowerBudget
-    power_budget_mo = PowerBudget(parent_mo_or_dn="sys/rack-unit-1")
+    server_dn = get_server_dn(handle, server_id)
+    power_budget_mo = PowerBudget(parent_mo_or_dn=server_dn)
     power_budget_mo.run_pow_char_at_boot = run_at_boot
     handle.set_mo(power_budget_mo)
     return power_budget_mo
@@ -52,7 +64,7 @@ def set_power_characterization(handle, run_at_boot="yes"):
 
 def set_standard_power_cap(handle, throttle="no", power_limit=0,
                            correction_time=3, corrective_action="alert",
-                           hard_cap="no"):
+                           hard_cap="no", server_id=1):
     """
     This method sets up the standard power cap configuration profile
 
@@ -64,6 +76,7 @@ def set_standard_power_cap(handle, throttle="no", power_limit=0,
             and corrective action is taken. Range (1-600)s
         corrective_action (string): "none","alert","shutdown","alert,shutdown"
         hard_cap (string): "yes", "no"
+        server_id (int): Server Id to be specified for C3x60 platforms
 
     Returns:
         StandardPowerProfile object
@@ -78,8 +91,10 @@ def set_standard_power_cap(handle, throttle="no", power_limit=0,
     """
 
     from imcsdk.mometa.standard.StandardPowerProfile import StandardPowerProfile
+    server_dn = get_server_dn(handle, server_id)
+    power_budget_dn = server_dn + "/budget"
     stdpowerprof_mo = StandardPowerProfile(
-        parent_mo_or_dn="sys/rack-unit-1/budget")
+        parent_mo_or_dn=power_budget_dn)
 
     stdpowerprof_mo.allow_throttle = throttle
     stdpowerprof_mo.power_limit = str(power_limit)
@@ -92,20 +107,23 @@ def set_standard_power_cap(handle, throttle="no", power_limit=0,
     return stdpowerprof_mo
 
 
-def disable_standard_cap(handle):
+def disable_standard_cap(handle, server_id=1):
     """
     This method disables the standard power profile
 
     Args:
         handle (ImcHandle)
+        server_id (int): Server Id to be specified for C3x60 platforms
 
     Returns:
         None
     """
 
     from imcsdk.mometa.standard.StandardPowerProfile import StandardPowerProfile
+    server_dn = get_server_dn(handle, server_id)
+    power_budget_dn = server_dn + "/budget"
     stdpowerprof_mo = StandardPowerProfile(
-        parent_mo_or_dn="sys/rack-unit-1/budget")
+        parent_mo_or_dn=power_budget_dn)
 
     stdpowerprof_mo.profile_enabled = "no"
     handle.set_mo(stdpowerprof_mo)
