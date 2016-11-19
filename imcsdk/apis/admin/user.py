@@ -114,7 +114,7 @@ def create_local_user(handle, username, password, privilege="read-only"):
     inactive_users = []
 
     for user in aaa_users:
-        if user.account_status == AaaUserConsts.ACCOUNT_STATUS_INACTIVE:
+        if user.account_status == AaaUserConsts.ACCOUNT_STATUS_INACTIVE and not user.name:
             inactive_users.append(user)
 
     if len(inactive_users) is 0:
