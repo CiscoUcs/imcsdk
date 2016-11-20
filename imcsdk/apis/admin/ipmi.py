@@ -24,6 +24,7 @@ def _get_ipmi_obj(handle, server_id=1):
     Internal method to get the IPMI object based on the type of platform
     """
 
+    parent_dn = ""
     if handle.platform == IMC_PLATFORM.TYPE_CLASSIC:
         parent_dn = "sys/svc-ext"
     elif handle.platform == IMC_PLATFORM.TYPE_MODULAR:
