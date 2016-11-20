@@ -16,9 +16,25 @@
 This module implements all the communication services
 """
 from imcsdk.mometa.comm.CommIpmiLan import CommIpmiLan, CommIpmiLanConsts
+from imcsdk.imccoreutils import get_server_dn, IMC_PLATFORM
 
 
-def enable_ipmi(handle, priv=CommIpmiLanConsts.PRIV_ADMIN, key='0'*40):
+def _get_ipmi_obj(handle, server_id=1):
+    """
+    Internal method to get the IPMI object based on the type of platform
+    """
+
+    if handle.platform == IMC_PLATFORM.TYPE_CLASSIC:
+        parent_dn = "sys/svc-ext"
+    elif handle.platform == IMC_PLATFORM.TYPE_MODULAR:
+        parent_dn = get_server_dn(handle, server_id) + "/svc-ext"
+
+    ipmi_obj = CommIpmiLan(parent_mo_or_dn=parent_dn)
+    return ipmi_obj
+
+
+def enable_ipmi(handle, priv=CommIpmiLanConsts.PRIV_ADMIN,
+                key='0'*40, server_id=1):
     """
     Enable IPMI over LAN.
 
@@ -26,9 +42,10 @@ def enable_ipmi(handle, priv=CommIpmiLanConsts.PRIV_ADMIN, key='0'*40):
         handle (ImcHandle)
         priv (string): Optional privilege level: 'admin', 'user', 'read-only'
         key (string): Optional encryption key as hexadecimal string
+        server_id (int): Server Id to be specified for C3x60 platforms
 
     Returns:
-        True
+        CommIpmiLan object
 
     Raises:
         ValueError if privilege or key are invalid
@@ -37,6 +54,7 @@ def enable_ipmi(handle, priv=CommIpmiLanConsts.PRIV_ADMIN, key='0'*40):
         if enable_ipmi(handle):
             print "IPMI Enabled"
     """
+
     # Verify priv string is valid privilege level
     if priv is not CommIpmiLanConsts.PRIV_ADMIN and \
        priv is not CommIpmiLanConsts.PRIV_USER and \
@@ -52,27 +70,48 @@ def enable_ipmi(handle, priv=CommIpmiLanConsts.PRIV_ADMIN, key='0'*40):
                          '"{1}"'.format(handle.ip, key))
 
     # Create enabled IPMI object
-    ipmi_mo = CommIpmiLan(parent_mo_or_dn="sys/svc-ext",
-                          admin_state="enabled", priv=priv, key=key)
+    ipmi_mo = _get_ipmi_obj(handle, server_id)
+    ipmi_mo.admin_state = "enabled"
+    ipmi_mo.priv = priv
+    ipmi_mo.key = key
 
     # Configure IPMI object on CIMC
     handle.set_mo(ipmi_mo)
-    return True
+    return handle.query_dn(ipmi_mo.dn)
 
 
-def disable_ipmi(handle):
+def disable_ipmi(handle, server_id=1):
     """
     Disable IPMI over LAN.
     Args:
         handle (ImcHandle)
+        server_id (int): Server Id to be specified for C3x60 platforms
 
     Returns:
-        True
-
+        CommIpmiLan object
     """
+
     # Create disabled IPMI object
-    ipmi_mo = CommIpmiLan(parent_mo_or_dn="sys/svc-ext",
-                          admin_state="disabled")
+    ipmi_mo = _get_ipmi_obj(handle, server_id)
+    ipmi_mo.admin_state = "disabled"
+
     # Configure IPMI object on CIMC
     handle.set_mo(ipmi_mo)
-    return True
+    return handle.query_dn(ipmi_mo.dn)
+
+
+def is_ipmi_enabled(handle, server_id=1):
+    """
+    Check if IPMI over LAN is enabled
+    Args:
+        handle (ImcHandle)
+        server_id (int): Server Id to be specified for C3x60 platforms
+
+    Returns:
+        True if enabled, else False
+    """
+
+    ipmi_mo = _get_ipmi_obj(handle, server_id)
+    ipmi_mo = handle.query_dn(ipmi_mo.dn)
+
+    return (ipmi_mo.admin_state.lower() == "enabled")

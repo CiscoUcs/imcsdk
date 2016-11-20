@@ -15,6 +15,8 @@
 This module performs the operations related to snmp server, user and traps.
 """
 
+from imcsdk.imcexception import ImcOperationError
+
 
 def snmp_enable(handle, community=None,
                 privilege="disabled", trap_community=None,
@@ -45,7 +47,6 @@ def snmp_enable(handle, community=None,
     """
 
     from imcsdk.mometa.comm.CommSnmp import CommSnmpConsts
-    from imcsdk.imcexception import ImcOperationError
 
     dn = "sys/svc-ext/snmp-svc"
     mo = handle.query_dn(dn)
@@ -88,7 +89,6 @@ def snmp_disable(handle):
     """
 
     from imcsdk.mometa.comm.CommSnmp import CommSnmpConsts
-    from imcsdk.imcexception import ImcOperationError
 
     dn = "sys/svc-ext/snmp-svc"
     mo = handle.query_dn(dn)
@@ -110,7 +110,6 @@ def snmp_enabled(handle):
         bool
     """
     from imcsdk.mometa.comm.CommSnmp import CommSnmpConsts
-    from imcsdk.imcexception import ImcOperationError
 
     dn = "sys/svc-ext/snmp-svc"
     mo = handle.query_dn(dn)
@@ -169,7 +168,6 @@ def snmp_trap_add(handle, hostname, port, version="v3",
     """
 
     from imcsdk.mometa.comm.CommSnmpTrap import CommSnmpTrapConsts
-    from imcsdk.imcexception import ImcOperationError
 
     mo = _get_free_snmp_trap_obj(handle)
 
@@ -259,8 +257,6 @@ def snmp_trap_modify(handle, trap_id=0, hostname=None, port=None,
                           user="username")
     """
 
-    from imcsdk.imcexception import ImcOperationError
-
     dn = "sys/svc-ext/snmp-svc/snmp-trap-" + str(trap_id)
     mo = handle.query_dn(dn)
     if not mo:
@@ -299,7 +295,6 @@ def snmp_trap_remove(handle, trap_id=0):
         snmp_trap_remove(handle, trap_id=6)
     """
 
-    from imcsdk.imcexception import ImcOperationError
     from imcsdk.mometa.comm.CommSnmpTrap import CommSnmpTrapConsts
 
     dn = "sys/svc-ext/snmp-svc/snmp-trap-" + str(trap_id)
@@ -312,9 +307,25 @@ def snmp_trap_remove(handle, trap_id=0):
     handle.set_mo(mo)
 
 
+def _get_free_snmp_user(handle):
+    users = handle.query_children(in_dn="sys/svc-ext/snmp-svc",
+                                  class_id="CommSnmpUser")
+    free_user = None
+    for user in users:
+        if user.name == "":
+            free_user = user
+            break
+
+    if free_user is None:
+        raise ImcOperationError("Snmp User Add",
+                                "Maximum number of users already configured")
+
+    return free_user
+
+
 def snmp_user_add(handle, name, security_level="authpriv",
-                  auth_pwd=None, auth="MD5",
-                  priv_pwd=None, priv="AES"):
+                  auth_pwd=None, auth=None,
+                  priv_pwd=None, priv=None):
     """
     Adds snmp user.
 
@@ -336,29 +347,21 @@ def snmp_user_add(handle, name, security_level="authpriv",
     Example:
         snmp_user_add(handle, name="snmpuser",
             security_level="authpriv", auth_pwd="abcd",
-            auth="md5", priv_pwd="xyz", priv="des")
+            auth="MD5", priv_pwd="xyz", priv="DES")
     """
 
-    from imcsdk.imcexception import ImcOperationError
-
-    users = handle.query_children(in_dn="sys/svc-ext/snmp-svc",
-                                  class_id="CommSnmpUser")
-    free_user = None
-    for user in users:
-        if user.name == "":
-            free_user = user
-            break
-
-    if free_user is None:
-        raise ImcOperationError("Snmp User Add",
-                                "Maximum number of users already configured")
+    free_user = _get_free_snmp_user(handle)
 
     free_user.name = name
     free_user.security_level = security_level
-    free_user.auth_pwd = auth_pwd
-    free_user.auth = auth
-    free_user.privacy_pwd = priv_pwd
-    free_user.privacy = priv
+    if auth_pwd:
+        free_user.auth_pwd = auth_pwd
+    if auth:
+        free_user.auth = auth
+    if priv_pwd:
+        free_user.privacy_pwd = priv_pwd
+    if priv:
+        free_user.privacy = priv
 
     handle.set_mo(free_user)
     return free_user
@@ -399,23 +402,21 @@ def snmp_user_modify(handle, user_id, username=None, security_level=None,
         username (string): snmp username
         security_level (string): "authpriv", "authnopriv", "noauthnopriv"
         auth_pwd (string): password
-        auth (string): "md5", "sha"
+        auth (string): "MD5", "SHA"
         priv_pwd (string): privacy password
-        priv (string): "aes", "des"
+        priv (string): "AES", "DES"
 
     Returns:
         CommSnmpUser: Managed Object
 
     Raises:
-        ImcOperationError is user not found
+        ImcOperationError: If user is not present
 
     Example:
-        snmp_user_modify(handle, name="snmpuser", descr="",
-                          pwd="password", privpwd="password",
-                          auth="md5", use_aes="no")
+        snmp_user_modify(handle, user_id=1, username="snmpuser",
+                         security_level="authpriv", auth_pwd="password",
+                         auth="MD5", priv="AES", priv_pwd="password")
     """
-
-    from imcsdk.imcexception import ImcOperationError
 
     dn = "sys/svc-ext/snmp-svc/snmpv3-user-" + str(user_id)
     mo = handle.query_dn(dn)
@@ -425,7 +426,7 @@ def snmp_user_modify(handle, user_id, username=None, security_level=None,
     if username:
         mo.name = username
     if security_level:
-        mo.com2_sec = security_level
+        mo.security_level = security_level
     if auth_pwd:
         mo.auth_pwd = auth_pwd
     if auth:
@@ -451,14 +452,13 @@ def snmp_user_remove(handle, name):
         None
 
     Raises:
-        ValueError: If CommSnmpUser Mo is not present
+        ImcOperationError: If user is not present
 
     Example:
         snmp_user_remove(handle, name="snmpuser")
 
     """
 
-    from imcsdk.imcexception import ImcOperationError
     from imcsdk.mometa.comm.CommSnmpUser import CommSnmpUserConsts
 
     users = handle.query_children(in_dn="sys/svc-ext/snmp-svc",
