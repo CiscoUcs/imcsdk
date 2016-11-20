@@ -108,11 +108,14 @@ class ImcVersion(object):
             return 1
 
         if self.__major != version.major:
-            return ord(self.__major) - ord(version.major)
+            func = (ord, int)[self.__major.isdigit() and version.major.isdigit()]
+            return func(self.__major) - func(version.major)
         if self.__minor != version.minor:
-            return ord(self.__minor) - ord(version.major)
+            func = (ord, int)[self.__minor.isdigit() and version.minor.isdigit()]
+            return func(self.__minor) - func(version.major)
         if self.__mr != version.mr:
-            return ord(self.__mr) - ord(version.mr)
+            func = (ord, int)[self.__mr.isdigit() and version.mr.isdigit()]
+            return func(self.__mr) - func(version.mr)
         return ord(self.__patch) - ord(version.patch)
 
     def __gt__(self, version):
