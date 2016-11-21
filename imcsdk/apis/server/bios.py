@@ -19,9 +19,7 @@ This module provides APIs for bios related configuration like boot order
 import logging
 import imcsdk.imccoreutils as imccoreutils
 
-logging.basicConfig()
 log = logging.getLogger('imc')
-log.setLevel(logging.DEBUG)
 
 
 def get_boot_order_precision(handle, dump=False, server_id=1):

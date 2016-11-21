@@ -70,7 +70,7 @@ def get_vic_adaptor_properties(handle, adaptor_slot, server_id=1, **kwargs):
 
 
 def setup_vic_adaptor_properties(handle, adaptor_slot, fip_mode=None,
-                                 vntag_mode=None, num_vmfex_ifs=0,
+                                 vntag_mode=None, num_vmfex_ifs=None,
                                  server_id=1, **kwargs):
     """
     This method setups the vic adaptor properties.
@@ -103,7 +103,8 @@ def setup_vic_adaptor_properties(handle, adaptor_slot, fip_mode=None,
     """
 
     mo = get_vic_adaptor_properties(handle, adaptor_slot, server_id, **kwargs)
-    mo.num_of_vm_fex_ifs = str(num_vmfex_ifs)
+    if num_vmfex_ifs:
+        mo.num_of_vm_fex_ifs = str(num_vmfex_ifs)
 
     if fip_mode is True:
         mo.fip_mode = "enabled"

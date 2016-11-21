@@ -16,14 +16,11 @@ This module contains APIs to facilitate Imc backup and import
 """
 
 import time
-import logging
 from ..imcexception import ImcValidationException
-
-log = logging.getLogger('imc')
 
 
 def _is_valid_arg(param, kwargs):
-    return param in kwargs and kwargs[param] is not None
+    return kwargs.get(param) is not None
 
 
 def backup_imc(handle, remote_host, remote_file, protocol, username, password,
