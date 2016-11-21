@@ -324,8 +324,8 @@ def _get_free_snmp_user(handle):
 
 
 def snmp_user_add(handle, name, security_level="authpriv",
-                  auth_pwd=None, auth=None,
-                  priv_pwd=None, priv=None):
+                  auth_pwd=None, auth="MD5",
+                  priv_pwd=None, priv="AES"):
     """
     Adds snmp user.
 
@@ -350,17 +350,16 @@ def snmp_user_add(handle, name, security_level="authpriv",
             auth="MD5", priv_pwd="xyz", priv="DES")
     """
 
+    from imcsdk.mometa.comm.CommSnmpUser import CommSnmpUserConsts
+
     free_user = _get_free_snmp_user(handle)
 
     free_user.name = name
     free_user.security_level = security_level
-    if auth_pwd:
+    if security_level != CommSnmpUserConsts.SECURITY_LEVEL_NOAUTHNOPRIV:
         free_user.auth_pwd = auth_pwd
-    if auth:
         free_user.auth = auth
-    if priv_pwd:
         free_user.privacy_pwd = priv_pwd
-    if priv:
         free_user.privacy = priv
 
     handle.set_mo(free_user)
