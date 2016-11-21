@@ -42,7 +42,7 @@ def test_valid_power_down_server(login_mock, query_dn_mock, set_mo_mock):
     assert power_down_server(test_cimc, 0, 1) is pwrd_off_mock
 
     # Scenario: server starts powered on, and powers off successfully
-    query_dn_mock.side_effect = [pwrd_on_mock, pwrd_off_mock, pwrd_off_mock]
+    query_dn_mock.side_effect = [pwrd_on_mock, pwrd_off_mock, pwrd_off_mock, pwrd_off_mock]
     assert power_down_server(test_cimc, 0, 1) is pwrd_off_mock
 
 
@@ -96,7 +96,7 @@ def test_valid_power_up_server(login_mock, query_dn_mock, set_mo_mock):
     assert power_up_server(test_cimc, 0, 1) is pwrd_on_mock
 
     # Scenario: server starts powered off, and powers on successfully
-    query_dn_mock.side_effect = [pwrd_off_mock, pwrd_on_mock, pwrd_on_mock]
+    query_dn_mock.side_effect = [pwrd_off_mock, pwrd_on_mock, pwrd_on_mock, pwrd_on_mock]
     assert power_up_server(test_cimc, 0, 1) is pwrd_on_mock
 
 
