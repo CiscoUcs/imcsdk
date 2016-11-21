@@ -16,15 +16,12 @@ This module contains the APIs used to create and download tech_support file.
 """
 
 import time
-import logging
 from ..imcexception import ImcValidationException, ImcWarning
 from ..imccoreutils import IMC_PLATFORM
 
-log = logging.getLogger('imc')
-
 
 def _is_valid_arg(param, kwargs):
-    return param in kwargs and kwargs[param] is not None
+    return kwargs.get(param) is not None
 
 
 def get_imc_tech_support(handle, remote_host, remote_file, protocol, username,

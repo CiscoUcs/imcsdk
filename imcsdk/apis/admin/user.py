@@ -18,9 +18,7 @@ This module implements apis to create/delete/modify local/ldap users
 
 import logging
 
-logging.basicConfig()
 log = logging.getLogger('imc')
-log.setLevel(logging.DEBUG)
 
 
 def set_strong_password(handle, enable=True):
@@ -80,8 +78,8 @@ def get_local_users(handle, dump=False):
         if user.name != "":
             users.append(user)
     if dump:
-        log.info("List of users (id, username, role, status")
-        log.info("-----------------------------------------")
+        log.info("List of users (id, username, role, status)")
+        log.info("------------------------------------------")
 
         for user in users:
             log.info(" %s %s %s %s" %
