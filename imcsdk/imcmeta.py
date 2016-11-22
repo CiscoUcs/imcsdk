@@ -881,7 +881,6 @@ METHOD_CLASS_ID = frozenset([
     "ConfigResolveParent",
     "EventSubscribe",
     "EventUnsubscribe",
-
 ])
 
 
