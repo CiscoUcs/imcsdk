@@ -339,38 +339,6 @@ class NamingId:
     THERMAL_POWER_PROFILE = "thermalPowerProfile"
 
 
-class YesOrNo:
-    _NO = "No"
-    _YES = "Yes"
-    FALSE = "false"
-    NO = "no"
-    TRUE = "true"
-    YES = "yes"
-
-
-class BootOrderEnum:
-    BOOT_ORDER_ENUM_1 = "1"
-    BOOT_ORDER_ENUM_2 = "2"
-    BOOT_ORDER_ENUM_3 = "3"
-    BOOT_ORDER_ENUM_4 = "4"
-    BOOT_ORDER_ENUM_5 = "5"
-
-
-class EmptyStringOrHostNameOrIPv4Address:
-    VALUE_0_0_0_0 = "0.0.0.0"
-
-
-class EmptyStringOrHostNameOrIPv4AddressOrIPv6Address:
-    pass
-
-
-class EnabledDisabled:
-    _DISABLED = "Disabled"
-    _ENABLED = "Enabled"
-    DISABLED = "disabled"
-    ENABLED = "enabled"
-
-
 class NamingPropertyId:
     ABSOLUTE_STATE_OF_CHARGE = "absoluteStateOfCharge"
     ACCESS = "access"
@@ -383,6 +351,7 @@ class NamingPropertyId:
     ACTUAL_BOOT_MODE = "actualBootMode"
     ADAPTOR_SECURE_UPDATE = "adaptorSecureUpdate"
     ADDRESS = "address"
+    ADDRESSV6 = "addressv6"
     ADMIN_ACTION = "adminAction"
     ADMIN_DUPLEX = "adminDuplex"
     ADMIN_NET_SPEED = "adminNetSpeed"
@@ -402,6 +371,7 @@ class NamingPropertyId:
     AUTH_PWD = "authPwd"
     AUTO_DELETE_OLDEST = "autoDeleteOldest"
     AUTO_ENHANCED_IMPORT = "autoEnhancedImport"
+    AUTO_MIN_BUDGET = "autoMinBudget"
     AUTO_NEG = "autoNeg"
     AUTO_SNAPSHOT = "autoSnapshot"
     AUTO_SYNC = "autoSync"
@@ -425,10 +395,12 @@ class NamingPropertyId:
     BOOT_DRIVE_IS_PHYSICAL_DRIVE = "bootDriveIsPhysicalDrive"
     BOOT_LUN = "bootLun"
     BOOT_VERSION = "bootVersion"
+    BUDGET = "budget"
     BUS_ID = "busId"
     CACHE_FLUSH_INTERVAL = "cacheFlushInterval"
     CACHE_MEMORY_SIZE = "cacheMemorySize"
     CACHE_POLICY = "cachePolicy"
+    CAP_BUDGET = "capBudget"
     CAPACITY = "capacity"
     CARD_MODE = "cardMode"
     CARD_SLOT = "cardSlot"
@@ -440,12 +412,16 @@ class NamingPropertyId:
     CHANGE_SET = "changeSet"
     CHANNEL_NUMBER = "channelNumber"
     CHARGING_STATE = "chargingState"
+    CHASSIS_UTILIZATION = "chassisUtilization"
     CIMC_MANAGEMENT_ENABLED = "cimcManagementEnabled"
     CIMC_RESET_REASON = "cimcResetReason"
     CIMC_SECURE_BOOT = "cimcSecureBoot"
     CLASS_OF_SERVICE = "classOfService"
     CLOCK = "clock"
     CLUSTER_ENABLE = "clusterEnable"
+    CMC1_IS_ACTIVE = "cmc1IsActive"
+    CMC2_IS_ACTIVE = "cmc2IsActive"
+    CMC_SECURE_BOOT = "cmcSecureBoot"
     CNTRL_ID = "cntrlId"
     COALESCING_TIME = "coalescingTime"
     COALESCING_TYPE = "coalescingType"
@@ -527,6 +503,7 @@ class NamingPropertyId:
     DOWNLOAD_STATUS = "downloadStatus"
     DRIVE_FIRMWARE = "driveFirmware"
     DRIVE_GROUP = "driveGroup"
+    DRIVE_POWER_POLICY = "drivePowerPolicy"
     DRIVE_SCOPE = "driveScope"
     DRIVE_SERIAL_NUMBER = "driveSerialNumber"
     DRIVE_STATE = "driveState"
@@ -552,6 +529,7 @@ class NamingPropertyId:
     ENCRYPTION_STATE = "encryptionState"
     ENGINE_ID = "engineId"
     ENGINE_ID_KEY = "engineIdKey"
+    ENTITY = "entity"
     ERROR_DESCRIPTION = "errorDescription"
     ERROR_DETECT_TIMEOUT = "errorDetectTimeout"
     EVENT = "event"
@@ -586,6 +564,8 @@ class NamingPropertyId:
     FSM_STAGE_DESCR = "fsmStageDescr"
     FSM_STATUS = "fsmStatus"
     FULL_CAPACITY = "fullCapacity"
+    FW_UPDATE_OPER_STATE = "fwUpdateOperState"
+    FW_UPDATE_PROGRESS = "fwUpdateProgress"
     FW_VERSION = "fwVersion"
     GENERATED_KEY_ID = "generatedKeyId"
     GROUP_ATTRIBUTE = "groupAttribute"
@@ -685,6 +665,7 @@ class NamingPropertyId:
     LOCATION = "location"
     LOCATOR_LEDSTATUS = "locatorLEDStatus"
     LOCKED = "locked"
+    LOW_POWER_USB = "lowPowerUsb"
     LROP_IN_PROGRESS = "lropInProgress"
     LUN = "lun"
     LUN_QUEUE_DEPTH = "lunQueueDepth"
@@ -705,6 +686,7 @@ class NamingPropertyId:
     MAX_MEMORY_POWER = "maxMemoryPower"
     MAX_OUTPUT = "maxOutput"
     MAX_POWER = "maxPower"
+    MAX_SESSIONS = "maxSessions"
     MAXIMUM = "maximum"
     MAXIMUM_SESSIONS = "maximumSessions"
     MEDIA_ERROR_COUNT = "mediaErrorCount"
@@ -804,6 +786,7 @@ class NamingPropertyId:
     PERCENTAGE_TOTAL_POWER_ON_HOUR = "percentageTotalPowerOnHour"
     PERF = "perf"
     PERFORMANCE_LEVEL = "performanceLevel"
+    PERIOD = "period"
     PERSISTENT_LUN_BIND = "persistentLunBind"
     PHYS_DRIVE_COERCION_MODE = "physDriveCoercionMode"
     PHYSICAL_BLOCK_SIZE = "physicalBlockSize"
@@ -827,6 +810,8 @@ class NamingPropertyId:
     POWER = "power"
     POWER_CHAR_STATUS = "powerCharStatus"
     POWER_LIMIT = "powerLimit"
+    POWER_LIMIT_SERVER1 = "powerLimitServer1"
+    POWER_LIMIT_SERVER2 = "powerLimitServer2"
     POWER_STATE = "powerState"
     PREBOOT_CLI_VERSION = "prebootCliVersion"
     PREDICTIVE_FAIL_POLL_INTERVAL = "predictiveFailPollInterval"
@@ -840,6 +825,8 @@ class NamingPropertyId:
     PRIMARY_TARGET_IPADDRESS = "primaryTargetIPAddress"
     PRIMARY_TARGET_NAME = "primaryTargetName"
     PRIMARY_TARGET_PORT = "primaryTargetPort"
+    PRIOR_SERVER_ID = "priorServerId"
+    PRIORITY = "priority"
     PRIV = "priv"
     PRIVACY = "privacy"
     PRIVACY_PWD = "privacyPwd"
@@ -867,6 +854,7 @@ class NamingPropertyId:
     RAW_SIZE = "rawSize"
     RD_ERR_COUNT_SLOT1_THRESHOLD = "rdErrCountSlot1Threshold"
     RD_ERR_COUNT_SLOT2_THRESHOLD = "rdErrCountSlot2Threshold"
+    READ_AHEAD_POLICY = "readAheadPolicy"
     READ_ERROR_COUNT = "readErrorCount"
     READ_ERROR_THRESHOLD = "readErrorThreshold"
     READ_POLICY = "readPolicy"
@@ -915,6 +903,7 @@ class NamingPropertyId:
     RUNNING_TIME = "runningTime"
     RUNNING_VERSION = "runningVersion"
     SAN_BOOT = "sanBoot"
+    SAS_ADDRESS = "sasAddress"
     SAS_ADDRESS0 = "sasAddress0"
     SAS_ADDRESS1 = "sasAddress1"
     SAS_ADDRESS2 = "sasAddress2"
@@ -940,6 +929,20 @@ class NamingPropertyId:
     SERIAL_DEBUGGER_PRESENT = "serialDebuggerPresent"
     SERIAL_NUMBER = "serialNumber"
     SERIALNUMBER = "serialnumber"
+    SERVER1_UPLINK1_SPEED = "server1Uplink1Speed"
+    SERVER1_UPLINK2_SPEED = "server1Uplink2Speed"
+    SERVER1_UPLINK3_SPEED = "server1Uplink3Speed"
+    SERVER1_UPLINK4_SPEED = "server1Uplink4Speed"
+    SERVER1_UPLINK5_SPEED = "server1Uplink5Speed"
+    SERVER1_UPLINK6_SPEED = "server1Uplink6Speed"
+    SERVER1_UTILIZATION = "server1Utilization"
+    SERVER2_UPLINK1_SPEED = "server2Uplink1Speed"
+    SERVER2_UPLINK2_SPEED = "server2Uplink2Speed"
+    SERVER2_UPLINK3_SPEED = "server2Uplink3Speed"
+    SERVER2_UPLINK4_SPEED = "server2Uplink4Speed"
+    SERVER2_UPLINK5_SPEED = "server2Uplink5Speed"
+    SERVER2_UPLINK6_SPEED = "server2Uplink6Speed"
+    SERVER2_UTILIZATION = "server2Utilization"
     SERVER_ID = "serverId"
     SESSION_TIMEOUT = "sessionTimeout"
     SEVERITY = "severity"
@@ -947,6 +950,7 @@ class NamingPropertyId:
     SIGNATURE = "signature"
     SIZE = "size"
     SLOT = "slot"
+    SLOT_ID = "slotId"
     SLOT_NUMBER = "slotNumber"
     SMBIOS_ID = "smbiosId"
     SNAPSHOT_CANCEL_OP = "snapshotCancelOp"
@@ -991,6 +995,9 @@ class NamingPropertyId:
     SYNC_MODE = "syncMode"
     SYS_CONTACT = "sysContact"
     SYS_LOCATION = "sysLocation"
+    SYS_PRODUCT_ID = "sysProductID"
+    SYS_PRODUCT_NAME = "sysProductName"
+    SYS_SERIAL_NUM = "sysSerialNum"
     TAGS = "tags"
     TARGET_ID = "targetId"
     TARGET_WWPN = "targetWwpn"
@@ -1088,6 +1095,8 @@ class NamingPropertyId:
     VP_FLOW_CONTROL = "vpFlowControl"
     VP_HWPMENABLE = "vpHWPMEnable"
     VP_HARDWARE_PREFETCH = "vpHardwarePrefetch"
+    VP_IOESLOT1_STATE = "vpIOESlot1State"
+    VP_IOESLOT2_STATE = "vpIOESlot2State"
     VP_IOHRESOURCE = "vpIOHResource"
     VP_IPPREFETCH = "vpIPPrefetch"
     VP_INTEL_HYPER_THREADING_TECH = "vpIntelHyperThreadingTech"
@@ -1168,8 +1177,17 @@ class NamingPropertyId:
     VP_SLOT_FRONT_SLOT6_LINK_SPEED = "vpSlotFrontSlot6LinkSpeed"
     VP_SLOT_HBALINK_SPEED = "vpSlotHBALinkSpeed"
     VP_SLOT_HBASTATE = "vpSlotHBAState"
+    VP_SLOT_IOEMEZZ1_LINK_SPEED = "vpSlotIOEMezz1LinkSpeed"
+    VP_SLOT_IOEMEZZ1_STATE = "vpSlotIOEMezz1State"
+    VP_SLOT_IOENVME1_LINK_SPEED = "vpSlotIOENVMe1LinkSpeed"
+    VP_SLOT_IOENVME1_STATE = "vpSlotIOENVMe1State"
+    VP_SLOT_IOENVME2_LINK_SPEED = "vpSlotIOENVMe2LinkSpeed"
+    VP_SLOT_IOENVME2_STATE = "vpSlotIOENVMe2State"
+    VP_SLOT_IOESLOT1_LINK_SPEED = "vpSlotIOESlot1LinkSpeed"
+    VP_SLOT_IOESLOT2_LINK_SPEED = "vpSlotIOESlot2LinkSpeed"
     VP_SLOT_MLOMLINK_SPEED = "vpSlotMLOMLinkSpeed"
     VP_SLOT_MLOMSTATE = "vpSlotMLOMState"
+    VP_SLOT_MLINK_SPEED = "vpSlotMLinkSpeed"
     VP_SLOT_MEZZ_STATE = "vpSlotMezzState"
     VP_SLOT_N1_STATE = "vpSlotN1State"
     VP_SLOT_N2_STATE = "vpSlotN2State"
@@ -1182,6 +1200,14 @@ class NamingPropertyId:
     VP_SLOT_RISER2_SLOT5_LINK_SPEED = "vpSlotRiser2Slot5LinkSpeed"
     VP_SLOT_RISER2_SLOT6_LINK_SPEED = "vpSlotRiser2Slot6LinkSpeed"
     VP_SLOT_SASSTATE = "vpSlotSASState"
+    VP_SLOT_SBMEZZ1_LINK_SPEED = "vpSlotSBMezz1LinkSpeed"
+    VP_SLOT_SBMEZZ1_STATE = "vpSlotSBMezz1State"
+    VP_SLOT_SBNVME1_LINK_SPEED = "vpSlotSBNVMe1LinkSpeed"
+    VP_SLOT_SBNVME1_STATE = "vpSlotSBNVMe1State"
+    VP_SLOT_SIOC1_LINK_SPEED = "vpSlotSIOC1LinkSpeed"
+    VP_SLOT_SIOC1_STATE = "vpSlotSIOC1State"
+    VP_SLOT_SIOC2_LINK_SPEED = "vpSlotSIOC2LinkSpeed"
+    VP_SLOT_SIOC2_STATE = "vpSlotSIOC2State"
     VP_SLOT_SSDSLOT1_LINK_SPEED = "vpSlotSSDSlot1LinkSpeed"
     VP_SLOT_SSDSLOT2_LINK_SPEED = "vpSlotSSDSlot2LinkSpeed"
     VP_SPARING_MODE = "vpSparingMode"
@@ -1211,6 +1237,27 @@ class NamingPropertyId:
     WWNN = "wwnn"
     WWPN = "wwpn"
 
+class Status:
+    CREATED = "created"
+    DELETED = "deleted"
+    MODIFIED = "modified"
+    REMOVED = "removed"
+
+class BootOrderEnum:
+    BOOT_ORDER_ENUM_1 = "1"
+    BOOT_ORDER_ENUM_2 = "2"
+    BOOT_ORDER_ENUM_3 = "3"
+    BOOT_ORDER_ENUM_4 = "4"
+    BOOT_ORDER_ENUM_5 = "5"
+
+class EnabledDisabled:
+    _DISABLED = "Disabled"
+    _ENABLED = "Enabled"
+    DISABLED = "disabled"
+    ENABLED = "enabled"
+
+class EmptyStringOrHostNameOrIPv4AddressOrIPv6Address:
+    pass
 
 class ObjectStatus:
     CREATED = "created"
@@ -1218,13 +1265,8 @@ class ObjectStatus:
     MODIFIED = "modified"
     REMOVED = "removed"
 
-
-class Status:
-    CREATED = "created"
-    DELETED = "deleted"
-    MODIFIED = "modified"
-    REMOVED = "removed"
-
+class EmptyStringOrHostNameOrIPv4Address:
+    VALUE_0_0_0_0 = "0.0.0.0"
 
 class SyslogSeverity:
     ALERT = "alert"
@@ -1235,4 +1277,12 @@ class SyslogSeverity:
     INFORMATIONAL = "informational"
     NOTICE = "notice"
     WARNING = "warning"
+
+class YesOrNo:
+    _NO = "No"
+    _YES = "Yes"
+    FALSE = "false"
+    NO = "no"
+    TRUE = "true"
+    YES = "yes"
 
