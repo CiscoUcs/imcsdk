@@ -256,6 +256,23 @@ def power_cycle_server(handle, timeout=120, interval=5, server_id=1, **kwargs):
     return handle.query_dn(server_dn)
 
 
+def _set_chassis_locator_led_state(handle, enabled, kwargs):
+    chassis_id = str(kwargs["chassis_id"])
+    chassis_dn = "sys/chassis-" + chassis_id
+    led_mo = EquipmentChassisLocatorLed(parent_mo_or_dn=chassis_dn)
+    led_mo.admin_state = (EquipmentChassisLocatorLedConsts.ADMIN_STATE_OFF,
+            EquipmentChassisLocatorLedConsts.ADMIN_STATE_ON)[enabled]
+    handle.set_mo(led_mo)
+
+
+def _set_server_locator_led_state(handle, enabled, kwargs):
+    server_dn = _set_server_dn(handle, kwargs)
+    led_mo = EquipmentLocatorLed(parent_mo_or_dn=server_dn)
+    led_mo.admin_state = (EquipmentLocatorLedConsts.ADMIN_STATE_OFF,
+            EquipmentLocatorLedConsts.ADMIN_STATE_ON)[enabled]
+    handle.set_mo(led_mo)
+
+
 def locator_led_on(handle, **kwargs):
     """
     This method will turn on the locator led on the server or chassis
@@ -277,17 +294,11 @@ def locator_led_on(handle, **kwargs):
     """
 
     if _is_valid_arg("chassis_id", kwargs):
-        chassis_id = str(kwargs["chassis_id"])
-        chassis_dn = "sys/chassis-" + chassis_id
-        led_mo = EquipmentChassisLocatorLed(parent_mo_or_dn=chassis_dn)
-        led_mo.admin_state = EquipmentChassisLocatorLedConsts.ADMIN_STATE_ON
-        handle.set_mo(led_mo)
+        _set_chassis_locator_led_state(handle, True, kwargs)
 
-    if _is_valid_arg("server_id", kwargs):
-        server_dn = _set_server_dn(handle, kwargs)
-        led_mo = EquipmentLocatorLed(parent_mo_or_dn=server_dn)
-        led_mo.admin_state = EquipmentLocatorLedConsts.ADMIN_STATE_ON
-        handle.set_mo(led_mo)
+    if _is_valid_arg("server_id", kwargs) or \
+            handle.platform == IMC_PLATFORM.TYPE_CLASSIC:
+        _set_server_locator_led_state(handle, True, kwargs)
 
 
 def locator_led_off(handle, **kwargs):
@@ -311,14 +322,8 @@ def locator_led_off(handle, **kwargs):
     """
 
     if _is_valid_arg("chassis_id", kwargs):
-        chassis_id = str(kwargs["chassis_id"])
-        chassis_dn = "sys/chassis-" + chassis_id
-        led_mo = EquipmentChassisLocatorLed(parent_mo_or_dn=chassis_dn)
-        led_mo.admin_state = EquipmentChassisLocatorLedConsts.ADMIN_STATE_OFF
-        handle.set_mo(led_mo)
+        _set_chassis_locator_led_state(handle, False, kwargs)
 
-    if _is_valid_arg("server_id", kwargs):
-        server_dn = _set_server_dn(handle, kwargs)
-        led_mo = EquipmentLocatorLed(parent_mo_or_dn=server_dn)
-        led_mo.admin_state = EquipmentLocatorLedConsts.ADMIN_STATE_OFF
-        handle.set_mo(led_mo)
+    if _is_valid_arg("server_id", kwargs) or \
+            handle.platform == IMC_PLATFORM.TYPE_CLASSIC:
+        _set_server_locator_led_state(handle, False, kwargs)

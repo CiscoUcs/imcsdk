@@ -25,12 +25,13 @@ from imcsdk.mometa.comm.CommVMediaMap import CommVMediaMap
 from imcsdk.mometa.sol.SolIf import SolIf, SolIfConsts
 from imcsdk.imcexception import ImcOperationError
 from imcsdk.imccoreutils import get_server_dn
+from imcsdk.apis.admin.ipmi import _get_comm_mo_dn
 CIFS_URI_PATTERN = re.compile('^//\d+\.\d+\.\d+\.\d+\/')
 NFS_URI_PATTERN = re.compile('^\d+\.\d+\.\d+\.\d+\:\/')
 
 
 def kvm_setup(handle, max_sessions=1, port=2068,
-              encrypt=False, mirror_locally=False):
+              encrypt=False, mirror_locally=False, server_id=1):
     """
     This method will setup and enable kvm console access
 
@@ -40,6 +41,7 @@ def kvm_setup(handle, max_sessions=1, port=2068,
         port (int): Port used for kvm communication
         encrypt (bool): Encrypt video information sent over kvm
         mirror_locally (bool): Mirror the kvm session on local monitor
+        server_id (int): Server Id to be specified for C3x60 platforms
 
     Returns:
         CommKvm object
@@ -52,7 +54,7 @@ def kvm_setup(handle, max_sessions=1, port=2068,
                   mirror_locally=False)
     """
 
-    kvm_mo = CommKvm(parent_mo_or_dn="sys/svc-ext")
+    kvm_mo = CommKvm(parent_mo_or_dn=_get_comm_mo_dn(handle, server_id))
     kvm_mo.admin_state = "enabled"
     kvm_mo.total_sessions = str(max_sessions)
     kvm_mo.port = str(port)
@@ -69,21 +71,39 @@ def kvm_setup(handle, max_sessions=1, port=2068,
     return kvm_mo
 
 
-def kvm_disable(handle):
+def kvm_disable(handle, server_id=1):
     """
     This method will disable kvm console access
 
     Args:
         handle (ImcHandle)
+        server_id (int): Server Id to be specified for C3x60 platforms
 
     Returns:
         None
     """
 
-    kvm_mo = CommKvm(parent_mo_or_dn="sys/svc-ext")
+    kvm_mo = CommKvm(parent_mo_or_dn=_get_comm_mo_dn(handle, server_id))
     kvm_mo.admin_state = "disabled"
 
     handle.set_mo(kvm_mo)
+
+
+def is_kvm_enabled(handle, server_id=1):
+    """
+    This method will check if kvm console access is enabled
+
+    Args:
+        handle (ImcHandle)
+        server_id (int): Server Id to be specified for C3x60 platforms
+
+    Returns:
+        None
+    """
+
+    kvm_mo = CommKvm(parent_mo_or_dn=_get_comm_mo_dn(handle, server_id))
+    kvm_mo = handle.query_dn(kvm_mo.dn)
+    return(kvm_mo.admin_state.lower() == "enabled")
 
 
 def vmedia_setup(handle, encrypt=False, low_power_usb=False):
@@ -171,7 +191,7 @@ def vmedia_get_existing_status(handle):
 
 def vmedia_mount_add(handle, volume_name, mount_protocol,
                      mount_options, remote_share,
-                     remote_file, user_id, password):
+                     remote_file, user_id="", password=""):
     """
     This method will setup the vmedia mapping
     Args:
@@ -415,3 +435,22 @@ def sol_disable(handle, server_id=1):
     solif_mo.admin_state = SolIfConsts.ADMIN_STATE_DISABLE
 
     handle.set_mo(solif_mo)
+
+
+def is_sol_enabled(handle, server_id=1):
+    """
+    This method will check if Serial over Lan connection is enabled
+
+    Args:
+        handle (ImcHandle)
+        server_id (int): Server Id to be specified for C3x60 platforms
+
+    Returns:
+        None
+    """
+
+    server_dn = get_server_dn(handle, server_id)
+    solif_mo = SolIf(parent_mo_or_dn=server_dn)
+    solif_mo = handle.query_dn(solif_mo.dn)
+    return(solif_mo.admin_state.lower() == "enabled" or
+           solif_mo.admin_state.lower() == "enable")

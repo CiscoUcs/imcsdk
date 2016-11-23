@@ -19,18 +19,20 @@ from imcsdk.mometa.comm.CommIpmiLan import CommIpmiLan, CommIpmiLanConsts
 from imcsdk.imccoreutils import get_server_dn, IMC_PLATFORM
 
 
-def _get_ipmi_parent_dn(handle, server_id=1):
+def _get_comm_mo_dn(handle, server_id=1):
     """
-    Internal method to get the IPMI object based on the type of platform
+    Internal method to get the IPMI mo's parent_dn based \
+            on the type of platform
     """
+    from imcsdk.imcexception import ImcValidationException
 
-    parent_dn = ""
     if handle.platform == IMC_PLATFORM.TYPE_CLASSIC:
-        parent_dn = "sys/svc-ext"
+        return("sys/svc-ext")
     elif handle.platform == IMC_PLATFORM.TYPE_MODULAR:
-        parent_dn = get_server_dn(handle, server_id) + "/svc-ext"
-
-    return parent_dn
+        return(get_server_dn(handle, server_id) + "/svc-ext")
+    else:
+        raise ImcValidationException("Invalid platform detected:%s" %
+                                     handle.platform)
 
 
 def enable_ipmi(handle, priv=CommIpmiLanConsts.PRIV_ADMIN,
@@ -70,8 +72,7 @@ def enable_ipmi(handle, priv=CommIpmiLanConsts.PRIV_ADMIN,
                          '"{1}"'.format(handle.ip, key))
 
     # Create enabled IPMI object
-    ipmi_mo = CommIpmiLan(parent_mo_or_dn=_get_ipmi_parent_dn(handle,
-                                                              server_id))
+    ipmi_mo = CommIpmiLan(parent_mo_or_dn=_get_comm_mo_dn(handle, server_id))
     ipmi_mo.admin_state = "enabled"
     ipmi_mo.priv = priv
     ipmi_mo.key = key
@@ -93,8 +94,7 @@ def disable_ipmi(handle, server_id=1):
     """
 
     # Create disabled IPMI object
-    ipmi_mo = CommIpmiLan(parent_mo_or_dn=_get_ipmi_parent_dn(handle,
-                                                              server_id))
+    ipmi_mo = CommIpmiLan(parent_mo_or_dn=_get_comm_mo_dn(handle, server_id))
     ipmi_mo.admin_state = "disabled"
 
     # Configure IPMI object on CIMC
@@ -113,8 +113,7 @@ def is_ipmi_enabled(handle, server_id=1):
         True if enabled, else False
     """
 
-    ipmi_mo = CommIpmiLan(parent_mo_or_dn=_get_ipmi_parent_dn(handle,
-                                                              server_id))
+    ipmi_mo = CommIpmiLan(parent_mo_or_dn=_get_comm_mo_dn(handle, server_id))
     ipmi_mo = handle.query_dn(ipmi_mo.dn)
 
     return (ipmi_mo.admin_state.lower() == "enabled")

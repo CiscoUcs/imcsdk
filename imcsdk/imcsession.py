@@ -471,10 +471,10 @@ class ImcSession(object):
             for rack in rack_elem_response.out_configs.child:
                 model_name = rack.model
 
-                if model_name.startswith("UCSC-C3X"):
-                    self.__platform = IMC_PLATFORM.TYPE_MODULAR
-                else:
-                    self.__platform = IMC_PLATFORM.TYPE_CLASSIC
+                platform_type = (IMC_PLATFORM.TYPE_CLASSIC,
+                                 IMC_PLATFORM.TYPE_MODULAR)[
+                                         model_name.startswith("UCSC-C3X")]
+                self._set_platform_type(platform_type)
 
                 if not (model_name.startswith("UCSC") or
                         model_name.startswith("UCS-E") or
