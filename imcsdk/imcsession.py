@@ -37,6 +37,7 @@ class ImcSession(object):
         self.__proxy = proxy
         self.__uri = self.__create_uri(port, secure)
         self.__platform = None
+        self.__model = None
 
         self.__imc = ip
         self.__name = None
@@ -120,6 +121,10 @@ class ImcSession(object):
     @property
     def platform(self):
         return self.__platform
+
+    @property
+    def model(self):
+        return self.__model
 
     @property
     def version(self):
@@ -475,6 +480,7 @@ class ImcSession(object):
                                  IMC_PLATFORM.TYPE_MODULAR)[
                                          model_name.startswith("UCSC-C3X")]
                 self._set_platform_type(platform_type)
+                self._set_model(model_name)
 
                 if not (model_name.startswith("UCSC") or
                         model_name.startswith("UCS-E") or
@@ -619,6 +625,24 @@ class ImcSession(object):
         Not to be exposed at the handle
         """
         self.__platform = platform
+
+    def _set_model(self, model):
+        """
+        Internal method to set the server model
+        Not to be exposed at the handle
+        """
+        from .imccoreutils import IMC_PLATFORM
+        class_ids = {
+            IMC_PLATFORM.TYPE_MODULAR: "ComputeServerNode",
+            IMC_PLATFORM.TYPE_CLASSIC: "ComputeRackUnit"
+            }
+        if self.__platform not in class_ids:
+            self.__model = model
+            return
+
+        mo_list = self.query_classid(class_ids.get(self.__platform))
+        server = mo_list[0]
+        self.__model = server.model
 
 
 def _get_port(port, secure):

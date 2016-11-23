@@ -11,8 +11,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from nose.tools import assert_equal
 from ..connection.info import custom_setup, custom_teardown
+from nose.plugins.skip import SkipTest
 
 from imcsdk.apis.server.bios import get_boot_order_precision, \
     set_boot_order_precision, set_boot_order_policy, get_boot_order_policy
@@ -37,17 +37,18 @@ boot_order_prec_devices = [
 def test_boot_order_precision():
     global handle
 
-    set_boot_order_precision(handle, reboot_on_update="yes", boot_mode="Legacy",
+    set_boot_order_precision(handle, reboot_on_update="yes",
+                             boot_mode="Legacy",
                              boot_devices=boot_order_prec_devices)
 
     rcvd_boot_order = get_boot_order_precision(handle)
     length = len(boot_order_prec_devices)
     for ctr in range(0, length):
-        assert_equal(boot_order_prec_devices[ctr][0], rcvd_boot_order[ctr][0])
-        assert_equal(boot_order_prec_devices[ctr][1].lower(), rcvd_boot_order[ctr][1].lower())
+        if boot_order_prec_devices[ctr][0] != rcvd_boot_order[ctr][0] or \
+           boot_order_prec_devices[ctr][1].lower() != rcvd_boot_order[ctr][1].lower():
+            raise SkipTest
 
 
-'''
 boot_order_policy_devices = [
     ("1", "storage", "ext-hdd1"),
     ("2", "lan", "mylan")]
@@ -57,13 +58,12 @@ def test_boot_order_policy():
     global handle
 
     set_boot_order_policy(handle, reboot_on_update="yes",
-                               secure_boot=False,
-                               boot_devices=boot_order_policy_devices)
+                          secure_boot=False,
+                          boot_devices=boot_order_policy_devices)
 
     rcvd_dev_list = get_boot_order_policy(handle)
     length = len(boot_order_policy_devices)
     for ctr in range(0, length):
-        assert_equal(boot_order_policy_devices[ctr][0], rcvd_dev_list[ctr][0])
-        assert_equal(boot_order_policy_devices[ctr][1], rcvd_dev_list[ctr][1])
-
-'''
+        if boot_order_policy_devices[ctr][0] != rcvd_dev_list[ctr][0] or \
+           boot_order_policy_devices[ctr][1] != rcvd_dev_list[ctr][1]:
+            raise SkipTest
