@@ -106,7 +106,11 @@ def is_kvm_enabled(handle, server_id=1):
     return(kvm_mo.admin_state.lower() == "enabled")
 
 
-def vmedia_setup(handle, encrypt=False, low_power_usb=False):
+def _get_vmedia_mo_dn(handle, server_id=1):
+    return _get_comm_mo_dn(handle, server_id) + "/vmedia-svc"
+
+
+def vmedia_setup(handle, encrypt=False, low_power_usb=False, server_id=1):
     """
     This method will enable vmedia and setup the properties
 
@@ -114,6 +118,7 @@ def vmedia_setup(handle, encrypt=False, low_power_usb=False):
         handle (ImcHandle)
         encrypt (bool): Encrypt virtual media communications
         low_power_usb (bool): Enable low power usb
+        server_id (int): Server Id to be specified for C3x60 platforms
 
     Returns:
         CommVMedia object
@@ -122,44 +127,41 @@ def vmedia_setup(handle, encrypt=False, low_power_usb=False):
         vmedia_setup(handle, True, True)
     """
 
-    vmedia_mo = CommVMedia(parent_mo_or_dn="sys/svc-ext")
+    vmedia_mo = CommVMedia(parent_mo_or_dn=_get_comm_mo_dn(handle, server_id))
     vmedia_mo.admin_state = "enabled"
-    if encrypt:
-        vmedia_mo.encryption_state = "enabled"
-    else:
-        vmedia_mo.encryption_state = "disabled"
-    if low_power_usb:
-        vmedia_mo.low_power_usb_state = "enabled"
-    else:
-        vmedia_mo.low_power_usb_state = "disabled"
+    vmedia_mo.encryption_state = ("disabled", "enabled")[encrypt]
+    vmedia_mo.low_power_usb_state = ("disabled", "enabled")[low_power_usb]
+    vmedia_mo.low_power_usb = ("disabled", "enabled")[low_power_usb]
 
     handle.set_mo(vmedia_mo)
     return vmedia_mo
 
 
-def vmedia_disable(handle):
+def vmedia_disable(handle, server_id=1):
     """
     This method will disable vmedia on the server and unmount any virtual media
         already mounted
 
     Args:
         handle: ImcHandle
+        server_id (int): Server Id to be specified for C3x60 platforms
 
     Returns:
         None
     """
 
-    vmedia_mo = CommVMedia(parent_mo_or_dn="sys/svc-ext")
+    vmedia_mo = CommVMedia(parent_mo_or_dn=_get_comm_mo_dn(handle, server_id))
     vmedia_mo.admin_state = "disabled"
 
     handle.set_mo(vmedia_mo)
 
 
-def vmedia_get_existing_uri(handle):
+def vmedia_get_existing_uri(handle, server_id=1):
     """
     This method will return list of URIs of existing mountd media
     Args:
         handle (ImcHandle)
+        server_id (int): Server Id to be specified for C3x60 platforms
 
     Returns:
         List of URIs of currently mounted virtual media
@@ -169,29 +171,30 @@ def vmedia_get_existing_uri(handle):
     """
     # Create list of URIs of all current virtually mapped ISOs
     return [virt_media.remote_share + virt_media.remote_file for virt_media
-            in handle.query_children(in_dn="sys/svc-ext/vmedia-svc")]
+            in handle.query_children(in_dn=_get_vmedia_mo_dn(handle, server_id))]
 
 
-def vmedia_get_existing_status(handle):
+def vmedia_get_existing_status(handle, server_id=1):
     """
     This method will return list of status of existing mountd media
     Args:
         handle (ImcHandle)
+        server_id (int): Server Id to be specified for C3x60 platforms
 
     Returns:
         List of Status of currently mounted virtual media
 
     Examples:
-        vmedia_get_existing_uri(handle)
+        vmedia_get_existing_status(handle)
     """
     # Create list of URIs of all current virtually mapped ISOs
     return [virt_media.mapping_status for virt_media
-            in handle.query_children(in_dn="sys/svc-ext/vmedia-svc")]
+            in handle.query_children(in_dn=_get_vmedia_mo_dn(handle, server_id))]
 
 
 def vmedia_mount_add(handle, volume_name, mount_protocol,
                      mount_options, remote_share,
-                     remote_file, user_id="", password=""):
+                     remote_file, user_id="", password="", server_id=1):
     """
     This method will setup the vmedia mapping
     Args:
@@ -203,6 +206,7 @@ def vmedia_mount_add(handle, volume_name, mount_protocol,
         remote_file (string): name of the image
         user_id (string): username
         password (string): password
+        server_id (int): Server Id to be specified for C3x60 platforms
 
     Returns:
         CommVMediaMap object
@@ -220,7 +224,7 @@ def vmedia_mount_add(handle, volume_name, mount_protocol,
     """
 
     vmediamap_mo = CommVMediaMap(
-        parent_mo_or_dn="sys/svc-ext/vmedia-svc",
+        parent_mo_or_dn=_get_vmedia_mo_dn(handle, server_id),
         volume_name=volume_name)
     vmediamap_mo.map = mount_protocol
     vmediamap_mo.mount_options = mount_options
@@ -234,7 +238,7 @@ def vmedia_mount_add(handle, volume_name, mount_protocol,
 
 
 def vmedia_mount_iso_uri(handle, uri, user_id=None, password=None,
-                         timeout=60, interval=5):
+                         timeout=60, interval=5, server_id=1):
     """
     This method will setup the vmedia mapping
     Args:
@@ -244,6 +248,7 @@ def vmedia_mount_iso_uri(handle, uri, user_id=None, password=None,
         password (string): optional password
         timeout (int): optional timeout to wait for ISO map status to be 'OK'
         interval (int): optional interval to query ISO status
+        server_id (int): Server Id to be specified for C3x60 platforms
 
     Raises:
         Exception if invalid protocol in URI
@@ -297,13 +302,14 @@ def vmedia_mount_iso_uri(handle, uri, user_id=None, password=None,
         remote_share=remote_share,
         remote_file=remote_file,
         user_id=user_id,
-        password=password)
+        password=password,
+        server_id=server_id)
 
     # Verify correct URL was mapped
-    if uri in vmedia_get_existing_uri(handle):
+    if uri in vmedia_get_existing_uri(handle, server_id):
         # Loop until mapping moves out of 'In Progress' state
         wait_time = 0
-        status_list = vmedia_get_existing_status(handle)
+        status_list = vmedia_get_existing_status(handle, server_id)
         while 'In Progress' in status_list:
             # Raise error if we've reached timeout
             if wait_time > timeout:
@@ -314,7 +320,7 @@ def vmedia_mount_iso_uri(handle, uri, user_id=None, password=None,
                 )
             # Wait interval sec between checks
             time.sleep(interval)
-            status_list = vmedia_get_existing_status(handle)
+            status_list = vmedia_get_existing_status(handle, server_id)
             wait_time += interval
         else:
             # Verify mapping transitioned to 'OK' state
@@ -333,13 +339,14 @@ def vmedia_mount_iso_uri(handle, uri, user_id=None, password=None,
         )
 
 
-def vmedia_mount_remove(handle, volume_name):
+def vmedia_mount_remove(handle, volume_name, server_id=1):
     """
     This method will remove the vmedia mapping referred to by the volume name
 
     Args:
         handle (ImcHandle)
         volume_name (string): Name of the volume or identity of the image
+        server_id (int): Server Id to be specified for C3x60 platforms
 
     Returns:
         None
@@ -352,7 +359,7 @@ def vmedia_mount_remove(handle, volume_name):
     """
 
     vmediamap_mo = CommVMediaMap(
-        parent_mo_or_dn="sys/svc-ext/vmedia-svc",
+        parent_mo_or_dn=_get_vmedia_mo_dn(handle, server_id),
         volume_name=volume_name)
     vmediamap_mo = handle.query_dn(dn=vmediamap_mo.dn)
     if vmediamap_mo is None:
@@ -361,12 +368,13 @@ def vmedia_mount_remove(handle, volume_name):
     handle.remove_mo(vmediamap_mo)
 
 
-def vmedia_mount_remove_all(handle):
+def vmedia_mount_remove_all(handle, server_id=1):
     """
     This method will remove all the vmedia mappings
 
     Args:
         handle (ImcHandle)
+        server_id (int): Server Id to be specified for C3x60 platforms
 
     Raises:
         Exception if mapping is able to be removed
@@ -379,7 +387,8 @@ def vmedia_mount_remove_all(handle):
     """
 
     # Get all current virtually mapped ISOs
-    virt_media_maps = handle.query_children(in_dn="sys/svc-ext/vmedia-svc")
+    virt_media_maps = handle.query_children(in_dn=_get_vmedia_mo_dn(handle,
+                                                                    server_id))
     # Loop over each mapped ISO
     for virt_media in virt_media_maps:
         # Remove the mapped ISO
