@@ -35,6 +35,8 @@ Table of Contents
 
     1. `Backup Imc <#backup-imc>`__
     2. `Import Imc <#import-imc>`__
+    3. `Technical Support <#technical-support>`__
+    4. `Firmware Installation <#firmware-installation>`__
 
 
 Overview
@@ -42,6 +44,9 @@ Overview
 
 Cisco IMC Python SDK is a python module which helps automate all aspects
 of Cisco IMC management servers i.e. both C-Series and E-Series.
+With the introduction of the modular C-3260 platforms, the latest version
+of Cisco IMC Python SDK supports both the classic C-Series (for e.g. C220, C240, C22 etc)
+and the modular C-Series (C3260).
 
 Bulk of the Cisco IMC Python SDK work on the IMC Manager’s Management
 Information Tree (MIT), performing create, modify or delete actions on
@@ -62,11 +67,22 @@ The figure below illustrates a sample (partial) MIT for Rack Unit.
 
 ::
 
+    On a Classic C-series Server
+    ----------------------------
     Tree (topRoot)              Distinguished Name	
     |-sys                       sys
     |-ComputeRackUnit              sys/rack-unit-1
         |-AdaptorUnit                  sys/rack-unit-1/adaptor-1
             |-AdaptorCfgBackup             sys/rack-unit-1/adaptor-1/export-config
+
+    On a Modular C-series Server
+    ----------------------------
+    Tree (topRoot)              Distinguished Name 
+    |-sys                       sys
+    |-EquipmentChassis             sys/chassis-1
+        |-ComputeServerNode             sys/chassis-1/server-1
+            |-AdaptorUnit                   sys/chassis-1/server-1/adaptor-1
+                |-AdaptorHostEthIf              sys/chassis-1/server-1/adaptor-1/host-eth-eth0       
 
 
 Managed Objects
@@ -240,6 +256,10 @@ Refer `ImcHandle API
 Reference <https://ciscoucs.github.io/imcsdk_docs/imcsdk.html#module-imcsdk.imchandle>`__
 for detailed parameter sets to ``ImcHandle``
 
+The handle maintains a reference to the type of platform (classic or modular) that it is managing.
+This can be accessed using the ``handle.platform`` property.
+
+
 Base APIs
 ~~~~~~~~~
 
@@ -347,13 +367,14 @@ Retrieving Meta Information
 ---------------------------
 
 ``get_meta_info`` is useful for getting information about a Managed
-object.
+object. Since this information can vary based on the type of platform i.e. classic or modular,
+this api will also take ``platform`` as an optional parameter.
 
 ::
 
-    from imcsdk.imccoreutils import get_meta_info  
+    from imcsdk.imccoreutils import get_meta_info, IMC_PLATFORM  
 
-    class_meta = get_meta_info("faultInst")
+    class_meta = get_meta_info("faultInst", platform=IMC_PLATFORM.TYPE_CLASSIC)
     print class_meta
 
 The below sample output starts with a tree view of where faultInst
@@ -452,10 +473,20 @@ Backup Imc
 
     backup_file = “/home/user/backup/config_backup.xml”
 
+    For classic platforms :-
+    ------------------------
     backup_imc(handle, 
                remote_file=backup_file, 
                protocol="ftp", username="user", password="pass",
                remote_host="10.10.10.10", passphrase="xxxxxx")
+
+    For modular platforms :-
+    ------------------------
+    backup_imc(handle,
+               remote_host=remote_host, remote_file='/path/to/filename.xml',
+               protocol='scp', username="user", password="pass",
+               passphrase='abc', entity = 'CMC')
+
 
 `Backup Imc API
 Reference <https://ciscoucs.github.io/imcsdk_docs/imcsdk.utils.html?highlight=backup_imc#imcsdk.utils.imcbackup.backup_imc>`__
@@ -471,9 +502,92 @@ Import Imc
 
     import_file = “/home/user/backup/config_backup.xml”
 
-    import_imc_backup(h,remote_file=import_file,
-                      protocol="ftp",username="user",password="pass",
-                      remote_host="10.10.10.10",passphrase="xxxxxx")
+    For classic platforms :-
+    ------------------------
+    import_imc_backup(handle, remote_file=import_file,
+                      protocol="ftp", username="user", password="pass",
+                      remote_host="10.10.10.10", passphrase="xxxxxx")
+
+    For modular platforms :-
+    ------------------------
+    import_imc_backup(handle, remote_host=remote_host, 
+                      remote_file='/path/to/filename.xml', protocol='scp',
+                      username=username, password=password,
+                      passphrase='abc', entity = 'CMC')
+
 
 `Import Imc API
 Reference <https://ciscoucs.github.io/imcsdk_docs/imcsdk.utils.html?highlight=import_imc_backup#imcsdk.utils.imcbackup.import_imc_backup>`__
+
+
+Technical Support
+~~~~~~~~~~~~~~~~~
+
+``get_imc_tech_support`` is used to import an existing backup to a Imc server
+
+::
+
+    from imcsdk.utils.imctechsupport import get_imc_tech_support
+
+    For classic platforms :-
+    ------------------------
+    get_imc_tech_support(handle=handle,
+                         remote_host=remote_host,
+                         remote_file='/path/to/filename.tar.gz',
+                         protocol='scp',
+                         username=username,
+                         password=password)
+                        
+    For modular platforms :-
+    ------------------------
+    get_imc_tech_support(handle=handle,
+                         remote_host=remote_host,
+                         remote_file='/path/to/filename.tar.gz',
+                         protocol='scp',
+                         username=username,
+                         password=password,
+                         component='all')
+
+    
+`Tech-support Imc API
+Reference <https://ciscoucs.github.io/imcsdk_docs/imcsdk.utils.html?highlight=get_imc_tech_support#imcsdk.utils.imctechsupport.get_imc_tech_support>`__
+
+
+Firmware Installation
+~~~~~~~~~~~~~~~~~~~~~
+
+``update_imc_firmware_huu`` is used to import an existing backup to a Imc server
+
+::
+
+    from imcsdk.utils.imcfirmwareinstall import update_imc_firmware_huu
+
+    For classic platforms :-
+    ------------------------
+    update_imc_firmware_huu(handle=handle,
+                            remote_ip=remote_ip,
+                            remote_share='/path/image_name.iso',
+                            share_type='nfs',
+                            username=username,
+                            password=password,
+                            update_component='all',
+                            stop_on_error='yes',
+                            verify_update='no',
+                            cimc_secure_boot='no')
+
+    For modular platforms :-
+    ------------------------
+    update_imc_firmware_huu(handle=handle,
+                            remote_ip=remote_ip,
+                            remote_share='/path/image_name.iso',
+                            share_type='nfs',
+                            username=username,
+                            password=password,
+                            update_component='all',
+                            stop_on_error='yes',
+                            verify_update='no',
+                            cimc_secure_boot='no',
+                            server_id=1)
+    
+`Firmware Installation Imc API
+Reference <https://ciscoucs.github.io/imcsdk_docs/imcsdk.utils.html?highlight=update_imc_firmware_huu#imcsdk.utils.imcfirmwareinstall.update_imc_firmware_huu>`__

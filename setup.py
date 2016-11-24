@@ -8,7 +8,7 @@ except ImportError:
     from distutils.core import setup
 
 
-with open('README.md') as readme_file:
+with open('README.rst') as readme_file:
     readme = readme_file.read()
 
 with open('HISTORY.rst') as history_file:
@@ -24,7 +24,7 @@ test_requirements = [
 
 setup(
     name='imcsdk',
-    version='0.9.0.3',
+    version='0.9.1.0',
     description="python SDK for Cisco UCS IMC",
     long_description=readme + '\n\n' + history,
     author="Cisco Systems",
