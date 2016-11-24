@@ -18,6 +18,30 @@ This module implements apis for power policy and power cap related config
 from imcsdk.imccoreutils import get_server_dn
 from imcsdk.imcexception import ImcOperationError
 
+import logging
+log = logging.getLogger('imc')
+
+# This list is currently maintained manually.
+# Ideally all such config/capabilites should come from a capability file
+supported_models = ['UCSC-C220-M4', 'UCSC-C240-M4', 'UCSC-C3X60-M4']
+
+
+def is_supported_model(handle):
+    for model in supported_models:
+        if handle.model.find(model) != -1:
+            return True
+    log.info("Current Model:'%s' does not support Power Cap and Budgeting" %
+             handle.model)
+    return False
+
+
+def get_supported_models():
+    """
+    This api returns the list of rack server models that support power cap and
+    power budgeting
+    """
+    return supported_models
+
 
 def get_power_budget(handle, server_id=1):
     """
@@ -32,6 +56,8 @@ def get_power_budget(handle, server_id=1):
         PowerBudget object
     """
 
+    if not is_supported_model(handle):
+        return
     server_dn = get_server_dn(handle, server_id)
     power_budget_mo = handle.query_children(in_dn=server_dn,
                                             class_id="PowerBudget")
@@ -54,10 +80,14 @@ def set_power_characterization(handle, run_at_boot="yes", server_id=1):
         PowerBudget object
     """
 
-    from imcsdk.mometa.power.PowerBudget import PowerBudget
+    from imcsdk.mometa.power.PowerBudget import PowerBudget, PowerBudgetConsts
+    if not is_supported_model(handle):
+        return
     server_dn = get_server_dn(handle, server_id)
     power_budget_mo = PowerBudget(parent_mo_or_dn=server_dn)
-    power_budget_mo.run_pow_char_at_boot = run_at_boot
+    power_budget_mo.admin_action = \
+            PowerBudgetConsts.ADMIN_ACTION_START_POWER_CHAR
+    power_budget_mo.admin_state = "enabled"
     handle.set_mo(power_budget_mo)
     return power_budget_mo
 
@@ -91,6 +121,8 @@ def set_standard_power_cap(handle, throttle="no", power_limit=0,
     """
 
     from imcsdk.mometa.standard.StandardPowerProfile import StandardPowerProfile
+    if not is_supported_model(handle):
+        return
     server_dn = get_server_dn(handle, server_id)
     power_budget_dn = server_dn + "/budget"
     stdpowerprof_mo = StandardPowerProfile(
@@ -120,6 +152,8 @@ def disable_standard_cap(handle, server_id=1):
     """
 
     from imcsdk.mometa.standard.StandardPowerProfile import StandardPowerProfile
+    if not is_supported_model(handle):
+        return
     server_dn = get_server_dn(handle, server_id)
     power_budget_dn = server_dn + "/budget"
     stdpowerprof_mo = StandardPowerProfile(
