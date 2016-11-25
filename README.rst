@@ -13,6 +13,23 @@ https://ciscoucs.github.io/imcsdk\_docs/
 Installation
 ------------
 
+The SDK can be installed using any of ways below
+
+From pip:
+~~~~~~~~~
+
+Installs the last released version
+
+::
+
+        pip install imcsdk
+
+
+From github:
+~~~~~~~~~~~~
+
+Installs the latest top of the tree development version
+
 ::
 
         # Install pip (skip if pip is already available):
@@ -23,8 +40,6 @@ Installation
         cd imcsdk
         make install
 
-Features
---------
 
 Community:
 ----------
