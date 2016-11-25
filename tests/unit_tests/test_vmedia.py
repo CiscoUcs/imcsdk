@@ -20,6 +20,7 @@ from imcsdk.apis.server.remotepresence import vmedia_mount_iso_uri, \
                                               vmedia_mount_remove_all, \
                                               vmedia_get_existing_uri, \
                                               vmedia_get_existing_status
+from imcsdk.imccoreutils import IMC_PLATFORM
 
 
 @patch.object(ImcHandle, 'query_children')
@@ -31,6 +32,7 @@ def test_vmedia_get_existing_uri(login_mock, query_mock):
     test_cimc = ImcHandle(ip='169.254.1.1',
                           username='admin',
                           password='right')
+    test_cimc._set_platform_type(IMC_PLATFORM.TYPE_CLASSIC)
 
     # Scenario: No pre-existing mappings
     query_mock.return_value = []
@@ -68,6 +70,7 @@ def test_vmedia_get_existing_status(login_mock, query_mock):
     test_cimc = ImcHandle(ip='169.254.1.1',
                           username='admin',
                           password='right')
+    test_cimc._set_platform_type(IMC_PLATFORM.TYPE_CLASSIC)
 
     # Scenario: No pre-existing mappings
     query_mock.return_value = []
@@ -104,6 +107,7 @@ def test_valid_vmedia_mount_iso_uri(login_mock, add_mount_mock,
     test_cimc = ImcHandle(ip='169.254.1.1',
                           username='admin',
                           password='right')
+    test_cimc._set_platform_type(IMC_PLATFORM.TYPE_CLASSIC)
 
     # http mapping succeeded
     exist_mock.return_value = ["http://169.254.1.2/test.iso"]
@@ -116,11 +120,13 @@ def test_valid_vmedia_mount_iso_uri(login_mock, add_mount_mock,
     # Assert values of the mount options
     assert add_mount_mock.call_args[1] == {
         'volume_name': 'test.iso',
-        'mount_options': 'noauto',
         'mount_protocol': 'www',
+        'mount_options': 'noauto',
         'remote_share': "http://169.254.1.2/",
         'remote_file': 'test.iso',
-        'user_id': '', 'password': ''
+        'user_id': '',
+        'password': '',
+        'server_id': 1
     }
 
     # https mapping succeeded
@@ -138,7 +144,9 @@ def test_valid_vmedia_mount_iso_uri(login_mock, add_mount_mock,
         'mount_protocol': 'www',
         'remote_share': "https://169.254.1.2/",
         'remote_file': 'test.iso',
-        'user_id': '', 'password': ''
+        'user_id': '',
+        'password': '',
+        'server_id': 1
     }
 
     # CIFS mapping succeeded
@@ -156,7 +164,9 @@ def test_valid_vmedia_mount_iso_uri(login_mock, add_mount_mock,
         'mount_protocol': 'cifs',
         'remote_share': "//169.254.1.2/",
         'remote_file': 'test.iso',
-        'user_id': '', 'password': ''
+        'user_id': '',
+        'password': '',
+        'server_id': 1
     }
 
     # NFS mapping succeeded
@@ -174,7 +184,9 @@ def test_valid_vmedia_mount_iso_uri(login_mock, add_mount_mock,
         'mount_protocol': 'nfs',
         'remote_share': "169.254.1.2:/",
         'remote_file': 'test.iso',
-        'user_id': '', 'password': ''
+        'user_id': '',
+        'password': '',
+        'server_id': 1
     }
 
 
@@ -193,6 +205,7 @@ def test_invalid_vmedia_mount_iso_uri(login_mock, add_mount_mock,
     test_cimc = ImcHandle(ip='169.254.1.1',
                           username='admin',
                           password='right')
+    test_cimc._set_platform_type(IMC_PLATFORM.TYPE_CLASSIC)
 
     # Scenario: Zero value passed in as check interval
     assert_raises(ValueError, vmedia_mount_iso_uri, test_cimc,
@@ -233,6 +246,7 @@ def test_valid_remove_vmedia_all(login_mock, query_mock, remove_mock):
     test_cimc = ImcHandle(ip='169.254.1.1',
                           username='admin',
                           password='right')
+    test_cimc._set_platform_type(IMC_PLATFORM.TYPE_CLASSIC)
 
     # Scenario: server has no vmedia mounts
     query_mock.return_value = []
@@ -272,6 +286,7 @@ def test_invalid_remove_vmedia_all(login_mock, query_mock, remove_mock):
     test_cimc = ImcHandle(ip='169.254.1.1',
                           username='admin',
                           password='right')
+    test_cimc._set_platform_type(IMC_PLATFORM.TYPE_CLASSIC)
 
     # Scenario: Three pre-exising mounts, only two unsuccessfully
     vmedia1 = CommVMediaMap(parent_mo_or_dn="sys/svc-ext/vmedia-svc",

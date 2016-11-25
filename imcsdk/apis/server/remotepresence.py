@@ -193,8 +193,8 @@ def vmedia_get_existing_status(handle, server_id=1):
 
 
 def vmedia_mount_add(handle, volume_name, mount_protocol,
-                     mount_options, remote_share,
-                     remote_file, user_id="", password="", server_id=1):
+                     mount_options=None, remote_share=None,
+                     remote_file=None, user_id="", password="", server_id=1):
     """
     This method will setup the vmedia mapping
     Args:
@@ -227,7 +227,8 @@ def vmedia_mount_add(handle, volume_name, mount_protocol,
         parent_mo_or_dn=_get_vmedia_mo_dn(handle, server_id),
         volume_name=volume_name)
     vmediamap_mo.map = mount_protocol
-    vmediamap_mo.mount_options = mount_options
+    if mount_options:
+        vmediamap_mo.mount_options = mount_options
     vmediamap_mo.remote_share = remote_share
     vmediamap_mo.remote_file = remote_file
     vmediamap_mo.username = user_id
