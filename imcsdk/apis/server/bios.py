@@ -30,7 +30,7 @@ def get_boot_order_precision(handle, dump=False, server_id=1):
     Args:
         handle (ImcHandle)
         dump (bool): True or False
-        server_id (int): Id of the server in case of C3X60 platforms
+        server_id (int): Id of the server in case of C3260 platforms
 
     Returns:
         List of tuples of the format:
@@ -162,7 +162,7 @@ def set_boot_order_precision(
                                       "vmedia"
             boot-device-name(string): Unique label for the boot device
         server_id (int): Id of the server to perform
-                         this operation on C3x60 platforms
+                         this operation on C3260 platforms
 
     Returns:
         LsBootDevPrecision object
@@ -207,7 +207,7 @@ def get_boot_order_policy(handle, dump=False, server_id=1):
         handle (ImcHandle)
         dump (bool): True or False
         server_id (int): Id of the server to perform
-                         this operation on C3x60 platforms
+                         this operation on C3260 platforms
 
     Returns:
         List of tuples of the format:
@@ -271,7 +271,7 @@ def set_boot_order_policy(handle, reboot_on_update="yes",
             boot-device-type(string): "efi", "lan", "storage", "vmedia"
             boot-device-name(string): Unique label for the boot device
         server_id (int): Id of the server to perform
-                         this operation on C3x60 platforms
+                         this operation on C3260 platforms
     Returns:
         LsBootDef object
 

@@ -50,7 +50,7 @@ def get_power_budget(handle, server_id=1):
 
     Args:
         handle (ImcHandle)
-        server_id (int): Server Id to be specified for C3x60 platforms
+        server_id (int): Server Id to be specified for C3260 platforms
 
     Returns:
         PowerBudget object
@@ -74,7 +74,7 @@ def set_power_characterization(handle, run_at_boot="yes", server_id=1):
     Args:
         handle (ImcHandle)
         run_at_boot (string) : "yes", "no"
-        server_id (int): Server Id to be specified for C3x60 platforms
+        server_id (int): Server Id to be specified for C3260 platforms
 
     Returns:
         PowerBudget object
@@ -106,7 +106,7 @@ def set_standard_power_cap(handle, throttle="no", power_limit=0,
             and corrective action is taken. Range (1-600)s
         corrective_action (string): "none","alert","shutdown","alert,shutdown"
         hard_cap (string): "yes", "no"
-        server_id (int): Server Id to be specified for C3x60 platforms
+        server_id (int): Server Id to be specified for C3260 platforms
 
     Returns:
         StandardPowerProfile object
@@ -145,7 +145,7 @@ def disable_standard_cap(handle, server_id=1):
 
     Args:
         handle (ImcHandle)
-        server_id (int): Server Id to be specified for C3x60 platforms
+        server_id (int): Server Id to be specified for C3260 platforms
 
     Returns:
         None

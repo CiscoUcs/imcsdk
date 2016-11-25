@@ -63,13 +63,13 @@ def get_server_power_state(handle, server_id=1):
 
     Args:
         handle (ImcHandle)
-        server_id (int): Server Id to be specified for C3x60 platforms
+        server_id (int): Server Id to be specified for C3260 platforms
 
     Examples:
-        For classic or non-C3x60 series servers:-
+        For classic or non-C3260 series servers:-
         get_server_power_state(handle)
 
-        For modular or C3x60 series servers, server_id should also be passed
+        For modular or C3260 series servers, server_id should also be passed
         in the params:-
         get_server_power_state(handle, server_id=1)
         If server_id is not specified, this will assume server_id="1"
@@ -96,7 +96,7 @@ def _wait_for_power_state(handle, state, timeout=60, interval=5, server_id=1):
         state(str)
         timeout(int)
         interval(int)
-        server_id (int): Server Id to be specified for C3x60 platforms
+        server_id (int): Server Id to be specified for C3260 platforms
 
     Returns:
         bool
@@ -132,12 +132,12 @@ def power_up_server(handle, timeout=60, interval=5, server_id=1, **kwargs):
         handle(ImcHandle)
         timeout (int)
         interval (int)
-        server_id (int): Server Id to be specified for C3x60 platforms
+        server_id (int): Server Id to be specified for C3260 platforms
         kwargs: key=value paired arguments
 
     Returns:
-        ComputeRackUnit object for non-C3x60 platform
-        ComputeServerNode object for C3x60 platform
+        ComputeRackUnit object for non-C3260 platform
+        ComputeServerNode object for C3260 platform
 
     Example:
         power_up_server(handle)
@@ -168,12 +168,12 @@ def power_down_server(handle, timeout=60, interval=5, server_id=1, **kwargs):
         handle(ImcHandle)
         timeout(int)
         interval(int)
-        server_id (int): Server Id to be specified for C3x60 platforms
+        server_id (int): Server Id to be specified for C3260 platforms
         kwargs: key=value paired arguments
 
     Returns:
-        ComputeRackUnit object for non-C3x60 platform
-        ComputeServerNode object for C3x60 platform
+        ComputeRackUnit object for non-C3260 platform
+        ComputeServerNode object for C3260 platform
 
     Example:
         power_down_server(handle)
@@ -200,12 +200,12 @@ def power_down_server_gracefully(handle, timeout=120, interval=5,
 
     Args:
         handle(ImcHandle)
-        server_id (int): Server Id to be specified for C3x60 platforms
+        server_id (int): Server Id to be specified for C3260 platforms
         kwargs: key=value paired arguments
 
     Returns:
-        ComputeRackUnit object for non-C3x60 platform
-        ComputeServerNode object for C3x60 platform
+        ComputeRackUnit object for non-C3260 platform
+        ComputeServerNode object for C3260 platform
 
     Example:
         power_down_server_gracefully(handle)
@@ -231,19 +231,19 @@ def power_cycle_server(handle, timeout=120, interval=5, server_id=1, **kwargs):
 
     Args:
         handle(ImcHandle)
-        server_id (int): Server Id to be specified for C3x60 platforms
+        server_id (int): Server Id to be specified for C3260 platforms
         kwargs: key=value paired arguments
 
 
     Returns:
-        ComputeRackUnit object for non-C3x60 platform
-        ComputeServerNode object for C3x60 platform
+        ComputeRackUnit object for non-C3260 platform
+        ComputeServerNode object for C3260 platform
 
     Example:
-        power_cycle_server(handle) for non-C3x60 platforms
+        power_cycle_server(handle) for non-C3260 platforms
         power_cycle_server(handle, timeout=120, interval=10) \
-                for non-C3x60 platforms
-        power_cycle_server(handle, server_id=2, timeout=60) for C3x60 platforms
+                for non-C3260 platforms
+        power_cycle_server(handle, server_id=2, timeout=60) for C3260 platforms
     """
 
     server_dn = get_server_dn(handle, server_id)
@@ -285,11 +285,11 @@ def locator_led_on(handle, **kwargs):
         None
 
     Example:
-        locator_led_on(handle) for non-C3x60 platforms.
+        locator_led_on(handle) for non-C3260 platforms.
             Turns on locator led on the server.
-        locator_led_on(handle, server_id=1) for C3x60 platforms.
+        locator_led_on(handle, server_id=1) for C3260 platforms.
             Turns on locator led on the specified server.
-        locator_led_on(handle, chassis_id=1) for C3x60 platforms.
+        locator_led_on(handle, chassis_id=1) for C3260 platforms.
             Turns on locator led on the chassis.
     """
 
@@ -313,11 +313,11 @@ def locator_led_off(handle, **kwargs):
         None
 
     Example:
-        locator_led_off(handle) for non-C3x60 platforms.
+        locator_led_off(handle) for non-C3260 platforms.
             Turns off locator led on the server.
-        locator_led_off(handle, server_id=1) for C3x60 platforms.
+        locator_led_off(handle, server_id=1) for C3260 platforms.
             Turns off locator led on the specified server.
-        locator_led_off(handle, chassis_id=1) for C3x60 platforms.
+        locator_led_off(handle, chassis_id=1) for C3260 platforms.
             Turns off locator led on the chassis.
     """
 

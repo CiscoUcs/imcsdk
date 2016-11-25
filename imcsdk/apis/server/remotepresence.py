@@ -41,7 +41,7 @@ def kvm_setup(handle, max_sessions=1, port=2068,
         port (int): Port used for kvm communication
         encrypt (bool): Encrypt video information sent over kvm
         mirror_locally (bool): Mirror the kvm session on local monitor
-        server_id (int): Server Id to be specified for C3x60 platforms
+        server_id (int): Server Id to be specified for C3260 platforms
 
     Returns:
         CommKvm object
@@ -77,7 +77,7 @@ def kvm_disable(handle, server_id=1):
 
     Args:
         handle (ImcHandle)
-        server_id (int): Server Id to be specified for C3x60 platforms
+        server_id (int): Server Id to be specified for C3260 platforms
 
     Returns:
         None
@@ -95,7 +95,7 @@ def is_kvm_enabled(handle, server_id=1):
 
     Args:
         handle (ImcHandle)
-        server_id (int): Server Id to be specified for C3x60 platforms
+        server_id (int): Server Id to be specified for C3260 platforms
 
     Returns:
         None
@@ -118,7 +118,7 @@ def vmedia_setup(handle, encrypt=False, low_power_usb=False, server_id=1):
         handle (ImcHandle)
         encrypt (bool): Encrypt virtual media communications
         low_power_usb (bool): Enable low power usb
-        server_id (int): Server Id to be specified for C3x60 platforms
+        server_id (int): Server Id to be specified for C3260 platforms
 
     Returns:
         CommVMedia object
@@ -144,7 +144,7 @@ def vmedia_disable(handle, server_id=1):
 
     Args:
         handle: ImcHandle
-        server_id (int): Server Id to be specified for C3x60 platforms
+        server_id (int): Server Id to be specified for C3260 platforms
 
     Returns:
         None
@@ -161,7 +161,7 @@ def vmedia_get_existing_uri(handle, server_id=1):
     This method will return list of URIs of existing mountd media
     Args:
         handle (ImcHandle)
-        server_id (int): Server Id to be specified for C3x60 platforms
+        server_id (int): Server Id to be specified for C3260 platforms
 
     Returns:
         List of URIs of currently mounted virtual media
@@ -179,7 +179,7 @@ def vmedia_get_existing_status(handle, server_id=1):
     This method will return list of status of existing mountd media
     Args:
         handle (ImcHandle)
-        server_id (int): Server Id to be specified for C3x60 platforms
+        server_id (int): Server Id to be specified for C3260 platforms
 
     Returns:
         List of Status of currently mounted virtual media
@@ -206,7 +206,7 @@ def vmedia_mount_add(handle, volume_name, mount_protocol,
         remote_file (string): name of the image
         user_id (string): username
         password (string): password
-        server_id (int): Server Id to be specified for C3x60 platforms
+        server_id (int): Server Id to be specified for C3260 platforms
 
     Returns:
         CommVMediaMap object
@@ -248,7 +248,7 @@ def vmedia_mount_iso_uri(handle, uri, user_id=None, password=None,
         password (string): optional password
         timeout (int): optional timeout to wait for ISO map status to be 'OK'
         interval (int): optional interval to query ISO status
-        server_id (int): Server Id to be specified for C3x60 platforms
+        server_id (int): Server Id to be specified for C3260 platforms
 
     Raises:
         Exception if invalid protocol in URI
@@ -346,7 +346,7 @@ def vmedia_mount_remove(handle, volume_name, server_id=1):
     Args:
         handle (ImcHandle)
         volume_name (string): Name of the volume or identity of the image
-        server_id (int): Server Id to be specified for C3x60 platforms
+        server_id (int): Server Id to be specified for C3260 platforms
 
     Returns:
         None
@@ -374,7 +374,7 @@ def vmedia_mount_remove_all(handle, server_id=1):
 
     Args:
         handle (ImcHandle)
-        server_id (int): Server Id to be specified for C3x60 platforms
+        server_id (int): Server Id to be specified for C3260 platforms
 
     Raises:
         Exception if mapping is able to be removed
@@ -411,7 +411,7 @@ def sol_setup(handle, speed, com_port, ssh_port, server_id=1):
         speed (string): "9600", "19200", "38400", "57600", "115200"
         com_port (string): "com0", "com1"
         ssh_port (int): port for ssh
-        server_id (int): Server Id to be specified for C3x60 platforms
+        server_id (int): Server Id to be specified for C3260 platforms
 
     Returns:
         SolIf object
@@ -433,7 +433,7 @@ def sol_disable(handle, server_id=1):
 
     Args:
         handle (ImcHandle)
-        server_id (int): Server Id to be specified for C3x60 platforms
+        server_id (int): Server Id to be specified for C3260 platforms
 
     Returns:
         None
@@ -452,7 +452,7 @@ def is_sol_enabled(handle, server_id=1):
 
     Args:
         handle (ImcHandle)
-        server_id (int): Server Id to be specified for C3x60 platforms
+        server_id (int): Server Id to be specified for C3260 platforms
 
     Returns:
         None
