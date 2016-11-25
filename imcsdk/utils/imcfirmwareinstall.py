@@ -46,7 +46,7 @@ def update_imc_firmware_huu(handle, remote_share, share_type, remote_ip,
         verify_update (string): "yes", "no"
         cimc_secure_boot (string): "yes", "no"
         server_id (int): Server id for which firmware is performed.
-                         This is relevant to C3x60 platforms.
+                         This is relevant to C3260 platforms.
 
     Returns:
         HuuFirmwareUpdater object

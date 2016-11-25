@@ -17,6 +17,7 @@ Report bugs at https://github.com/ciscoucs/imcsdk/issues.
 
 If you are reporting a bug, please include:
 
+* Console logs and stack trace, if any.
 * Your operating system name and version.
 * Any details about your local setup that might be helpful in troubleshooting.
 * Detailed steps to reproduce the bug.
@@ -36,6 +37,10 @@ maintainers decide they can't be merged.
 Please squash your commits to one commit per fix or feature. The resulting
 commit should have a single meaningful message.
 
+Additions/Modifications done to the apis layer should conform to the following:-
+- add/create/set/modify functions should return the corresponding Managed Object
+- as much as possible every api should ideally be accompanied with it's testcase
+ 
 Testing your code
 ~~~~~~~~~~~~~~~~~
 Some test cases are written to be run against live hardware.  You will need a

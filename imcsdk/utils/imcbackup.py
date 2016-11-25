@@ -38,7 +38,7 @@ def backup_imc(handle, remote_host, remote_file, protocol, username, password,
         passphrase (str) : Password for the backup file.
         timeout_in_sec (number) : time in seconds for which method waits
                               for the backUp file to generate before it exits.
-        entity (str): For C3x60 platforms:
+        entity (str): For C3260 platforms:
                       "CMC" for backup of chassis related configuration and state  
                       "CIMC1" for backup of server-1 related configuration and state
                       "CIMC2" for backup of server-2 related configuration and state
@@ -134,7 +134,7 @@ def import_imc_backup(handle, remote_host, remote_file, protocol, username,
         username (str) : Remote Host user name
         password (str) : Remote Host user credentials/password
         passphrase (str) : Password for the backup file.
-        entity (str): For C3x60 platforms:
+        entity (str): For C3260 platforms:
                       "CMC" for importing chassis related configuration and state  
                       "CIMC1" for importing server-1 related configuration and state
                       "CIMC2" for importing server-2 related configuration and state

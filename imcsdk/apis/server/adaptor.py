@@ -44,7 +44,7 @@ def get_vic_adaptor_properties(handle, adaptor_slot, server_id=1, **kwargs):
     Args:
         handle (ImcHandle)
         adaptor_slot (string): PCI slot of the vic adaptor
-        server_id (int): Server Id to be specified for C3x60 platforms
+        server_id (int): Server Id to be specified for C3260 platforms
         kwargs: key=value paired arguments
 
     Examples:
@@ -87,11 +87,11 @@ def setup_vic_adaptor_properties(handle, adaptor_slot, fip_mode=None,
         kwargs: key=value paired arguments
 
     Examples:
-        For non-C3x60 platforms:-
+        For non-C3260 platforms:-
         setup_vic_adaptor_properties(handle, adaptor_slot="1",
                                      fip_mode=True)
 
-        For C3x60 platforms:-
+        For C3260 platforms:-
         setup_vic_adaptor_properties(handle, adaptor_slot="1",
                                      vntag_mode=True, num_of_vm_fex_ifs=5,
                                      server_id=2)
@@ -128,7 +128,7 @@ def get_vnic(handle, adaptor_slot, name, server_id=1, **kwargs):
         handle (ImcHandle)
         adaptor_slot (string): PCI slot number of the adaptor
         name (string): Name for the vnic to be deleted
-        server_id (int): Server Id for C3x60 platforms
+        server_id (int): Server Id for C3260 platforms
         kwargs: key=value paired arguments
 
     Returns:
@@ -160,16 +160,16 @@ def create_vnic(handle, adaptor_slot, name, channel_number, mac, mtu=1500,
         port_profile (string): port-profile name
         pxe_boot (bool): enable pxe_boot
         uplink_port (int): uplink port for binding the vnic. "0", "1"
-        server_id (int): Server Id for C3x60 platforms
+        server_id (int): Server Id for C3260 platforms
         kwargs: key=value paired arguments
 
     Examples:
-        For non-C3x60 platforms:-
+        For non-C3260 platforms:-
         create_vnic(handle, adaptor_slot="1", name="test-vnic",
                     channel_number=10, mac="00:11:22:33:44:55",
                     mtu=1500, pxe_boot=True, uplink_port=0)
 
-        For C3x60 platforms:
+        For C3260 platforms:
         create_vnic(handle, adaptor_slot="1", name="test-vnic",
                     channel_number=10, mac="00:11:22:33:44:55",
                     mtu=1500, pxe_boot=True, uplink_port=0, server_id=1)
@@ -211,7 +211,7 @@ def delete_vnic(handle, adaptor_slot, name, server_id=1, **kwargs):
         handle (ImcHandle)
         adaptor_slot (string): PCI slot number of the adaptor
         name (string): Name for the vnic to be deleted
-        server_id (int): Server Id for C3x60 platforms
+        server_id (int): Server Id for C3260 platforms
         kwargs: key=value paired arguments
 
     Returns:
@@ -230,7 +230,7 @@ def get_vhba(handle, adaptor_slot, name, server_id=1, **kwargs):
         handle (ImcHandle)
         adaptor_slot (string): PCI slot number of the adaptor
         name (string): Name for the vhba to be deleted
-        server_id (int): Server Id for C3x60 platforms
+        server_id (int): Server Id for C3260 platforms
         kwargs: key=value paired arguments
 
     Returns:
@@ -261,7 +261,7 @@ def create_vhba(handle, adaptor_slot, name, channel_number, wwnn, wwpn,
         port_profile (string): port-profile name
         san_boot (bool): san-boot
         uplink_port (int): uplink port for binding the vhba. "0", "1"
-        server_id (int): Server Id for C3x60 platforms
+        server_id (int): Server Id for C3260 platforms
         kwargs: key=value paired arguments
     Returns:
         AdaptorHostFcIf object
@@ -309,7 +309,7 @@ def delete_vhba(handle, adaptor_slot, name, server_id=1, **kwargs):
         handle (ImcHandle)
         adaptor_slot (string): PCI slot number of the adaptor
         name (string): Name for the vhba to be deleted
-        server_id (int): Server Id for C3x60 platforms
+        server_id (int): Server Id for C3260 platforms
         kwargs: key=value paired arguments
 
     Returns:

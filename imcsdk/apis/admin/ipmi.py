@@ -44,7 +44,7 @@ def enable_ipmi(handle, priv=CommIpmiLanConsts.PRIV_ADMIN,
         handle (ImcHandle)
         priv (string): Optional privilege level: 'admin', 'user', 'read-only'
         key (string): Optional encryption key as hexadecimal string
-        server_id (int): Server Id to be specified for C3x60 platforms
+        server_id (int): Server Id to be specified for C3260 platforms
 
     Returns:
         CommIpmiLan object
@@ -87,7 +87,7 @@ def disable_ipmi(handle, server_id=1):
     Disable IPMI over LAN.
     Args:
         handle (ImcHandle)
-        server_id (int): Server Id to be specified for C3x60 platforms
+        server_id (int): Server Id to be specified for C3260 platforms
 
     Returns:
         CommIpmiLan object
@@ -107,7 +107,7 @@ def is_ipmi_enabled(handle, server_id=1):
     Check if IPMI over LAN is enabled
     Args:
         handle (ImcHandle)
-        server_id (int): Server Id to be specified for C3x60 platforms
+        server_id (int): Server Id to be specified for C3260 platforms
 
     Returns:
         True if enabled, else False
