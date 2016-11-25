@@ -4,7 +4,7 @@ History
 
 0.9.1.0 (2016-11-25)
 --------------------
-* Support for C3260 platform
+* Support for Modular C3260 and Classic platforms
 * Supports every Managed Object exposed by IMC upto version 2.0(13e)
 * Support to invoke APIs on individual server modules in case of C3260 platform
 * Support for TLSv1.1/v1.2 and fallback to TLSv1 for older versions
