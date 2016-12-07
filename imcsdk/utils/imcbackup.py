@@ -19,10 +19,6 @@ import time
 from ..imcexception import ImcValidationException
 
 
-def _is_valid_arg(param, kwargs):
-    return kwargs.get(param) is not None
-
-
 def backup_imc(handle, remote_host, remote_file, protocol, username, password,
                passphrase, timeout_in_sec=600, entity="CMC", **kwargs):
     """
@@ -39,7 +35,7 @@ def backup_imc(handle, remote_host, remote_file, protocol, username, password,
         timeout_in_sec (number) : time in seconds for which method waits
                               for the backUp file to generate before it exits.
         entity (str): For C3260 platforms:
-                      "CMC" for backup of chassis related configuration and state  
+                      "CMC" for backup of chassis related configuration and state
                       "CIMC1" for backup of server-1 related configuration and state
                       "CIMC2" for backup of server-2 related configuration and state
         kwargs : key=value paired arguments

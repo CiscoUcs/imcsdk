@@ -196,6 +196,27 @@ class ManagedObject(ImcBase):
                 self._dirty_mask |= mask
         object.__setattr__(self, name, value)
 
+    def check_prop_match(self, **kwargs):
+        for prop_name in kwargs:
+            if not imccoreutils.prop_exists(self, prop_name):
+                raise ValueError("Invalid Property Name Exception - "
+                                 "Class [%s]: Prop <%s> "
+                                 % (self.__class__.__name__, prop_name))
+
+            if kwargs[prop_name] != getattr(self, prop_name):
+                return False
+        return True
+
+    def set_prop_multiple(self, **kwargs):
+        for prop_name in kwargs:
+            if imccoreutils.prop_exists(prop_name):
+                self.__set_prop(prop_name, kwargs[prop_name])
+            else:
+                ImcWarning("Invalid Property Name for "
+                           "Class [%s]: Prop <%s>, setting it forcefully"
+                           % (self.__class__.__name__, prop_name))
+                self.__set_prop(prop_name, kwargs[prop_name], forced=True)
+
     def __str__(self):
         """
         Method to return string representation of a managed object.
