@@ -21,10 +21,6 @@ from imcsdk.imccoreutils import get_server_dn
 from imcsdk.imcexception import ImcOperationError
 
 
-def _is_valid_arg(param, kwargs):
-    return kwargs.get(param) is not None
-
-
 def _get_adaptor(handle, adaptor_slot, server_id=1, **kwargs):
 
     server_dn = get_server_dn(handle, server_id)

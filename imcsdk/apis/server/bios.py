@@ -18,6 +18,7 @@ This module provides APIs for bios related configuration like boot order
 
 import logging
 import imcsdk.imccoreutils as imccoreutils
+from imcsdk.mometa.lsboot.LsbootDevPrecision import LsbootDevPrecision
 
 log = logging.getLogger('imc')
 
@@ -33,8 +34,8 @@ def get_boot_order_precision(handle, dump=False, server_id=1):
         server_id (int): Id of the server in case of C3260 platforms
 
     Returns:
-        List of tuples of the format:
-            [(boot-order, boot-device-type, boot-device-name)]
+        List of dict in the format
+            [{"order": '2', "type": "pxe", "name": "pxe"}]
 
     Example:
         boot_order_precision(handle, dump=False)
@@ -48,18 +49,19 @@ def get_boot_order_precision(handle, dump=False, server_id=1):
         in_dn=parent_dn, class_id="BiosBootDevPrecision")
 
     for device in boot_device_list:
-        device_tuple = (device.order, device.type, device.name)
-        boot_order_list.append(device_tuple)
+        boot_order_list.append({"order": device.order,
+                                "type": device.type,
+                                "name": device.name})
 
     sorted_boot_order_list = sorted(
-        boot_order_list, key=lambda item: item[0])
+        boot_order_list, key=lambda item: item["order"])
 
     if dump:
         log.info("Precision Boot Order is [Order, Type, Name]:")
         log.info("--------------------------------------------")
         for device in sorted_boot_order_list:
-            log.info(" %s %s %s" % (device[0].ljust(5),
-                                    device[1].ljust(10), device[2].ljust(20)))
+            log.info(" %s %s %s" % (device["order"].ljust(5),
+                                    device["type"].ljust(10), device["name"].ljust(20)))
 
     return sorted_boot_order_list
 
@@ -93,24 +95,21 @@ def _is_boot_order_policy(dn):
     return dn.find("policy") != -1
 
 
-def _get_boot_device_obj(parent_dn, device_type, device_name):
+def _get_device(parent_dn, device_type, device_name):
     from imcsdk.imccoreutils import load_class
 
     if _is_boot_order_precision(parent_dn):
-        if device_type not in precision_device_dict.keys():
+        if device_type not in precision_device_dict:
             return None
         class_struct = load_class(precision_device_dict[device_type])
+        class_obj = class_struct(parent_mo_or_dn=parent_dn, name=device_name)
     elif _is_boot_order_policy(parent_dn):
-        if device_type not in policy_device_dict.keys():
+        if device_type not in policy_device_dict:
             return None
         class_struct = load_class(policy_device_dict[device_type])
+        class_obj = class_struct(parent_mo_or_dn=parent_dn)
     else:
         return None
-
-    if imccoreutils.property_exists_in_prop_map(class_struct, "name"):
-        class_obj = class_struct(parent_mo_or_dn=parent_dn, name=device_name)
-    else:
-        class_obj = class_struct(parent_mo_or_dn=parent_dn)
 
     return class_obj
 
@@ -122,28 +121,29 @@ def _add_boot_device(handle, parent_dn, boot_device):
 
     Args:
         handle(ImcHandle)
-        boot_device(tuple): This is a tuple of the format
-                    [(boot-order, boot-device-type, boot-device-name)]
+        boot_device(dict): This is a tuple of the format
+                    {"order":'1', "type":"vmedia", "name": "vmedia"}
 
     Returns:
         None
     """
 
-    boot_device_obj = _get_boot_device_obj(
-        parent_dn, boot_device[1], boot_device[2])
-    if boot_device_obj is None:
+    device = _get_device(parent_dn,
+                         boot_device["type"],
+                         boot_device["name"])
+    if device is None:
         raise ValueError(
             "Unsupported boot-device %s with label %s" %
-            (boot_device[1], boot_device[2]))
+            (boot_device["type"], boot_device["name"]))
 
-    boot_device_obj.order = boot_device[0]
-    if hasattr(boot_device_obj, "state"):
-        boot_device_obj.state = "enabled"
-    handle.add_mo(boot_device_obj, modify_present=True)
+    device.order = boot_device["order"]
+    if hasattr(device, "state"):
+        device.state = "enabled"
+    handle.add_mo(device, modify_present=True)
 
 
 def set_boot_order_precision(
-        handle, reboot_on_update="yes", boot_mode="Legacy",
+        handle, reboot_on_update=True, configured_boot_mode="Legacy",
         boot_devices=[], server_id=1):
     """
     This method will replace the existing boot order precision with the new one
@@ -152,10 +152,12 @@ def set_boot_order_precision(
 
     Args:
         handle (ImcHandle)
-        reboot_on_update (string): "yes", "no"
-        boot_mode (string): "Legacy", "Uefi", "None"
-        boot_devices (list of tuples): format
-            [(boot-order, boot-device-type, boot-device-name)]
+        reboot_on_update (bool): True, False
+        configured_boot_mode(string): "Legacy", "Uefi", "None"
+        boot_devices (list of dict): format
+            [{"order":'1', "type":"vmedia", "name":"vmedia"},
+             {"order":'2', "type":"hdd", "name":"hdd"}]
+
             boot-order(string): Order
             boot-device-type(string): "hdd", "iscsi", "pchstorage", "pxe",
                                       "san", "sdcard", "uefishell", "usb",
@@ -170,20 +172,19 @@ def set_boot_order_precision(
     Examples:
         set_boot_order_precision(
             handle,
-             reboot_on_update="yes",
-             boot_mode="Uefi",
-             boot_devices = [("1", "hdd", "ext-hdd1"), ("2", "cdrom", "cdrom")]
+             reboot_on_update=False,
+             configured_boot_mode="Uefi",
+             boot_devices = [{"order":'1', "type":"vmedia", "name":"vmedia"},
+                             {"order":'2', "type":"hdd", "name":"hdd"}]
     """
 
     # Insert version check here to gracefully handle older versions of CIMC
 
-    from imcsdk.mometa.lsboot.LsbootDevPrecision import LsbootDevPrecision
-
     server_dn = imccoreutils.get_server_dn(handle, server_id)
     lsbootdevprecision_mo = LsbootDevPrecision(
         parent_mo_or_dn=server_dn)
-    lsbootdevprecision_mo.reboot_on_update = reboot_on_update
-    lsbootdevprecision_mo.configured_boot_mode = boot_mode
+    lsbootdevprecision_mo.reboot_on_update = ("no", "yes")[reboot_on_update]
+    lsbootdevprecision_mo.configured_boot_mode = configured_boot_mode
 
     handle.set_mo(lsbootdevprecision_mo)
 
@@ -192,11 +193,59 @@ def set_boot_order_precision(
     for mo in boot_order_child_mos:
         handle.remove_mo(mo)
 
-    for device_tuple in boot_devices:
-        _add_boot_device(handle, lsbootdevprecision_mo.dn, device_tuple)
+    for device in boot_devices:
+        _add_boot_device(handle, lsbootdevprecision_mo.dn, device)
 
     lsbootdevprecision_mo = handle.query_classid("LsbootDevPrecision")
     return lsbootdevprecision_mo
+
+
+def get_configured_boot_precision(handle, server_id=1):
+    from imcsdk.imccoreutils import get_server_dn
+
+    configured_boot_order = []
+
+    class_to_name_dict = {value: key for key, value in precision_device_dict.items()}
+
+    server_dn = get_server_dn(handle, server_id)
+    pmo = LsbootDevPrecision(parent_mo_or_dn=server_dn)
+    mos = handle.query_children(in_dn=pmo.dn)
+    for mo in mos:
+        device = {"order": mo.order,
+                  "type": class_to_name_dict[mo._class_id],
+                  "name": mo.name}
+        configured_boot_order.append(device)
+    return sorted(configured_boot_order, key=lambda x: x["order"])
+
+
+def boot_order_precision_exists(handle, **kwargs):
+    from imcsdk.imccoreutils import _is_valid_arg, _set_server_dn
+
+    server_dn = _set_server_dn(handle, kwargs)
+    mos = handle.query_children(in_dn=server_dn,
+                                class_id="LsbootDevPrecision")
+    if len(mos) == 0:
+        return False, "no Mos found"
+
+    mo = mos[0]
+
+    args = {"reboot_on_update": ("no", "yes")[kwargs.get("reboot_on_update") == True],
+            "configured_boot_mode": kwargs.get("configured_boot_mode")}
+    if not mo.check_prop_match(**args):
+        return False, "parent MO property values do not match"
+
+    if _is_valid_arg("boot_devices", kwargs):
+        in_boot_order = sorted(kwargs["boot_devices"], key=lambda x: x["order"])
+        configured_boot_order = get_configured_boot_precision(handle, kwargs.get("server_id"))
+
+        if len(in_boot_order) != len(configured_boot_order):
+            return False, "length mismatch"
+        for i in range(0, len(in_boot_order)):
+            if not (in_boot_order[i]["order"] == configured_boot_order[i]["order"] and
+                    in_boot_order[i]["type"] == configured_boot_order[i]["type"] and
+                    in_boot_order[i]["name"] == configured_boot_order[i]["name"]):
+                return False, "dictionaries do not match"
+    return True, "exists"
 
 
 def get_boot_order_policy(handle, dump=False, server_id=1):
@@ -210,8 +259,8 @@ def get_boot_order_policy(handle, dump=False, server_id=1):
                          this operation on C3260 platforms
 
     Returns:
-        List of tuples of the format:
-            [(boot-order, boot-device-type, boot-device-name)]
+        List of dict in the format
+            [{"order": '1', "type": "pxe", "name": "pxe"}]
 
     Example:
         get_boot_order_policy(handle, dump=False)
@@ -228,17 +277,20 @@ def get_boot_order_policy(handle, dump=False, server_id=1):
     boot_security_policy = LsbootBootSecurity(
         parent_mo_or_dn=parent_dn)
 
-    for mo in child_mo_list:
-        if mo.dn == boot_security_policy.dn:
+    for device in child_mo_list:
+        if device.dn == boot_security_policy.dn:
             continue
-        if hasattr(mo, "name"):
-            device_tuple = (mo.order, mo.type, mo.name)
-        else:
-            device_tuple = (mo.order, mo.type, "NA")
-        boot_order_list.append(device_tuple)
+
+        device_name = "NA"
+        if hasattr(device, "name"):
+            device_name = device.name
+
+        boot_order_list.append({"order": device.order,
+                                "type": device.type,
+                                "name": device_name})
 
     sorted_boot_order_list = sorted(
-        boot_order_list, key=lambda device: device[0])
+        boot_order_list, key=lambda x: x["order"])
 
     if dump:
         log.info("Boot Order according to Policy is [Order, Type, Name]:")
@@ -247,14 +299,14 @@ def get_boot_order_policy(handle, dump=False, server_id=1):
         for device_tuple in sorted_boot_order_list:
             log.info(
                 " %s %s %s" %
-                (device_tuple[0].ljust(5),
-                 device_tuple[1].center(10),
-                 device_tuple[2].center(20)))
+                (device_tuple["order"].ljust(5),
+                 device_tuple["type"].center(10),
+                 device_tuple["name"].center(20)))
 
     return sorted_boot_order_list
 
 
-def set_boot_order_policy(handle, reboot_on_update="yes",
+def set_boot_order_policy(handle, reboot_on_update=False,
                           secure_boot=False, boot_devices=[], server_id=1):
     """
     This method will set the boot order policy passed from the user
@@ -263,10 +315,12 @@ def set_boot_order_policy(handle, reboot_on_update="yes",
 
     Args:
         handle (ImcHandle)
-        reboot_on_update (string): "yes", "no"
+        reboot_on_update (bool): True, False
         secure_boot (bool): secure boot
-        boot_devices (list of tuples): format
-            [(boot-order, boot-device-type, boot-device-name)]
+        boot_devices (list of dict): format
+            [{"order":'1', "type":"vmedia", "name":"vmedia"},
+             {"order":'2', "type":"lan", "name":"lan"}]
+
             boot-order(string): Order
             boot-device-type(string): "efi", "lan", "storage", "vmedia"
             boot-device-name(string): Unique label for the boot device
@@ -278,10 +332,12 @@ def set_boot_order_policy(handle, reboot_on_update="yes",
     Examples:
         set_boot_order_policy(
             handle,
-            reboot_on_update="yes",
+            reboot_on_update=False,
             secure_boot=True,
-            boot_devices = [("1", "storage", "ext-hdd1"),
-                            ("2", "lan", "office-lan")])
+            boot_devices = [{"order":'1', "type":"vmedia", "name":"vmedia"},
+                            {"order":'2', "type":"lan", "name":"lan"}]
+
+
     """
 
     from imcsdk.mometa.lsboot.LsbootDef import LsbootDef
@@ -290,7 +346,7 @@ def set_boot_order_policy(handle, reboot_on_update="yes",
     server_dn = imccoreutils.get_server_dn(handle, server_id)
 
     boot_policy = LsbootDef(parent_mo_or_dn=server_dn)
-    boot_policy.reboot_on_update = reboot_on_update
+    boot_policy.reboot_on_update = ("no", "yes")[reboot_on_update]
     handle.set_mo(boot_policy)
 
     secure_boot_policy = LsbootBootSecurity(parent_mo_or_dn=boot_policy.dn)
@@ -306,8 +362,8 @@ def set_boot_order_policy(handle, reboot_on_update="yes",
             continue
         # handle.remove_mo(mo)
 
-    for device_tuple in boot_devices:
-        _add_boot_device(handle, boot_policy.dn, device_tuple)
+    for device in boot_devices:
+        _add_boot_device(handle, boot_policy.dn, device)
 
     boot_policy = handle.query_classid("LsbootDef")
     return boot_policy
