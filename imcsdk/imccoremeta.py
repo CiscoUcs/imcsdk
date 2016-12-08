@@ -42,17 +42,17 @@ class ImcVersion(object):
             return None
 
         self.__version = version
+        self.__major = None
+        self.__minor = None
+        self.__mr = None
+        self.__patch = None
 
         match_pattern = re.compile("^(?P<major>[1-9][0-9]{0,2})\."
                                    "(?P<minor>(([0-9])|([1-9][0-9]{0,1})))\("
                                    "(?P<mr>(([0-9])|([1-9][0-9]{0,2})))\."
                                    "(?P<patch>(([0-9])|([1-9][0-9]{0,4})))\)$")
         match_obj = re.match(match_pattern, version)
-        if match_obj:
-            self.__major = match_obj.group("major")
-            self.__minor = match_obj.group("minor")
-            self.__mr = match_obj.group("mr")
-            self.__patch = match_obj.group("patch")
+        if self._set_versions(match_obj):
             return
 
         match_pattern = re.compile("^(?P<major>[1-9][0-9]{0,2})\."
@@ -60,22 +60,46 @@ class ImcVersion(object):
                                    "(?P<mr>(([0-9])|([1-9][0-9]{0,2})))"
                                    "(?P<patch>[a-z])\)$")
         match_obj = re.match(match_pattern, version)
-        if match_obj:
-            self.__major = match_obj.group("major")
-            self.__minor = match_obj.group("minor")
-            self.__mr = match_obj.group("mr")
-            self.__patch = match_obj.group("patch")
+        if self._set_versions(match_obj):
             return
 
         match_pattern = re.compile("^(?P<major>[1-9][0-9]{0,2})\."
                                    "(?P<minor>(([0-9])|([1-9][0-9]{0,1})))\("
                                    "(?P<mr>(([0-9])|([1-9][0-9]{0,2})))\)$")
         match_obj = re.match(match_pattern, version)
-        if match_obj:
-            self.__major = match_obj.group("major")
-            self.__minor = match_obj.group("minor")
-            self.__mr = match_obj.group("mr")
+        if self._set_versions(match_obj):
             return
+
+        # handle spin builds "2.0(13aS1))"
+        match_pattern = re.compile("^(?P<major>[1-9][0-9]{0,2})\."
+                                   "(?P<minor>(([0-9])|([1-9][0-9]{0,1})))\("
+                                   "(?P<mr>(([0-9])|([1-9][0-9]{0,2})))"
+                                   "(?P<patch>[a-z])"
+                                   "(?P<spin>S[1-9][0-9]{0,2})\)$")
+        match_obj = re.match(match_pattern, version)
+        if self._set_versions(match_obj):
+            return
+
+        # handle spin builds "3.0(1S10))"
+        match_pattern = re.compile("^(?P<major>[1-9][0-9]{0,2})\."
+                                   "(?P<minor>(([0-9])|([1-9][0-9]{0,1})))\("
+                                   "(?P<mr>(([0-9])|([1-9][0-9]{0,2})))"
+                                   "(?P<spin>S[1-9][0-9]{0,2})\)$")
+        match_obj = re.match(match_pattern, version)
+        if self._set_versions(match_obj):
+            return
+
+    def _set_versions(self, match_obj):
+        if not match_obj:
+            return False
+
+        match_dict = match_obj.groupdict()
+        self.__major = match_dict.get("major")
+        self.__minor = match_dict.get("minor")
+        self.__mr = match_dict.get("mr")
+        self.__patch = match_dict.get("patch")
+
+        return True
 
     @property
     def major(self):
@@ -102,21 +126,32 @@ class ImcVersion(object):
         """Getter Method of UcsVersion Class"""
         return self.__version
 
+    def _compare(self, version1, version2):
+        if version1 == version2:
+            return 0
+        if not version1:
+            return -1
+        if not version2:
+            return 1
+
+        func = (ord, int)[version1.isdigit() and version2.isdigit()]
+        return func(version1) - func(version2)
+
     def compare_to(self, version):
         """Method to compare Imc Version."""
         if version is None or not isinstance(version, ImcVersion):
             return 1
 
-        if self.__major != version.major:
-            func = (ord, int)[self.__major.isdigit() and version.major.isdigit()]
-            return func(self.__major) - func(version.major)
-        if self.__minor != version.minor:
-            func = (ord, int)[self.__minor.isdigit() and version.minor.isdigit()]
-            return func(self.__minor) - func(version.major)
-        if self.__mr != version.mr:
-            func = (ord, int)[self.__mr.isdigit() and version.mr.isdigit()]
-            return func(self.__mr) - func(version.mr)
-        return ord(self.__patch) - ord(version.patch)
+        ret = 0
+        versions = [(self.__major, version.major),
+                    (self.__minor, version.minor),
+                    (self.__mr, version.mr),
+                    (self.__patch, version.patch)]
+        for item in versions:
+            ret = self._compare(item[0], item[1])
+            if ret:
+                return ret
+        return ret
 
     def __gt__(self, version):
         return self.compare_to(version) > 0

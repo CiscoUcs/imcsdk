@@ -27,16 +27,34 @@ def teardown_module():
     custom_teardown(handle)
 
 
+def test_nightly_version1():
+    version1 = ImcVersion("2.0(13aS6)")
+    version2 = ImcVersion("3.0(1S10)")
+    assert_equal((version1 < version2), True)
+
+
+def test_nightly_version2():
+    version1 = ImcVersion("2.0(13aS6)")
+    version2 = ImcVersion("2.0(1S10)")
+    assert_equal((version1 > version2), True)
+
+
 def test_gt_same_major_version():
     version1 = VersionMeta.Version151f
     version2 = VersionMeta.Version151x
-    assert_equal((version2 > version1), True)
+    assert_equal((version1 < version2), True)
 
 
 def test_gt_different_major_version():
     version1 = VersionMeta.Version151x
     version2 = VersionMeta.Version202c
-    assert_equal((version2 > version1), True)
+    assert_equal((version1 < version2), True)
+
+
+def test_patch_versions():
+    version1 = ImcVersion("2.0(12b)")
+    version2 = ImcVersion("2.0(12)")
+    assert_equal((version1 > version2), True)
 
 
 def test_handle_version():
