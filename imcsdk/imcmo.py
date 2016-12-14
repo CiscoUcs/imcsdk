@@ -209,7 +209,7 @@ class ManagedObject(ImcBase):
 
     def set_prop_multiple(self, **kwargs):
         for prop_name in kwargs:
-            if imccoreutils.prop_exists(prop_name):
+            if imccoreutils.prop_exists(self, prop_name):
                 self.__set_prop(prop_name, kwargs[prop_name])
             else:
                 ImcWarning("Invalid Property Name for "
