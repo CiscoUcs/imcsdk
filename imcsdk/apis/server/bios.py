@@ -61,7 +61,8 @@ def get_boot_order_precision(handle, dump=False, server_id=1):
         log.info("--------------------------------------------")
         for device in sorted_boot_order_list:
             log.info(" %s %s %s" % (device["order"].ljust(5),
-                                    device["type"].ljust(10), device["name"].ljust(20)))
+                                    device["type"].ljust(10),
+                                    device["name"].ljust(20)))
 
     return sorted_boot_order_list
 
@@ -181,9 +182,13 @@ def set_boot_order_precision(
     # Insert version check here to gracefully handle older versions of CIMC
 
     server_dn = imccoreutils.get_server_dn(handle, server_id)
-    lsbootdevprecision_mo = LsbootDevPrecision(
-        parent_mo_or_dn=server_dn)
-    lsbootdevprecision_mo.reboot_on_update = ("no", "yes")[reboot_on_update]
+    lsbootdevprecision_mo = LsbootDevPrecision(parent_mo_or_dn=server_dn)
+    # lsbootdevprecision_mo.reboot_on_update = ("no", "yes")[reboot_on_update]
+
+    lsbootdevprecision_mo.reboot_on_update = "no"
+    if reboot_on_update:
+        lsbootdevprecision_mo.reboot_on_update = "yes"
+
     lsbootdevprecision_mo.configured_boot_mode = configured_boot_mode
 
     handle.set_mo(lsbootdevprecision_mo)
@@ -205,7 +210,9 @@ def get_configured_boot_precision(handle, server_id=1):
 
     configured_boot_order = []
 
-    class_to_name_dict = {value: key for key, value in precision_device_dict.items()}
+    class_to_name_dict = {
+        value: key for key,
+        value in precision_device_dict.items()}
 
     server_dn = get_server_dn(handle, server_id)
     pmo = LsbootDevPrecision(parent_mo_or_dn=server_dn)
@@ -229,14 +236,17 @@ def boot_order_precision_exists(handle, **kwargs):
 
     mo = mos[0]
 
-    args = {"reboot_on_update": ("no", "yes")[kwargs.get("reboot_on_update") == True],
+    args = {"reboot_on_update": ("no", "yes")[kwargs.get("reboot_on_update")],
             "configured_boot_mode": kwargs.get("configured_boot_mode")}
     if not mo.check_prop_match(**args):
         return False, "parent MO property values do not match"
 
     if _is_valid_arg("boot_devices", kwargs):
-        in_boot_order = sorted(kwargs["boot_devices"], key=lambda x: x["order"])
-        configured_boot_order = get_configured_boot_precision(handle, kwargs.get("server_id"))
+        in_boot_order = sorted(
+            kwargs["boot_devices"],
+            key=lambda x: x["order"])
+        configured_boot_order = get_configured_boot_precision(
+            handle, kwargs.get("server_id"))
 
         if len(in_boot_order) != len(configured_boot_order):
             return False, "length mismatch"
@@ -245,7 +255,7 @@ def boot_order_precision_exists(handle, **kwargs):
                     in_boot_order[i]["type"] == configured_boot_order[i]["type"] and
                     in_boot_order[i]["name"] == configured_boot_order[i]["name"]):
                 return False, "dictionaries do not match"
-    return True, "exists"
+    return True, None
 
 
 def get_boot_order_policy(handle, dump=False, server_id=1):
