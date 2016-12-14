@@ -120,6 +120,11 @@ def _get_device(parent_dn, device_type, device_name):
             return None
         class_struct = load_class(policy_device_dict[device_type]["class_id"])
         access = policy_device_dict[device_type]["access"]
+        '''
+        cdrom and fdd are of type LsbootVirtualMedia and have "access" as the
+        naming property. Other objects under LsbootDef do not need this.
+        Hence cdrom and fdd need special handling below.
+        '''
         if device_type in ["cdrom", "fdd"]:
             class_obj = class_struct(parent_mo_or_dn=parent_dn, access=access)
         else:
@@ -347,7 +352,7 @@ def set_boot_order_policy(handle, reboot_on_update=False,
         reboot_on_update (bool): True, False
         secure_boot (bool): secure boot
         boot_devices (list of dict): format
-            [{"order":'1', "device-type":"vmedia", "name":"vmedia"},
+            [{"order":'1', "device-type":"cdrom", "name":"cdrom0"},
              {"order":'2', "device-type":"lan", "name":"lan"}]
 
             boot-order(string): Order
@@ -363,7 +368,7 @@ def set_boot_order_policy(handle, reboot_on_update=False,
             handle,
             reboot_on_update=False,
             secure_boot=True,
-            boot_devices = [{"order":'1', "device-type":"vmedia", "name":"vmedia"},
+            boot_devices = [{"order":'1', "device-type":"cdrom", "name":"cdrom0"},
                             {"order":'2', "device-type":"lan", "name":"lan"}]
 
 
