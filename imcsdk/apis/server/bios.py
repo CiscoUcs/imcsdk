@@ -259,7 +259,7 @@ def boot_order_precision_exists(handle, **kwargs):
 
     mo = mos[0]
 
-    args = {"reboot_on_update": ("no", "yes")[kwargs.get("reboot_on_update")],
+    args = {"reboot_on_update": kwargs.get("reboot_on_update"),
             "configured_boot_mode": kwargs.get("configured_boot_mode")}
     if not mo.check_prop_match(**args):
         return False, "parent MO property values do not match"
