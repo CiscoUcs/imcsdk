@@ -35,7 +35,7 @@ def get_boot_order_precision(handle, dump=False, server_id=1):
 
     Returns:
         List of dict in the format
-            [{"order": '2', "type": "pxe", "name": "pxe"}]
+            [{"order": '2', "device-type": "pxe", "name": "pxe"}]
 
     Example:
         boot_order_precision(handle, dump=False)
@@ -50,7 +50,7 @@ def get_boot_order_precision(handle, dump=False, server_id=1):
 
     for device in boot_device_list:
         boot_order_list.append({"order": device.order,
-                                "type": device.type,
+                                "device-type": device.type,
                                 "name": device.name})
 
     sorted_boot_order_list = sorted(
@@ -61,7 +61,7 @@ def get_boot_order_precision(handle, dump=False, server_id=1):
         log.info("--------------------------------------------")
         for device in sorted_boot_order_list:
             log.info(" %s %s %s" % (device["order"].ljust(5),
-                                    device["type"].ljust(10),
+                                    device["device-type"].ljust(10),
                                     device["name"].ljust(20)))
 
     return sorted_boot_order_list
@@ -76,15 +76,17 @@ precision_device_dict = {
     "sdcard": "LsbootSd",
     "uefishell": "LsbootUefiShell",
     "usb": "LsbootUsb",
-    "vmedia": "LsbootVMedia"
+    "vmedia": "LsbootVMedia",
+    "nvme": "LsbootNVMe",
 }
 
 
 policy_device_dict = {
-    "efi": "LsbootEfi",
-    "lan": "LsbootLan",
-    "storage": "LsbootStorage",
-    "vmedia": "LsbootVirtualMedia",
+    "efi": {"class_id": "LsbootEfi", "access": "read-only"},
+    "lan": {"class_id": "LsbootLan", "access": "read-only"},
+    "storage": {"class_id": "LsbootStorage", "access": "read-write"},
+    "cdrom": {"class_id": "LsbootVirtualMedia", "access": "read-only"},
+    "fdd": {"class_id": "LsbootVirtualMedia", "access": "read-write"}
 }
 
 
@@ -94,6 +96,15 @@ def _is_boot_order_precision(dn):
 
 def _is_boot_order_policy(dn):
     return dn.find("policy") != -1
+
+
+def _get_device_type(policy_type, in_device):
+    if policy_type == "boot-order-policy":
+        for device_type, device_props in policy_device_dict.iteritems():
+            if device_props["class_id"] == in_device._class_id and \
+                    device_props["access"] == in_device.access:
+                return device_type
+    return ""
 
 
 def _get_device(parent_dn, device_type, device_name):
@@ -107,8 +118,13 @@ def _get_device(parent_dn, device_type, device_name):
     elif _is_boot_order_policy(parent_dn):
         if device_type not in policy_device_dict:
             return None
-        class_struct = load_class(policy_device_dict[device_type])
-        class_obj = class_struct(parent_mo_or_dn=parent_dn)
+        class_struct = load_class(policy_device_dict[device_type]["class_id"])
+        access = policy_device_dict[device_type]["access"]
+        if device_type in ["cdrom", "fdd"]:
+            class_obj = class_struct(parent_mo_or_dn=parent_dn, access=access)
+        else:
+            class_obj = class_struct(parent_mo_or_dn=parent_dn)
+            class_obj.access = access
     else:
         return None
 
@@ -122,22 +138,24 @@ def _add_boot_device(handle, parent_dn, boot_device):
 
     Args:
         handle(ImcHandle)
-        boot_device(dict): This is a tuple of the format
-                    {"order":'1', "type":"vmedia", "name": "vmedia"}
+        boot_device(dict): This is a dictionary of the format
+                    {"order":'1', "device-type":"vmedia", "name": "vmedia"}
 
     Returns:
         None
     """
 
     device = _get_device(parent_dn,
-                         boot_device["type"],
+                         boot_device["device-type"],
                          boot_device["name"])
     if device is None:
         raise ValueError(
             "Unsupported boot-device %s with label %s" %
-            (boot_device["type"], boot_device["name"]))
+            (boot_device["device-type"], boot_device["name"]))
 
     device.order = boot_device["order"]
+    device_props = {key: value for key, value in boot_device.iteritems() if key not in ["order", "device-type", "name"]}
+    device.set_prop_multiple(**device_props)
     if hasattr(device, "state"):
         device.state = "enabled"
     handle.add_mo(device, modify_present=True)
@@ -156,8 +174,8 @@ def set_boot_order_precision(
         reboot_on_update (bool): True, False
         configured_boot_mode(string): "Legacy", "Uefi", "None"
         boot_devices (list of dict): format
-            [{"order":'1', "type":"vmedia", "name":"vmedia"},
-             {"order":'2', "type":"hdd", "name":"hdd"}]
+            [{"order":'1', "device-type":"vmedia", "name":"vmedia"},
+             {"order":'2', "device-type":"hdd", "name":"hdd"}]
 
             boot-order(string): Order
             boot-device-type(string): "hdd", "iscsi", "pchstorage", "pxe",
@@ -175,8 +193,8 @@ def set_boot_order_precision(
             handle,
              reboot_on_update=False,
              configured_boot_mode="Uefi",
-             boot_devices = [{"order":'1', "type":"vmedia", "name":"vmedia"},
-                             {"order":'2', "type":"hdd", "name":"hdd"}]
+             boot_devices = [{"order":'1', "device-type":"vmedia", "name":"vmedia"},
+                             {"order":'2', "device-type":"hdd", "name":"hdd"}]
     """
 
     # Insert version check here to gracefully handle older versions of CIMC
@@ -219,7 +237,7 @@ def get_configured_boot_precision(handle, server_id=1):
     mos = handle.query_children(in_dn=pmo.dn)
     for mo in mos:
         device = {"order": mo.order,
-                  "type": class_to_name_dict[mo._class_id],
+                  "device-type": class_to_name_dict[mo._class_id],
                   "name": mo.name}
         configured_boot_order.append(device)
     return sorted(configured_boot_order, key=lambda x: x["order"])
@@ -252,7 +270,7 @@ def boot_order_precision_exists(handle, **kwargs):
             return False, "length mismatch"
         for i in range(0, len(in_boot_order)):
             if not (in_boot_order[i]["order"] == configured_boot_order[i]["order"] and
-                    in_boot_order[i]["type"] == configured_boot_order[i]["type"] and
+                    in_boot_order[i]["device-type"] == configured_boot_order[i]["device-type"] and
                     in_boot_order[i]["name"] == configured_boot_order[i]["name"]):
                 return False, "dictionaries do not match"
     return True, None
@@ -270,7 +288,7 @@ def get_boot_order_policy(handle, dump=False, server_id=1):
 
     Returns:
         List of dict in the format
-            [{"order": '1', "type": "pxe", "name": "pxe"}]
+            [{"order": '1', "device-type": "pxe", "name": "pxe"}]
 
     Example:
         get_boot_order_policy(handle, dump=False)
@@ -295,8 +313,9 @@ def get_boot_order_policy(handle, dump=False, server_id=1):
         if hasattr(device, "name"):
             device_name = device.name
 
+        device_type = _get_device_type("boot-order-policy", device)
         boot_order_list.append({"order": device.order,
-                                "type": device.type,
+                                "device-type": device_type,
                                 "name": device_name})
 
     sorted_boot_order_list = sorted(
@@ -310,7 +329,7 @@ def get_boot_order_policy(handle, dump=False, server_id=1):
             log.info(
                 " %s %s %s" %
                 (device_tuple["order"].ljust(5),
-                 device_tuple["type"].center(10),
+                 device_tuple["device-type"].center(10),
                  device_tuple["name"].center(20)))
 
     return sorted_boot_order_list
@@ -328,11 +347,11 @@ def set_boot_order_policy(handle, reboot_on_update=False,
         reboot_on_update (bool): True, False
         secure_boot (bool): secure boot
         boot_devices (list of dict): format
-            [{"order":'1', "type":"vmedia", "name":"vmedia"},
-             {"order":'2', "type":"lan", "name":"lan"}]
+            [{"order":'1', "device-type":"vmedia", "name":"vmedia"},
+             {"order":'2', "device-type":"lan", "name":"lan"}]
 
             boot-order(string): Order
-            boot-device-type(string): "efi", "lan", "storage", "vmedia"
+            boot-device-type(string): "efi", "lan", "storage", "cdrom", "fdd"
             boot-device-name(string): Unique label for the boot device
         server_id (int): Id of the server to perform
                          this operation on C3260 platforms
@@ -344,8 +363,8 @@ def set_boot_order_policy(handle, reboot_on_update=False,
             handle,
             reboot_on_update=False,
             secure_boot=True,
-            boot_devices = [{"order":'1', "type":"vmedia", "name":"vmedia"},
-                            {"order":'2', "type":"lan", "name":"lan"}]
+            boot_devices = [{"order":'1', "device-type":"vmedia", "name":"vmedia"},
+                            {"order":'2', "device-type":"lan", "name":"lan"}]
 
 
     """
@@ -360,11 +379,10 @@ def set_boot_order_policy(handle, reboot_on_update=False,
     handle.set_mo(boot_policy)
 
     secure_boot_policy = LsbootBootSecurity(parent_mo_or_dn=boot_policy.dn)
-    if secure_boot:
-        secure_boot_policy.secure_boot = "enabled"
-    else:
-        secure_boot_policy.secure_boot = "disabled"
-    handle.set_mo(secure_boot_policy)
+    # Secure boot policy is supported only from ImcVersion 2.0(1a)
+    if handle.version >= secure_boot_policy.get_version(handle.platform):
+        secure_boot_policy.secure_boot = ("disabled", "enabled")[secure_boot]
+        handle.set_mo(secure_boot_policy)
 
     boot_policy_child_mos = handle.query_children(in_dn=boot_policy.dn)
     for mo in boot_policy_child_mos:
