@@ -32,6 +32,31 @@ def teardown_module():
     custom_teardown(handle)
 
 
+def test_non_vntag_mode():
+    global handle
+    setup_vic_adaptor_properties(handle, adaptor_slot=ADAPTOR_ID, fip_mode=True,
+                                 vntag_mode=False)
+    mo = get_vic_adaptor_properties(handle, adaptor_slot=ADAPTOR_ID)
+    assert_equal(mo.vntag_mode.lower(), "disabled")
+
+
+def test_non_vntag_create_vnic():
+    global handle
+    vnic_mo = create_vnic(handle, adaptor_slot=ADAPTOR_ID, name="sdk-test-vnic-nv",
+                          class_of_service=5, mac="00:11:22:33:44:56",
+                          mtu=1500, pxe_boot=True, uplink_port=0)
+    rcvd_mo = get_vnic(handle, adaptor_slot=ADAPTOR_ID, name="sdk-test-vnic-nv")
+    assert_not_equal(rcvd_mo, None)
+    assert_equal(vnic_mo.name, rcvd_mo.name)
+    assert_equal(vnic_mo.class_of_service, rcvd_mo.class_of_service)
+
+
+def test_delete_vnic():
+    global handle
+    delete_vnic(handle, adaptor_slot=ADAPTOR_ID, name="sdk-test-vnic-nv")
+    assert_equal(get_vnic(handle, adaptor_slot=ADAPTOR_ID, name="sdk-test-vnic-nv"), None)
+
+
 def test_enable_adaptor_properties():
     global handle
     setup_vic_adaptor_properties(handle, adaptor_slot=ADAPTOR_ID, fip_mode=True,

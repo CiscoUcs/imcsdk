@@ -155,7 +155,7 @@ def create_vnic(handle,
                 channel_number=None,
                 mac="AUTO",
                 mtu=1500,
-                class_of_service=0,
+                class_of_service=None,
                 port_profile="",
                 pxe_boot=False,
                 uplink_port=0,
@@ -199,10 +199,11 @@ def create_vnic(handle,
 
     vnic.mac = mac
     vnic.mtu = str(mtu)
-    vnic.class_of_service = str(class_of_service)
     vnic.pxe_boot = ("disabled", "enabled")[pxe_boot]
     vnic.uplink_port = str(uplink_port)
 
+    if class_of_service:
+        vnic.class_of_service = str(class_of_service)
     if channel_number:
         vnic.channel_number = str(channel_number)
     if port_profile:
