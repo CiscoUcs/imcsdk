@@ -23,7 +23,7 @@ from imcsdk.mometa.lsboot.LsbootDevPrecision import LsbootDevPrecision
 log = logging.getLogger('imc')
 
 
-def get_boot_order_precision(handle, dump=False, server_id=1):
+def boot_order_precision_get(handle, dump=False, server_id=1):
     """
     Gets the precision boot order.
     This is supported from EP release onwards only
@@ -139,7 +139,7 @@ def _get_device(parent_dn, device_type, device_name):
 def _add_boot_device(handle, parent_dn, boot_device):
     """
     This method verifies and adds the boot device in the boot order
-    Used by set_boot_order_precision and set_boot_order_policy
+    Used by boot_order_precision_set and boot_order_policy_set
 
     Args:
         handle(ImcHandle)
@@ -166,7 +166,7 @@ def _add_boot_device(handle, parent_dn, boot_device):
     handle.add_mo(device, modify_present=True)
 
 
-def set_boot_order_precision(
+def boot_order_precision_set(
         handle, reboot_on_update=True, configured_boot_mode="Legacy",
         boot_devices=[], server_id=1):
     """
@@ -194,7 +194,7 @@ def set_boot_order_precision(
         LsBootDevPrecision object
 
     Examples:
-        set_boot_order_precision(
+        boot_order_precision_set(
             handle,
              reboot_on_update=False,
              configured_boot_mode="Uefi",
@@ -228,7 +228,7 @@ def set_boot_order_precision(
     return lsbootdevprecision_mo
 
 
-def get_configured_boot_precision(handle, server_id=1):
+def boot_precision_configured_get(handle, server_id=1):
     from imcsdk.imccoreutils import get_server_dn
 
     configured_boot_order = []
@@ -259,7 +259,11 @@ def boot_order_precision_exists(handle, **kwargs):
 
     mo = mos[0]
 
-    args = {"reboot_on_update": kwargs.get("reboot_on_update"),
+    reboot_on_update = kwargs.get("reboot_on_update")
+    if isinstance(reboot_on_update, bool):
+        reboot_on_update = ("no", "yes")[reboot_on_update]
+
+    args = {"reboot_on_update": reboot_on_update,
             "configured_boot_mode": kwargs.get("configured_boot_mode")}
     if not mo.check_prop_match(**args):
         return False, "parent MO property values do not match"
@@ -268,7 +272,7 @@ def boot_order_precision_exists(handle, **kwargs):
         in_boot_order = sorted(
             kwargs["boot_devices"],
             key=lambda x: x["order"])
-        configured_boot_order = get_configured_boot_precision(
+        configured_boot_order = boot_precision_configured_get(
             handle, kwargs.get("server_id"))
 
         if len(in_boot_order) != len(configured_boot_order):
@@ -281,7 +285,7 @@ def boot_order_precision_exists(handle, **kwargs):
     return True, None
 
 
-def get_boot_order_policy(handle, dump=False, server_id=1):
+def boot_order_policy_get(handle, dump=False, server_id=1):
     """
     Gets the boot order. This is the legacy boot order
 
@@ -296,7 +300,7 @@ def get_boot_order_policy(handle, dump=False, server_id=1):
             [{"order": '1', "device-type": "pxe", "name": "pxe"}]
 
     Example:
-        get_boot_order_policy(handle, dump=False)
+        boot_order_policy_get(handle, dump=False)
     """
 
     from imcsdk.mometa.lsboot.LsbootBootSecurity import LsbootBootSecurity
@@ -340,7 +344,7 @@ def get_boot_order_policy(handle, dump=False, server_id=1):
     return sorted_boot_order_list
 
 
-def set_boot_order_policy(handle, reboot_on_update=False,
+def boot_order_policy_set(handle, reboot_on_update=False,
                           secure_boot=False, boot_devices=[], server_id=1):
     """
     This method will set the boot order policy passed from the user
@@ -364,7 +368,7 @@ def set_boot_order_policy(handle, reboot_on_update=False,
         LsBootDef object
 
     Examples:
-        set_boot_order_policy(
+        boot_order_policy_set(
             handle,
             reboot_on_update=False,
             secure_boot=True,

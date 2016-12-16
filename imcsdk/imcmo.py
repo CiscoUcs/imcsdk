@@ -343,9 +343,9 @@ class ManagedObject(ImcBase):
             xml_obj.set('dn', self.dn)
 
         self.child_to_xml(xml_obj, option, cookie=cookie)
-        if unknown_properties:
-            log.info("List of properties not applicable for the current platform:")
-            log.info(unknown_properties)
+        # if unknown_properties:
+        #     log.info("List of properties not applicable for the current platform:")
+        #     log.info(unknown_properties)
 
         return xml_obj
 

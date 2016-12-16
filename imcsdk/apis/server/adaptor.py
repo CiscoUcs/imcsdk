@@ -21,16 +21,25 @@ from imcsdk.imccoreutils import get_server_dn
 from imcsdk.imcexception import ImcOperationError
 
 
-def _get_adaptor(handle, adaptor_slot, server_id=1, **kwargs):
+def get_adaptor_unit(handle, adaptor_slot, server_id=1, **kwargs):
+    """
+    This method fetches the adaptorUnit Managed Object for the specified
+    adaptor Slot on a server.
 
+    Args:
+        handle (ImcHandle)
+        adaptor_slot (string): PCI slot number of the adaptor
+        server_id (int): Server Id for C3260 platforms
+        kwargs: key=value paired arguments
+
+    Examples:
+        get_adaptor_unit(handle, adaptor_slot=1, server_id=1)
+    """
     server_dn = get_server_dn(handle, server_id)
-    dn = server_dn + "/adaptor-" + str(adaptor_slot)
-    mo = handle.query_dn(dn)
+    mo = handle.query_dn(server_dn + "/adaptor-" + str(adaptor_slot))
 
     if mo is None:
-        raise ImcOperationError("Get Adaptor",
-                                "Adaptor is not available")
-
+        raise ImcOperationError("Get Adaptor Unit", "Adaptor is not available")
     return mo
 
 
@@ -133,29 +142,38 @@ def get_vnic(handle, adaptor_slot, name, server_id=1, **kwargs):
 
     from imcsdk.mometa.adaptor.AdaptorHostEthIf import AdaptorHostEthIf
 
-    mo = _get_adaptor(handle, adaptor_slot, server_id, **kwargs)
+    mo = get_adaptor_unit(handle, adaptor_slot, server_id, **kwargs)
     vnic_mo = AdaptorHostEthIf(parent_mo_or_dn=mo.dn, name=name)
     vnic_mo = handle.query_dn(vnic_mo.dn)
 
     return vnic_mo
 
 
-def create_vnic(handle, adaptor_slot, name, channel_number, mac, mtu=1500,
-                cos="", port_profile="", pxe_boot=False, uplink_port=0,
-                server_id=1, **kwargs):
+def create_vnic(handle,
+                name,
+                adaptor_slot=1,
+                channel_number=None,
+                mac="AUTO",
+                mtu=1500,
+                class_of_service=None,
+                port_profile="",
+                pxe_boot=False,
+                uplink_port=0,
+                server_id=1,
+                **kwargs):
     """
     This method is used to create a new vnic
     Args:
         handle (ImcHandle)
-        adaptor_slot (string): PCI slot number of the adaptor
         name (string): Name for the vnic
+        adaptor_slot (string): PCI slot number of the adaptor
         channel_number (int): channel number for the vnic
-        cos (string): class of service
+        class_of_service (int): class of service. 0-6
         mac (string): mac address for the vnic
         mtu (int): mtu size for the vnic
         port_profile (string): port-profile name
-        pxe_boot (bool): enable pxe_boot
-        uplink_port (int): uplink port for binding the vnic. "0", "1"
+        pxe_boot (bool): enable pxe_boot. True/False
+        uplink_port (int): uplink port for binding the vnic. 0/1
         server_id (int): Server Id for C3260 platforms
         kwargs: key=value paired arguments
 
@@ -176,37 +194,32 @@ def create_vnic(handle, adaptor_slot, name, channel_number, mac, mtu=1500,
 
     from imcsdk.mometa.adaptor.AdaptorHostEthIf import AdaptorHostEthIf
 
-    mo = _get_adaptor(handle, adaptor_slot, server_id, **kwargs)
-    vnic_mo = AdaptorHostEthIf(parent_mo_or_dn=mo.dn, name=name)
-    vnic_mo.channel_number = str(channel_number)
-    if cos:
-        vnic_mo.class_of_service = cos
-    vnic_mo.mac = mac
-    vnic_mo.mtu = str(mtu)
+    mo = get_adaptor_unit(handle, adaptor_slot, server_id, **kwargs)
+    vnic = AdaptorHostEthIf(parent_mo_or_dn=mo.dn, name=name)
+
+    vnic.mac = mac
+    vnic.mtu = str(mtu)
+    vnic.pxe_boot = ("disabled", "enabled")[pxe_boot]
+    vnic.uplink_port = str(uplink_port)
+
+    if class_of_service:
+        vnic.class_of_service = str(class_of_service)
+    if channel_number:
+        vnic.channel_number = str(channel_number)
     if port_profile:
-        vnic_mo.port_profile = port_profile
-    if pxe_boot:
-        vnic_mo.pxe_boot = "enabled"
-    else:
-        vnic_mo.pxe_boot = "disabled"
+        vnic.port_profile = port_profile
 
-    if uplink_port not in [0, 1]:
-        raise ImcOperationError("Create Vnic",
-                                "Invalid uplink port")
-
-    vnic_mo.uplink_port = str(uplink_port)
-    handle.add_mo(vnic_mo, modify_present=True)
-
-    return handle.query_dn(vnic_mo.dn)
+    handle.add_mo(vnic, modify_present=True)
+    return handle.query_dn(vnic.dn)
 
 
-def delete_vnic(handle, adaptor_slot, name, server_id=1, **kwargs):
+def delete_vnic(handle, name, adaptor_slot=1, server_id=1, **kwargs):
     """
     This method is used to delete a vnic
     Args:
         handle (ImcHandle)
-        adaptor_slot (string): PCI slot number of the adaptor
         name (string): Name for the vnic to be deleted
+        adaptor_slot (int): PCI slot number of the adaptor
         server_id (int): Server Id for C3260 platforms
         kwargs: key=value paired arguments
 
@@ -235,7 +248,7 @@ def get_vhba(handle, adaptor_slot, name, server_id=1, **kwargs):
 
     from imcsdk.mometa.adaptor.AdaptorHostFcIf import AdaptorHostFcIf
 
-    mo = _get_adaptor(handle, adaptor_slot, server_id, **kwargs)
+    mo = get_adaptor_unit(handle, adaptor_slot, server_id, **kwargs)
     vhba_mo = AdaptorHostFcIf(parent_mo_or_dn=mo.dn, name=name)
     vhba_mo = handle.query_dn(vhba_mo.dn)
 
@@ -276,7 +289,7 @@ def create_vhba(handle, adaptor_slot, name, channel_number, wwnn, wwpn,
 
     from imcsdk.mometa.adaptor.AdaptorHostFcIf import AdaptorHostFcIf
 
-    mo = _get_adaptor(handle, adaptor_slot, server_id, **kwargs)
+    mo = get_adaptor_unit(handle, adaptor_slot, server_id, **kwargs)
     vhba_mo = AdaptorHostFcIf(parent_mo_or_dn=mo.dn, name=name)
     vhba_mo.channel_number = str(channel_number)
     vhba_mo.wwnn = wwnn
