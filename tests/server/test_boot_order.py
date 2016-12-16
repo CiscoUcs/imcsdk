@@ -15,8 +15,8 @@ from ..connection.info import custom_setup, custom_teardown
 from nose.plugins.skip import SkipTest
 from nose.tools import assert_equal
 
-from imcsdk.apis.server.bios import set_boot_order_precision, \
-        set_boot_order_policy, get_boot_order_policy
+from imcsdk.apis.server.bios import boot_order_precision_set, \
+        boot_order_policy_set, boot_order_policy_get
 
 handle = None
 
@@ -40,13 +40,13 @@ boot_order_prec_devices = [
 
 def test_boot_order_precision():
     global handle
-    from imcsdk.apis.server.bios import get_configured_boot_precision
+    from imcsdk.apis.server.bios import boot_precision_configured_get
 
-    set_boot_order_precision(handle, reboot_on_update=False,
+    boot_order_precision_set(handle, reboot_on_update=False,
                              configured_boot_mode="Legacy",
                              boot_devices=boot_order_prec_devices)
 
-    rcvd_boot_order = get_configured_boot_precision(handle)
+    rcvd_boot_order = boot_precision_configured_get(handle)
     for ctr in range(0, len(rcvd_boot_order)):
         if boot_order_prec_devices[ctr]["order"] != rcvd_boot_order[ctr]["order"] or \
            boot_order_prec_devices[ctr]["device-type"].lower() != rcvd_boot_order[ctr]["device-type"].lower():
@@ -61,11 +61,11 @@ boot_order_policy_devices = [{"order": '1', "device-type": "storage", "name": "e
 def test_boot_order_policy():
     global handle
 
-    set_boot_order_policy(handle, reboot_on_update=True,
+    boot_order_policy_set(handle, reboot_on_update=True,
                           secure_boot=False,
                           boot_devices=boot_order_policy_devices)
 
-    rcvd_dev_list = get_boot_order_policy(handle)
+    rcvd_dev_list = boot_order_policy_get(handle)
     length = len(boot_order_policy_devices)
     for ctr in range(0, length):
         if boot_order_policy_devices[ctr]["order"] != rcvd_dev_list[ctr]["order"] or \
