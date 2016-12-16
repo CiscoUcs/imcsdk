@@ -65,7 +65,7 @@ def virtual_drive_create(handle,
     params["strip_size"] = strip_size
 
     if (admin_action and
-            handle.platform == imccoreutils.IMC_PLATFORM.TYPE_MODULAR):
+            handle.platform == imccoreutils.IMC_PLATFORM.TYPE_CLASSIC):
         params["admin_action"] = admin_action
 
     if virtual_drive_name:
