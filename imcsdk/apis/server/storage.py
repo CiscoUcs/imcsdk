@@ -17,6 +17,7 @@ This module provides APIs for storage configuration like virtual drives and
 disk groups.
 """
 
+import math
 import logging
 import imcsdk.imccoreutils as imccoreutils
 from imcsdk.mometa.storage.StorageVirtualDriveCreatorUsingUnusedPhysicalDrive \
@@ -57,6 +58,8 @@ def _flatten_list(drive_list):
     # convert to format imc expects
     # [[1]] => [1]
     # [[1,2],[3,4]] => [1, 2, 3, 4]
+    if not (isinstance(drive_list, list) and isinstance(drive_list[0], list)):
+        raise "drive_list needs a list of list(s). i.e [[1,2],[3,4]]"
     dg_list = []
     for each in drive_list:
         for sub_each in each:
@@ -71,7 +74,7 @@ def _flatten_to_string(drive_list):
     return ''.join([''.join(str(x)) for x in _flatten_list(drive_list)])
 
 
-def _vd_name_create(raid_level, drive_list):
+def _vd_name_derive(raid_level, drive_list):
     return "RAID" + str(raid_level) + "_" + _flatten_to_string(drive_list)
 
 
@@ -92,71 +95,92 @@ def _human_to_bytes(size_str):
     return int(s[0]) << (10 * convert[s[1]])
 
 
-def _bytes_to_human(size, output_format='MB'):
+def _bytes_to_human(size, output_format=None):
     """
     converts bytes to human readable format.
         The return is in output_format.
     """
     convert = {'KB': 1, 'MB': 2, 'GB': 3, 'TB': 4,
                'PB': 5, 'EB': 6, 'ZB': 7, 'YB': 8}
+    unit = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+    if output_format is None:
+        output_format = unit[int(math.floor(math.log(size, 2))/10)]
     if output_format not in convert:
         raise "unknown output format" + output_format
-    return str(size >> (10 * convert[output_format])) + output_format
+    return str(size >> (10 * convert[output_format])) + ' ' + output_format
 
 
-def _drive_smallest_get(size_list):
-    smallest = None
-    for each in size_list:
-        if smallest is None:
-            smallest = each
-        if each < smallest:
-            smallest = each
-    return smallest
-
-
-def _vd_size_get(handle,
-                 controller_slot,
-                 drive_list,
-                 raid_level,
-                 server_id=1):
-    """
-    Returns the usable disk size for the specified virtual_drive
-        drive_list:
-            [[1]]
-            [[1,2],[3,4]]
-    """
+def _pd_sizes_get(handle,
+                  controller_slot,
+                  drive_list,
+                  server_id=1):
     sizes = []
     for each in drive_list:
-        sub_sizes = []
         for drive in each:
             dmo = physical_drive_get(handle=handle,
                                      drive_slot=drive,
                                      controller_slot=controller_slot,
                                      server_id=server_id)
-            sub_sizes.append(_human_to_bytes(dmo.coerced_size))
-        sizes.append(sub_sizes)
+            sizes.append(_human_to_bytes(dmo.coerced_size))
+    return sizes
+
+
+def _pd_min_size_get(sizes):
+    min_size = None
+    for size in sizes:
+        if min_size is None:
+            min_size = size
+        elif size < min_size:
+            min_size = size
+    return min_size
+
+
+def _pd_total_size_get(sizes):
+    available_size = 0
+    for size in sizes:
+        available_size += size
+    return available_size
+
+
+def _vd_span_depth_get(drive_list):
+    return len(drive_list)
+
+
+def _vd_max_size_get(handle,
+                     controller_slot,
+                     drive_list,
+                     raid_level,
+                     server_id=1):
+    """
+    Returns the usable disk size for the specified virtual_drive
+        drive_list:
+            [[1]]
+            [[1,2],[3,4]]
+
+        min_size = smallest size of all the drives from this disk group
+        available_size = accumulated size of all the drives together
+        span_depth = number of sub groups [[1,2,3],[4,5,6]] span_depth = 2
+    """
+    sizes = _pd_sizes_get(handle=handle,
+                          controller_slot=controller_slot,
+                          drive_list=drive_list,
+                          server_id=server_id)
+    min_size = _pd_min_size_get(sizes)
+    total_size = _pd_total_size_get(sizes)
+    span_depth = _vd_span_depth_get(drive_list)
 
     if raid_level == 0:
-        # RAID-0
-        # only one disk allowed
-        # smallest size disk * number of disks
-        smallest = _drive_smallest_get(drive_list[0])
-        return smallest * len(drive_list[0])
-    elif raid_level == 1:
-        # RAID-1
-        #
+        max_size = total_size
+    elif raid_level == 1 or raid_level == 10:
+        max_size = total_size/2
+    elif raid_level == 5 or raid_level == 50:
+        max_size = total_size - (span_depth * 1 * min_size)
+    elif raid_level == 6 or raid_level == 60:
+        max_size = total_size - (span_depth * 2 * min_size)
+    else:
+        raise "Unsupported Raid level" + raid_level
 
-
-
-
-    size = 0
-    for drive in _flatten_list(drive_list):
-        dmo = physical_drive_get(handle=handle,
-                                 drive_slot=drive,
-                                 controller_slot=controller_slot,
-                                 server_id=server_id)
-        size += _human_to_bytes(dmo.coerced_size)
-    return _bytes_to_human(size)
+    return _bytes_to_human(max_size)
 
 
 def virtual_drive_create(handle,
@@ -186,13 +210,13 @@ def virtual_drive_create(handle,
                                     "MEZZ","0"-"9"
             raid_level (int): raid level
                             0, 1, 5, 6, 10, 50, 60
-                        Raid 0 — Simple striping.
-                        Raid 1 — Simple mirroring.
-                        Raid 5 — Striping with parity.
-                        Raid 6 — Striping with two parity drives.
-                        Raid 10 — Spanned mirroring.
-                        Raid 50 — Spanned striping with parity.
-                        Raid 60 — Spanned striping with two parity drives.
+                        Raid 0 Simple striping.
+                        Raid 1 Simple mirroring.
+                        Raid 5 Striping with parity.
+                        Raid 6 Striping with two parity drives.
+                        Raid 10 Spanned mirroring.
+                        Raid 50 Spanned striping with parity.
+                        Raid 60 Spanned striping with two parity drives.
 
         Examples:
             virtual_drive_create(handle=imc,
@@ -222,12 +246,12 @@ def virtual_drive_create(handle,
         params["admin_action"] = admin_action
 
     params["virtual_drive_name"] = \
-        (_vd_name_create(raid_level, drive_group), vdn)[vdn is not None]
+        (_vd_name_derive(raid_level, drive_group), vdn)[vdn is not None]
 
-    params["size"] = (_vd_size_get(handle=handle,
-                                   controller_slot=controller_slot,
-                                   drive_list=drive_group,
-                                   server_id=server_id),
+    params["size"] = (_vd_max_size_get(handle=handle,
+                                       controller_slot=controller_slot,
+                                       drive_list=drive_group,
+                                       server_id=server_id),
                       size)[size is not None]
 
     mo = vd_creator(**params)
