@@ -27,6 +27,8 @@ class EquipmentTpmConsts:
     PRESENCE_NOT_SUPPORTED = "not-supported"
     PRESENCE_UNAUTHORIZED = "unauthorized"
     PRESENCE_UNKNOWN = "unknown"
+    ACTIVE_STATUS_NA = "NA"
+    OWNERSHIP_NA = "NA"
 
 
 class EquipmentTpm(ManagedObject):

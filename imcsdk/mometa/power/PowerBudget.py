@@ -17,7 +17,7 @@ class PowerBudget(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("PowerBudget", "powerBudget", "budget", VersionMeta.Version151f, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'computeRackUnit'], [u'advancedPowerProfile', u'faultInst', u'standardPowerProfile'], ["Get", "Set"]),
+        "classic": MoMeta("PowerBudget", "powerBudget", "budget", VersionMeta.Version151f, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'computeRackUnit'], [u'advancedPowerProfile', u'faultInst', u'standardPowerProfile'], ["Get", "Set"]),
         "modular": MoMeta("PowerBudget", "powerBudget", "budget", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeServerNode'], [u'customPowerProfile', u'faultInst', u'thermalPowerProfile'], [None])
     }
 
@@ -38,6 +38,7 @@ class PowerBudget(ManagedObject):
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x10, 0, 510, None, ["reset-power-profile-default", "start-power-char"], []), 
             "admin_state": MoPropertyMeta("admin_state", "adminState", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
+            "pow_char_enable": MoPropertyMeta("pow_char_enable", "powCharEnable", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
         },
 
         "modular": {
@@ -73,6 +74,7 @@ class PowerBudget(ManagedObject):
             "status": "status", 
             "adminAction": "admin_action", 
             "adminState": "admin_state", 
+            "powCharEnable": "pow_char_enable", 
         },
 
         "modular": {
@@ -105,6 +107,7 @@ class PowerBudget(ManagedObject):
         self.status = None
         self.admin_action = None
         self.admin_state = None
+        self.pow_char_enable = None
         self.description = None
 
         ManagedObject.__init__(self, "PowerBudget", parent_mo_or_dn, **kwargs)

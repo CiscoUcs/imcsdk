@@ -16,7 +16,7 @@ class AdaptorEthRdmaProfile(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("AdaptorEthRdmaProfile", "adaptorEthRdmaProfile", "rdmaprofile", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'adaptorHostEthIf'], [], [None]),
+        "classic": MoMeta("AdaptorEthRdmaProfile", "adaptorEthRdmaProfile", "rdmaprofile", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'adaptorHostEthIf'], [], ["Get", "Set"]),
         "modular": MoMeta("AdaptorEthRdmaProfile", "adaptorEthRdmaProfile", "rdmaprofile", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'adaptorHostEthIf'], [], [None])
     }
 

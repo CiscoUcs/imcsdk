@@ -17,7 +17,7 @@ class ActivatePIDCatalog(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("ActivatePIDCatalog", "activatePIDCatalog", "activate-catalog", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'pidCatalog'], [], [None]),
+        "classic": MoMeta("ActivatePIDCatalog", "activatePIDCatalog", "activate-catalog", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'pidCatalog'], [], ["Get", "Set"]),
         "modular": MoMeta("ActivatePIDCatalog", "activatePIDCatalog", "activate-catalog", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'pidCatalog'], [], [None])
     }
 

@@ -20,46 +20,47 @@ class AdaptorHostEthIf(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("AdaptorHostEthIf", "adaptorHostEthIf", "host-eth-[name]", VersionMeta.Version151f, "InputOutput", 0x1fff, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [], ["Add", "Get", "Remove", "Set"]),
-        "modular": MoMeta("AdaptorHostEthIf", "adaptorHostEthIf", "host-eth-[name]", VersionMeta.Version2013e, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [], [None])
+        "modular": MoMeta("AdaptorHostEthIf", "adaptorHostEthIf", "host-eth-[name]", VersionMeta.Version2013e, "InputOutput", 0x1fff, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [], [None])
     }
 
 
     prop_meta = {
 
         "classic": {
-            "channel_number": MoPropertyMeta("channel_number", "channelNumber", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, [], ["1-1000"]), 
+            "cdn": MoPropertyMeta("cdn", "cdn", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x2, None, None, r"""[a-zA-Z0-9\-\._:]{0,32}""", [], []), 
+            "channel_number": MoPropertyMeta("channel_number", "channelNumber", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, [], ["1-1000"]), 
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-            "class_of_service": MoPropertyMeta("class_of_service", "classOfService", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, None, None, r"""[0-6]""", [], []), 
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
+            "class_of_service": MoPropertyMeta("class_of_service", "classOfService", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, r"""[0-6]""", [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
             "if_type": MoPropertyMeta("if_type", "ifType", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["virtual"], []), 
             "iscsi_boot": MoPropertyMeta("iscsi_boot", "iscsiBoot", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
-            "mac": MoPropertyMeta("mac", "mac", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, r"""(([0-9a-fA-F][0-9a-fA-F]:){5}([0-9a-fA-F][0-9a-fA-F]))|0""", ["AUTO"], []), 
-            "mtu": MoPropertyMeta("mtu", "mtu", "uint", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, [], ["1500-9000"]), 
-            "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version151f, MoPropertyMeta.NAMING, 0x40, None, None, r"""[a-zA-Z0-9\-\._:]{1,31}""", [], []), 
-            "port_profile": MoPropertyMeta("port_profile", "portProfile", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x80, None, None, r"""[a-zA-Z0-9_\-]{0,80}""", [], []), 
-            "pxe_boot": MoPropertyMeta("pxe_boot", "pxeBoot", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x200, 0, 255, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x400, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "uplink_port": MoPropertyMeta("uplink_port", "uplinkPort", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x800, None, None, None, ["0", "1"], []), 
+            "mac": MoPropertyMeta("mac", "mac", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x20, None, None, r"""(([0-9a-fA-F][0-9a-fA-F]:){5}([0-9a-fA-F][0-9a-fA-F]))|0""", ["AUTO"], []), 
+            "mtu": MoPropertyMeta("mtu", "mtu", "uint", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, [], ["1500-9000"]), 
+            "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version151f, MoPropertyMeta.NAMING, 0x80, None, None, r"""[a-zA-Z0-9\-\._:]{1,31}""", [], []), 
+            "port_profile": MoPropertyMeta("port_profile", "portProfile", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x100, None, None, r"""[a-zA-Z0-9_\-]{0,80}""", [], []), 
+            "pxe_boot": MoPropertyMeta("pxe_boot", "pxeBoot", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x400, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x800, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "uplink_port": MoPropertyMeta("uplink_port", "uplinkPort", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x1000, None, None, None, ["0", "1"], []), 
             "usnic_count": MoPropertyMeta("usnic_count", "usnicCount", "uint", VersionMeta.Version151x, MoPropertyMeta.READ_ONLY, None, None, None, None, [], ["0-225"]), 
-            "cdn": MoPropertyMeta("cdn", "cdn", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x1000, None, None, r"""[a-zA-Z0-9\-\._:]{0,32}""", [], []), 
         },
 
         "modular": {
-            "channel_number": MoPropertyMeta("channel_number", "channelNumber", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, [], ["1-1000"]), 
+            "cdn": MoPropertyMeta("cdn", "cdn", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x2, None, None, r"""[a-zA-Z0-9\-\._:]{0,32}""", [], []), 
+            "channel_number": MoPropertyMeta("channel_number", "channelNumber", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, [], ["1-1000"]), 
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-            "class_of_service": MoPropertyMeta("class_of_service", "classOfService", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, None, None, r"""[0-6]""", [], []), 
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
+            "class_of_service": MoPropertyMeta("class_of_service", "classOfService", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, None, None, r"""[0-6]""", [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
             "if_type": MoPropertyMeta("if_type", "ifType", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["virtual"], []), 
             "iscsi_boot": MoPropertyMeta("iscsi_boot", "iscsiBoot", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
-            "mac": MoPropertyMeta("mac", "mac", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, r"""(([0-9a-fA-F][0-9a-fA-F]:){5}([0-9a-fA-F][0-9a-fA-F]))|0""", ["AUTO"], []), 
-            "mtu": MoPropertyMeta("mtu", "mtu", "uint", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, [], ["1500-9000"]), 
-            "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version2013e, MoPropertyMeta.NAMING, 0x40, None, None, r"""[a-zA-Z0-9\-\._:]{1,31}""", [], []), 
-            "port_profile": MoPropertyMeta("port_profile", "portProfile", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, None, None, r"""[a-zA-Z0-9_\-]{0,80}""", [], []), 
-            "pxe_boot": MoPropertyMeta("pxe_boot", "pxeBoot", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, 0, 255, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x400, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "uplink_port": MoPropertyMeta("uplink_port", "uplinkPort", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x800, None, None, None, ["0", "1"], []), 
+            "mac": MoPropertyMeta("mac", "mac", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, None, None, r"""(([0-9a-fA-F][0-9a-fA-F]:){5}([0-9a-fA-F][0-9a-fA-F]))|0""", ["AUTO"], []), 
+            "mtu": MoPropertyMeta("mtu", "mtu", "uint", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, [], ["1500-9000"]), 
+            "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version2013e, MoPropertyMeta.NAMING, 0x80, None, None, r"""[a-zA-Z0-9\-\._:]{1,31}""", [], []), 
+            "port_profile": MoPropertyMeta("port_profile", "portProfile", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x100, None, None, r"""[a-zA-Z0-9_\-]{0,80}""", [], []), 
+            "pxe_boot": MoPropertyMeta("pxe_boot", "pxeBoot", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x400, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x800, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "uplink_port": MoPropertyMeta("uplink_port", "uplinkPort", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x1000, None, None, None, ["0", "1"], []), 
             "usnic_count": MoPropertyMeta("usnic_count", "usnicCount", "uint", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], ["0-225"]), 
         },
 
@@ -68,6 +69,7 @@ class AdaptorHostEthIf(ManagedObject):
     prop_map = {
 
         "classic": {
+            "cdn": "cdn", 
             "channelNumber": "channel_number", 
             "childAction": "child_action", 
             "classOfService": "class_of_service", 
@@ -83,10 +85,10 @@ class AdaptorHostEthIf(ManagedObject):
             "status": "status", 
             "uplinkPort": "uplink_port", 
             "usnicCount": "usnic_count", 
-            "cdn": "cdn", 
         },
 
         "modular": {
+            "cdn": "cdn", 
             "channelNumber": "channel_number", 
             "childAction": "child_action", 
             "classOfService": "class_of_service", 
@@ -109,6 +111,7 @@ class AdaptorHostEthIf(ManagedObject):
     def __init__(self, parent_mo_or_dn, name, **kwargs):
         self._dirty_mask = 0
         self.name = name
+        self.cdn = None
         self.channel_number = None
         self.child_action = None
         self.class_of_service = None
@@ -121,7 +124,6 @@ class AdaptorHostEthIf(ManagedObject):
         self.status = None
         self.uplink_port = None
         self.usnic_count = None
-        self.cdn = None
 
         ManagedObject.__init__(self, "AdaptorHostEthIf", parent_mo_or_dn, **kwargs)
 

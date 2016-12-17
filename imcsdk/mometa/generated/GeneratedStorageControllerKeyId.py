@@ -25,7 +25,7 @@ class GeneratedStorageControllerKeyId(ManagedObject):
         "classic": {
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version209c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version209c, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
-            "generated_key_id": MoPropertyMeta("generated_key_id", "generatedKeyId", "string", VersionMeta.Version209c, MoPropertyMeta.READ_ONLY, None, 1, 255, None, [], []), 
+            "generated_key_id": MoPropertyMeta("generated_key_id", "generatedKeyId", "string", VersionMeta.Version209c, MoPropertyMeta.READ_ONLY, None, 1, 256, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version209c, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version209c, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
         },
