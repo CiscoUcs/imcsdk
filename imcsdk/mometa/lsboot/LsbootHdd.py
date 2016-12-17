@@ -20,7 +20,7 @@ class LsbootHdd(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("LsbootHdd", "lsbootHdd", "hdd-[name]", VersionMeta.Version201a, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], [u'lsbootDevPrecision'], [], ["Add", "Get", "Remove", "Set"]),
-        "modular": MoMeta("LsbootHdd", "lsbootHdd", "hdd-[name]", VersionMeta.Version2013e, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], [u'lsbootDevPrecision'], [], [None])
+        "modular": MoMeta("LsbootHdd", "lsbootHdd", "hdd-[name]", VersionMeta.Version2013e, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], [u'lsbootDevPrecision'], [], ["Add", "Get", "Remove", "Set"])
     }
 
 

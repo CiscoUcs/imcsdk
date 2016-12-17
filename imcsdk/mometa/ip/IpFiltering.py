@@ -21,7 +21,7 @@ class IpFiltering(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("IpFiltering", "ipFiltering", "ip-filter", VersionMeta.Version301c, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], [u'mgmtIf'], [], ["Get", "Set"]),
-        "modular": MoMeta("IpFiltering", "ipFiltering", "ip-filter", VersionMeta.Version301c, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], [u'mgmtIf'], [], [None])
+        "modular": MoMeta("IpFiltering", "ipFiltering", "ip-filter", VersionMeta.Version301c, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], [u'mgmtIf'], [], ["Get", "Set"])
     }
 
 

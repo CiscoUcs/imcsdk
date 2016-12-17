@@ -24,7 +24,7 @@ class FirmwareBootDefinition(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("FirmwareBootDefinition", "firmwareBootDefinition", "fw-boot-def", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'biosUnit', u'mgmtController', u'storageController', u'systemIOController'], [u'firmwareBootUnit'], ["Get"]),
-        "modular": MoMeta("FirmwareBootDefinition", "firmwareBootDefinition", "fw-boot-def", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'biosUnit', u'mgmtController', u'storageController'], [u'firmwareBootUnit'], [None])
+        "modular": MoMeta("FirmwareBootDefinition", "firmwareBootDefinition", "fw-boot-def", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'biosUnit', u'mgmtController', u'storageController'], [u'firmwareBootUnit'], ["Get"])
     }
 
 

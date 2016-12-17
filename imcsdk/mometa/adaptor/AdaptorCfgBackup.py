@@ -24,7 +24,7 @@ class AdaptorCfgBackup(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("AdaptorCfgBackup", "adaptorCfgBackup", "export-config", VersionMeta.Version151f, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [], ["Get", "Set"]),
-        "modular": MoMeta("AdaptorCfgBackup", "adaptorCfgBackup", "export-config", VersionMeta.Version2013e, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [], [None])
+        "modular": MoMeta("AdaptorCfgBackup", "adaptorCfgBackup", "export-config", VersionMeta.Version2013e, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [], ["Get", "Set"])
     }
 
 

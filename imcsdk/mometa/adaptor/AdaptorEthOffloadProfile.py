@@ -17,7 +17,7 @@ class AdaptorEthOffloadProfile(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("AdaptorEthOffloadProfile", "adaptorEthOffloadProfile", "eth-offload", VersionMeta.Version151f, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'adaptorHostEthIf'], [], ["Get", "Set"]),
-        "modular": MoMeta("AdaptorEthOffloadProfile", "adaptorEthOffloadProfile", "eth-offload", VersionMeta.Version2013e, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'adaptorHostEthIf'], [], [None])
+        "modular": MoMeta("AdaptorEthOffloadProfile", "adaptorEthOffloadProfile", "eth-offload", VersionMeta.Version2013e, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'adaptorHostEthIf'], [], ["Get", "Set"])
     }
 
 

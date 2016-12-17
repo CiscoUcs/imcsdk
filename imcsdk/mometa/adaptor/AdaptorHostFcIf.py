@@ -23,7 +23,7 @@ class AdaptorHostFcIf(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("AdaptorHostFcIf", "adaptorHostFcIf", "host-fc-[name]", VersionMeta.Version151f, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [u'adaptorFcPersistentBindings'], ["Add", "Get", "Remove", "Set"]),
-        "modular": MoMeta("AdaptorHostFcIf", "adaptorHostFcIf", "host-fc-[name]", VersionMeta.Version2013e, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [u'adaptorFcPersistentBindings'], [None])
+        "modular": MoMeta("AdaptorHostFcIf", "adaptorHostFcIf", "host-fc-[name]", VersionMeta.Version2013e, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [u'adaptorFcPersistentBindings'], ["Add", "Get", "Remove", "Set"])
     }
 
 

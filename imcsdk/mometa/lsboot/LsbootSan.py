@@ -20,7 +20,7 @@ class LsbootSan(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("LsbootSan", "lsbootSan", "san-[name]", VersionMeta.Version201a, "InputOutput", 0x7ff, [], ["admin", "read-only", "user"], [u'lsbootDevPrecision'], [], ["Add", "Get", "Remove", "Set"]),
-        "modular": MoMeta("LsbootSan", "lsbootSan", "san-[name]", VersionMeta.Version2013e, "InputOutput", 0x7ff, [], ["admin", "read-only", "user"], [u'lsbootDevPrecision'], [], [None])
+        "modular": MoMeta("LsbootSan", "lsbootSan", "san-[name]", VersionMeta.Version2013e, "InputOutput", 0x7ff, [], ["admin", "read-only", "user"], [u'lsbootDevPrecision'], [], ["Add", "Get", "Remove", "Set"])
     }
 
 

@@ -22,7 +22,7 @@ class CommVMediaMap(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("CommVMediaMap", "commVMediaMap", "vmmap-[volume_name]", VersionMeta.Version151f, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'commVMedia'], [], ["Add", "Get"]),
-        "modular": MoMeta("CommVMediaMap", "commVMediaMap", "vmmap-[volume_name]", VersionMeta.Version2013e, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'commVMedia'], [], [None])
+        "modular": MoMeta("CommVMediaMap", "commVMediaMap", "vmmap-[volume_name]", VersionMeta.Version2013e, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'commVMedia'], [], ["Add", "Get"])
     }
 
 

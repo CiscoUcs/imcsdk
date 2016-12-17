@@ -86,7 +86,7 @@ class EquipmentPsu(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("EquipmentPsu", "equipmentPsu", "psu-[id]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeRackUnit'], [u'equipmentPsuFan', u'faultInst'], ["Get"]),
-        "modular": MoMeta("EquipmentPsu", "equipmentPsu", "psu-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeServerNode', u'equipmentChassis'], [u'faultInst'], [None])
+        "modular": MoMeta("EquipmentPsu", "equipmentPsu", "psu-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeServerNode', u'equipmentChassis'], [u'faultInst'], ["Get"])
     }
 
 

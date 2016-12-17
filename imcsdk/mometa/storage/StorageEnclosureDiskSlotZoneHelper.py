@@ -24,7 +24,7 @@ class StorageEnclosureDiskSlotZoneHelper(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "modular": MoMeta("StorageEnclosureDiskSlotZoneHelper", "storageEnclosureDiskSlotZoneHelper", "zone-drive", VersionMeta.Version2013e, "InputOutput", 0xff, [], ["admin"], [u'storageEnclosure'], [], [None])
+        "modular": MoMeta("StorageEnclosureDiskSlotZoneHelper", "storageEnclosureDiskSlotZoneHelper", "zone-drive", VersionMeta.Version2013e, "InputOutput", 0xff, [], ["admin"], [u'storageEnclosure'], [], ["Get", "Set"])
     }
 
 

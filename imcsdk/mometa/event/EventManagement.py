@@ -17,7 +17,7 @@ class EventManagement(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("EventManagement", "eventManagement", "event-management", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'computeRackUnit'], [u'platformEventFilters'], ["Get", "Set"]),
-        "modular": MoMeta("EventManagement", "eventManagement", "event-management", VersionMeta.Version301c, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'equipmentChassis'], [u'platformEventFilters'], [None])
+        "modular": MoMeta("EventManagement", "eventManagement", "event-management", VersionMeta.Version301c, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'equipmentChassis'], [u'platformEventFilters'], ["Get", "Set"])
     }
 
 

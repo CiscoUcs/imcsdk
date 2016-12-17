@@ -56,7 +56,7 @@ class StorageVirtualDriveCreatorUsingVirtualDriveGroup(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("StorageVirtualDriveCreatorUsingVirtualDriveGroup", "storageVirtualDriveCreatorUsingVirtualDriveGroup", "virtual-drive-carve", VersionMeta.Version201a, "InputOutput", 0x3fff, [], ["admin"], [u'storageController'], [u'storageVirtualDriveWithDriveGroupSpace'], ["Get", "Set"]),
-        "modular": MoMeta("StorageVirtualDriveCreatorUsingVirtualDriveGroup", "storageVirtualDriveCreatorUsingVirtualDriveGroup", "virtual-drive-carve", VersionMeta.Version2013e, "InputOutput", 0x3fff, [], ["admin"], [u'storageController'], [u'storageVirtualDriveWithDriveGroupSpace'], [None])
+        "modular": MoMeta("StorageVirtualDriveCreatorUsingVirtualDriveGroup", "storageVirtualDriveCreatorUsingVirtualDriveGroup", "virtual-drive-carve", VersionMeta.Version2013e, "InputOutput", 0x3fff, [], ["admin"], [u'storageController'], [u'storageVirtualDriveWithDriveGroupSpace'], ["Get", "Set"])
     }
 
 

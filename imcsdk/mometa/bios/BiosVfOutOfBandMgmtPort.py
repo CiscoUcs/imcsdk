@@ -21,7 +21,7 @@ class BiosVfOutOfBandMgmtPort(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosVfOutOfBandMgmtPort", "biosVfOutOfBandMgmtPort", "OoB-MgmtPort", VersionMeta.Version154, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfOutOfBandMgmtPort", "biosVfOutOfBandMgmtPort", "OoB-MgmtPort", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
+        "modular": MoMeta("BiosVfOutOfBandMgmtPort", "biosVfOutOfBandMgmtPort", "OoB-MgmtPort", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
     }
 
 

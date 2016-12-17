@@ -51,7 +51,7 @@ class ComputeServerNode(ManagedObject):
     naming_props = set([u'serverId'])
 
     mo_meta = {
-        "modular": MoMeta("ComputeServerNode", "computeServerNode", "server-[server_id]", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'equipmentChassis'], [u'adaptorUnit', u'biosUnit', u'bmcResetReason', u'commSvcRack', u'computeBoard', u'equipmentFanModule', u'equipmentIndicatorLed', u'equipmentLocatorLed', u'equipmentPsu', u'faultInst', u'huuController', u'ioExpander', u'iodController', u'lsbootDef', u'lsbootDevPrecision', u'mgmtBackupServer', u'mgmtController', u'mgmtImporterServer', u'networkAdapterUnit', u'oneTimeBootDevice', u'oneTimePrecisionBootDevice', u'osiController', u'pciEquipSlot', u'powerBudget', u'powerMonitor', u'serverUtilization', u'solIf'], [None])
+        "modular": MoMeta("ComputeServerNode", "computeServerNode", "server-[server_id]", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'equipmentChassis'], [u'adaptorUnit', u'biosUnit', u'bmcResetReason', u'commSvcRack', u'computeBoard', u'equipmentFanModule', u'equipmentIndicatorLed', u'equipmentLocatorLed', u'equipmentPsu', u'faultInst', u'huuController', u'ioExpander', u'iodController', u'lsbootDef', u'lsbootDevPrecision', u'mgmtBackupServer', u'mgmtController', u'mgmtImporterServer', u'networkAdapterUnit', u'oneTimeBootDevice', u'oneTimePrecisionBootDevice', u'osiController', u'pciEquipSlot', u'powerBudget', u'powerMonitor', u'serverUtilization', u'solIf'], ["Get", "Set"])
     }
 
 

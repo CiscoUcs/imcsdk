@@ -17,7 +17,7 @@ class CommNtpProvider(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("CommNtpProvider", "commNtpProvider", "ntp-svc", VersionMeta.Version151f, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'commSvcEp'], [], ["Get", "Set"]),
-        "modular": MoMeta("CommNtpProvider", "commNtpProvider", "ntp-svc", VersionMeta.Version2013e, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'commSvcEp'], [], [None])
+        "modular": MoMeta("CommNtpProvider", "commNtpProvider", "ntp-svc", VersionMeta.Version2013e, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'commSvcEp'], [], ["Get", "Set"])
     }
 
 

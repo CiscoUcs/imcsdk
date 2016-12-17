@@ -17,7 +17,7 @@ class CommVMedia(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("CommVMedia", "commVMedia", "vmedia-svc", VersionMeta.Version151f, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'commSvcEp'], [u'commSavedVMediaMap', u'commVMediaMap'], ["Get", "Set"]),
-        "modular": MoMeta("CommVMedia", "commVMedia", "vmedia-svc", VersionMeta.Version2013e, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'commSvcRack'], [u'commSavedVMediaMap', u'commVMediaMap'], [None])
+        "modular": MoMeta("CommVMedia", "commVMedia", "vmedia-svc", VersionMeta.Version2013e, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'commSvcRack'], [u'commSavedVMediaMap', u'commVMediaMap'], ["Get", "Set"])
     }
 
 

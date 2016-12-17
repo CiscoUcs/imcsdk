@@ -28,7 +28,7 @@ class BiosVfPackageCStateLimit(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosVfPackageCStateLimit", "biosVfPackageCStateLimit", "Package-CState-Limit", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfPackageCStateLimit", "biosVfPackageCStateLimit", "Package-CState-Limit", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
+        "modular": MoMeta("BiosVfPackageCStateLimit", "biosVfPackageCStateLimit", "Package-CState-Limit", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
     }
 
 

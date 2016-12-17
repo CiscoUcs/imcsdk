@@ -20,7 +20,7 @@ class AdaptorHostEthIf(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("AdaptorHostEthIf", "adaptorHostEthIf", "host-eth-[name]", VersionMeta.Version151f, "InputOutput", 0x1fff, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [], ["Add", "Get", "Remove", "Set"]),
-        "modular": MoMeta("AdaptorHostEthIf", "adaptorHostEthIf", "host-eth-[name]", VersionMeta.Version2013e, "InputOutput", 0x1fff, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [], [None])
+        "modular": MoMeta("AdaptorHostEthIf", "adaptorHostEthIf", "host-eth-[name]", VersionMeta.Version2013e, "InputOutput", 0x1fff, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [], ["Add", "Get", "Remove", "Set"])
     }
 
 

@@ -56,7 +56,7 @@ class MgmtIf(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("MgmtIf", "mgmtIf", "if-1", VersionMeta.Version151f, "InputOutput", 0xffffffff, [], ["admin", "read-only", "user"], [u'mgmtController'], [u'faultInst', u'ipBlocking', u'ipFiltering'], ["Get", "Set"]),
-        "modular": MoMeta("MgmtIf", "mgmtIf", "if-1", VersionMeta.Version2013e, "InputOutput", 0x7ffffffffff, [], ["admin", "read-only", "user"], [u'equipmentChassis', u'mgmtController'], [u'ipBlocking', u'ipFiltering'], [None])
+        "modular": MoMeta("MgmtIf", "mgmtIf", "if-1", VersionMeta.Version2013e, "InputOutput", 0x7ffffffffff, [], ["admin", "read-only", "user"], [u'equipmentChassis', u'mgmtController'], [u'ipBlocking', u'ipFiltering'], ["Get", "Set"])
     }
 
 

@@ -16,7 +16,7 @@ class EquipmentChassis(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "modular": MoMeta("EquipmentChassis", "equipmentChassis", "chassis-1", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'topSystem'], [u'chassisPIDCatalog', u'chassisPowerBudget', u'chassisPowerMonitor', u'chassisPowerUtilization', u'computeServerNode', u'equipmentChassisLocatorLed', u'equipmentFanModule', u'equipmentIndicatorLed', u'equipmentPsu', u'equipmentSystemIOController', u'eventManagement', u'faultInst', u'mgmtBackup', u'mgmtIf', u'mgmtImporter', u'mgmtInventory', u'storageEnclosure', u'storageSasExpander', u'sysdebugTechSupportExport'], [None])
+        "modular": MoMeta("EquipmentChassis", "equipmentChassis", "chassis-1", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'topSystem'], [u'chassisPIDCatalog', u'chassisPowerBudget', u'chassisPowerMonitor', u'chassisPowerUtilization', u'computeServerNode', u'equipmentChassisLocatorLed', u'equipmentFanModule', u'equipmentIndicatorLed', u'equipmentPsu', u'equipmentSystemIOController', u'eventManagement', u'faultInst', u'mgmtBackup', u'mgmtIf', u'mgmtImporter', u'mgmtInventory', u'storageEnclosure', u'storageSasExpander', u'sysdebugTechSupportExport'], ["Get"])
     }
 
 

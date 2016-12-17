@@ -21,7 +21,7 @@ class BiosVfCDNEnable(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosVfCDNEnable", "biosVfCDNEnable", "CDN-Enable", VersionMeta.Version204c, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfCDNEnable", "biosVfCDNEnable", "CDN-Enable", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
+        "modular": MoMeta("BiosVfCDNEnable", "biosVfCDNEnable", "CDN-Enable", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
     }
 
 

@@ -17,7 +17,7 @@ class AdaptorFcWorkQueueProfile(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("AdaptorFcWorkQueueProfile", "adaptorFcWorkQueueProfile", "fc-work-q", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'adaptorHostFcIf'], [], ["Get", "Set"]),
-        "modular": MoMeta("AdaptorFcWorkQueueProfile", "adaptorFcWorkQueueProfile", "fc-work-q", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'adaptorHostFcIf'], [], [None])
+        "modular": MoMeta("AdaptorFcWorkQueueProfile", "adaptorFcWorkQueueProfile", "fc-work-q", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'adaptorHostFcIf'], [], ["Get", "Set"])
     }
 
 

@@ -16,7 +16,7 @@ class BmcResetReason(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "modular": MoMeta("BmcResetReason", "bmcResetReason", "bmc-reset-reason", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeServerNode'], [], [None])
+        "modular": MoMeta("BmcResetReason", "bmcResetReason", "bmc-reset-reason", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeServerNode'], [], ["Get"])
     }
 
 

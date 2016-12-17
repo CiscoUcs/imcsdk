@@ -19,7 +19,7 @@ class BiosVfWorkLoadConfig(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosVfWorkLoadConfig", "biosVfWorkLoadConfig", "work-load-config", VersionMeta.Version204c, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfWorkLoadConfig", "biosVfWorkLoadConfig", "work-load-config", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
+        "modular": MoMeta("BiosVfWorkLoadConfig", "biosVfWorkLoadConfig", "work-load-config", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
     }
 
 
