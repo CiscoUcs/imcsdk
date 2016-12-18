@@ -20,7 +20,7 @@ class BiosVfPCIeSSDHotPlugSupport(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("BiosVfPCIeSSDHotPlugSupport", "biosVfPCIeSSDHotPlugSupport", "PCIeSSDHotPlugSupport", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None]),
+        "classic": MoMeta("BiosVfPCIeSSDHotPlugSupport", "biosVfPCIeSSDHotPlugSupport", "PCIeSSDHotPlugSupport", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
     }
 
 

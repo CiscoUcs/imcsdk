@@ -23,7 +23,7 @@ class StorageEnclosureDiskFwHelper(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "modular": MoMeta("StorageEnclosureDiskFwHelper", "storageEnclosureDiskFwHelper", "drive-fw-update", VersionMeta.Version2013e, "InputOutput", 0x7ff, [], ["admin"], [u'storageEnclosure'], [], [None])
+        "modular": MoMeta("StorageEnclosureDiskFwHelper", "storageEnclosureDiskFwHelper", "drive-fw-update", VersionMeta.Version2013e, "InputOutput", 0x7ff, [], ["admin"], [u'storageEnclosure'], [], ["Get", "Set"])
     }
 
 

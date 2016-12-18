@@ -17,7 +17,7 @@ class StorageControllerProps(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("StorageControllerProps", "storageControllerProps", "controller-props", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageController'], [], ["Get"]),
-        "modular": MoMeta("StorageControllerProps", "storageControllerProps", "controller-props", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageController'], [], [None])
+        "modular": MoMeta("StorageControllerProps", "storageControllerProps", "controller-props", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageController'], [], ["Get"])
     }
 
 

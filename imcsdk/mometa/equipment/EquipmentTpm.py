@@ -27,6 +27,8 @@ class EquipmentTpmConsts:
     PRESENCE_NOT_SUPPORTED = "not-supported"
     PRESENCE_UNAUTHORIZED = "unauthorized"
     PRESENCE_UNKNOWN = "unknown"
+    ACTIVE_STATUS_NA = "NA"
+    OWNERSHIP_NA = "NA"
 
 
 class EquipmentTpm(ManagedObject):
@@ -37,7 +39,7 @@ class EquipmentTpm(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("EquipmentTpm", "equipmentTpm", "tpm", VersionMeta.Version201a, "OutputOnly", 0xf, [], ["read-only"], [u'computeBoard'], [], ["Get"]),
-        "modular": MoMeta("EquipmentTpm", "equipmentTpm", "tpm", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["read-only"], [u'computeBoard'], [], [None])
+        "modular": MoMeta("EquipmentTpm", "equipmentTpm", "tpm", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["read-only"], [u'computeBoard'], [], ["Get"])
     }
 
 

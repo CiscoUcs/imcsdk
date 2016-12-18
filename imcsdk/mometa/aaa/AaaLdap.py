@@ -14,6 +14,8 @@ class AaaLdapConsts:
     DNS_DOMAIN_SOURCE_EXTRACTED_DOMAIN = "extracted-domain"
     LOCATE_DIRECTORY_USING_DNS_NO = "no"
     LOCATE_DIRECTORY_USING_DNS_YES = "yes"
+    USER_SEARCH_PRECEDENCE_LDAP_USER_DB = "ldap-user-db"
+    USER_SEARCH_PRECEDENCE_LOCAL_USER_DB = "local-user-db"
 
 
 class AaaLdap(ManagedObject):
@@ -23,8 +25,8 @@ class AaaLdap(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("AaaLdap", "aaaLdap", "ldap-ext", VersionMeta.Version151f, "InputOutput", 0x1ffffffff, [], ["admin", "read-only", "user"], [u'topSystem'], [u'aaaLdapRoleGroup', u'ldapCACertificateManagement'], ["Get", "Set"]),
-        "modular": MoMeta("AaaLdap", "aaaLdap", "ldap-ext", VersionMeta.Version2013e, "InputOutput", 0xffffffff, [], ["admin", "read-only", "user"], [u'topSystem'], [u'aaaLdapRoleGroup', u'ldapCACertificateManagement'], [None])
+        "classic": MoMeta("AaaLdap", "aaaLdap", "ldap-ext", VersionMeta.Version151f, "InputOutput", 0x3ffffffff, [], ["admin", "read-only", "user"], [u'topSystem'], [u'aaaLdapRoleGroup', u'ldapCACertificateManagement'], ["Get", "Set"]),
+        "modular": MoMeta("AaaLdap", "aaaLdap", "ldap-ext", VersionMeta.Version2013e, "InputOutput", 0x1ffffffff, [], ["admin", "read-only", "user"], [u'topSystem'], [u'aaaLdapRoleGroup', u'ldapCACertificateManagement'], ["Get", "Set"])
     }
 
 
@@ -62,7 +64,8 @@ class AaaLdap(ManagedObject):
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x20000000, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x40000000, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "timeout": MoPropertyMeta("timeout", "timeout", "uint", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x80000000, None, None, None, [], ["0-180", "0-1800"]), 
-            "group_nested_search": MoPropertyMeta("group_nested_search", "groupNestedSearch", "uint", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x100000000, None, None, None, [], ["1-128"]), 
+            "user_search_precedence": MoPropertyMeta("user_search_precedence", "userSearchPrecedence", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x100000000, None, None, None, ["ldap-user-db", "local-user-db"], []), 
+            "group_nested_search": MoPropertyMeta("group_nested_search", "groupNestedSearch", "uint", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x200000000, None, None, None, [], ["1-128"]), 
         },
 
         "modular": {
@@ -97,6 +100,7 @@ class AaaLdap(ManagedObject):
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20000000, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40000000, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "timeout": MoPropertyMeta("timeout", "timeout", "uint", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80000000, None, None, None, [], ["0-180", "0-1800"]), 
+            "user_search_precedence": MoPropertyMeta("user_search_precedence", "userSearchPrecedence", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x100000000, None, None, None, ["ldap-user-db", "local-user-db"], []), 
         },
 
     }
@@ -135,6 +139,7 @@ class AaaLdap(ManagedObject):
             "rn": "rn", 
             "status": "status", 
             "timeout": "timeout", 
+            "userSearchPrecedence": "user_search_precedence", 
             "groupNestedSearch": "group_nested_search", 
         },
 
@@ -170,6 +175,7 @@ class AaaLdap(ManagedObject):
             "rn": "rn", 
             "status": "status", 
             "timeout": "timeout", 
+            "userSearchPrecedence": "user_search_precedence", 
         },
 
     }
@@ -205,6 +211,7 @@ class AaaLdap(ManagedObject):
         self.password = None
         self.status = None
         self.timeout = None
+        self.user_search_precedence = None
         self.group_nested_search = None
 
         ManagedObject.__init__(self, "AaaLdap", parent_mo_or_dn, **kwargs)

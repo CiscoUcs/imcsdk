@@ -9,6 +9,7 @@ class StorageEnclosureDiskConsts:
     DRIVE_POWER_POLICY_N_A = "N/A"
     DRIVE_POWER_POLICY_ACTIVE = "active"
     DRIVE_POWER_POLICY_POWER_SAVE = "power-save"
+    DRIVE_POWER_POLICY_TRANSITIONING = "transitioning"
     DRIVE_POWER_POLICY_UNKNOWN = "unknown"
 
 
@@ -19,7 +20,7 @@ class StorageEnclosureDisk(ManagedObject):
     naming_props = set([u'slot'])
 
     mo_meta = {
-        "modular": MoMeta("StorageEnclosureDisk", "storageEnclosureDisk", "upload-catalog", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageEnclosure'], [], [None])
+        "modular": MoMeta("StorageEnclosureDisk", "storageEnclosureDisk", "disk-[slot]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageEnclosure'], [], ["Get"])
     }
 
 
@@ -31,7 +32,7 @@ class StorageEnclosureDisk(ManagedObject):
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "diskstate": MoPropertyMeta("diskstate", "diskstate", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
-            "drive_power_policy": MoPropertyMeta("drive_power_policy", "drivePowerPolicy", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["N/A", "active", "power-save", "unknown"], []), 
+            "drive_power_policy": MoPropertyMeta("drive_power_policy", "drivePowerPolicy", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["N/A", "active", "power-save", "transitioning", "unknown"], []), 
             "expander1linkspeed": MoPropertyMeta("expander1linkspeed", "expander1linkspeed", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "expander2linkspeed": MoPropertyMeta("expander2linkspeed", "expander2linkspeed", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "fw_update_oper_state": MoPropertyMeta("fw_update_oper_state", "fwUpdateOperState", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 

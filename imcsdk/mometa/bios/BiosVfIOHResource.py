@@ -22,7 +22,7 @@ class BiosVfIOHResource(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosVfIOHResource", "biosVfIOHResource", "ioh-resource", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfIOHResource", "biosVfIOHResource", "ioh-resource", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
+        "modular": MoMeta("BiosVfIOHResource", "biosVfIOHResource", "ioh-resource", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
     }
 
 

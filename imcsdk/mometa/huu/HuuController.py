@@ -17,7 +17,7 @@ class HuuController(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("HuuController", "huuController", "huu", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'topSystem'], [u'huuFirmwareCatalog', u'huuFirmwareRunning', u'huuFirmwareUpdateCancel', u'huuFirmwareUpdater'], ["Get"]),
-        "modular": MoMeta("HuuController", "huuController", "huu", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeServerNode'], [u'huuFirmwareCatalog', u'huuFirmwareRunning', u'huuFirmwareUpdateCancel', u'huuFirmwareUpdater'], [None])
+        "modular": MoMeta("HuuController", "huuController", "huu", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeServerNode'], [u'huuFirmwareCatalog', u'huuFirmwareRunning', u'huuFirmwareUpdateCancel', u'huuFirmwareUpdater'], ["Get"])
     }
 
 

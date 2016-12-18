@@ -18,7 +18,7 @@ class AdaptorEthUSNICProfile(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("AdaptorEthUSNICProfile", "adaptorEthUSNICProfile", "ethusnic", VersionMeta.Version151x, "InputOutput", 0x3ffff, [], ["admin"], [u'adaptorHostEthIf'], [], ["Get", "Remove", "Set"]),
-        "modular": MoMeta("AdaptorEthUSNICProfile", "adaptorEthUSNICProfile", "ethusnic", VersionMeta.Version2013e, "InputOutput", 0x3ffff, [], ["admin"], [u'adaptorHostEthIf'], [], [None])
+        "modular": MoMeta("AdaptorEthUSNICProfile", "adaptorEthUSNICProfile", "ethusnic", VersionMeta.Version2013e, "InputOutput", 0x3ffff, [], ["admin"], [u'adaptorHostEthIf'], [], ["Get", "Remove", "Set"])
     }
 
 

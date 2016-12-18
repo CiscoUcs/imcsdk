@@ -17,7 +17,7 @@ class StorageLocalDiskProps(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("StorageLocalDiskProps", "storageLocalDiskProps", "general-props", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageController', u'storageLocalDisk'], [], ["Get"]),
-        "modular": MoMeta("StorageLocalDiskProps", "storageLocalDiskProps", "general-props", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageController', u'storageLocalDisk'], [], [None])
+        "modular": MoMeta("StorageLocalDiskProps", "storageLocalDiskProps", "general-props", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageController', u'storageLocalDisk'], [], ["Get"])
     }
 
 
@@ -38,10 +38,14 @@ class StorageLocalDiskProps(ManagedObject):
             "media_error_count": MoPropertyMeta("media_error_count", "mediaErrorCount", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "media_type": MoPropertyMeta("media_type", "mediaType", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "non_coerced_size": MoPropertyMeta("non_coerced_size", "nonCoercedSize", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "operating_temperature": MoPropertyMeta("operating_temperature", "operatingTemperature", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "other_error_count": MoPropertyMeta("other_error_count", "otherErrorCount", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "pd_status": MoPropertyMeta("pd_status", "pdStatus", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "percentage_life_left": MoPropertyMeta("percentage_life_left", "percentageLifeLeft", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "physical_block_size": MoPropertyMeta("physical_block_size", "physicalBlockSize", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "physical_drive": MoPropertyMeta("physical_drive", "physicalDrive", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "power_cycle_count": MoPropertyMeta("power_cycle_count", "powerCycleCount", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "power_on_hours": MoPropertyMeta("power_on_hours", "powerOnHours", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "power_state": MoPropertyMeta("power_state", "powerState", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "predictive_failure_count": MoPropertyMeta("predictive_failure_count", "predictiveFailureCount", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "raw_size": MoPropertyMeta("raw_size", "rawSize", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
@@ -50,6 +54,7 @@ class StorageLocalDiskProps(ManagedObject):
             "sas_address1": MoPropertyMeta("sas_address1", "sasAddress1", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "sequence_number": MoPropertyMeta("sequence_number", "sequenceNumber", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "wear_status_in_days": MoPropertyMeta("wear_status_in_days", "wearStatusInDays", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
         },
 
         "modular": {
@@ -67,10 +72,14 @@ class StorageLocalDiskProps(ManagedObject):
             "media_error_count": MoPropertyMeta("media_error_count", "mediaErrorCount", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "media_type": MoPropertyMeta("media_type", "mediaType", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "non_coerced_size": MoPropertyMeta("non_coerced_size", "nonCoercedSize", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "operating_temperature": MoPropertyMeta("operating_temperature", "operatingTemperature", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "other_error_count": MoPropertyMeta("other_error_count", "otherErrorCount", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "pd_status": MoPropertyMeta("pd_status", "pdStatus", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "percentage_life_left": MoPropertyMeta("percentage_life_left", "percentageLifeLeft", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "physical_block_size": MoPropertyMeta("physical_block_size", "physicalBlockSize", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "physical_drive": MoPropertyMeta("physical_drive", "physicalDrive", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "power_cycle_count": MoPropertyMeta("power_cycle_count", "powerCycleCount", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "power_on_hours": MoPropertyMeta("power_on_hours", "powerOnHours", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "power_state": MoPropertyMeta("power_state", "powerState", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "predictive_failure_count": MoPropertyMeta("predictive_failure_count", "predictiveFailureCount", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "raw_size": MoPropertyMeta("raw_size", "rawSize", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
@@ -79,6 +88,7 @@ class StorageLocalDiskProps(ManagedObject):
             "sas_address1": MoPropertyMeta("sas_address1", "sasAddress1", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "sequence_number": MoPropertyMeta("sequence_number", "sequenceNumber", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "wear_status_in_days": MoPropertyMeta("wear_status_in_days", "wearStatusInDays", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
         },
 
     }
@@ -100,10 +110,14 @@ class StorageLocalDiskProps(ManagedObject):
             "mediaErrorCount": "media_error_count", 
             "mediaType": "media_type", 
             "nonCoercedSize": "non_coerced_size", 
+            "operatingTemperature": "operating_temperature", 
             "otherErrorCount": "other_error_count", 
             "pdStatus": "pd_status", 
+            "percentageLifeLeft": "percentage_life_left", 
             "physicalBlockSize": "physical_block_size", 
             "physicalDrive": "physical_drive", 
+            "powerCycleCount": "power_cycle_count", 
+            "powerOnHours": "power_on_hours", 
             "powerState": "power_state", 
             "predictiveFailureCount": "predictive_failure_count", 
             "rawSize": "raw_size", 
@@ -112,6 +126,7 @@ class StorageLocalDiskProps(ManagedObject):
             "sasAddress1": "sas_address1", 
             "sequenceNumber": "sequence_number", 
             "status": "status", 
+            "wearStatusInDays": "wear_status_in_days", 
         },
 
         "modular": {
@@ -129,10 +144,14 @@ class StorageLocalDiskProps(ManagedObject):
             "mediaErrorCount": "media_error_count", 
             "mediaType": "media_type", 
             "nonCoercedSize": "non_coerced_size", 
+            "operatingTemperature": "operating_temperature", 
             "otherErrorCount": "other_error_count", 
             "pdStatus": "pd_status", 
+            "percentageLifeLeft": "percentage_life_left", 
             "physicalBlockSize": "physical_block_size", 
             "physicalDrive": "physical_drive", 
+            "powerCycleCount": "power_cycle_count", 
+            "powerOnHours": "power_on_hours", 
             "powerState": "power_state", 
             "predictiveFailureCount": "predictive_failure_count", 
             "rawSize": "raw_size", 
@@ -141,6 +160,7 @@ class StorageLocalDiskProps(ManagedObject):
             "sasAddress1": "sas_address1", 
             "sequenceNumber": "sequence_number", 
             "status": "status", 
+            "wearStatusInDays": "wear_status_in_days", 
         },
 
     }
@@ -160,10 +180,14 @@ class StorageLocalDiskProps(ManagedObject):
         self.media_error_count = None
         self.media_type = None
         self.non_coerced_size = None
+        self.operating_temperature = None
         self.other_error_count = None
         self.pd_status = None
+        self.percentage_life_left = None
         self.physical_block_size = None
         self.physical_drive = None
+        self.power_cycle_count = None
+        self.power_on_hours = None
         self.power_state = None
         self.predictive_failure_count = None
         self.raw_size = None
@@ -171,6 +195,7 @@ class StorageLocalDiskProps(ManagedObject):
         self.sas_address1 = None
         self.sequence_number = None
         self.status = None
+        self.wear_status_in_days = None
 
         ManagedObject.__init__(self, "StorageLocalDiskProps", parent_mo_or_dn, **kwargs)
 

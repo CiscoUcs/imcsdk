@@ -21,8 +21,8 @@ class ExportLdapCACertificate(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("ExportLdapCACertificate", "exportLdapCACertificate", "ldap-ca-cert-export", VersionMeta.Version2013e, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'ldapCACertificateManagement'], [], [None]),
-        "modular": MoMeta("ExportLdapCACertificate", "exportLdapCACertificate", "ldap-ca-cert-export", VersionMeta.Version2013e, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'ldapCACertificateManagement'], [], [None])
+        "classic": MoMeta("ExportLdapCACertificate", "exportLdapCACertificate", "ldap-ca-cert-export", VersionMeta.Version2013e, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'ldapCACertificateManagement'], [], ["Get"]),
+        "modular": MoMeta("ExportLdapCACertificate", "exportLdapCACertificate", "ldap-ca-cert-export", VersionMeta.Version2013e, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'ldapCACertificateManagement'], [], ["Get"])
     }
 
 

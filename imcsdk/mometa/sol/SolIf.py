@@ -29,7 +29,7 @@ class SolIf(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("SolIf", "solIf", "sol-if", VersionMeta.Version151f, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'computeRackUnit'], [], ["Get", "Set"]),
-        "modular": MoMeta("SolIf", "solIf", "sol-if", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'computeServerNode'], [], [None])
+        "modular": MoMeta("SolIf", "solIf", "sol-if", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'computeServerNode'], [], ["Get", "Set"])
     }
 
 

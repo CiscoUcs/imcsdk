@@ -56,6 +56,28 @@ class ConfigSet(BaseObject):
                 self.attr_set(n, v)
 
 
+class FailedMo(BaseObject):
+    """This is FailedMo class."""
+    def __init__(self, **kwargs):
+        BaseObject.__init__(self, "FailedMo", "failedMo")
+        self.dn = None
+        self.error_code = None
+        self.error_descr = None
+        self.name = None
+        if kwargs:
+            for n, v in kwargs.iteritems():
+                self.attr_set(n, v)
+
+
+class FailedMos(BaseObject):
+    """This is FailedMos class."""
+    def __init__(self, **kwargs):
+        BaseObject.__init__(self, "FailedMos", "failedMos")
+        if kwargs:
+            for n, v in kwargs.iteritems():
+                self.attr_set(n, v)
+
+
 class FilterFilter(BaseObject):
     """This is FilterFilter class."""
     def __init__(self, **kwargs):

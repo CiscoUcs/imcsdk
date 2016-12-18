@@ -21,7 +21,7 @@ class BiosVfAssertNMIOnSERR(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosVfAssertNMIOnSERR", "biosVfAssertNMIOnSERR", "Assert-NMI-on-SERR", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfAssertNMIOnSERR", "biosVfAssertNMIOnSERR", "Assert-NMI-on-SERR", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
+        "modular": MoMeta("BiosVfAssertNMIOnSERR", "biosVfAssertNMIOnSERR", "Assert-NMI-on-SERR", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
     }
 
 

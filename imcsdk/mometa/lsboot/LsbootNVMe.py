@@ -18,8 +18,8 @@ class LsbootNVMe(ManagedObject):
     naming_props = set([u'name'])
 
     mo_meta = {
-        "classic": MoMeta("LsbootNVMe", "lsbootNVMe", "nvme-[name]", VersionMeta.Version2013e, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'lsbootDevPrecision'], [], [None]),
-        "modular": MoMeta("LsbootNVMe", "lsbootNVMe", "nvme-[name]", VersionMeta.Version2013e, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'lsbootDevPrecision'], [], [None])
+        "classic": MoMeta("LsbootNVMe", "lsbootNVMe", "nvme-[name]", VersionMeta.Version2013e, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'lsbootDevPrecision'], [], ["Get", "Set"]),
+        "modular": MoMeta("LsbootNVMe", "lsbootNVMe", "nvme-[name]", VersionMeta.Version2013e, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'lsbootDevPrecision'], [], ["Get", "Set"])
     }
 
 

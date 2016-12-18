@@ -16,8 +16,8 @@ class StorageSasExpander(ManagedObject):
     naming_props = set([u'id'])
 
     mo_meta = {
-        "classic": MoMeta("StorageSasExpander", "storageSasExpander", "sas-expander-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["read-only"], [u'topSystem'], [u'mgmtController'], [None]),
-        "modular": MoMeta("StorageSasExpander", "storageSasExpander", "sas-expander-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["read-only"], [u'equipmentChassis'], [u'faultInst', u'mgmtController', u'storageSasUplink'], [None])
+        "classic": MoMeta("StorageSasExpander", "storageSasExpander", "sas-expander-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["read-only"], [u'topSystem'], [u'mgmtController'], ["Get"]),
+        "modular": MoMeta("StorageSasExpander", "storageSasExpander", "sas-expander-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["read-only"], [u'equipmentChassis'], [u'faultInst', u'mgmtController', u'storageSasUplink'], ["Get"])
     }
 
 

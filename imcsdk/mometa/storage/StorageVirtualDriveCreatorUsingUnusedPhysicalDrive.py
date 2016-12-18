@@ -64,7 +64,7 @@ class StorageVirtualDriveCreatorUsingUnusedPhysicalDrive(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("StorageVirtualDriveCreatorUsingUnusedPhysicalDrive", "storageVirtualDriveCreatorUsingUnusedPhysicalDrive", "virtual-drive-create", VersionMeta.Version201a, "InputOutput", 0xffff, [], ["admin"], [u'storageController'], [u'storageUnusedLocalDisk'], ["Get", "Set"]),
-        "modular": MoMeta("StorageVirtualDriveCreatorUsingUnusedPhysicalDrive", "storageVirtualDriveCreatorUsingUnusedPhysicalDrive", "virtual-drive-create", VersionMeta.Version2013e, "InputOutput", 0x7fff, [], ["admin"], [u'storageController'], [u'storageUnusedLocalDisk'], [None])
+        "modular": MoMeta("StorageVirtualDriveCreatorUsingUnusedPhysicalDrive", "storageVirtualDriveCreatorUsingUnusedPhysicalDrive", "virtual-drive-create", VersionMeta.Version2013e, "InputOutput", 0x7fff, [], ["admin"], [u'storageController'], [u'storageUnusedLocalDisk'], ["Get", "Set"])
     }
 
 

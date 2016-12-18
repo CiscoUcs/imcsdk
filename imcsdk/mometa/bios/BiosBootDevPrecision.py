@@ -33,7 +33,7 @@ class BiosBootDevPrecision(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosBootDevPrecision", "biosBootDevPrecision", "bdvp-[order]", VersionMeta.Version201a, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'biosBOT'], [], ["Get"]),
-        "modular": MoMeta("BiosBootDevPrecision", "biosBootDevPrecision", "bdvp-[order]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'biosBOT'], [], [None])
+        "modular": MoMeta("BiosBootDevPrecision", "biosBootDevPrecision", "bdvp-[order]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'biosBOT'], [], ["Get"])
     }
 
 

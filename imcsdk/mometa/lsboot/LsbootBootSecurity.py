@@ -22,7 +22,7 @@ class LsbootBootSecurity(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("LsbootBootSecurity", "lsbootBootSecurity", "boot-security", VersionMeta.Version201a, "InputOutput", 0x1f, [], ["admin", "user"], [u'lsbootDef'], [], ["Get", "Set"]),
-        "modular": MoMeta("LsbootBootSecurity", "lsbootBootSecurity", "boot-security", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "user"], [u'lsbootDef'], [], [None])
+        "modular": MoMeta("LsbootBootSecurity", "lsbootBootSecurity", "boot-security", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "user"], [u'lsbootDef'], [], ["Get", "Set"])
     }
 
 

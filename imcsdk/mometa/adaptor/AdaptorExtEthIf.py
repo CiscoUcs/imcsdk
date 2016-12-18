@@ -41,7 +41,7 @@ class AdaptorExtEthIf(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("AdaptorExtEthIf", "adaptorExtEthIf", "ext-eth-[port_id]", VersionMeta.Version151f, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [u'adaptorConnectorInfo', u'adaptorLinkTraining', u'adaptorPortProfiles'], ["Get", "Set"]),
-        "modular": MoMeta("AdaptorExtEthIf", "adaptorExtEthIf", "ext-eth-[port_id]", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [u'adaptorPortProfiles'], [None])
+        "modular": MoMeta("AdaptorExtEthIf", "adaptorExtEthIf", "ext-eth-[port_id]", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [u'adaptorPortProfiles'], ["Get", "Set"])
     }
 
 

@@ -17,7 +17,7 @@ class BiosVfPatrolScrubDuration(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosVfPatrolScrubDuration", "biosVfPatrolScrubDuration", "Patrol-Scrub-Duration", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfPatrolScrubDuration", "biosVfPatrolScrubDuration", "Patrol-Scrub-Duration", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
+        "modular": MoMeta("BiosVfPatrolScrubDuration", "biosVfPatrolScrubDuration", "Patrol-Scrub-Duration", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
     }
 
 

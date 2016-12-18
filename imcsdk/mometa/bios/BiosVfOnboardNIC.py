@@ -26,7 +26,7 @@ class BiosVfOnboardNIC(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosVfOnboardNIC", "biosVfOnboardNIC", "Onboard-NIC", VersionMeta.Version151f, "InputOutput", 0x3f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfOnboardNIC", "biosVfOnboardNIC", "Onboard-NIC", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
+        "modular": MoMeta("BiosVfOnboardNIC", "biosVfOnboardNIC", "Onboard-NIC", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
     }
 
 

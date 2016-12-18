@@ -17,7 +17,7 @@ class AaaUserPolicy(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("AaaUserPolicy", "aaaUserPolicy", "policy", VersionMeta.Version209c, "InputOutput", 0x1f, [], ["admin", "user"], [u'aaaUserEp'], [], ["Get", "Set"]),
-        "modular": MoMeta("AaaUserPolicy", "aaaUserPolicy", "policy", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "user"], [u'aaaUserEp'], [], [None])
+        "modular": MoMeta("AaaUserPolicy", "aaaUserPolicy", "policy", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "user"], [u'aaaUserEp'], [], ["Get", "Set"])
     }
 
 

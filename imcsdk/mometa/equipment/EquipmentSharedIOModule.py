@@ -13,10 +13,10 @@ class EquipmentSharedIOModule(ManagedObject):
     """This is EquipmentSharedIOModule class."""
 
     consts = EquipmentSharedIOModuleConsts()
-    naming_props = set([])
+    naming_props = set([u'slot'])
 
     mo_meta = {
-        "modular": MoMeta("EquipmentSharedIOModule", "equipmentSharedIOModule", "shared-io-module", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'equipmentSystemIOController'], [u'commEpIpmiLan', u'computeSharedIOMbPowerStats', u'computeSharedIOMbTempStats', u'mgmtController'], [None])
+        "modular": MoMeta("EquipmentSharedIOModule", "equipmentSharedIOModule", "shared-io-module-[slot]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'equipmentSystemIOController'], [u'commEpIpmiLan', u'computeSharedIOMbPowerStats', u'computeSharedIOMbTempStats', u'mgmtController'], ["Get"])
     }
 
 
@@ -68,8 +68,9 @@ class EquipmentSharedIOModule(ManagedObject):
 
     }
 
-    def __init__(self, parent_mo_or_dn, **kwargs):
+    def __init__(self, parent_mo_or_dn, slot, **kwargs):
         self._dirty_mask = 0
+        self.slot = slot
         self.adapter_hw_revision = None
         self.child_action = None
         self.current_firmware_version = None

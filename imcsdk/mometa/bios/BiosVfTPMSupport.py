@@ -21,7 +21,7 @@ class BiosVfTPMSupport(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosVfTPMSupport", "biosVfTPMSupport", "TPM-Support", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfTPMSupport", "biosVfTPMSupport", "TPM-Support", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
+        "modular": MoMeta("BiosVfTPMSupport", "biosVfTPMSupport", "TPM-Support", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
     }
 
 

@@ -16,8 +16,8 @@ class StorageControllerNVMe(ManagedObject):
     naming_props = set([u'id'])
 
     mo_meta = {
-        "classic": MoMeta("StorageControllerNVMe", "storageControllerNVMe", "storage-NVMe-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeBoard'], [u'firmwareRunning'], [None]),
-        "modular": MoMeta("StorageControllerNVMe", "storageControllerNVMe", "storage-NVMe-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeBoard'], [u'firmwareRunning'], [None])
+        "classic": MoMeta("StorageControllerNVMe", "storageControllerNVMe", "storage-NVMe-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeBoard'], [u'firmwareRunning'], ["Get"]),
+        "modular": MoMeta("StorageControllerNVMe", "storageControllerNVMe", "storage-NVMe-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeBoard'], [u'firmwareRunning'], ["Get"])
     }
 
 

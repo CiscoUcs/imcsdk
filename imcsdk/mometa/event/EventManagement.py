@@ -16,7 +16,8 @@ class EventManagement(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("EventManagement", "eventManagement", "event-management", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'computeRackUnit'], [u'platformEventFilters'], [None]),
+        "classic": MoMeta("EventManagement", "eventManagement", "event-management", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'computeRackUnit'], [u'platformEventFilters'], ["Get", "Set"]),
+        "modular": MoMeta("EventManagement", "eventManagement", "event-management", VersionMeta.Version301c, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'equipmentChassis'], [u'platformEventFilters'], ["Get", "Set"])
     }
 
 
@@ -31,11 +32,29 @@ class EventManagement(ManagedObject):
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
         },
 
+        "modular": {
+            "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["reset-event-filters"], []), 
+            "admin_state": MoPropertyMeta("admin_state", "adminState", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version301c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+        },
+
     }
 
     prop_map = {
 
         "classic": {
+            "adminAction": "admin_action", 
+            "adminState": "admin_state", 
+            "childAction": "child_action", 
+            "dn": "dn", 
+            "rn": "rn", 
+            "status": "status", 
+        },
+
+        "modular": {
             "adminAction": "admin_action", 
             "adminState": "admin_state", 
             "childAction": "child_action", 

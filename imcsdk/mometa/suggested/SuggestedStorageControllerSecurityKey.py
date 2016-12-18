@@ -27,7 +27,7 @@ class SuggestedStorageControllerSecurityKey(ManagedObject):
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version209c, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version209c, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version209c, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "suggested_security_key": MoPropertyMeta("suggested_security_key", "suggestedSecurityKey", "string", VersionMeta.Version209c, MoPropertyMeta.READ_ONLY, None, 1, 32, None, [], []), 
+            "suggested_security_key": MoPropertyMeta("suggested_security_key", "suggestedSecurityKey", "string", VersionMeta.Version209c, MoPropertyMeta.READ_ONLY, None, 1, 33, None, [], []), 
         },
 
     }

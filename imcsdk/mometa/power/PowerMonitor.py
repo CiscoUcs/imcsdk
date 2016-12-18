@@ -19,7 +19,7 @@ class PowerMonitor(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("PowerMonitor", "powerMonitor", "pwrmonitor-[domain]", VersionMeta.Version202c, "InputOutput", 0xf, [], ["admin", "read-only", "user"], [u'computeRackUnit'], [], ["Get"]),
-        "modular": MoMeta("PowerMonitor", "powerMonitor", "pwrmonitor-[domain]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeServerNode'], [], [None])
+        "modular": MoMeta("PowerMonitor", "powerMonitor", "pwrmonitor-[domain]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeServerNode'], [], ["Get"])
     }
 
 

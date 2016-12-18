@@ -17,7 +17,7 @@ class PciEquipSlot(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("PciEquipSlot", "pciEquipSlot", "equipped-slot-[id]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeRackUnit'], [u'faultInst'], ["Get"]),
-        "modular": MoMeta("PciEquipSlot", "pciEquipSlot", "equipped-slot-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeServerNode'], [u'faultInst'], [None])
+        "modular": MoMeta("PciEquipSlot", "pciEquipSlot", "equipped-slot-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeServerNode'], [u'faultInst'], ["Get"])
     }
 
 

@@ -31,7 +31,7 @@ class LsbootVMedia(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("LsbootVMedia", "lsbootVMedia", "vm-[name]", VersionMeta.Version201a, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], [u'lsbootDevPrecision'], [], ["Add", "Get", "Remove", "Set"]),
-        "modular": MoMeta("LsbootVMedia", "lsbootVMedia", "vm-[name]", VersionMeta.Version2013e, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], [u'lsbootDevPrecision'], [], [None])
+        "modular": MoMeta("LsbootVMedia", "lsbootVMedia", "vm-[name]", VersionMeta.Version2013e, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], [u'lsbootDevPrecision'], [], ["Add", "Get", "Remove", "Set"])
     }
 
 

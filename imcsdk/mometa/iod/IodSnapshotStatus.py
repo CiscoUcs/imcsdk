@@ -17,7 +17,7 @@ class IodSnapshotStatus(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("IodSnapshotStatus", "iodSnapshotStatus", "snapshotStatus", VersionMeta.Version151x, "OutputOnly", 0xf, [], ["read-only"], [u'iodController'], [], ["Get"]),
-        "modular": MoMeta("IodSnapshotStatus", "iodSnapshotStatus", "snapshotStatus", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["read-only"], [u'iodController'], [], [None])
+        "modular": MoMeta("IodSnapshotStatus", "iodSnapshotStatus", "snapshotStatus", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["read-only"], [u'iodController'], [], ["Get"])
     }
 
 

@@ -17,7 +17,7 @@ class StorageControllerSettings(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("StorageControllerSettings", "storageControllerSettings", "controller-settings", VersionMeta.Version201a, "InputOutput", 0xf, [], ["admin", "read-only", "user"], [u'storageController'], [], ["Get"]),
-        "modular": MoMeta("StorageControllerSettings", "storageControllerSettings", "controller-settings", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageController'], [], [None])
+        "modular": MoMeta("StorageControllerSettings", "storageControllerSettings", "controller-settings", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageController'], [], ["Get"])
     }
 
 

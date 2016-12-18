@@ -18,7 +18,7 @@ class HuuFirmwareUpdateCancel(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("HuuFirmwareUpdateCancel", "huuFirmwareUpdateCancel", "firmwareUpdateCancel", VersionMeta.Version152, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'huuController'], [], ["Get", "Set"]),
-        "modular": MoMeta("HuuFirmwareUpdateCancel", "huuFirmwareUpdateCancel", "firmwareUpdateCancel", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'huuController'], [], [None])
+        "modular": MoMeta("HuuFirmwareUpdateCancel", "huuFirmwareUpdateCancel", "firmwareUpdateCancel", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'huuController'], [], ["Get", "Set"])
     }
 
 

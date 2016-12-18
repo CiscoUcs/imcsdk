@@ -23,7 +23,7 @@ class AaaUser(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("AaaUser", "aaaUser", "user-[id]", VersionMeta.Version151f, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], [u'aaaUserEp'], [], ["Get", "Set"]),
-        "modular": MoMeta("AaaUser", "aaaUser", "user-[id]", VersionMeta.Version2013e, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], [u'aaaUserEp'], [], [None])
+        "modular": MoMeta("AaaUser", "aaaUser", "user-[id]", VersionMeta.Version2013e, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], [u'aaaUserEp'], [], ["Get", "Set"])
     }
 
 

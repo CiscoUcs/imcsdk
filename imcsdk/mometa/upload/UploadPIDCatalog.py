@@ -21,8 +21,8 @@ class UploadPIDCatalog(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("UploadPIDCatalog", "uploadPIDCatalog", "upload-catalog", VersionMeta.Version2013e, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'pidCatalog'], [], [None]),
-        "modular": MoMeta("UploadPIDCatalog", "uploadPIDCatalog", "upload-catalog", VersionMeta.Version2013e, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'chassisPIDCatalog'], [], [None])
+        "classic": MoMeta("UploadPIDCatalog", "uploadPIDCatalog", "upload-catalog", VersionMeta.Version2013e, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'pidCatalog'], [], ["Get"]),
+        "modular": MoMeta("UploadPIDCatalog", "uploadPIDCatalog", "upload-catalog", VersionMeta.Version2013e, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'chassisPIDCatalog'], [], ["Get"])
     }
 
 

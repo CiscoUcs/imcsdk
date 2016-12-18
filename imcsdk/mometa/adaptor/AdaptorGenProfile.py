@@ -16,8 +16,8 @@ class AdaptorGenProfile(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("AdaptorGenProfile", "adaptorGenProfile", "general", VersionMeta.Version151f, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [], ["Get", "Set"]),
-        "modular": MoMeta("AdaptorGenProfile", "adaptorGenProfile", "general", VersionMeta.Version2013e, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [], [None])
+        "classic": MoMeta("AdaptorGenProfile", "adaptorGenProfile", "general", VersionMeta.Version151f, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [], ["Get", "Set"]),
+        "modular": MoMeta("AdaptorGenProfile", "adaptorGenProfile", "general", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [], ["Get", "Set"])
     }
 
 
@@ -31,17 +31,16 @@ class AdaptorGenProfile(ManagedObject):
             "iscsi_boot_supported": MoPropertyMeta("iscsi_boot_supported", "iscsiBootSupported", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
             "lldp": MoPropertyMeta("lldp", "lldp", "string", VersionMeta.Version208d, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
             "model": MoPropertyMeta("model", "model", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "num_of_vm_fex_ifs": MoPropertyMeta("num_of_vm_fex_ifs", "numOfVMFexIfs", "uint", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, [], ["0-112"]), 
             "pci_slot": MoPropertyMeta("pci_slot", "pciSlot", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "product_name": MoPropertyMeta("product_name", "productName", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "revision": MoPropertyMeta("revision", "revision", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
             "serial": MoPropertyMeta("serial", "serial", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "usnic_supported": MoPropertyMeta("usnic_supported", "usnicSupported", "string", VersionMeta.Version151x, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
             "vendor": MoPropertyMeta("vendor", "vendor", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "vendor_id": MoPropertyMeta("vendor_id", "vendorId", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
-            "vntag_mode": MoPropertyMeta("vntag_mode", "vntagMode", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
+            "vntag_mode": MoPropertyMeta("vntag_mode", "vntagMode", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
         },
 
         "modular": {
@@ -52,17 +51,16 @@ class AdaptorGenProfile(ManagedObject):
             "iscsi_boot_supported": MoPropertyMeta("iscsi_boot_supported", "iscsiBootSupported", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
             "lldp": MoPropertyMeta("lldp", "lldp", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
             "model": MoPropertyMeta("model", "model", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "num_of_vm_fex_ifs": MoPropertyMeta("num_of_vm_fex_ifs", "numOfVMFexIfs", "uint", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, [], ["0-112"]), 
             "pci_slot": MoPropertyMeta("pci_slot", "pciSlot", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "product_name": MoPropertyMeta("product_name", "productName", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "revision": MoPropertyMeta("revision", "revision", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
             "serial": MoPropertyMeta("serial", "serial", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "usnic_supported": MoPropertyMeta("usnic_supported", "usnicSupported", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
             "vendor": MoPropertyMeta("vendor", "vendor", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "vendor_id": MoPropertyMeta("vendor_id", "vendorId", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
-            "vntag_mode": MoPropertyMeta("vntag_mode", "vntagMode", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
+            "vntag_mode": MoPropertyMeta("vntag_mode", "vntagMode", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
         },
 
     }
@@ -77,7 +75,6 @@ class AdaptorGenProfile(ManagedObject):
             "iscsiBootSupported": "iscsi_boot_supported", 
             "lldp": "lldp", 
             "model": "model", 
-            "numOfVMFexIfs": "num_of_vm_fex_ifs", 
             "pciSlot": "pci_slot", 
             "productName": "product_name", 
             "revision": "revision", 
@@ -98,7 +95,6 @@ class AdaptorGenProfile(ManagedObject):
             "iscsiBootSupported": "iscsi_boot_supported", 
             "lldp": "lldp", 
             "model": "model", 
-            "numOfVMFexIfs": "num_of_vm_fex_ifs", 
             "pciSlot": "pci_slot", 
             "productName": "product_name", 
             "revision": "revision", 
@@ -121,7 +117,6 @@ class AdaptorGenProfile(ManagedObject):
         self.iscsi_boot_supported = None
         self.lldp = None
         self.model = None
-        self.num_of_vm_fex_ifs = None
         self.pci_slot = None
         self.product_name = None
         self.revision = None

@@ -21,7 +21,7 @@ class BiosVfAssertNMIOnPERR(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosVfAssertNMIOnPERR", "biosVfAssertNMIOnPERR", "Assert-NMI-on-PERR", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfAssertNMIOnPERR", "biosVfAssertNMIOnPERR", "Assert-NMI-on-PERR", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
+        "modular": MoMeta("BiosVfAssertNMIOnPERR", "biosVfAssertNMIOnPERR", "Assert-NMI-on-PERR", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
     }
 
 

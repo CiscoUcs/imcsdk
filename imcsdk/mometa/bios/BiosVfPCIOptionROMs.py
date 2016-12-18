@@ -23,7 +23,7 @@ class BiosVfPCIOptionROMs(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosVfPCIOptionROMs", "biosVfPCIOptionROMs", "PCI-OptionROMs", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfPCIOptionROMs", "biosVfPCIOptionROMs", "PCI-OptionROMs", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
+        "modular": MoMeta("BiosVfPCIOptionROMs", "biosVfPCIOptionROMs", "PCI-OptionROMs", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
     }
 
 

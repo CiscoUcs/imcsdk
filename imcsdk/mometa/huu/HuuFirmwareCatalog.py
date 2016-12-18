@@ -17,7 +17,7 @@ class HuuFirmwareCatalog(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("HuuFirmwareCatalog", "huuFirmwareCatalog", "firmwareCatalog", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'huuController'], [u'huuFirmwareCatalogComponent'], ["Get"]),
-        "modular": MoMeta("HuuFirmwareCatalog", "huuFirmwareCatalog", "firmwareCatalog", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'huuController'], [u'huuFirmwareCatalogComponent'], [None])
+        "modular": MoMeta("HuuFirmwareCatalog", "huuFirmwareCatalog", "firmwareCatalog", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'huuController'], [u'huuFirmwareCatalogComponent'], ["Get"])
     }
 
 

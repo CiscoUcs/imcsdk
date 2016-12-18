@@ -32,7 +32,7 @@ class LsbootDevPrecision(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("LsbootDevPrecision", "lsbootDevPrecision", "boot-precision", VersionMeta.Version201a, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'computeRackUnit'], [u'lsbootHdd', u'lsbootIscsi', u'lsbootNVMe', u'lsbootPchStorage', u'lsbootPxe', u'lsbootSan', u'lsbootSd', u'lsbootUefiShell', u'lsbootUsb', u'lsbootVMedia'], ["Get", "Set"]),
-        "modular": MoMeta("LsbootDevPrecision", "lsbootDevPrecision", "boot-precision", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'computeServerNode'], [u'lsbootHdd', u'lsbootIscsi', u'lsbootNVMe', u'lsbootPchStorage', u'lsbootPxe', u'lsbootSan', u'lsbootSd', u'lsbootUefiShell', u'lsbootUsb', u'lsbootVMedia'], [None])
+        "modular": MoMeta("LsbootDevPrecision", "lsbootDevPrecision", "boot-precision", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'computeServerNode'], [u'lsbootHdd', u'lsbootIscsi', u'lsbootNVMe', u'lsbootPchStorage', u'lsbootPxe', u'lsbootSan', u'lsbootSd', u'lsbootUefiShell', u'lsbootUsb', u'lsbootVMedia'], ["Get", "Set"])
     }
 
 

@@ -17,7 +17,7 @@ class HuuUpdateComponentStatus(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("HuuUpdateComponentStatus", "huuUpdateComponentStatus", "component-[component]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'huuFirmwareUpdateStatus'], [], ["Get"]),
-        "modular": MoMeta("HuuUpdateComponentStatus", "huuUpdateComponentStatus", "component-[component]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'huuFirmwareUpdateStatus'], [], [None])
+        "modular": MoMeta("HuuUpdateComponentStatus", "huuUpdateComponentStatus", "component-[component]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'huuFirmwareUpdateStatus'], [], ["Get"])
     }
 
 

@@ -40,7 +40,7 @@ class FirmwareBootUnit(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("FirmwareBootUnit", "firmwareBootUnit", "bootunit-[type]", VersionMeta.Version151f, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'firmwareBootDefinition'], [], ["Get", "Set"]),
-        "modular": MoMeta("FirmwareBootUnit", "firmwareBootUnit", "bootunit-[type]", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'firmwareBootDefinition'], [], [None])
+        "modular": MoMeta("FirmwareBootUnit", "firmwareBootUnit", "bootunit-[type]", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'firmwareBootDefinition'], [], ["Get", "Set"])
     }
 
 

@@ -90,6 +90,18 @@ def config_conf_mo(cookie, dn, in_config, in_hierarchical=YesOrNo.FALSE):
     return xml_request
 
 
+def config_conf_mos(cookie, in_configs, in_hierarchical=YesOrNo.FALSE):
+    """ Auto-generated IMC XML API Method. """
+    method = ExternalMethod("ConfigConfMos")
+
+    method.cookie = cookie
+    method.in_configs = in_configs
+    method.in_hierarchical = (("false", "true")[in_hierarchical in imcgenutils.AFFIRMATIVE_LIST])
+
+    xml_request = method.to_xml(option=WriteXmlOption.DIRTY)
+    return xml_request
+
+
 def config_resolve_children(cookie, class_id, in_dn, in_hierarchical=YesOrNo.FALSE):
     """ Auto-generated IMC XML API Method. """
     method = ExternalMethod("ConfigResolveChildren")
