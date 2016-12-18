@@ -44,14 +44,14 @@ def _list_to_string(drive_list):
     # convert to format imc expects
     # list to string
     # [[1]] => '[1]'
-    # [[1,2],[3,4]] => '[1,2],[3,4]'
+    # [[1,2],[3,4]] => '[1,2][3,4]'
     # imc fails to parse '[1, 2]'
     # it needs to be '[1,2]'
     # and hence the replace(' ', '')
     dg_str = ""
     for each in drive_list:
-        dg_str += str(each) + ','
-    return dg_str[:-1].replace(' ', '')
+        dg_str += str(each)
+    return dg_str.replace(' ', '')
 
 
 def _flatten_list(drive_list):
@@ -126,24 +126,29 @@ def _pd_sizes_get(handle,
 
 
 def _pd_min_size_get(sizes):
-    min_size = None
-    for size in sizes:
-        if min_size is None:
-            min_size = size
-        elif size < min_size:
-            min_size = size
-    return min_size
+    return min(sizes)
 
 
 def _pd_total_size_get(sizes):
-    available_size = 0
-    for size in sizes:
-        available_size += size
-    return available_size
+    return sum(sizes)
 
 
 def _vd_span_depth_get(drive_list):
     return len(drive_list)
+
+
+def _raid_max_size_get(raid_level, total_size, min_size, span_depth):
+    if raid_level == 0:
+        max_size = total_size
+    elif raid_level == 1 or raid_level == 10:
+        max_size = total_size/2
+    elif raid_level == 5 or raid_level == 50:
+        max_size = total_size - (span_depth * 1 * min_size)
+    elif raid_level == 6 or raid_level == 60:
+        max_size = total_size - (span_depth * 2 * min_size)
+    else:
+        raise "Unsupported Raid level" + raid_level
+    return max_size
 
 
 def _vd_max_size_get(handle,
@@ -169,18 +174,8 @@ def _vd_max_size_get(handle,
     total_size = _pd_total_size_get(sizes)
     span_depth = _vd_span_depth_get(drive_list)
 
-    if raid_level == 0:
-        max_size = total_size
-    elif raid_level == 1 or raid_level == 10:
-        max_size = total_size/2
-    elif raid_level == 5 or raid_level == 50:
-        max_size = total_size - (span_depth * 1 * min_size)
-    elif raid_level == 6 or raid_level == 60:
-        max_size = total_size - (span_depth * 2 * min_size)
-    else:
-        raise "Unsupported Raid level" + raid_level
-
-    return _bytes_to_human(max_size)
+    max_size = _raid_max_size_get(raid_level, total_size, min_size, span_depth)
+    return _bytes_to_human(max_size, output_format="MB")
 
 
 def virtual_drive_create(handle,
@@ -227,7 +222,6 @@ def virtual_drive_create(handle,
     slot_dn = server_dn + "/board/storage-SAS-SLOT-" + controller_slot
 
     dg_str = _list_to_string(drive_group)
-    print(dg_str)
     vdn = virtual_drive_name
 
     params = {}
@@ -251,9 +245,51 @@ def virtual_drive_create(handle,
     params["size"] = (_vd_max_size_get(handle=handle,
                                        controller_slot=controller_slot,
                                        drive_list=drive_group,
+                                       raid_level=raid_level,
                                        server_id=server_id),
                       size)[size is not None]
 
     mo = vd_creator(**params)
     mo.admin_state = "trigger"
     handle.add_mo(mo)
+    return mo
+
+
+def _vd_query_by_name(handle,
+                      controller_slot,
+                      name,
+                      server_id=1):
+    server_dn = imccoreutils.get_server_dn(handle, server_id)
+    slot_dn = server_dn + "/board/storage-SAS-SLOT-" + controller_slot
+
+    mos = handle.query_children(in_dn=slot_dn, class_id="storageVirtualDrive")
+    for mo in mos:
+        if mo.name == name:
+            return mo
+    return None
+
+
+def virtual_drive_delete(handle,
+                         controller_slot,
+                         name,
+                         server_id=1):
+    """
+        Deletes the specified virtul drive
+
+        Args:
+            handle (ImcHandle)
+            controller_slot(string): sas controller slot name/number
+                                    "MEZZ","0"-"9"
+            name(string): name of the virtual drive to delete
+            server_id(int): server_id for UCS 3260 platform
+
+        Examples:
+            virtual_drive_delete(handle=imc,
+                                 controller_slot='MEZZ',
+                                 name="RAID0_1")
+    """
+    vd = _vd_query_by_name(handle=handle,
+                           controller_slot=controller_slot,
+                           name=name,
+                           server_id=server_id)
+    handle.remove_mo(vd)
