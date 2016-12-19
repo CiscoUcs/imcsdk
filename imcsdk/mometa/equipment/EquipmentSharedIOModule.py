@@ -16,7 +16,7 @@ class EquipmentSharedIOModule(ManagedObject):
     naming_props = set([u'slot'])
 
     mo_meta = {
-        "modular": MoMeta("EquipmentSharedIOModule", "equipmentSharedIOModule", "shared-io-module-[slot]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'equipmentSystemIOController'], [u'commEpIpmiLan', u'computeSharedIOMbPowerStats', u'computeSharedIOMbTempStats', u'mgmtController'], [None])
+        "modular": MoMeta("EquipmentSharedIOModule", "equipmentSharedIOModule", "shared-io-module-[slot]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'equipmentSystemIOController'], [u'commEpIpmiLan', u'computeSharedIOMbPowerStats', u'computeSharedIOMbTempStats', u'mgmtController'], ["Get"])
     }
 
 

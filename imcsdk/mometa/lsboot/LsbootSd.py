@@ -20,7 +20,7 @@ class LsbootSd(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("LsbootSd", "lsbootSd", "sd-[name]", VersionMeta.Version201a, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], [u'lsbootDevPrecision'], [], ["Add", "Get", "Remove", "Set"]),
-        "modular": MoMeta("LsbootSd", "lsbootSd", "sd-[name]", VersionMeta.Version2013e, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], [u'lsbootDevPrecision'], [], [None])
+        "modular": MoMeta("LsbootSd", "lsbootSd", "sd-[name]", VersionMeta.Version2013e, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], [u'lsbootDevPrecision'], [], ["Add", "Get", "Remove", "Set"])
     }
 
 

@@ -22,7 +22,7 @@ class BiosVfQPIConfig(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosVfQPIConfig", "biosVfQPIConfig", "QPI-Config", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfQPIConfig", "biosVfQPIConfig", "QPI-Config", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
+        "modular": MoMeta("BiosVfQPIConfig", "biosVfQPIConfig", "QPI-Config", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
     }
 
 

@@ -24,7 +24,7 @@ class CommSnmpTrap(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("CommSnmpTrap", "commSnmpTrap", "snmp-trap-[id]", VersionMeta.Version151f, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'commSnmp'], [], ["Get", "Set"]),
-        "modular": MoMeta("CommSnmpTrap", "commSnmpTrap", "snmp-trap-[id]", VersionMeta.Version2013e, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'commSnmp'], [], [None])
+        "modular": MoMeta("CommSnmpTrap", "commSnmpTrap", "snmp-trap-[id]", VersionMeta.Version2013e, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'commSnmp'], [], ["Get", "Set"])
     }
 
 

@@ -17,7 +17,7 @@ class AdaptorEthWorkQueueProfile(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("AdaptorEthWorkQueueProfile", "adaptorEthWorkQueueProfile", "eth-work-q", VersionMeta.Version151f, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'adaptorHostEthIf'], [], ["Get", "Set"]),
-        "modular": MoMeta("AdaptorEthWorkQueueProfile", "adaptorEthWorkQueueProfile", "eth-work-q", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'adaptorHostEthIf'], [], [None])
+        "modular": MoMeta("AdaptorEthWorkQueueProfile", "adaptorEthWorkQueueProfile", "eth-work-q", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'adaptorHostEthIf'], [], ["Get", "Set"])
     }
 
 

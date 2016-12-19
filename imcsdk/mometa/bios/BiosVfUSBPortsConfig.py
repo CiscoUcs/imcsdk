@@ -51,7 +51,7 @@ class BiosVfUSBPortsConfig(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosVfUSBPortsConfig", "biosVfUSBPortsConfig", "USB-Ports-Config", VersionMeta.Version151f, "InputOutput", 0x7ff, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfUSBPortsConfig", "biosVfUSBPortsConfig", "USB-Ports-Config", VersionMeta.Version2013e, "InputOutput", 0x7ff, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
+        "modular": MoMeta("BiosVfUSBPortsConfig", "biosVfUSBPortsConfig", "USB-Ports-Config", VersionMeta.Version2013e, "InputOutput", 0x7ff, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
     }
 
 

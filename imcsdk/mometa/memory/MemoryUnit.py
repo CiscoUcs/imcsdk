@@ -126,7 +126,7 @@ class MemoryUnit(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("MemoryUnit", "memoryUnit", "mem-[id]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'memoryArray'], [u'faultInst', u'memoryUnitEnvStats'], ["Get"]),
-        "modular": MoMeta("MemoryUnit", "memoryUnit", "mem-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'memoryArray'], [u'faultInst', u'memoryUnitEnvStats'], [None])
+        "modular": MoMeta("MemoryUnit", "memoryUnit", "mem-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'memoryArray'], [u'faultInst', u'memoryUnitEnvStats'], ["Get"])
     }
 
 

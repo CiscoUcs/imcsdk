@@ -26,7 +26,7 @@ class AaaLdap(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("AaaLdap", "aaaLdap", "ldap-ext", VersionMeta.Version151f, "InputOutput", 0x3ffffffff, [], ["admin", "read-only", "user"], [u'topSystem'], [u'aaaLdapRoleGroup', u'ldapCACertificateManagement'], ["Get", "Set"]),
-        "modular": MoMeta("AaaLdap", "aaaLdap", "ldap-ext", VersionMeta.Version2013e, "InputOutput", 0x1ffffffff, [], ["admin", "read-only", "user"], [u'topSystem'], [u'aaaLdapRoleGroup', u'ldapCACertificateManagement'], [None])
+        "modular": MoMeta("AaaLdap", "aaaLdap", "ldap-ext", VersionMeta.Version2013e, "InputOutput", 0x1ffffffff, [], ["admin", "read-only", "user"], [u'topSystem'], [u'aaaLdapRoleGroup', u'ldapCACertificateManagement'], ["Get", "Set"])
     }
 
 

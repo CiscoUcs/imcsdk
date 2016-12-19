@@ -32,7 +32,7 @@ class StorageLocalDisk(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("StorageLocalDisk", "storageLocalDisk", "pd-[id]", VersionMeta.Version151f, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'storageController'], [u'faultInst', u'storageLocalDiskProps', u'storageOperation'], ["Get", "Set"]),
-        "modular": MoMeta("StorageLocalDisk", "storageLocalDisk", "pd-[id]", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'storageController'], [u'faultInst', u'storageLocalDiskProps', u'storageOperation'], [None])
+        "modular": MoMeta("StorageLocalDisk", "storageLocalDisk", "pd-[id]", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'storageController'], [u'faultInst', u'storageLocalDiskProps', u'storageOperation'], ["Get", "Set"])
     }
 
 

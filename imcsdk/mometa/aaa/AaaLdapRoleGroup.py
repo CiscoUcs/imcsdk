@@ -21,7 +21,7 @@ class AaaLdapRoleGroup(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("AaaLdapRoleGroup", "aaaLdapRoleGroup", "rolegroup-[id]", VersionMeta.Version151f, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'aaaLdap'], [], ["Get", "Set"]),
-        "modular": MoMeta("AaaLdapRoleGroup", "aaaLdapRoleGroup", "rolegroup-[id]", VersionMeta.Version2013e, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'aaaLdap'], [], [None])
+        "modular": MoMeta("AaaLdapRoleGroup", "aaaLdapRoleGroup", "rolegroup-[id]", VersionMeta.Version2013e, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'aaaLdap'], [], ["Get", "Set"])
     }
 
 

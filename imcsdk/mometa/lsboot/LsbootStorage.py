@@ -18,7 +18,7 @@ class LsbootStorage(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("LsbootStorage", "lsbootStorage", "storage-read-write", VersionMeta.Version151f, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'lsbootDef'], [], ["Add", "Get", "Remove", "Set"]),
-        "modular": MoMeta("LsbootStorage", "lsbootStorage", "storage-read-write", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'lsbootDef'], [], [None])
+        "modular": MoMeta("LsbootStorage", "lsbootStorage", "storage-read-write", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'lsbootDef'], [], ["Add", "Get", "Remove", "Set"])
     }
 
 

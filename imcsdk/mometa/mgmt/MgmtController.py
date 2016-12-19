@@ -23,7 +23,7 @@ class MgmtController(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("MgmtController", "mgmtController", "mgmt", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'adaptorUnit', u'computeRackUnit', u'storageSasExpander'], [u'firmwareBootDefinition', u'firmwareRunning', u'firmwareUpdatable', u'mgmtIf', u'sysdebugMEpLog'], ["Get"]),
-        "modular": MoMeta("MgmtController", "mgmtController", "mgmt", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'adaptorUnit', u'computeServerNode', u'equipmentSharedIOModule', u'equipmentSystemIOController', u'storageSasExpander'], [u'firmwareBootDefinition', u'firmwareRunning', u'firmwareUpdatable', u'mgmtIf', u'sysdebugMEpLog'], [None])
+        "modular": MoMeta("MgmtController", "mgmtController", "mgmt", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'adaptorUnit', u'computeServerNode', u'equipmentSharedIOModule', u'equipmentSystemIOController', u'storageSasExpander'], [u'firmwareBootDefinition', u'firmwareRunning', u'firmwareUpdatable', u'mgmtIf', u'sysdebugMEpLog'], ["Get"])
     }
 
 

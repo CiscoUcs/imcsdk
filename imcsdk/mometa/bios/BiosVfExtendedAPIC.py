@@ -21,7 +21,7 @@ class BiosVfExtendedAPIC(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosVfExtendedAPIC", "biosVfExtendedAPIC", "Extended-APIC", VersionMeta.Version201a, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfExtendedAPIC", "biosVfExtendedAPIC", "Extended-APIC", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
+        "modular": MoMeta("BiosVfExtendedAPIC", "biosVfExtendedAPIC", "Extended-APIC", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
     }
 
 

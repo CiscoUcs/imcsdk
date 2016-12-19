@@ -17,7 +17,7 @@ class ComputeMbPowerStats(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("ComputeMbPowerStats", "computeMbPowerStats", "power-stats", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeBoard'], [], ["Get"]),
-        "modular": MoMeta("ComputeMbPowerStats", "computeMbPowerStats", "power-stats", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeBoard'], [], [None])
+        "modular": MoMeta("ComputeMbPowerStats", "computeMbPowerStats", "power-stats", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeBoard'], [], ["Get"])
     }
 
 

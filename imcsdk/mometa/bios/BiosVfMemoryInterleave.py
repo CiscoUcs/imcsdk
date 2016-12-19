@@ -37,7 +37,7 @@ class BiosVfMemoryInterleave(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosVfMemoryInterleave", "biosVfMemoryInterleave", "Memory-Interleave", VersionMeta.Version151f, "InputOutput", 0x7f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfMemoryInterleave", "biosVfMemoryInterleave", "Memory-Interleave", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
+        "modular": MoMeta("BiosVfMemoryInterleave", "biosVfMemoryInterleave", "Memory-Interleave", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
     }
 
 

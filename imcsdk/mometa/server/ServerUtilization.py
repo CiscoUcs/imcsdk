@@ -17,7 +17,7 @@ class ServerUtilization(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("ServerUtilization", "serverUtilization", "utilization", VersionMeta.Version202c, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeRackUnit'], [], ["Get"]),
-        "modular": MoMeta("ServerUtilization", "serverUtilization", "utilization", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeServerNode'], [], [None])
+        "modular": MoMeta("ServerUtilization", "serverUtilization", "utilization", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeServerNode'], [], ["Get"])
     }
 
 

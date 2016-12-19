@@ -382,7 +382,7 @@ class BiosVfPCISlotOptionROMEnable(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosVfPCISlotOptionROMEnable", "biosVfPCISlotOptionROMEnable", "PCI-Slot-OptionROM-Enable", VersionMeta.Version151f, "InputOutput", 0x1fffffffffff, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfPCISlotOptionROMEnable", "biosVfPCISlotOptionROMEnable", "PCI-Slot-OptionROM-Enable", VersionMeta.Version2013e, "InputOutput", 0x1ffffffffffff, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
+        "modular": MoMeta("BiosVfPCISlotOptionROMEnable", "biosVfPCISlotOptionROMEnable", "PCI-Slot-OptionROM-Enable", VersionMeta.Version2013e, "InputOutput", 0x1ffffffffffff, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
     }
 
 

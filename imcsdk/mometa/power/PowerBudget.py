@@ -18,7 +18,7 @@ class PowerBudget(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("PowerBudget", "powerBudget", "budget", VersionMeta.Version151f, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'computeRackUnit'], [u'advancedPowerProfile', u'faultInst', u'standardPowerProfile'], ["Get", "Set"]),
-        "modular": MoMeta("PowerBudget", "powerBudget", "budget", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeServerNode'], [u'customPowerProfile', u'faultInst', u'thermalPowerProfile'], [None])
+        "modular": MoMeta("PowerBudget", "powerBudget", "budget", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeServerNode'], [u'customPowerProfile', u'faultInst', u'thermalPowerProfile'], ["Get", "Set"])
     }
 
 

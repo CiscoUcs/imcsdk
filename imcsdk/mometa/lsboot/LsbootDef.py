@@ -22,7 +22,7 @@ class LsbootDef(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("LsbootDef", "lsbootDef", "boot-policy", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'computeRackUnit'], [u'lsbootBootSecurity', u'lsbootEfi', u'lsbootLan', u'lsbootStorage', u'lsbootVirtualMedia'], ["Get", "Set"]),
-        "modular": MoMeta("LsbootDef", "lsbootDef", "boot-policy", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'computeServerNode'], [u'lsbootBootSecurity', u'lsbootEfi', u'lsbootLan', u'lsbootStorage', u'lsbootVirtualMedia'], [None])
+        "modular": MoMeta("LsbootDef", "lsbootDef", "boot-policy", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'computeServerNode'], [u'lsbootBootSecurity', u'lsbootEfi', u'lsbootLan', u'lsbootStorage', u'lsbootVirtualMedia'], ["Get", "Set"])
     }
 
 

@@ -31,7 +31,7 @@ class MgmtImporterServer(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "modular": MoMeta("MgmtImporterServer", "mgmtImporterServer", "importer-config", VersionMeta.Version2013e, "InputOutput", 0x7ff, [], ["admin", "read-only", "user"], [u'computeServerNode'], [], [None])
+        "modular": MoMeta("MgmtImporterServer", "mgmtImporterServer", "importer-config", VersionMeta.Version2013e, "InputOutput", 0x7ff, [], ["admin", "read-only", "user"], [u'computeServerNode'], [], ["Get", "Set"])
     }
 
 

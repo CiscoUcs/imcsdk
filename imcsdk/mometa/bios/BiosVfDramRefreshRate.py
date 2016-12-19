@@ -22,7 +22,7 @@ class BiosVfDramRefreshRate(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosVfDramRefreshRate", "biosVfDramRefreshRate", "dram-refresh-rate", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfDramRefreshRate", "biosVfDramRefreshRate", "dram-refresh-rate", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
+        "modular": MoMeta("BiosVfDramRefreshRate", "biosVfDramRefreshRate", "dram-refresh-rate", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
     }
 
 

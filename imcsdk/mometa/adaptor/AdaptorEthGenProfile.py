@@ -33,7 +33,7 @@ class AdaptorEthGenProfile(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("AdaptorEthGenProfile", "adaptorEthGenProfile", "general", VersionMeta.Version151f, "InputOutput", 0x1fff, [], ["admin", "read-only", "user"], [u'adaptorHostEthIf'], [], ["Get", "Set"]),
-        "modular": MoMeta("AdaptorEthGenProfile", "adaptorEthGenProfile", "general", VersionMeta.Version2013e, "InputOutput", 0x1fff, [], ["admin", "read-only", "user"], [u'adaptorHostEthIf'], [], [None])
+        "modular": MoMeta("AdaptorEthGenProfile", "adaptorEthGenProfile", "general", VersionMeta.Version2013e, "InputOutput", 0x1fff, [], ["admin", "read-only", "user"], [u'adaptorHostEthIf'], [], ["Get", "Set"])
     }
 
 

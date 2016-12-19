@@ -20,7 +20,7 @@ class LsbootPxe(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("LsbootPxe", "lsbootPxe", "pxe-[name]", VersionMeta.Version201a, "InputOutput", 0x7ff, [], ["admin", "read-only", "user"], [u'lsbootDevPrecision'], [], ["Add", "Get", "Remove", "Set"]),
-        "modular": MoMeta("LsbootPxe", "lsbootPxe", "pxe-[name]", VersionMeta.Version2013e, "InputOutput", 0x7ff, [], ["admin", "read-only", "user"], [u'lsbootDevPrecision'], [], [None])
+        "modular": MoMeta("LsbootPxe", "lsbootPxe", "pxe-[name]", VersionMeta.Version2013e, "InputOutput", 0x7ff, [], ["admin", "read-only", "user"], [u'lsbootDevPrecision'], [], ["Add", "Get", "Remove", "Set"])
     }
 
 

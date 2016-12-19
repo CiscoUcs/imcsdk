@@ -23,7 +23,7 @@ class BiosBootDevGrp(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosBootDevGrp", "biosBootDevGrp", "bdg-[order]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'biosBOT'], [u'biosBootDev'], ["Get"]),
-        "modular": MoMeta("BiosBootDevGrp", "biosBootDevGrp", "bdg-[order]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'biosBOT'], [u'biosBootDev'], [None])
+        "modular": MoMeta("BiosBootDevGrp", "biosBootDevGrp", "bdg-[order]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'biosBOT'], [u'biosBootDev'], ["Get"])
     }
 
 

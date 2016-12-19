@@ -69,7 +69,7 @@ class StorageVirtualDrive(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("StorageVirtualDrive", "storageVirtualDrive", "vd-[id]", VersionMeta.Version151f, "InputOutput", 0x7fff, [], ["admin", "read-only", "user"], [u'storageController'], [u'faultInst', u'storageLocalDiskUsage', u'storageOperation'], ["Get", "Remove", "Set"]),
-        "modular": MoMeta("StorageVirtualDrive", "storageVirtualDrive", "vd-[id]", VersionMeta.Version2013e, "InputOutput", 0x7fff, [], ["admin", "read-only", "user"], [u'storageController'], [u'faultInst', u'storageLocalDiskUsage', u'storageOperation'], [None])
+        "modular": MoMeta("StorageVirtualDrive", "storageVirtualDrive", "vd-[id]", VersionMeta.Version2013e, "InputOutput", 0x7fff, [], ["admin", "read-only", "user"], [u'storageController'], [u'faultInst', u'storageLocalDiskUsage', u'storageOperation'], ["Get", "Remove", "Set"])
     }
 
 

@@ -28,7 +28,7 @@ class CommSnmpUser(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("CommSnmpUser", "commSnmpUser", "snmpv3-user-[id]", VersionMeta.Version151f, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'commSnmp'], [], ["Get", "Set"]),
-        "modular": MoMeta("CommSnmpUser", "commSnmpUser", "snmpv3-user-[id]", VersionMeta.Version2013e, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'commSnmp'], [], [None])
+        "modular": MoMeta("CommSnmpUser", "commSnmpUser", "snmpv3-user-[id]", VersionMeta.Version2013e, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'commSnmp'], [], ["Get", "Set"])
     }
 
 

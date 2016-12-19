@@ -17,7 +17,7 @@ class StorageOperation(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("StorageOperation", "storageOperation", "storage-operation", VersionMeta.Version201a, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageLocalDisk', u'storageRaidBattery', u'storageVirtualDrive'], [], ["Get"]),
-        "modular": MoMeta("StorageOperation", "storageOperation", "storage-operation", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageLocalDisk', u'storageRaidBattery', u'storageVirtualDrive'], [], [None])
+        "modular": MoMeta("StorageOperation", "storageOperation", "storage-operation", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageLocalDisk', u'storageRaidBattery', u'storageVirtualDrive'], [], ["Get"])
     }
 
 

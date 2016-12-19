@@ -27,7 +27,7 @@ class SysdebugMEpLog(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("SysdebugMEpLog", "sysdebugMEpLog", "log-[type]-[id]", VersionMeta.Version151f, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'mgmtController'], [u'faultInst'], ["Get", "Set"]),
-        "modular": MoMeta("SysdebugMEpLog", "sysdebugMEpLog", "log-[type]-[id]", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'mgmtController'], [u'faultInst'], [None])
+        "modular": MoMeta("SysdebugMEpLog", "sysdebugMEpLog", "log-[type]-[id]", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'mgmtController'], [u'faultInst'], ["Get", "Set"])
     }
 
 

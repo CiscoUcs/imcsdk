@@ -22,7 +22,7 @@ class BiosVfResumeOnACPowerLoss(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosVfResumeOnACPowerLoss", "biosVfResumeOnACPowerLoss", "Resume-on-AC-power-loss", VersionMeta.Version151f, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'computeBoard'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfResumeOnACPowerLoss", "biosVfResumeOnACPowerLoss", "Resume-on-AC-power-loss", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'computeBoard'], [], [None])
+        "modular": MoMeta("BiosVfResumeOnACPowerLoss", "biosVfResumeOnACPowerLoss", "Resume-on-AC-power-loss", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'computeBoard'], [], ["Get", "Set"])
     }
 
 

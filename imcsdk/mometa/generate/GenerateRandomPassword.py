@@ -17,7 +17,7 @@ class GenerateRandomPassword(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("GenerateRandomPassword", "generateRandomPassword", "policy", VersionMeta.Version301c, "OutputOnly", 0xf, [], ["admin", "user"], [u'aaaUserEp'], [], ["Get"]),
-        "modular": MoMeta("GenerateRandomPassword", "generateRandomPassword", "policy", VersionMeta.Version301c, "OutputOnly", 0xf, [], ["admin", "user"], [u'aaaUserEp'], [], [None])
+        "modular": MoMeta("GenerateRandomPassword", "generateRandomPassword", "policy", VersionMeta.Version301c, "OutputOnly", 0xf, [], ["admin", "user"], [u'aaaUserEp'], [], ["Get"])
     }
 
 

@@ -17,7 +17,7 @@ class AdaptorGenProfile(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("AdaptorGenProfile", "adaptorGenProfile", "general", VersionMeta.Version151f, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [], ["Get", "Set"]),
-        "modular": MoMeta("AdaptorGenProfile", "adaptorGenProfile", "general", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [], [None])
+        "modular": MoMeta("AdaptorGenProfile", "adaptorGenProfile", "general", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [], ["Get", "Set"])
     }
 
 

@@ -18,7 +18,7 @@ class LdapCACertificate(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("LdapCACertificate", "ldapCACertificate", "ldap-ca-cert", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "user"], [u'ldapCACertificateManagement'], [], ["Get", "Set"]),
-        "modular": MoMeta("LdapCACertificate", "ldapCACertificate", "ldap-ca-cert", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'ldapCACertificateManagement'], [], [None])
+        "modular": MoMeta("LdapCACertificate", "ldapCACertificate", "ldap-ca-cert", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'ldapCACertificateManagement'], [], ["Get", "Set"])
     }
 
 

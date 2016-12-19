@@ -16,7 +16,7 @@ class ComputeServerRef(ManagedObject):
     naming_props = set([u'ownership'])
 
     mo_meta = {
-        "modular": MoMeta("ComputeServerRef", "computeServerRef", "server-ref-[ownership]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageEnclosureDiskSlotEp'], [], [None])
+        "modular": MoMeta("ComputeServerRef", "computeServerRef", "server-ref-[ownership]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageEnclosureDiskSlotEp'], [], ["Get"])
     }
 
 

@@ -21,7 +21,7 @@ class LsbootLan(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("LsbootLan", "lsbootLan", "lan-read-only", VersionMeta.Version151f, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'lsbootDef'], [], ["Add", "Get", "Remove", "Set"]),
-        "modular": MoMeta("LsbootLan", "lsbootLan", "lan-read-only", VersionMeta.Version2013e, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'lsbootDef'], [], [None])
+        "modular": MoMeta("LsbootLan", "lsbootLan", "lan-read-only", VersionMeta.Version2013e, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'lsbootDef'], [], ["Add", "Get", "Remove", "Set"])
     }
 
 
