@@ -273,9 +273,15 @@ def virtual_drive_exists(handle,
                          controller_slot,
                          virtual_drive_name,
                          server_id=1):
+    """
+    Checks if a VD by the specified name exists.
+
+    Returns:
+        exists(bool), error(str)
+    """
     mo = vd_query_by_name(handle, controller_slot,
                           virtual_drive_name, server_id)
-    return (mo is not None)
+    return mo is not None, None
 
 
 def virtual_drive_delete(handle,
