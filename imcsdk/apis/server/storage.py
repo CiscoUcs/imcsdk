@@ -74,7 +74,7 @@ def _flatten_to_string(drive_list):
     return ''.join([''.join(str(x)) for x in _flatten_list(drive_list)])
 
 
-def _vd_name_derive(raid_level, drive_list):
+def vd_name_derive(raid_level, drive_list):
     return "RAID" + str(raid_level) + "_" + _flatten_to_string(drive_list)
 
 
@@ -240,7 +240,7 @@ def virtual_drive_create(handle,
         params["admin_action"] = admin_action
 
     params["virtual_drive_name"] = \
-        (_vd_name_derive(raid_level, drive_group), vdn)[vdn is not None]
+        (vd_name_derive(raid_level, drive_group), vdn)[vdn is not None]
 
     params["size"] = (_vd_max_size_get(handle=handle,
                                        controller_slot=controller_slot,
@@ -255,10 +255,10 @@ def virtual_drive_create(handle,
     return mo
 
 
-def _vd_query_by_name(handle,
-                      controller_slot,
-                      name,
-                      server_id=1):
+def vd_query_by_name(handle,
+                     controller_slot,
+                     name,
+                     server_id=1):
     server_dn = imccoreutils.get_server_dn(handle, server_id)
     slot_dn = server_dn + "/board/storage-SAS-SLOT-" + controller_slot
 
@@ -267,6 +267,15 @@ def _vd_query_by_name(handle,
         if mo.name == name:
             return mo
     return None
+
+
+def virtual_drive_exists(handle,
+                         controller_slot,
+                         virtual_drive_name,
+                         server_id=1):
+    mo = vd_query_by_name(handle, controller_slot,
+                          virtual_drive_name, server_id)
+    return (mo is not None)
 
 
 def virtual_drive_delete(handle,
@@ -288,8 +297,8 @@ def virtual_drive_delete(handle,
                                  controller_slot='MEZZ',
                                  name="RAID0_1")
     """
-    vd = _vd_query_by_name(handle=handle,
-                           controller_slot=controller_slot,
-                           name=name,
-                           server_id=server_id)
+    vd = vd_query_by_name(handle=handle,
+                          controller_slot=controller_slot,
+                          name=name,
+                          server_id=server_id)
     handle.remove_mo(vd)
