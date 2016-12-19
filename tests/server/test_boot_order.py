@@ -31,6 +31,24 @@ def teardown_module():
     custom_teardown(handle)
 
 
+def test_boot_order_precision_001():
+    tests = [
+        [
+            {"order": "1", "device-type": "hdd", "name": "hdd"},
+            {"order": "2", "device-type": "pxe", "name": "pxe"},
+            {"order": "3", "device-type": "pxe", "name": "pxe2"}
+        ],
+        [
+            {"order": "1", "device-type": "hdd", "name": "hdd"},
+            {"order": "2", "device-type": "pxe", "name": "pxe2"},
+            {"order": "3", "device-type": "pxe", "name": "pxe"}
+        ]
+    ]
+    for t in tests:
+        boot_order_precision_set(handle,
+                                 boot_devices=t)
+
+
 boot_order_prec_devices = [
         {"order": '1', "device-type": "hdd", "name": "hdd"},
         {"order": '3', "device-type": "pxe", "name": "pxe", "slot": "10", "port": "100"},

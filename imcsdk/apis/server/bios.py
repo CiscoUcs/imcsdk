@@ -167,7 +167,7 @@ def _add_boot_device(handle, parent_dn, boot_device):
 
 
 def boot_order_precision_set(
-        handle, reboot_on_update=True, configured_boot_mode="Legacy",
+        handle, reboot_on_update=False, configured_boot_mode="Legacy",
         boot_devices=[], server_id=1):
     """
     This method will replace the existing boot order precision with the new one
