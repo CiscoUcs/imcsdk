@@ -18,7 +18,7 @@ class OsiCancel(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("OsiCancel", "osiCancel", "osiCancel", VersionMeta.Version301c, "InputOutput", 0x3f, [], ["admin"], [u'osiController'], [], ["Get", "Set"]),
-        "modular": MoMeta("OsiCancel", "osiCancel", "osiCancel", VersionMeta.Version301c, "InputOutput", 0x3f, [], ["admin"], [u'osiController'], [], ["Get", "Set"])
+        "modular": MoMeta("OsiCancel", "osiCancel", "osiCancel", VersionMeta.Version301c, "InputOutput", 0x3f, [], ["admin"], [u'osiController'], [], [None])
     }
 
 

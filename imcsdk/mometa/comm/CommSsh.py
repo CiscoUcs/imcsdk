@@ -22,7 +22,7 @@ class CommSsh(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("CommSsh", "commSsh", "ssh-svc", VersionMeta.Version151f, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'commSvcEp'], [], ["Get", "Set"]),
-        "modular": MoMeta("CommSsh", "commSsh", "ssh-svc", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'commSvcEp'], [], ["Get", "Set"])
+        "modular": MoMeta("CommSsh", "commSsh", "ssh-svc", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'commSvcEp'], [], [None])
     }
 
 

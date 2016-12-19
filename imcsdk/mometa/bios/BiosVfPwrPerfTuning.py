@@ -19,7 +19,7 @@ class BiosVfPwrPerfTuning(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosVfPwrPerfTuning", "biosVfPwrPerfTuning", "Pwr-Perf-Tuning", VersionMeta.Version204c, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfPwrPerfTuning", "biosVfPwrPerfTuning", "Pwr-Perf-Tuning", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
+        "modular": MoMeta("BiosVfPwrPerfTuning", "biosVfPwrPerfTuning", "Pwr-Perf-Tuning", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
     }
 
 

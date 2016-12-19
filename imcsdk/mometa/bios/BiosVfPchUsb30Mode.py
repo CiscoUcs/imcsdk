@@ -21,7 +21,7 @@ class BiosVfPchUsb30Mode(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosVfPchUsb30Mode", "biosVfPchUsb30Mode", "PchUsb30-Mode", VersionMeta.Version202c, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfPchUsb30Mode", "biosVfPchUsb30Mode", "PchUsb30-Mode", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
+        "modular": MoMeta("BiosVfPchUsb30Mode", "biosVfPchUsb30Mode", "PchUsb30-Mode", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
     }
 
 

@@ -31,7 +31,7 @@ class MgmtBackupServer(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "modular": MoMeta("MgmtBackupServer", "mgmtBackupServer", "exporter-config", VersionMeta.Version2013e, "InputOutput", 0x7ff, [], ["admin", "read-only", "user"], [u'computeServerNode'], [], ["Get", "Set"])
+        "modular": MoMeta("MgmtBackupServer", "mgmtBackupServer", "exporter-config", VersionMeta.Version2013e, "InputOutput", 0x7ff, [], ["admin", "read-only", "user"], [u'computeServerNode'], [], [None])
     }
 
 

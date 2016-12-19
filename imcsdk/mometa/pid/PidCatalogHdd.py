@@ -17,7 +17,7 @@ class PidCatalogHdd(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("PidCatalogHdd", "pidCatalogHdd", "pid-hdd-[disk]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'pidCatalog'], [], ["Get"]),
-        "modular": MoMeta("PidCatalogHdd", "pidCatalogHdd", "pid-hdd-[disk]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'pidCatalog'], [], ["Get"])
+        "modular": MoMeta("PidCatalogHdd", "pidCatalogHdd", "pid-hdd-[disk]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'pidCatalog'], [], [None])
     }
 
 

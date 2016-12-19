@@ -21,7 +21,7 @@ class StorageFlexFlashVirtualDrive(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("StorageFlexFlashVirtualDrive", "storageFlexFlashVirtualDrive", "vd-[partition_id]", VersionMeta.Version202c, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'storageFlexFlashController'], [u'faultInst'], ["Get", "Set"]),
-        "modular": MoMeta("StorageFlexFlashVirtualDrive", "storageFlexFlashVirtualDrive", "vd-[partition_id]", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'storageFlexFlashController'], [u'faultInst'], ["Get", "Set"])
+        "modular": MoMeta("StorageFlexFlashVirtualDrive", "storageFlexFlashVirtualDrive", "vd-[partition_id]", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'storageFlexFlashController'], [u'faultInst'], [None])
     }
 
 

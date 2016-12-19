@@ -49,7 +49,7 @@ class BiosVfLOMPortOptionROM(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosVfLOMPortOptionROM", "biosVfLOMPortOptionROM", "LOMPort-OptionROM", VersionMeta.Version151f, "InputOutput", 0x1ff, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfLOMPortOptionROM", "biosVfLOMPortOptionROM", "LOMPort-OptionROM", VersionMeta.Version2013e, "InputOutput", 0x1ff, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
+        "modular": MoMeta("BiosVfLOMPortOptionROM", "biosVfLOMPortOptionROM", "LOMPort-OptionROM", VersionMeta.Version2013e, "InputOutput", 0x1ff, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
     }
 
 

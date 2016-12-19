@@ -23,7 +23,7 @@ class AdaptorHostFcIf(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("AdaptorHostFcIf", "adaptorHostFcIf", "host-fc-[name]", VersionMeta.Version151f, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [u'adaptorFcPersistentBindings'], ["Add", "Get", "Remove", "Set"]),
-        "modular": MoMeta("AdaptorHostFcIf", "adaptorHostFcIf", "host-fc-[name]", VersionMeta.Version2013e, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [u'adaptorFcPersistentBindings'], ["Add", "Get", "Remove", "Set"])
+        "modular": MoMeta("AdaptorHostFcIf", "adaptorHostFcIf", "host-fc-[name]", VersionMeta.Version2013e, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [u'adaptorFcPersistentBindings'], [None])
     }
 
 
@@ -47,7 +47,7 @@ class AdaptorHostFcIf(ManagedObject):
 
         "modular": {
             "admin_persistent_bindings": MoPropertyMeta("admin_persistent_bindings", "adminPersistentBindings", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["policy", "rebuild"], []), 
-            "channel_number": MoPropertyMeta("channel_number", "channelNumber", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, [], ["1-1000"]), 
+            "channel_number": MoPropertyMeta("channel_number", "channelNumber", "uint", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, [], ["1-1000"]), 
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
             "if_type": MoPropertyMeta("if_type", "ifType", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["virtual"], []), 

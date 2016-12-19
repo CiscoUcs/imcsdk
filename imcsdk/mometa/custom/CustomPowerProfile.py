@@ -18,7 +18,7 @@ class CustomPowerProfile(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "modular": MoMeta("CustomPowerProfile", "customPowerProfile", "cust-prof", VersionMeta.Version2013e, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], [u'powerBudget'], [], ["Get", "Set"])
+        "modular": MoMeta("CustomPowerProfile", "customPowerProfile", "cust-prof", VersionMeta.Version2013e, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], [u'powerBudget'], [], [None])
     }
 
 

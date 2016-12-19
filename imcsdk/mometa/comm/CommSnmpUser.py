@@ -28,7 +28,7 @@ class CommSnmpUser(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("CommSnmpUser", "commSnmpUser", "snmpv3-user-[id]", VersionMeta.Version151f, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'commSnmp'], [], ["Get", "Set"]),
-        "modular": MoMeta("CommSnmpUser", "commSnmpUser", "snmpv3-user-[id]", VersionMeta.Version2013e, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'commSnmp'], [], ["Get", "Set"])
+        "modular": MoMeta("CommSnmpUser", "commSnmpUser", "snmpv3-user-[id]", VersionMeta.Version2013e, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'commSnmp'], [], [None])
     }
 
 
@@ -57,7 +57,7 @@ class CommSnmpUser(ManagedObject):
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
             "id": MoPropertyMeta("id", "id", "uint", VersionMeta.Version2013e, MoPropertyMeta.NAMING, 0x20, None, None, None, [], ["1-15"]), 
             "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, 0, 31, None, [], []), 
-            "privacy": MoPropertyMeta("privacy", "privacy", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["", "AES", "DES"], []), 
+            "privacy": MoPropertyMeta("privacy", "privacy", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["", "AES", "DES", "SHA"], []), 
             "privacy_pwd": MoPropertyMeta("privacy_pwd", "privacyPwd", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x100, None, None, r"""(.{8,64})?""", [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, 0, 255, None, [], []), 
             "security_level": MoPropertyMeta("security_level", "securityLevel", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x400, None, None, None, ["", "authnopriv", "authpriv", "noauthnopriv"], []), 

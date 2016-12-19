@@ -17,7 +17,7 @@ class PidCatalog(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("PidCatalog", "pidCatalog", "pid", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeBoard'], [u'activatePIDCatalog', u'pidCatalogCpu', u'pidCatalogDimm', u'pidCatalogHdd', u'pidCatalogPCIAdapter', u'uploadPIDCatalog'], ["Get"]),
-        "modular": MoMeta("PidCatalog", "pidCatalog", "pid", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeBoard'], [u'activatePIDCatalog', u'pidCatalogCpu', u'pidCatalogDimm', u'pidCatalogHdd', u'pidCatalogPCIAdapter'], ["Get"])
+        "modular": MoMeta("PidCatalog", "pidCatalog", "pid", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeBoard'], [u'activatePIDCatalog', u'pidCatalogCpu', u'pidCatalogDimm', u'pidCatalogHdd', u'pidCatalogPCIAdapter'], [None])
     }
 
 

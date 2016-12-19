@@ -19,7 +19,7 @@ class CommIpmiLan(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("CommIpmiLan", "commIpmiLan", "ipmi-lan-svc", VersionMeta.Version151f, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'commSvcEp'], [], ["Get", "Set"]),
-        "modular": MoMeta("CommIpmiLan", "commIpmiLan", "ipmi-lan-svc", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'commSvcRack'], [], ["Get", "Set"])
+        "modular": MoMeta("CommIpmiLan", "commIpmiLan", "ipmi-lan-svc", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'commSvcRack'], [], [None])
     }
 
 

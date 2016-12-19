@@ -17,7 +17,7 @@ class CommSvcEp(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("CommSvcEp", "commSvcEp", "svc-ext", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'topSystem'], [u'commHttp', u'commHttps', u'commIpmiLan', u'commKvm', u'commNtpProvider', u'commRedfish', u'commSnmp', u'commSsh', u'commSyslog', u'commVMedia'], ["Get"]),
-        "modular": MoMeta("CommSvcEp", "commSvcEp", "svc-ext", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'topSystem'], [u'commHttp', u'commHttps', u'commNtpProvider', u'commSnmp', u'commSsh', u'commSyslog'], ["Get"])
+        "modular": MoMeta("CommSvcEp", "commSvcEp", "svc-ext", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'topSystem'], [u'commHttp', u'commHttps', u'commNtpProvider', u'commSnmp', u'commSsh', u'commSyslog'], [None])
     }
 
 

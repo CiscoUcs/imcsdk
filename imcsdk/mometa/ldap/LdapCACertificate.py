@@ -18,7 +18,7 @@ class LdapCACertificate(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("LdapCACertificate", "ldapCACertificate", "ldap-ca-cert", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "user"], [u'ldapCACertificateManagement'], [], ["Get", "Set"]),
-        "modular": MoMeta("LdapCACertificate", "ldapCACertificate", "ldap-ca-cert", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'ldapCACertificateManagement'], [], ["Get", "Set"])
+        "modular": MoMeta("LdapCACertificate", "ldapCACertificate", "ldap-ca-cert", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'ldapCACertificateManagement'], [], [None])
     }
 
 
@@ -38,10 +38,10 @@ class LdapCACertificate(ManagedObject):
             "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["delete-ca-certificate", "test-ldap-binding"], []), 
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
-            "pwd": MoPropertyMeta("pwd", "pwd", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, 0, 510, None, [], []), 
+            "pwd": MoPropertyMeta("pwd", "pwd", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, 0, 256, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "user": MoPropertyMeta("user", "user", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, 0, 510, None, [], []), 
+            "user": MoPropertyMeta("user", "user", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, 0, 256, None, [], []), 
         },
 
     }

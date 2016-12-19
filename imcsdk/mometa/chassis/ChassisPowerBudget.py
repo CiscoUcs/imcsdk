@@ -17,7 +17,7 @@ class ChassisPowerBudget(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "modular": MoMeta("ChassisPowerBudget", "chassisPowerBudget", "budget", VersionMeta.Version2013e, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'equipmentChassis'], [u'autoPowerProfile'], ["Get"])
+        "modular": MoMeta("ChassisPowerBudget", "chassisPowerBudget", "budget", VersionMeta.Version2013e, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'equipmentChassis'], [u'autoPowerProfile'], [None])
     }
 
 

@@ -21,7 +21,7 @@ class NetworkAdapterUnit(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("NetworkAdapterUnit", "networkAdapterUnit", "network-adapter-[slot]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeRackUnit'], [u'networkAdapterEthIf'], ["Get"]),
-        "modular": MoMeta("NetworkAdapterUnit", "networkAdapterUnit", "network-adapter-[slot]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeServerNode'], [u'networkAdapterEthIf'], ["Get"])
+        "modular": MoMeta("NetworkAdapterUnit", "networkAdapterUnit", "network-adapter-[slot]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeServerNode'], [u'networkAdapterEthIf'], [None])
     }
 
 

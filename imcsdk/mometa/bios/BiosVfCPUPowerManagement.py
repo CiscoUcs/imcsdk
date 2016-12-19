@@ -21,7 +21,7 @@ class BiosVfCPUPowerManagement(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosVfCPUPowerManagement", "biosVfCPUPowerManagement", "CPU-PowerManagement", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfCPUPowerManagement", "biosVfCPUPowerManagement", "CPU-PowerManagement", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
+        "modular": MoMeta("BiosVfCPUPowerManagement", "biosVfCPUPowerManagement", "CPU-PowerManagement", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
     }
 
 

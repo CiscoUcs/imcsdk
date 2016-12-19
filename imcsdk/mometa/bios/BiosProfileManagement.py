@@ -17,7 +17,7 @@ class BiosProfileManagement(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosProfileManagement", "biosProfileManagement", "profile-mgmt", VersionMeta.Version301c, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'biosUnit'], [u'biosProfile', u'uploadBiosProfile'], ["Get", "Set"]),
-        "modular": MoMeta("BiosProfileManagement", "biosProfileManagement", "profile-mgmt", VersionMeta.Version301c, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'biosUnit'], [u'biosProfile', u'uploadBiosProfile'], ["Get", "Set"])
+        "modular": MoMeta("BiosProfileManagement", "biosProfileManagement", "profile-mgmt", VersionMeta.Version301c, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'biosUnit'], [u'biosProfile', u'uploadBiosProfile'], [None])
     }
 
 

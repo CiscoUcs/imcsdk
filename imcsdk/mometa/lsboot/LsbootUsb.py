@@ -23,7 +23,7 @@ class LsbootUsb(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("LsbootUsb", "lsbootUsb", "usb-[name]", VersionMeta.Version201a, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'lsbootDevPrecision'], [], ["Add", "Get", "Remove", "Set"]),
-        "modular": MoMeta("LsbootUsb", "lsbootUsb", "usb-[name]", VersionMeta.Version2013e, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'lsbootDevPrecision'], [], ["Add", "Get", "Remove", "Set"])
+        "modular": MoMeta("LsbootUsb", "lsbootUsb", "usb-[name]", VersionMeta.Version2013e, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'lsbootDevPrecision'], [], [None])
     }
 
 

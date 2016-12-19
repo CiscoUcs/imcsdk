@@ -19,7 +19,7 @@ class BiosVfOnboardStorageSWStack(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosVfOnboardStorageSWStack", "biosVfOnboardStorageSWStack", "Onboard-SCU-Storage-SWStack", VersionMeta.Version151x, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfOnboardStorageSWStack", "biosVfOnboardStorageSWStack", "Onboard-SCU-Storage-SWStack", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
+        "modular": MoMeta("BiosVfOnboardStorageSWStack", "biosVfOnboardStorageSWStack", "Onboard-SCU-Storage-SWStack", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
     }
 
 

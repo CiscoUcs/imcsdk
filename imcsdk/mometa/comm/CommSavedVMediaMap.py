@@ -23,7 +23,7 @@ class CommSavedVMediaMap(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("CommSavedVMediaMap", "commSavedVMediaMap", "saved-vmmap-[volume_name]", VersionMeta.Version301c, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'commVMedia'], [], ["Get", "Remove", "Set"]),
-        "modular": MoMeta("CommSavedVMediaMap", "commSavedVMediaMap", "saved-vmmap-[volume_name]", VersionMeta.Version301c, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'commVMedia'], [], ["Get", "Remove", "Set"])
+        "modular": MoMeta("CommSavedVMediaMap", "commSavedVMediaMap", "saved-vmmap-[volume_name]", VersionMeta.Version301c, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'commVMedia'], [], [None])
     }
 
 

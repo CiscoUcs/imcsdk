@@ -86,7 +86,7 @@ class EquipmentFan(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("EquipmentFan", "equipmentFan", "fan-[id]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'equipmentFanModule'], [u'faultInst'], ["Get"]),
-        "modular": MoMeta("EquipmentFan", "equipmentFan", "fan-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'equipmentFanModule'], [u'faultInst'], ["Get"])
+        "modular": MoMeta("EquipmentFan", "equipmentFan", "fan-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'equipmentFanModule'], [u'faultInst'], [None])
     }
 
 

@@ -17,7 +17,7 @@ class StorageLocalDiskProps(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("StorageLocalDiskProps", "storageLocalDiskProps", "general-props", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageController', u'storageLocalDisk'], [], ["Get"]),
-        "modular": MoMeta("StorageLocalDiskProps", "storageLocalDiskProps", "general-props", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageController', u'storageLocalDisk'], [], ["Get"])
+        "modular": MoMeta("StorageLocalDiskProps", "storageLocalDiskProps", "general-props", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageController', u'storageLocalDisk'], [], [None])
     }
 
 

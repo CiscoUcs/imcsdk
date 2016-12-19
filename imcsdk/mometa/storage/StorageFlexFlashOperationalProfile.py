@@ -21,7 +21,7 @@ class StorageFlexFlashOperationalProfile(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("StorageFlexFlashOperationalProfile", "storageFlexFlashOperationalProfile", "oper-profile", VersionMeta.Version202c, "InputOutput", 0x3fff, [], ["admin", "read-only", "user"], [u'storageFlexFlashController'], [], ["Get", "Set"]),
-        "modular": MoMeta("StorageFlexFlashOperationalProfile", "storageFlexFlashOperationalProfile", "oper-profile", VersionMeta.Version2013e, "InputOutput", 0x3fff, [], ["admin", "read-only", "user"], [u'storageFlexFlashController'], [], ["Get", "Set"])
+        "modular": MoMeta("StorageFlexFlashOperationalProfile", "storageFlexFlashOperationalProfile", "oper-profile", VersionMeta.Version2013e, "InputOutput", 0x3fff, [], ["admin", "read-only", "user"], [u'storageFlexFlashController'], [], [None])
     }
 
 

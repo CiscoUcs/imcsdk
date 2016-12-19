@@ -28,7 +28,7 @@ class AaaSession(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("AaaSession", "aaaSession", "term-[id]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'aaaUserEp'], [], ["Get"]),
-        "modular": MoMeta("AaaSession", "aaaSession", "term-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'aaaUserEp'], [], ["Get"])
+        "modular": MoMeta("AaaSession", "aaaSession", "term-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'aaaUserEp'], [], [None])
     }
 
 
@@ -52,7 +52,7 @@ class AaaSession(ManagedObject):
             "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version2013e, MoPropertyMeta.NAMING, None, 1, 32, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x8, None, None, r"""((removed|created|modified|deleted),){0,3}(removed|created|modified|deleted){0,1}""", [], []), 
-            "ui": MoPropertyMeta("ui", "ui", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["ep", "none", "serial", "shell", "vMedia", "web"], []), 
+            "ui": MoPropertyMeta("ui", "ui", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["ep", "none", "serial", "server-1:SOL", "server-1:vKVM", "server-1:vMedia", "server-2:SOL", "server-2:vKVM", "server-2:vMedia", "shell", "vMedia", "web"], []), 
             "user": MoPropertyMeta("user", "user", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 255, None, [], []), 
         },
 

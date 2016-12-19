@@ -21,7 +21,7 @@ class OneTimePrecisionBootDevice(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("OneTimePrecisionBootDevice", "oneTimePrecisionBootDevice", "one-time-precision-boot", VersionMeta.Version301c, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'computeRackUnit'], [], ["Get", "Set"]),
-        "modular": MoMeta("OneTimePrecisionBootDevice", "oneTimePrecisionBootDevice", "one-time-precision-boot", VersionMeta.Version301c, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'computeServerNode'], [], ["Get", "Set"])
+        "modular": MoMeta("OneTimePrecisionBootDevice", "oneTimePrecisionBootDevice", "one-time-precision-boot", VersionMeta.Version301c, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'computeServerNode'], [], [None])
     }
 
 

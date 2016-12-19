@@ -17,7 +17,7 @@ class AdaptorRssProfile(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("AdaptorRssProfile", "adaptorRssProfile", "rss", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'adaptorHostEthIf'], [], ["Get", "Set"]),
-        "modular": MoMeta("AdaptorRssProfile", "adaptorRssProfile", "rss", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'adaptorHostEthIf'], [], ["Get", "Set"])
+        "modular": MoMeta("AdaptorRssProfile", "adaptorRssProfile", "rss", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'adaptorHostEthIf'], [], [None])
     }
 
 

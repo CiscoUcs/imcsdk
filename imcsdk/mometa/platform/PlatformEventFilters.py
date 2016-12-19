@@ -20,7 +20,7 @@ class PlatformEventFilters(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("PlatformEventFilters", "platformEventFilters", "pef-[id]", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'eventManagement'], [], ["Get", "Set"]),
-        "modular": MoMeta("PlatformEventFilters", "platformEventFilters", "pef-[id]", VersionMeta.Version301c, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'eventManagement'], [], ["Get", "Set"])
+        "modular": MoMeta("PlatformEventFilters", "platformEventFilters", "pef-[id]", VersionMeta.Version301c, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'eventManagement'], [], [None])
     }
 
 

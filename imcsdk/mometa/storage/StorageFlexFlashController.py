@@ -26,7 +26,7 @@ class StorageFlexFlashController(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("StorageFlexFlashController", "storageFlexFlashController", "storage-flexflash-[id]", VersionMeta.Version202c, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], [u'computeBoard'], [u'faultInst', u'storageFlexFlashControllerProps', u'storageFlexFlashOperationalProfile', u'storageFlexFlashPhysicalDrive', u'storageFlexFlashVirtualDrive', u'storageFlexFlashVirtualDriveImageMap'], ["Get", "Set"]),
-        "modular": MoMeta("StorageFlexFlashController", "storageFlexFlashController", "storage-flexflash-[id]", VersionMeta.Version2013e, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], [u'computeBoard'], [u'faultInst', u'storageFlexFlashControllerProps', u'storageFlexFlashOperationalProfile', u'storageFlexFlashPhysicalDrive', u'storageFlexFlashVirtualDrive', u'storageFlexFlashVirtualDriveImageMap'], ["Get", "Set"])
+        "modular": MoMeta("StorageFlexFlashController", "storageFlexFlashController", "storage-flexflash-[id]", VersionMeta.Version2013e, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], [u'computeBoard'], [u'faultInst', u'storageFlexFlashControllerProps', u'storageFlexFlashOperationalProfile', u'storageFlexFlashPhysicalDrive', u'storageFlexFlashVirtualDrive', u'storageFlexFlashVirtualDriveImageMap'], [None])
     }
 
 

@@ -17,7 +17,7 @@ class AdaptorFcBootTable(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("AdaptorFcBootTable", "adaptorFcBootTable", "fcboot-[index]", VersionMeta.Version151f, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'adaptorHostFcIf'], [], ["Add", "Get", "Set"]),
-        "modular": MoMeta("AdaptorFcBootTable", "adaptorFcBootTable", "fcboot-[index]", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'adaptorHostFcIf'], [], ["Add", "Get", "Set"])
+        "modular": MoMeta("AdaptorFcBootTable", "adaptorFcBootTable", "fcboot-[index]", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'adaptorHostFcIf'], [], [None])
     }
 
 

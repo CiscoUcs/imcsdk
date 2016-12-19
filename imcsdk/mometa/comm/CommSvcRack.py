@@ -16,7 +16,7 @@ class CommSvcRack(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "modular": MoMeta("CommSvcRack", "commSvcRack", "svc-ext", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeServerNode'], [u'commIpmiLan', u'commKvm', u'commVMedia'], ["Get"])
+        "modular": MoMeta("CommSvcRack", "commSvcRack", "svc-ext", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeServerNode'], [u'commIpmiLan', u'commKvm', u'commVMedia'], [None])
     }
 
 

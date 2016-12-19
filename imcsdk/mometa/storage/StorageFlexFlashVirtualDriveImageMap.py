@@ -20,7 +20,7 @@ class StorageFlexFlashVirtualDriveImageMap(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("StorageFlexFlashVirtualDriveImageMap", "storageFlexFlashVirtualDriveImageMap", "vdrive-map-[virtual_drive]", VersionMeta.Version202c, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'storageFlexFlashController'], [], ["Get", "Set"]),
-        "modular": MoMeta("StorageFlexFlashVirtualDriveImageMap", "storageFlexFlashVirtualDriveImageMap", "vdrive-map-[virtual_drive]", VersionMeta.Version2013e, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'storageFlexFlashController'], [], ["Get", "Set"])
+        "modular": MoMeta("StorageFlexFlashVirtualDriveImageMap", "storageFlexFlashVirtualDriveImageMap", "vdrive-map-[virtual_drive]", VersionMeta.Version2013e, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'storageFlexFlashController'], [], [None])
     }
 
 

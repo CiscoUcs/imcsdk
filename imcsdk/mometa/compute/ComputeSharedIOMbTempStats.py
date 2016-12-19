@@ -18,7 +18,7 @@ class ComputeSharedIOMbTempStats(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "modular": MoMeta("ComputeSharedIOMbTempStats", "computeSharedIOMbTempStats", "temp-stats", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'equipmentSharedIOModule'], [], ["Get"])
+        "modular": MoMeta("ComputeSharedIOMbTempStats", "computeSharedIOMbTempStats", "temp-stats", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'equipmentSharedIOModule'], [], [None])
     }
 
 

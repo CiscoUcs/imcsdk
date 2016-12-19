@@ -17,7 +17,7 @@ class PidCatalogPCIAdapter(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("PidCatalogPCIAdapter", "pidCatalogPCIAdapter", "pid-pciadapter-[slot]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'pidCatalog'], [], ["Get"]),
-        "modular": MoMeta("PidCatalogPCIAdapter", "pidCatalogPCIAdapter", "pid-pciadapter-[slot]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'pidCatalog'], [], ["Get"])
+        "modular": MoMeta("PidCatalogPCIAdapter", "pidCatalogPCIAdapter", "pid-pciadapter-[slot]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'pidCatalog'], [], [None])
     }
 
 

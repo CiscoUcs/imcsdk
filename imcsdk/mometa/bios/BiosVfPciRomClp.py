@@ -21,7 +21,7 @@ class BiosVfPciRomClp(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosVfPciRomClp", "biosVfPciRomClp", "pci-rom-clp", VersionMeta.Version204c, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfPciRomClp", "biosVfPciRomClp", "pci-rom-clp", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
+        "modular": MoMeta("BiosVfPciRomClp", "biosVfPciRomClp", "pci-rom-clp", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
     }
 
 

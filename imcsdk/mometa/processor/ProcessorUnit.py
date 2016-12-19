@@ -70,7 +70,7 @@ class ProcessorUnit(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("ProcessorUnit", "processorUnit", "cpu-[id]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeBoard'], [u'faultInst', u'processorEnvStats'], ["Get"]),
-        "modular": MoMeta("ProcessorUnit", "processorUnit", "cpu-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeBoard'], [u'faultInst', u'processorEnvStats'], ["Get"])
+        "modular": MoMeta("ProcessorUnit", "processorUnit", "cpu-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeBoard'], [u'faultInst', u'processorEnvStats'], [None])
     }
 
 

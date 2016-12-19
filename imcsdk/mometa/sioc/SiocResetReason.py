@@ -16,7 +16,7 @@ class SiocResetReason(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "modular": MoMeta("SiocResetReason", "siocResetReason", "sioc-reset-reason", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'equipmentSystemIOController'], [], ["Get"])
+        "modular": MoMeta("SiocResetReason", "siocResetReason", "sioc-reset-reason", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'equipmentSystemIOController'], [], [None])
     }
 
 

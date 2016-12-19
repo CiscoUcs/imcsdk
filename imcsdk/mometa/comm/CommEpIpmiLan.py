@@ -18,7 +18,7 @@ class CommEpIpmiLan(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "modular": MoMeta("CommEpIpmiLan", "commEpIpmiLan", "cmc-ipmi-lan", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'equipmentSharedIOModule', u'equipmentSystemIOController'], [], ["Get", "Set"])
+        "modular": MoMeta("CommEpIpmiLan", "commEpIpmiLan", "cmc-ipmi-lan", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'equipmentSharedIOModule', u'equipmentSystemIOController'], [], [None])
     }
 
 

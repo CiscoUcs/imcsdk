@@ -17,7 +17,7 @@ class OsiStatus(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("OsiStatus", "osiStatus", "osiStatus", VersionMeta.Version301c, "OutputOnly", 0xf, [], ["read-only"], [u'osiController'], [], ["Get"]),
-        "modular": MoMeta("OsiStatus", "osiStatus", "osiStatus", VersionMeta.Version301c, "OutputOnly", 0xf, [], ["read-only"], [u'osiController'], [], ["Get"])
+        "modular": MoMeta("OsiStatus", "osiStatus", "osiStatus", VersionMeta.Version301c, "OutputOnly", 0xf, [], ["read-only"], [u'osiController'], [], [None])
     }
 
 

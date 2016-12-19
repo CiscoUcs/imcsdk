@@ -17,7 +17,7 @@ class AaaUserPasswordExpiration(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("AaaUserPasswordExpiration", "aaaUserPasswordExpiration", "password-expiration", VersionMeta.Version301c, "InputOutput", 0x1ff, [], ["admin", "user"], [u'aaaUserEp'], [], ["Get", "Set"]),
-        "modular": MoMeta("AaaUserPasswordExpiration", "aaaUserPasswordExpiration", "password-expiration", VersionMeta.Version301c, "InputOutput", 0x1ff, [], ["admin", "user"], [u'aaaUserEp'], [], ["Get", "Set"])
+        "modular": MoMeta("AaaUserPasswordExpiration", "aaaUserPasswordExpiration", "password-expiration", VersionMeta.Version301c, "InputOutput", 0x1ff, [], ["admin", "user"], [u'aaaUserEp'], [], [None])
     }
 
 

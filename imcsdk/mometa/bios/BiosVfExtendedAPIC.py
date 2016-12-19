@@ -21,7 +21,7 @@ class BiosVfExtendedAPIC(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosVfExtendedAPIC", "biosVfExtendedAPIC", "Extended-APIC", VersionMeta.Version201a, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfExtendedAPIC", "biosVfExtendedAPIC", "Extended-APIC", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
+        "modular": MoMeta("BiosVfExtendedAPIC", "biosVfExtendedAPIC", "Extended-APIC", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
     }
 
 
@@ -38,7 +38,7 @@ class BiosVfExtendedAPIC(ManagedObject):
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "vp_extended_apic": MoPropertyMeta("vp_extended_apic", "vpExtendedAPIC", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "X2APIC", "XAPIC", "platform-default"], []), 
+            "vp_extended_apic": MoPropertyMeta("vp_extended_apic", "vpExtendedAPIC", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "X2APIC", "XAPIC", "disabled", "enabled", "platform-default"], []), 
         },
 
     }

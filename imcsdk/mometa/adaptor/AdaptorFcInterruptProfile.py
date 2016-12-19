@@ -19,7 +19,7 @@ class AdaptorFcInterruptProfile(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("AdaptorFcInterruptProfile", "adaptorFcInterruptProfile", "fc-int", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'adaptorHostFcIf'], [], ["Get", "Set"]),
-        "modular": MoMeta("AdaptorFcInterruptProfile", "adaptorFcInterruptProfile", "fc-int", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'adaptorHostFcIf'], [], ["Get", "Set"])
+        "modular": MoMeta("AdaptorFcInterruptProfile", "adaptorFcInterruptProfile", "fc-int", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'adaptorHostFcIf'], [], [None])
     }
 
 

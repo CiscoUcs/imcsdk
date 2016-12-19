@@ -22,7 +22,7 @@ class BiosVfQPIConfig(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosVfQPIConfig", "biosVfQPIConfig", "QPI-Config", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfQPIConfig", "biosVfQPIConfig", "QPI-Config", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
+        "modular": MoMeta("BiosVfQPIConfig", "biosVfQPIConfig", "QPI-Config", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
     }
 
 
@@ -41,7 +41,7 @@ class BiosVfQPIConfig(ManagedObject):
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "vp_qpi_link_frequency": MoPropertyMeta("vp_qpi_link_frequency", "vpQPILinkFrequency", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["6.4-gt/s", "7.2-gt/s", "8.0-gt/s", "auto", "platform-default"], []), 
+            "vp_qpi_link_frequency": MoPropertyMeta("vp_qpi_link_frequency", "vpQPILinkFrequency", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["6.4-gt/s", "7.2-gt/s", "8.0-gt/s", "9.6-gt/s", "auto", "platform-default"], []), 
         },
 
     }

@@ -16,7 +16,7 @@ class ChassisPIDCatalog(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "modular": MoMeta("ChassisPIDCatalog", "chassisPIDCatalog", "pid", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'equipmentChassis'], [u'uploadPIDCatalog'], ["Get"])
+        "modular": MoMeta("ChassisPIDCatalog", "chassisPIDCatalog", "pid", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'equipmentChassis'], [u'uploadPIDCatalog'], [None])
     }
 
 

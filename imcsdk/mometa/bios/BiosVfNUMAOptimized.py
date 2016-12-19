@@ -21,7 +21,7 @@ class BiosVfNUMAOptimized(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosVfNUMAOptimized", "biosVfNUMAOptimized", "NUMA-optimized", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfNUMAOptimized", "biosVfNUMAOptimized", "NUMA-optimized", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
+        "modular": MoMeta("BiosVfNUMAOptimized", "biosVfNUMAOptimized", "NUMA-optimized", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
     }
 
 

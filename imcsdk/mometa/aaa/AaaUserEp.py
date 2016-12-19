@@ -17,7 +17,7 @@ class AaaUserEp(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("AaaUserEp", "aaaUserEp", "user-ext", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'topSystem'], [u'aaaSession', u'aaaUser', u'aaaUserPasswordExpiration', u'aaaUserPolicy', u'generateRandomPassword'], ["Get"]),
-        "modular": MoMeta("AaaUserEp", "aaaUserEp", "user-ext", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'topSystem'], [u'aaaSession', u'aaaUser', u'aaaUserPasswordExpiration', u'aaaUserPolicy', u'generateRandomPassword'], ["Get"])
+        "modular": MoMeta("AaaUserEp", "aaaUserEp", "user-ext", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'topSystem'], [u'aaaSession', u'aaaUser', u'aaaUserPasswordExpiration', u'aaaUserPolicy', u'generateRandomPassword'], [None])
     }
 
 

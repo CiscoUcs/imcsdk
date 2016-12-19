@@ -38,7 +38,7 @@ class CommSyslog(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("CommSyslog", "commSyslog", "syslog", VersionMeta.Version151f, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'commSvcEp'], [u'commSyslogClient'], ["Get", "Set"]),
-        "modular": MoMeta("CommSyslog", "commSyslog", "syslog", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'commSvcEp'], [u'commSyslogClient'], ["Get", "Set"])
+        "modular": MoMeta("CommSyslog", "commSyslog", "syslog", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'commSvcEp'], [u'commSyslogClient'], [None])
     }
 
 

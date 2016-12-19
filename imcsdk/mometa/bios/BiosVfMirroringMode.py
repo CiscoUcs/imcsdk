@@ -19,7 +19,7 @@ class BiosVfMirroringMode(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosVfMirroringMode", "biosVfMirroringMode", "Mirroring-Mode", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfMirroringMode", "biosVfMirroringMode", "Mirroring-Mode", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
+        "modular": MoMeta("BiosVfMirroringMode", "biosVfMirroringMode", "Mirroring-Mode", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
     }
 
 

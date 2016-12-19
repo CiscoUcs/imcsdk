@@ -17,7 +17,7 @@ class AdaptorEthRecvQueueProfile(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("AdaptorEthRecvQueueProfile", "adaptorEthRecvQueueProfile", "eth-rcv-q", VersionMeta.Version151f, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'adaptorHostEthIf'], [], ["Get", "Set"]),
-        "modular": MoMeta("AdaptorEthRecvQueueProfile", "adaptorEthRecvQueueProfile", "eth-rcv-q", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'adaptorHostEthIf'], [], ["Get", "Set"])
+        "modular": MoMeta("AdaptorEthRecvQueueProfile", "adaptorEthRecvQueueProfile", "eth-rcv-q", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'adaptorHostEthIf'], [], [None])
     }
 
 

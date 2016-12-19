@@ -17,7 +17,7 @@ class StorageVirtualDriveWithDriveGroupSpace(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("StorageVirtualDriveWithDriveGroupSpace", "storageVirtualDriveWithDriveGroupSpace", "vd-[id]", VersionMeta.Version201a, "InputOutput", 0xf, [], ["admin", "read-only", "user"], [u'storageVirtualDriveCreatorUsingVirtualDriveGroup'], [], ["Get"]),
-        "modular": MoMeta("StorageVirtualDriveWithDriveGroupSpace", "storageVirtualDriveWithDriveGroupSpace", "vd-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageVirtualDriveCreatorUsingVirtualDriveGroup'], [], ["Get"])
+        "modular": MoMeta("StorageVirtualDriveWithDriveGroupSpace", "storageVirtualDriveWithDriveGroupSpace", "vd-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageVirtualDriveCreatorUsingVirtualDriveGroup'], [], [None])
     }
 
 

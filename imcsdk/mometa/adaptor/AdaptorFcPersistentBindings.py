@@ -17,7 +17,7 @@ class AdaptorFcPersistentBindings(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("AdaptorFcPersistentBindings", "adaptorFcPersistentBindings", "perbi-[index]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'adaptorHostFcIf'], [], ["Get"]),
-        "modular": MoMeta("AdaptorFcPersistentBindings", "adaptorFcPersistentBindings", "perbi-[index]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'adaptorHostFcIf'], [], ["Get"])
+        "modular": MoMeta("AdaptorFcPersistentBindings", "adaptorFcPersistentBindings", "perbi-[index]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'adaptorHostFcIf'], [], [None])
     }
 
 

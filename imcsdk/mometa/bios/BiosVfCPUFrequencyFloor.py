@@ -21,7 +21,7 @@ class BiosVfCPUFrequencyFloor(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosVfCPUFrequencyFloor", "biosVfCPUFrequencyFloor", "CPU-FreqFloor", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfCPUFrequencyFloor", "biosVfCPUFrequencyFloor", "CPU-FreqFloor", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
+        "modular": MoMeta("BiosVfCPUFrequencyFloor", "biosVfCPUFrequencyFloor", "CPU-FreqFloor", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
     }
 
 

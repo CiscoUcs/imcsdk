@@ -21,7 +21,7 @@ class BiosVfBootOptionRetry(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosVfBootOptionRetry", "biosVfBootOptionRetry", "Boot-option-retry", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfBootOptionRetry", "biosVfBootOptionRetry", "Boot-option-retry", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
+        "modular": MoMeta("BiosVfBootOptionRetry", "biosVfBootOptionRetry", "Boot-option-retry", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
     }
 
 

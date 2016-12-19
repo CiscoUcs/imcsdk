@@ -21,7 +21,7 @@ class BiosVfSerialPortAEnable(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosVfSerialPortAEnable", "biosVfSerialPortAEnable", "Serial-port-A-enable", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfSerialPortAEnable", "biosVfSerialPortAEnable", "Serial-port-A-enable", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
+        "modular": MoMeta("BiosVfSerialPortAEnable", "biosVfSerialPortAEnable", "Serial-port-A-enable", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
     }
 
 

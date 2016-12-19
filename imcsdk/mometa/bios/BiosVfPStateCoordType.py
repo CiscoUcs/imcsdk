@@ -20,7 +20,7 @@ class BiosVfPStateCoordType(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosVfPStateCoordType", "biosVfPStateCoordType", "p-state-coord", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfPStateCoordType", "biosVfPStateCoordType", "p-state-coord", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
+        "modular": MoMeta("BiosVfPStateCoordType", "biosVfPStateCoordType", "p-state-coord", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
     }
 
 

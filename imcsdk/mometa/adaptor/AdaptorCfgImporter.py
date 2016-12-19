@@ -24,7 +24,7 @@ class AdaptorCfgImporter(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("AdaptorCfgImporter", "adaptorCfgImporter", "import-config", VersionMeta.Version151f, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [], ["Get", "Set"]),
-        "modular": MoMeta("AdaptorCfgImporter", "adaptorCfgImporter", "import-config", VersionMeta.Version2013e, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [], ["Get", "Set"])
+        "modular": MoMeta("AdaptorCfgImporter", "adaptorCfgImporter", "import-config", VersionMeta.Version2013e, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [], [None])
     }
 
 

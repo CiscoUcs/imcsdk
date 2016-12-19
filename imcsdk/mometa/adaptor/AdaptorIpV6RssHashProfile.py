@@ -17,7 +17,7 @@ class AdaptorIpV6RssHashProfile(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("AdaptorIpV6RssHashProfile", "adaptorIpV6RssHashProfile", "ipv6-rss-hash", VersionMeta.Version151f, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'adaptorHostEthIf'], [], ["Get", "Set"]),
-        "modular": MoMeta("AdaptorIpV6RssHashProfile", "adaptorIpV6RssHashProfile", "ipv6-rss-hash", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'adaptorHostEthIf'], [], ["Get", "Set"])
+        "modular": MoMeta("AdaptorIpV6RssHashProfile", "adaptorIpV6RssHashProfile", "ipv6-rss-hash", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'adaptorHostEthIf'], [], [None])
     }
 
 

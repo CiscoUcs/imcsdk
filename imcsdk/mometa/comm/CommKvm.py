@@ -17,7 +17,7 @@ class CommKvm(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("CommKvm", "commKvm", "kvm-svc", VersionMeta.Version151f, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'commSvcEp'], [], ["Get", "Set"]),
-        "modular": MoMeta("CommKvm", "commKvm", "kvm-svc", VersionMeta.Version2013e, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'commSvcRack'], [], ["Get", "Set"])
+        "modular": MoMeta("CommKvm", "commKvm", "kvm-svc", VersionMeta.Version2013e, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'commSvcRack'], [], [None])
     }
 
 

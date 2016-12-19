@@ -21,7 +21,7 @@ class BiosVfPatrolScrub(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosVfPatrolScrub", "biosVfPatrolScrub", "Patrol-Scrub-Param", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfPatrolScrub", "biosVfPatrolScrub", "Patrol-Scrub-Param", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
+        "modular": MoMeta("BiosVfPatrolScrub", "biosVfPatrolScrub", "Patrol-Scrub-Param", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
     }
 
 

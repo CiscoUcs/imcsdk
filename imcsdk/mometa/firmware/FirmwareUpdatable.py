@@ -48,7 +48,7 @@ class FirmwareUpdatable(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("FirmwareUpdatable", "firmwareUpdatable", "fw-updatable", VersionMeta.Version151f, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'biosUnit', u'mgmtController', u'systemIOController'], [], ["Get"]),
-        "modular": MoMeta("FirmwareUpdatable", "firmwareUpdatable", "fw-updatable", VersionMeta.Version2013e, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'biosUnit', u'mgmtController'], [], ["Get"])
+        "modular": MoMeta("FirmwareUpdatable", "firmwareUpdatable", "fw-updatable", VersionMeta.Version2013e, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'biosUnit', u'mgmtController'], [], [None])
     }
 
 

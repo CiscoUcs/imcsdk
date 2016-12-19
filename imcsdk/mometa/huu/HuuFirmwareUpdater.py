@@ -21,7 +21,7 @@ class HuuFirmwareUpdater(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("HuuFirmwareUpdater", "huuFirmwareUpdater", "firmwareUpdater", VersionMeta.Version151f, "InputOutput", 0xffff, [], ["admin", "read-only", "user"], [u'huuController'], [], ["Get"]),
-        "modular": MoMeta("HuuFirmwareUpdater", "huuFirmwareUpdater", "firmwareUpdater", VersionMeta.Version2013e, "InputOutput", 0x1ffff, [], ["admin", "read-only", "user"], [u'huuController'], [], ["Get"])
+        "modular": MoMeta("HuuFirmwareUpdater", "huuFirmwareUpdater", "firmwareUpdater", VersionMeta.Version2013e, "InputOutput", 0x1ffff, [], ["admin", "read-only", "user"], [u'huuController'], [], [None])
     }
 
 

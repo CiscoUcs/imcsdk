@@ -21,7 +21,7 @@ class BiosVfProcessorC6Report(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosVfProcessorC6Report", "biosVfProcessorC6Report", "Processor-C6-Report", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfProcessorC6Report", "biosVfProcessorC6Report", "Processor-C6-Report", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
+        "modular": MoMeta("BiosVfProcessorC6Report", "biosVfProcessorC6Report", "Processor-C6-Report", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
     }
 
 

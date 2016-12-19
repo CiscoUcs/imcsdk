@@ -17,7 +17,7 @@ class StorageUnusedLocalDisk(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("StorageUnusedLocalDisk", "storageUnusedLocalDisk", "pd-[id]", VersionMeta.Version201a, "InputOutput", 0xf, [], ["admin", "read-only", "user"], [u'storageVirtualDriveCreatorUsingUnusedPhysicalDrive'], [], ["Get"]),
-        "modular": MoMeta("StorageUnusedLocalDisk", "storageUnusedLocalDisk", "pd-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageVirtualDriveCreatorUsingUnusedPhysicalDrive'], [], ["Get"])
+        "modular": MoMeta("StorageUnusedLocalDisk", "storageUnusedLocalDisk", "pd-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageVirtualDriveCreatorUsingUnusedPhysicalDrive'], [], [None])
     }
 
 

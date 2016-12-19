@@ -41,7 +41,7 @@ class AdaptorExtEthIf(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("AdaptorExtEthIf", "adaptorExtEthIf", "ext-eth-[port_id]", VersionMeta.Version151f, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [u'adaptorConnectorInfo', u'adaptorLinkTraining', u'adaptorPortProfiles'], ["Get", "Set"]),
-        "modular": MoMeta("AdaptorExtEthIf", "adaptorExtEthIf", "ext-eth-[port_id]", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [u'adaptorPortProfiles'], ["Get", "Set"])
+        "modular": MoMeta("AdaptorExtEthIf", "adaptorExtEthIf", "ext-eth-[port_id]", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [u'adaptorPortProfiles'], [None])
     }
 
 
@@ -62,7 +62,7 @@ class AdaptorExtEthIf(ManagedObject):
         },
 
         "modular": {
-            "admin_speed": MoPropertyMeta("admin_speed", "adminSpeed", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["-", "10Gbps", "1Gbps", "40Gbps", "4x10Gbps", "Auto"], []), 
+            "admin_speed": MoPropertyMeta("admin_speed", "adminSpeed", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["-", "40Gbps", "4x10Gbps", "Auto"], []), 
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "if_type": MoPropertyMeta("if_type", "ifType", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["aggregation", "physical", "unknown", "virtual"], []), 

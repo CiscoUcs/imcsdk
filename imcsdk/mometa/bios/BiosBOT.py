@@ -17,7 +17,7 @@ class BiosBOT(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosBOT", "biosBOT", "bdgep", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'biosUnit'], [u'biosBootDevGrp', u'biosBootDevPrecision', u'biosBootMode'], ["Get"]),
-        "modular": MoMeta("BiosBOT", "biosBOT", "bdgep", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'biosUnit'], [u'biosBootDevGrp', u'biosBootDevPrecision', u'biosBootMode'], ["Get"])
+        "modular": MoMeta("BiosBOT", "biosBOT", "bdgep", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'biosUnit'], [u'biosBootDevGrp', u'biosBootDevPrecision', u'biosBootMode'], [None])
     }
 
 

@@ -17,7 +17,7 @@ class StorageEnclosure(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "modular": MoMeta("StorageEnclosure", "storageEnclosure", "enc-1", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'equipmentChassis'], [u'storageEnclosureDisk', u'storageEnclosureDiskFwHelper', u'storageEnclosureDiskSlotEp', u'storageEnclosureDiskSlotZoneHelper'], ["Get", "Set"])
+        "modular": MoMeta("StorageEnclosure", "storageEnclosure", "enc-1", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'equipmentChassis'], [u'storageEnclosureDisk', u'storageEnclosureDiskFwHelper', u'storageEnclosureDiskSlotEp', u'storageEnclosureDiskSlotZoneHelper'], [None])
     }
 
 

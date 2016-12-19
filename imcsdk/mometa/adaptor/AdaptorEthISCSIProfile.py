@@ -18,7 +18,7 @@ class AdaptorEthISCSIProfile(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("AdaptorEthISCSIProfile", "adaptorEthISCSIProfile", "ethiscsi", VersionMeta.Version151f, "InputOutput", 0x3fffffff, [], ["admin", "read-only", "user"], [u'adaptorHostEthIf'], [], ["Add", "Get", "Remove", "Set"]),
-        "modular": MoMeta("AdaptorEthISCSIProfile", "adaptorEthISCSIProfile", "ethiscsi", VersionMeta.Version2013e, "InputOutput", 0x1fffffff, [], ["admin", "read-only", "user"], [u'adaptorHostEthIf'], [], ["Add", "Get", "Remove", "Set"])
+        "modular": MoMeta("AdaptorEthISCSIProfile", "adaptorEthISCSIProfile", "ethiscsi", VersionMeta.Version2013e, "InputOutput", 0x1fffffff, [], ["admin", "read-only", "user"], [u'adaptorHostEthIf'], [], [None])
     }
 
 

@@ -37,7 +37,7 @@ class BiosVfMemoryInterleave(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosVfMemoryInterleave", "biosVfMemoryInterleave", "Memory-Interleave", VersionMeta.Version151f, "InputOutput", 0x7f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfMemoryInterleave", "biosVfMemoryInterleave", "Memory-Interleave", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
+        "modular": MoMeta("BiosVfMemoryInterleave", "biosVfMemoryInterleave", "Memory-Interleave", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
     }
 
 
@@ -59,7 +59,7 @@ class BiosVfMemoryInterleave(ManagedObject):
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "vp_channel_inter_leave": MoPropertyMeta("vp_channel_inter_leave", "vpChannelInterLeave", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["1-way", "2-way", "3-way", "4-way", "auto", "platform-default"], []), 
-            "vp_memory_inter_leave": MoPropertyMeta("vp_memory_inter_leave", "vpMemoryInterLeave", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["1 Way Node Interleave", "2 Way Node Interleave", "4 Way Node Interleave", "8 Way Node Interleave", "Disabled", "Enabled", "disabled", "enabled", "platform-default"], []), 
+            "vp_memory_inter_leave": MoPropertyMeta("vp_memory_inter_leave", "vpMemoryInterLeave", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["1 Way Node Interleave", "2 Way Node Interleave", "4 Way Node Interleave", "8 Way Node Interleave", "Disabled", "Enabled", "platform-default"], []), 
             "vp_rank_inter_leave": MoPropertyMeta("vp_rank_inter_leave", "vpRankInterLeave", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["1-way", "2-way", "4-way", "8-way", "auto", "platform-default"], []), 
         },
 

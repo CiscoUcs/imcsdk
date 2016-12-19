@@ -33,13 +33,13 @@ def teardown_module():
 
 boot_order_prec_devices = [
         {"order": '1', "device-type": "hdd", "name": "hdd"},
-        {"order": '2', "device-type": "pxe", "name": "pxe", "slot": "10", "port": "100"},
-        {"order": '3', "device-type": "pxe", "name": "pxe1"},
+        {"order": '3', "device-type": "pxe", "name": "pxe", "slot": "10", "port": "100"},
+        {"order": '2', "device-type": "pxe", "name": "pxe1"},
         {"order": '4', "device-type": "usb", "name": "usb0", "subtype": "usb-cd"}]
 
 
 def test_boot_order_precision():
-    global handle
+    global handle, boot_order_prec_devices
     from imcsdk.apis.server.bios import boot_precision_configured_get
 
     boot_order_precision_set(handle, reboot_on_update=False,
@@ -47,19 +47,43 @@ def test_boot_order_precision():
                              boot_devices=boot_order_prec_devices)
 
     rcvd_boot_order = boot_precision_configured_get(handle)
+    devices = sorted(boot_order_prec_devices, key=lambda x: x["order"])
     for ctr in range(0, len(rcvd_boot_order)):
-        if boot_order_prec_devices[ctr]["order"] != rcvd_boot_order[ctr]["order"] or \
-           boot_order_prec_devices[ctr]["device-type"].lower() != rcvd_boot_order[ctr]["device-type"].lower():
+        if devices[ctr]["order"] != rcvd_boot_order[ctr]["order"] or \
+           devices[ctr]["device-type"].lower() != rcvd_boot_order[ctr]["device-type"].lower():
+            raise SkipTest
+
+
+boot_order_prec_devices_2 = [
+        {"order": '1', "device-type": "hdd", "name": "hdd"},
+        {"order": '2', "device-type": "pxe", "name": "pxe", "slot": "10", "port": "100"},
+        {"order": '3', "device-type": "pxe", "name": "pxe1"},
+        {"order": '4', "device-type": "usb", "name": "usb0", "subtype": "usb-cd"}]
+
+
+def test_boot_order_precision_2():
+    global handle, boot_order_prec_devices
+    from imcsdk.apis.server.bios import boot_precision_configured_get
+
+    boot_order_precision_set(handle, reboot_on_update=False,
+                             configured_boot_mode="Legacy",
+                             boot_devices=boot_order_prec_devices_2)
+
+    rcvd_boot_order = boot_precision_configured_get(handle)
+    devices = sorted(boot_order_prec_devices_2, key=lambda x: x["order"])
+    for ctr in range(0, len(rcvd_boot_order)):
+        if devices[ctr]["order"] != rcvd_boot_order[ctr]["order"] or \
+           devices[ctr]["device-type"].lower() != rcvd_boot_order[ctr]["device-type"].lower():
             raise SkipTest
 
 
 boot_order_policy_devices = [{"order": '1', "device-type": "storage", "name": "ext-hdd1"},
-                             {"order": '2', "device-type": "lan", "name": "mylan"},
-                             {"order": '3', "device-type": "cdrom", "name": "mycdrom"}]
+                             {"order": '3', "device-type": "lan", "name": "mylan"},
+                             {"order": '2', "device-type": "cdrom", "name": "mycdrom"}]
 
 
 def test_boot_order_policy():
-    global handle
+    global handle, boot_order_policy_devices
 
     boot_order_policy_set(handle, reboot_on_update=True,
                           secure_boot=False,
@@ -67,9 +91,10 @@ def test_boot_order_policy():
 
     rcvd_dev_list = boot_order_policy_get(handle)
     length = len(boot_order_policy_devices)
+    devices = sorted(boot_order_policy_devices, key=lambda x: x["order"])
     for ctr in range(0, length):
-        if boot_order_policy_devices[ctr]["order"] != rcvd_dev_list[ctr]["order"] or \
-           boot_order_policy_devices[ctr]["device-type"] != rcvd_dev_list[ctr]["device-type"]:
+        if devices[ctr]["order"] != rcvd_dev_list[ctr]["order"] or \
+           devices[ctr]["device-type"] != rcvd_dev_list[ctr]["device-type"]:
             raise SkipTest
 
 

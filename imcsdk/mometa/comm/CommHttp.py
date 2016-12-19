@@ -24,7 +24,7 @@ class CommHttp(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("CommHttp", "commHttp", "http-svc", VersionMeta.Version151f, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'commSvcEp'], [], ["Get", "Set"]),
-        "modular": MoMeta("CommHttp", "commHttp", "http-svc", VersionMeta.Version2013e, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'commSvcEp'], [], ["Get", "Set"])
+        "modular": MoMeta("CommHttp", "commHttp", "http-svc", VersionMeta.Version2013e, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'commSvcEp'], [], [None])
     }
 
 

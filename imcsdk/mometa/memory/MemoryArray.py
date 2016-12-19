@@ -45,7 +45,7 @@ class MemoryArray(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("MemoryArray", "memoryArray", "memarray-[id]", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'computeBoard'], [u'faultInst', u'memoryUnit'], ["Get", "Set"]),
-        "modular": MoMeta("MemoryArray", "memoryArray", "memarray-[id]", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'computeBoard'], [u'faultInst', u'memoryUnit'], ["Get", "Set"])
+        "modular": MoMeta("MemoryArray", "memoryArray", "memarray-[id]", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'computeBoard'], [u'faultInst', u'memoryUnit'], [None])
     }
 
 
