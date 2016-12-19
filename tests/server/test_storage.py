@@ -16,7 +16,7 @@ from ..connection.info import custom_setup, custom_teardown
 from imcsdk.apis.server.storage import _list_to_string
 from imcsdk.apis.server.storage import _flatten_list
 from imcsdk.apis.server.storage import _flatten_to_string
-from imcsdk.apis.server.storage import _vd_name_derive
+from imcsdk.apis.server.storage import vd_name_derive
 from imcsdk.apis.server.storage import _human_to_bytes
 from imcsdk.apis.server.storage import _bytes_to_human
 from imcsdk.apis.server.storage import _pd_min_size_get
@@ -63,7 +63,7 @@ def test_vd_name_derive():
              {"dg": [[1, 2]], "raid": 1, "expected": 'RAID1_12'},
              {"dg": [[1, 2], [3, 4]], "raid": 10, "expected": 'RAID10_1234'}]
     for test in tests:
-        assert_equal(_vd_name_derive(test["raid"], test["dg"]),
+        assert_equal(vd_name_derive(test["raid"], test["dg"]),
                      test["expected"])
 
 

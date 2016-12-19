@@ -138,17 +138,17 @@ def _vd_span_depth_get(drive_list):
 
 
 def _raid_max_size_get(raid_level, total_size, min_size, span_depth):
-    if raid_level == 0:
-        max_size = total_size
-    elif raid_level == 1 or raid_level == 10:
-        max_size = total_size/2
-    elif raid_level == 5 or raid_level == 50:
-        max_size = total_size - (span_depth * 1 * min_size)
-    elif raid_level == 6 or raid_level == 60:
-        max_size = total_size - (span_depth * 2 * min_size)
-    else:
-        raise "Unsupported Raid level" + raid_level
-    return max_size
+    size = {0: total_size,
+            1: total_size/2,
+            5: total_size - (span_depth * 1 * min_size),
+            6: total_size - (span_depth * 2 * min_size),
+            10: total_size/2,
+            50: total_size - (span_depth * 1 * min_size),
+            60: total_size - (span_depth * 2 * min_size)}
+
+    if raid_level not in size:
+        raise "Unsupported Raid level" + str(raid_level)
+    return size[raid_level]
 
 
 def _vd_max_size_get(handle,
