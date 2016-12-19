@@ -47,7 +47,7 @@ class AdaptorHostEthIf(ManagedObject):
 
         "modular": {
             "cdn": MoPropertyMeta("cdn", "cdn", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x2, None, None, r"""[a-zA-Z0-9\-\._:]{0,32}""", [], []), 
-            "channel_number": MoPropertyMeta("channel_number", "channelNumber", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, [], ["1-1000"]), 
+            "channel_number": MoPropertyMeta("channel_number", "channelNumber", "uint", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, [], ["1-1000"]), 
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "class_of_service": MoPropertyMeta("class_of_service", "classOfService", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, None, None, r"""[0-6]""", [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 

@@ -204,6 +204,9 @@ def boot_order_precision_set(
 
     # Insert version check here to gracefully handle older versions of CIMC
 
+    # IMC expects the devices to be configured in sorted order
+    boot_devices = sorted(boot_devices, key=lambda x: x["order"])
+
     server_dn = imccoreutils.get_server_dn(handle, server_id)
     lsbootdevprecision_mo = LsbootDevPrecision(parent_mo_or_dn=server_dn)
     # lsbootdevprecision_mo.reboot_on_update = ("no", "yes")[reboot_on_update]
@@ -377,6 +380,9 @@ def boot_order_policy_set(handle, reboot_on_update=False,
 
 
     """
+
+    # IMC expects the devices to be configured in sorted order
+    boot_devices = sorted(boot_devices, key=lambda x: x["order"])
 
     from imcsdk.mometa.lsboot.LsbootDef import LsbootDef
     from imcsdk.mometa.lsboot.LsbootBootSecurity import LsbootBootSecurity
