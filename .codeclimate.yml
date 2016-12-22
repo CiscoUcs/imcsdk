@@ -1,0 +1,25 @@
+---
+engines:
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - python
+  fixme:
+    enabled: true
+  radon:
+    enabled: true
+ratings:
+  paths:
+  - imcsdk/*.py
+  - imcsdk/utils/*.py
+exclude_paths:
+- tests/
+- docs/
+- imcsdk/mometa/
+- imcsdk/methodmeta/
+- imcsdk/imcmeta.py
+- imcsdk/imcconstants.py
+- imcsdk/imcfiltertype.py
+- imcsdk/imcbasetype.py
+- imcsdk/imcmethodfactory.py
