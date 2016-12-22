@@ -33,10 +33,11 @@ def teardown_module():
     custom_teardown(handle)
     _delete_file("inventory.json")
     _delete_file("inventory.csv")
+    _delete_file("inventory.html")
 
 
 def test_get_inventory():
-    get_inventory(handle)
+    get_inventory(handle, file_format="html", file_name="inventory.html")
     get_inventory(handle, component="cpu", file_format="csv",
                   file_name="inventory.csv")
     get_inventory(handle, component="disks", file_format="json",

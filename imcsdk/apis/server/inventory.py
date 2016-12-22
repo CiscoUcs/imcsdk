@@ -214,6 +214,54 @@ def _get_inventory_csv(inventory, file_name, spec=inventory_spec):
         f.writerow([])
 
 
+def _get_inventory_html(inventory, file_name, spec=inventory_spec):
+    if file_name is None:
+        raise ImcOperationError("Inventory collection",
+                                "file_name is a required parameter")
+    f = open(file_name, "wb")
+
+    html = ""
+    html += "<html>"
+
+    html += "<head>"
+    html += "</head>"
+    html += "<body>"
+
+    x = inventory
+    for comp in spec:
+        html += '<table border="1">' + comp.upper()
+
+        props = spec[comp]["props"]
+        keys = [y['prop'] for y in props]
+        keys.insert(0, "Host")
+        for key in keys:
+            html += "<th>" + key + "</th>"
+
+        for ip in x:
+            if comp not in x[ip]:
+                continue
+            host_component = x[ip][comp]
+            if len(host_component) == 0:
+                continue
+            for entry in host_component:
+                row_val = []
+                for key in keys:
+                    if key not in entry:
+                        continue
+                    row_val.append(entry[key])
+                row_val.insert(0, ip)
+                html += "<tr>"
+                for each in row_val:
+                    html += "<td>" + each + "</td>"
+                html += "</tr>"
+
+    html += "</table>"
+    html += "</body>"
+    html += "</html>"
+    f.write(html)
+    f.close()
+
+
 def get_inventory(handle,
                   component="all",
                   file_format="json",
@@ -230,7 +278,7 @@ def get_inventory(handle,
             "all" - will get inventory for all components
             For individual components use -
                 "cpu, disk,  memory, psu, pci, vic, lom, storage, tpm"
-        file_format (string): "json", "csv"
+        file_format (string): "json", "csv", "html"
         file_name (string): file name to save the data to.
         spec (dictionary): only for advanced usage
 
@@ -258,6 +306,8 @@ def get_inventory(handle,
 
     if file_format == "csv":
         _get_inventory_csv(inventory=inventory, file_name=file_name, spec=spec)
+    elif file_format == "html":
+        _get_inventory_html(inventory=inventory, file_name=file_name, spec=spec)
     elif file_format == "json" and file_name:
         f = open(file_name, 'w')
         f.write(json.dumps(inventory))
