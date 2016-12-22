@@ -76,10 +76,8 @@ inventory_spec = {
         "class_id": "NetworkAdapterUnit",
         "props": [
             {"prop": "model"},
-            {"prop": "serial"},
             {"label": "PCI-Slot", "prop": "slot"},
-            {"label": "Num-Interfaces", "prop": "num_intf"},
-            {"label": "PCI-slot", "prop": "pci_slot"}]
+            {"label": "Num-Interfaces", "prop": "num_intf"}],
     },
     "tpm": {
         "class_id": "EquipmentTpm",
