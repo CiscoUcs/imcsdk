@@ -38,6 +38,10 @@ def teardown_module():
 
 def test_get_inventory():
     get_inventory(handle, file_format="html", file_name="inventory.html")
+    get_inventory(handle, component=["cpu", "disks"], file_format="html",
+                  file_name="inventory.html")
+    get_inventory(handle, component=["cpu", "disks", "all"],
+                  file_format="html", file_name="inventory.html")
     get_inventory(handle, component="cpu", file_format="csv",
                   file_name="inventory.csv")
     get_inventory(handle, component="disks", file_format="json",
@@ -48,3 +52,8 @@ def test_get_inventory():
 @raises(Exception)
 def test_get_inventory_error():
     get_inventory(handle, component="vic", file_format="csv")
+
+
+@raises(Exception)
+def test_get_inventory_invalid_component():
+    get_inventory(handle, component="invalid", file_format="csv")

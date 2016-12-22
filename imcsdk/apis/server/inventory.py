@@ -214,6 +214,48 @@ def _get_inventory_csv(inventory, file_name, spec=inventory_spec):
         f.writerow([])
 
 
+def _get_search_script():
+    script = """
+<script>
+    function myFunction() {
+    // Declare variables
+    var input, filter, table, tr, td, i, j, tds, ths, matched;
+    input = document.getElementById("searchInput");
+    filter = input.value.toUpperCase();
+    tr = document.getElementsByTagName("tr");
+
+    // Loop through all table rows, and hide
+    // those who don't match the search query
+    for (i = 0; i < tr.length; i++) {
+        tds = tr[i].getElementsByTagName("td");
+        ths = tr[i].getElementsByTagName("th");
+        matched = false;
+        if (ths.length > 0) {
+            matched = true;
+        }
+        else {
+            for (j = 0; j < tds.length; j++) {
+                td = tds[j];
+                if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    matched = true;
+                    break;
+                }
+
+            }
+        }
+        if (matched == true) {
+            tr[i].style.display = "";
+        }
+        else {
+            tr[i].style.display = "none";
+        }
+        }
+    }
+</script>
+"""
+    return script
+
+
 def _get_inventory_html(inventory, file_name, spec=inventory_spec):
     if file_name is None:
         raise ImcOperationError("Inventory collection",
@@ -221,11 +263,19 @@ def _get_inventory_html(inventory, file_name, spec=inventory_spec):
     f = open(file_name, "wb")
 
     html = ""
-    html += "<html>"
+    html += "<html>\n"
 
-    html += "<head>"
-    html += "</head>"
-    html += "<body>"
+    html += "<head>\n"
+    html += _get_search_script()
+    html += "</head>\n"
+    html += "<body>\n"
+    html += """
+    <br>
+    <input type="text" id="searchInput" onkeyup="myFunction()" placeholder="Search..">
+    </br>
+    </br>
+    </br>
+    """
 
     x = inventory
     for comp in spec:
@@ -252,10 +302,12 @@ def _get_inventory_html(inventory, file_name, spec=inventory_spec):
                 row_val.insert(0, ip)
                 html += "<tr>"
                 for each in row_val:
-                    html += "<td>" + each + "</td>"
+                    if each:
+                        html += "<td>" + each + "</td>"
                 html += "</tr>"
+        html += "</br>"
 
-    html += "</table>"
+    html += "</table>\n"
     html += "</body>"
     html += "</html>"
     f.write(html)
@@ -295,14 +347,20 @@ def get_inventory(handle,
         servers = [handle]
 
     for server in servers:
-        if component == "all":
+        components = component
+        if not isinstance(component, list):
+            components = [component]
+        if "all" in components:
             for comp in spec.keys():
                 _get_inventory(server, comp, spec, inventory)
         else:
-            if component not in spec:
-                raise "Unsupported component type" + str(component)
+            for comp in components:
+                if comp not in spec:
+                    raise ImcOperationError("Inventory Collection",
+                                            ("Unsupported component type:" +
+                                             str(component)))
 
-            _get_inventory(server, component, spec, inventory)
+                _get_inventory(server, comp, spec, inventory)
 
     if file_format == "csv":
         _get_inventory_csv(inventory=inventory, file_name=file_name, spec=spec)
