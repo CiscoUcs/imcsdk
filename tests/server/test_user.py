@@ -13,8 +13,9 @@
 
 from nose.tools import assert_equal
 from ..connection.info import custom_setup, custom_teardown
-from imcsdk.apis.admin.user import create_local_user, delete_local_user, \
-    user_exists, set_strong_password, is_strong_password_set
+from imcsdk.apis.admin.user import local_user_create, local_user_delete, \
+    local_user_exists, strong_password_set, is_strong_password_set, \
+    password_expiration_set, password_expiration_exists
 from imcsdk.apis.admin.snmp import snmp_enable, snmp_disable, snmp_enabled, \
     snmp_user_add, snmp_user_exists, snmp_user_remove, \
     snmp_trap_add, snmp_trap_exists, snmp_trap_remove
@@ -35,31 +36,40 @@ def teardown_module():
 
 
 def test_set_strong_password():
-    global handle
-    set_strong_password(handle)
+    strong_password_set(handle)
     assert_equal(is_strong_password_set(handle), True)
 
 
 def test_unset_strong_password():
-    global handle
-    set_strong_password(handle, enable=False)
+    strong_password_set(handle, enable=False)
     assert_equal(is_strong_password_set(handle), False)
 
 
+def test_set_password_expiration():
+    password_expiration_set(handle, password_expiry_duration=1000, password_history=4, password_notification_period=10)
+    match, mo = password_expiration_exists(handle, password_expiry_duration=1000, password_history=4, password_notification_period=10)
+    assert_equal(match, True)
+
+
+def test_unset_password_expiration():
+    password_expiration_set(handle, password_expiry_duration=0)
+    match, mo = password_expiration_exists(handle, password_expiry_duration=0)
+    assert_equal(match, True)
+
+
 def test_local_user_create():
-    global handle
-    create_local_user(handle, "nosetest", "Nbv-12345", "admin")
-    assert_equal(user_exists(handle, "nosetest", "admin"), True)
+    local_user_create(handle, "nosetest", "Nbv-12345", "admin")
+    exists, mo = local_user_exists(handle, name="nosetest", priv="admin")
+    assert_equal(exists, True)
 
 
 def test_local_user_delete():
-    global handle
-    delete_local_user(handle, "nosetest")
-    assert_equal(user_exists(handle, "nosetest", "admin"), False)
+    local_user_delete(handle, "nosetest")
+    exists, mo = local_user_exists(handle, name="nosetest", priv="admin")
+    assert_equal(exists, False)
 
 
 def test_snmp_enable():
-    global handle
     snmp_enable(handle, community="test", privilege="full",
                 trap_community="test-trap",
                 sys_contact="abcd@pqrs.com", sys_location="somewhere")
@@ -67,7 +77,6 @@ def test_snmp_enable():
 
 
 def test_snmp_user_create():
-    global handle
     snmp_user = snmp_user_add(handle, name="test-snmp-user",
                               security_level="authpriv",
                               auth_pwd="Nbv-12345", auth="MD5",
@@ -77,7 +86,7 @@ def test_snmp_user_create():
 
 
 def test_snmp_trap_create():
-    global handle, snmp_trap_id
+    global snmp_trap_id
     snmp_trap = snmp_trap_add(handle, hostname="2.2.2.2", port="3000",
                               version="v3", notification_type="traps",
                               user="test-snmp-user")
@@ -88,7 +97,7 @@ def test_snmp_trap_create():
 
 
 def test_snmp_trap_delete():
-    global handle, snmp_trap_id
+    global snmp_trap_id
     snmp_trap_remove(handle, snmp_trap_id)
     assert_equal(snmp_trap_exists(handle, hostname="2.2.2.2", port="3000",
                                   version="v3", notification_type="traps",
@@ -96,12 +105,10 @@ def test_snmp_trap_delete():
 
 
 def test_snmp_user_delete():
-    global handle
     snmp_user_remove(handle, name="test-snmp-user")
     assert_equal(snmp_user_exists(handle, name="test-snmp-user"), 0)
 
 
 def test_snmp_disable():
-    global handle
     snmp_disable(handle)
     assert_equal(snmp_enabled(handle), False)
