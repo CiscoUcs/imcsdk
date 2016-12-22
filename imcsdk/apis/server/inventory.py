@@ -277,7 +277,8 @@ def _get_inventory_html(inventory, file_name, spec=inventory_spec):
 
     x = inventory
     for comp in spec:
-        html += '<table border="1">' + comp.upper()
+        html += '<table border="1">'
+        html += "<br><br>" + comp.upper()
 
         props = spec[comp]["props"]
         keys = [y['prop'] for y in props]
@@ -300,10 +301,10 @@ def _get_inventory_html(inventory, file_name, spec=inventory_spec):
                 row_val.insert(0, ip)
                 html += "<tr>"
                 for each in row_val:
-                    if each:
-                        html += "<td>" + each + "</td>"
+                    if each is None:
+                        each = ""
+                    html += "<td>" + each + "</td>"
                 html += "</tr>"
-        html += "</br>"
 
     html += "</table>\n"
     html += "</body>"
