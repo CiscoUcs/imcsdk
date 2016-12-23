@@ -35,8 +35,12 @@ Table of Contents
 
     1. `Backup Imc <#backup-imc>`__
     2. `Import Imc <#import-imc>`__
-    3. `Technical Support <#technical-support>`__
-    4. `Firmware Installation <#firmware-installation>`__
+
+8. `Technical Support <#technical-support>`__
+
+9. `Firmware Installation <#firmware-installation>`__
+
+10. `Inventory <#inventory>`__
 
 
 Overview
@@ -69,7 +73,7 @@ The figure below illustrates a sample (partial) MIT for Rack Unit.
 
     On a Classic C-series Server
     ----------------------------
-    Tree (topRoot)              Distinguished Name	
+    Tree (topRoot)              Distinguished Name
     |-sys                       sys
     |-ComputeRackUnit              sys/rack-unit-1
         |-AdaptorUnit                  sys/rack-unit-1/adaptor-1
@@ -77,12 +81,12 @@ The figure below illustrates a sample (partial) MIT for Rack Unit.
 
     On a Modular C-series Server
     ----------------------------
-    Tree (topRoot)              Distinguished Name 
+    Tree (topRoot)              Distinguished Name
     |-sys                       sys
     |-EquipmentChassis             sys/chassis-1
         |-ComputeServerNode             sys/chassis-1/server-1
             |-AdaptorUnit                   sys/chassis-1/server-1/adaptor-1
-                |-AdaptorHostEthIf              sys/chassis-1/server-1/adaptor-1/host-eth-eth0       
+                |-AdaptorHostEthIf              sys/chassis-1/server-1/adaptor-1/host-eth-eth0
 
 
 Managed Objects
@@ -91,8 +95,8 @@ Managed Objects
 Managed Objects (MO) are abstractions of Cisco IMC resources, such as
 such as rack-mounted servers, cpu, memory and network adaptors. Managed
 Objects represent any physical or logical entity that is configured /
-managed in the Cisco IMC MIT. For example, physical entities such as 
-rack unit, I/O cards, Processors and logical entities such as User 
+managed in the Cisco IMC MIT. For example, physical entities such as
+rack unit, I/O cards, Processors and logical entities such as User
 roles are represented as Managed Objects.
 
 Every Managed Object is uniquely identified in the tree with its
@@ -113,8 +117,8 @@ The above written Dn is composed of the following Rn:
 
 ::
 
-    topSystem MO: rn=”	s” 
-    computeRackUnit MO: rn=”rack-unit-<id>” 
+    topSystem MO: rn=”	s”
+    computeRackUnit MO: rn=”rack-unit-<id>”
     adaptorUnit MO: rn =”adaptor-<id>”
 
 A Relative Name (Rn) may have the value of one or more of the MO’s
@@ -123,15 +127,15 @@ of the same type within the context of the parent. Any properties that
 form part of the Rn as described earlier are referred to as Naming
 properties.
 
-For instance, multiple blade MOs reside under a chassis MO. The adaptor 
-MO contains the adaptor identifier as part of its Rn (adaptor-[id]), 
+For instance, multiple blade MOs reside under a chassis MO. The adaptor
+MO contains the adaptor identifier as part of its Rn (adaptor-[id]),
 thereby uniquely identifying each adaptor MO in the context of a rack unit.
 
 References To Managed Objects
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The contents of the Managed Objects are referred to during the operation
-of IMC. Some of the MOs are referred to implicitly or as part of 
+of IMC. Some of the MOs are referred to implicitly or as part of
 deployment of another MO.
 
 A singleton MO type is found utmost once in the entire MIT and is
@@ -189,7 +193,7 @@ There are methods supported for:
 
    -  EventSubscribe
 
-   
+
 Installation
 ------------
 
@@ -217,7 +221,7 @@ Installation Steps
 ::
 
     git clone https://github.com/CiscoUcs/imcsdk/
-    cd imcsdk 
+    cd imcsdk
     sudo make install
 
 Uninstallation
@@ -289,7 +293,7 @@ under the parent ``org-root``
 ::
 
     from imcsdk.mometa.adaptor.AdaptorEthISCSIProfile import AdaptorEthISCSIProfile
-	
+
     adapter_profile = AdaptorEthISCSIProfile(parent_mo_or_dn="sys/rack-unit-1/adaptor-2/host-eth-eth1",
                                    initiator_name="abc.def.storage",
                                    initiator_ip_address="10.10.10.10",
@@ -372,7 +376,7 @@ this api will also take ``platform`` as an optional parameter.
 
 ::
 
-    from imcsdk.imccoreutils import get_meta_info, IMC_PLATFORM  
+    from imcsdk.imccoreutils import get_meta_info, IMC_PLATFORM
 
     class_meta = get_meta_info("faultInst", platform=IMC_PLATFORM.TYPE_CLASSIC)
     print class_meta
@@ -475,8 +479,8 @@ Backup Imc
 
     For classic platforms :-
     ------------------------
-    backup_imc(handle, 
-               remote_file=backup_file, 
+    backup_imc(handle,
+               remote_file=backup_file,
                protocol="ftp", username="user", password="pass",
                remote_host="10.10.10.10", passphrase="xxxxxx")
 
@@ -510,7 +514,7 @@ Import Imc
 
     For modular platforms :-
     ------------------------
-    import_imc_backup(handle, remote_host=remote_host, 
+    import_imc_backup(handle, remote_host=remote_host,
                       remote_file='/path/to/filename.xml', protocol='scp',
                       username=username, password=password,
                       passphrase='abc', entity = 'CMC')
@@ -521,7 +525,7 @@ Reference <https://ciscoucs.github.io/imcsdk_docs/imcsdk.utils.html?highlight=im
 
 
 Technical Support
-~~~~~~~~~~~~~~~~~
+-----------------
 
 ``get_imc_tech_support`` is used to import an existing backup to a Imc server
 
@@ -537,7 +541,7 @@ Technical Support
                          protocol='scp',
                          username=username,
                          password=password)
-                        
+
     For modular platforms :-
     ------------------------
     get_imc_tech_support(handle=handle,
@@ -548,13 +552,13 @@ Technical Support
                          password=password,
                          component='all')
 
-    
+
 `Tech-support Imc API
 Reference <https://ciscoucs.github.io/imcsdk_docs/imcsdk.utils.html?highlight=get_imc_tech_support#imcsdk.utils.imctechsupport.get_imc_tech_support>`__
 
 
 Firmware Installation
-~~~~~~~~~~~~~~~~~~~~~
+---------------------
 
 ``update_imc_firmware_huu`` is used to import an existing backup to a Imc server
 
@@ -588,6 +592,46 @@ Firmware Installation
                             verify_update='no',
                             cimc_secure_boot='no',
                             server_id=1)
-    
+
 `Firmware Installation Imc API
 Reference <https://ciscoucs.github.io/imcsdk_docs/imcsdk.utils.html?highlight=update_imc_firmware_huu#imcsdk.utils.imcfirmwareinstall.update_imc_firmware_huu>`__
+
+
+Inventory
+---------
+The ``get_inventory`` API is used to fetch server inventory
+
+::
+
+    from imcsdk.apis.server.inventory import get_inventory
+
+    # Fetch inventory for a single server
+    get_inventory(handle=handle)
+
+    # Fetch inventory for a multiple servers
+    get_inventory(handle=[handle1, handle2, handle3])
+
+    # Fetch inventory for a single server
+    get_inventory(handle=handle, component="all")
+
+    # Fetch disks inventory for a single server
+    get_inventory(handle=handle, component="disks")
+
+    # Fetch cpu and disks inventory for a single server
+    get_inventory(handle=handle, component=["cpu", "disks"])
+
+    # Fetch cpu and disks inventory for a single server and
+    # write it to a file in json format
+    get_inventory(handle=handle, component=["cpu", "disks"],
+                  file_format="json", file_name="inventory.json")
+
+    # Fetch cpu and disks inventory for a single server and
+    # write it to a file in csv format
+    get_inventory(handle=handle, component=["cpu", "disks"], file_format="csv",
+                  file_name="inventory.csv")
+
+    # Fetch cpu and disks inventory for a single server and
+    # write it to a file in html format
+    get_inventory(handle=handle, component=["cpu", "disks"],
+    file_format="html", file_name="inventory.html")
+
