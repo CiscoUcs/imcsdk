@@ -884,10 +884,10 @@ def get_handle_from_cookie(cookie):
 
 
 def add_handle_to_list(handle):
-    if handle:
+    if handle and handle not in global_handles:
         global_handles.append(handle)
 
 
 def remove_handle_from_list(handle):
-    if handle:
+    if handle and handle in global_handles:
         global_handles.remove(handle)
