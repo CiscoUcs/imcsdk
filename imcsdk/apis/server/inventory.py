@@ -22,6 +22,7 @@ inventory_spec = {
     "cpu": {
         "class_id": "ProcessorUnit",
         "props": [
+            {"prop": "dn"},
             {"prop": "id"},
             {"prop": "model"},
             {"prop": "vendor"},
@@ -33,6 +34,7 @@ inventory_spec = {
             {"prop": "presence", "value": "missing"}
         ],
         "props": [
+            {"prop": "dn"},
             {"prop": "id"},
             {"prop": "model"},
             {"prop": "vendor"},
@@ -115,6 +117,37 @@ inventory_spec = {
             {"label": "Firmware", "prop": "drive_firmware"},
             {"label": "Drive State", "prop": "drive_state"},
             {"prop": "online"}
+        ]
+    },
+    "vNICs": {
+        "class_id": "AdaptorHostEthIf",
+        "props": [
+            {"prop": "dn"},
+            {"prop": "name"},
+            {"prop": "cdn"},
+            {"prop": "mac"},
+            {"prop": "mtu"},
+            {"prop": "pxe_boot"},
+            {"prop": "iscsi_boot"},
+            {"prop": "usnic_count"},
+            {"prop": "uplink_port"},
+            {"prop": "class_of_service"},
+            {"prop": "channel_number"},
+            {"prop": "port_profile"}
+        ]
+    },
+    "vHBAs": {
+        "class_id": "AdaptorHostFcIf",
+        "props": [
+            {"prop": "dn"},
+            {"prop": "name"},
+            {"prop": "wwnn"},
+            {"prop": "wwpn"},
+            {"prop": "uplink_port"},
+            {"prop": "san_boot"},
+            {"prop": "channel_number"},
+            {"prop": "port_profile"},
+            {"prop": "admin_persistent_bindings"}
         ]
     }
 }
