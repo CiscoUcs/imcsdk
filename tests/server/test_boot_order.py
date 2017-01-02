@@ -123,7 +123,7 @@ def test_boot_order_precision_exists():
         handle,
         reboot_on_update=False,
         configured_boot_mode="Legacy",
-        boot_devices=boot_order_prec_devices,
+        boot_devices=boot_order_prec_devices_2,
         server_id=1
     )
     if not ret:

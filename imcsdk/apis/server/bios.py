@@ -68,16 +68,48 @@ def boot_order_precision_get(handle, dump=False, server_id=1):
 
 
 precision_device_dict = {
-    "hdd": "LsbootHdd",
-    "iscsi": "LsbootIscsi",
-    "pchstorage": "LsbootPchStorage",
-    "pxe": "LsbootPxe",
-    "san": "LsbootSan",
-    "sdcard": "LsbootSd",
-    "uefishell": "LsbootUefiShell",
-    "usb": "LsbootUsb",
-    "vmedia": "LsbootVMedia",
-    "nvme": "LsbootNVMe",
+    "hdd": {
+            "class_id": "LsbootHdd",
+            "type": "LOCALHDD"
+            },
+    "iscsi": {
+            "class_id": "LsbootIscsi",
+            "type": "ISCSI",
+            "subtype": "ISCSI"
+            },
+    "pchstorage": {
+            "class_id": "LsbootPchStorage",
+            "type": "PCHSTORAGE"
+            },
+    "pxe": {
+            "class_id": "LsbootPxe",
+            "type": "PXE",
+            "subtype": "PXE"
+            },
+    "san": {
+            "class_id": "LsbootSan",
+            "type": "SAN",
+            "subtype": "SAN"
+            },
+    "sdcard": {"class_id": "LsbootSd",
+               "type": "SDCARD",
+               "subtype": "SDCARD"},
+    "uefishell": {
+            "class_id": "LsbootUefiShell",
+            "type": "UEFISHELL"
+            },
+    "usb": {
+            "class_id": "LsbootUsb",
+            "type": "USB"
+            },
+    "vmedia": {
+            "class_id": "LsbootVMedia",
+            "type": "VMEDIA"
+            },
+    "nvme": {
+            "class_id": "LsbootNVMe",
+            "type": "NVME"
+            },
 }
 
 
@@ -113,8 +145,12 @@ def _get_device(parent_dn, device_type, device_name):
     if _is_boot_order_precision(parent_dn):
         if device_type not in precision_device_dict:
             return None
-        class_struct = load_class(precision_device_dict[device_type])
+        class_struct = load_class(precision_device_dict[device_type]["class_id"])
         class_obj = class_struct(parent_mo_or_dn=parent_dn, name=device_name)
+        if "type" in precision_device_dict[device_type]:
+            class_obj.type = precision_device_dict[device_type]["type"]
+        if "subtype" in precision_device_dict[device_type]:
+            class_obj.subtype = precision_device_dict[device_type]["subtype"]
     elif _is_boot_order_policy(parent_dn):
         if device_type not in policy_device_dict:
             return None
@@ -237,7 +273,7 @@ def boot_precision_configured_get(handle, server_id=1):
     configured_boot_order = []
 
     class_to_name_dict = {
-        value: key for key,
+        value["class_id"]: key for key,
         value in precision_device_dict.items()}
 
     server_dn = get_server_dn(handle, server_id)
