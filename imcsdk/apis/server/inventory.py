@@ -271,8 +271,6 @@ def _get_inventory_html(inventory, file_name, spec=inventory_spec):
     <br>
     <input type="text" id="searchInput" onkeyup="myFunction()" placeholder="Search..">
     </br>
-    </br>
-    </br>
     """
 
     x = inventory
@@ -283,8 +281,10 @@ def _get_inventory_html(inventory, file_name, spec=inventory_spec):
         props = spec[comp]["props"]
         keys = [y['prop'] for y in props]
         keys.insert(0, "Host")
+        html += '<tr style="background-color: gainsboro;">'
         for key in keys:
             html += "<th>" + key + "</th>"
+        html += '</tr>'
 
         for ip in x:
             if comp not in x[ip]:
