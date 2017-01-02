@@ -37,10 +37,7 @@ def strong_password_set(handle, enable=True):
     mos = handle.query_classid("AaaUserPolicy")
     user_policy = mos[0]
 
-    if enable:
-        user_policy.user_password_policy = "enabled"
-    else:
-        user_policy.user_password_policy = "disabled"
+    user_policy.user_password_policy = ("disabled", "enabled") [enable]
 
     handle.set_mo(user_policy)
     return user_policy
@@ -54,10 +51,12 @@ def is_strong_password_set(handle):
         handle(ImcHandle)
 
     Returns:
-        True if enabled, else False
+        bool
     """
 
     mos = handle.query_classid("AaaUserPolicy")
+    if len(mos) == 0:
+        raise ImcOperationError("Check Password Strength", "MO does not exist")
     return (mos[0].user_password_policy == "enabled")
 
 
@@ -116,10 +115,10 @@ def password_expiration_exists(handle, **kwargs):
 
     mo = AaaUserPasswordExpiration(parent_mo_or_dn="sys/user-ext")
     mo = handle.query_dn(mo.dn)
-    if mo:
-        return (mo.check_prop_match(**kwargs), mo)
-    else:
+    if mo is None:
         return False, None
+
+    return (mo.check_prop_match(**kwargs), mo)
 
 
 def local_users_get(handle, dump=False):
@@ -131,14 +130,12 @@ def local_users_get(handle, dump=False):
         dump (bool)
 
     Returns:
-        List of AaaUser objects corresponding to the active users
+        List of AaaUser objects corresponding to the local users
     """
 
     aaa_users = _get_local_users(handle)
-    users = []
-    for user in aaa_users:
-        if user.name != "":
-            users.append(user)
+    users = [x for x in aaa_users if x.name]
+
     if dump:
         log.info("List of users (id, username, role, status)")
         log.info("------------------------------------------")
@@ -165,17 +162,13 @@ def _get_local_user(handle, name):
 def _get_free_user_id(handle):
     from imcsdk.mometa.aaa.AaaUser import AaaUserConsts
     users = _get_local_users(handle)
-    inactive_users = []
     for user in users:
         if user.account_status == AaaUserConsts.ACCOUNT_STATUS_INACTIVE and \
                 not user.name:
-            inactive_users.append(user)
+            return user.id
 
-    if len(inactive_users) is 0:
-        raise ImcOperationError("Create Local User",
-                                "Max number of users already configured")
-
-    return inactive_users[0].id
+    raise ImcOperationError("Create Local User",
+                            "Max number of users already configured")
 
 
 def local_user_create(handle, name, pwd, priv="read-only"):
@@ -210,7 +203,10 @@ def local_user_create(handle, name, pwd, priv="read-only"):
     available_user_id = _get_free_user_id(handle)
 
     new_user = AaaUser(parent_mo_or_dn="sys/user-ext", id=available_user_id)
-    args = {"name": name, "pwd": pwd, "priv": priv, "account_status": AaaUserConsts.ACCOUNT_STATUS_ACTIVE}
+    args = {"name": name,
+            "pwd": pwd,
+            "priv": priv,
+            "account_status": AaaUserConsts.ACCOUNT_STATUS_ACTIVE}
     new_user.set_prop_multiple(**args)
 
     handle.set_mo(new_user)

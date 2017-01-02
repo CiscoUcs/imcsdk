@@ -17,7 +17,7 @@ from imcsdk.apis.admin.user import local_user_create, local_user_delete, \
     local_user_exists, strong_password_set, is_strong_password_set, \
     password_expiration_set, password_expiration_exists
 from imcsdk.apis.admin.snmp import snmp_enable, snmp_disable, snmp_enabled, \
-    snmp_user_add, snmp_user_exists, snmp_user_remove, \
+    snmp_user_add, snmp_user_exists, snmp_user_remove, snmp_user_modify, \
     snmp_trap_add, snmp_trap_exists, snmp_trap_remove
 
 
@@ -83,6 +83,14 @@ def test_snmp_user_create():
                               priv_pwd="Nbv-12345", priv="AES")
     assert_equal(snmp_user_exists(
         handle, name="test-snmp-user"), int(snmp_user.id))
+
+
+def test_snmp_user_modify():
+    snmp_user_id = snmp_user_exists(handle, name="test-snmp-user")
+    snmp_user = snmp_user_modify(handle, user_id=snmp_user_id,
+                                 auth_pwd="Nbv-56789",
+                                 security_level="authnopriv")
+    assert_equal(snmp_user.security_level, "authnopriv")
 
 
 def test_snmp_trap_create():
