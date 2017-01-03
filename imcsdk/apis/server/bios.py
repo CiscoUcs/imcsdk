@@ -69,47 +69,49 @@ def boot_order_precision_get(handle, dump=False, server_id=1):
 
 precision_device_dict = {
     "hdd": {
-            "class_id": "LsbootHdd",
-            "type": "LOCALHDD"
-            },
+        "class_id": "LsbootHdd",
+        "type": "LOCALHDD"
+    },
     "iscsi": {
-            "class_id": "LsbootIscsi",
-            "type": "ISCSI",
-            "subtype": "ISCSI"
-            },
+        "class_id": "LsbootIscsi",
+        "type": "ISCSI",
+        "subtype": "ISCSI"
+    },
     "pchstorage": {
-            "class_id": "LsbootPchStorage",
-            "type": "PCHSTORAGE"
-            },
+        "class_id": "LsbootPchStorage",
+        "type": "PCHSTORAGE"
+    },
     "pxe": {
-            "class_id": "LsbootPxe",
-            "type": "PXE",
-            "subtype": "PXE"
-            },
+        "class_id": "LsbootPxe",
+        "type": "PXE",
+        "subtype": "PXE"
+    },
     "san": {
-            "class_id": "LsbootSan",
-            "type": "SAN",
-            "subtype": "SAN"
-            },
-    "sdcard": {"class_id": "LsbootSd",
-               "type": "SDCARD",
-               "subtype": "SDCARD"},
+        "class_id": "LsbootSan",
+        "type": "SAN",
+        "subtype": "SAN"
+    },
+    "sdcard": {
+        "class_id": "LsbootSd",
+        "type": "SDCARD",
+        "subtype": "SDCARD"
+    },
     "uefishell": {
-            "class_id": "LsbootUefiShell",
-            "type": "UEFISHELL"
-            },
+        "class_id": "LsbootUefiShell",
+        "type": "UEFISHELL"
+    },
     "usb": {
-            "class_id": "LsbootUsb",
-            "type": "USB"
-            },
+        "class_id": "LsbootUsb",
+        "type": "USB"
+    },
     "vmedia": {
-            "class_id": "LsbootVMedia",
-            "type": "VMEDIA"
-            },
+        "class_id": "LsbootVMedia",
+        "type": "VMEDIA"
+    },
     "nvme": {
-            "class_id": "LsbootNVMe",
-            "type": "NVME"
-            },
+        "class_id": "LsbootNVMe",
+        "type": "NVME"
+    },
 }
 
 
