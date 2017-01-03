@@ -32,7 +32,7 @@ def test_vmedia_get_existing_uri(login_mock, query_mock):
     test_cimc = ImcHandle(ip='169.254.1.1',
                           username='admin',
                           password='right')
-    test_cimc._set_platform_type(IMC_PLATFORM.TYPE_CLASSIC)
+    test_cimc._set_platform(platform=IMC_PLATFORM.TYPE_CLASSIC)
 
     # Scenario: No pre-existing mappings
     query_mock.return_value = []
@@ -70,7 +70,7 @@ def test_vmedia_get_existing_status(login_mock, query_mock):
     test_cimc = ImcHandle(ip='169.254.1.1',
                           username='admin',
                           password='right')
-    test_cimc._set_platform_type(IMC_PLATFORM.TYPE_CLASSIC)
+    test_cimc._set_platform(platform=IMC_PLATFORM.TYPE_CLASSIC)
 
     # Scenario: No pre-existing mappings
     query_mock.return_value = []
@@ -107,7 +107,7 @@ def test_valid_vmedia_mount_iso_uri(login_mock, add_mount_mock,
     test_cimc = ImcHandle(ip='169.254.1.1',
                           username='admin',
                           password='right')
-    test_cimc._set_platform_type(IMC_PLATFORM.TYPE_CLASSIC)
+    test_cimc._set_platform(platform=IMC_PLATFORM.TYPE_CLASSIC)
 
     # http mapping succeeded
     exist_mock.return_value = ["http://169.254.1.2/test.iso"]
@@ -205,7 +205,7 @@ def test_invalid_vmedia_mount_iso_uri(login_mock, add_mount_mock,
     test_cimc = ImcHandle(ip='169.254.1.1',
                           username='admin',
                           password='right')
-    test_cimc._set_platform_type(IMC_PLATFORM.TYPE_CLASSIC)
+    test_cimc._set_platform(platform=IMC_PLATFORM.TYPE_CLASSIC)
 
     # Scenario: Zero value passed in as check interval
     assert_raises(ValueError, vmedia_mount_iso_uri, test_cimc,
@@ -246,7 +246,7 @@ def test_valid_remove_vmedia_all(login_mock, query_mock, remove_mock):
     test_cimc = ImcHandle(ip='169.254.1.1',
                           username='admin',
                           password='right')
-    test_cimc._set_platform_type(IMC_PLATFORM.TYPE_CLASSIC)
+    test_cimc._set_platform(platform=IMC_PLATFORM.TYPE_CLASSIC)
 
     # Scenario: server has no vmedia mounts
     query_mock.return_value = []
@@ -286,7 +286,7 @@ def test_invalid_remove_vmedia_all(login_mock, query_mock, remove_mock):
     test_cimc = ImcHandle(ip='169.254.1.1',
                           username='admin',
                           password='right')
-    test_cimc._set_platform_type(IMC_PLATFORM.TYPE_CLASSIC)
+    test_cimc._set_platform(platform=IMC_PLATFORM.TYPE_CLASSIC)
 
     # Scenario: Three pre-exising mounts, only two unsuccessfully
     vmedia1 = CommVMediaMap(parent_mo_or_dn="sys/svc-ext/vmedia-svc",
