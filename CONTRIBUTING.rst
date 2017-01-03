@@ -49,7 +49,9 @@ file and set the hostname, username, and password to match your server.  e.g.
 
     [imc]
     hostname=192.168.1.1
+    
     username=admin
+    
     password=password
 
 The test suite is typically run via nose as follows:
