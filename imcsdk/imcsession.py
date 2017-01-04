@@ -461,32 +461,44 @@ class ImcSession(object):
                 self._logout()
         return False
 
+    def _validate_model(self, model):
+        valid_model_prefixes = ["UCSC", "UCS-E", "UCSS"]
+        valid_models = ["R460-4640810", "C260-BASE-2646"]
+
+        if model in valid_models:
+            self._set_model(model)
+            return True
+
+        for prefix in valid_model_prefixes:
+            if model.startswith(prefix):
+                self._set_model(model)
+                return True
+
+        return False
+
     def _validate_imc(self):
-        """ ValidateIMC method validates if a given host is valid IMC Server."""
-
+        """
+        This method validates if a given host is a supported IMC server
+        """
         from .imcmethodfactory import config_resolve_class
-        from .imccoreutils import IMC_PLATFORM
 
-        valid_models = ("R460-4640810", "C260-BASE-2646")
+        request = config_resolve_class(cookie=self.__cookie,
+                                       class_id="biosUnit")
+        response = self.post_elem(request)
 
-        rack_elem = config_resolve_class(cookie=self.__cookie,
-                                         class_id="biosUnit")
-        rack_elem_response = self.post_elem(rack_elem)
-        if rack_elem_response.error_code == 0:
-            for rack in rack_elem_response.out_configs.child:
-                model_name = rack.model
+        if not response or response.error_code != 0 or \
+                len(response.out_configs.child) == 0:
+            self.logout()
+            return False
 
-                platform_type = (IMC_PLATFORM.TYPE_CLASSIC,
-                                 IMC_PLATFORM.TYPE_MODULAR)[
-                                         model_name.startswith("UCSC-C3X")]
-                self._set_platform_type(platform_type)
-                self._set_model(model_name)
+        for element in response.out_configs.child:
+            model = element.model
 
-                if not (model_name.startswith("UCSC") or
-                        model_name.startswith("UCS-E") or
-                        model_name in valid_models):
-                    self._logout()
-                    return False
+            if not self._validate_model(model):
+                self._logout()
+                return False
+
+            self._set_platform(model=model)
 
         return True
 
@@ -619,12 +631,20 @@ class ImcSession(object):
         """
         self.__dump_xml = False
 
-    def _set_platform_type(self, platform):
+    def _set_platform(self, model=None, platform=None):
         """
         Internal method to set the platform type
         Not to be exposed at the handle
         """
-        self.__platform = platform
+        from imcsdk.imccoreutils import IMC_PLATFORM
+        modular_platform_prefixes = ["UCSC-C3X", "UCSS-S32"]
+        if platform:
+            self.__platform = platform
+        elif model:
+            self.__platform = IMC_PLATFORM.TYPE_CLASSIC
+            for prefix in modular_platform_prefixes:
+                if model.startswith(prefix):
+                    self.__platform = IMC_PLATFORM.TYPE_MODULAR
 
     def _set_model(self, model):
         """

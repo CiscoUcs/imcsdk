@@ -33,7 +33,7 @@ def test_valid_enable_ipmi(login_mock, query_dn_mock, set_mo_mock):
                           username='admin',
                           password='right')
 
-    test_cimc._set_platform_type(IMC_PLATFORM.TYPE_CLASSIC)
+    test_cimc._set_platform(platform=IMC_PLATFORM.TYPE_CLASSIC)
     query_dn_mock.return_value = ipmi_enabled_mock
 
     # Scenario: Enable IPMI default values
@@ -84,7 +84,7 @@ def test_valid_disable_ipmi(login_mock, query_dn_mock, set_mo_mock):
                           username='admin',
                           password='right')
 
-    test_cimc._set_platform_type(IMC_PLATFORM.TYPE_CLASSIC)
+    test_cimc._set_platform(platform=IMC_PLATFORM.TYPE_CLASSIC)
     query_dn_mock.return_value = ipmi_disabled_mock
 
     # Scenario: Enable IPMI default values
