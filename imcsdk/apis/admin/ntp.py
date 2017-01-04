@@ -17,27 +17,30 @@ This module implements all the ntp related functionality
 """
 from imcsdk.mometa.comm.CommNtpProvider import CommNtpProvider
 from imcsdk.imccoreutils import _is_valid_arg
+from imcsdk.imcexception import ImcOperationError
 
 
-def _get_ntp_mo(handle=None, from_server=False):
-    from imcsdk.imcexception import ImcOperationError
+def _get_ntp_mo(handle):
 
-    mo = CommNtpProvider(parent_mo_or_dn="sys/svc-ext")
-    if from_server:
-        if handle is None:
-            raise ImcOperationError("Get NTP Settings", "Handle is None")
+    mo = _create_ntp_mo()
+    if handle is None:
+        raise ImcOperationError("Get NTP Settings", "Handle is None")
 
-        mo = handle.query_dn(mo.dn)
-        if mo is None:
-            raise ImcOperationError("Get NTP Settings", "MO doesn't exist")
+    mo = handle.query_dn(mo.dn)
+    if mo is None:
+        raise ImcOperationError("Get NTP Settings", "MO doesn't exist")
     return mo
 
 
+def _create_ntp_mo():
+    return CommNtpProvider(parent_mo_or_dn="sys/svc-ext")
+
+
 def _set_ntp_servers(mo, ntp_servers):
-    args = {}
-    for server in ntp_servers:
-        key = "ntp_server" + str(server["id"])
-        args[key] = server["ip"]
+    if len(ntp_servers) > 4:
+        raise ImcOperationError("Set NTP Servers",
+                                "Cannot specify more than 4 servers")
+    args = {"ntp_server" + str(x["id"]): x["ip"] for x in ntp_servers}
     mo.set_prop_multiple(**args)
 
 
@@ -61,7 +64,7 @@ def ntp_enable(handle, ntp_servers=[]):
                                   {"id": 2, "ip": "192.168.1.2"}]
     """
 
-    mo = _get_ntp_mo()
+    mo = _create_ntp_mo()
     mo.ntp_enable = "yes"
 
     _set_ntp_servers(mo, ntp_servers)
@@ -79,7 +82,7 @@ def ntp_disable(handle):
         CommNtpProvider object
     """
 
-    mo = _get_ntp_mo()
+    mo = _create_ntp_mo()
     mo.ntp_enable = "no"
 
     handle.set_mo(mo)
@@ -109,7 +112,7 @@ def ntp_servers_modify(handle, ntp_servers=[]):
     # While sending the modified list of servers, it is imperative to send
     # ntp_enable property in the request.
     # Hence, query the MO and reassign the same value to ntp_enable
-    mo = _get_ntp_mo(handle, from_server=True)
+    mo = _get_ntp_mo(handle)
     mo.ntp_enable = mo.ntp_enable
     _set_ntp_servers(mo, ntp_servers)
 
@@ -127,7 +130,7 @@ def is_ntp_enabled(handle):
         bool
     """
 
-    mo = _get_ntp_mo(handle, from_server=True)
+    mo = _get_ntp_mo(handle)
     return (mo.ntp_enable.lower() in ["true", "yes"])
 
 
@@ -161,13 +164,14 @@ def ntp_setting_exists(handle, **kwargs):
         (True, CommNtpProvider) if settings match, (False, None) otherwise
     """
 
-    ntp_mo = _get_ntp_mo(handle, from_server=True)
+    ntp_mo = _get_ntp_mo(handle)
 
-    if ntp_mo.ntp_enable != kwargs.get("ntp_enable"):
-        return False, None
+    if _is_valid_arg("ntp_enable", kwargs):
+        if ntp_mo.ntp_enable != kwargs.get("ntp_enable"):
+            return False, None
 
     if _is_valid_arg("ntp_servers", kwargs):
-        mo = _get_ntp_mo()
+        mo = _create_ntp_mo()
         _set_ntp_servers(mo, kwargs.get("ntp_servers"))
         if not _check_ntp_server_match(ntp_mo, mo):
             return False, None

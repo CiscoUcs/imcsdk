@@ -11,7 +11,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from nose.tools import assert_equal
+from nose.tools import assert_equal, raises
 from ..connection.info import custom_setup, custom_teardown
 
 from imcsdk.apis.admin.ntp import ntp_enable, ntp_disable, is_ntp_enabled, \
@@ -35,7 +35,14 @@ ntp_servers = [{"id": 1, "ip": "192.168.1.1"},
                {"id": 3, "ip": "192.168.1.3"},
                {"id": 4, "ip": "1.2.3.4"}]
 
-ntp_servers_1 = [{"id": 1, "ip": "192.168.1.1"},
+ntp_servers_2 = [{"id": 1, "ip": "192.168.1.1"},
+                 {"id": 2, "ip": ""},
+                 {"id": 3, "ip": "192.168.1.3"},
+                 {"id": 4, "ip": "1.1.1.1"},
+                 {"id": 5, "ip": "2.2.2.2"}]
+
+
+ntp_servers_3 = [{"id": 1, "ip": "192.168.1.1"},
                  {"id": 2, "ip": ""},
                  {"id": 3, "ip": "192.168.1.3"},
                  {"id": 4, "ip": "1.1.1.1"}]
@@ -53,17 +60,33 @@ def test_ntp_setting_exists():
     assert_equal(match, True)
 
 
+@raises(Exception)
+def test_ntp_enable_2():
+    ntp_enable(handle, ntp_servers=ntp_servers_2)
+    match, mo = ntp_setting_exists(handle,
+                                   ntp_servers=ntp_servers_2)
+    assert_equal(match, True)
+
+
+@raises(Exception)
 def test_ntp_setting_exists_2():
+    match, mo = ntp_setting_exists(handle,
+                                   ntp_enable="yes",
+                                   ntp_servers=ntp_servers_2)
+    assert_equal(match, True)
+
+
+def test_ntp_setting_exists_3():
     match, mo = ntp_setting_exists(handle,
                                    ntp_enable="yes")
     assert_equal(match, True)
 
 
 def test_ntp_servers_modify():
-    ntp_servers_modify(handle, ntp_servers=ntp_servers_1)
+    ntp_servers_modify(handle, ntp_servers=ntp_servers_3)
     match, mo = ntp_setting_exists(handle,
                                    ntp_enable="yes",
-                                   ntp_servers=ntp_servers_1)
+                                   ntp_servers=ntp_servers_3)
     assert_equal(match, True)
 
 
