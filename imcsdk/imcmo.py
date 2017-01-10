@@ -317,7 +317,7 @@ class ManagedObject(ImcBase):
                             prop.mask and
                             self._dirty_mask & prop.mask != 0)):
                     value = getattr(self, key)
-                    if value:
+                    if value is not None:
                         xml_obj.set(prop.xml_attribute, value)
             else:
                 if key not in self.__xtra_props:

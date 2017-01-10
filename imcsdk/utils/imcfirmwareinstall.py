@@ -14,6 +14,7 @@
 
 import time
 import datetime
+import logging
 from imcsdk.imcgenutils import *
 from imcsdk.imccoreutils import IMC_PLATFORM, get_server_dn
 from imcsdk.mometa.huu.HuuFirmwareUpdater import HuuFirmwareUpdater, \
@@ -22,6 +23,7 @@ from imcsdk.mometa.huu.HuuFirmwareUpdateStatus import HuuFirmwareUpdateStatus
 from imcsdk.mometa.top.TopSystem import TopSystem
 from imcsdk.mometa.huu.HuuController import HuuController
 
+log = logging.getLogger('imc')
 
 def update_imc_firmware_huu(handle, remote_share, share_type, remote_ip,
                             username="", password="", update_component="all",

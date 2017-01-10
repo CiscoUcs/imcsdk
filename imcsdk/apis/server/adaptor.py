@@ -108,8 +108,9 @@ def setup_vic_adaptor_properties(handle, adaptor_slot, fip_mode=None,
     """
 
     mo = get_vic_adaptor_properties(handle, adaptor_slot, server_id, **kwargs)
-    if num_vmfex_ifs:
-        mo.num_of_vm_fex_ifs = str(num_vmfex_ifs)
+    # VMFEX feature support is discontinued
+    # if num_vmfex_ifs:
+    #     mo.num_of_vm_fex_ifs = str(num_vmfex_ifs)
 
     if fip_mode is True:
         mo.fip_mode = "enabled"
