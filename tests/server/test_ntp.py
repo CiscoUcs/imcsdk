@@ -15,7 +15,7 @@ from nose.tools import assert_equal, raises
 from ..connection.info import custom_setup, custom_teardown
 
 from imcsdk.apis.admin.ntp import ntp_enable, ntp_disable, is_ntp_enabled, \
-        ntp_setting_exists, ntp_servers_modify
+        ntp_setting_exists, ntp_servers_modify, ntp_servers_clear
 
 handle = None
 
@@ -90,6 +90,32 @@ def test_ntp_servers_modify():
     assert_equal(match, True)
 
 
+def test_ntp_servers_clear():
+    ntp_servers_clear(handle, ntp_servers=["192.168.1.3", "1.1.1.1"])
+    match, mo = ntp_setting_exists(handle, ntp_enable="yes",
+                                   ntp_servers=[{"id": 1, "ip": "192.168.1.1"}])
+    assert_equal(match, True)
+
+
+@raises(Exception)
+def test_ntp_servers_clear_all_enabled():
+    ntp_servers_clear(handle)
+    match, mo = ntp_setting_exists(handle, ntp_enable="yes",
+                                   ntp_servers=[{"id": 1, "ip": ""},
+                                                {"id": 2, "ip": ""},
+                                                {"id": 3, "ip": ""},
+                                                {"id": 4, "ip": ""}])
+
+
 def test_ntp_disable():
     ntp_disable(handle)
     assert_equal(is_ntp_enabled(handle), False)
+
+
+def test_ntp_servers_clear_all_disabled():
+    ntp_servers_clear(handle)
+    match, mo = ntp_setting_exists(handle, ntp_enable="no",
+                                   ntp_servers=[{"id": 1, "ip": ""},
+                                                {"id": 2, "ip": ""},
+                                                {"id": 3, "ip": ""},
+                                                {"id": 4, "ip": ""}])

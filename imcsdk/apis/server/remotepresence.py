@@ -426,6 +426,7 @@ def sol_setup(handle, speed, com_port, ssh_port, server_id=1):
     solif_mo.ssh_port = str(ssh_port)
 
     handle.set_mo(solif_mo)
+    return handle.query_dn(solif_mo.dn)
 
 
 def sol_disable(handle, server_id=1):

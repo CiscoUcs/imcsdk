@@ -19,38 +19,42 @@ from imcsdk.mometa.comm.CommNtpProvider import CommNtpProvider
 from imcsdk.imccoreutils import _is_valid_arg
 from imcsdk.imcexception import ImcOperationError
 
+import logging
+
+log = logging.getLogger('imc')
+
+COMM_EXT_DN = "sys/svc-ext"
+NTP_DN = "sys/svc-ext/ntp-svc"
+_NTP_SERVER_LIST = ["ntp_server1", "ntp_server2", "ntp_server3", "ntp_server4"]
+
 
 def _get_ntp_mo(handle):
 
-    mo = _create_ntp_mo()
     if handle is None:
         raise ImcOperationError("Get NTP Settings", "Handle is None")
 
-    mo = handle.query_dn(mo.dn)
+    mo = handle.query_dn(NTP_DN)
     if mo is None:
         raise ImcOperationError("Get NTP Settings", "MO doesn't exist")
     return mo
 
 
-def _create_ntp_mo():
-    return CommNtpProvider(parent_mo_or_dn="sys/svc-ext")
-
-
 def _set_ntp_servers(mo, ntp_servers):
-    if len(ntp_servers) > 4:
+    if len(ntp_servers) > len(_NTP_SERVER_LIST):
         raise ImcOperationError("Set NTP Servers",
-                                "Cannot specify more than 4 servers")
+                                "Cannot specify more than %d servers"
+                                % len(_NTP_SERVER_LIST))
     args = {"ntp_server" + str(x["id"]): x["ip"] for x in ntp_servers}
     mo.set_prop_multiple(**args)
 
 
 def ntp_enable(handle, ntp_servers=[]):
     """
-    Enable NTP
+    Enables NTP and configures the NTP servers provided
 
     Args:
         handle (ImcHandle)
-        ntp_servers (list): List of dictionaries of the type
+        ntp_servers (list): List of dictionaries in the format
                             [{"id": 1, "ip": "192.168.1.1"},
                              {"id": 2, "ip": "192.168.1.2"}]
                             Upto 4 ntp servers can be specified.
@@ -64,7 +68,8 @@ def ntp_enable(handle, ntp_servers=[]):
                                   {"id": 2, "ip": "192.168.1.2"}]
     """
 
-    mo = _create_ntp_mo()
+    log.warning('IPMI Set SEL Time command will be disabled if NTP is enabled.')
+    mo = _get_ntp_mo(handle)
     mo.ntp_enable = "yes"
 
     _set_ntp_servers(mo, ntp_servers)
@@ -74,7 +79,7 @@ def ntp_enable(handle, ntp_servers=[]):
 
 def ntp_disable(handle):
     """
-    Disable NTP
+    Disables NTP
     Args:
         handle (ImcHandle)
 
@@ -82,19 +87,52 @@ def ntp_disable(handle):
         CommNtpProvider object
     """
 
-    mo = _create_ntp_mo()
+    log.warning('Disabling NTP may cause Cisco IMC to lose timesync with server/s')
+    mo = _get_ntp_mo(handle)
     mo.ntp_enable = "no"
 
     handle.set_mo(mo)
     return handle.query_dn(mo.dn)
 
 
-def ntp_servers_modify(handle, ntp_servers=[]):
+def ntp_servers_clear(handle, ntp_servers=[]):
     """
-    Modify the configured NTP servers
+    Clears the NTP servers provided in the arguments.
+    Clears all the NTP servers by default.
+
     Args:
         handle (ImcHandle)
-        ntp_servers (list): List of dictionaries of the type
+        ntp_servers (list): List of NTP servers in the format
+                            ["192.168.1.1", "192.168.1.2"]
+
+    Returns:
+        CommNtpProvider object
+    """
+
+    mo = _get_ntp_mo(handle)
+    args = {}
+
+    if ntp_servers:
+        args = {x: "" for x in _NTP_SERVER_LIST if getattr(mo, x) in ntp_servers}
+    else:
+        args = {x: "" for x in _NTP_SERVER_LIST}
+
+    if mo.ntp_enable.lower() in ["yes", "true"] and len(args) == len(_NTP_SERVER_LIST):
+        raise ImcOperationError("Clear NTP Servers",
+                                "Cannot clear all NTP servers when NTP is enabled")
+
+    mo.set_prop_multiple(**args)
+    mo.ntp_enable = mo.ntp_enable
+    handle.set_mo(mo)
+    return handle.query_dn(mo.dn)
+
+
+def ntp_servers_modify(handle, ntp_servers=[]):
+    """
+    Modifies the configured NTP servers
+    Args:
+        handle (ImcHandle)
+        ntp_servers (list): List of dictionaries in the format
                             [{"id": 1, "ip": "192.168.1.1"},
                              {"id": 2, "ip": "192.168.1.2"}]
                             Upto 4 ntp servers can be specified.
@@ -117,7 +155,7 @@ def ntp_servers_modify(handle, ntp_servers=[]):
     _set_ntp_servers(mo, ntp_servers)
 
     handle.set_mo(mo)
-    return mo
+    return handle.query_dn(mo.dn)
 
 
 def is_ntp_enabled(handle):
@@ -139,8 +177,7 @@ def _is_invalid_value(value):
 
 
 def _check_ntp_server_match(ntp_mo, mo):
-    for prop in ["ntp_server1", "ntp_server2",
-                 "ntp_server3", "ntp_server4"]:
+    for prop in _NTP_SERVER_LIST:
         configured_value = getattr(ntp_mo, prop)
         in_value = getattr(mo, prop)
 
@@ -171,7 +208,7 @@ def ntp_setting_exists(handle, **kwargs):
             return False, None
 
     if _is_valid_arg("ntp_servers", kwargs):
-        mo = _create_ntp_mo()
+        mo = CommNtpProvider(parent_mo_or_dn=COMM_EXT_DN)
         _set_ntp_servers(mo, kwargs.get("ntp_servers"))
         if not _check_ntp_server_match(ntp_mo, mo):
             return False, None
