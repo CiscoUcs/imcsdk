@@ -24,8 +24,8 @@ from imcsdk.mometa.equipment.EquipmentLocatorLed \
     import EquipmentLocatorLed, EquipmentLocatorLedConsts
 from imcsdk.mometa.equipment.EquipmentChassisLocatorLed \
     import EquipmentChassisLocatorLed, EquipmentChassisLocatorLedConsts
-from imcsdk.imccoreutils import get_server_dn, IMC_PLATFORM, _set_server_dn, \
-        _is_valid_arg
+from imcsdk.imccoreutils import get_server_dn, IMC_PLATFORM, _set_server_dn
+from imcsdk.apis.utils import _is_valid_arg
 
 
 def _set_power_state(handle, server_dn, state):

@@ -16,8 +16,8 @@
 This module implements all the ntp related functionality
 """
 from imcsdk.mometa.comm.CommNtpProvider import CommNtpProvider
-from imcsdk.imccoreutils import _is_valid_arg
 from imcsdk.imcexception import ImcOperationError
+from imcsdk.apis.utils import _get_mo, _is_invalid_value, _is_valid_arg
 
 import logging
 
@@ -26,17 +26,6 @@ log = logging.getLogger('imc')
 COMM_EXT_DN = "sys/svc-ext"
 NTP_DN = "sys/svc-ext/ntp-svc"
 _NTP_SERVER_LIST = ["ntp_server1", "ntp_server2", "ntp_server3", "ntp_server4"]
-
-
-def _get_ntp_mo(handle):
-
-    if handle is None:
-        raise ImcOperationError("Get NTP Settings", "Handle is None")
-
-    mo = handle.query_dn(NTP_DN)
-    if mo is None:
-        raise ImcOperationError("Get NTP Settings", "MO doesn't exist")
-    return mo
 
 
 def _set_ntp_servers(mo, ntp_servers):
@@ -69,7 +58,7 @@ def ntp_enable(handle, ntp_servers=[]):
     """
 
     log.warning('IPMI Set SEL Time command will be disabled if NTP is enabled.')
-    mo = _get_ntp_mo(handle)
+    mo = _get_mo(handle, dn=NTP_DN)
     mo.ntp_enable = "yes"
 
     _set_ntp_servers(mo, ntp_servers)
@@ -88,7 +77,7 @@ def ntp_disable(handle):
     """
 
     log.warning('Disabling NTP may cause Cisco IMC to lose timesync with server/s')
-    mo = _get_ntp_mo(handle)
+    mo = _get_mo(handle, dn=NTP_DN)
     mo.ntp_enable = "no"
 
     handle.set_mo(mo)
@@ -109,7 +98,7 @@ def ntp_servers_clear(handle, ntp_servers=[]):
         CommNtpProvider object
     """
 
-    mo = _get_ntp_mo(handle)
+    mo = _get_mo(handle, dn=NTP_DN)
     args = {}
 
     if ntp_servers:
@@ -150,7 +139,7 @@ def ntp_servers_modify(handle, ntp_servers=[]):
     # While sending the modified list of servers, it is imperative to send
     # ntp_enable property in the request.
     # Hence, query the MO and reassign the same value to ntp_enable
-    mo = _get_ntp_mo(handle)
+    mo = _get_mo(handle, dn=NTP_DN)
     mo.ntp_enable = mo.ntp_enable
     _set_ntp_servers(mo, ntp_servers)
 
@@ -168,12 +157,8 @@ def is_ntp_enabled(handle):
         bool
     """
 
-    mo = _get_ntp_mo(handle)
+    mo = _get_mo(handle, dn=NTP_DN)
     return (mo.ntp_enable.lower() in ["true", "yes"])
-
-
-def _is_invalid_value(value):
-    return value in ["", None]
 
 
 def _check_ntp_server_match(ntp_mo, mo):
@@ -201,7 +186,7 @@ def ntp_setting_exists(handle, **kwargs):
         (True, CommNtpProvider) if settings match, (False, None) otherwise
     """
 
-    ntp_mo = _get_ntp_mo(handle)
+    ntp_mo = _get_mo(handle, dn=NTP_DN)
 
     if _is_valid_arg("ntp_enable", kwargs):
         if ntp_mo.ntp_enable != kwargs.get("ntp_enable"):
