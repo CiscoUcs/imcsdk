@@ -20,6 +20,14 @@ import logging
 log = logging.getLogger('imc')
 
 
+def _get_parent_dn(handle):
+    from imcsdk.imccoreutils import IMC_PLATFORM
+    if handle.platform == IMC_PLATFORM.TYPE_CLASSIC:
+        return 'sys'
+    elif handle.platform == IMC_PLATFORM.TYPE_MODULAR:
+        return 'sys/chassis-1'
+
+
 def inventory_imc(handle, user=None, pwd=None, hostname=None, remote_file=None,
                   proto='tftp', timeout=300, interval=2, **kwargs):
     """
@@ -46,14 +54,8 @@ def inventory_imc(handle, user=None, pwd=None, hostname=None, remote_file=None,
     """
 
     from imcsdk.mometa.mgmt.MgmtInventory import MgmtInventory
-    from imcsdk.imccoreutils import IMC_PLATFORM
 
-    if handle.platform == IMC_PLATFORM.TYPE_CLASSIC:
-        parent_dn = 'sys'
-    elif handle.platform == IMC_PLATFORM.TYPE_MODULAR:
-        parent_dn = 'sys/chassis-1'
-
-    mo = MgmtInventory(parent_mo_or_dn=parent_dn)
+    mo = MgmtInventory(parent_mo_or_dn=_get_parent_dn(handle))
     params = {
         'user': user,
         'pwd': pwd,
@@ -68,20 +70,22 @@ def inventory_imc(handle, user=None, pwd=None, hostname=None, remote_file=None,
 
     handle.add_mo(mo, modify_present=True)
 
-    log.info('Starting Inventory Collection')
+    log.info('Starting Inventory Collection for IMC[%s]' % handle.ip)
     time.sleep(interval)
     time_left = timeout
 
     # Check for the inventory collection to complete.
     while time_left > 0:
         mo = handle.query_dn(dn=mo.dn)
+        log.info("Status:[%s] Progress:[%s]" % (mo.fsm_status, mo.progress))
+
         if mo.fsm_status == "COMPLETED" and mo.progress == "100%":
             log.info("Inventory Collection Complete")
             return mo
 
-        log.info("Status:[%s] Progress:[%s]" % (mo.fsm_status, mo.progress))
         time.sleep(interval)
         time_left -= interval
 
-    log.info("Inventory Collection timed out after %s seconds!" % timeout)
+    log.info("Inventory Collection for IMC[%s] timed out after %s seconds!" %
+             (handle.ip, timeout))
     return mo
