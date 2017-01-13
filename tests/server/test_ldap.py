@@ -45,6 +45,11 @@ ldap_servers_2 = [{"id": 1, "ip": "192.168.1.1", "port": 400},
                   {"id": 6, "ip": "192.168.1.63", "port": 600},
                   {"id": 7, "ip": "192.168.1.13", "port": 600}]
 
+ldap_servers_3 = [{"id": 1, "ip": "192.168.1.1", "port": 400},
+                  {"id": 2, "ip": "192.168.1.2", "port": 500},
+                  {"id": 3, "ip": "192.168.1.100", "port": 600},
+                  {"id": 4, "ip": "1.2.3.4", "port": 800}]
+
 
 def test_ldap_configure():
     ldap_configure(
@@ -62,6 +67,28 @@ def test_ldap_configure():
         bind_dn='CN=administrator,CN=Users,DC=QATCSLABTPI02,DC=cisco,DC=com',
         password='abcdefg', ldap_servers=ldap_servers)
     assert_equal(match, True)
+
+
+def test_ldap_mismatch_config():
+    match, mo = ldap_settings_exist(
+        handle, enabled=True,
+        basedn='DC=QATCSLABTPI02,DC=cisco,DC=com',
+        domain='QATCSLABTPI02.cisco.com',
+        timeout=100, group_auth=False,
+        bind_dn='CN=administrator,CN=Users,DC=QATCSLABTPI02,DC=cisco,DC=com',
+        password='abcdefg', ldap_servers=ldap_servers)
+    assert_equal(match, False)
+
+
+def test_ldap_mismatch_config_servers():
+    match, mo = ldap_settings_exist(
+        handle, enabled=True,
+        basedn='DC=QATCSLABTPI02,DC=cisco,DC=com',
+        domain='QATCSLABTPI02.cisco.com',
+        timeout=20, group_auth=True,
+        bind_dn='CN=administrator,CN=Users,DC=QATCSLABTPI02,DC=cisco,DC=com',
+        password='abcdefg', ldap_servers=ldap_servers_3)
+    assert_equal(match, False)
 
 
 @raises(Exception)

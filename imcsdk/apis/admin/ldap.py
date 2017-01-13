@@ -168,7 +168,7 @@ def _check_ldap_server_match(ldap_mo, ldap_servers):
     return True
 
 
-def _check_ldap_specials(mo, kwargs):
+def _get_ldap_params(kwargs):
     params = {}
     if _is_valid_arg('enabled', kwargs):
         params['admin_state'] = ('disabled', 'enabled')[kwargs.pop('enabled')]
@@ -188,14 +188,11 @@ def _check_ldap_specials(mo, kwargs):
     if _is_valid_arg('group_nested_search', kwargs):
         params['group_nested_search'] = str(kwargs.pop('group_nested_search'))
 
-    if not mo.check_prop_match(**params):
-        return False
-
     # pop the password property if it exists
     if _is_valid_arg('password', kwargs):
         kwargs.pop('password')
 
-    return True
+    return params
 
 
 def ldap_settings_exist(handle, **kwargs):
@@ -221,7 +218,8 @@ def ldap_settings_exist(handle, **kwargs):
 
     mo = _get_mo(handle, dn=LDAP_DN)
 
-    if not _check_ldap_specials(mo, kwargs):
+    params = _get_ldap_params(kwargs)
+    if not mo.check_prop_match(**params):
         return False, None
 
     if _is_valid_arg('ldap_servers', kwargs):
@@ -261,8 +259,7 @@ def _get_free_ldap_role_group_id(handle):
     raise ImcOperationError("LDAP role group create", "No free role group available")
 
 
-def ldap_role_group_create(handle, domain=None, name=None,
-                           role='read-only', **kwargs):
+def ldap_role_group_create(handle, domain, name, role='read-only', **kwargs):
     """
     Creates an LDAP role group
 
@@ -429,8 +426,8 @@ def is_ldap_certificate_management_enabled(handle):
     return mo.binding_certificate.lower() == "enabled"
 
 
-def ldap_certificate_download(handle, user=None, pwd=None, remote_server=None,
-                              remote_file=None, protocol='tftp', **kwargs):
+def ldap_certificate_download(handle, remote_server, remote_file,
+                              user=None, pwd=None, protocol='tftp', **kwargs):
     """
     Download LDAP CA certificate from remote server to Cisco IMC
 
@@ -465,8 +462,8 @@ def ldap_certificate_download(handle, user=None, pwd=None, remote_server=None,
     return handle.query_dn(mo.dn)
 
 
-def ldap_certificate_export(handle, user=None, pwd=None, remote_server=None,
-                            remote_file=None, protocol='tftp', **kwargs):
+def ldap_certificate_export(handle, remote_server, remote_file,
+                            user=None, pwd=None, protocol='tftp', **kwargs):
     """
     Export the LDAP CA certificate from the Cisco IMC to a remote location
 
