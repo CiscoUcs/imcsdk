@@ -17,6 +17,8 @@ This module contains APIs to download inventory to a remote location
 
 import time
 import logging
+from imcsdk.mometa.mgmt.MgmtInventory import MgmtInventory
+
 log = logging.getLogger('imc')
 
 
@@ -28,10 +30,10 @@ def _get_parent_dn(handle):
         return 'sys/chassis-1'
 
 
-def inventory_imc(handle, user=None, pwd=None, hostname=None, remote_file=None,
-                  proto='tftp', timeout=300, interval=2, **kwargs):
+def inventory_remote(handle, hostname, remote_file, user=None, pwd=None,
+                     proto='tftp', **kwargs):
     """
-    Inventory the the Cisco IMC server.
+    Inventory the Cisco IMC server.
 
     Args:
         handle (ImcHandle): Imc Connection handle
@@ -40,8 +42,6 @@ def inventory_imc(handle, user=None, pwd=None, hostname=None, remote_file=None,
         hostname (str): IP or Hostname for the remote host.
         remote_file (str): Absolute path and name for the backup file
         proto (str) : "ftp", "http", "scp", "sftp", "tftp"
-        timeout (int): Timeout in secs for inventory collection to complete
-        interval (int): Frequency of monitoring in seconds
         kwargs : key=value paired arguments
 
     Returns:
@@ -52,8 +52,6 @@ def inventory_imc(handle, user=None, pwd=None, hostname=None, remote_file=None,
                       hostname="1.1.1.1", remote_file="/users/xyz/inventory",
                       proto="scp")
     """
-
-    from imcsdk.mometa.mgmt.MgmtInventory import MgmtInventory
 
     mo = MgmtInventory(parent_mo_or_dn=_get_parent_dn(handle))
     params = {
@@ -67,10 +65,27 @@ def inventory_imc(handle, user=None, pwd=None, hostname=None, remote_file=None,
 
     mo.set_prop_multiple(**params)
     mo.set_prop_multiple(**kwargs)
-
     handle.add_mo(mo, modify_present=True)
+    return handle.query_dn(mo.dn)
 
-    log.info('Starting Inventory Collection for IMC[%s]' % handle.ip)
+
+def monitor_inventory_collection(handle, timeout=300, interval=2):
+    """
+    Monitors the inventory collection feature supported natively by Cisco IMC
+
+    Args:
+        handle (ImcHandle)
+        timeout (int): Timeout in secs for inventory collection to complete
+        interval (int): Frequency of monitoring in seconds
+
+    Returns:
+        None
+
+    Example:
+        monitor_inventory_collection(handle)
+    """
+    mo = MgmtInventory(parent_mo_or_dn=_get_parent_dn(handle))
+    log.info('Monitoring Inventory Collection for IMC[%s]' % handle.ip)
     time.sleep(interval)
     time_left = timeout
 
@@ -81,11 +96,10 @@ def inventory_imc(handle, user=None, pwd=None, hostname=None, remote_file=None,
 
         if mo.fsm_status == "COMPLETED" and mo.progress == "100%":
             log.info("Inventory Collection Complete")
-            return mo
+            return
 
         time.sleep(interval)
         time_left -= interval
 
     log.info("Inventory Collection for IMC[%s] timed out after %s seconds!" %
              (handle.ip, timeout))
-    return mo
