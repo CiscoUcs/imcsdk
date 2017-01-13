@@ -870,10 +870,6 @@ def _set_server_dn(handle, kwargs):
     return get_server_dn(handle, str(server_id))
 
 
-def _is_valid_arg(param, kwargs):
-    return kwargs.get(param) is not None
-
-
 def get_handle_from_cookie(cookie):
 
     for handle in global_handles:

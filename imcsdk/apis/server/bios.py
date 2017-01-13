@@ -290,7 +290,8 @@ def boot_precision_configured_get(handle, server_id=1):
 
 
 def boot_order_precision_exists(handle, **kwargs):
-    from imcsdk.imccoreutils import _is_valid_arg, _set_server_dn
+    from imcsdk.imccoreutils import _set_server_dn
+    from imcsdk.apis.utils import _is_valid_arg
 
     server_dn = _set_server_dn(handle, kwargs)
     mos = handle.query_children(in_dn=server_dn,

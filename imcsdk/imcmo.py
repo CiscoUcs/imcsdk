@@ -177,6 +177,8 @@ class ManagedObject(ImcBase):
             None
         """
 
+        if value is None:
+            return
         if not forced:
             prop = imccoreutils.get_prop_meta(self, name)
             if prop.access != imccoremeta.MoPropertyMeta.READ_WRITE:

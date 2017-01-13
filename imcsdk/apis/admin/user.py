@@ -13,7 +13,7 @@
 
 
 """
-This module implements apis to create/delete/modify local/ldap users
+This module implements apis to create/delete/modify local users
 """
 
 import logging
