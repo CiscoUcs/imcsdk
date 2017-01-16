@@ -17,8 +17,11 @@ This module provides APIs for bios related configuration like boot order
 """
 
 import logging
+import json
 import imcsdk.imccoreutils as imccoreutils
 from imcsdk.mometa.lsboot.LsbootDevPrecision import LsbootDevPrecision
+from imcsdk.imcexception import ImcOperationError
+from imcsdk.apis.utils import _is_valid_arg
 
 log = logging.getLogger('imc')
 
@@ -449,3 +452,286 @@ def boot_order_policy_set(handle, reboot_on_update=False,
 
     boot_policy = handle.query_classid("LsbootDef")
     return boot_policy
+
+
+def _get_bios_dn(handle, server_id=1):
+    server_dn = imccoreutils.get_server_dn(handle, server_id)
+    return (server_dn + '/bios')
+
+
+def _get_bios_profile_mo(handle, name, server_id=1):
+    bios_dn = _get_bios_dn(handle, server_id)
+    parent_dn = bios_dn + '/profile-mgmt'
+    mos = handle.query_children(in_dn=parent_dn)
+    for mo in mos:
+        if mo._class_id == 'BiosProfile' and mo.name == name:
+            return mo
+    return None
+
+
+def _get_bios_profile(handle, name, server_id=1):
+    mo = _get_bios_profile_mo(handle, name=name, server_id=server_id)
+    if mo is None:
+        raise ImcOperationError("Get BiosProfile: %s " % name,
+                                "Managed Object not found")
+    return mo
+
+
+def bios_profile_backup_running(handle, server_id=1, **kwargs):
+    """
+    Backups up the running configuration of various bios tokens to create a
+    'cisco_backup_profile'.
+    Will overwrite the existing backup profile if it exists.
+
+    Args:
+        handle (ImcHandle)
+        server_id (int): Id of the server to perform
+                         this operation on C3260 platforms
+        kwargs : Key-Value paired arguments for future use
+
+    Returns:
+        BiosProfile object corresponding to the backup profile created
+
+    Raises:
+        ImcOperationError if the backup profile is not created
+
+    Examples:
+        bios_profile_backup_running(handle, server_id=1)
+    """
+
+    from imcsdk.mometa.bios.BiosProfileManagement import BiosProfileManagement,\
+        BiosProfileManagementConsts
+    mo = BiosProfileManagement(parent_mo_or_dn=_get_bios_dn(handle, server_id))
+    mo.admin_action = BiosProfileManagementConsts.ADMIN_ACTION_BACKUP
+    mo.set_prop_multiple(**kwargs)
+    handle.set_mo(mo)
+
+    return _get_bios_profile(handle, name='cisco_backup_profile',
+                             server_id=server_id)
+
+
+def bios_profile_upload(handle, remote_server, remote_file, protocol='tftp',
+                        user=None, pwd=None, server_id=1, **kwargs):
+    """
+    Uploads a user configured bios profile in json format.
+    Cisco IMC supports uploading a maximum of 3 profiles
+
+    Args:
+        handle (ImcHandle)
+        remote_server (str): Remote Server IP or Hostname
+        remote_file (str): Remote file path
+        protocol (str): Protocol for downloading the certificate
+                        ['tftp', 'ftp', 'http', 'scp', 'sftp']
+        server_id (int): Id of the server to perform
+                         this operation on C3260 platforms
+        kwargs: Key-Value paired arguments for future use
+
+    Returns:
+        UploadBiosProfile object
+
+    Examples:
+
+    """
+
+    from imcsdk.mometa.upload.UploadBiosProfile import UploadBiosProfile
+    bios_dn = _get_bios_dn(handle, server_id=server_id)
+    mo = UploadBiosProfile(
+            parent_mo_or_dn=bios_dn + '/profile-mgmt')
+    params = {
+        'remote_server': remote_server,
+        'remote_file': remote_file,
+        'protocol': protocol,
+        'user': user,
+        'pwd': pwd
+    }
+    mo.set_prop_multiple(**params)
+    mo.set_prop_multiple(**kwargs)
+    handle.set_mo(mo)
+    return handle.query_dn(mo.dn)
+
+
+def bios_profile_get(handle, name, server_id=1):
+    """
+    Gets the bios profile corresponding to the name specified
+
+    Args:
+        handle (ImcHandle)
+        name (str): Name of the bios profile.
+                    Corresponds to the name field in the json file.
+        server_id (int): Id of the server to perform
+                         this operation on C3260 platforms
+
+    Returns:
+        BiosProfile object corresponding to the name specified
+
+    Raises:
+        ImcOperationError if the bios profile is not found
+
+    Examples:
+
+    """
+
+    return _get_bios_profile_mo(handle, name=name, server_id=server_id)
+
+
+def bios_profile_activate(handle, name, backup_on_activate=True,
+                          reboot_on_activate=False, server_id=1, **kwargs):
+    """
+    Activates the bios profile specified by name on the Cisco IMC Server
+
+    Args:
+        handle (ImcHandle)
+        name (str): Name of the bios profile.
+                    Corresponds to the name field in the json file.
+        backup_on_activate (bool): Backup running bios configuration
+                                   before activating this profile.
+                                   Will overwrite the previous backup.
+        reboot_on_activate (bool): Reboot the host/server for the newer bios
+                                   configuration to be applied.
+        server_id (int): Id of the server to perform
+                         this operation on C3260 platforms.
+        kwargs: Key-Value paired arguments for future use.
+
+    Returns:
+        BiosProfile object corresponding to the name specified
+
+    Raises:
+        ImcOperationError if the bios profile is not found
+
+    Examples:
+
+    """
+
+    from imcsdk.mometa.bios.BiosProfile import BiosProfileConsts
+    mo = _get_bios_profile(handle, name=name, server_id=server_id)
+    params = {
+        'backup_on_activate': ('no', 'yes')[backup_on_activate],
+        'reboot_on_activate': ('no', 'yes')[reboot_on_activate],
+        'enabled': 'yes',
+        'admin_action': BiosProfileConsts.ADMIN_ACTION_ACTIVATE
+    }
+    mo.set_prop_multiple(**params)
+    mo.set_prop_multiple(**kwargs)
+    handle.set_mo(mo)
+    return handle.query_dn(mo.dn)
+
+
+def bios_profile_delete(handle, name, server_id=1):
+    """
+    Deletes the bios profile specified by the name on the Cisco IMC server
+
+    Args:
+        handle (ImcHandle)
+        name (str): Name of the bios profile.
+                    Corresponds to the name field in the json file.
+        server_id (int): Id of the server to perform
+                         this operation on C3260 platforms.
+
+    Returns:
+        None
+
+    Raises:
+        ImcOperationError if the bios profile is not found
+
+    Examples:
+
+    """
+    from imcsdk.mometa.bios.BiosProfile import BiosProfileConsts
+    mo = _get_bios_profile(handle, name=name, server_id=server_id)
+    mo.admin_action = BiosProfileConsts.ADMIN_ACTION_DELETE
+    handle.set_mo(mo)
+
+
+def is_bios_profile_enabled(handle, name, server_id=1):
+    """
+    Args:
+        handle (ImcHandle)
+        name (str): Name of the bios profile.
+                    Corresponds to the name field in the json file.
+        server_id (int): Id of the server to perform
+                         this operation on C3260 platforms.
+
+    Returns:
+        bool
+
+    Raises:
+        ImcOperationError if the bios profile is not found
+
+    Examples:
+
+    """
+    mo = _get_bios_profile(handle, name=name, server_id=server_id)
+    return mo.enabled.lower() in ['yes', 'true']
+
+
+def bios_profile_exists(handle, **kwargs):
+    """
+    Checks if the bios profile with the specified params exists
+
+    Args:
+        handle (ImcHandle)
+        kwargs: Key-Value paired arguments
+
+    Returns:
+        (True, BiosProfile) if the settings match, else (False, None)
+
+    Raises:
+        ImcOperationError if the bios profile is not found
+
+    """
+
+    mo = _get_bios_profile(handle, name=name, server_id=server_id)
+    params = {}
+    if _is_valid_arg('backup_on_activate', kwargs):
+        params['backup_on_activate'] = ('no', 'yes')[
+            kwargs.get('backup_on_activate')]
+
+    if _is_valid_arg('reboot_on_activate', kwargs):
+        params['reboot_on_activate'] = ('no', 'yes')[
+            kwargs.get('reboot_on_activate')]
+
+    if _is_valid_arg('enabled', kwargs):
+        params['enabled'] = ('no', 'yes')[kwargs.get('enabled')]
+
+    if not mo.check_prop_match(**params):
+        return False, None
+
+    return True, mo
+
+
+def bios_profile_generate_json(handle, name, server_id=1, file_name=None):
+    """
+    Generates a json output of the bios profile specified by the name on
+    the Cisco IMC server.
+    If a file name is specified, it writes the output to the file.
+
+    Args:
+        handle (ImcHandle)
+        name (str): Name of the bios profile.
+                    Corresponds to the name field in the json file.
+        server_id (int): Id of the server to perform
+                         this operation on C3260 platforms.
+
+    Returns:
+        JSON Output of the Bios Tokens
+
+    Raises:
+        ImcOperationError if the bios profile is not found
+    """
+
+    output = {}
+    output['tokens'] = {}
+
+    mo = _get_bios_profile_mo(handle, name=name, server_id=server_id)
+    output['name'] = mo.name
+    output['description'] = mo.description
+
+    tokens = handle.query_children(in_dn=mo.dn)
+    output['tokens'] = {x.name: x.configured_value for x in tokens}
+
+    if file_name:
+        f = open(file_name, 'w')
+        f.write(json.dumps(output))
+        f.close()
+
+    return output
