@@ -11,6 +11,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import time
 from ..connection.info import custom_setup, custom_teardown
 from nose.tools import assert_equal, assert_not_equal
 
@@ -53,6 +54,7 @@ def test_bios_profile_upload():
     bios_profile_upload(handle, remote_server=REMOTE_SERVER,
                         remote_file=REMOTE_FILE, protocol='scp',
                         user=USER, pwd=PASSWORD)
+    time.sleep(2)
     assert_not_equal(bios_profile_get(handle, name='simple'),
                      None)
 
@@ -69,7 +71,13 @@ def test_bios_profile_activate():
 def test_bios_profile_generate_json():
     diff = []
     output = bios_profile_generate_json(handle, name='simple')
-    diff = [key for key in output if key in expected_output and output[key] != expected_output[key]]
+    output_tokens = output.pop('tokens')
+    expected_tokens = expected_output.pop('tokens')
+    diff = [key for key in output if key in expected_output and
+            output[key] != expected_output[key]]
+    assert_equal(diff, [])
+    diff = [key for key in output_tokens if
+    key in expected_tokens and output_tokens[key] != expected_tokens[key]]
     assert_equal(diff, [])
 
 
