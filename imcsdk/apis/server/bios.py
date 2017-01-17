@@ -530,7 +530,9 @@ def bios_profile_upload(handle, remote_server, remote_file, protocol='tftp',
         UploadBiosProfile object
 
     Examples:
-
+        bios_profile_upload(handle, remote_server='1.1.1.1',
+                        remote_file='/tmp/bios_profile', protocol='scp',
+                        user='abcd', pwd='pqrs')
     """
 
     from imcsdk.mometa.upload.UploadBiosProfile import UploadBiosProfile
@@ -568,7 +570,7 @@ def bios_profile_get(handle, name, server_id=1):
         ImcOperationError if the bios profile is not found
 
     Examples:
-
+        bios_profile_get(handle, name='simple')
     """
 
     return _get_bios_profile_mo(handle, name=name, server_id=server_id)
@@ -599,7 +601,9 @@ def bios_profile_activate(handle, name, backup_on_activate=True,
         ImcOperationError if the bios profile is not found
 
     Examples:
-
+        bios_profile_activate(handle, name='simple',
+                              backup_on_activate=True,
+                              reboot_on_activate=False)
     """
 
     from imcsdk.mometa.bios.BiosProfile import BiosProfileConsts
@@ -634,7 +638,7 @@ def bios_profile_delete(handle, name, server_id=1):
         ImcOperationError if the bios profile is not found
 
     Examples:
-
+        bios_profile_delete(handle, name='simple', server_id=2)
     """
     from imcsdk.mometa.bios.BiosProfile import BiosProfileConsts
     mo = _get_bios_profile(handle, name=name, server_id=server_id)
@@ -658,7 +662,9 @@ def is_bios_profile_enabled(handle, name, server_id=1):
         ImcOperationError if the bios profile is not found
 
     Examples:
-
+        is_bios_profile_enabled(handle,
+                                name='simple',
+                                server_id=1)
     """
     mo = _get_bios_profile(handle, name=name, server_id=server_id)
     return mo.enabled.lower() in ['yes', 'true']
@@ -677,7 +683,6 @@ def bios_profile_exists(handle, **kwargs):
 
     Raises:
         ImcOperationError if the bios profile is not found
-
     """
 
     mo = _get_bios_profile(handle, name=name, server_id=server_id)
@@ -717,6 +722,9 @@ def bios_profile_generate_json(handle, name, server_id=1, file_name=None):
 
     Raises:
         ImcOperationError if the bios profile is not found
+
+    Examples:
+        bios_profile_generate_json(handle, name='simple', server_id=2)
     """
 
     output = {}
