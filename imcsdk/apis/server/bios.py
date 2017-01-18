@@ -205,8 +205,12 @@ def _add_boot_device(handle, parent_dn, boot_device):
 
 
 def boot_order_precision_set(
-        handle, reboot_on_update=False, configured_boot_mode="Legacy",
-        boot_devices=[], server_id=1):
+        handle,
+        reboot_on_update=False,
+        reapply=False,
+        configured_boot_mode="Legacy",
+        boot_devices=[],
+        server_id=1):
     """
     This method will replace the existing boot order precision with the new one
         and also set the boot mode
@@ -215,6 +219,7 @@ def boot_order_precision_set(
     Args:
         handle (ImcHandle)
         reboot_on_update (bool): True, False
+        reapply(bool): True, False
         configured_boot_mode(string): "Legacy", "Uefi", "None"
         boot_devices (list of dict): format
             [{"order":'1', "device-type":"vmedia", "name":"vmedia"},
@@ -234,10 +239,11 @@ def boot_order_precision_set(
     Examples:
         boot_order_precision_set(
             handle,
-             reboot_on_update=False,
-             configured_boot_mode="Uefi",
-             boot_devices = [{"order":'1', "device-type":"vmedia", "name":"vmedia"},
-                             {"order":'2', "device-type":"hdd", "name":"hdd"}]
+            reboot_on_update=False,
+            reapply=False,
+            configured_boot_mode="Uefi",
+            boot_devices = [{"order":'1', "device-type":"vmedia", "name":"vmedia"},
+                            {"order":'2', "device-type":"hdd", "name":"hdd"}]
     """
 
     # Insert version check here to gracefully handle older versions of CIMC
@@ -247,11 +253,14 @@ def boot_order_precision_set(
 
     server_dn = imccoreutils.get_server_dn(handle, server_id)
     lsbootdevprecision_mo = LsbootDevPrecision(parent_mo_or_dn=server_dn)
-    # lsbootdevprecision_mo.reboot_on_update = ("no", "yes")[reboot_on_update]
 
     lsbootdevprecision_mo.reboot_on_update = "no"
     if reboot_on_update:
         lsbootdevprecision_mo.reboot_on_update = "yes"
+
+    lsbootdevprecision_mo.reapply = "no"
+    if reapply:
+        lsbootdevprecision_mo.reapply = "yes"
 
     lsbootdevprecision_mo.configured_boot_mode = configured_boot_mode
 
