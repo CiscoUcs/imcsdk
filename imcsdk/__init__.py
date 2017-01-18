@@ -13,12 +13,19 @@
 
 
 import logging
+import logging.handlers
 
 log = logging.getLogger('imc')
 console = logging.StreamHandler()
 formatter = logging.Formatter(
     '%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 console.setFormatter(formatter)
+
+
+def enable_file_logging(filename="imcsdk.log"):
+    file_handler = logging.handlers.RotatingFileHandler(
+              filename, maxBytes=10*1024*1024, backupCount=5)
+    log.addHandler(file_handler)
 
 
 def set_log_level(level=logging.DEBUG):
