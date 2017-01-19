@@ -20,24 +20,15 @@ disk groups.
 import math
 import logging
 import imcsdk.imccoreutils as imccoreutils
+from imcsdk.imcexception import ImcOperationError
 from imcsdk.mometa.storage.StorageVirtualDriveCreatorUsingUnusedPhysicalDrive \
     import StorageVirtualDriveCreatorUsingUnusedPhysicalDrive as vd_creator
+from imcsdk.mometa.self.SelfEncryptStorageController import \
+    SelfEncryptStorageController, SelfEncryptStorageControllerConsts
+from imcsdk.mometa.storage.StorageLocalDisk import StorageLocalDiskConsts
+from imcsdk.mometa.storage.StorageController import StorageControllerConsts
 
 log = logging.getLogger('imc')
-
-
-def physical_drive_get(handle,
-                       drive_slot,
-                       controller_slot,
-                       server_id=1):
-    """
-    Returns the drive Mo
-
-    """
-    server_dn = imccoreutils.get_server_dn(handle, server_id)
-    drive_dn = server_dn + "/board/storage-SAS-SLOT-" + \
-        str(controller_slot) + '/pd-' + str(drive_slot)
-    return handle.query_dn(drive_dn)
 
 
 def _list_to_string(drive_list):
@@ -111,6 +102,7 @@ def _bytes_to_human(size, output_format=None):
 
 
 def _pd_sizes_get(handle,
+                  controller_type,
                   controller_slot,
                   drive_list,
                   server_id=1):
@@ -118,8 +110,9 @@ def _pd_sizes_get(handle,
     for each in drive_list:
         for drive in each:
             dmo = physical_drive_get(handle=handle,
-                                     drive_slot=drive,
+                                     controller_type=controller_type,
                                      controller_slot=controller_slot,
+                                     drive_slot=drive,
                                      server_id=server_id)
             sizes.append(_human_to_bytes(dmo.coerced_size))
     return sizes
@@ -152,6 +145,7 @@ def _raid_max_size_get(raid_level, total_size, min_size, span_depth):
 
 
 def _vd_max_size_get(handle,
+                     controller_type,
                      controller_slot,
                      drive_list,
                      raid_level,
@@ -167,6 +161,7 @@ def _vd_max_size_get(handle,
         span_depth = number of sub groups [[1,2,3],[4,5,6]] span_depth = 2
     """
     sizes = _pd_sizes_get(handle=handle,
+                          controller_type=controller_type,
                           controller_slot=controller_slot,
                           drive_list=drive_list,
                           server_id=server_id)
@@ -178,8 +173,26 @@ def _vd_max_size_get(handle,
     return _bytes_to_human(max_size, output_format="MB")
 
 
+def _get_controller_dn(handle, controller_type, controller_slot, server_id=1):
+    server_dn = imccoreutils.get_server_dn(handle, server_id)
+    return (server_dn + "/board/storage-" + controller_type + "-SLOT-" + controller_slot)
+
+
+def _get_controller(handle, controller_type, controller_slot, server_id=1):
+    mo = handle.query_dn(_get_controller_dn(handle,
+                                            controller_type,
+                                            controller_slot,
+                                            server_id))
+    if mo is None:
+        raise ImcOperationError("Get Controller Type:%s Slot:%s" %
+                                    (controller_type, controller_slot),
+                                "Managed Object not found")
+    return mo
+
+
 def virtual_drive_create(handle,
                          drive_group,
+                         controller_type,
                          controller_slot,
                          raid_level=0,
                          virtual_drive_name=None,
@@ -190,36 +203,46 @@ def virtual_drive_create(handle,
                          write_policy="Write Through",
                          strip_size="64k",
                          size=None,
-                         admin_action=None,
+                         self_encrypt=False,
                          server_id=1):
     """
-        Creates virtul drive from unused physical drives
+    Creates virtual drive from unused physical drives
 
-        Args:
-            handle (ImcHandle)
-            drive_group (list of lists): list of drives
-                            [[1]]
-                            [[1,2]]
-                            [[1,2],[3,4]]
-            controller_slot(string): sas controller slot name/number
-                                    "MEZZ","0"-"9"
-            raid_level (int): raid level
-                            0, 1, 5, 6, 10, 50, 60
-                        Raid 0 Simple striping.
-                        Raid 1 Simple mirroring.
-                        Raid 5 Striping with parity.
-                        Raid 6 Striping with two parity drives.
-                        Raid 10 Spanned mirroring.
-                        Raid 50 Spanned striping with parity.
-                        Raid 60 Spanned striping with two parity drives.
+    Args:
+        handle (ImcHandle)
+        drive_group (list of lists): list of drives
+                        [[1]]
+                        [[1,2]]
+                        [[1,2],[3,4]]
+        controller_type (str): Controller type
+                               'SAS'
+        controller_slot (str): Controller slot name/number
+                                "MEZZ","0"-"9", "HBA"
+        virtual_drive_name (str): Name of the virtual drive
+        raid_level (int): raid level
+                        0, 1, 5, 6, 10, 50, 60
+                    Raid 0 Simple striping.
+                    Raid 1 Simple mirroring.
+                    Raid 5 Striping with parity.
+                    Raid 6 Striping with two parity drives.
+                    Raid 10 Spanned mirroring.
+                    Raid 50 Spanned striping with parity.
+                    Raid 60 Spanned striping with two parity drives.
+        access_policy (str): Access-policy for the virtual drive
+                ['read-write', 'read-only', 'hidden', 'default', 'blocked']
+        self_encrypt (bool): Encrypt the virtual drive if the underlying
+                             controller and physical drive support it
 
-        Examples:
-            virtual_drive_create(handle=imc,
-                                 drive_group=[[2]],
-                                 controller_slot='MEZZ')
+    Returns:
+        StorageVirtualDrive object
+
+    Examples:
+        virtual_drive_create(handle=imc,
+                             drive_group=[[2]],
+                             controller_slot='MEZZ')
     """
-    server_dn = imccoreutils.get_server_dn(handle, server_id)
-    slot_dn = server_dn + "/board/storage-SAS-SLOT-" + controller_slot
+    slot_dn = _get_controller_dn(handle, controller_type,
+                                 controller_slot, server_id)
 
     dg_str = _list_to_string(drive_group)
     vdn = virtual_drive_name
@@ -235,14 +258,14 @@ def virtual_drive_create(handle,
     params["write_policy"] = write_policy
     params["strip_size"] = strip_size
 
-    if (admin_action and
-            handle.platform == imccoreutils.IMC_PLATFORM.TYPE_CLASSIC):
-        params["admin_action"] = admin_action
+    if self_encrypt:
+        params["admin_action"] = "enable-self-encrypt"
 
     params["virtual_drive_name"] = \
         (vd_name_derive(raid_level, drive_group), vdn)[vdn is not None]
 
     params["size"] = (_vd_max_size_get(handle=handle,
+                                       controller_type=controller_type,
                                        controller_slot=controller_slot,
                                        drive_list=drive_group,
                                        raid_level=raid_level,
@@ -256,11 +279,11 @@ def virtual_drive_create(handle,
 
 
 def vd_query_by_name(handle,
+                     controller_type,
                      controller_slot,
                      name,
                      server_id=1):
-    server_dn = imccoreutils.get_server_dn(handle, server_id)
-    slot_dn = server_dn + "/board/storage-SAS-SLOT-" + controller_slot
+    slot_dn = _get_controller_dn(handle, controller_type, controller_slot, server_id)
 
     mos = handle.query_children(in_dn=slot_dn, class_id="storageVirtualDrive")
     for mo in mos:
@@ -270,41 +293,726 @@ def vd_query_by_name(handle,
 
 
 def virtual_drive_exists(handle,
+                         controller_type,
                          controller_slot,
                          virtual_drive_name,
                          server_id=1):
     """
-    Checks if a VD by the specified name exists.
+    Checks if a virtual drive by the specified name exists.
+
+    Args:
+        controller_type (str): Controller type
+                               'SAS'
+        controller_slot (str): Controller slot name/number
+                                "MEZZ","0"-"9", "HBA"
+        virtual_drive_name (str): Name of the virtual drive
 
     Returns:
         exists(bool), error(str)
     """
-    mo = vd_query_by_name(handle, controller_slot,
+    mo = vd_query_by_name(handle, controller_type, controller_slot,
                           virtual_drive_name, server_id)
     return mo is not None, None
 
 
 def virtual_drive_delete(handle,
+                         controller_type,
                          controller_slot,
                          name,
                          server_id=1):
     """
-        Deletes the specified virtul drive
+    Deletes the specified virtual drive
 
-        Args:
-            handle (ImcHandle)
-            controller_slot(string): sas controller slot name/number
-                                    "MEZZ","0"-"9"
-            name(string): name of the virtual drive to delete
-            server_id(int): server_id for UCS 3260 platform
+    Args:
+        handle (ImcHandle)
+        controller_slot (str): controller slot name/number
+                               "MEZZ","0"-"9"
+        name (string): name of the virtual drive to delete
+        server_id (int): server_id for UCS 3260 platform
 
-        Examples:
-            virtual_drive_delete(handle=imc,
-                                 controller_slot='MEZZ',
-                                 name="RAID0_1")
+    Examples:
+        virtual_drive_delete(handle=imc,
+                             controller_slot='MEZZ',
+                             name="RAID0_1")
     """
     vd = vd_query_by_name(handle=handle,
+                          controller_type=controller_type,
                           controller_slot=controller_slot,
                           name=name,
                           server_id=server_id)
     handle.remove_mo(vd)
+
+
+def virtual_drive_encryption_enable(handle, controller_type,
+                                    controller_slot, name, server_id=1):
+    """
+    Enables encryption on the virtual drive if it is supported by the controller
+    and the underlying physical drive
+
+    Args:
+        handle (ImcHandle)
+        controller_type (str): Controller type
+                               'SAS'
+        controller_slot (str): Controller slot name/number
+                                "MEZZ","0"-"9", "HBA"
+        name (string): name of the virtual drive
+        server_id (int): server_id for UCS 3260 platform
+
+    Returns:
+        StorageVirtualDrive object
+
+    Examples:
+        virtual_drive_encryption_enable(handle, 'SAS', 'HBA', 'test_vd')
+    """
+    from imcsdk.mometa.storage.StorageVirtualDrive import \
+        StorageVirtualDriveConsts
+    vd = vd_query_by_name(handle=handle,
+                          controller_type=controller_type,
+                          controller_slot=controller_slot,
+                          name=name,
+                          server_id=server_id)
+    vd.admin_action = StorageVirtualDriveConsts.ADMIN_ACTION_ENABLE_SELF_ENCRYPT
+    handle.set_mo(vd)
+    return handle.query_dn(vd.dn)
+
+
+def controller_jbod_mode_enable(handle, controller_type,
+                                controller_slot, server_id=1):
+    """
+    Enables jbod mode on the controller
+
+    Args:
+        handle (ImcHandle)
+        controller_type (str): Controller type
+                               'SAS'
+        controller_slot (str): Controller slot name/number
+                                "MEZZ","0"-"9", "HBA"
+        server_id (int): server_id for UCS 3260 platform
+
+    Returns:
+        StorageController object
+
+    Examples:
+        controller_jbod_mode_enable(handle, controller_type='SAS',
+                                    controller_slot='HBA')
+
+    """
+    controller_mo = _get_controller(handle,
+                                    controller_type,
+                                    controller_slot,
+                                    server_id)
+    controller_mo.admin_action = 'enable-jbod'
+    handle.set_mo(controller_mo)
+    return handle.query_dn(controller_mo.dn)
+
+
+def controller_jbod_mode_disable(handle, controller_type,
+                                    controller_slot, server_id=1):
+    """
+    Disables jbod mode on the controller
+
+    Args:
+        handle (ImcHandle)
+        controller_type (str): Controller type
+                               'SAS'
+        controller_slot (str): Controller slot name/number
+                                "MEZZ","0"-"9", "HBA"
+        server_id (int): server_id for UCS 3260 platform
+
+    Returns:
+        StorageController object
+
+    Examples:
+        controller_jbod_mode_disable(handle, controller_type='SAS',
+                                     controller_slot='HBA')
+
+    """
+    controller_mo = _get_controller(handle,
+                                    controller_type,
+                                    controller_slot,
+                                    server_id)
+    controller_mo.admin_action = 'disable-jbod'
+    handle.set_mo(controller_mo)
+    return handle.query_dn(controller_mo.dn)
+
+
+def is_controller_jbod_mode_enabled(handle, controller_type,
+                                    controller_slot, server_id=1):
+    """
+    Checks if jbod mode is enabled on the controller
+
+    Args:
+        handle (ImcHandle)
+        controller_type (str): Controller type
+                               'SAS'
+        controller_slot (str): Controller slot name/number
+                                "MEZZ","0"-"9", "HBA"
+        server_id (int): server_id for UCS 3260 platform
+
+    Returns:
+        bool
+
+    Examples:
+        is_controller_jbod_mode_enabled(handle, controller_type='SAS',
+                                        controller_slot='HBA')
+    """
+    dn = _get_controller_dn(handle, controller_type, controller_slot, server_id)
+    settings = handle.query_children(in_dn=dn, class_id='StorageControllerSettings')
+    return settings[0].enable_jbod.lower() in ['yes', 'true'] if settings else False
+
+
+def controller_encryption_enable(handle, controller_type,
+                                 controller_slot, key_id, security_key,
+                                 server_id=1):
+    """
+    Enables encryption on the controller
+
+    Args:
+        handle (ImcHandle)
+        controller_type (str): Controller type
+                               'SAS'
+        controller_slot (str): Controller slot name/number
+                               "MEZZ","0"-"9"
+        key_id (str): Security Key Identifier.
+                      Max Length is 256 characters.
+        security_key (str): Security key used to enable controller security.
+                            Max Length is 32 characters.
+        server_id (int): server_id for UCS 3260 platform
+
+    Returns:
+        StorageController object
+
+    Examples:
+        controller_encryption_enable(handle,
+                                 controller_type='SAS',
+                                 controller_slot='HBA'',
+                                 key_id='ABCD12345', security_key='12345')
+    """
+    from imcsdk.mometa.self.SelfEncryptStorageController import \
+        SelfEncryptStorageController, SelfEncryptStorageControllerConsts
+
+    dn  = _get_controller_dn(
+                handle,
+                controller_type,
+                controller_slot,
+                server_id)
+
+    mo = SelfEncryptStorageController(parent_mo_or_dn=dn)
+    params = {
+        'key_id': key_id,
+        'security_key': security_key,
+        'admin_action': SelfEncryptStorageControllerConsts.ADMIN_ACTION_ENABLE_SELF_ENCRYPT
+    }
+
+    mo.set_prop_multiple(**params)
+    handle.set_mo(mo)
+    return handle.query_dn(dn)
+
+
+def controller_encryption_disable(handle, controller_type,
+                                  controller_slot, server_id=1):
+    """
+    Disables encryption on the controller
+
+    Args:
+        handle (ImcHandle)
+        controller_type (str): Controller type
+                               'SAS'
+        controller_slot (str): Controller slot name/number
+                                "MEZZ","0"-"9", "HBA"
+        server_id (int): server_id for UCS 3260 platform
+
+    Returns:
+        StorageController object
+
+    Examples:
+        controller_encryption_disable(handle,
+                                  controller_type='SAS',
+                                  controller_slot='HBA'')
+    """
+    dn = _get_controller_dn(
+                handle,
+                controller_type,
+                controller_slot,
+                server_id)
+
+    mo = SelfEncryptStorageController(parent_mo_or_dn=dn)
+    mo.admin_action = SelfEncryptStorageControllerConsts.ADMIN_ACTION_DISABLE_SELF_ENCRYPT
+    handle.set_mo(mo)
+    return handle.query_dn(dn)
+
+
+def is_controller_encryption_enabled(handle, controller_type,
+                                     controller_slot, server_id=1):
+    """
+    Checks if encryption is enabled on the controller
+
+    Args:
+        handle (ImcHandle)
+        controller_type (str): Controller type
+                               'SAS'
+        controller_slot (str): Controller slot name/number
+                                "MEZZ","0"-"9", "HBA"
+        server_id (int): server_id for UCS 3260 platform
+
+    Returns:
+        bool
+
+    Examples:
+        is_controller_encryption_enabled(
+                            handle,
+                            controller_type='SAS',
+                            controller_slot='HBA'')
+    """
+    controller_mo = _get_controller(handle,
+                                    controller_type,
+                                    controller_slot,
+                                    server_id)
+    return controller_mo.self_encrypt_enabled.lower() in ['yes', 'true']
+
+
+def controller_encryption_modify_security_key(handle,
+                                              controller_type,
+                                              controller_slot,
+                                              existing_security_key,
+                                              security_key,
+                                              server_id=1):
+    """
+    Modifies the security key on the controller
+
+    Args:
+        handle (ImcHandle)
+        controller_type (str): Controller type
+                               'SAS'
+        controller_slot (str): Controller slot name/number
+                                "MEZZ","0"-"9", "HBA"
+        existing_security_key (str): Existing Security Key
+        security_key (str): New Security Key
+
+        server_id (int): server_id for UCS 3260 platform
+
+    Returns:
+        StorageController object
+
+    Examples:
+        controller_encryption_modify_security_key(
+                     handle,
+                     controller_type='SAS',
+                     controller_slot='HBA'',
+                     existing_security_key='Nbv12345',
+                     security_key='Nbv123456')
+    """
+    dn = _get_controller_dn(handle,
+                            controller_type,
+                            controller_slot,
+                            server_id)
+    mo = SelfEncryptStorageController(parent_mo_or_dn=dn)
+    params = {
+        'existing_security_key': existing_security_key,
+        'security_key': security_key
+    }
+    mo.set_prop_multiple(**params)
+    handle.set_mo(mo)
+    return handle.query_dn(dn)
+
+
+def controller_encryption_key_id_generate(handle, controller_type,
+                                          controller_slot, server_id=1):
+    """
+    Generates a random key id for the given controller
+
+    Args:
+        handle (ImcHandle)
+        controller_type (str): Controller type
+                               'SAS'
+        controller_slot (str): Controller slot name/number
+                                "MEZZ","0"-"9", "HBA"
+        server_id (int): server_id for UCS 3260 platform
+
+    Returns:
+        Key-id string
+
+    Examples:
+        key_id = controller_encryption_key_id_generate(
+                handle,
+                controller_type='SAS',
+                controller_slot='HBA'')
+    """
+    dn = _get_controller_dn(handle, controller_type, controller_slot, server_id)
+    mos = handle.query_children(
+                in_dn=dn,
+                class_id='GeneratedStorageControllerKeyId')
+    return mos[0].generated_key_id if mos else ""
+
+
+def controller_encryption_key_generate(handle, controller_type,
+                                       controller_slot, server_id=1):
+    """
+    Generates a random security key for the given controller
+
+    Args:
+        handle (ImcHandle)
+        controller_type (str): Controller type
+                               'SAS'
+        controller_slot (str): Controller slot name/number
+                                "MEZZ","0"-"9", "HBA"
+        server_id (int): server_id for UCS 3260 platform
+
+    Returns:
+        Security Key string
+
+    Examples:
+        key = controller_encryption_key_generate(
+                handle,
+                controller_type='SAS',
+                controller_slot='HBA'')
+    """
+    dn = _get_controller_dn(handle, controller_type, controller_slot, server_id)
+    mos = handle.query_children(
+                in_dn=dn,
+                class_id='SuggestedStorageControllerSecurityKey')
+    return mos[0].suggested_security_key if mos else ""
+
+
+def controller_unlock_foreign_drives(handle, controller_type,
+                                     controller_slot, security_key,
+                                     server_id=1):
+    """
+    Unlocks on the given controller, drives encrypted on another controller.
+
+    Args:
+        handle (ImcHandle)
+        controller_type (str): Controller type
+                               'SAS'
+        controller_slot (str): Controller slot name/number
+                                "MEZZ","0"-"9", "HBA"
+        security_key (str): Security Key used to encrypt the foreign drive
+        server_id (int): server_id for UCS 3260 platform
+
+    Returns:
+        StorageController object
+
+    Examples:
+        key = controller_unlock_foreign_drives(
+                handle,
+                controller_type='SAS',
+                controller_slot='HBA'',
+                security_key='12345')
+    """
+    dn = _get_controller_dn(handle, controller_type, controller_slot, server_id)
+    mo = SelfEncryptStorageController(parent_mo_or_dn=dn)
+    params = {
+        'security_key': security_key,
+        'admin_action': SelfEncryptStorageControllerConsts.ADMIN_ACTION_UNLOCK_SECURED_DRIVES
+    }
+    mo.set_prop_multiple(**params)
+    return handle.query_dn(dn)
+
+
+def controller_import_foreign_config(handle, controller_type,
+                                     controller_slot, server_id=1):
+    """
+    Imports foreign configuration on the given controller
+
+    Args:
+        handle (ImcHandle)
+        controller_type (str): Controller type
+                               'SAS'
+        controller_slot (str): Controller slot name/number
+                                "MEZZ","0"-"9", "HBA"
+        server_id (int): server_id for UCS 3260 platform
+
+    Returns:
+        StorageController object
+
+    Examples:
+        controller_import_foreign_config(handle,
+                controller_type='SAS',
+                controller_slot='HBA'')
+    """
+    controller_mo = _get_controller(handle,
+                                    controller_type,
+                                    controller_slot,
+                                    server_id)
+    controller_mo.admin_action = \
+        StorageControllerConsts.ADMIN_ACTION_IMPORT_FOREIGN_CONFIG
+    handle.set_mo(controller_mo)
+    return handle.query_dn(controller_mo.dn)
+
+
+def physical_drive_get(handle,
+                       controller_type,
+                       controller_slot,
+                       drive_slot,
+                       server_id=1):
+    """
+    Gets the physical drive
+
+    Args:
+        handle (ImcHandle)
+        controller_type (str): Controller type
+                               'SAS'
+        controller_slot (str): Controller slot name/number
+                                "MEZZ","0"-"9", "HBA"
+        drive_slot (int): Slot in which the drive resides
+        server_id (int): server_id for UCS 3260 platform
+
+    Returns:
+        StorageLocalDisk object
+
+    Examples:
+        mo = physical_drive_get(handle, controller_type='SAS',
+                            controller_slot='HBA'',
+                            drive_slot=4')
+    """
+    controller_dn = _get_controller_dn(handle, controller_type,
+                                       controller_slot, server_id)
+    drive_dn = controller_dn + '/pd-' + str(drive_slot)
+    return handle.query_dn(drive_dn)
+
+
+def _set_physical_drive_action(handle, mo, action):
+    if mo is None:
+        raise ImcOperationError("Get Physical Drive",
+                                "Managed Object not found")
+    mo.admin_action = action
+    handle.set_mo(mo)
+    return handle.query_dn(mo.dn)
+
+
+def is_physical_drive_encryption_capable(handle, controller_type,
+                                         controller_slot, drive_slot,
+                                         server_id=1):
+    """
+    Checks if encryption is supported on the physical drive
+
+    Args:
+        handle (ImcHandle)
+        controller_type (str): Controller type
+                               'SAS'
+        controller_slot (str): Controller slot name/number
+                                "MEZZ","0"-"9", "HBA"
+        drive_slot (int): Slot in which the drive resides
+        server_id (int): server_id for UCS 3260 platform
+
+    Returns:
+        bool
+
+    Examples:
+        capable = is_physical_drive_encryption_capable(
+                    handle,
+                    controller_type='SAS',
+                    controller_slot='HBA'',
+                    drive_slot=4')
+    """
+    drive = physical_drive_get(handle, controller_type,
+                               controller_slot, drive_slot,
+                               server_id)
+    if drive is None:
+        raise ImcOperationError("Get Physical Drive:%s" % drive_slot,
+                                "Managed Object not found")
+    return drive.fde_capable.lower() in ['yes', 'true']
+
+
+def is_physical_drive_encryption_enabled(handle, controller_type,
+                                             controller_slot, drive_slot,
+                                             server_id=1):
+    """
+    Checks if encryption is enabled on the physical drive
+
+    Args:
+        handle (ImcHandle)
+        controller_type (str): Controller type
+                               'SAS'
+        controller_slot (str): Controller slot name/number
+                                "MEZZ","0"-"9", "HBA"
+        drive_slot (int): Slot in which the drive resides
+        server_id (int): server_id for UCS 3260 platform
+
+    Returns:
+        bool
+
+    Examples:
+        enabled = is_physical_drive_encryption_enabled(
+                handle,
+                controller_type='SAS',
+                controller_slot='HBA'',
+                drive_slot=4')
+    """
+    drive = physical_drive_get(handle, controller_type,
+                               controller_slot, drive_slot,
+                               server_id)
+    if drive is None:
+        raise ImcOperationError("Get Physical Drive:%s" % drive_slot,
+                                "Managed Object not found")
+    return drive.fde_enabled.lower() in ['yes', 'true']
+
+
+def physical_drive_set_jbod_mode(handle, controller_type,
+                                 controller_slot, drive_slot, server_id=1):
+    """
+    Sets the physical drive in jbod mode
+
+    Args:
+        handle (ImcHandle)
+        controller_type (str): Controller type
+                               'SAS'
+        controller_slot (str): Controller slot name/number
+                                "MEZZ","0"-"9", "HBA"
+        drive_slot (int): Slot in which the drive resides
+        server_id (int): server_id for UCS 3260 platform
+
+    Returns:
+        StorageLocalDisk object
+
+    Examples:
+        physical_drive_set_jbod_mode(handle,
+                                 controller_type='SAS',
+                                 controller_slot='HBA'',
+                                 drive_slot=4')
+    """
+    if not is_controller_jbod_mode_enabled(handle, controller_type,
+                                           controller_slot, server_id):
+        raise ImcOperationError("Physical Drive: %s JBOD Mode Enable",
+                                "Controller JBOD mode is not enabled")
+    pd = physical_drive_get(handle, controller_type, controller_slot,
+                            drive_slot, server_id)
+    return _set_physical_drive_action(handle,
+                                      pd,
+                                      StorageLocalDiskConsts.ADMIN_ACTION_MAKE_JBOD)
+
+
+def physical_drive_set_unconfigured_good(handle,
+                                         controller_type,
+                                         controller_slot,
+                                         drive_slot,
+                                         server_id=1):
+    """
+    Sets the physical drive in unconfigured good state
+
+    Args:
+        handle (ImcHandle)
+        controller_type (str): Controller type
+                               'SAS'
+        controller_slot (str): Controller slot name/number
+                                "MEZZ","0"-"9", "HBA"
+        drive_slot (int): Slot in which the drive resides
+        server_id (int): server_id for UCS 3260 platform
+
+    Returns:
+        StorageLocalDisk object
+
+    Examples:
+        physical_drive_set_unconfigured_good(
+                handle,
+                controller_type='SAS',
+                controller_slot='HBA'',
+                drive_slot=4')
+    """
+    pd = physical_drive_get(handle, controller_type, controller_slot,
+                            drive_slot, server_id)
+    return _set_physical_drive_action(
+                handle,
+                pd,
+                StorageLocalDiskConsts.ADMIN_ACTION_MAKE_UNCONFIGURED_GOOD)
+
+
+def physical_drive_encryption_enable(handle, controller_type,
+                                     controller_slot, drive_slot, server_id=1):
+    """
+    Enables encryption on the physical drive
+
+    Args:
+        handle (ImcHandle)
+        controller_type (str): Controller type
+                               'SAS'
+        controller_slot (str): Controller slot name/number
+                                "MEZZ","0"-"9", "HBA"
+        drive_slot (int): Slot in which the drive resides
+        server_id (int): server_id for UCS 3260 platform
+
+    Returns:
+        StorageLocalDisk object
+
+    Examples:
+        physical_drive_encryption_enable(
+                handle,
+                controller_type='SAS',
+                controller_slot='HBA'',
+                drive_slot=4')
+    """
+    pd = physical_drive_get(handle, controller_type, controller_slot,
+                            drive_slot, server_id)
+    return _set_physical_drive_action(
+                handle,
+                pd,
+                StorageLocalDiskConsts.ADMIN_ACTION_ENABLE_SELF_ENCRYPT)
+
+
+def physical_drive_encryption_disable(handle, controller_type,
+                                      controller_slot, drive_slot, server_id=1):
+    """
+    Disables encryption on the physical drive
+
+    Args:
+        handle (ImcHandle)
+        controller_type (str): Controller type
+                               'SAS'
+        controller_slot (str): Controller slot name/number
+                                "MEZZ","0"-"9", "HBA"
+        drive_slot (int): Slot in which the drive resides
+        server_id (int): server_id for UCS 3260 platform
+
+    Returns:
+        StorageLocalDisk object
+
+    Examples:
+        physical_drive_encryption_disable(
+                handle,
+                controller_type='SAS',
+                controller_slot='HBA'',
+                drive_slot=4')
+    """
+    pd = physical_drive_get(handle, controller_type, controller_slot,
+                            drive_slot, server_id)
+    return _set_physical_drive_action(
+                handle,
+                pd,
+                StorageLocalDiskConsts.ADMIN_ACTION_DISABLE_SELF_ENCRYPT)
+
+
+def physical_drive_secure_erase_foreign_drives(
+                handle,
+                controller_type,
+                controller_slot,
+                drive_slot,
+                server_id=1):
+    """
+    Erases foreign configuration from the physical drive. Drive data is lost.
+
+    Args:
+        handle (ImcHandle)
+        controller_type (str): Controller type
+                               'SAS'
+        controller_slot (str): Controller slot name/number
+                                "MEZZ","0"-"9", "HBA"
+        drive_slot (int): Slot in which the drive resides
+        server_id (int): server_id for UCS 3260 platform
+
+    Returns:
+        StorageLocalDisk object
+
+    Examples:
+        physical_drive_secure_erase_foreign_drives(
+                handle,
+                controller_type='SAS',
+                controller_slot='HBA'',
+                drive_slot=4')
+    """
+    pd = physical_drive_get(handle, controller_type, controller_slot,
+                            drive_slot, server_id)
+    return _set_physical_drive_action(
+                handle,
+                pd,
+                StorageLocalDiskConsts.ADMIN_ACTION_DISABLE_SED_FOREIGN_DRIVES)
+

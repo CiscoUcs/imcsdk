@@ -87,7 +87,7 @@ def ntp_disable(handle):
 def ntp_servers_clear(handle, ntp_servers=[]):
     """
     Clears the NTP servers provided in the arguments.
-    Clears all the NTP servers by default.
+    Clears all the NTP servers, only if ntp is disabled.
 
     Args:
         handle (ImcHandle)
