@@ -35,7 +35,7 @@ def _get_comm_mo_dn(handle, server_id=1):
                                      handle.platform)
 
 
-def enable_ipmi(handle, priv=CommIpmiLanConsts.PRIV_ADMIN,
+def ipmi_enable(handle, priv=CommIpmiLanConsts.PRIV_ADMIN,
                 key='0'*40, server_id=1):
     """
     Enable IPMI over LAN.
@@ -53,16 +53,9 @@ def enable_ipmi(handle, priv=CommIpmiLanConsts.PRIV_ADMIN,
         ValueError if privilege or key are invalid
 
     Example:
-        if enable_ipmi(handle):
+        if ipmi_enable(handle):
             print "IPMI Enabled"
     """
-
-    # Verify priv string is valid privilege level
-    if priv is not CommIpmiLanConsts.PRIV_ADMIN and \
-       priv is not CommIpmiLanConsts.PRIV_USER and \
-       priv is not CommIpmiLanConsts.PRIV_READ_ONLY:
-        raise ValueError('{0}: ERROR: invalid privilege level: ' +
-                         '"{1}"'.format(handle.ip, priv))
 
     # Verify key is a hex number
     try:
@@ -82,7 +75,7 @@ def enable_ipmi(handle, priv=CommIpmiLanConsts.PRIV_ADMIN,
     return handle.query_dn(ipmi_mo.dn)
 
 
-def disable_ipmi(handle, server_id=1):
+def ipmi_disable(handle, server_id=1):
     """
     Disable IPMI over LAN.
     Args:

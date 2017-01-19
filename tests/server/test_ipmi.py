@@ -14,7 +14,7 @@
 from nose.tools import assert_equal
 from ..connection.info import custom_setup, custom_teardown
 
-from imcsdk.apis.admin.ipmi import enable_ipmi, disable_ipmi, is_ipmi_enabled
+from imcsdk.apis.admin.ipmi import ipmi_enable, ipmi_disable, is_ipmi_enabled
 
 handle = None
 
@@ -32,12 +32,12 @@ def teardown_module():
 def test_ipmi_enable():
     global handle
 
-    enable_ipmi(handle, key="123451234512345fedcb123451234512345abcde")
+    ipmi_enable(handle, key="123451234512345fedcb123451234512345abcde")
     assert_equal(is_ipmi_enabled(handle), True)
 
 
 def test_ipmi_disable():
     global handle
 
-    disable_ipmi(handle)
+    ipmi_disable(handle)
     assert_equal(is_ipmi_enabled(handle), False)

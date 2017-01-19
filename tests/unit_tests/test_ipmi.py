@@ -15,7 +15,7 @@ from mock import patch, MagicMock
 from nose.tools import assert_raises
 from imcsdk.imchandle import ImcHandle
 from imcsdk.mometa.comm.CommIpmiLan import CommIpmiLanConsts
-from imcsdk.apis.admin.ipmi import disable_ipmi, enable_ipmi
+from imcsdk.apis.admin.ipmi import ipmi_disable, ipmi_enable
 from imcsdk.imccoreutils import IMC_PLATFORM
 
 
@@ -37,7 +37,7 @@ def test_valid_enable_ipmi(login_mock, query_dn_mock, set_mo_mock):
     query_dn_mock.return_value = ipmi_enabled_mock
 
     # Scenario: Enable IPMI default values
-    assert enable_ipmi(test_cimc) is ipmi_enabled_mock
+    assert ipmi_enable(test_cimc) is ipmi_enabled_mock
     # Assert values of the object passed to add_mo()
     test_ipmi_mo = set_mo_mock.call_args[0][0]
     assert test_ipmi_mo.admin_state == "enabled"
@@ -45,7 +45,7 @@ def test_valid_enable_ipmi(login_mock, query_dn_mock, set_mo_mock):
     assert test_ipmi_mo.key == '0'*40
 
     # Scenario: Enable IPMI custom priv and key
-    assert enable_ipmi(test_cimc, priv="user", key='1'*40) is ipmi_enabled_mock
+    assert ipmi_enable(test_cimc, priv="user", key='1'*40) is ipmi_enabled_mock
     test_ipmi_mo = set_mo_mock.call_args[0][0]
     assert test_ipmi_mo.admin_state == "enabled"
     assert test_ipmi_mo.priv == "user"
@@ -64,10 +64,10 @@ def test_invalid_enable_ipmi(login_mock, set_mo_mock):
                           password='right')
 
     # Scenario: Invalid priv value
-    assert_raises(ValueError, enable_ipmi, test_cimc, priv="Wrong")
+    assert_raises(ValueError, ipmi_enable, test_cimc, priv="Wrong")
 
     # Scenario: Invalid key
-    assert_raises(ValueError, enable_ipmi, test_cimc, key='bacon')
+    assert_raises(ValueError, ipmi_enable, test_cimc, key='bacon')
 
 
 @patch.object(ImcHandle, 'set_mo')
@@ -88,7 +88,7 @@ def test_valid_disable_ipmi(login_mock, query_dn_mock, set_mo_mock):
     query_dn_mock.return_value = ipmi_disabled_mock
 
     # Scenario: Enable IPMI default values
-    assert disable_ipmi(test_cimc) is ipmi_disabled_mock
+    assert ipmi_disable(test_cimc) is ipmi_disabled_mock
     # Assert values of the object passed to add_mo()
     test_ipmi_mo = set_mo_mock.call_args[0][0]
     assert test_ipmi_mo.admin_state == "disabled"
