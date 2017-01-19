@@ -175,7 +175,7 @@ def _vd_max_size_get(handle,
 
 def _get_controller_dn(handle, controller_type, controller_slot, server_id=1):
     server_dn = imccoreutils.get_server_dn(handle, server_id)
-    return (server_dn + "/board/storage-" + controller_type + "-SLOT-" + controller_slot)
+    return (server_dn + "/board/storage-" + controller_type + "-" + controller_slot)
 
 
 def _get_controller(handle, controller_type, controller_slot, server_id=1):

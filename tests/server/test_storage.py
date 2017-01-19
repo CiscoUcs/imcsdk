@@ -41,7 +41,7 @@ from imcsdk.apis.server.storage import \
 from imcsdk.imccoreutils import get_server_dn
 
 CONTROLLER_TYPE="SAS"
-CONTROLLER_SLOT="HBA"
+CONTROLLER_SLOT="SLOT-HBA"
 PD_DRIVE_SLOT=4
 is_pd_capable = False
 
