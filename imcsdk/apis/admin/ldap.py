@@ -433,10 +433,10 @@ def ldap_certificate_download(handle, remote_server, remote_file,
 
     Args:
         handle (ImcHandle)
-        user (str): Username for the remote server
-        pwd (str): Password for the remote server
         remote_server (str): Remote Server IP or Hostname
         remote_file (str): Remote file path
+        user (str): Username for the remote server
+        pwd (str): Password for the remote server
         protocol (str): Protocol for downloading the certificate
                         ['tftp', 'ftp', 'http', 'scp', 'sftp']
         kwargs: Key-Value paired arguments for future use
@@ -469,10 +469,10 @@ def ldap_certificate_export(handle, remote_server, remote_file,
 
     Args:
         handle (ImcHandle)
-        user (str): Username for the remote server
-        pwd (str): Password for the remote server
         remote_server (str): Remote Server IP or Hostname
         remote_file (str): Remote file path
+        user (str): Username for the remote server
+        pwd (str): Password for the remote server
         protocol (str): Protocol for downloading the certificate
                         ['tftp', 'ftp', 'http', 'scp', 'sftp']
         kwargs: Key-Value paired arguments for future use
@@ -498,7 +498,7 @@ def ldap_certificate_export(handle, remote_server, remote_file,
     return handle.query_dn(mo.dn)
 
 
-def ldap_certificate_binding_test(handle, user=None, pwd=None, **kwargs):
+def ldap_certificate_binding_check(handle, user=None, pwd=None, **kwargs):
     """
     Tests the LDAP CA certificate binding
 
@@ -511,7 +511,7 @@ def ldap_certificate_binding_test(handle, user=None, pwd=None, **kwargs):
         LdapCACertificate object
 
     Examples:
-        ldap_certificate_binding_test(handle, user='abcd', pwd='pqrs')
+        ldap_certificate_binding_check(handle, user='abcd', pwd='pqrs')
     """
     mo = _get_mo(handle, dn='sys/ldap-ext/ldap-ca-cert-mgmt/ldap-ca-cert')
     params = {
