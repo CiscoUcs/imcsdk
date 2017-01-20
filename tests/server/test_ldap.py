@@ -122,3 +122,7 @@ def test_ldap_cert_mgmt_enable():
 def test_ldap_cert_mgmt_disable():
     ldap_certificate_management_disable(handle)
     assert_equal(is_ldap_certificate_management_enabled(handle), False)
+
+
+def test_ldap_disable():
+    ldap_configure(handle, enabled=False)
