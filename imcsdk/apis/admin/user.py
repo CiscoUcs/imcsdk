@@ -70,7 +70,7 @@ def password_expiration_set(handle,
 
     Args:
         handle(ImcHandle)
-        password_expiry_duration(int): The time period after which the set password expires. 
+        password_expiry_duration(int): The time period after which the set password expires.
                                        Setting this to zero will disable password expiry.
         password_history(int): Specifies in number of instances,
                                the new password entered should not have been used in the past.
@@ -225,7 +225,7 @@ def local_user_exists(handle, **kwargs):
         (True, AaaUser) if the user exists with the properties, else (False, None)
 
     Examples:
-        user_exists(handle, username="abcd", privilege="admin")
+        user_exists(handle, user="abcd", priv="admin")
     """
 
     users = _get_local_users(handle)
