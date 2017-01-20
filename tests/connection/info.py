@@ -11,10 +11,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-host = "imc"
 
-
-def custom_setup():
+def custom_setup(host="imc"):
     try:
         import ConfigParser
     except:
