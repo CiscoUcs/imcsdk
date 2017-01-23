@@ -303,7 +303,7 @@ def snmp_user_add(handle, name, security_level="authpriv",
     Example:
         snmp_user_add(handle, name="snmpuser",
             security_level="authpriv", auth_pwd="abcd",
-            auth="MD5", priv_pwd="xyz", priv="DES")
+            auth="MD5", privacy_pwd="xyz", privacy="DES")
     """
 
     from imcsdk.mometa.comm.CommSnmpUser import CommSnmpUserConsts
@@ -398,7 +398,7 @@ def snmp_user_modify(handle, user_id, **kwargs):
     Example:
         snmp_user_modify(handle, user_id=1, name="snmpuser",
                          security_level="authpriv", auth_pwd="password",
-                         auth="MD5", priv="AES", privacy_pwd="password")
+                         auth="MD5", privacy="AES", privacy_pwd="password")
     """
 
     dn = SNMP_DN + "/snmpv3-user-" + str(user_id)
