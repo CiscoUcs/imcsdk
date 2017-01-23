@@ -376,6 +376,17 @@ def virtual_drive_encryption_enable(handle, controller_type,
     return handle.query_dn(vd.dn)
 
 
+def _controller_action_set(handle, controller_type, controller_slot, action,
+                           server_id=1):
+    controller_mo = _get_controller(handle,
+                                    controller_type,
+                                    controller_slot,
+                                    server_id)
+    controller_mo.admin_action = action
+    handle.set_mo(controller_mo)
+    return handle.query_dn(controller_mo.dn)
+
+
 def controller_jbod_mode_enable(handle, controller_type,
                                 controller_slot, server_id=1):
     """
@@ -397,13 +408,9 @@ def controller_jbod_mode_enable(handle, controller_type,
                                     controller_slot='HBA')
 
     """
-    controller_mo = _get_controller(handle,
-                                    controller_type,
-                                    controller_slot,
-                                    server_id)
-    controller_mo.admin_action = 'enable-jbod'
-    handle.set_mo(controller_mo)
-    return handle.query_dn(controller_mo.dn)
+    return _controller_action_set(handle, controller_type,
+                                  controller_slot, 'enable-jbod',
+                                  server_id=server_id)
 
 
 def controller_jbod_mode_disable(handle, controller_type,
@@ -427,13 +434,9 @@ def controller_jbod_mode_disable(handle, controller_type,
                                      controller_slot='HBA')
 
     """
-    controller_mo = _get_controller(handle,
-                                    controller_type,
-                                    controller_slot,
-                                    server_id)
-    controller_mo.admin_action = 'disable-jbod'
-    handle.set_mo(controller_mo)
-    return handle.query_dn(controller_mo.dn)
+    return _controller_action_set(handle, controller_type,
+                                  controller_slot, 'disable-jbod',
+                                  server_id=server_id)
 
 
 def is_controller_jbod_mode_enabled(handle, controller_type,
@@ -491,7 +494,7 @@ def controller_encryption_enable(handle, controller_type,
     from imcsdk.mometa.self.SelfEncryptStorageController import \
         SelfEncryptStorageController, SelfEncryptStorageControllerConsts
 
-    dn  = _get_controller_dn(
+    dn = _get_controller_dn(
                 handle,
                 controller_type,
                 controller_slot,
@@ -730,14 +733,12 @@ def controller_import_foreign_config(handle, controller_type,
                 controller_type='SAS',
                 controller_slot='HBA'')
     """
-    controller_mo = _get_controller(handle,
-                                    controller_type,
-                                    controller_slot,
-                                    server_id)
-    controller_mo.admin_action = \
-        StorageControllerConsts.ADMIN_ACTION_IMPORT_FOREIGN_CONFIG
-    handle.set_mo(controller_mo)
-    return handle.query_dn(controller_mo.dn)
+    return _controller_action_set(
+                handle,
+                controller_type,
+                controller_slot,
+                action=StorageControllerConsts.ADMIN_ACTION_IMPORT_FOREIGN_CONFIG,
+                server_id=server_id)
 
 
 def physical_drive_get(handle,
@@ -771,7 +772,11 @@ def physical_drive_get(handle,
     return handle.query_dn(drive_dn)
 
 
-def _set_physical_drive_action(handle, mo, action):
+def _physical_drive_action_set(handle, controller_type,
+                               controller_slot, drive_slot,
+                               action, server_id=1):
+    mo = physical_drive_get(handle, controller_type, controller_slot,
+                       drive_slot, server_id)
     if mo is None:
         raise ImcOperationError("Get Physical Drive",
                                 "Managed Object not found")
@@ -875,11 +880,14 @@ def physical_drive_set_jbod_mode(handle, controller_type,
                                            controller_slot, server_id):
         raise ImcOperationError("Physical Drive: %s JBOD Mode Enable",
                                 "Controller JBOD mode is not enabled")
-    pd = physical_drive_get(handle, controller_type, controller_slot,
-                            drive_slot, server_id)
-    return _set_physical_drive_action(handle,
-                                      pd,
-                                      StorageLocalDiskConsts.ADMIN_ACTION_MAKE_JBOD)
+    return _physical_drive_action_set(
+            handle,
+            controller_type=controller_type,
+            controller_slot=controller_slot,
+            drive_slot=drive_slot,
+            action=StorageLocalDiskConsts.ADMIN_ACTION_MAKE_JBOD,
+            server_id=server_id
+        )
 
 
 def physical_drive_set_unconfigured_good(handle,
@@ -909,12 +917,14 @@ def physical_drive_set_unconfigured_good(handle,
                 controller_slot='HBA'',
                 drive_slot=4')
     """
-    pd = physical_drive_get(handle, controller_type, controller_slot,
-                            drive_slot, server_id)
-    return _set_physical_drive_action(
-                handle,
-                pd,
-                StorageLocalDiskConsts.ADMIN_ACTION_MAKE_UNCONFIGURED_GOOD)
+    return _physical_drive_action_set(
+            handle,
+            controller_type=controller_type,
+            controller_slot=controller_slot,
+            drive_slot=drive_slot,
+            action=StorageLocalDiskConsts.ADMIN_ACTION_MAKE_UNCONFIGURED_GOOD,
+            server_id=server_id
+        )
 
 
 def physical_drive_encryption_enable(handle, controller_type,
@@ -941,12 +951,14 @@ def physical_drive_encryption_enable(handle, controller_type,
                 controller_slot='HBA'',
                 drive_slot=4')
     """
-    pd = physical_drive_get(handle, controller_type, controller_slot,
-                            drive_slot, server_id)
-    return _set_physical_drive_action(
-                handle,
-                pd,
-                StorageLocalDiskConsts.ADMIN_ACTION_ENABLE_SELF_ENCRYPT)
+    return _physical_drive_action_set(
+            handle,
+            controller_type=controller_type,
+            controller_slot=controller_slot,
+            drive_slot=drive_slot,
+            action=StorageLocalDiskConsts.ADMIN_ACTION_ENABLE_SELF_ENCRYPT,
+            server_id=server_id
+        )
 
 
 def physical_drive_encryption_disable(handle, controller_type,
@@ -973,12 +985,14 @@ def physical_drive_encryption_disable(handle, controller_type,
                 controller_slot='HBA'',
                 drive_slot=4')
     """
-    pd = physical_drive_get(handle, controller_type, controller_slot,
-                            drive_slot, server_id)
-    return _set_physical_drive_action(
-                handle,
-                pd,
-                StorageLocalDiskConsts.ADMIN_ACTION_DISABLE_SELF_ENCRYPT)
+    return _physical_drive_action_set(
+            handle,
+            controller_type=controller_type,
+            controller_slot=controller_slot,
+            drive_slot=drive_slot,
+            action=StorageLocalDiskConsts.ADMIN_ACTION_DISABLE_SELF_ENCRYPT,
+            server_id=server_id
+        )
 
 
 def physical_drive_secure_erase_foreign_drives(
@@ -1009,10 +1023,11 @@ def physical_drive_secure_erase_foreign_drives(
                 controller_slot='HBA'',
                 drive_slot=4')
     """
-    pd = physical_drive_get(handle, controller_type, controller_slot,
-                            drive_slot, server_id)
-    return _set_physical_drive_action(
-                handle,
-                pd,
-                StorageLocalDiskConsts.ADMIN_ACTION_DISABLE_SED_FOREIGN_DRIVES)
-
+    return _physical_drive_action_set(
+            handle,
+            controller_type=controller_type,
+            controller_slot=controller_slot,
+            drive_slot=drive_slot,
+            action=StorageLocalDiskConsts.ADMIN_ACTION_DISABLE_SED_FOREIGN_DRIVES,
+            server_id=server_id
+        )
