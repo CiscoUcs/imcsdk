@@ -130,7 +130,7 @@ def upload_certificate(handle, username, password, server, file_name, protocol):
 
     mo = UploadCertificate(parent_mo_or_dn="sys/cert-mgmt")
     mo.admin_action = UploadCertificateConsts.ADMIN_ACTION_REMOTE_CERT_UPLOAD
-    mo.username = username
+    mo.user = username
     mo.pwd = password
     mo.remote_server = server
     mo.remote_file = file_name

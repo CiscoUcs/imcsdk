@@ -320,7 +320,8 @@ class ManagedObject(ImcBase):
                             self._dirty_mask & prop.mask != 0)):
                     value = getattr(self, key)
                     if value is not None:
-                        xml_obj.set(prop.xml_attribute, value)
+                        if prop.version <= handle.version:
+                            xml_obj.set(prop.xml_attribute, value)
             else:
                 if key not in self.__xtra_props:
                     # This is an internal property
@@ -338,7 +339,7 @@ class ManagedObject(ImcBase):
                 if option != WriteXmlOption.DIRTY or \
                         self.__xtra_props[key].is_dirty:
                     value = self.__xtra_props[key].value
-                    if value:
+                    if value is not None:
                         xml_obj.set(key, value)
 
         if 'dn' not in xml_obj.attrib:
