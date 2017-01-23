@@ -39,6 +39,18 @@ def test_nightly_version2():
     assert_equal((version1 > version2), True)
 
 
+def test_nightly_version3():
+    version1 = ImcVersion("2.0(2cS6)")
+    version2 = ImcVersion("2.0(2c)")
+    assert_equal((version1 == version2), True)
+
+
+def test_nightly_version4():
+    version1 = ImcVersion("2.0(2cS6)")
+    version2 = ImcVersion("2.0(3)")
+    assert_equal((version1 < version2), True)
+
+
 def test_gt_same_major_version():
     version1 = VersionMeta.Version151f
     version2 = VersionMeta.Version151x
