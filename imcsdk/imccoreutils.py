@@ -27,6 +27,7 @@ from . import methodmeta
 from . imcmeta import MO_CLASS_ID, METHOD_CLASS_ID, OTHER_TYPE_CLASS_ID, \
     MO_CLASS_META
 from .imcexception import ImcOperationError, ImcValidationException
+from imccoremeta import MoPropertyMeta
 
 log = logging.getLogger('imc')
 
@@ -749,6 +750,18 @@ def validate_property_value(mo, prop, value):
             return True
 
     return False
+
+
+def validate_property_access(mo, prop, platform=None):
+    access_list = []
+    for platform in IMC_PLATFORM_LIST:
+        prop_ = _get_property_from_prop_meta_for_platform(
+                mo,
+                prop,
+                platform)
+        if prop_:
+            access_list.append(prop_.access)
+    return MoPropertyMeta.READ_WRITE in access_list
 
 
 def property_exists_in_prop_map(mo, prop_name):

@@ -181,7 +181,7 @@ class ManagedObject(ImcBase):
             return
         if not forced:
             prop = imccoreutils.get_prop_meta(self, name)
-            if prop.access != imccoremeta.MoPropertyMeta.READ_WRITE:
+            if not imccoreutils.validate_property_access(self, name):
                 if getattr(self, name) is not None or \
                                 prop.access != \
                                 imccoremeta.MoPropertyMeta.CREATE_ONLY:
