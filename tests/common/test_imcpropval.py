@@ -13,6 +13,7 @@
 
 from nose.tools import *
 from imcsdk.mometa.compute.ComputeRackUnit import ComputeRackUnit
+from imcsdk.mometa.power.PowerBudget import PowerBudget
 
 obj = None
 
@@ -46,3 +47,11 @@ def test_003_set_naming_property():
     # This is a naming property. so, it is create only
     # Should fail with an exception
     obj.server_id = "15"
+
+
+def test_004_set_rw_ro_property():
+    obj = PowerBudget(parent_mo_or_dn='sys/rack-unit-1')
+    obj.status = 'modified'
+
+    obj = PowerBudget(parent_mo_or_dn='sys/chassis-1/server-1')
+    obj.status = 'modified'
