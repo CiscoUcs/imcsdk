@@ -12,6 +12,7 @@
 # limitations under the License.
 
 
+import os
 import logging
 import logging.handlers
 
@@ -50,6 +51,9 @@ def set_log_level(level=logging.DEBUG):
 set_log_level(logging.DEBUG)
 
 log.addHandler(console)
+
+if os.path.exists('/tmp/imcsdk_debug'):
+    enable_file_logging()
 
 __author__ = 'Cisco Systems'
 __email__ = 'ucs-python@cisco.com'

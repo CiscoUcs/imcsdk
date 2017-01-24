@@ -14,6 +14,7 @@
 
 import time
 import logging
+import os
 from threading import Timer
 
 from .imcexception import ImcException, ImcLoginError
@@ -57,6 +58,10 @@ class ImcSession(object):
         self.__dump_xml = False
         self.__redirect = False
         self.__driver = ImcDriver(proxy=self.__proxy)
+
+        # In debug mode, log the XMLs to a file
+        if os.path.exists('/tmp/imcsdk_debug'):
+            self.__dump_xml = True
 
     @property
     def ip(self):
