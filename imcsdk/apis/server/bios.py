@@ -679,35 +679,39 @@ def is_bios_profile_enabled(handle, name, server_id=1):
     return mo.enabled.lower() in ['yes', 'true']
 
 
-def bios_profile_exists(handle, **kwargs):
+def bios_profile_exists(handle, name, server_id=1, **kwargs):
     """
     Checks if the bios profile with the specified params exists
 
     Args:
         handle (ImcHandle)
-        kwargs: Key-Value paired arguments
+        name (str): Name of the bios profile.
+                    Corresponds to the name field in the json file.
+        server_id (int): Id of the server to perform
+                         this operation on C3260 platforms.
+        kwargs: Key-Value paired arguments relevant to BiosProfile object
 
     Returns:
         (True, BiosProfile) if the settings match, else (False, None)
 
     Raises:
         ImcOperationError if the bios profile is not found
+
+    Examples:
+        match, mo = bios_profile_exists(handle, name='simple',
+                                        enabled=True)
     """
 
     mo = _get_bios_profile(handle, name=name, server_id=server_id)
     params = {}
-    if _is_valid_arg('backup_on_activate', kwargs):
-        params['backup_on_activate'] = ('no', 'yes')[
-            kwargs.get('backup_on_activate')]
-
-    if _is_valid_arg('reboot_on_activate', kwargs):
-        params['reboot_on_activate'] = ('no', 'yes')[
-            kwargs.get('reboot_on_activate')]
 
     if _is_valid_arg('enabled', kwargs):
-        params['enabled'] = ('no', 'yes')[kwargs.get('enabled')]
+        params['enabled'] = ('No', 'Yes')[kwargs.pop('enabled')]
 
     if not mo.check_prop_match(**params):
+        return False, None
+
+    if not mo.check_prop_match(**kwargs):
         return False, None
 
     return True, mo

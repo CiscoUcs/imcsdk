@@ -17,7 +17,9 @@ from nose.tools import assert_equal, assert_not_equal
 
 from imcsdk.apis.server.bios import bios_profile_backup_running, \
         bios_profile_upload, bios_profile_activate, bios_profile_delete,\
-        bios_profile_get, bios_profile_generate_json, is_bios_profile_enabled
+        bios_profile_get, bios_profile_generate_json, is_bios_profile_enabled,\
+        bios_profile_exists
+
 
 handle = None
 REMOTE_SERVER = ''
@@ -26,12 +28,12 @@ USER = ''
 PASSWORD = ''
 
 expected_output = {
-	"name": "simple",
-	"description": "Simple Profile",
-	"tokens": {
-		"TPMAdminCtrl":"Enabled",
-		"TerminalType":"PC-ANSI"
-	}
+    "name": "simple",
+    "description": "Simple Profile",
+    "tokens": {
+        "TPMAdminCtrl": "Enabled",
+        "TerminalType": "PC-ANSI"
+    }
 }
 
 
@@ -47,7 +49,8 @@ def teardown_module():
 
 def test_bios_profile_backup():
     bios_profile_backup_running(handle, server_id=1)
-    assert_not_equal(bios_profile_get(handle, name='cisco_backup_profile'), None)
+    assert_not_equal(bios_profile_get(handle, name='cisco_backup_profile'),
+                     None)
 
 
 def test_bios_profile_upload():
@@ -68,6 +71,12 @@ def test_bios_profile_activate():
                  True)
 
 
+def test_bios_profile_exists():
+    match, mo = bios_profile_exists(handle, name='simple',
+                                    enabled=True)
+    assert_equal(match, True)
+
+
 def test_bios_profile_generate_json():
     diff = []
     output = bios_profile_generate_json(handle, name='simple')
@@ -77,16 +86,10 @@ def test_bios_profile_generate_json():
             output[key] != expected_output[key]]
     assert_equal(diff, [])
     diff = [key for key in output_tokens if
-    key in expected_tokens and output_tokens[key] != expected_tokens[key]]
+            key in expected_tokens and output_tokens[key] != expected_tokens[key]]
     assert_equal(diff, [])
 
 
 def test_bios_profile_delete():
     bios_profile_delete(handle, name='simple')
     assert_equal(bios_profile_get(handle, name='simple'), None)
-    pass
-
-
-
-
-
