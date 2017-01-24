@@ -322,13 +322,12 @@ class ImcHandle(ImcSession):
         elif in_dn:
             parent_dn = in_dn
 
-        if class_id:
+        meta_class_id = None
+        if class_id and not hierarchy:
             meta_class_id = imccoreutils.find_class_id_in_mo_meta_ignore_case(
                 class_id)
             if not meta_class_id:
                 meta_class_id = class_id
-        else:
-            meta_class_id = class_id
 
         elem = config_resolve_children(cookie=self.cookie,
                                        class_id=meta_class_id,
@@ -342,7 +341,10 @@ class ImcHandle(ImcSession):
         out_mo_list = imccoreutils.extract_molist_from_method_response(response,
                                                                        hierarchy
                                                                        )
-
+        if class_id and hierarchy:
+            out_mo_list = imccoreutils.filter_molist_on_class_id(
+                                out_mo_list,
+                                class_id=class_id)
         return out_mo_list
 
     def add_mo(self, mo, modify_present=True, timeout=None):

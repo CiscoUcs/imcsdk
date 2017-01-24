@@ -13,6 +13,7 @@
 
 from nose.tools import assert_equal
 from ..connection.info import custom_setup, custom_teardown
+from imcsdk.imccoreutils import IMC_PLATFORM
 
 handle = None
 
@@ -30,3 +31,15 @@ def test_default():
     mos = handle.query_children(in_dn="sys/user-ext", class_id="aaaUser")
     for mo in mos:
         assert_equal(mo._class_id, "AaaUser")
+
+
+def test_hierarchy():
+    mos = handle.query_children(in_dn="sys/svc-ext", hierarchy=True)
+    assert_equal(len(mos) > 30, True)
+
+
+def test_hierarchy_with_class_id():
+    mos = handle.query_children(in_dn="sys/svc-ext", class_id="commSnmpUser",
+                                hierarchy=True)
+    for mo in mos:
+        assert_equal(mo._class_id, "CommSnmpUser")

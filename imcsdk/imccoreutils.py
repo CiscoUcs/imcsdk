@@ -326,6 +326,14 @@ def extract_molist_from_method_response(method_response,
     return mo_list
 
 
+def filter_molist_on_class_id(mo_list, class_id=None):
+    if class_id is None:
+        return mo_list
+
+    out_list = [mo for mo in mo_list if mo._class_id.lower() == class_id.lower()]
+    return out_list
+
+
 def write_mo_tree(mo, level=0, depth=None, show_level=[],
                   print_tree=True, tree_dict={}, dn=None):
     """
