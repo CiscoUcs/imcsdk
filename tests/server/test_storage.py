@@ -11,6 +11,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import time
 from nose.tools import assert_equal, raises
 from ..connection.info import custom_setup, custom_teardown
 from imcsdk.apis.server.storage import _list_to_string
@@ -25,7 +26,25 @@ from imcsdk.apis.server.storage import _vd_span_depth_get
 from imcsdk.apis.server.storage import _raid_max_size_get
 from imcsdk.apis.server.storage import virtual_drive_create
 from imcsdk.apis.server.storage import virtual_drive_delete
+from imcsdk.apis.server.storage import virtual_drive_exists
+from imcsdk.apis.server.storage import controller_encryption_enable, \
+    controller_encryption_disable, is_controller_encryption_enabled, \
+    controller_encryption_modify_security_key, \
+    controller_encryption_key_id_generate, controller_encryption_key_generate
+from imcsdk.apis.server.storage import \
+    is_physical_drive_encryption_capable, physical_drive_set_jbod_mode, \
+    physical_drive_encryption_enable, physical_drive_encryption_disable, \
+    is_physical_drive_encryption_enabled, physical_drive_get, \
+    physical_drive_set_unconfigured_good
+
+
 from imcsdk.imccoreutils import get_server_dn
+
+CONTROLLER_TYPE="SAS"
+CONTROLLER_SLOT="SLOT-HBA"
+PD_DRIVE_SLOT=4
+is_pd_capable = False
+
 
 
 def test_list_to_string():
@@ -169,8 +188,9 @@ def teardown_module():
     custom_teardown(handle)
 
 
+
 def test_vd_create_delete():
-    # Guarding check to execute only on servers that have a "MEZZ" controller
+    # Guarding check to execute only on servers that have a CONTROLLER_SLOT controller
     # and have drive 1-6 present
     server_dn = get_server_dn(handle, server_id=1)
     slot_dn = server_dn + "/board/storage-SAS-SLOT-MEZZ"
@@ -182,19 +202,199 @@ def test_vd_create_delete():
         if mo is None:
             return
 
-    tests = [{"dg": [[1]], "cs": "MEZZ", "r": 0},
-             {"dg": [[1, 2, 3, 4]], "cs": "MEZZ", "r": 1},
-             {"dg": [[1, 2, 3]], "cs": "MEZZ", "r": 5},
-             {"dg": [[1, 2, 3]], "cs": "MEZZ", "r": 6},
-             {"dg": [[1, 2], [3, 4], [5, 6]], "cs": "MEZZ", "r": 10},
-             {"dg": [[1, 2, 3], [4, 5, 6]], "cs": "MEZZ", "r": 50},
-             {"dg": [[1, 2, 3], [4, 5, 6]], "cs": "MEZZ", "r": 60}]
+    tests = [{"dg": [[1]], "ct": CONTROLLER_TYPE, "cs": CONTROLLER_SLOT, "r": 0},
+             {"dg": [[1, 2, 3, 4]], "ct": CONTROLLER_TYPE, "cs": CONTROLLER_SLOT, "r": 1},
+             {"dg": [[1, 2, 3]], "ct": CONTROLLER_TYPE, "cs": CONTROLLER_SLOT, "r": 5},
+             {"dg": [[1, 2, 3]], "ct": CONTROLLER_TYPE, "cs": CONTROLLER_SLOT, "r": 6},
+             {"dg": [[1, 2], [3, 4], [5, 6]], "ct": CONTROLLER_TYPE, "cs": CONTROLLER_SLOT, "r": 10},
+             {"dg": [[1, 2, 3], [4, 5, 6]], "ct": CONTROLLER_TYPE, "cs": CONTROLLER_SLOT, "r": 50},
+             {"dg": [[1, 2, 3], [4, 5, 6]], "ct": CONTROLLER_TYPE, "cs": CONTROLLER_SLOT, "r": 60}]
 
     for t in tests:
         vd = virtual_drive_create(handle=handle,
                                   drive_group=t["dg"],
+                                  controller_type=t["ct"],
                                   controller_slot=t["cs"],
-                                  raid_level=t["r"])
+                                  raid_level=t["r"],
+                                  self_encrypt=True)
         virtual_drive_delete(handle=handle,
                              controller_slot=t["cs"],
                              name=vd.virtual_drive_name)
+
+
+def test_controller_encryption_enable():
+    controller_encryption_enable(handle,
+                                 controller_type=CONTROLLER_TYPE,
+                                 controller_slot=CONTROLLER_SLOT,
+                                 key_id='Nbv12345', security_key='Nbv12345')
+    assert_equal(is_controller_encryption_enabled(handle,
+                                                  CONTROLLER_TYPE,
+                                                  CONTROLLER_SLOT),
+                 True)
+
+
+def test_controller_encryption_modify():
+    controller_encryption_modify_security_key(
+                     handle,
+                     controller_type=CONTROLLER_TYPE,
+                     controller_slot=CONTROLLER_SLOT,
+                     existing_security_key='Nbv12345',
+                     security_key='Nbv123456')
+
+
+def test_controller_generated_keys():
+    key_id = controller_encryption_key_id_generate(
+                handle,
+                controller_type=CONTROLLER_TYPE,
+                controller_slot=CONTROLLER_SLOT)
+    assert_equal(len(key_id) <= 256 , True)
+
+    key = controller_encryption_key_generate(
+                handle,
+                controller_type=CONTROLLER_TYPE,
+                controller_slot=CONTROLLER_SLOT)
+    assert_equal(len(key) <= 32, True)
+
+    controller_encryption_modify_security_key(
+        handle,
+        controller_type=CONTROLLER_TYPE,
+        controller_slot=CONTROLLER_SLOT,
+        existing_security_key='Nbv123456',
+        security_key=key)
+
+
+'''
+def test_controller_jbod_mode_enable():
+    controller_jbod_mode_enable(handle,
+                                controller_type=CONTROLLER_TYPE,
+                                controller_slot=CONTROLLER_SLOT)
+    assert_equal(is_controller_jbod_mode_enabled(
+                                handle,
+                                controller_type=CONTROLLER_TYPE,
+                                controller_slot=CONTROLLER_SLOT),
+                 True)
+'''
+
+
+def test_pd_jbod_mode_enable():
+    physical_drive_set_jbod_mode(handle,
+                                 controller_type=CONTROLLER_TYPE,
+                                 controller_slot=CONTROLLER_SLOT,
+                                 drive_slot=PD_DRIVE_SLOT)
+    mo = physical_drive_get(handle, controller_type=CONTROLLER_TYPE,
+                            controller_slot=CONTROLLER_SLOT,
+                            drive_slot=PD_DRIVE_SLOT)
+    assert_equal(mo.drive_state, 'JBOD')
+
+
+@raises(Exception)
+def test_invalid_pd_jbod_mode_enable():
+    physical_drive_set_jbod_mode(handle,
+                                 controller_type=CONTROLLER_TYPE,
+                                 controller_slot=CONTROLLER_SLOT,
+                                 drive_slot=3)
+
+
+def test_pd_encryption_enable():
+    global is_pd_capable
+    is_pd_capable = is_physical_drive_encryption_capable(
+                    handle,
+                    controller_type=CONTROLLER_TYPE,
+                    controller_slot=CONTROLLER_SLOT,
+                    drive_slot=PD_DRIVE_SLOT)
+    if not is_pd_capable:
+        return
+
+    physical_drive_encryption_enable(
+        handle,
+        controller_type=CONTROLLER_TYPE,
+        controller_slot=CONTROLLER_SLOT,
+        drive_slot=PD_DRIVE_SLOT)
+
+    enabled = is_physical_drive_encryption_enabled(
+                handle,
+                controller_type=CONTROLLER_TYPE,
+                controller_slot=CONTROLLER_SLOT,
+                drive_slot=PD_DRIVE_SLOT)
+    assert_equal(enabled, True)
+
+
+def test_pd_set_unconfigured_good():
+    physical_drive_set_unconfigured_good(
+        handle,
+        controller_type=CONTROLLER_TYPE,
+        controller_slot=CONTROLLER_SLOT,
+        drive_slot=PD_DRIVE_SLOT)
+    mo = physical_drive_get(handle, controller_type=CONTROLLER_TYPE,
+                            controller_slot=CONTROLLER_SLOT,
+                            drive_slot=PD_DRIVE_SLOT)
+    assert_equal(mo.drive_state, 'Unconfigured Good')
+
+
+def test_pd_encryption_disable():
+    if not is_pd_capable:
+        return
+
+    physical_drive_encryption_disable(
+        handle,
+        controller_type=CONTROLLER_TYPE,
+        controller_slot=CONTROLLER_SLOT,
+        drive_slot=PD_DRIVE_SLOT)
+
+    enabled = is_physical_drive_encryption_enabled(
+        handle,
+        controller_type=CONTROLLER_TYPE,
+        controller_slot=CONTROLLER_SLOT,
+        drive_slot=PD_DRIVE_SLOT)
+    assert_equal(enabled, False)
+
+
+'''
+def test_controller_jbod_mode_disable():
+    controller_jbod_mode_disable(handle,
+                                 controller_type=CONTROLLER_TYPE,
+                                 controller_slot=CONTROLLER_SLOT)
+    assert_equal(is_controller_jbod_mode_enabled(
+                                handle,
+                                controller_type=CONTROLLER_TYPE,
+                                controller_slot=CONTROLLER_SLOT),
+                 False)
+'''
+
+
+def test_vd_create_delete_with_encryption():
+    virtual_drive_create(
+        handle,
+        drive_group=[[PD_DRIVE_SLOT]],
+        controller_type=CONTROLLER_TYPE,
+        controller_slot=CONTROLLER_SLOT,
+        raid_level=0,
+        self_encrypt=True,
+        virtual_drive_name='test-vd')
+    exists, err = virtual_drive_exists(handle,
+                                       controller_type=CONTROLLER_TYPE,
+                                       controller_slot=CONTROLLER_SLOT,
+                                       virtual_drive_name='test-vd')
+    assert_equal(exists, True)
+
+    time.sleep(2)
+    virtual_drive_delete(handle,
+                         controller_type=CONTROLLER_TYPE,
+                         controller_slot=CONTROLLER_SLOT,
+                         name='test-vd')
+    exists, err = virtual_drive_exists(handle,
+                                   controller_type=CONTROLLER_TYPE,
+                                   controller_slot=CONTROLLER_SLOT,
+                                   virtual_drive_name='test-vd')
+    assert_equal(exists, False)
+
+
+def test_controller_encryption_disable():
+    controller_encryption_disable(handle,
+                                  controller_type=CONTROLLER_TYPE,
+                                  controller_slot=CONTROLLER_SLOT)
+    assert_equal(is_controller_encryption_enabled(
+                            handle,
+                            controller_type=CONTROLLER_TYPE,
+                            controller_slot=CONTROLLER_SLOT),
+                 False)
