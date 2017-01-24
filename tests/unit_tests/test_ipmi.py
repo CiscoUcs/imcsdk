@@ -63,6 +63,8 @@ def test_invalid_enable_ipmi(login_mock, set_mo_mock):
                           username='admin',
                           password='right')
 
+    test_cimc._set_platform(platform=IMC_PLATFORM.TYPE_CLASSIC)
+
     # Scenario: Invalid priv value
     assert_raises(ValueError, ipmi_enable, test_cimc, priv="Wrong")
 

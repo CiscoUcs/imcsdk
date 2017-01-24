@@ -752,16 +752,17 @@ def validate_property_value(mo, prop, value):
     return False
 
 
-def validate_property_access(mo, prop, platform=None):
-    access_list = []
+def is_writable_prop(mo, prop, platform=None):
+
     for platform in IMC_PLATFORM_LIST:
         prop_ = _get_property_from_prop_meta_for_platform(
                 mo,
                 prop,
                 platform)
-        if prop_:
-            access_list.append(prop_.access)
-    return MoPropertyMeta.READ_WRITE in access_list
+        if prop_ and prop_.access == MoPropertyMeta.READ_WRITE:
+            return True
+
+    return False
 
 
 def property_exists_in_prop_map(mo, prop_name):
