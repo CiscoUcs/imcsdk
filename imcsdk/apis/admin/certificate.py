@@ -17,7 +17,7 @@ This module provides apis for certificate related functionality
 """
 
 
-def get_current_certificate(handle):
+def current_certificate_get(handle):
     """
     This api gets the current certificate installed on the system
 
@@ -32,7 +32,7 @@ def get_current_certificate(handle):
     return cert_mo[0]
 
 
-def generate_certificate_signing_request(handle, name, org, org_unit, country,
+def certificate_signing_request_generate(handle, name, org, org_unit, country,
                                          state, locality, username=None,
                                          password=None, server=None,
                                          file_name=None, protocol=None,
@@ -61,7 +61,7 @@ def generate_certificate_signing_request(handle, name, org, org_unit, country,
         None
 
     Examples:
-        generate_certificate_signing_request(
+        certificate_signing_request_generate(
             handle, name="test-cert", org="test-org", org_unit="test-unit",
             country=GenerateCertificateSigningRequestConsts.COUNTRY_CODE_UNITED_STATES,
             state="California", locality="San Francisco", self_signed=True)
@@ -73,26 +73,29 @@ def generate_certificate_signing_request(handle, name, org, org_unit, country,
 
     mo = GenerateCertificateSigningRequest(parent_mo_or_dn="sys/cert-mgmt")
 
-    mo.common_name = name
-    mo.organization = org
-    mo.organizational_unit = org_unit
-    mo.country_code = country
-    mo.state = state
-    mo.locality = locality
+    params = {
+        "common_name": name,
+        "organization": org,
+        "organizational_unit": org_unit,
+        "country_code": country,
+        "state": state,
+        "locality": locality
+    }
 
     if self_signed:
-        mo.self_signed = "yes"
+        params["self_signed"] = "yes"
     else:
-        mo.user = username
-        mo.pwd = password
-        mo.remote_server = server
-        mo.remote_file = file_name
-        mo.protocol = protocol
+        params["user"] = username
+        params["pwd"] = password
+        params["remote_server"] = server
+        params["remote_file"] = file_name
+        params["protocol"] = protocol
 
+    mo.set_prop_multiple(**params)
     handle.add_mo(mo, modify_present=True)
 
 
-def get_certificate_signing_status(handle):
+def certificate_signing_status_get(handle):
     """
     This api checks the status of the certificate generation request
     submitted previously
@@ -105,13 +108,13 @@ def get_certificate_signing_status(handle):
     """
 
     mo = handle.query_classid("GenerateCertificateSigningRequest")
-    return mo[0].csr_status
+    return mo[0].csr_status if mo else ""
 
 
-def upload_certificate(handle, username, password, server, file_name, protocol):
+def certificate_upload(handle, username, password, server, file_name, protocol):
     """
     This api uploads the certificate generated using \
-        generate_certificate_signing_request
+        certificate_signing_request_generate
 
     Args:
         handle (ImcHandle)
@@ -129,11 +132,14 @@ def upload_certificate(handle, username, password, server, file_name, protocol):
         UploadCertificateConsts
 
     mo = UploadCertificate(parent_mo_or_dn="sys/cert-mgmt")
-    mo.admin_action = UploadCertificateConsts.ADMIN_ACTION_REMOTE_CERT_UPLOAD
-    mo.user = username
-    mo.pwd = password
-    mo.remote_server = server
-    mo.remote_file = file_name
-    mo.protocol = protocol
+    params = {
+        "admin_action": UploadCertificateConsts.ADMIN_ACTION_REMOTE_CERT_UPLOAD,
+        "user": username,
+        "pwd": password,
+        "remote_server": server,
+        "remote_file": file_name,
+        "protocol": protocol,
+    }
 
+    mo.set_prop_multiple(**params)
     handle.add_mo(mo, modify_present=True)

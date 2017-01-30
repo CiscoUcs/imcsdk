@@ -30,25 +30,26 @@ from imcsdk.apis.utils import _is_valid_arg
 
 def _set_power_state(handle, server_dn, state):
     server_mo = handle.query_dn(server_dn)
-    mo_class = None
     if handle.platform == IMC_PLATFORM.TYPE_CLASSIC:
         mo_class = ComputeRackUnitConsts
     elif handle.platform == IMC_PLATFORM.TYPE_MODULAR:
         mo_class = ComputeServerNodeConsts
+    else:
+        raise ImcOperationError("Set Power State", "Unknown platform:%s found" %
+                                handle.platform)
 
-    if state == "up":
-        server_mo.admin_power = mo_class.ADMIN_POWER_UP
-    elif state == "down":
-        server_mo.admin_power = mo_class.ADMIN_POWER_DOWN
-    elif state == "graceful-down":
-        server_mo.admin_power = mo_class.ADMIN_POWER_SOFT_SHUT_DOWN
-    elif state == "cycle":
-        server_mo.admin_power = mo_class.ADMIN_POWER_CYCLE_IMMEDIATE
+    state_dict = {
+        "up": mo_class.ADMIN_POWER_UP,
+        "down": mo_class.ADMIN_POWER_DOWN,
+        "graceful-down": mo_class.ADMIN_POWER_SOFT_SHUT_DOWN,
+        "cycle": mo_class.ADMIN_POWER_CYCLE_IMMEDIATE
+    }
 
+    server_mo.admin_power = state_dict[state]
     handle.set_mo(server_mo)
 
 
-def get_server_power_state(handle, server_id=1):
+def server_power_state_get(handle, server_id=1):
     """
     This method will return the oper power status of the rack server
 
@@ -58,11 +59,11 @@ def get_server_power_state(handle, server_id=1):
 
     Examples:
         For classic or non-C3260 series servers:-
-        get_server_power_state(handle)
+        server_power_state_get(handle)
 
         For modular or C3260 series servers, server_id should also be passed
         in the params:-
-        get_server_power_state(handle, server_id=1)
+        server_power_state_get(handle, server_id=1)
         If server_id is not specified, this will assume server_id="1"
 
     Returns:
@@ -73,8 +74,9 @@ def get_server_power_state(handle, server_id=1):
     server_mo = handle.query_dn(server_dn)
     if server_mo:
         return server_mo.oper_power
-    else:
-        raise ImcOperationError("Invalid Operation", "Please check params")
+
+    raise ImcOperationError("Get Server Power State",
+                            "Managed Object not found for dn:%s" % server_dn)
 
 
 def _wait_for_power_state(handle, state, timeout=60, interval=5, server_id=1):
@@ -101,7 +103,7 @@ def _wait_for_power_state(handle, state, timeout=60, interval=5, server_id=1):
         raise ValueError("ERROR: interval must be positive integer")
 
     wait_time = 0
-    while get_server_power_state(handle, server_id) != state:
+    while server_power_state_get(handle, server_id) != state:
         # Raise error if we've reached timeout
         if wait_time > timeout:
             raise ImcOperationError(
@@ -114,7 +116,7 @@ def _wait_for_power_state(handle, state, timeout=60, interval=5, server_id=1):
         wait_time += interval
 
 
-def power_up_server(handle, timeout=60, interval=5, server_id=1, **kwargs):
+def server_power_up(handle, timeout=60, interval=5, server_id=1, **kwargs):
     """
     This method will send the server the power up signal, and then polls
     the server every $interval until either $timeout or it comes online.
@@ -131,14 +133,14 @@ def power_up_server(handle, timeout=60, interval=5, server_id=1, **kwargs):
         ComputeServerNode object for C3260 platform
 
     Example:
-        power_up_server(handle)
-        power_up_server(handle, timeout=120, interval=10)
-        power_up_server(handle, server_id=2, timeout=60)
+        server_power_up(handle)
+        server_power_up(handle, timeout=120, interval=10)
+        server_power_up(handle, server_id=2, timeout=60)
     """
 
     server_dn = get_server_dn(handle, server_id)
     # Turn power on only if not already powered up
-    if get_server_power_state(handle, server_id) != "on":
+    if server_power_state_get(handle, server_id) != "on":
         _set_power_state(handle, server_dn, "up")
 
     # Poll until the server is powered up
@@ -149,7 +151,7 @@ def power_up_server(handle, timeout=60, interval=5, server_id=1, **kwargs):
     return handle.query_dn(server_dn)
 
 
-def power_down_server(handle, timeout=60, interval=5, server_id=1, **kwargs):
+def server_power_down(handle, timeout=60, interval=5, server_id=1, **kwargs):
     """
     This method will power down the rack server, even if tasks are still
     running on it.  Then polls the server every $interval until either $timeout
@@ -167,14 +169,14 @@ def power_down_server(handle, timeout=60, interval=5, server_id=1, **kwargs):
         ComputeServerNode object for C3260 platform
 
     Example:
-        power_down_server(handle)
-        power_down_server(handle, timeout=120, interval=10)
-        power_down_server(handle, server_id=2, timeout=60)
+        server_power_down(handle)
+        server_power_down(handle, timeout=120, interval=10)
+        server_power_down(handle, server_id=2, timeout=60)
     """
 
     server_dn = get_server_dn(handle, server_id)
     # Turn power off only if not already powered down
-    if get_server_power_state(handle, server_id) != "off":
+    if server_power_state_get(handle, server_id) != "off":
         _set_power_state(handle, server_dn, "down")
 
     # Poll until the server is powered up
@@ -184,7 +186,7 @@ def power_down_server(handle, timeout=60, interval=5, server_id=1, **kwargs):
     return handle.query_dn(server_dn)
 
 
-def power_down_server_gracefully(handle, timeout=120, interval=5,
+def server_power_down_gracefully(handle, timeout=120, interval=5,
                                  server_id=1, **kwargs):
     """
     This method will power down the rack server gracefully
@@ -199,14 +201,14 @@ def power_down_server_gracefully(handle, timeout=120, interval=5,
         ComputeServerNode object for C3260 platform
 
     Example:
-        power_down_server_gracefully(handle)
-        power_down_server_gracefully(handle, timeout=120, interval=10)
-        power_down_server_gracefully(handle, server_id=2, timeout=60)
+        server_power_down_gracefully(handle)
+        server_power_down_gracefully(handle, timeout=120, interval=10)
+        server_power_down_gracefully(handle, server_id=2, timeout=60)
     """
 
     server_dn = get_server_dn(handle, server_id)
     # Gracefully power off only if not already powered down
-    if get_server_power_state(handle, server_id) != "off":
+    if server_power_state_get(handle, server_id) != "off":
         _set_power_state(handle, server_dn, "graceful-down")
 
     # Poll until the server is powered up
@@ -216,7 +218,7 @@ def power_down_server_gracefully(handle, timeout=120, interval=5,
     return handle.query_dn(server_dn)
 
 
-def power_cycle_server(handle, timeout=120, interval=5, server_id=1, **kwargs):
+def server_power_cycle(handle, timeout=120, interval=5, server_id=1, **kwargs):
     """
     This method will power cycle the rack server immediately.
 
@@ -231,10 +233,10 @@ def power_cycle_server(handle, timeout=120, interval=5, server_id=1, **kwargs):
         ComputeServerNode object for C3260 platform
 
     Example:
-        power_cycle_server(handle) for non-C3260 platforms
-        power_cycle_server(handle, timeout=120, interval=10) \
+        server_power_cycle(handle) for non-C3260 platforms
+        server_power_cycle(handle, timeout=120, interval=10) \
                 for non-C3260 platforms
-        power_cycle_server(handle, server_id=2, timeout=60) for C3260 platforms
+        server_power_cycle(handle, server_id=2, timeout=60) for C3260 platforms
     """
 
     server_dn = get_server_dn(handle, server_id)
@@ -252,7 +254,8 @@ def _set_chassis_locator_led_state(handle, enabled, kwargs):
     chassis_dn = "sys/chassis-" + chassis_id
     led_mo = EquipmentChassisLocatorLed(parent_mo_or_dn=chassis_dn)
     led_mo.admin_state = (EquipmentChassisLocatorLedConsts.ADMIN_STATE_OFF,
-            EquipmentChassisLocatorLedConsts.ADMIN_STATE_ON)[enabled]
+                          EquipmentChassisLocatorLedConsts.ADMIN_STATE_ON)\
+                            [enabled]
     handle.set_mo(led_mo)
 
 
@@ -260,7 +263,7 @@ def _set_server_locator_led_state(handle, enabled, kwargs):
     server_dn = _set_server_dn(handle, kwargs)
     led_mo = EquipmentLocatorLed(parent_mo_or_dn=server_dn)
     led_mo.admin_state = (EquipmentLocatorLedConsts.ADMIN_STATE_OFF,
-            EquipmentLocatorLedConsts.ADMIN_STATE_ON)[enabled]
+                          EquipmentLocatorLedConsts.ADMIN_STATE_ON)[enabled]
     handle.set_mo(led_mo)
 
 
