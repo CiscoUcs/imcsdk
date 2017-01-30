@@ -18,7 +18,9 @@ This module implements all the server actions
 
 import time
 from imcsdk.imcexception import ImcOperationError
-from imcsdk.mometa.compute.ComputeRackUnit import ComputeRackUnitConsts
+from imcsdk.mometa.compute.ComputeRackUnit import ComputeRackUnit,\
+        ComputeRackUnitConsts
+from imcsdk.mometa.equipment.EquipmentChassis import EquipmentChassis
 from imcsdk.mometa.compute.ComputeServerNode import ComputeServerNodeConsts
 from imcsdk.mometa.equipment.EquipmentLocatorLed \
     import EquipmentLocatorLed, EquipmentLocatorLedConsts
@@ -318,3 +320,45 @@ def locator_led_off(handle, **kwargs):
     if _is_valid_arg("server_id", kwargs) or \
             handle.platform == IMC_PLATFORM.TYPE_CLASSIC:
         _set_server_locator_led_state(handle, False, kwargs)
+
+
+def tag_server(handle, tag):
+    """
+    This method will tag the server with the label specified.
+    Applicable to non-C3260 platforms
+
+    Args:
+        handle(ImcHandle)
+        tag (str): Label to be used to tag the asset
+
+    Returns:
+        ComputeRackUnit object
+
+    Example:
+        tag_server(handle, tag="Row21-Rack10-Slot5")
+    """
+    mo = ComputeRackUnit(parent_mo_or_dn="sys", server_id='1')
+    mo.asset_tag = str(tag)
+    handle.set_mo(mo)
+    return mo
+
+
+def tag_chassis(handle, tag):
+    """
+    This method will tag the chassis with the label specified.
+    Applicable to C3260 platforms
+
+    Args:
+        handle(ImcHandle)
+        tag (str): Label to be used to tag the asset
+
+    Returns:
+        EquipmentChassis object
+
+    Example:
+        tag_server(handle, tag="Row21-Rack10-Slot10")
+    """
+    mo = EquipmentChassis(parent_mo_or_dn="sys")
+    mo.asset_tag = str(tag)
+    handle.set_mo(mo)
+    return mo
