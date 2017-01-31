@@ -15,7 +15,7 @@ from mock import patch, MagicMock
 from nose.tools import assert_raises
 from imcsdk.imchandle import ImcHandle
 from imcsdk.imcexception import ImcOperationError
-from imcsdk.apis.server.serveractions import power_down_server, power_up_server
+from imcsdk.apis.server.serveractions import server_power_down, server_power_up
 from imcsdk.imccoreutils import IMC_PLATFORM
 
 
@@ -39,11 +39,11 @@ def test_valid_power_down_server(login_mock, query_dn_mock, set_mo_mock):
 
     # Scenario: server starts powered off
     query_dn_mock.return_value = pwrd_off_mock
-    assert power_down_server(test_cimc, 0, 1) is pwrd_off_mock
+    assert server_power_down(test_cimc, 0, 1) is pwrd_off_mock
 
     # Scenario: server starts powered on, and powers off successfully
     query_dn_mock.side_effect = [pwrd_on_mock, pwrd_off_mock, pwrd_off_mock, pwrd_off_mock]
-    assert power_down_server(test_cimc, 0, 1) is pwrd_off_mock
+    assert server_power_down(test_cimc, 0, 1) is pwrd_off_mock
 
 
 @patch.object(ImcHandle, 'set_mo')
@@ -66,11 +66,11 @@ def test_invalid_power_down_server(login_mock, query_dn_mock, set_mo_mock):
     test_cimc._set_platform(platform=IMC_PLATFORM.TYPE_CLASSIC)
 
     # Scenario: Zero value passed in as check interval
-    assert_raises(ValueError, power_down_server, test_cimc, 0, 0)
+    assert_raises(ValueError, server_power_down, test_cimc, 0, 0)
 
     # Scenario: server starts power on, and doesn't power off
     query_dn_mock.return_value = pwrd_on_mock
-    assert_raises(ImcOperationError, power_down_server, test_cimc, 0, 1)
+    assert_raises(ImcOperationError, server_power_down, test_cimc, 0, 1)
 
 
 @patch.object(ImcHandle, 'set_mo')
@@ -93,11 +93,11 @@ def test_valid_power_up_server(login_mock, query_dn_mock, set_mo_mock):
 
     # Scenario: server starts powered on
     query_dn_mock.return_value = pwrd_on_mock
-    assert power_up_server(test_cimc, 0, 1) is pwrd_on_mock
+    assert server_power_up(test_cimc, 0, 1) is pwrd_on_mock
 
     # Scenario: server starts powered off, and powers on successfully
     query_dn_mock.side_effect = [pwrd_off_mock, pwrd_on_mock, pwrd_on_mock, pwrd_on_mock]
-    assert power_up_server(test_cimc, 0, 1) is pwrd_on_mock
+    assert server_power_up(test_cimc, 0, 1) is pwrd_on_mock
 
 
 @patch.object(ImcHandle, 'set_mo')
@@ -119,8 +119,8 @@ def test_invalid_power_up_server(login_mock, query_dn_mock, set_mo_mock):
     test_cimc._set_platform(platform=IMC_PLATFORM.TYPE_CLASSIC)
 
     # Scenario: Zero value passed in as check interval
-    assert_raises(ValueError, power_up_server, test_cimc, 0, 0)
+    assert_raises(ValueError, server_power_up, test_cimc, 0, 0)
 
     # Scenario: server starts power off, and doesn't power on
     query_dn_mock.return_value = pwrd_off_mock
-    assert_raises(ImcOperationError, power_up_server, test_cimc, 0, 1)
+    assert_raises(ImcOperationError, server_power_up, test_cimc, 0, 1)

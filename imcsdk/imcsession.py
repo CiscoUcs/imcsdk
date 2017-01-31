@@ -471,12 +471,10 @@ class ImcSession(object):
         valid_models = ["R460-4640810", "C260-BASE-2646"]
 
         if model in valid_models:
-            self._set_model(model)
             return True
 
         for prefix in valid_model_prefixes:
             if model.startswith(prefix):
-                self._set_model(model)
                 return True
 
         return False
@@ -504,6 +502,7 @@ class ImcSession(object):
                 return False
 
             self._set_platform(model=model)
+            self._set_model(model=model)
 
         return True
 
@@ -661,13 +660,17 @@ class ImcSession(object):
             IMC_PLATFORM.TYPE_MODULAR: "ComputeServerNode",
             IMC_PLATFORM.TYPE_CLASSIC: "ComputeRackUnit"
             }
-        if self.__platform not in class_ids:
-            self.__model = model
-            return
 
-        mo_list = self.query_classid(class_ids.get(self.__platform))
-        server = mo_list[0]
-        self.__model = server.model
+        # Check for the right platform
+        if self.__platform in class_ids:
+            mo_list = self.query_classid(class_ids.get(self.__platform))
+            if mo_list:
+                self.__model = mo_list[0].model
+                return
+
+        # Unknown platform, should not end up here
+        # Blindly assign the model passed
+        self.__model = model
 
 
 def _get_port(port, secure):

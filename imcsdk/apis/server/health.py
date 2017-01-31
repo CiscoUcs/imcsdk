@@ -17,22 +17,22 @@ This module demonstrates the use of health and fault related functionality
 """
 
 
-def get_faults(handle, parent_class_id=None, dump=False):
+def faults_get(handle, parent_class_id=None, dump=False):
     """
-    Fetch fault related information
+    Fetch fault related information.
+    By default, fetches all the faults in the system.
 
     Args:
         handle (ImcHandle)
-        parent_class_id (string): Class Id for which faults are needed. If \n
-                                None then get all faults.
+        parent_class_id (string): Class Id for which faults are needed.
         dump (bool): True or False
 
     Returns:
         FaultInst: List of Managed Objects
 
     Examples:
-        get_faults(handle, parent_class_id="computeRackUnit", dump=False)
-        get_faults(handle, dump=True)
+        faults_get(handle, parent_class_id="computeRackUnit", dump=False)
+        faults_get(handle, dump=True)
     """
 
     from imcsdk.imccoreutils import write_object

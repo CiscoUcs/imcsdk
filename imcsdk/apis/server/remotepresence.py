@@ -55,18 +55,15 @@ def kvm_setup(handle, max_sessions=1, port=2068,
     """
 
     kvm_mo = CommKvm(parent_mo_or_dn=_get_comm_mo_dn(handle, server_id))
-    kvm_mo.admin_state = "enabled"
-    kvm_mo.total_sessions = str(max_sessions)
-    kvm_mo.port = str(port)
-    if encrypt:
-        kvm_mo.encryption_state = "enabled"
-    else:
-        kvm_mo.encryption_state = "disabled"
-    if mirror_locally:
-        kvm_mo.local_video_state = "enabled"
-    else:
-        kvm_mo.local_video_state = "disabled"
+    params = {
+        "admin_state": "enabled",
+        "total_sessions": str(max_sessions),
+        "port": str(port),
+        "encryption_state": ("disabled", "enabled") [encrypt],
+        "local_video_state": ("disabled", "enabled") [mirror_locally],
+    }
 
+    kvm_mo.set_prop_multiple(**params)
     handle.set_mo(kvm_mo)
     return kvm_mo
 
@@ -85,7 +82,6 @@ def kvm_disable(handle, server_id=1):
 
     kvm_mo = CommKvm(parent_mo_or_dn=_get_comm_mo_dn(handle, server_id))
     kvm_mo.admin_state = "disabled"
-
     handle.set_mo(kvm_mo)
 
 
@@ -128,11 +124,14 @@ def vmedia_setup(handle, encrypt=False, low_power_usb=False, server_id=1):
     """
 
     vmedia_mo = CommVMedia(parent_mo_or_dn=_get_comm_mo_dn(handle, server_id))
-    vmedia_mo.admin_state = "enabled"
-    vmedia_mo.encryption_state = ("disabled", "enabled")[encrypt]
-    vmedia_mo.low_power_usb_state = ("disabled", "enabled")[low_power_usb]
-    vmedia_mo.low_power_usb = ("disabled", "enabled")[low_power_usb]
+    params = {
+        "admin_state": "enabled",
+        "encryption_state": ("disabled", "enabled")[encrypt],
+        "low_power_usb_state": ("disabled", "enabled")[low_power_usb],
+        "low_power_usb": ("disabled", "enabled")[low_power_usb],
+    }
 
+    vmedia_mo.set_prop_multiple(**params)
     handle.set_mo(vmedia_mo)
     return vmedia_mo
 
@@ -399,18 +398,18 @@ def vmedia_mount_remove_all(handle, server_id=1):
         raise ImcOperationError('Remove Virtual Media',
                                 '{0}: ERROR - Unable remove all virtual' +
                                 'media mappings'.format(handle.ip))
-    # Return True if all mapppings removed
+    # Return True if all mappings removed
     return True
 
 
-def sol_setup(handle, speed, com_port, ssh_port, server_id=1):
+def sol_setup(handle, speed, comport, ssh_port, server_id=1):
     """
     This method will setup serial over lan connection
 
     Args:
         handle (ImcHandle)
         speed (string): "9600", "19200", "38400", "57600", "115200"
-        com_port (string): "com0", "com1"
+        comport (string): "com0", "com1"
         ssh_port (int): port for ssh
         server_id (int): Server Id to be specified for C3260 platforms
 
@@ -418,13 +417,15 @@ def sol_setup(handle, speed, com_port, ssh_port, server_id=1):
         SolIf object
     """
 
-    server_dn = get_server_dn(handle, server_id)
-    solif_mo = SolIf(parent_mo_or_dn=server_dn)
-    solif_mo.admin_state = SolIfConsts.ADMIN_STATE_ENABLE
-    solif_mo.speed = speed
-    solif_mo.comport = com_port
-    solif_mo.ssh_port = str(ssh_port)
+    solif_mo = SolIf(parent_mo_or_dn=get_server_dn(handle, server_id))
+    params = {
+        "admin_state": SolIfConsts.ADMIN_STATE_ENABLE,
+        "speed": str(speed),
+        "comport": comport,
+        "ssh_port": str(ssh_port),
+    }
 
+    solif_mo.set_prop_multiple(**params)
     handle.set_mo(solif_mo)
     return handle.query_dn(solif_mo.dn)
 
@@ -441,10 +442,8 @@ def sol_disable(handle, server_id=1):
         None
     """
 
-    server_dn = get_server_dn(handle, server_id)
-    solif_mo = SolIf(parent_mo_or_dn=server_dn)
+    solif_mo = SolIf(parent_mo_or_dn=get_server_dn(handle, server_id))
     solif_mo.admin_state = SolIfConsts.ADMIN_STATE_DISABLE
-
     handle.set_mo(solif_mo)
 
 
@@ -460,8 +459,6 @@ def is_sol_enabled(handle, server_id=1):
         None
     """
 
-    server_dn = get_server_dn(handle, server_id)
-    solif_mo = SolIf(parent_mo_or_dn=server_dn)
+    solif_mo = SolIf(parent_mo_or_dn=get_server_dn(handle, server_id))
     solif_mo = handle.query_dn(solif_mo.dn)
-    return(solif_mo.admin_state.lower() == "enabled" or
-           solif_mo.admin_state.lower() == "enable")
+    return solif_mo.admin_state.lower() in ["enable", "enabled"]
