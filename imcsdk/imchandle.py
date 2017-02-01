@@ -323,6 +323,11 @@ class ImcHandle(ImcSession):
             parent_dn = in_dn
 
         meta_class_id = None
+        # Setting the default class-id to None
+        # When hierarchy and class-id are passed together to Cisco IMC,
+        # an empty response is received.
+        # Hence, passing the class-id only when hierarchy is not set
+        # When both hierarchy and class-id are set, do local filtering for class-id
         if class_id and not hierarchy:
             meta_class_id = imccoreutils.find_class_id_in_mo_meta_ignore_case(
                 class_id)

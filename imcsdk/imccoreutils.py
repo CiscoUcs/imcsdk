@@ -327,7 +327,7 @@ def extract_molist_from_method_response(method_response,
 
 
 def filter_molist_on_class_id(mo_list, class_id=None):
-    if class_id is None:
+    if not class_id:
         return mo_list
 
     out_list = [mo for mo in mo_list if mo._class_id.lower() == class_id.lower()]

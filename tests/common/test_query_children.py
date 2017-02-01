@@ -38,6 +38,11 @@ def test_hierarchy():
     assert_equal(len(mos) > 30, True)
 
 
+def test_hierarchy_with_empty_class_id():
+    mos = handle.query_children(in_dn="sys/svc-ext", hierarchy=True, class_id="")
+    assert_equal(len(mos) > 30, True)
+
+
 def test_hierarchy_with_class_id():
     mos = handle.query_children(in_dn="sys/svc-ext", class_id="commSnmpUser",
                                 hierarchy=True)
