@@ -343,7 +343,7 @@ def tag_server(handle, tag):
     mo = ComputeRackUnit(parent_mo_or_dn="sys", server_id='1')
     mo.asset_tag = str(tag)
     handle.set_mo(mo)
-    return mo
+    return handle.query_dn(mo.dn)
 
 
 def tag_chassis(handle, tag):
@@ -364,4 +364,4 @@ def tag_chassis(handle, tag):
     mo = EquipmentChassis(parent_mo_or_dn="sys")
     mo.asset_tag = str(tag)
     handle.set_mo(mo)
-    return mo
+    return handle.query_dn(mo.dn)

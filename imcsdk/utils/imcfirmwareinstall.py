@@ -144,6 +144,7 @@ def monitor_huu_firmware_update(handle, timeout=60, interval=10, server_id=1):
 
     while True:
         try:
+            update_obj = handle.query_dn(update_obj.dn)
             if _has_upgrade_started(update_obj):
                 log_progress("Firmware upgrade is yet to start")
 

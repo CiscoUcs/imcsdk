@@ -18,10 +18,15 @@ and create vnics and vhbas
 """
 
 from imcsdk.imccoreutils import get_server_dn
-from imcsdk.imcexception import ImcOperationError
+from imcsdk.apis.utils import _get_mo
 
 
-def get_adaptor_unit(handle, adaptor_slot, server_id=1, **kwargs):
+def _get_adaptor_dn(handle, adaptor_slot, server_id=1):
+    server_dn = get_server_dn(handle, server_id)
+    return(server_dn + "/adaptor-" + str(adaptor_slot))
+
+
+def adaptor_unit_get(handle, adaptor_slot, server_id=1, **kwargs):
     """
     This method fetches the adaptorUnit Managed Object for the specified
     adaptor Slot on a server.
@@ -32,18 +37,16 @@ def get_adaptor_unit(handle, adaptor_slot, server_id=1, **kwargs):
         server_id (int): Server Id for C3260 platforms
         kwargs: key=value paired arguments
 
+    Returns:
+        AdaptorUnit object
+
     Examples:
-        get_adaptor_unit(handle, adaptor_slot=1, server_id=1)
+        adaptor_unit_get(handle, adaptor_slot=1, server_id=1)
     """
-    server_dn = get_server_dn(handle, server_id)
-    mo = handle.query_dn(server_dn + "/adaptor-" + str(adaptor_slot))
-
-    if mo is None:
-        raise ImcOperationError("Get Adaptor Unit", "Adaptor is not available")
-    return mo
+    return _get_mo(handle, dn=_get_adaptor_dn(handle, adaptor_slot, server_id))
 
 
-def get_vic_adaptor_properties(handle, adaptor_slot, server_id=1, **kwargs):
+def adaptor_properties_get(handle, adaptor_slot, server_id=1, **kwargs):
     """
     This method is used to get the vic adaptor properties
     Args:
@@ -54,27 +57,20 @@ def get_vic_adaptor_properties(handle, adaptor_slot, server_id=1, **kwargs):
 
     Examples:
         For non-3x60 platforms:-
-        get_vic_adaptor_properties(handle, adaptor_slot="1")
+        adaptor_properties_get(handle, adaptor_slot="1")
 
         For 3x60 platforms:-
-        get_vic_adaptor_properties(handle, adaptor_slot="1", server_id=1)
+        adaptor_properties_get(handle, adaptor_slot="1", server_id=1)
 
     Returns:
         AdaptorGenProfile object
     """
 
-    server_dn = get_server_dn(handle, server_id)
-    dn = server_dn + "/adaptor-" + str(adaptor_slot) + "/general"
-    mo = handle.query_dn(dn)
-
-    if mo is None:
-        raise ImcOperationError("Get Adaptor",
-                                "Adaptor is not available")
-
-    return mo
+    dn = _get_adaptor_dn(handle, adaptor_slot, server_id) + "/general"
+    return _get_mo(handle, dn=dn)
 
 
-def setup_vic_adaptor_properties(handle, adaptor_slot, fip_mode=None,
+def adaptor_properties_set(handle, adaptor_slot, lldp=None, fip_mode=None,
                                  vntag_mode=None, num_vmfex_ifs=None,
                                  server_id=1, **kwargs):
     """
@@ -89,45 +85,64 @@ def setup_vic_adaptor_properties(handle, adaptor_slot, fip_mode=None,
                              adaptor is in vntag mode
                              When the vntag mode is being disabled,
                              this property will be set to 0
+        server_id (int): Server Id to be specified for C3260 platforms
         kwargs: key=value paired arguments
 
     Examples:
         For non-C3260 platforms:-
-        setup_vic_adaptor_properties(handle, adaptor_slot="1",
+        adaptor_properties_set(handle, adaptor_slot="1",
                                      fip_mode=True)
 
         For C3260 platforms:-
-        setup_vic_adaptor_properties(handle, adaptor_slot="1",
+        adaptor_properties_set(handle, adaptor_slot="1",
                                      vntag_mode=True, num_of_vm_fex_ifs=5,
                                      server_id=2)
-        setup_vic_adaptor_properties(handle, adaptor_slot="1",
+        adaptor_properties_set(handle, adaptor_slot="1",
                                      fip_mode=False, server_id=1)
 
     Returns:
         AdaptorGenProfile object
     """
 
-    mo = get_vic_adaptor_properties(handle, adaptor_slot, server_id, **kwargs)
-    # VMFEX feature support is discontinued
-    # if num_vmfex_ifs:
-    #     mo.num_of_vm_fex_ifs = str(num_vmfex_ifs)
+    from imcsdk.mometa.adaptor.AdaptorGenProfile import AdaptorGenProfile
+    adaptor = adaptor_unit_get(handle, adaptor_slot, server_id, **kwargs)
+    mo = AdaptorGenProfile(parent_mo_or_dn=adaptor.dn)
+    # VMFEX feature support is discontinued since 3.0(1c) release
 
-    if fip_mode is True:
-        mo.fip_mode = "enabled"
-    elif fip_mode is False:
-        mo.fip_mode = "disabled"
+    values = {
+        True: "enabled",
+        False: "disabled"
+    }
 
-    if vntag_mode is True:
-        mo.vntag_mode = "enabled"
-    elif vntag_mode is False:
-        mo.vntag_mode = "disabled"
-        mo.num_of_vm_fex_ifs = ""
+    mo.fip_mode = values.get(fip_mode)
+    mo.vntag_mode = values.get(vntag_mode)
+    mo.lldp = values.get(lldp)
 
+    handle.set_mo(mo)
+    return handle.query_dn(mo.dn)
+
+
+def adaptor_reset(handle, adaptor_slot, server_id=1, **kwargs):
+    """
+
+    Args:
+        handle (ImcHandle)
+        adaptor_slot (string): PCI slot number of the adaptor
+        server_id (int): Server Id to be specified for C3260 platforms
+        kwargs: key=value paired arguments
+
+    Returns:
+        AdaptorUnit object
+
+    """
+    from imcsdk.mometa.adaptor.AdaptorUnit import AdaptorUnitConsts
+    mo = adaptor_unit_get(handle, adaptor_slot, server_id, **kwargs)
+    mo.admin_state = AdaptorUnitConsts.ADMIN_STATE_ADAPTOR_RESET
     handle.set_mo(mo)
     return mo
 
 
-def get_vnic(handle, adaptor_slot, name, server_id=1, **kwargs):
+def vnic_get(handle, adaptor_slot, name, server_id=1, **kwargs):
     """
     This method is used to get a vnic
     Args:
@@ -143,21 +158,19 @@ def get_vnic(handle, adaptor_slot, name, server_id=1, **kwargs):
 
     from imcsdk.mometa.adaptor.AdaptorHostEthIf import AdaptorHostEthIf
 
-    mo = get_adaptor_unit(handle, adaptor_slot, server_id, **kwargs)
+    mo = adaptor_unit_get(handle, adaptor_slot, server_id, **kwargs)
     vnic_mo = AdaptorHostEthIf(parent_mo_or_dn=mo.dn, name=name)
-    vnic_mo = handle.query_dn(vnic_mo.dn)
-
-    return vnic_mo
+    return handle.query_dn(vnic_mo.dn)
 
 
-def create_vnic(handle,
+def vnic_create(handle,
                 name,
                 adaptor_slot=1,
                 channel_number=None,
                 mac="AUTO",
                 mtu=1500,
                 class_of_service=None,
-                port_profile="",
+                port_profile=None,
                 pxe_boot=False,
                 uplink_port=0,
                 server_id=1,
@@ -180,12 +193,12 @@ def create_vnic(handle,
 
     Examples:
         For non-C3260 platforms:-
-        create_vnic(handle, adaptor_slot="1", name="test-vnic",
+        vnic_create(handle, adaptor_slot="1", name="test-vnic",
                     channel_number=10, mac="00:11:22:33:44:55",
                     mtu=1500, pxe_boot=True, uplink_port=0)
 
         For C3260 platforms:
-        create_vnic(handle, adaptor_slot="1", name="test-vnic",
+        vnic_create(handle, adaptor_slot="1", name="test-vnic",
                     channel_number=10, mac="00:11:22:33:44:55",
                     mtu=1500, pxe_boot=True, uplink_port=0, server_id=1)
 
@@ -195,32 +208,32 @@ def create_vnic(handle,
 
     from imcsdk.mometa.adaptor.AdaptorHostEthIf import AdaptorHostEthIf
 
-    mo = get_adaptor_unit(handle, adaptor_slot, server_id, **kwargs)
+    mo = adaptor_unit_get(handle, adaptor_slot, server_id, **kwargs)
     vnic = AdaptorHostEthIf(parent_mo_or_dn=mo.dn, name=name)
 
-    vnic.mac = mac
-    vnic.mtu = str(mtu)
-    vnic.pxe_boot = ("disabled", "enabled")[pxe_boot]
-    vnic.uplink_port = str(uplink_port)
+    params = {
+        "mac": mac,
+        "mtu": str(mtu),
+        "pxe_boot": ("disabled", "enabled")[pxe_boot],
+        "uplink_port": str(uplink_port),
+        "class_of_service": (None, str(class_of_service))[class_of_service is not None],
+        "channel_number": (None, str(channel_number))[channel_number is not None],
+        "port_profile": port_profile,
+    }
 
-    if class_of_service:
-        vnic.class_of_service = str(class_of_service)
-    if channel_number:
-        vnic.channel_number = str(channel_number)
-    if port_profile:
-        vnic.port_profile = port_profile
-
+    vnic.set_prop_multiple(**params)
+    vnic.set_prop_multiple(**kwargs)
     handle.add_mo(vnic, modify_present=True)
     return handle.query_dn(vnic.dn)
 
 
-def delete_vnic(handle, name, adaptor_slot=1, server_id=1, **kwargs):
+def vnic_delete(handle, name, adaptor_slot=1, server_id=1, **kwargs):
     """
     This method is used to delete a vnic
     Args:
         handle (ImcHandle)
         name (string): Name for the vnic to be deleted
-        adaptor_slot (int): PCI slot number of the adaptor
+        adaptor_slot (string): PCI slot number of the adaptor
         server_id (int): Server Id for C3260 platforms
         kwargs: key=value paired arguments
 
@@ -228,12 +241,12 @@ def delete_vnic(handle, name, adaptor_slot=1, server_id=1, **kwargs):
         None
     """
 
-    vnic_mo = get_vnic(handle, adaptor_slot, name, server_id, **kwargs)
+    vnic_mo = vnic_get(handle, adaptor_slot, name, server_id, **kwargs)
     if vnic_mo:
         handle.remove_mo(vnic_mo)
 
 
-def get_vhba(handle, adaptor_slot, name, server_id=1, **kwargs):
+def vhba_get(handle, adaptor_slot, name, server_id=1, **kwargs):
     """
     This method is used to get a vhba
     Args:
@@ -249,15 +262,13 @@ def get_vhba(handle, adaptor_slot, name, server_id=1, **kwargs):
 
     from imcsdk.mometa.adaptor.AdaptorHostFcIf import AdaptorHostFcIf
 
-    mo = get_adaptor_unit(handle, adaptor_slot, server_id, **kwargs)
+    mo = adaptor_unit_get(handle, adaptor_slot, server_id, **kwargs)
     vhba_mo = AdaptorHostFcIf(parent_mo_or_dn=mo.dn, name=name)
-    vhba_mo = handle.query_dn(vhba_mo.dn)
-
-    return vhba_mo
+    return handle.query_dn(vhba_mo.dn)
 
 
-def create_vhba(handle, adaptor_slot, name, channel_number, wwnn, wwpn,
-                port_profile="", san_boot=False, uplink_port=0,
+def vhba_create(handle, adaptor_slot, name, channel_number, wwnn, wwpn,
+                port_profile=None, san_boot=False, uplink_port=0,
                 server_id=1, **kwargs):
     """
     This method is used to create a new vhba
@@ -277,12 +288,12 @@ def create_vhba(handle, adaptor_slot, name, channel_number, wwnn, wwpn,
         AdaptorHostFcIf object
     Examples:
         For non-3x60 platforms:
-        create_vhba(handle, adaptor_slot="1", name="test-vhba",
+        vhba_create(handle, adaptor_slot="1", name="test-vhba",
                     channel_number=101, wwnn="10:00:11:3A:7D:D0:9A:43",
                     wwpn="20:00:11:3A:7D:D0:9A:43",
                     san_boot=True, uplink_port=0)
         For 3x60 platforms:
-        create_vhba(handle, adaptor_slot="2", name="test-vhba",
+        vhba_create(handle, adaptor_slot="2", name="test-vhba",
                     channel_number=100, wwnn="10:00:11:3A:7D:D0:9A:43",
                     wwpn="20:00:11:3A:7D:D0:9A:43",
                     san_boot=True, uplink_port=0, server_id=2)
@@ -290,29 +301,25 @@ def create_vhba(handle, adaptor_slot, name, channel_number, wwnn, wwpn,
 
     from imcsdk.mometa.adaptor.AdaptorHostFcIf import AdaptorHostFcIf
 
-    mo = get_adaptor_unit(handle, adaptor_slot, server_id, **kwargs)
+    mo = adaptor_unit_get(handle, adaptor_slot, server_id, **kwargs)
     vhba_mo = AdaptorHostFcIf(parent_mo_or_dn=mo.dn, name=name)
-    vhba_mo.channel_number = str(channel_number)
-    vhba_mo.wwnn = wwnn
-    vhba_mo.wwpn = wwpn
-    if port_profile:
-        vhba_mo.port_profile = port_profile
-    if san_boot:
-        vhba_mo.san_boot = "enabled"
-    else:
-        vhba_mo.san_boot = "disabled"
 
-    if uplink_port not in [0, 1]:
-        raise ImcOperationError("Create Vhba",
-                                "Invalid uplink port")
+    params = {
+        "channel_number": (None, str(channel_number))[channel_number is not None],
+        "wwnn": wwnn,
+        "wwpn": wwpn,
+        "port_profile": port_profile,
+        "san_boot": ("disabled", "enabled")[san_boot],
+        "uplink_port": str(uplink_port)
+    }
 
-    vhba_mo.uplink_port = str(uplink_port)
+    vhba_mo.set_prop_multiple(**params)
+    vhba_mo.set_prop_multiple(**kwargs)
     handle.add_mo(vhba_mo, modify_present=True)
-
     return handle.query_dn(vhba_mo.dn)
 
 
-def delete_vhba(handle, adaptor_slot, name, server_id=1, **kwargs):
+def vhba_delete(handle, adaptor_slot, name, server_id=1, **kwargs):
     """
     This method is used to delete a vnic
     Args:
@@ -326,6 +333,6 @@ def delete_vhba(handle, adaptor_slot, name, server_id=1, **kwargs):
         None
     """
 
-    vhba_mo = get_vhba(handle, adaptor_slot, name, server_id, **kwargs)
+    vhba_mo = vhba_get(handle, adaptor_slot, name, server_id, **kwargs)
     if vhba_mo:
         handle.remove_mo(vhba_mo)
