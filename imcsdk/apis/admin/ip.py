@@ -15,11 +15,14 @@
 """
 This module implements the APIs for IP Blocking and IP Filtering
 """
-from imcsdk.mometa.ip.IpBlocking import IpBlocking, IpBlockingConsts
+import logging
+from imcsdk.mometa.ip.IpBlocking import IpBlocking
 from imcsdk.mometa.ip.IpFiltering import IpFiltering, IpFilteringConsts
 from imcsdk.apis.utils import _get_mo, _is_valid_arg, _is_invalid_value
 from imcsdk.imccoreutils import get_server_dn, IMC_PLATFORM
 from imcsdk.imcexception import ImcOperationError
+
+log = logging.getLogger('imc')
 
 
 def _get_mgmt_if_dn(handle, id=1):
@@ -34,8 +37,8 @@ def _get_mgmt_if_dn(handle, id=1):
     return mo.dn
 
 
-def ip_blocking_enable(handle, fail_count=5, fail_window=60, penalty_time=300,
-                       **kwargs):
+def ip_blocking_enable(handle, fail_count='5', fail_window='60',
+                       penalty_time='300', **kwargs):
     """
     Enables IP Blocking
 
@@ -54,15 +57,19 @@ def ip_blocking_enable(handle, fail_count=5, fail_window=60, penalty_time=300,
 
     Returns:
         IpBlocking object
+
+    Examples:
+        ip_blocking_enable(handle, fail_count='6',
+                           fail_window='120', penalty_time='800')
     """
 
     mo = IpBlocking(parent_mo_or_dn=_get_mgmt_if_dn(handle))
 
     params = {
         'enable': 'yes',
-        'fail_count': fail_count,
-        'fail_window': fail_window,
-        'penalty_time': penalty_time
+        'fail_count': str(fail_count),
+        'fail_window': str(fail_window),
+        'penalty_time': str(penalty_time)
     }
     mo.set_prop_multiple(**params)
     mo.set_prop_multiple(**kwargs)
@@ -79,13 +86,16 @@ def ip_blocking_disable(handle):
 
     Returns:
         None
+
+    Examples:
+        ip_blocking_disable(handle)
     """
     mo = IpBlocking(parent_mo_or_dn=_get_mgmt_if_dn(handle))
     mo.enable = 'no'
     handle.set_mo(mo)
 
 
-def is_ip_blocking_enabled(handle,):
+def is_ip_blocking_enabled(handle):
     """
     Checks if IP Blocking is enabled
 
@@ -94,6 +104,9 @@ def is_ip_blocking_enabled(handle,):
 
     Returns:
         bool
+
+    Examples:
+        is_ip_blocking_enabled(handle)
     """
     mo = IpBlocking(parent_mo_or_dn=_get_mgmt_if_dn(handle))
     mo = handle.query_dn(mo.dn)
@@ -110,18 +123,15 @@ def ip_blocking_exists(handle, **kwargs):
 
     Returns:
         (True, IpBlocking object) if exists, else (False, None)
+
+    Examples:
+        ip_blocking_exists(handle, fail_count='6',
+                           fail_window='120', penalty_time='800')
     """
     mo = IpBlocking(parent_mo_or_dn=_get_mgmt_if_dn(handle))
     mo = _get_mo(handle, dn=mo.dn)
 
-    params = {
-        'enable': kwargs.get('enable'),
-        'fail_count': kwargs.get('fail_count'),
-        'fail_window': kwargs.get('fail_window'),
-        'penalty_time': kwargs.get('penalty_time')
-    }
-
-    if mo.check_prop_match(**params):
+    if mo.check_prop_match(**kwargs):
         return (True, mo)
 
     return (False, None)
@@ -153,7 +163,13 @@ def ip_filtering_enable(handle, filters=[]):
 
     Returns:
         IpFiltering object
+
+    Examples:
+        ip_filtering_enable(handle, filters=[{"id": 1, "filter": "1.1.1.0-255.255.255.255"},
+                                             {"id": 2, "filter": "2.2.2.2"}])
     """
+    log.warning('Changes to IP Filtering will be applied immediately. '
+                'Connectivity to Cisco IMC will be lost and a re-login is required.')
     mo = IpFiltering(parent_mo_or_dn=_get_mgmt_if_dn(handle))
     mo.enable = 'yes'
     _set_ip_filters(mo, filters)
@@ -172,6 +188,9 @@ def ip_filtering_disable(handle):
 
     Returns:
         None
+
+    Examples:
+        ip_filtering_disable(handle)
     """
     mo = IpFiltering(parent_mo_or_dn=_get_mgmt_if_dn(handle))
     mo.enable = 'no'
@@ -187,6 +206,9 @@ def is_ip_filtering_enabled(handle):
 
     Returns:
         bool
+
+    Examples:
+        is_ip_filtering_enabled(handle)
     """
     mo = IpFiltering(parent_mo_or_dn=_get_mgmt_if_dn(handle))
     mo = handle.query_dn(mo.dn)
@@ -205,7 +227,12 @@ def ip_filtering_modify(handle, filters=[]):
 
     Returns:
         IpFiltering object
+
+    Examples:
+        ip_filtering_modify(handle, filters=[{'id': 1, 'filter': '10.10.10.10'}])
     """
+    log.warning('Changes to IP Filtering will be applied immediately. '
+                'Connectivity to Cisco IMC will be lost and a re-login is required.')
     mo = IpFiltering(parent_mo_or_dn=_get_mgmt_if_dn(handle))
     _set_ip_filters(mo, filters)
 
@@ -222,10 +249,15 @@ def ip_filtering_clear(handle, filter_id=''):
         handle (ImcHandle)
         filter_id (str): String representing the filter id
 
-
     Returns:
         IpFiltering object
+
+    Examples:
+        ip_filtering_clear(handle, filter_id='3')
+        ip_filtering_clear(handle, filter_id='all')
     """
+    log.warning('Changes to IP Filtering will be applied immediately. '
+                'Connectivity to Cisco IMC maybe lost based on the filter being cleared')
     mo = IpFiltering(parent_mo_or_dn=_get_mgmt_if_dn(handle))
 
     if filter_id == 'all':
@@ -274,6 +306,11 @@ def ip_filtering_exists(handle, **kwargs):
 
     Returns:
         (True, IpFiltering object) if exists, else (False, None)
+
+    Examples:
+        ip_filtering_exists(handle, enable='yes',
+                            filters=[{"id": 1, "filter": "1.1.1.0-255.255.255.255"},
+                                     {"id": 2, "filter": "2.2.2.2"}])
     """
     ip_mo = IpFiltering(parent_mo_or_dn=_get_mgmt_if_dn(handle))
     ip_mo = handle.query_dn(ip_mo.dn)
