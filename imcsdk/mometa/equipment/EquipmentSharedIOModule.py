@@ -13,10 +13,10 @@ class EquipmentSharedIOModule(ManagedObject):
     """This is EquipmentSharedIOModule class."""
 
     consts = EquipmentSharedIOModuleConsts()
-    naming_props = set([u'slot'])
+    naming_props = set([u'slotId'])
 
     mo_meta = {
-        "modular": MoMeta("EquipmentSharedIOModule", "equipmentSharedIOModule", "shared-io-module-[slot]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'equipmentSystemIOController'], [u'commEpIpmiLan', u'computeSharedIOMbPowerStats', u'computeSharedIOMbTempStats', u'mgmtController'], ["Get"])
+        "modular": MoMeta("EquipmentSharedIOModule", "equipmentSharedIOModule", "shared-io-module-[slot_id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'equipmentSystemIOController'], [u'commEpIpmiLan', u'computeSharedIOMbPowerStats', u'computeSharedIOMbTempStats', u'mgmtController'], ["Get"])
     }
 
 
@@ -34,7 +34,7 @@ class EquipmentSharedIOModule(ManagedObject):
             "product_id": MoPropertyMeta("product_id", "productId", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
             "serial_number": MoPropertyMeta("serial_number", "serialNumber", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "slot_id": MoPropertyMeta("slot_id", "slotId", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "slot_id": MoPropertyMeta("slot_id", "slotId", "string", VersionMeta.Version2013e, MoPropertyMeta.NAMING, None, 0, 510, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x8, None, None, r"""((removed|created|modified|deleted),){0,3}(removed|created|modified|deleted){0,1}""", [], []), 
             "usnic_capable": MoPropertyMeta("usnic_capable", "usnicCapable", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "vendor": MoPropertyMeta("vendor", "vendor", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
@@ -68,9 +68,9 @@ class EquipmentSharedIOModule(ManagedObject):
 
     }
 
-    def __init__(self, parent_mo_or_dn, slot, **kwargs):
+    def __init__(self, parent_mo_or_dn, slot_id, **kwargs):
         self._dirty_mask = 0
-        self.slot = slot
+        self.slot_id = slot_id
         self.adapter_hw_revision = None
         self.child_action = None
         self.current_firmware_version = None
@@ -80,7 +80,6 @@ class EquipmentSharedIOModule(ManagedObject):
         self.lldp = None
         self.product_id = None
         self.serial_number = None
-        self.slot_id = None
         self.status = None
         self.usnic_capable = None
         self.vendor = None
