@@ -200,6 +200,8 @@ class ManagedObject(ImcBase):
 
     def check_prop_match(self, **kwargs):
         for prop_name in kwargs:
+            if kwargs[prop_name] is None:
+                continue
             if not imccoreutils.prop_exists(self, prop_name):
                 raise ValueError("Invalid Property Name Exception - "
                                  "Class [%s]: Prop <%s> "
