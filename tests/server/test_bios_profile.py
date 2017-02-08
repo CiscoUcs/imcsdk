@@ -77,6 +77,11 @@ def test_bios_profile_exists():
     assert_equal(match, True)
 
 
+def test_bios_profile_not_exists():
+    match, mo = bios_profile_exists(handle, name='complex')
+    assert_equal(match, False)
+
+
 def test_bios_profile_generate_json():
     diff = []
     output = bios_profile_generate_json(handle, name='simple')
