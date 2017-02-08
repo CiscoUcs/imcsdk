@@ -48,3 +48,7 @@ def test_hierarchy_with_class_id():
                                 hierarchy=True)
     for mo in mos:
         assert_equal(mo._class_id, "CommSnmpUser")
+
+
+def test_full_hierarchy():
+    mos = handle.query_children(in_dn='sys', hierarchy=True)

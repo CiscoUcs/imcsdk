@@ -54,3 +54,20 @@ def test_001_mo_heirarchy_to_xml():
     expected = b'<memoryUnitEnvStatsHist1 childAction="deleteNonPresent" dn="sys/chassis-1/blade-2/board/memarray-1/mem-9/dimm-env-stats/1" id="1" mostRecent="no" rn="1" suspect="no" temperature="28.000000" temperatureAvg="25.599997" temperatureMax="28.000000" temperatureMin="24.000000" thresholded="" timeCollected="2015-09-07T09:43:53.262"><memoryUnitEnvStatsHist2 childAction="deleteNonPresent" dn="sys/chassis-1/blade-2/board/memarray-1/mem-9/dimm-env-stats/1/1" id="1" mostRecent="no" rn="1" suspect="no" temperature="28.000000" temperatureAvg="25.599997" temperatureMax="28.000000" temperatureMin="24.000000" thresholded="" timeCollected="2015-09-07T09:43:53.262" /></memoryUnitEnvStatsHist1>'
     obj = response.out_configs.child[0].child[0].child[0]
     assert_equal(xc.to_xml_str(obj.to_xml()), expected)
+
+
+def test_mo_to_xml():
+    from imcsdk.mometa.aaa.AaaUser import AaaUser
+
+    mo = AaaUser(parent_mo_or_dn='sys/user-ext', id='11')
+    mo.name = 'abcd'
+    mo.priv = 'admin'
+    mo.pwd = 'abcd'
+    xml = mo.to_xml()
+    xml_str = xc.to_xml_str(xml)
+    new_mo = xc.from_xml_str(xml_str)
+    assert_equal(len(mo.__dict__), len(new_mo.__dict__))
+    for prop in mo.__dict__:
+        if prop == '_dirty_mask':
+            continue
+        assert_equal(getattr(mo, prop), getattr(new_mo, prop))

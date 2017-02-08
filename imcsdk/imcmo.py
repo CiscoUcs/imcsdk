@@ -295,6 +295,7 @@ class ManagedObject(ImcBase):
             return
 
         platform = None
+        handle = None
         if cookie:
             handle = imccoreutils.get_handle_from_cookie(cookie)
             if handle:
@@ -320,7 +321,10 @@ class ManagedObject(ImcBase):
                             self._dirty_mask & prop.mask != 0)):
                     value = getattr(self, key)
                     if value is not None:
-                        if prop.version <= handle.version:
+                        if handle:
+                            if prop.version <= handle.version:
+                                xml_obj.set(prop.xml_attribute, value)
+                        else:
                             xml_obj.set(prop.xml_attribute, value)
             else:
                 if key not in self.__xtra_props:
