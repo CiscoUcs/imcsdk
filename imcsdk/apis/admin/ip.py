@@ -153,7 +153,7 @@ def _set_ip_filters(mo, filters):
 def ip_filtering_enable(handle, filters=[]):
     """
     Enables IP filtering with the filters specified
-    Connection is expected to drop.
+    Connection may drop during this activity.
 
     Args:
         handle (ImcHandle)
@@ -217,7 +217,8 @@ def is_ip_filtering_enabled(handle):
 
 def ip_filtering_modify(handle, filters=[]):
     """
-    Modifies IP filtering with the filters specified
+    Modifies IP filtering with the filters specified.
+    Connection may drop during this activity.
 
     Args:
         handle (ImcHandle)
@@ -243,7 +244,8 @@ def ip_filtering_modify(handle, filters=[]):
 
 def ip_filtering_clear(handle, filter_id=''):
     """
-    Clears the IP filters specified by
+    Clears the IP filters specified by the input.
+    Connection may drop during this activity.
 
     Args:
         handle (ImcHandle)

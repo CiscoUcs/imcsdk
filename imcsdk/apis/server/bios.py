@@ -694,15 +694,15 @@ def bios_profile_exists(handle, name, server_id=1, **kwargs):
     Returns:
         (True, BiosProfile) if the settings match, else (False, None)
 
-    Raises:
-        ImcOperationError if the bios profile is not found
-
     Examples:
         match, mo = bios_profile_exists(handle, name='simple',
                                         enabled=True)
     """
 
-    mo = _get_bios_profile(handle, name=name, server_id=server_id)
+    mo = _get_bios_profile_mo(handle, name=name, server_id=server_id)
+    if mo is None:
+        return False, None
+
     params = {}
 
     if _is_valid_arg('enabled', kwargs):
@@ -743,7 +743,7 @@ def bios_profile_generate_json(handle, name, server_id=1, file_name=None):
     output = {}
     output['tokens'] = {}
 
-    mo = _get_bios_profile_mo(handle, name=name, server_id=server_id)
+    mo = _get_bios_profile(handle, name=name, server_id=server_id)
     output['name'] = mo.name
     output['description'] = mo.description
 
