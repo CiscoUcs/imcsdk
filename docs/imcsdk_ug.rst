@@ -263,6 +263,14 @@ for detailed parameter sets to ``ImcHandle``
 The handle maintains a reference to the type of platform (classic or modular) that it is managing.
 This can be accessed using the ``handle.platform`` property.
 
+Cisco IMC servers running firmware version 3.0(1c) on which secure login is enabled, support only TLS version 1.2.
+This includes servers on which http -> https redirection is enabled and running firmware version 3.0(1c).
+
+For successfully connecting to such servers, the following requirements have to be fulfilled :-
+
+- Python2 version >= 2.7.9 or Python3 version >= 3.4
+- Openssl version >= 1.0.1
+
 
 Base APIs
 ~~~~~~~~~

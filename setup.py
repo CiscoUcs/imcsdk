@@ -24,7 +24,7 @@ test_requirements = [
 
 setup(
     name='imcsdk',
-    version='0.9.1.0',
+    version='0.9.2.0',
     description="python SDK for Cisco UCS IMC",
     long_description=readme + '\n\n' + history,
     author="Cisco Systems",
