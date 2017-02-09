@@ -346,7 +346,7 @@ def _get_inventory_html(inventory, file_name, spec=inventory_spec):
     f.close()
 
 
-def get_inventory(handle,
+def inventory_get(handle,
                   component="all",
                   file_format="json",
                   file_name=None,

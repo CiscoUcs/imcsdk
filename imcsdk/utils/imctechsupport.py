@@ -20,7 +20,7 @@ from ..imcexception import ImcValidationException, ImcWarning
 from ..imccoreutils import IMC_PLATFORM
 
 
-def get_imc_tech_support(handle, remote_host, remote_file, protocol, username,
+def tech_support_get(handle, remote_host, remote_file, protocol, username,
                          password, timeout_in_sec=600,
                          component="all", **kwargs):
     """
@@ -49,10 +49,10 @@ def get_imc_tech_support(handle, remote_host, remote_file, protocol, username,
 
     Example:
         remote_file = "/root/tech_sup_backup.tar.gz"
-        get_imc_tech_support(h,remote_file=remote_file,
+        tech_support_get(h,remote_file=remote_file,
                protocol="scp",username="user",password="pass",
                remote_host="10.10.10.10")
-        get_imc_tech_support(h,remote_file=remote_file,
+        tech_support_get(h,remote_file=remote_file,
                protocol="scp",username="user",password="pass",
                remote_host="10.10.10.10", component="all")
     """
