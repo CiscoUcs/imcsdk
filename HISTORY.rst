@@ -4,7 +4,7 @@ History
 
 0.9.2.0 (2017-02-10)
 --------------------
-* Supports every Managed Object exposed by IMC upto version 3.0(1c)
+* Adds support for IMC version 3.0(1c)
 * New APIs for the following features:-
 
   * Secure Drive Encryption
