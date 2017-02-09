@@ -268,7 +268,7 @@ This includes servers on which http -> https redirection is enabled and running 
 
 For successfully connecting to such servers, the following requirements have to be fulfilled :-
 
-- Python2 version >= 2.7.9 or Python3 version >= 3.4
+- Python2 version >= 2.7.9 or Python3 version >= 3.2
 - Openssl version >= 1.0.1
 
 
