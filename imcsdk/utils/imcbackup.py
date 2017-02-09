@@ -19,10 +19,10 @@ import time
 from ..imcexception import ImcValidationException
 
 
-def backup_imc(handle, remote_host, remote_file, protocol, username, password,
-               passphrase, timeout_in_sec=600, entity="CMC", **kwargs):
+def backup_create(handle, remote_host, remote_file, protocol, username, password,
+                  passphrase, timeout_in_sec=600, entity="CMC", **kwargs):
     """
-    backup_imc helps create and download Imc backups.
+    backup_create helps create and download Imc backups.
 
     Args:
         handle (ImcHandle): Imc Connection handle
@@ -42,10 +42,10 @@ def backup_imc(handle, remote_host, remote_file, protocol, username, password,
 
     Example:
         remote_file = "/root/config_backup.xml"
-        backup_imc(h,remote_file=remote_file,
+        backup_create(h,remote_file=remote_file,
                protocol="ftp",username="user",password="pass",
                remote_host="10.10.10.10",passphrase="xxxxxx")
-        backup_imc(handle, remote_file="/users/xyz/backup",
+        backup_create(handle, remote_file="/users/xyz/backup",
                    remote_host="1.1.1.1", protocol="scp",
                    username="admin", password="password",
                    passphrase="passphrase", timeout_in_sec=600, entity="CMC")
@@ -77,6 +77,7 @@ def backup_imc(handle, remote_host, remote_file, protocol, username, password,
     mgmt_backup.passphrase = passphrase
     mgmt_backup.proto = protocol
     mgmt_backup.admin_state = MgmtBackupConsts.ADMIN_STATE_ENABLED
+    mgmt_backup.set_prop_multiple(**kwargs)
 
     if handle.platform == IMC_PLATFORM.TYPE_MODULAR:
         mgmt_backup.entity = entity
@@ -111,14 +112,14 @@ def backup_imc(handle, remote_host, remote_file, protocol, username, password,
         duration = max(0, (duration - poll_interval))
         if duration == 0:
             handle.remove_mo(mgmt_backup)
-            raise ImcValidationException('backup_imc timed out')
+            raise ImcValidationException('backup_create timed out')
 
 
-def import_imc_backup(handle, remote_host, remote_file, protocol, username,
-                      password, passphrase, entity="CMC", **kwargs):
+def backup_import(handle, remote_host, remote_file, protocol, username,
+                  password, passphrase, entity="CMC", **kwargs):
     """
     This operation uploads a Imc backup taken earlier via GUI
-    or backup_imc operation for all configuration, system configuration,
+    or backup_create operation for all configuration, system configuration,
     and logical configuration files. User can perform an import while the
     system is up and running.
 
@@ -138,13 +139,13 @@ def import_imc_backup(handle, remote_host, remote_file, protocol, username,
 
     Example:
         remote_file = "/root/config_backup.xml"
-        import_imc_backup(h,remote_file=remote_file,
-               protocol="ftp",username="user",password="pass",
-               remote_host="10.10.10.10",passphrase="xxxxxx")
-        import_imc_backup(handle, remote_file="/users/xyz/backup",
-                   remote_host="1.1.1.1", protocol="scp",
-                   username="admin", password="password",
-                   passphrase="passphrase", timeout_in_sec=600, entity="CMC")
+        backup_import(h,remote_file=remote_file,
+                      protocol="ftp",username="user",password="pass",
+                      remote_host="10.10.10.10",passphrase="xxxxxx")
+        backup_import(handle, remote_file="/users/xyz/backup",
+                      remote_host="1.1.1.1", protocol="scp",
+                      username="admin", password="password",
+                      passphrase="passphrase", timeout_in_sec=600, entity="CMC")
  """
 
     from ..mometa.top.TopSystem import TopSystem
@@ -172,6 +173,7 @@ def import_imc_backup(handle, remote_host, remote_file, protocol, username,
     mgmt_importer.pwd = password
     mgmt_importer.passphrase = passphrase
     mgmt_importer.admin_state = MgmtImporterConsts.ADMIN_STATE_ENABLED
+    mgmt_importer.set_prop_multiple(**kwargs)
 
     if handle.platform == IMC_PLATFORM.TYPE_MODULAR:
         mgmt_importer.entity = entity

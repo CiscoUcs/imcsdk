@@ -13,7 +13,7 @@
 
 from nose.tools import raises, assert_equal
 from ..connection.info import custom_setup, custom_teardown
-from imcsdk.apis.server.inventory import get_inventory
+from imcsdk.apis.server.inventory import inventory_get
 from imcsdk.apis.server.serveractions import tag_server, tag_chassis
 from imcsdk.imccoreutils import IMC_PLATFORM
 
@@ -39,26 +39,26 @@ def teardown_module():
 
 
 def test_get_inventory():
-    get_inventory(handle, file_format="html", file_name="inventory.html")
-    get_inventory(handle, component=["cpu", "disks"], file_format="html",
+    inventory_get(handle, file_format="html", file_name="inventory.html")
+    inventory_get(handle, component=["cpu", "disks"], file_format="html",
                   file_name="inventory.html")
-    get_inventory(handle, component=["cpu", "disks", "all"],
+    inventory_get(handle, component=["cpu", "disks", "all"],
                   file_format="html", file_name="inventory.html")
-    get_inventory(handle, component="cpu", file_format="csv",
+    inventory_get(handle, component="cpu", file_format="csv",
                   file_name="inventory.csv")
-    get_inventory(handle, component="disks", file_format="json",
+    inventory_get(handle, component="disks", file_format="json",
                   file_name="inventory.json")
-    get_inventory(handle, component="vic")
+    inventory_get(handle, component="vic")
 
 
 @raises(Exception)
 def test_get_inventory_error():
-    get_inventory(handle, component="vic", file_format="csv")
+    inventory_get(handle, component="vic", file_format="csv")
 
 
 @raises(Exception)
 def test_get_inventory_invalid_component():
-    get_inventory(handle, component="invalid", file_format="csv")
+    inventory_get(handle, component="invalid", file_format="csv")
 
 
 def test_asset_tag_server():

@@ -33,8 +33,8 @@ Table of Contents
 
 7.  `Backup And Import <#backup-and-import>`__
 
-    1. `Backup Imc <#backup-imc>`__
-    2. `Import Imc <#import-imc>`__
+    1. `Backup IMC <#backup-imc>`__
+    2. `Import IMC <#import-imc>`__
 
 8. `Technical Support <#technical-support>`__
 
@@ -263,6 +263,14 @@ for detailed parameter sets to ``ImcHandle``
 The handle maintains a reference to the type of platform (classic or modular) that it is managing.
 This can be accessed using the ``handle.platform`` property.
 
+Cisco IMC servers running firmware version 3.0(1c) on which secure login is enabled, support only TLS version 1.2.
+This includes servers on which http -> https redirection is enabled and running firmware version 3.0(1c).
+
+For successfully connecting to such servers, the following requirements have to be fulfilled :-
+
+- Python2 version >= 2.7.9 or Python3 version >= 3.2
+- Openssl version >= 1.0.1
+
 
 Base APIs
 ~~~~~~~~~
@@ -390,7 +398,7 @@ shows information about properties of the MO.
    -  ``xml_attribute`` - the name of the property as expected by the
       server.
    -  ``field_type`` - type of the field
-   -  ``min_version`` - Imc server release in which the property was
+   -  ``min_version`` - IMC server release in which the property was
       first introduced
    -  ``access`` - defines if a property is
       interal/user-readable/user-writable
@@ -465,173 +473,172 @@ sample output: (truncated)
 Backup And Import
 -----------------
 
-Backup Imc
+Backup IMC
 ~~~~~~~~~~
 
-``backup_imc`` is used to take backup of a Imc server
+``backup_create`` is used to take backup of a Cisco IMC server
 
 
 ::
 
-    from imcsdk.utils.imcbackup import backup_imc
+    from imcsdk.utils.imcbackup import backup_create
 
     backup_file = “/home/user/backup/config_backup.xml”
 
     For classic platforms :-
     ------------------------
-    backup_imc(handle,
-               remote_file=backup_file,
-               protocol="ftp", username="user", password="pass",
-               remote_host="10.10.10.10", passphrase="xxxxxx")
+    backup_create(handle,
+                  remote_file=backup_file,
+                  protocol="ftp", username="user", password="pass",
+                  remote_host="10.10.10.10", passphrase="xxxxxx")
 
     For modular platforms :-
     ------------------------
-    backup_imc(handle,
-               remote_host=remote_host, remote_file='/path/to/filename.xml',
-               protocol='scp', username="user", password="pass",
-               passphrase='abc', entity = 'CMC')
+    backup_create(handle,
+                  remote_host=remote_host, remote_file='/path/to/filename.xml',
+                  protocol='scp', username="user", password="pass",
+                  passphrase='abc', entity = 'CMC')
 
 
-`Backup Imc API
-Reference <https://ciscoucs.github.io/imcsdk_docs/imcsdk.utils.html?highlight=backup_imc#imcsdk.utils.imcbackup.backup_imc>`__
+`Backup IMC API
+Reference <https://ciscoucs.github.io/imcsdk_docs/imcsdk.utils.html?highlight=backup_create#imcsdk.utils.imcbackup.backup_create>`__
 
-Import Imc
+Import IMC
 ~~~~~~~~~~
 
-``import_imc_backup`` is used to import an existing backup to a Imc server
+``backup_import`` is used to import an existing backup to a Cisco IMC server
 
 ::
 
-    from imcsdk.utils.imcbackup import import_imc_backup
+    from imcsdk.utils.imcbackup import backup_import
 
     import_file = “/home/user/backup/config_backup.xml”
 
     For classic platforms :-
     ------------------------
-    import_imc_backup(handle, remote_file=import_file,
-                      protocol="ftp", username="user", password="pass",
-                      remote_host="10.10.10.10", passphrase="xxxxxx")
+    backup_import(handle, remote_file=import_file,
+                  protocol="ftp", username="user", password="pass",
+                  remote_host="10.10.10.10", passphrase="xxxxxx")
 
     For modular platforms :-
     ------------------------
-    import_imc_backup(handle, remote_host=remote_host,
-                      remote_file='/path/to/filename.xml', protocol='scp',
-                      username=username, password=password,
-                      passphrase='abc', entity = 'CMC')
+    backup_import(handle, remote_host=remote_host,
+                  remote_file='/path/to/filename.xml', protocol='scp',
+                  username=username, password=password,
+                  passphrase='abc', entity = 'CMC')
 
 
-`Import Imc API
-Reference <https://ciscoucs.github.io/imcsdk_docs/imcsdk.utils.html?highlight=import_imc_backup#imcsdk.utils.imcbackup.import_imc_backup>`__
+`Import IMC API
+Reference <https://ciscoucs.github.io/imcsdk_docs/imcsdk.utils.html?highlight=backup_import#imcsdk.utils.imcbackup.backup_import>`__
 
 
 Technical Support
 -----------------
 
-``get_imc_tech_support`` is used to import an existing backup to a Imc server
+``tech_support_get`` is used to collect tech-support for a Cisco IMC server
 
 ::
 
-    from imcsdk.utils.imctechsupport import get_imc_tech_support
+    from imcsdk.utils.imctechsupport import tech_support_get
 
     For classic platforms :-
     ------------------------
-    get_imc_tech_support(handle=handle,
-                         remote_host=remote_host,
-                         remote_file='/path/to/filename.tar.gz',
-                         protocol='scp',
-                         username=username,
-                         password=password)
+    tech_support_get(handle=handle,
+                     remote_host=remote_host,
+                     remote_file='/path/to/filename.tar.gz',
+                     protocol='scp',
+                     username=username,
+                     password=password)
 
     For modular platforms :-
     ------------------------
-    get_imc_tech_support(handle=handle,
-                         remote_host=remote_host,
-                         remote_file='/path/to/filename.tar.gz',
-                         protocol='scp',
-                         username=username,
-                         password=password,
-                         component='all')
+    tech_support_get(handle=handle,
+                     remote_host=remote_host,
+                     remote_file='/path/to/filename.tar.gz',
+                     protocol='scp',
+                     username=username,
+                     password=password,
+                     component='all')
 
 
-`Tech-support Imc API
-Reference <https://ciscoucs.github.io/imcsdk_docs/imcsdk.utils.html?highlight=get_imc_tech_support#imcsdk.utils.imctechsupport.get_imc_tech_support>`__
+`Tech-support IMC API
+Reference <https://ciscoucs.github.io/imcsdk_docs/imcsdk.utils.html?highlight=tech_support_get#imcsdk.utils.imctechsupport.tech_support_get>`__
 
 
 Firmware Installation
 ---------------------
 
-``update_imc_firmware_huu`` is used to import an existing backup to a Imc server
+``firmware_huu_update`` is used to upgrade firmware of a Cisco IMC server
 
 ::
 
-    from imcsdk.utils.imcfirmwareinstall import update_imc_firmware_huu
+    from imcsdk.utils.imcfirmwareinstall import firmware_huu_update
 
     For classic platforms :-
     ------------------------
-    update_imc_firmware_huu(handle=handle,
-                            remote_ip=remote_ip,
-                            remote_share='/path/image_name.iso',
-                            share_type='nfs',
-                            username=username,
-                            password=password,
-                            update_component='all',
-                            stop_on_error='yes',
-                            verify_update='no',
-                            cimc_secure_boot='no')
+    firmware_huu_update(handle=handle,
+                        remote_ip=remote_ip,
+                        remote_share='/path/image_name.iso',
+                        share_type='nfs',
+                        username=username,
+                        password=password,
+                        update_component='all',
+                        stop_on_error='yes',
+                        verify_update='no',
+                        cimc_secure_boot='no')
 
     For modular platforms :-
     ------------------------
-    update_imc_firmware_huu(handle=handle,
-                            remote_ip=remote_ip,
-                            remote_share='/path/image_name.iso',
-                            share_type='nfs',
-                            username=username,
-                            password=password,
-                            update_component='all',
-                            stop_on_error='yes',
-                            verify_update='no',
-                            cimc_secure_boot='no',
-                            server_id=1)
+    firmware_huu_update(handle=handle,
+                        remote_ip=remote_ip,
+                        remote_share='/path/image_name.iso',
+                        share_type='nfs',
+                        username=username,
+                        password=password,
+                        update_component='all',
+                        stop_on_error='yes',
+                        verify_update='no',
+                        cimc_secure_boot='no',
+                        server_id=1)
 
-`Firmware Installation Imc API
-Reference <https://ciscoucs.github.io/imcsdk_docs/imcsdk.utils.html?highlight=update_imc_firmware_huu#imcsdk.utils.imcfirmwareinstall.update_imc_firmware_huu>`__
+`Firmware Installation IMC API
+Reference <https://ciscoucs.github.io/imcsdk_docs/imcsdk.utils.html?highlight=firmware_huu_update#imcsdk.utils.imcfirmwareinstall.firmware_huu_update>`__
 
 
 Inventory
 ---------
-The ``get_inventory`` API is used to fetch server inventory
+The ``inventory_get`` API is used to fetch server inventory
 
 ::
 
-    from imcsdk.apis.server.inventory import get_inventory
+    from imcsdk.apis.server.inventory import inventory_get
 
     # Fetch inventory for a single server
-    get_inventory(handle=handle)
+    inventory_get(handle=handle)
 
     # Fetch inventory for a multiple servers
-    get_inventory(handle=[handle1, handle2, handle3])
+    inventory_get(handle=[handle1, handle2, handle3])
 
     # Fetch inventory for a single server
-    get_inventory(handle=handle, component="all")
+    inventory_get(handle=handle, component="all")
 
     # Fetch disks inventory for a single server
-    get_inventory(handle=handle, component="disks")
+    inventory_get(handle=handle, component="disks")
 
     # Fetch cpu and disks inventory for a single server
-    get_inventory(handle=handle, component=["cpu", "disks"])
+    inventory_get(handle=handle, component=["cpu", "disks"])
 
     # Fetch cpu and disks inventory for a single server and
     # write it to a file in json format
-    get_inventory(handle=handle, component=["cpu", "disks"],
+    inventory_get(handle=handle, component=["cpu", "disks"],
                   file_format="json", file_name="inventory.json")
 
     # Fetch cpu and disks inventory for a single server and
     # write it to a file in csv format
-    get_inventory(handle=handle, component=["cpu", "disks"], file_format="csv",
+    inventory_get(handle=handle, component=["cpu", "disks"], file_format="csv",
                   file_name="inventory.csv")
 
     # Fetch cpu and disks inventory for a single server and
     # write it to a file in html format
-    get_inventory(handle=handle, component=["cpu", "disks"],
+    inventory_get(handle=handle, component=["cpu", "disks"],
     file_format="html", file_name="inventory.html")
-

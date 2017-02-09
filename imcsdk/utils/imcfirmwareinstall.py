@@ -25,11 +25,11 @@ from imcsdk.mometa.huu.HuuController import HuuController
 
 log = logging.getLogger('imc')
 
-def update_imc_firmware_huu(handle, remote_share, share_type, remote_ip,
-                            username="", password="", update_component="all",
-                            stop_on_error="yes", timeout=240,
-                            verify_update="yes", cimc_secure_boot="no",
-                            server_id=1):
+def firmware_huu_update(handle, remote_share, share_type, remote_ip,
+                        username="", password="", update_component="all",
+                        stop_on_error="yes", timeout=240,
+                        verify_update="yes", cimc_secure_boot="no",
+                        server_id=1):
     """
     This method can be used to upgrade the cimc firmware
 
@@ -54,17 +54,17 @@ def update_imc_firmware_huu(handle, remote_share, share_type, remote_ip,
         HuuFirmwareUpdater object
 
     Examples:
-        update_imc_firmware_huu(handle=handle,
-                                remote_ip=ip,
-                                remote_share='nfsshare2/ucs-c460m4-huu-2.0.9l.iso',
-                                share_type='nfs',
-                                username=username,
-                                password=password,
-                                update_component='all',
-                                stop_on_error='yes',
-                                verify_update='no',
-                                cimc_secure_boot='no',
-                                timeout=60)
+        firmware_huu_update(handle=handle,
+                            remote_ip=ip,
+                            remote_share='nfsshare2/ucs-c460m4-huu-2.0.9l.iso',
+                            share_type='nfs',
+                            username=username,
+                            password=password,
+                            update_component='all',
+                            stop_on_error='yes',
+                            verify_update='no',
+                            cimc_secure_boot='no',
+                            timeout=60)
     """
 
     top_system = TopSystem()
@@ -112,7 +112,7 @@ def _print_component_upgrade_summary(handle):
         log.info("%20s: %s" % (obj.component, obj.update_status))
 
 
-def monitor_huu_firmware_update(handle, timeout=60, interval=10, server_id=1):
+def firmware_huu_update_monitor(handle, timeout=60, interval=10, server_id=1):
     """
     This method monitors status of a firmware upgrade.
 
@@ -126,7 +126,7 @@ def monitor_huu_firmware_update(handle, timeout=60, interval=10, server_id=1):
         None
 
     Examples:
-        monitor_huu_firmware_update(handle, 60, 10)
+        firmware_huu_update_monitor(handle, 60, 10)
     """
     current_status = []
     start = datetime.datetime.now()
@@ -162,7 +162,7 @@ def monitor_huu_firmware_update(handle, timeout=60, interval=10, server_id=1):
             secs = (datetime.datetime.now() - start).total_seconds()
             if int(secs / 60) > timeout:
                 log_progress("Monitor API timeout",
-                             "rerun monitor_huu_firmware_update")
+                             "rerun firmware_huu_update_monitor")
                 break
         except:
             _validate_connection(handle)
