@@ -117,7 +117,7 @@ The above written Dn is composed of the following Rn:
 
 ::
 
-    topSystem MO: rn=”	s”
+    topSystem MO: rn=”sys”
     computeRackUnit MO: rn=”rack-unit-<id>”
     adaptorUnit MO: rn =”adaptor-<id>”
 
@@ -281,7 +281,7 @@ The SDK provides APIs to enable CRUD operations.
 -  **R**\ etrieve an object -
    ``query_dn``,\ ``query_classid``
 -  **U**\ pdate an object - ``set_mo``
--  **D**\ elete an object - ``delete_mo``
+-  **D**\ elete an object - ``remove_mo``
 
 
 All these methods are invoked on a ``ImcHandle`` instance. We refer it
@@ -295,20 +295,16 @@ Creating managed objects is done via ``add_mo`` API.
 
 Example:
 
-The below example creates a new Service Profile(\ ``LsServer``) Object
-under the parent ``org-root``
+The below example creates a vnic(\ ``AdaptorHostEthIf``) Object
 
 ::
 
-    from imcsdk.mometa.adaptor.AdaptorEthISCSIProfile import AdaptorEthISCSIProfile
+    from imcsdk.mometa.adaptor.AdaptorHostEthIf import AdaptorHostEthIf
 
-    adapter_profile = AdaptorEthISCSIProfile(parent_mo_or_dn="sys/rack-unit-1/adaptor-2/host-eth-eth1",
-                                   initiator_name="abc.def.storage",
-                                   initiator_ip_address="10.10.10.10",
-                                   initiator_gateway="10.10.10.11",
-                                   initiator_subnet_mask="255.255.255.0",
-                                   dhcp_iscsi="enabled")
-    handle.add_mo(adapter_profile)
+    vnic = AdaptorHostEthIf(parent_mo_or_dn='sys/rack-unit-1/adaptor-1',
+                            name='vnic-1', mac='00:11:22:33:44:55',
+                            mtu=1500, pxe_boot=True, uplink_port=0)
+    handle.add_mo(vnic)
 
 
 `Add Mo API
@@ -346,13 +342,13 @@ Modifying Objects
 ::
 
     # Query for an existing Mo
-    adapter_profile = handle.query_dn("sys/rack-unit-1/adaptor-2/host-eth-eth1/ethiscsi")
+    rack = handle.query_dn('sys/rack-unit-1')
 
-    # Update description of the service profile
-    adapter_profile.initiator_gateway = "10.10.10.12"
+    # Update the usr_lbl field
+    rack.usr_lbl = 'RackUnit10'
 
     # Add it to the on-going transaction
-    handle.set_mo(adapter_profile)
+    handle.set_mo(rack)
 
 `Set Mo API
 reference <https://ciscoucs.github.io/imcsdk_docs/imcsdk.html?highlight=set_mo#imcsdk.imchandle.ImcHandle.set_mo>`__
@@ -365,10 +361,10 @@ Deleting Objects
 ::
 
     # Query for an existing Mo
-    adapter_profile = handle.query_dn("sys/rack-unit-1/adaptor-2/host-eth-eth1/ethiscsi")
+    vnic = handle.query_dn('sys/rack-unit-1/adaptor-2/host-eth-vnic-1')
 
     # Remove the object
-    handle.remove_mo(adapter_profile)
+    handle.remove_mo(vnic)
 
 
 `Remove Mo API
