@@ -5,7 +5,7 @@ History
 0.9.2.0 (2017-02-10)
 --------------------
 * Adds support for IMC version 3.0(1c)
-* New APIs for the following features:-
+* New APIs for the following,
 
   * Secure Drive Encryption
   * BIOS Profile
@@ -17,21 +17,22 @@ History
   * IP Blocking
   * Asset Tagging
 
-* Redesigned APIs for the following features:-
+* Redesigned APIs for the following,
 
-  * SNMP Traps and users 
+  * SNMP Traps and users
   * Local Users
   * Adaptor operations
   * KVM/Sol/Vmedia operations
   * Power Budgeting and Power Capping
   * Boot Order Precision and Legacy Boot order
-  
-* Improved local inventory collection API that handles multiple IMC servers and more formats
-* Support to filter out Managed Object properties based on the property version and platform version
-* Support for handling of interim/spin IMC builds
-* Updated verbs for Managed Objects
-* Bug fix for monitoring firmware upgrade
-* Bug fix for handle.query_children API with class_id and hierarchy as filters
+
+* Improved local inventory collection API; handles multiple IMC servers and supports multiple output formats
+* Support for skipping attributes of a Managed object not known to a server
+  version
+* Support for handling of interim/spin builds
+* Bug fix in monitoring firmware upgrade API
+* Bug fix in handle.query_children API when class_id and hierarchy are
+  specified
 * Improved test Coverage
 
 0.9.1.0 (2016-11-25)
