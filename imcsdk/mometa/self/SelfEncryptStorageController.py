@@ -10,6 +10,8 @@ class SelfEncryptStorageControllerConsts:
     ADMIN_ACTION_ENABLE_SELF_ENCRYPT = "enable-self-encrypt"
     ADMIN_ACTION_MODIFY_SELF_ENCRYPT = "modify-self-encrypt"
     ADMIN_ACTION_UNLOCK_SECURED_DRIVES = "unlock-secured-drives"
+    KEY_MANAGEMENT_LOCAL = "local"
+    KEY_MANAGEMENT_REMOTE = "remote"
 
 
 class SelfEncryptStorageController(ManagedObject):
@@ -19,7 +21,7 @@ class SelfEncryptStorageController(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("SelfEncryptStorageController", "selfEncryptStorageController", "ctr-self-encrypt", VersionMeta.Version209c, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'storageController'], [], ["Get", "Set"]),
+        "classic": MoMeta("SelfEncryptStorageController", "selfEncryptStorageController", "ctr-self-encrypt", VersionMeta.Version209c, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'storageController'], [], ["Get", "Set"]),
     }
 
 
@@ -31,9 +33,10 @@ class SelfEncryptStorageController(ManagedObject):
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "existing_security_key": MoPropertyMeta("existing_security_key", "existingSecurityKey", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x8, 1, 33, None, [], []), 
             "key_id": MoPropertyMeta("key_id", "keyId", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x10, 1, 256, None, [], []), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, None, [], []), 
-            "security_key": MoPropertyMeta("security_key", "securityKey", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x40, 1, 33, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "key_management": MoPropertyMeta("key_management", "keyManagement", "string", VersionMeta.Version302b, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["local", "remote"], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x40, 0, 255, None, [], []), 
+            "security_key": MoPropertyMeta("security_key", "securityKey", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x80, 1, 33, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
         },
 
     }
@@ -46,6 +49,7 @@ class SelfEncryptStorageController(ManagedObject):
             "dn": "dn", 
             "existingSecurityKey": "existing_security_key", 
             "keyId": "key_id", 
+            "keyManagement": "key_management", 
             "rn": "rn", 
             "securityKey": "security_key", 
             "status": "status", 
@@ -59,6 +63,7 @@ class SelfEncryptStorageController(ManagedObject):
         self.child_action = None
         self.existing_security_key = None
         self.key_id = None
+        self.key_management = None
         self.security_key = None
         self.status = None
 
