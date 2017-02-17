@@ -1,4 +1,3 @@
-# Copyright 2016 Cisco Systems, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,18 +15,18 @@
 This module implements all the server actions
 """
 
-import time
-from imcsdk.imcexception import ImcOperationError
-from imcsdk.mometa.compute.ComputeRackUnit import ComputeRackUnit,\
-        ComputeRackUnitConsts
-from imcsdk.mometa.equipment.EquipmentChassis import EquipmentChassis
-from imcsdk.mometa.compute.ComputeServerNode import ComputeServerNodeConsts
-from imcsdk.mometa.equipment.EquipmentLocatorLed \
-    import EquipmentLocatorLed, EquipmentLocatorLedConsts
-from imcsdk.mometa.equipment.EquipmentChassisLocatorLed \
-    import EquipmentChassisLocatorLed, EquipmentChassisLocatorLedConsts
-from imcsdk.imccoreutils import get_server_dn, IMC_PLATFORM, _set_server_dn
 from imcsdk.apis.utils import _is_valid_arg
+from imcsdk.imccoreutils import get_server_dn, IMC_PLATFORM, _set_server_dn
+from imcsdk.imcexception import ImcOperationError
+from imcsdk.mometa.compute.ComputeRackUnit import ComputeRackUnit, \
+    ComputeRackUnitConsts
+from imcsdk.mometa.compute.ComputeServerNode import ComputeServerNodeConsts
+from imcsdk.mometa.equipment.EquipmentChassis import EquipmentChassis
+from imcsdk.mometa.equipment.EquipmentChassisLocatorLed import \
+    EquipmentChassisLocatorLed, EquipmentChassisLocatorLedConsts
+from imcsdk.mometa.equipment.EquipmentLocatorLed import EquipmentLocatorLed, \
+    EquipmentLocatorLedConsts
+import time
 
 
 def _set_power_state(handle, server_dn, state):
