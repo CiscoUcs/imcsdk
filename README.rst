@@ -1,4 +1,4 @@
-|image0| |Code Health| |Code Climate|
+|image0| |Code Health| |Code Climate| |rtd|
 
 Python SDK for Cisco IMC
 ========================
@@ -8,7 +8,7 @@ Python SDK for Cisco IMC
 Documentation
 -------------
 
-https://ciscoucs.github.io/imcsdk\_docs/
+http://imcsdk.readthedocs.io
 
 Installation
 ------------
@@ -54,3 +54,6 @@ Community:
    :target: https://landscape.io/github/CiscoUcs/imcsdk/master
 .. |Code Climate| image:: https://codeclimate.com/github/CiscoUcs/imcsdk/badges/gpa.svg
    :target: https://codeclimate.com/github/CiscoUcs/imcsdk
+.. |rtd| image:: https://readthedocs.org/projects/imcsdk/badge/?version=latest
+   :target: http://imcsdk.readthedocs.io/en/latest/?badge=latest
+   :alt: Documentation Status 
