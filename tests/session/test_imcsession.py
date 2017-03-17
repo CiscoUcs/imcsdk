@@ -91,3 +91,30 @@ def test_imc_timeout():
     except urllib2.URLError as e:
         print("Hit expected error")
         raise Exception
+
+
+def test_imc_context_manager_no_timeout():
+    try:
+        import ConfigParser
+    except:
+        import configparser as ConfigParser
+
+    from imcsdk.imchandle import ImcHandle
+    from ..connection import info
+
+    config = ConfigParser.RawConfigParser()
+    config.read(info.CONNECTION_CFG_FILEPATH)
+    hostname = config.get(host, "hostname")
+    username = config.get(host, "username")
+    password = config.get(host, "password")
+
+    handle = ImcHandle(hostname, username, password)
+    with handle:
+        server_dn = get_server_dn(handle)
+        mo = handle.query_dn(server_dn, timeout=600)
+        usr_lbl = "test-lbl2"
+        mo.usr_lbl = usr_lbl
+        handle.set_mo(mo, timeout=600)
+        mo = handle.query_dn(server_dn)
+
+    assert_equal(mo.usr_lbl, usr_lbl)
