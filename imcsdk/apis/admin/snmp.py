@@ -188,7 +188,7 @@ def snmp_trap_exists(handle, **kwargs):
         kwargs: Key-Value paired arguments relevant to CommSnmpTrap object
 
     Returns:
-        True, trap-id(int) if found, else False, 0
+        True, CommSnmpTrap MO if found, else False, None
 
     Example:
         snmp_trap_exists(handle, hostname="10.10.10.10",
@@ -204,9 +204,9 @@ def snmp_trap_exists(handle, **kwargs):
 
     for trap in traps:
         if trap.check_prop_match(**kwargs):
-            return True, int(trap.id)
+            return True, trap
 
-    return False, 0
+    return False, None
 
 
 def snmp_trap_modify(handle, trap_id, **kwargs):
@@ -368,7 +368,7 @@ def snmp_user_exists(handle, name):
         name (string): snmp username
 
     Returns:
-        True, user_id(int) if found, else False, 0
+        True, CommSnmpUser MO if found, else False, None
 
     Example:
         snmp_user_exists(handle, name="snmpuser")
@@ -376,8 +376,8 @@ def snmp_user_exists(handle, name):
 
     user = snmp_user_get(handle, name=name)
     if user:
-        return (True, int(user.id))
-    return (False, 0)
+        return (True, user)
+    return (False, None)
 
 
 def snmp_user_modify(handle, user_id, **kwargs):
