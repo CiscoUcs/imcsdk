@@ -466,8 +466,7 @@ class ImcHandle(ImcSession):
                 self.__to_commit = {}
                 raise ImcException(response.error_code, response.error_descr)
 
-            for pair_ in response.out_config.child:
-                for out_mo in pair_.child:
-                    out_mo.sync_mo(mo_dict[out_mo.dn])
+            for out_mo in response.out_config.child:
+                out_mo.sync_mo(mo_dict[out_mo.dn])
 
         self.__to_commit = {}
