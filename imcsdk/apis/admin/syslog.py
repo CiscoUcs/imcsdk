@@ -36,7 +36,7 @@ def syslog_get(handle, caller="syslog_get"):
     Example:
         mo = syslog_get(handle)
     """
-    mo = handle.quey_dn(dn=SYSLOG_DN)
+    mo = handle.query_dn(dn=SYSLOG_DN)
     if mo is None:
         raise ImcOperationError(caller, "syslog '%s' does not exist" %
                                 SYSLOG_DN)
@@ -122,7 +122,7 @@ def syslog_remote_get(handle, name, caller="syslog_remote_get"):
         mo = syslog_remote_get(handle, name="primary", caller="myfunc")
     """
     dn = SYSLOG_DN + "/client-" + name
-    mo = handle.quey_dn(dn=dn)
+    mo = handle.query_dn(dn=dn)
     if mo is None:
         raise ImcOperationError(caller,
                                 "syslog remote client '%s' does not exist" %
@@ -131,7 +131,7 @@ def syslog_remote_get(handle, name, caller="syslog_remote_get"):
 
 
 def syslog_remote_enable(handle, hostname, name="primary", port="514",
-                         admin_action="no-op"):
+                         **kwargs):
     """
     Enables Syslog on Remote Client.
 
@@ -140,7 +140,6 @@ def syslog_remote_enable(handle, hostname, name="primary", port="514",
         hostname (string): ip address of remote host
         name (string): "primary", "secondary", "tertiary"
         port(string): port
-        admin_action (string): admin action
         kwargs: key-value paired arguments for future use
 
     Returns:
@@ -160,8 +159,7 @@ def syslog_remote_enable(handle, hostname, name="primary", port="514",
     params = {
         'admin_state': CommSyslogClientConsts.ADMIN_STATE_ENABLED,
         'hostname': hostname,
-        'port': port,
-        'admin_action': admin_action
+        'port': port
     }
 
     mo.set_prop_multiple(**params)
@@ -170,7 +168,7 @@ def syslog_remote_enable(handle, hostname, name="primary", port="514",
     return mo
 
 
-def syslog_remote_disable(handle):
+def syslog_remote_disable(handle, name):
     """
     Disables System log on Remote Client.
 
@@ -216,8 +214,31 @@ def is_syslog_remote_enabled(handle, name, **kwargs):
     except ImcOperationError:
         return (False, None)
 
-    kwargs['admin_state'] = CommSnmpConsts.ADMIN_STATE_ENABLED
+    kwargs['admin_state'] = CommSyslogClientConsts.ADMIN_STATE_ENABLED
 
     mo_exists = mo.check_prop_match(**kwargs)
     return (mo_exists, mo if mo_exists else None)
 
+
+def syslog_remote_clear(handle, name):
+    """
+    Clears System log on Remote Client.
+
+    Args:
+        handle (ImcHandle)
+
+    Returns:
+        CommSyslogClient: Managed Object
+
+    Raises:
+        ImcOperationError: If CommSyslogClient Mo is not present
+
+    Example:
+        syslog_remote_clear(handle, name)
+    """
+    from imcsdk.mometa.comm.CommSyslogClient import CommSyslogClientConsts
+
+    mo = syslog_remote_get(handle, name)
+    mo.admin_action = CommSyslogClientConsts.ADMIN_ACTION_CLEAR
+    handle.set_mo(mo)
+    return mo
