@@ -96,20 +96,29 @@ def snmp_disable(handle):
     return mo
 
 
-def is_snmp_enabled(handle):
+def is_snmp_enabled(handle, **kwargs):
     """
     Checks if snmp is enabled or not
 
     Args:
         handle (ImcHandle)
+        kwargs: Key-Value paired arguments relevant to CommSnmp object
 
     Returns:
-        bool
+        True/false, CommSnmp MO/None
+
+    Example:
+        is_snmp_enabled(handle)
     """
     from imcsdk.mometa.comm.CommSnmp import CommSnmpConsts
 
     mo = _get_mo(handle, dn=SNMP_DN)
-    return (mo.admin_state == CommSnmpConsts.ADMIN_STATE_ENABLED)
+
+    kwargs['admin_state'] = CommSnmpConsts.ADMIN_STATE_ENABLED
+
+    mo_exists = mo.check_prop_match(**kwargs)
+    return (mo_exists, mo if mo_exists else None)
+
 
 
 def _get_free_snmp_trap_obj(handle):
