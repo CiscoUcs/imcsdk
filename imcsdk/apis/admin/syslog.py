@@ -220,6 +220,39 @@ def is_syslog_remote_enabled(handle, name, **kwargs):
     return (mo_exists, mo if mo_exists else None)
 
 
+def is_syslog_remote_clear(handle, name):
+    """
+    Checks if configuration of remote system log is at default
+
+    Args:
+        handle (ImcHandle)
+
+    Returns:
+        True/False, CommSyslogClient MO, None
+
+    Raises:
+        ImcOperationError: If CommSyslogClient Mo is not present
+
+    Example:
+        issyslog_remote_clear(handle, name)
+    """
+    from imcsdk.mometa.comm.CommSyslogClient import CommSyslogClientConsts
+
+    try:
+        mo = syslog_remote_get(handle, name)
+    except ImcOperationError:
+        return (False, None)
+
+    kwargs = {
+        'admin_state': CommSyslogClientConsts.ADMIN_STATE_DISABLED,
+        'hostname': '0.0.0.0',
+        'port': '514'
+    }
+
+    mo_exists = mo.check_prop_match(**kwargs)
+    return (mo_exists, mo if mo_exists else None)
+
+
 def syslog_remote_clear(handle, name):
     """
     Clears System log on Remote Client.
