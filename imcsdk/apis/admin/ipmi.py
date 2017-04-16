@@ -95,7 +95,7 @@ def ipmi_disable(handle, server_id=1):
     return handle.query_dn(ipmi_mo.dn)
 
 
-def is_ipmi_enabled(handle, server_id=1):
+def is_ipmi_enabled(handle, server_id=1, **kwargs):
     """
     Check if IPMI over LAN is enabled
     Args:
@@ -106,7 +106,9 @@ def is_ipmi_enabled(handle, server_id=1):
         True if enabled, else False
     """
 
-    ipmi_mo = CommIpmiLan(parent_mo_or_dn=_get_comm_mo_dn(handle, server_id))
-    ipmi_mo = handle.query_dn(ipmi_mo.dn)
+    mo = CommIpmiLan(parent_mo_or_dn=_get_comm_mo_dn(handle, server_id))
+    mo = handle.query_dn(mo.dn)
 
-    return (ipmi_mo.admin_state.lower() == "enabled")
+    kwargs['admin_state'] = "enabled"
+    mo_exists = mo.check_prop_match(**kwargs)
+    return (mo_exists, mo if mo_exists else None)
