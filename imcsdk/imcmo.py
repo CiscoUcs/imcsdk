@@ -416,7 +416,8 @@ class ManagedObject(ImcBase):
             if prop in ManagedObject.__internal_prop or prop.startswith(
                     "_ManagedObject__"):
                 continue
-            mo.__dict__[prop] = prop_value
+            mo.__dict__[prop] = prop_value if prop != "status" else None
+        mo.mark_clean()
         return None
 
     def show_tree(self, level=0):

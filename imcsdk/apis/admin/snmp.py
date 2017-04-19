@@ -359,7 +359,7 @@ def snmp_user_get(handle, name):
     return None
 
 
-def snmp_user_exists(handle, name):
+def snmp_user_exists(handle, name, **kwargs):
     """
     checks if snmp user exists.
 
@@ -373,9 +373,11 @@ def snmp_user_exists(handle, name):
     Example:
         snmp_user_exists(handle, name="snmpuser")
     """
+    kwargs.pop('auth_pwd', None)
+    kwargs.pop('privacy_pwd', None)
 
     user = snmp_user_get(handle, name=name)
-    if user:
+    if user and user.check_prop_match(**kwargs):
         return (True, user)
     return (False, None)
 
