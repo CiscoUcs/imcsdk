@@ -47,7 +47,7 @@ The container must have the following packages needed for CIMC 3.0:
 -  epel-release and latest Ansible (if the user want to automate anything with CIMC 3.0)
 -  Python requests library needed to interact with RedFish URIs /redfish/v1/*
 
-Below is the `Dockerfile` needed for CIMC 3.0.
+Below is the ``Dockerfile`` needed for CIMC 3.0.
 
 ::
 
@@ -125,7 +125,7 @@ Below is the `Dockerfile` needed for CIMC 3.0.
         CMD ["sleep", "infinity"]
 
 
-Copy the above `Dockerfile` to your host.
+Copy the above ``Dockerfile`` to your host.
 
 Install Docker on the RHEL/CentOS/MacOS host.  Ubuntu host has not been tested as the above container is a CentOS images.
 
@@ -133,7 +133,7 @@ RHEL   - https://docs.docker.com/engine/installation/linux/rhel/
 CentOS - https://docs.docker.com/engine/installation/linux/centos/
 MacOS  - https://docs.docker.com/docker-for-mac/install/
 
-After installing and starting the Docker daemon on the host, go to the directory that contains the above `Dockerfile` and build the `centos-cimc-3.0` container.  This takes 15-20 minutes.
+After installing and starting the Docker daemon on the host, go to the directory that contains the above ``Dockerfile`` and build the ``centos-cimc-3.0`` container.  This takes 15-20 minutes.
 
 ::
 
@@ -148,7 +148,7 @@ Remove unwanted intermediate containers:
         docker images | grep '<none>' | awk '{print $3}' | xargs docker rmi -f
 
 
-Check the built image of the container `centos-cimc-3.0`:
+Check the built image of the container ``centos-cimc-3.0``:
 
 ::
 
@@ -165,7 +165,7 @@ Run/start the built container:
         docker run --hostname cimc-3.0 --name cimc-3.0 -d centos-cimc-3.0
 
 
-Check the started running container `cimc-3.0`:
+Check the started running container ``cimc-3.0``:
 
 ::
 
@@ -204,7 +204,7 @@ Once inside the container, make sure that all the packages needed for CIMC 3.0 a
         curl 7.29.0
 
 
-Test if `imcsdk` APIs work with CIMC 3.0 inside the container.  Below, we use imcsdk to get the BIOS settings and the inventory of the UCS server with CIMC 3.0.
+Test if ``imcsdk`` APIs work with CIMC 3.0 inside the container.  Below, we use imcsdk to get the BIOS settings and the inventory of the UCS server with CIMC 3.0.
 
 ::
 
@@ -237,9 +237,9 @@ Test if `imcsdk` APIs work with CIMC 3.0 inside the container.  Below, we use im
         [root@cimc-3 /]# exit
 
 
-Test if Python's `requests` library works with RedFish URIs CIMC 3.0 inside the container.
+Test if Python's ``requests`` library works with RedFish URIs CIMC 3.0 inside the container.
 
-Below, we use Python's `requests` library with RedFish URIs (`/redfish/v1/*`) to get the model number, serial number and BIOS version of the UCS server with CIMC 3.0.
+Below, we use Python's ``requests`` library with RedFish URIs (``/redfish/v1/*``) to get the model number, serial number and BIOS version of the UCS server with CIMC 3.0.
 
 ::
 
@@ -274,7 +274,7 @@ Below, we use Python's `requests` library with RedFish URIs (`/redfish/v1/*`) to
         [root@cimc-3 /]# exit
 
 
-Test if we can use `curl` to get objects from RedFish URIs inside the container.
+Test if we can use ``curl`` to get objects from RedFish URIs inside the container.
 
 ::
 
@@ -407,14 +407,14 @@ Links about RedFish:
 -  RedFish API spec - http://redfish.dmtf.org/schemas/DSP0266_1.1.html
 -  Redfish Schema Index - http://redfish.dmtf.org/redfish/schema_index
 
-If the container `cimc-3.0` is not needed, stop and remote it:
+If the container ``cimc-3.0`` is not needed, stop and remote it:
 
 ::
 
         docker stop cimc-3.0 && docker rm cimc-3.0
 
 
-If the image `centos-cimc-3.0` is not needed, remove it:
+If the image ``centos-cimc-3.0`` is not needed, remove it:
 
 ::
 
@@ -422,4 +422,4 @@ If the image `centos-cimc-3.0` is not needed, remove it:
         docker rmi centos
 
 
-After the Docker image `centos-cimc-3.0` is built from the above `Dockerfile`, it can be tagged (`docker tag`), pushed to any registry (`docker push`), pulled from the registry (`docker pull`), run/started (`docker run`), and used to programmatically interact with CIMC 3.0.
+After the Docker image ``centos-cimc-3.0`` is built from the above ``Dockerfile``, it can be tagged (``docker tag``), pushed to any registry (``docker push``), pulled from the registry (``docker pull``), run/started (``docker run``), and used to programmatically interact with CIMC 3.0.
