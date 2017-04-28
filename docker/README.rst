@@ -51,9 +51,9 @@ Download the ``Dockerfile`` in this directory to your host.
 
 Install Docker on the RHEL/CentOS/MacOS host.  Ubuntu host has not been tested as the above container is a CentOS images.
 
-**RHEL**   - https://docs.docker.com/engine/installation/linux/rhel/
-**CentOS** - https://docs.docker.com/engine/installation/linux/centos/
-**MacOS**  - https://docs.docker.com/docker-for-mac/install/
+RHEL   - https://docs.docker.com/engine/installation/linux/rhel/
+CentOS - https://docs.docker.com/engine/installation/linux/centos/
+MacOS  - https://docs.docker.com/docker-for-mac/install/
 
 After installing and starting the Docker daemon on the host, go to the directory that contains the downloaded ``Dockerfile`` and build the ``centos-cimc-3.0`` container.  This takes 15-20 minutes.
 
