@@ -49,7 +49,7 @@ The container must have the following packages needed for CIMC 3.0:
 
 Download the ``Dockerfile`` in this directory to your host.
 
-Install Docker on the RHEL/CentOS/MacOS host.  Ubuntu host has not been tested as the above container is a CentOS images.
+Install Docker on the RHEL/CentOS/MacOS host.  Ubuntu host has not been tested as the above container is a CentOS image currently.
 
 **RHEL**   - https://docs.docker.com/engine/installation/linux/rhel/
 
