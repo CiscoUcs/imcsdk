@@ -31,7 +31,7 @@ CentOS also ships with Python 2.7.5 as the system Python version:
         Python 2.7.5
 
 
-Upgrading system Python in RHEL from Python 2.7.5 to Python  >= 2.7.9 breaks a lot of packages like pip, yum, ansible, OpenStack packages, etc.
+Upgrading system Python in RHEL and CentOS from Python 2.7.5 to Python  >= 2.7.9 breaks a lot of packages like pip, yum, ansible, OpenStack packages, etc.
 
 Upgrading system OpenSSL to version >= 1.0.1 may break VPN client and SSL.  Apple MacOS sierra ships with OpenSSL 0.9.8 and will not even allow the user to upgrade OpenSSL.
 
