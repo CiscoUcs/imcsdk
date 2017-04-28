@@ -35,6 +35,8 @@ Upgrading system Python in RHEL and CentOS from Python 2.7.5 to Python  >= 2.7.9
 
 Upgrading system OpenSSL to version >= 1.0.1 may break VPN client and SSL.  Apple MacOS sierra ships with OpenSSL 0.9.8 and will not even allow the user to upgrade OpenSSL.
 
+Production/staging/ops testbeds may not even allow us to upgrade system Python and system OpenSSL as it may break other packages/features.
+
 Hence, the best approach is to containerize imcsdk using Docker with all the required dependencies/packages needed to programmatically interact with CIMC 3.0.
 
 The container must have the following packages needed for CIMC 3.0:
