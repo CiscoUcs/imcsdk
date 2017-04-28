@@ -333,7 +333,7 @@ Links about RedFish:
 -  RedFish API spec - http://redfish.dmtf.org/schemas/DSP0266_1.1.html
 -  Redfish Schema Index - http://redfish.dmtf.org/redfish/schema_index
 
-If the container ``cimc-3.0`` is not needed, stop and remote it:
+If the container ``cimc-3.0`` is not needed, stop and remove it:
 
 ::
 
