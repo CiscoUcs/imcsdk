@@ -163,7 +163,7 @@ Test if ``imcsdk`` APIs work with CIMC 3.0 inside the container.  Below, we use 
         [root@cimc-3 /]# exit
 
 
-Test if Python's ``requests`` library works with **RedFish** URIs CIMC 3.0 inside the container.
+Test if Python's ``requests`` library works with **RedFish** URIs with CIMC 3.0 inside the container.
 
 Below, we use Python's ``requests`` library with **RedFish** URIs (``/redfish/v1/*``) to get the model number, serial number and BIOS version of the UCS server with CIMC 3.0.
 
