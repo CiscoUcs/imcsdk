@@ -43,7 +43,7 @@ The container must have the following packages needed for CIMC 3.0:
 -  ``pip`` with Python 2.7.13
 -  ``OpenSSL 1.0.1``
 -  Cisco's Python ``imcsdk`` library (https://github.com/CiscoUcs/imcsdk)
--  DMTF's Python ``RedFish`` library (python-redfish-library in https://github.com/DMTF/python-redfish-library)
+-  DMTF's Python ``RedFish`` library (``python-redfish-library`` in https://github.com/DMTF/python-redfish-library)
 -  ``epel-release`` and latest ``Ansible`` (if the user wants to automate anything with CIMC 3.0)
 -  Python ``requests`` library needed to interact with RedFish URIs ``/redfish/v1/*``
 
