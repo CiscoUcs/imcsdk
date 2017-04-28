@@ -47,97 +47,19 @@ The container must have the following packages needed for CIMC 3.0:
 -  epel-release and latest Ansible (if the user want to automate anything with CIMC 3.0)
 -  Python requests library needed to interact with RedFish URIs /redfish/v1/*
 
-Below is the ``Dockerfile`` needed for CIMC 3.0.
-
-::
-
-        #####################################################################
-        #
-        # This Dockerfile has all the packages needed to programmatically
-        # interact with CIMC 3.0 using Python.  This Dockerfile installs the
-        # following CentOS packages needed to interact with 3.0:
-        #
-        #   1. Python 2.7.13 (Python >= 2.7.9 is needed for CIMC 3.0)
-        #   2. pip with Python 2.7.13
-        #   3. OpenSSL 1.0.1
-        #   4. Cisco's Python imcsdk library
-        #   5. DMTF's Python RedFish library (python-redfish-library)
-        #   6. epel-release and latest Ansible (if the user want to automate
-        #      anything with CIMC 3.0)
-        #   7. Python requests library needed to interact with RedFish URIs
-        #      /redfish/v1/*
-        #
-        # Author: Vikram Hosakote (vhosakot@cisco.com)
-        #
-        #####################################################################
-         
-        FROM centos:latest
-        MAINTAINER vhosakot@cisco.com
-         
-        RUN yum -y update && yum -y upgrade && yum clean all
-        RUN yum -y install which wget gcc zlib-devel openssl-devel
-        RUN yum -y groupinstall "Development tools"
-         
-        # Install Python 2.7.13
-        RUN wget https://www.python.org/ftp/python/2.7.13/Python-2.7.13.tgz && \
-            tar xzf Python-2.7.13.tgz && \
-            cd Python-2.7.13 && \
-            ./configure --prefix=/usr/local && \
-            make && \
-            make altinstall && \
-            ln -s /usr/local/bin/python2.7 /usr/bin/python2.7.13 && \
-            cd .. && \
-            rm -rf Python-2.7.13.tgz && \
-            rm -rf Python-2.7.13 && \
-            python2.7.13 -V
-         
-        # Install pip with Python 2.7.13
-        RUN wget https://bootstrap.pypa.io/get-pip.py && \
-            python2.7.13 get-pip.py && \
-            rm -rf get-pip.py && \
-            pip --version
-         
-        # Install OpenSSL 1.0.1
-        RUN yum -y install openssl && \
-            openssl version
-         
-        # Install imcsdk
-        RUN pip install imcsdk
-         
-        # Install RedFish Python SDK
-        RUN git clone https://github.com/DMTF/python-redfish-library.git && \
-            cd python-redfish-library && \
-            python2.7.13 setup.py sdist --formats=zip && \
-            cd dist && \
-            z=`ls *.zip` && \
-            pip install $z && \
-            cd ../.. && \
-            rm -rf python-redfish-library
-         
-        # Install epel-release latest Ansible
-        RUN yum -y install epel-release && \
-            yum -y install ansible && \
-            ansible --version
-         
-        # Install Python requests library
-        RUN pip install requests
-         
-        CMD ["sleep", "infinity"]
-
-
-Copy the above ``Dockerfile`` to your host.
+Download the ``Dockerfile`` in this directory to your host.
 
 Install Docker on the RHEL/CentOS/MacOS host.  Ubuntu host has not been tested as the above container is a CentOS images.
 
-RHEL   - https://docs.docker.com/engine/installation/linux/rhel/
-CentOS - https://docs.docker.com/engine/installation/linux/centos/
-MacOS  - https://docs.docker.com/docker-for-mac/install/
+**RHEL**   - https://docs.docker.com/engine/installation/linux/rhel/
+**CentOS** - https://docs.docker.com/engine/installation/linux/centos/
+**MacOS**  - https://docs.docker.com/docker-for-mac/install/
 
-After installing and starting the Docker daemon on the host, go to the directory that contains the above ``Dockerfile`` and build the ``centos-cimc-3.0`` container.  This takes 15-20 minutes.
+After installing and starting the Docker daemon on the host, go to the directory that contains the downloaded ``Dockerfile`` and build the ``centos-cimc-3.0`` container.  This takes 15-20 minutes.
 
 ::
 
-        cd <path to Dockerfile>
+        cd <path to downloaded Dockerfile>
         docker build --rm -t centos-cimc-3.0 .
 
 
@@ -237,9 +159,9 @@ Test if ``imcsdk`` APIs work with CIMC 3.0 inside the container.  Below, we use 
         [root@cimc-3 /]# exit
 
 
-Test if Python's ``requests`` library works with RedFish URIs CIMC 3.0 inside the container.
+Test if Python's ``requests`` library works with **RedFish** URIs CIMC 3.0 inside the container.
 
-Below, we use Python's ``requests`` library with RedFish URIs (``/redfish/v1/*``) to get the model number, serial number and BIOS version of the UCS server with CIMC 3.0.
+Below, we use Python's ``requests`` library with **RedFish** URIs (``/redfish/v1/*``) to get the model number, serial number and BIOS version of the UCS server with CIMC 3.0.
 
 ::
 
@@ -422,4 +344,4 @@ If the image ``centos-cimc-3.0`` is not needed, remove it:
         docker rmi centos
 
 
-After the Docker image ``centos-cimc-3.0`` is built from the above ``Dockerfile``, it can be tagged (``docker tag``), pushed to any registry (``docker push``), pulled from the registry (``docker pull``), run/started (``docker run``), and used to programmatically interact with CIMC 3.0.
+After the Docker image ``centos-cimc-3.0`` is built from the downloaded ``Dockerfile``, it can be tagged (``docker tag``), pushed to any registry (``docker push``), pulled from the registry (``docker pull``), run/started (``docker run``), and used to programmatically interact with CIMC 3.0.
