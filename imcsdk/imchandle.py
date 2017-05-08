@@ -34,6 +34,10 @@ class ImcHandle(ImcSession):
         port (int or None): The port number to be used during connection
         secure (bool or None): True for secure connection, otherwise False
         proxy (str): The proxy object to be used to connect
+        auto_refresh (bool): if set to True, it'll refresh the cookie continuously
+        force (bool): if set to True it'll reconnect even if cookie exists
+            and is valid for the respective connection.
+        timeout (int): timeout value in secs
 
     Example:
         handle = ImcHandle("192.168.1.1","admin","password")\n
@@ -48,10 +52,31 @@ class ImcHandle(ImcSession):
     """
 
     def __init__(self, ip, username, password, port=None, secure=None,
-                 proxy=None):
-        ImcSession.__init__(self, ip, username, password, port,
-                            secure, proxy)
+                 proxy=None, auto_refresh=False, force=False, timeout=None):
+
+        ImcSession.__init__(self, ip=ip, username=username, password=password,
+                            port=port, secure=secure, proxy=proxy,
+                            auto_refresh=auto_refresh, force=force,
+                            timeout=timeout)
         self.__to_commit = {}
+
+    def __enter__(self):
+        """
+        Initiates a connection to the server referenced by the ImcHandle.
+        A cookie is populated in the ImcHandle, if the login is successful.
+
+        The class instance is returned.
+        """
+
+        self._login()
+        return self
+
+    def __exit__(self, *exc):
+        """
+        Disconnects from the server referenced by the ImcHandle and exits.
+        """
+
+        self._logout()
 
     def set_dump_xml(self):
         """
@@ -67,7 +92,7 @@ class ImcHandle(ImcSession):
 
         self._unset_dump_xml()
 
-    def login(self, auto_refresh=False, force=False, timeout=None):
+    def login(self, auto_refresh=None, force=None, timeout=None):
         """
         Initiates a connection to the server referenced by the ImcHandle.
         A cookie is populated in the ImcHandle, if the login is successful.
@@ -75,8 +100,8 @@ class ImcHandle(ImcSession):
         Args:
             auto_refresh (bool): if set to True, it refresh the cookie
                 continuously
-            force (bool): if set to True it reconnects even if cookie exists
-                and is valid for respective connection.
+            force (bool): if set to True it'll reconnect even if cookie exists
+                and is valid for the respective connection.
             timeout (int): timeout value in secs
 
         Returns:
@@ -91,7 +116,7 @@ class ImcHandle(ImcSession):
             where handle is ImcHandle()
         """
 
-        return self._login(auto_refresh, force, timeout=timeout)
+        return self._login(auto_refresh=auto_refresh, force=force, timeout=timeout)
 
     def logout(self, timeout=None):
         """
