@@ -391,13 +391,20 @@ def vmedia_mount_remove_all(handle, server_id=1):
                                                                     server_id))
     # Loop over each mapped ISO
     for virt_media in virt_media_maps:
-        # Remove the mapped ISO
-        handle.remove_mo(virt_media)
-    # Raise error if all mappings not removed
-    if len(handle.query_children(in_dn="sys/svc-ext/vmedia-svc")) > 0:
-        raise ImcOperationError('Remove Virtual Media',
-                                '{0}: ERROR - Unable remove all virtual' +
-                                'media mappings'.format(handle.ip))
+        # Remove the mapped ISO, skipped saved ISO
+        if type(virt_media) is CommVMediaMap:
+            handle.remove_mo(virt_media)
+
+    # Raise error if all non-saved mappings are not removed
+    virt_media_maps = handle.query_children(in_dn=_get_vmedia_mo_dn(handle,
+                                                                    server_id))
+    # Loop over each mapped ISO
+    for virt_media in virt_media_maps:
+        # Raise error if non-saved vmedia still exists
+        if type(virt_media) is CommVMediaMap:
+            raise ImcOperationError('Remove Virtual Media',
+                                    '{0}: ERROR - Unable remove all virtual' +
+                                    'media mappings'.format(handle.ip))
     # Return True if all mappings removed
     return True
 
