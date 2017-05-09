@@ -15,17 +15,17 @@
 """
 This module implements all the kvm and sol related samples
 """
-import os
-import time
-import urlparse
-import re
+from imcsdk.apis.admin.ipmi import _get_comm_mo_dn
+from imcsdk.imccoreutils import get_server_dn
+from imcsdk.imcexception import ImcOperationError
 from imcsdk.mometa.comm.CommKvm import CommKvm
 from imcsdk.mometa.comm.CommVMedia import CommVMedia
 from imcsdk.mometa.comm.CommVMediaMap import CommVMediaMap
 from imcsdk.mometa.sol.SolIf import SolIf, SolIfConsts
-from imcsdk.imcexception import ImcOperationError
-from imcsdk.imccoreutils import get_server_dn
-from imcsdk.apis.admin.ipmi import _get_comm_mo_dn
+import os
+import re
+import time
+import urlparse
 CIFS_URI_PATTERN = re.compile('^//\d+\.\d+\.\d+\.\d+\/')
 NFS_URI_PATTERN = re.compile('^\d+\.\d+\.\d+\.\d+\:\/')
 
@@ -429,8 +429,11 @@ def sol_setup(handle, speed, comport, ssh_port, server_id=1):
         "admin_state": SolIfConsts.ADMIN_STATE_ENABLE,
         "speed": str(speed),
         "comport": comport,
-        "ssh_port": str(ssh_port),
     }
+
+    version = int(handle.version())
+    if version >= 3: 
+        params["ssh_port"] = str(ssh_port),
 
     solif_mo.set_prop_multiple(**params)
     handle.set_mo(solif_mo)
