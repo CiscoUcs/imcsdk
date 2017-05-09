@@ -22,6 +22,7 @@ import imcsdk.imccoreutils as imccoreutils
 from imcsdk.mometa.lsboot.LsbootDevPrecision import LsbootDevPrecision
 from imcsdk.imcexception import ImcOperationError
 from imcsdk.apis.utils import _is_valid_arg
+import imcsdk.imcgenutils as imcgenutils
 
 log = logging.getLogger('imc')
 
@@ -137,7 +138,7 @@ def _is_boot_order_policy(dn):
 
 def _get_device_type(policy_type, in_device):
     if policy_type == "boot-order-policy":
-        for device_type, device_props in policy_device_dict.iteritems():
+        for device_type, device_props in imcgenutils.iteritems(policy_device_dict):
             if device_props["class_id"] == in_device._class_id and \
                     device_props["access"] == in_device.access:
                 return device_type
@@ -200,7 +201,7 @@ def _add_boot_device(handle, parent_dn, boot_device):
             (boot_device["device-type"], boot_device["name"]))
 
     device.order = boot_device["order"]
-    device_props = {key: value for key, value in boot_device.iteritems() if key not in ["order", "device-type", "name"]}
+    device_props = {key: value for key, value in imcgenutils.iteritems(boot_device) if key not in ["order", "device-type", "name"]}
     device.set_prop_multiple(**device_props)
     if hasattr(device, "state"):
         device.state = "enabled"
@@ -288,7 +289,7 @@ def boot_precision_configured_get(handle, server_id=1):
 
     class_to_name_dict = {
         value["class_id"]: key for key,
-        value in precision_device_dict.items()}
+        value in imcgenutils.iteritems(precision_device_dict)}
 
     server_dn = get_server_dn(handle, server_id)
     pmo = LsbootDevPrecision(parent_mo_or_dn=server_dn)

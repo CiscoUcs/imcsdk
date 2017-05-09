@@ -17,8 +17,14 @@ This module implements all the kvm and sol related samples
 """
 import os
 import time
-import urlparse
 import re
+
+try:
+    from urllib.parse import urlsplit
+except ImportError:
+    from urlparse import urlsplit
+
+
 from imcsdk.mometa.comm.CommKvm import CommKvm
 from imcsdk.mometa.comm.CommVMedia import CommVMedia
 from imcsdk.mometa.comm.CommVMediaMap import CommVMediaMap
@@ -274,9 +280,9 @@ def vmedia_mount_iso_uri(handle, uri, user_id=None, password=None,
     mount_options = "noauto"
 
     # Set the Map based on the protocol
-    if urlparse.urlsplit(uri).scheme == 'http':
+    if urlsplit(uri).scheme == 'http':
         mount_protocol = "www"
-    elif urlparse.urlsplit(uri).scheme == 'https':
+    elif urlsplit(uri).scheme == 'https':
         mount_protocol = "www"
     elif CIFS_URI_PATTERN.match(uri):
         mount_protocol = "cifs"
@@ -285,7 +291,7 @@ def vmedia_mount_iso_uri(handle, uri, user_id=None, password=None,
     else:
         # Raise ValueError and bail
         raise ValueError("Unsupported protocol: " +
-                         urlparse.urlsplit(uri).scheme)
+                         urlsplit(uri).scheme)
 
     # Convert no user/pass to blank strings
     if not user_id:
