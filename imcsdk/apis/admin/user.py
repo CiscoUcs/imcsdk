@@ -118,6 +118,10 @@ def password_expiration_exists(handle, **kwargs):
     if mo is None:
         return False, None
 
+    for k, v in kwargs.items():
+        if isinstance(v, int):
+            kwargs[k] = str(v)
+
     return (mo.check_prop_match(**kwargs), mo)
 
 

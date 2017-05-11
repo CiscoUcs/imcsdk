@@ -102,6 +102,7 @@ def test_imc_context_manager_no_timeout():
     from imcsdk.imchandle import ImcHandle
     from ..connection import info
 
+    host = 'imc'
     config = ConfigParser.RawConfigParser()
     config.read(info.CONNECTION_CFG_FILEPATH)
     hostname = config.get(host, "hostname")
