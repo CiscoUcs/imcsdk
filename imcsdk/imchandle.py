@@ -394,7 +394,7 @@ class ImcHandle(ImcSession):
             obj = handle.add_mo(mo)
         """
 
-        from imccoreutils import validate_mo_version
+        from .imccoreutils import validate_mo_version
 
         validate_mo_version(self, mo)
 
@@ -425,7 +425,7 @@ class ImcHandle(ImcSession):
             obj = handle.set_mo(mo)
         """
 
-        from imccoreutils import validate_mo_version
+        from .imccoreutils import validate_mo_version
 
         validate_mo_version(self, mo)
 
@@ -447,6 +447,10 @@ class ImcHandle(ImcSession):
         Example:
             obj = handle.remove_mo(mo)
         """
+
+        from .imccoreutils import validate_mo_version
+
+        validate_mo_version(self, mo)
 
         mo.status = "deleted"
         if mo.parent_mo:
