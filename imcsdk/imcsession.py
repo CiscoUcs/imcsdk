@@ -470,7 +470,7 @@ class ImcSession(object):
         return False
 
     def _validate_model(self, model):
-        valid_model_prefixes = ["UCSC", "UCS-E", "UCSS", "HX"]
+        valid_model_prefixes = ["UCSC", "UCS-E", "UCSS", "HX", "TA-"]
         valid_models = ["R460-4640810", "C260-BASE-2646"]
 
         if model in valid_models:
