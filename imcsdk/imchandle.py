@@ -48,9 +48,10 @@ class ImcHandle(ImcSession):
     """
 
     def __init__(self, ip, username, password, port=None, secure=None,
-                 proxy=None):
-        ImcSession.__init__(self, ip, username, password, port,
-                            secure, proxy)
+                 proxy=None, redirect_uri=None, headers={}):
+        ImcSession.__init__(self, ip=ip, username=username, password=password,
+                            port=port, secure=secure, proxy=proxy,
+                            redirect_uri=redirect_uri, headers=headers)
         self.__to_commit = {}
 
     def set_dump_xml(self):
