@@ -17,8 +17,14 @@ This module implements all the kvm and sol related samples
 """
 import os
 import time
-import urlparse
 import re
+
+try:
+    from urllib.parse import urlsplit
+except ImportError:
+    from urlparse import urlsplit
+
+
 from imcsdk.mometa.comm.CommKvm import CommKvm
 from imcsdk.mometa.comm.CommVMedia import CommVMedia
 from imcsdk.mometa.comm.CommVMediaMap import CommVMediaMap
@@ -274,9 +280,9 @@ def vmedia_mount_iso_uri(handle, uri, user_id=None, password=None,
     mount_options = "noauto"
 
     # Set the Map based on the protocol
-    if urlparse.urlsplit(uri).scheme == 'http':
+    if urlsplit(uri).scheme == 'http':
         mount_protocol = "www"
-    elif urlparse.urlsplit(uri).scheme == 'https':
+    elif urlsplit(uri).scheme == 'https':
         mount_protocol = "www"
     elif CIFS_URI_PATTERN.match(uri):
         mount_protocol = "cifs"
@@ -285,7 +291,7 @@ def vmedia_mount_iso_uri(handle, uri, user_id=None, password=None,
     else:
         # Raise ValueError and bail
         raise ValueError("Unsupported protocol: " +
-                         urlparse.urlsplit(uri).scheme)
+                         urlsplit(uri).scheme)
 
     # Convert no user/pass to blank strings
     if not user_id:
@@ -391,13 +397,20 @@ def vmedia_mount_remove_all(handle, server_id=1):
                                                                     server_id))
     # Loop over each mapped ISO
     for virt_media in virt_media_maps:
-        # Remove the mapped ISO
-        handle.remove_mo(virt_media)
-    # Raise error if all mappings not removed
-    if len(handle.query_children(in_dn="sys/svc-ext/vmedia-svc")) > 0:
-        raise ImcOperationError('Remove Virtual Media',
-                                '{0}: ERROR - Unable remove all virtual' +
-                                'media mappings'.format(handle.ip))
+        # Remove the mapped ISO, skipped saved ISO
+        if type(virt_media) is CommVMediaMap:
+            handle.remove_mo(virt_media)
+
+    # Raise error if all non-saved mappings are not removed
+    virt_media_maps = handle.query_children(in_dn=_get_vmedia_mo_dn(handle,
+                                                                    server_id))
+    # Loop over each mapped ISO
+    for virt_media in virt_media_maps:
+        # Raise error if non-saved vmedia still exists
+        if type(virt_media) is CommVMediaMap:
+            raise ImcOperationError('Remove Virtual Media',
+                                    '{0}: ERROR - Unable remove all virtual' +
+                                    'media mappings'.format(handle.ip))
     # Return True if all mappings removed
     return True
 

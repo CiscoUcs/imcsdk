@@ -31,11 +31,16 @@ class ImcSession(object):
     """
 
     def __init__(self, ip, username, password, port=None, secure=None,
-                 proxy=None, redirect_uri=None, headers={}):
+
+                 proxy=None, auto_refresh=False, force=False, timeout=None,
+                 redirect_uri=None, headers={}):
+      
         self.__ip = ip
         self.__username = username
         self.__password = password
         self.__proxy = proxy
+        self.__auto_refresh = auto_refresh
+        self.__timeout = timeout
         self.__uri = self.__create_uri(port, secure)
         self.__platform = None
         self.__model = None
@@ -53,7 +58,7 @@ class ImcSession(object):
         self.__last_update_time = None
 
         self.__refresh_timer = None
-        self.__force = False
+        self.__force = force
 
         self.__dump_xml = False
         self.__redirect = False
@@ -182,7 +187,7 @@ class ImcSession(object):
         self.__cookie = response.out_cookie
         self.__session_id = response.out_session_id
         self.__version = ImcVersion(response.out_version)
-        self.__refresh_period = response.out_refresh_period
+        self.__refresh_period = int(response.out_refresh_period)
         self.__priv = response.out_priv
         self.__domains = response.out_domains
         self.__channel = response.out_channel
@@ -191,7 +196,7 @@ class ImcSession(object):
 
     def post(self, uri, data=None, read=True, timeout=None):
         """
-        sends the request and receives the response from imcm server
+        sends the request and receives the response from the imc server
 
         Args:
             uri (str): URI of the  the imc Server
@@ -204,12 +209,13 @@ class ImcSession(object):
             response = post("http://192.168.1.1:80", data=xml_str)
         """
 
+        timeout = timeout if timeout is not None else self.__timeout
         response = self.__driver.post(uri=uri, data=data, read=read, timeout=timeout)
         return response
 
     def post_xml(self, xml_str, read=True, timeout=None):
         """
-        sends the xml request and receives the response from imc server
+        sends the xml request and receives the response from the imc server
 
         Args:
             xml_str (str): xml string
@@ -251,7 +257,7 @@ class ImcSession(object):
 
     def post_elem(self, elem, timeout=None):
         """
-        sends the request and receives the response from imc server using xml
+        sends the request and receives the response from the imc server using xml
         element
 
         Args:
@@ -296,7 +302,7 @@ class ImcSession(object):
             file_name,
             progress=Progress()):
         """
-        Downloads the file from imc server
+        Downloads the file from the imc server
 
         Args:
             url_suffix (str): suffix url to be appended to
@@ -468,7 +474,7 @@ class ImcSession(object):
         return False
 
     def _validate_model(self, model):
-        valid_model_prefixes = ["UCSC", "UCS-E", "UCSS"]
+        valid_model_prefixes = ["UCSC", "UCS-E", "UCSS", "HX"]
         valid_models = ["R460-4640810", "C260-BASE-2646"]
 
         if model in valid_models:
@@ -546,7 +552,7 @@ class ImcSession(object):
         self.__imc = top_system.name
         self.__virtual_ipv4_address = top_system.address
 
-    def _login(self, auto_refresh=False, force=False, timeout=None):
+    def _login(self, auto_refresh=None, force=None, timeout=None):
         """
         Internal method responsible to do a login on imc server.
 
@@ -555,6 +561,7 @@ class ImcSession(object):
                                     continuously
             force (bool): if set to True it reconnects even if cookie exists
                                     and is valid for respective connection.
+            timeout (int): timeout value in secs
 
         Returns:
             True on successful connect
@@ -562,7 +569,8 @@ class ImcSession(object):
         from .imcmethodfactory import aaa_login
         from .imccoreutils import add_handle_to_list
 
-        self.__force = force
+        self.__force = force if force is not None else self.__force
+        auto_refresh = auto_refresh if auto_refresh is not None else self.__auto_refresh
 
         if self._validate_connection():
             return True
@@ -590,7 +598,7 @@ class ImcSession(object):
 
     def _logout(self, timeout=None):
         """
-        Internal method to disconnect from imc server.
+        Internal method to disconnect from the imc server.
 
         Args:
             None

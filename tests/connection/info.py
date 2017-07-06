@@ -11,6 +11,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import os
+
+CONNECTION_CFG_FILEPATH = os.path.join(os.path.dirname(__file__), '..', 'connection',
+                          'connection.cfg')
 
 def custom_setup(host="imc"):
     try:
@@ -18,12 +22,10 @@ def custom_setup(host="imc"):
     except:
         import configparser as ConfigParser
 
-    import os
     from imcsdk.imchandle import ImcHandle
 
     config = ConfigParser.RawConfigParser()
-    config.read(os.path.join(os.path.dirname(__file__), '..', 'connection',
-                             'connection.cfg'))
+    config.read(CONNECTION_CFG_FILEPATH)
 
     hostname = config.get(host, "hostname")
     username = config.get(host, "username")

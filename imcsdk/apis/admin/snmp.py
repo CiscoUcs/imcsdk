@@ -96,20 +96,29 @@ def snmp_disable(handle):
     return mo
 
 
-def is_snmp_enabled(handle):
+def is_snmp_enabled(handle, **kwargs):
     """
     Checks if snmp is enabled or not
 
     Args:
         handle (ImcHandle)
+        kwargs: Key-Value paired arguments relevant to CommSnmp object
 
     Returns:
-        bool
+        True/false, CommSnmp MO/None
+
+    Example:
+        is_snmp_enabled(handle)
     """
     from imcsdk.mometa.comm.CommSnmp import CommSnmpConsts
 
     mo = _get_mo(handle, dn=SNMP_DN)
-    return (mo.admin_state == CommSnmpConsts.ADMIN_STATE_ENABLED)
+
+    kwargs['admin_state'] = CommSnmpConsts.ADMIN_STATE_ENABLED
+
+    mo_exists = mo.check_prop_match(**kwargs)
+    return (mo_exists, mo if mo_exists else None)
+
 
 
 def _get_free_snmp_trap_obj(handle):
@@ -188,7 +197,7 @@ def snmp_trap_exists(handle, **kwargs):
         kwargs: Key-Value paired arguments relevant to CommSnmpTrap object
 
     Returns:
-        True, trap-id(int) if found, else False, 0
+        True, CommSnmpTrap MO if found, else False, None
 
     Example:
         snmp_trap_exists(handle, hostname="10.10.10.10",
@@ -204,9 +213,9 @@ def snmp_trap_exists(handle, **kwargs):
 
     for trap in traps:
         if trap.check_prop_match(**kwargs):
-            return True, int(trap.id)
+            return True, trap
 
-    return False, 0
+    return False, None
 
 
 def snmp_trap_modify(handle, trap_id, **kwargs):
@@ -359,7 +368,7 @@ def snmp_user_get(handle, name):
     return None
 
 
-def snmp_user_exists(handle, name):
+def snmp_user_exists(handle, name, **kwargs):
     """
     checks if snmp user exists.
 
@@ -368,16 +377,18 @@ def snmp_user_exists(handle, name):
         name (string): snmp username
 
     Returns:
-        True, user_id(int) if found, else False, 0
+        True, CommSnmpUser MO if found, else False, None
 
     Example:
         snmp_user_exists(handle, name="snmpuser")
     """
+    kwargs.pop('auth_pwd', None)
+    kwargs.pop('privacy_pwd', None)
 
     user = snmp_user_get(handle, name=name)
-    if user:
-        return (True, int(user.id))
-    return (False, 0)
+    if user and user.check_prop_match(**kwargs):
+        return (True, user)
+    return (False, None)
 
 
 def snmp_user_modify(handle, user_id, **kwargs):

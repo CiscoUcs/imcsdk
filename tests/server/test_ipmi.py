@@ -33,11 +33,13 @@ def test_ipmi_enable():
     global handle
 
     ipmi_enable(handle, key="123451234512345fedcb123451234512345abcde")
-    assert_equal(is_ipmi_enabled(handle), True)
+    match, mo = is_ipmi_enabled(handle)
+    assert_equal(match, True)
 
 
 def test_ipmi_disable():
     global handle
 
     ipmi_disable(handle)
-    assert_equal(is_ipmi_enabled(handle), False)
+    match, mo = is_ipmi_enabled(handle)
+    assert_equal(match, False)

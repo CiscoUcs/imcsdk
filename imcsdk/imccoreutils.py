@@ -27,7 +27,7 @@ from . import methodmeta
 from . imcmeta import MO_CLASS_ID, METHOD_CLASS_ID, OTHER_TYPE_CLASS_ID, \
     MO_CLASS_META
 from .imcexception import ImcOperationError, ImcValidationException
-from imccoremeta import MoPropertyMeta
+from .imccoremeta import MoPropertyMeta
 
 log = logging.getLogger('imc')
 

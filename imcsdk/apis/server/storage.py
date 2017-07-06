@@ -376,6 +376,36 @@ def virtual_drive_encryption_enable(handle, controller_type,
     return handle.query_dn(vd.dn)
 
 
+def virtual_drive_set_boot_drive(handle, controller_type, controller_slot, name, server_id=1):
+    """
+    Set a virtual drive as boot drive.
+
+    Args:
+        handle (ImcHandle)
+        controller_type (str): Controller type
+                               'SAS'
+        controller_slot (str): Controller slot name/number
+                                "MEZZ","0"-"9", "HBA"
+        name (string): name of the virtual drive
+        server_id (int): server_id for UCS 3260 platform
+
+    Returns:
+        StorageVirtualDrive object
+
+    Examples:
+        virtual_drive_set_boot_drive(handle, 'SAS', 'HBA', 'test_vd')
+    """
+    from imcsdk.mometa.storage.StorageVirtualDrive import \
+        StorageVirtualDriveConsts
+    vd = vd_query_by_name(handle=handle,
+                          controller_type=controller_type,
+                          controller_slot=controller_slot,
+                          name=name,
+                          server_id=server_id)
+    vd.admin_action = StorageVirtualDriveConsts.ADMIN_ACTION_SET_BOOT_DRIVE
+    handle.set_mo(vd)
+    return handle.query_dn(vd.dn)
+
 def _controller_action_set(handle, controller_type, controller_slot, action,
                            server_id=1):
     controller_mo = _get_controller(handle,

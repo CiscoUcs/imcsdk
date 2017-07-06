@@ -263,6 +263,11 @@ class ImcDriver(object):
             try:
                 response = opener.open(request, timeout=timeout)
             except Exception as e:
+                if "Connection reset by peer".lower() in str(e).lower():
+                    log.error("Please make sure Python version >=2.7.9 "
+                              "and Openssl verion >= 1.0.1 are "
+                              "installed for >= CIMC 3.0")
+                    raise
                 if "SSL".lower() not in str(e).lower():
                     raise
 

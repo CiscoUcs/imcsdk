@@ -34,6 +34,10 @@ class ImcHandle(ImcSession):
         port (int or None): The port number to be used during connection
         secure (bool or None): True for secure connection, otherwise False
         proxy (str): The proxy object to be used to connect
+        auto_refresh (bool): if set to True, it'll refresh the cookie continuously
+        force (bool): if set to True it'll reconnect even if cookie exists
+            and is valid for the respective connection.
+        timeout (int): timeout value in secs
 
     Example:
         handle = ImcHandle("192.168.1.1","admin","password")\n
@@ -48,11 +52,34 @@ class ImcHandle(ImcSession):
     """
 
     def __init__(self, ip, username, password, port=None, secure=None,
-                 proxy=None, redirect_uri=None, headers={}):
+                 proxy=None, auto_refresh=False, force=False, timeout=None,
+                 redirect_uri=None, headers={}):
         ImcSession.__init__(self, ip=ip, username=username, password=password,
                             port=port, secure=secure, proxy=proxy,
+                            auto_refresh=auto_refresh, force=force,
+                            timeout=timeout,
                             redirect_uri=redirect_uri, headers=headers)
+
+
         self.__to_commit = {}
+
+    def __enter__(self):
+        """
+        Initiates a connection to the server referenced by the ImcHandle.
+        A cookie is populated in the ImcHandle, if the login is successful.
+
+        The class instance is returned.
+        """
+
+        self._login()
+        return self
+
+    def __exit__(self, *exc):
+        """
+        Disconnects from the server referenced by the ImcHandle and exits.
+        """
+
+        self._logout()
 
     def set_dump_xml(self):
         """
@@ -68,7 +95,7 @@ class ImcHandle(ImcSession):
 
         self._unset_dump_xml()
 
-    def login(self, auto_refresh=False, force=False, timeout=None):
+    def login(self, auto_refresh=None, force=None, timeout=None):
         """
         Initiates a connection to the server referenced by the ImcHandle.
         A cookie is populated in the ImcHandle, if the login is successful.
@@ -76,8 +103,8 @@ class ImcHandle(ImcSession):
         Args:
             auto_refresh (bool): if set to True, it refresh the cookie
                 continuously
-            force (bool): if set to True it reconnects even if cookie exists
-                and is valid for respective connection.
+            force (bool): if set to True it'll reconnect even if cookie exists
+                and is valid for the respective connection.
             timeout (int): timeout value in secs
 
         Returns:
@@ -92,7 +119,7 @@ class ImcHandle(ImcSession):
             where handle is ImcHandle()
         """
 
-        return self._login(auto_refresh, force, timeout=timeout)
+        return self._login(auto_refresh=auto_refresh, force=force, timeout=timeout)
 
     def logout(self, timeout=None):
         """
@@ -370,7 +397,7 @@ class ImcHandle(ImcSession):
             obj = handle.add_mo(mo)
         """
 
-        from imccoreutils import validate_mo_version
+        from .imccoreutils import validate_mo_version
 
         validate_mo_version(self, mo)
 
@@ -401,7 +428,7 @@ class ImcHandle(ImcSession):
             obj = handle.set_mo(mo)
         """
 
-        from imccoreutils import validate_mo_version
+        from .imccoreutils import validate_mo_version
 
         validate_mo_version(self, mo)
 
@@ -423,6 +450,10 @@ class ImcHandle(ImcSession):
         Example:
             obj = handle.remove_mo(mo)
         """
+
+        from .imccoreutils import validate_mo_version
+
+        validate_mo_version(self, mo)
 
         mo.status = "deleted"
         if mo.parent_mo:
@@ -467,8 +498,7 @@ class ImcHandle(ImcSession):
                 self.__to_commit = {}
                 raise ImcException(response.error_code, response.error_descr)
 
-            for pair_ in response.out_config.child:
-                for out_mo in pair_.child:
-                    out_mo.sync_mo(mo_dict[out_mo.dn])
+            for out_mo in response.out_config.child:
+                out_mo.sync_mo(mo_dict[out_mo.dn])
 
         self.__to_commit = {}

@@ -46,13 +46,13 @@ def test_unset_strong_password():
 
 
 def test_set_password_expiration():
-    password_expiration_set(handle, password_expiry_duration=1000, password_history=4, password_notification_period=10)
+    mo = password_expiration_set(handle, password_expiry_duration=1000, password_history=4, password_notification_period=10)
     match, mo = password_expiration_exists(handle, password_expiry_duration=1000, password_history=4, password_notification_period=10)
     assert_equal(match, True)
 
 
 def test_unset_password_expiration():
-    password_expiration_set(handle, password_expiry_duration=0)
+    mo = password_expiration_set(handle, password_expiry_duration=0)
     match, mo = password_expiration_exists(handle, password_expiry_duration=0)
     assert_equal(match, True)
 
@@ -73,7 +73,8 @@ def test_snmp_enable():
     snmp_enable(handle, community="test", privilege="full",
                 trap_community="test-trap",
                 sys_contact="abcd@pqrs.com", sys_location="somewhere")
-    assert_equal(is_snmp_enabled(handle), True)
+    match, mo = is_snmp_enabled(handle)
+    assert_equal(match, True)
 
 
 def test_snmp_user_create():
@@ -81,27 +82,27 @@ def test_snmp_user_create():
                               security_level="authpriv",
                               auth_pwd="Nbv-12345", auth="MD5",
                               privacy_pwd="Nbv-12345", privacy="AES")
-    match, user_id = snmp_user_exists(handle, name="test-snmp-user")
-    assert_equal(user_id, int(snmp_user.id))
+    match, mo = snmp_user_exists(handle, name="test-snmp-user")
+    assert_equal(match, True)
 
     snmp_user = snmp_user_add(handle, name="test-snmp-user2",
                               security_level="authnopriv",
                               auth_pwd="Nbv-12345", auth="MD5",
                               privacy_pwd="Nbv-12345", privacy="AES")
-    match, user_id = snmp_user_exists(handle, name="test-snmp-user2")
-    assert_equal(user_id, int(snmp_user.id))
+    match, mo = snmp_user_exists(handle, name="test-snmp-user2")
+    assert_equal(match, True)
 
     snmp_user = snmp_user_add(handle, name="test-snmp-user3",
                               security_level="noauthnopriv",
                               auth_pwd="Nbv-12345", auth="MD5",
                               privacy_pwd="Nbv-12345", privacy="AES")
-    match, user_id = snmp_user_exists(handle, name="test-snmp-user3")
-    assert_equal(user_id, int(snmp_user.id))
+    match, mo = snmp_user_exists(handle, name="test-snmp-user3")
+    assert_equal(match, True)
 
 
 def test_snmp_user_modify():
-    match, snmp_user_id = snmp_user_exists(handle, name="test-snmp-user")
-    snmp_user = snmp_user_modify(handle, user_id=snmp_user_id,
+    match, mo = snmp_user_exists(handle, name="test-snmp-user")
+    snmp_user = snmp_user_modify(handle, user_id=mo.id,
                                  auth_pwd="Nbv-56789",
                                  security_level="authnopriv")
     assert_equal(snmp_user.security_level, "authnopriv")
@@ -113,34 +114,35 @@ def test_snmp_trap_create():
                               version="v3", notification_type="traps",
                               user="test-snmp-user")
     snmp_trap_id = int(snmp_trap.id)
-    match, trap_id = snmp_trap_exists(handle, hostname="2.2.2.2", port="3000",
+    match, mo = snmp_trap_exists(handle, hostname="2.2.2.2", port="3000",
                                       version="v3", notification_type="traps",
                                       user="test-snmp-user")
-    assert_equal(trap_id, snmp_trap_id)
+    assert_equal(match, True)
 
 
 def test_snmp_trap_delete():
     snmp_trap_remove(handle, snmp_trap_id)
-    match, trap_id = snmp_trap_exists(handle, hostname="2.2.2.2", port="3000",
+    match, mo = snmp_trap_exists(handle, hostname="2.2.2.2", port="3000",
                                       version="v3", notification_type="traps",
                                       user="test-snmp-user")
-    assert_equal(trap_id, 0)
+    assert_equal(match, False)
 
 
 def test_snmp_user_delete():
     snmp_user_remove(handle, name="test-snmp-user")
-    match, user_id = snmp_user_exists(handle, name="test-snmp-user")
-    assert_equal(user_id, 0)
+    match, mo = snmp_user_exists(handle, name="test-snmp-user")
+    assert_equal(match, False)
 
     snmp_user_remove(handle, name="test-snmp-user2")
-    match, user_id = snmp_user_exists(handle, name="test-snmp-user2")
-    assert_equal(user_id, 0)
+    match, mo = snmp_user_exists(handle, name="test-snmp-user2")
+    assert_equal(match, False)
 
     snmp_user_remove(handle, name="test-snmp-user3")
-    match, user_id = snmp_user_exists(handle, name="test-snmp-user3")
-    assert_equal(user_id, 0)
+    match, mo = snmp_user_exists(handle, name="test-snmp-user3")
+    assert_equal(match, False)
 
 
 def test_snmp_disable():
     snmp_disable(handle)
-    assert_equal(is_snmp_enabled(handle), False)
+    match, mo = is_snmp_enabled(handle)
+    assert_equal(match, False)
