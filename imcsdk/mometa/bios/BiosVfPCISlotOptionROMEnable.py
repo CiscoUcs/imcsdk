@@ -413,6 +413,17 @@ class BiosVfPCISlotOptionROMEnableConsts:
     VP_SLOT_SBMEZZ1_STATE_LEGACY_ONLY = "Legacy Only"
     VP_SLOT_SBMEZZ1_STATE_UEFI_ONLY = "UEFI Only"
     VP_SLOT_SBMEZZ1_STATE_PLATFORM_DEFAULT = "platform-default"
+    VP_SLOT_SBMEZZ2_LINK_SPEED_AUTO = "Auto"
+    VP_SLOT_SBMEZZ2_LINK_SPEED_DISABLED = "Disabled"
+    VP_SLOT_SBMEZZ2_LINK_SPEED_GEN1 = "GEN1"
+    VP_SLOT_SBMEZZ2_LINK_SPEED_GEN2 = "GEN2"
+    VP_SLOT_SBMEZZ2_LINK_SPEED_GEN3 = "GEN3"
+    VP_SLOT_SBMEZZ2_LINK_SPEED_PLATFORM_DEFAULT = "platform-default"
+    VP_SLOT_SBMEZZ2_STATE_DISABLED = "Disabled"
+    VP_SLOT_SBMEZZ2_STATE_ENABLED = "Enabled"
+    VP_SLOT_SBMEZZ2_STATE_LEGACY_ONLY = "Legacy Only"
+    VP_SLOT_SBMEZZ2_STATE_UEFI_ONLY = "UEFI Only"
+    VP_SLOT_SBMEZZ2_STATE_PLATFORM_DEFAULT = "platform-default"
     VP_SLOT_SBNVME1_LINK_SPEED_AUTO = "Auto"
     VP_SLOT_SBNVME1_LINK_SPEED_DISABLED = "Disabled"
     VP_SLOT_SBNVME1_LINK_SPEED_GEN1 = "GEN1"
@@ -456,7 +467,7 @@ class BiosVfPCISlotOptionROMEnable(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosVfPCISlotOptionROMEnable", "biosVfPCISlotOptionROMEnable", "PCI-Slot-OptionROM-Enable", VersionMeta.Version151f, "InputOutput", 0x7ffffffffffffff, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfPCISlotOptionROMEnable", "biosVfPCISlotOptionROMEnable", "PCI-Slot-OptionROM-Enable", VersionMeta.Version2013e, "InputOutput", 0x1ffffffffffff, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
+        "modular": MoMeta("BiosVfPCISlotOptionROMEnable", "biosVfPCISlotOptionROMEnable", "PCI-Slot-OptionROM-Enable", VersionMeta.Version2013e, "InputOutput", 0x7ffffffffffff, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
     }
 
 
@@ -568,12 +579,14 @@ class BiosVfPCISlotOptionROMEnable(ManagedObject):
             "vp_slot_m_link_speed": MoPropertyMeta("vp_slot_m_link_speed", "vpSlotMLinkSpeed", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10000000000, None, None, None, ["Disabled", "GEN1", "GEN2", "GEN3", "platform-default"], []), 
             "vp_slot_sb_mezz1_link_speed": MoPropertyMeta("vp_slot_sb_mezz1_link_speed", "vpSlotSBMezz1LinkSpeed", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20000000000, None, None, None, ["Auto", "Disabled", "GEN1", "GEN2", "GEN3", "platform-default"], []), 
             "vp_slot_sb_mezz1_state": MoPropertyMeta("vp_slot_sb_mezz1_state", "vpSlotSBMezz1State", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40000000000, None, None, None, ["Disabled", "Enabled", "Legacy Only", "UEFI Only", "disabled", "enabled", "platform-default"], []), 
-            "vp_slot_sbnv_me1_link_speed": MoPropertyMeta("vp_slot_sbnv_me1_link_speed", "vpSlotSBNVMe1LinkSpeed", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80000000000, None, None, None, ["Auto", "Disabled", "GEN1", "GEN2", "GEN3", "platform-default"], []), 
-            "vp_slot_sbnv_me1_state": MoPropertyMeta("vp_slot_sbnv_me1_state", "vpSlotSBNVMe1State", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x100000000000, None, None, None, ["Disabled", "Enabled", "Legacy Only", "UEFI Only", "disabled", "enabled", "platform-default"], []), 
-            "vp_slot_sio_c1_link_speed": MoPropertyMeta("vp_slot_sio_c1_link_speed", "vpSlotSIOC1LinkSpeed", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200000000000, None, None, None, ["Auto", "Disabled", "GEN1", "GEN2", "GEN3", "platform-default"], []), 
-            "vp_slot_sio_c1_state": MoPropertyMeta("vp_slot_sio_c1_state", "vpSlotSIOC1State", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x400000000000, None, None, None, ["Disabled", "Enabled", "Legacy Only", "UEFI Only", "disabled", "enabled", "platform-default"], []), 
-            "vp_slot_sio_c2_link_speed": MoPropertyMeta("vp_slot_sio_c2_link_speed", "vpSlotSIOC2LinkSpeed", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x800000000000, None, None, None, ["Auto", "Disabled", "GEN1", "GEN2", "GEN3", "platform-default"], []), 
-            "vp_slot_sio_c2_state": MoPropertyMeta("vp_slot_sio_c2_state", "vpSlotSIOC2State", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x1000000000000, None, None, None, ["Disabled", "Enabled", "Legacy Only", "UEFI Only", "disabled", "enabled", "platform-default"], []), 
+            "vp_slot_sb_mezz2_link_speed": MoPropertyMeta("vp_slot_sb_mezz2_link_speed", "vpSlotSBMezz2LinkSpeed", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x80000000000, None, None, None, ["Auto", "Disabled", "GEN1", "GEN2", "GEN3", "platform-default"], []), 
+            "vp_slot_sb_mezz2_state": MoPropertyMeta("vp_slot_sb_mezz2_state", "vpSlotSBMezz2State", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x100000000000, None, None, None, ["Disabled", "Enabled", "Legacy Only", "UEFI Only", "disabled", "enabled", "platform-default"], []), 
+            "vp_slot_sbnv_me1_link_speed": MoPropertyMeta("vp_slot_sbnv_me1_link_speed", "vpSlotSBNVMe1LinkSpeed", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200000000000, None, None, None, ["Auto", "Disabled", "GEN1", "GEN2", "GEN3", "platform-default"], []), 
+            "vp_slot_sbnv_me1_state": MoPropertyMeta("vp_slot_sbnv_me1_state", "vpSlotSBNVMe1State", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x400000000000, None, None, None, ["Disabled", "Enabled", "Legacy Only", "UEFI Only", "disabled", "enabled", "platform-default"], []), 
+            "vp_slot_sio_c1_link_speed": MoPropertyMeta("vp_slot_sio_c1_link_speed", "vpSlotSIOC1LinkSpeed", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x800000000000, None, None, None, ["Auto", "Disabled", "GEN1", "GEN2", "GEN3", "platform-default"], []), 
+            "vp_slot_sio_c1_state": MoPropertyMeta("vp_slot_sio_c1_state", "vpSlotSIOC1State", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x1000000000000, None, None, None, ["Disabled", "Enabled", "Legacy Only", "UEFI Only", "disabled", "enabled", "platform-default"], []), 
+            "vp_slot_sio_c2_link_speed": MoPropertyMeta("vp_slot_sio_c2_link_speed", "vpSlotSIOC2LinkSpeed", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2000000000000, None, None, None, ["Auto", "Disabled", "GEN1", "GEN2", "GEN3", "platform-default"], []), 
+            "vp_slot_sio_c2_state": MoPropertyMeta("vp_slot_sio_c2_state", "vpSlotSIOC2State", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4000000000000, None, None, None, ["Disabled", "Enabled", "Legacy Only", "UEFI Only", "disabled", "enabled", "platform-default"], []), 
         },
 
     }
@@ -686,6 +699,8 @@ class BiosVfPCISlotOptionROMEnable(ManagedObject):
             "vpSlotMLinkSpeed": "vp_slot_m_link_speed", 
             "vpSlotSBMezz1LinkSpeed": "vp_slot_sb_mezz1_link_speed", 
             "vpSlotSBMezz1State": "vp_slot_sb_mezz1_state", 
+            "vpSlotSBMezz2LinkSpeed": "vp_slot_sb_mezz2_link_speed", 
+            "vpSlotSBMezz2State": "vp_slot_sb_mezz2_state", 
             "vpSlotSBNVMe1LinkSpeed": "vp_slot_sbnv_me1_link_speed", 
             "vpSlotSBNVMe1State": "vp_slot_sbnv_me1_state", 
             "vpSlotSIOC1LinkSpeed": "vp_slot_sio_c1_link_speed", 
@@ -768,6 +783,8 @@ class BiosVfPCISlotOptionROMEnable(ManagedObject):
         self.vp_slot_m_link_speed = None
         self.vp_slot_sb_mezz1_link_speed = None
         self.vp_slot_sb_mezz1_state = None
+        self.vp_slot_sb_mezz2_link_speed = None
+        self.vp_slot_sb_mezz2_state = None
         self.vp_slot_sbnv_me1_link_speed = None
         self.vp_slot_sbnv_me1_state = None
         self.vp_slot_sio_c1_link_speed = None

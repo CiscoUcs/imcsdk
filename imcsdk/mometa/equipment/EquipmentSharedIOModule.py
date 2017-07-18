@@ -31,6 +31,7 @@ class EquipmentSharedIOModule(ManagedObject):
             "fip_mode": MoPropertyMeta("fip_mode", "fipMode", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "iscsi_boot_capable": MoPropertyMeta("iscsi_boot_capable", "iscsiBootCapable", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "lldp": MoPropertyMeta("lldp", "lldp", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "pci_link": MoPropertyMeta("pci_link", "pciLink", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "product_id": MoPropertyMeta("product_id", "productId", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
             "serial_number": MoPropertyMeta("serial_number", "serialNumber", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
@@ -55,6 +56,7 @@ class EquipmentSharedIOModule(ManagedObject):
             "fipMode": "fip_mode", 
             "iscsiBootCapable": "iscsi_boot_capable", 
             "lldp": "lldp", 
+            "pciLink": "pci_link", 
             "productId": "product_id", 
             "rn": "rn", 
             "serialNumber": "serial_number", 
@@ -78,6 +80,7 @@ class EquipmentSharedIOModule(ManagedObject):
         self.fip_mode = None
         self.iscsi_boot_capable = None
         self.lldp = None
+        self.pci_link = None
         self.product_id = None
         self.serial_number = None
         self.status = None

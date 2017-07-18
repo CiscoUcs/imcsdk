@@ -24,6 +24,7 @@ class VicBackupAll(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("VicBackupAll", "vicBackupAll", "vic-all-exportconfig", VersionMeta.Version303a, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], [u'topSystem'], [], [None]),
+        "modular": MoMeta("VicBackupAll", "vicBackupAll", "vic-all-exportconfig", VersionMeta.Version303a, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], [u'equipmentChassis'], [], [None])
     }
 
 
@@ -44,11 +45,41 @@ class VicBackupAll(ManagedObject):
             "user": MoPropertyMeta("user", "user", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x200, 0, 255, None, [], []), 
         },
 
+        "modular": {
+            "admin_state": MoPropertyMeta("admin_state", "adminState", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["trigger", "triggered"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version303a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "descr": MoPropertyMeta("descr", "descr", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
+            "hostname": MoPropertyMeta("hostname", "hostname", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, r"""([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:""", [], []), 
+            "progress": MoPropertyMeta("progress", "progress", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
+            "proto": MoPropertyMeta("proto", "proto", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["ftp", "http", "none", "scp", "sftp", "tftp"], []), 
+            "pwd": MoPropertyMeta("pwd", "pwd", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, None, [], []), 
+            "remote_file": MoPropertyMeta("remote_file", "remoteFile", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x40, 0, 255, r"""[^\(\)~`'\?\\"";<>\|&\*\^$%]{1,255}""", [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x80, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "user": MoPropertyMeta("user", "user", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x200, 0, 255, None, [], []), 
+        },
+
     }
 
     prop_map = {
 
         "classic": {
+            "adminState": "admin_state", 
+            "childAction": "child_action", 
+            "descr": "descr", 
+            "dn": "dn", 
+            "hostname": "hostname", 
+            "progress": "progress", 
+            "proto": "proto", 
+            "pwd": "pwd", 
+            "remoteFile": "remote_file", 
+            "rn": "rn", 
+            "status": "status", 
+            "user": "user", 
+        },
+
+        "modular": {
             "adminState": "admin_state", 
             "childAction": "child_action", 
             "descr": "descr", 

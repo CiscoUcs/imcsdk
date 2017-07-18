@@ -26,7 +26,7 @@ class HuuFirmwareUpdater(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("HuuFirmwareUpdater", "huuFirmwareUpdater", "firmwareUpdater", VersionMeta.Version151f, "InputOutput", 0x3ffff, [], ["admin", "read-only", "user"], [u'huuController'], [], ["Get"]),
-        "modular": MoMeta("HuuFirmwareUpdater", "huuFirmwareUpdater", "firmwareUpdater", VersionMeta.Version2013e, "InputOutput", 0x1ffff, [], ["admin", "read-only", "user"], [u'huuController'], [], ["Get"])
+        "modular": MoMeta("HuuFirmwareUpdater", "huuFirmwareUpdater", "firmwareUpdater", VersionMeta.Version2013e, "InputOutput", 0x3ffff, [], ["admin", "read-only", "user"], [u'huuController'], [], ["Get"])
     }
 
 
@@ -49,10 +49,10 @@ class HuuFirmwareUpdater(ManagedObject):
             "stop_on_error": MoPropertyMeta("stop_on_error", "stopOnError", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x800, None, None, None, ["No", "Yes", "false", "no", "true", "yes"], []), 
             "time_out": MoPropertyMeta("time_out", "timeOut", "uint", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x1000, None, None, None, [], ["30-240"]), 
             "update_component": MoPropertyMeta("update_component", "updateComponent", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2000, None, None, None, [], []), 
-            "username": MoPropertyMeta("username", "username", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4000, None, None, None, [], []), 
-            "verify_update": MoPropertyMeta("verify_update", "verifyUpdate", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8000, None, None, None, ["No", "Yes", "false", "no", "true", "yes"], []), 
-            "boot_medium": MoPropertyMeta("boot_medium", "bootMedium", "string", VersionMeta.Version311c, MoPropertyMeta.READ_WRITE, 0x10000, 0, 510, None, ["microsd", "vmedia"], []), 
-            "update_type": MoPropertyMeta("update_type", "updateType", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x20000, 0, 510, None, ["delay", "delay_reboot", "immediate"], []), 
+            "update_type": MoPropertyMeta("update_type", "updateType", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x4000, 0, 510, None, ["delay", "delay_reboot", "immediate"], []), 
+            "username": MoPropertyMeta("username", "username", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8000, None, None, None, [], []), 
+            "verify_update": MoPropertyMeta("verify_update", "verifyUpdate", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10000, None, None, None, ["No", "Yes", "false", "no", "true", "yes"], []), 
+            "boot_medium": MoPropertyMeta("boot_medium", "bootMedium", "string", VersionMeta.Version311c, MoPropertyMeta.READ_WRITE, 0x20000, 0, 510, None, ["microsd", "vmedia"], []), 
         },
 
         "modular": {
@@ -72,9 +72,10 @@ class HuuFirmwareUpdater(ManagedObject):
             "stop_on_error": MoPropertyMeta("stop_on_error", "stopOnError", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x800, None, None, None, ["No", "Yes", "no", "yes"], []), 
             "time_out": MoPropertyMeta("time_out", "timeOut", "uint", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x1000, None, None, None, [], ["30-240"]), 
             "update_component": MoPropertyMeta("update_component", "updateComponent", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2000, None, None, None, [], []), 
-            "username": MoPropertyMeta("username", "username", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4000, None, None, None, [], []), 
-            "verify_update": MoPropertyMeta("verify_update", "verifyUpdate", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8000, None, None, None, ["No", "Yes", "no", "yes"], []), 
-            "cmc_secure_boot": MoPropertyMeta("cmc_secure_boot", "cmcSecureBoot", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10000, None, None, None, ["No", "Yes", "no", "yes"], []), 
+            "update_type": MoPropertyMeta("update_type", "updateType", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x4000, 0, 510, None, ["delay", "delay_reboot", "immediate"], []), 
+            "username": MoPropertyMeta("username", "username", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8000, None, None, None, [], []), 
+            "verify_update": MoPropertyMeta("verify_update", "verifyUpdate", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10000, None, None, None, ["No", "Yes", "no", "yes"], []), 
+            "cmc_secure_boot": MoPropertyMeta("cmc_secure_boot", "cmcSecureBoot", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20000, None, None, None, ["No", "Yes", "no", "yes"], []), 
         },
 
     }
@@ -98,10 +99,10 @@ class HuuFirmwareUpdater(ManagedObject):
             "stopOnError": "stop_on_error", 
             "timeOut": "time_out", 
             "updateComponent": "update_component", 
+            "updateType": "update_type", 
             "username": "username", 
             "verifyUpdate": "verify_update", 
             "bootMedium": "boot_medium", 
-            "updateType": "update_type", 
         },
 
         "modular": {
@@ -121,6 +122,7 @@ class HuuFirmwareUpdater(ManagedObject):
             "stopOnError": "stop_on_error", 
             "timeOut": "time_out", 
             "updateComponent": "update_component", 
+            "updateType": "update_type", 
             "username": "username", 
             "verifyUpdate": "verify_update", 
             "cmcSecureBoot": "cmc_secure_boot", 
@@ -144,10 +146,10 @@ class HuuFirmwareUpdater(ManagedObject):
         self.stop_on_error = None
         self.time_out = None
         self.update_component = None
+        self.update_type = None
         self.username = None
         self.verify_update = None
         self.boot_medium = None
-        self.update_type = None
         self.cmc_secure_boot = None
 
         ManagedObject.__init__(self, "HuuFirmwareUpdater", parent_mo_or_dn, **kwargs)
