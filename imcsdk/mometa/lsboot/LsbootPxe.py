@@ -6,6 +6,7 @@ from ...imcmeta import VersionMeta
 
 
 class LsbootPxeConsts:
+    MAC_ADDRESS_ = ""
     STATE_DISABLED = "Disabled"
     STATE_ENABLED = "Enabled"
     SUBTYPE_PXE = "PXE"
@@ -19,7 +20,7 @@ class LsbootPxe(ManagedObject):
     naming_props = set([u'name'])
 
     mo_meta = {
-        "classic": MoMeta("LsbootPxe", "lsbootPxe", "pxe-[name]", VersionMeta.Version201a, "InputOutput", 0x7ff, [], ["admin", "read-only", "user"], [u'lsbootDevPrecision'], [], ["Add", "Get", "Remove", "Set"]),
+        "classic": MoMeta("LsbootPxe", "lsbootPxe", "pxe-[name]", VersionMeta.Version201a, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'lsbootDevPrecision'], [], ["Add", "Get", "Remove", "Set"]),
         "modular": MoMeta("LsbootPxe", "lsbootPxe", "pxe-[name]", VersionMeta.Version2013e, "InputOutput", 0x7ff, [], ["admin", "read-only", "user"], [u'lsbootDevPrecision'], [], ["Add", "Get", "Remove", "Set"])
     }
 
@@ -33,11 +34,12 @@ class LsbootPxe(ManagedObject):
             "order": MoPropertyMeta("order", "order", "uint", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, [], ["1-255"]), 
             "port": MoPropertyMeta("port", "port", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x10, None, None, r"""([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]){0,1}""", [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, None, [], []), 
-            "slot": MoPropertyMeta("slot", "slot", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x40, None, None, r"""([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]|L|MLOM|L1|L2){0,1}""", [], []), 
+            "slot": MoPropertyMeta("slot", "slot", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x40, None, None, r"""([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]|L|MLOM){0,1}""", [], []), 
             "state": MoPropertyMeta("state", "state", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "subtype": MoPropertyMeta("subtype", "subtype", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["PXE"], []), 
             "type": MoPropertyMeta("type", "type", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x400, None, None, None, ["PXE"], []), 
+            "mac_address": MoPropertyMeta("mac_address", "macAddress", "string", VersionMeta.Version311c, MoPropertyMeta.READ_WRITE, 0x800, None, None, r"""(([0-9a-fA-F][0-9a-fA-F]:){5}([0-9a-fA-F][0-9a-fA-F]))|0""", [""], []), 
         },
 
         "modular": {
@@ -70,6 +72,7 @@ class LsbootPxe(ManagedObject):
             "status": "status", 
             "subtype": "subtype", 
             "type": "type", 
+            "macAddress": "mac_address", 
         },
 
         "modular": {
@@ -99,6 +102,7 @@ class LsbootPxe(ManagedObject):
         self.status = None
         self.subtype = None
         self.type = None
+        self.mac_address = None
 
         ManagedObject.__init__(self, "LsbootPxe", parent_mo_or_dn, **kwargs)
 

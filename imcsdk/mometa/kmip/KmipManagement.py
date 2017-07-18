@@ -18,7 +18,7 @@ class KmipManagement(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("KmipManagement", "kmipManagement", "kmip-mgmt", VersionMeta.Version302b, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'topSystem'], [u'downloadClientCertificate', u'downloadClientPrivateKey', u'downloadRootCACertificate', u'exportClientCertificate', u'exportClientPrivateKey', u'exportRootCACertificate', u'kmipServer', u'kmipServerLogin'], ["Get", "Set"]),
+        "classic": MoMeta("KmipManagement", "kmipManagement", "kmip-mgmt", VersionMeta.Version302b, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'topSystem'], [u'downloadClientCertificate', u'downloadClientPrivateKey', u'downloadRootCACertificate', u'exportClientCertificate', u'exportClientPrivateKey', u'exportRootCACertificate', u'kmipServer', u'kmipServerLogin'], [None]),
     }
 
 

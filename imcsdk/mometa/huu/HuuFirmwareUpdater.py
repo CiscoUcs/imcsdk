@@ -8,9 +8,14 @@ from ...imcmeta import VersionMeta
 class HuuFirmwareUpdaterConsts:
     ADMIN_STATE_TRIGGER = "trigger"
     ADMIN_STATE_TRIGGERED = "triggered"
+    BOOT_MEDIUM_MICROSD = "microsd"
+    BOOT_MEDIUM_VMEDIA = "vmedia"
     MAP_TYPE_CIFS = "cifs"
     MAP_TYPE_NFS = "nfs"
     MAP_TYPE_WWW = "www"
+    UPDATE_TYPE_DELAY = "delay"
+    UPDATE_TYPE_DELAY_REBOOT = "delay_reboot"
+    UPDATE_TYPE_IMMEDIATE = "immediate"
 
 
 class HuuFirmwareUpdater(ManagedObject):
@@ -20,7 +25,7 @@ class HuuFirmwareUpdater(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("HuuFirmwareUpdater", "huuFirmwareUpdater", "firmwareUpdater", VersionMeta.Version151f, "InputOutput", 0xffff, [], ["admin", "read-only", "user"], [u'huuController'], [], ["Get"]),
+        "classic": MoMeta("HuuFirmwareUpdater", "huuFirmwareUpdater", "firmwareUpdater", VersionMeta.Version151f, "InputOutput", 0x3ffff, [], ["admin", "read-only", "user"], [u'huuController'], [], ["Get"]),
         "modular": MoMeta("HuuFirmwareUpdater", "huuFirmwareUpdater", "firmwareUpdater", VersionMeta.Version2013e, "InputOutput", 0x1ffff, [], ["admin", "read-only", "user"], [u'huuController'], [], ["Get"])
     }
 
@@ -46,6 +51,8 @@ class HuuFirmwareUpdater(ManagedObject):
             "update_component": MoPropertyMeta("update_component", "updateComponent", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2000, None, None, None, [], []), 
             "username": MoPropertyMeta("username", "username", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4000, None, None, None, [], []), 
             "verify_update": MoPropertyMeta("verify_update", "verifyUpdate", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8000, None, None, None, ["No", "Yes", "false", "no", "true", "yes"], []), 
+            "boot_medium": MoPropertyMeta("boot_medium", "bootMedium", "string", VersionMeta.Version311c, MoPropertyMeta.READ_WRITE, 0x10000, 0, 510, None, ["microsd", "vmedia"], []), 
+            "update_type": MoPropertyMeta("update_type", "updateType", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x20000, 0, 510, None, ["delay", "delay_reboot", "immediate"], []), 
         },
 
         "modular": {
@@ -93,6 +100,8 @@ class HuuFirmwareUpdater(ManagedObject):
             "updateComponent": "update_component", 
             "username": "username", 
             "verifyUpdate": "verify_update", 
+            "bootMedium": "boot_medium", 
+            "updateType": "update_type", 
         },
 
         "modular": {
@@ -137,6 +146,8 @@ class HuuFirmwareUpdater(ManagedObject):
         self.update_component = None
         self.username = None
         self.verify_update = None
+        self.boot_medium = None
+        self.update_type = None
         self.cmc_secure_boot = None
 
         ManagedObject.__init__(self, "HuuFirmwareUpdater", parent_mo_or_dn, **kwargs)

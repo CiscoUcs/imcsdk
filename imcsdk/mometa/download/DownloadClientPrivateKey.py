@@ -33,12 +33,12 @@ class DownloadClientPrivateKey(ManagedObject):
             "download_progress": MoPropertyMeta("download_progress", "downloadProgress", "string", VersionMeta.Version302b, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
             "download_status": MoPropertyMeta("download_status", "downloadStatus", "string", VersionMeta.Version302b, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
             "protocol": MoPropertyMeta("protocol", "protocol", "string", VersionMeta.Version302b, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["ftp", "http", "none", "scp", "sftp", "tftp"], []), 
-            "pwd": MoPropertyMeta("pwd", "pwd", "string", VersionMeta.Version302b, MoPropertyMeta.READ_WRITE, 0x8, 0, 256, None, [], []), 
-            "remote_file": MoPropertyMeta("remote_file", "remoteFile", "string", VersionMeta.Version302b, MoPropertyMeta.READ_WRITE, 0x10, None, None, r"""[^\(\)~`'\?\\"";<>\|&\*\^$%]{0,128}""", [], []), 
+            "pwd": MoPropertyMeta("pwd", "pwd", "string", VersionMeta.Version302b, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
+            "remote_file": MoPropertyMeta("remote_file", "remoteFile", "string", VersionMeta.Version302b, MoPropertyMeta.READ_WRITE, 0x10, None, None, r"""[^\(\)~`'\?\\"";<>\|&\*\^$%]{0,255}""", [], []), 
             "remote_server": MoPropertyMeta("remote_server", "remoteServer", "string", VersionMeta.Version302b, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, r"""(([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:) |((([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6})|(([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?)+)|([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]))""", [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version302b, MoPropertyMeta.READ_WRITE, 0x40, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version302b, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "user": MoPropertyMeta("user", "user", "string", VersionMeta.Version302b, MoPropertyMeta.READ_WRITE, 0x100, 0, 256, None, [], []), 
+            "user": MoPropertyMeta("user", "user", "string", VersionMeta.Version302b, MoPropertyMeta.READ_WRITE, 0x100, 0, 255, None, [], []), 
         },
 
     }

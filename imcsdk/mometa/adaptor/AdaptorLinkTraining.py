@@ -6,9 +6,11 @@ from ...imcmeta import VersionMeta
 
 
 class AdaptorLinkTrainingConsts:
+    LINK_TRAINING_OFF = "OFF"
+    LINK_TRAINING_ON = "ON"
     LINK_TRAINING_N_A = "n/a"
-    LINK_TRAINING_OFF = "off"
-    LINK_TRAINING_ON = "on"
+    _LINK_TRAINING_OFF = "off"
+    _LINK_TRAINING_ON = "on"
 
 
 class AdaptorLinkTraining(ManagedObject):
@@ -27,7 +29,7 @@ class AdaptorLinkTraining(ManagedObject):
         "classic": {
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version204c, MoPropertyMeta.INTERNAL, 0x2, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
-            "link_training": MoPropertyMeta("link_training", "linkTraining", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["n/a", "off", "on"], []), 
+            "link_training": MoPropertyMeta("link_training", "linkTraining", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["OFF", "ON", "n/a", "off", "on"], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
         },

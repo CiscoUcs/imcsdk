@@ -10,7 +10,6 @@ class AdaptorEthGenProfileConsts:
     ARFS_ENABLED = "Enabled"
     _ARFS_DISABLED = "disabled"
     _ARFS_ENABLED = "enabled"
-    ORDER_ANY = "ANY"
     RATE_LIMIT_OFF = "OFF"
     UPLINK_FAILOVER_DISABLED = "Disabled"
     UPLINK_FAILOVER_ENABLED = "Enabled"
@@ -23,6 +22,7 @@ class AdaptorEthGenProfileConsts:
     VMQ_ENABLED = "Enabled"
     _VMQ_DISABLED = "disabled"
     _VMQ_ENABLED = "enabled"
+    ORDER_ANY = "ANY"
 
 
 class AdaptorEthGenProfile(ManagedObject):
@@ -32,7 +32,7 @@ class AdaptorEthGenProfile(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("AdaptorEthGenProfile", "adaptorEthGenProfile", "general", VersionMeta.Version151f, "InputOutput", 0x1fff, [], ["admin", "read-only", "user"], [u'adaptorHostEthIf'], [], ["Get", "Set"]),
+        "classic": MoMeta("AdaptorEthGenProfile", "adaptorEthGenProfile", "general", VersionMeta.Version151f, "InputOutput", 0xffff, [], ["admin", "read-only", "user"], [u'adaptorHostEthIf'], [], ["Get", "Set"]),
         "modular": MoMeta("AdaptorEthGenProfile", "adaptorEthGenProfile", "general", VersionMeta.Version2013e, "InputOutput", 0x1fff, [], ["admin", "read-only", "user"], [u'adaptorHostEthIf'], [], ["Get", "Set"])
     }
 
@@ -43,7 +43,7 @@ class AdaptorEthGenProfile(ManagedObject):
             "arfs": MoPropertyMeta("arfs", "arfs", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
-            "order": MoPropertyMeta("order", "order", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, r"""[0-9]|1[0-7]""", ["ANY"], []), 
+            "order": MoPropertyMeta("order", "order", "uint", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, [], ["0-17"]), 
             "rate_limit": MoPropertyMeta("rate_limit", "rateLimit", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, r"""(([1-9]\d?\d?\d?|10000) Mbps)""", ["OFF"], ["1-40000"]), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
@@ -53,6 +53,9 @@ class AdaptorEthGenProfile(ManagedObject):
             "vlan": MoPropertyMeta("vlan", "vlan", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x400, None, None, None, ["NONE"], ["1-4094"]), 
             "vlan_mode": MoPropertyMeta("vlan_mode", "vlanMode", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x800, None, None, None, ["ACCESS", "TRUNK"], []), 
             "vmq": MoPropertyMeta("vmq", "vmq", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x1000, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
+            "nvgre": MoPropertyMeta("nvgre", "nvgre", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x2000, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
+            "pci_link": MoPropertyMeta("pci_link", "pciLink", "uint", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x4000, None, None, None, [], ["0-1"]), 
+            "vxlan": MoPropertyMeta("vxlan", "vxlan", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x8000, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
         },
 
         "modular": {
@@ -89,6 +92,9 @@ class AdaptorEthGenProfile(ManagedObject):
             "vlan": "vlan", 
             "vlanMode": "vlan_mode", 
             "vmq": "vmq", 
+            "nvgre": "nvgre", 
+            "pciLink": "pci_link", 
+            "vxlan": "vxlan", 
         },
 
         "modular": {
@@ -122,6 +128,9 @@ class AdaptorEthGenProfile(ManagedObject):
         self.vlan = None
         self.vlan_mode = None
         self.vmq = None
+        self.nvgre = None
+        self.pci_link = None
+        self.vxlan = None
 
         ManagedObject.__init__(self, "AdaptorEthGenProfile", parent_mo_or_dn, **kwargs)
 

@@ -7,9 +7,9 @@ from ...imcmeta import VersionMeta
 
 class AdaptorFcGenProfileConsts:
     MAC_AUTO = "AUTO"
-    ORDER_ANY = "ANY"
     RATE_LIMIT_OFF = "OFF"
     VLAN_NONE = "NONE"
+    ORDER_ANY = "ANY"
 
 
 class AdaptorFcGenProfile(ManagedObject):
@@ -19,7 +19,7 @@ class AdaptorFcGenProfile(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("AdaptorFcGenProfile", "adaptorFcGenProfile", "general", VersionMeta.Version151f, "InputOutput", 0x7ff, [], ["admin", "read-only", "user"], [u'adaptorHostFcIf'], [], ["Get", "Set"]),
+        "classic": MoMeta("AdaptorFcGenProfile", "adaptorFcGenProfile", "general", VersionMeta.Version151f, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'adaptorHostFcIf'], [], ["Get", "Set"]),
         "modular": MoMeta("AdaptorFcGenProfile", "adaptorFcGenProfile", "general", VersionMeta.Version2013e, "InputOutput", 0x7ff, [], ["admin", "read-only", "user"], [u'adaptorHostFcIf'], [], ["Get", "Set"])
     }
 
@@ -32,12 +32,13 @@ class AdaptorFcGenProfile(ManagedObject):
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "mac": MoPropertyMeta("mac", "mac", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, r"""(([0-9a-fA-F][0-9a-fA-F]:){5}([0-9a-fA-F][0-9a-fA-F]))|0""", ["AUTO"], []), 
             "max_data_field_size": MoPropertyMeta("max_data_field_size", "maxDataFieldSize", "uint", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, [], ["256-2112"]), 
-            "order": MoPropertyMeta("order", "order", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x20, None, None, r"""[0-9]|1[0-7]""", ["ANY"], []), 
+            "order": MoPropertyMeta("order", "order", "uint", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, [], ["0-17"]), 
             "persistent_lun_bind": MoPropertyMeta("persistent_lun_bind", "persistentLunBind", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
             "rate_limit": MoPropertyMeta("rate_limit", "rateLimit", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x80, None, None, r"""(([1-9]\d?\d?\d?|10000) Mbps)""", ["OFF"], ["1-40000"]), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x100, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "vlan": MoPropertyMeta("vlan", "vlan", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x400, None, None, None, ["NONE"], ["1-4094"]), 
+            "pci_link": MoPropertyMeta("pci_link", "pciLink", "uint", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x800, None, None, None, [], ["0-1"]), 
         },
 
         "modular": {
@@ -70,6 +71,7 @@ class AdaptorFcGenProfile(ManagedObject):
             "rn": "rn", 
             "status": "status", 
             "vlan": "vlan", 
+            "pciLink": "pci_link", 
         },
 
         "modular": {
@@ -99,6 +101,7 @@ class AdaptorFcGenProfile(ManagedObject):
         self.rate_limit = None
         self.status = None
         self.vlan = None
+        self.pci_link = None
 
         ManagedObject.__init__(self, "AdaptorFcGenProfile", parent_mo_or_dn, **kwargs)
 

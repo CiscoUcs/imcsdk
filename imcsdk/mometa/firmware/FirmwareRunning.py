@@ -28,7 +28,7 @@ class FirmwareRunning(ManagedObject):
     naming_props = set([u'deployment'])
 
     mo_meta = {
-        "classic": MoMeta("FirmwareRunning", "firmwareRunning", "fw-[deployment]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'biosUnit', u'mgmtController', u'storageController', u'storageControllerNVMe', u'systemIOController'], [], ["Get"]),
+        "classic": MoMeta("FirmwareRunning", "firmwareRunning", "fw-[deployment]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'biosUnit', u'mgmtController', u'storageController', u'systemIOController'], [], ["Get"]),
         "modular": MoMeta("FirmwareRunning", "firmwareRunning", "fw-[deployment]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'biosUnit', u'mgmtController', u'storageController', u'storageControllerNVMe'], [], ["Get"])
     }
 

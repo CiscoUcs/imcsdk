@@ -12,6 +12,8 @@ class CommSyslogClientConsts:
     NAME_PRIMARY = "primary"
     NAME_SECONDARY = "secondary"
     NAME_TERTIARY = "tertiary"
+    PROTO_TCP = "tcp"
+    PROTO_UDP = "udp"
 
 
 class CommSyslogClient(ManagedObject):
@@ -21,7 +23,7 @@ class CommSyslogClient(ManagedObject):
     naming_props = set([u'name'])
 
     mo_meta = {
-        "classic": MoMeta("CommSyslogClient", "commSyslogClient", "client-[name]", VersionMeta.Version151f, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'commSyslog'], [], ["Get"]),
+        "classic": MoMeta("CommSyslogClient", "commSyslogClient", "client-[name]", VersionMeta.Version151f, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], [u'commSyslog'], [], ["Get"]),
         "modular": MoMeta("CommSyslogClient", "commSyslogClient", "client-[name]", VersionMeta.Version2013e, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'commSyslog'], [], ["Get"])
     }
 
@@ -38,6 +40,7 @@ class CommSyslogClient(ManagedObject):
             "port": MoPropertyMeta("port", "port", "uint", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, [], ["1-65535"]), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x80, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "proto": MoPropertyMeta("proto", "proto", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["tcp", "udp"], []), 
         },
 
         "modular": {
@@ -66,6 +69,7 @@ class CommSyslogClient(ManagedObject):
             "port": "port", 
             "rn": "rn", 
             "status": "status", 
+            "proto": "proto", 
         },
 
         "modular": {
@@ -91,6 +95,7 @@ class CommSyslogClient(ManagedObject):
         self.hostname = None
         self.port = None
         self.status = None
+        self.proto = None
 
         ManagedObject.__init__(self, "CommSyslogClient", parent_mo_or_dn, **kwargs)
 

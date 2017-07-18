@@ -22,6 +22,8 @@ class MgmtBackupConsts:
     PROTO_SCP = "scp"
     PROTO_SFTP = "sftp"
     PROTO_TFTP = "tftp"
+    SOURCE_REMOTE = "remote"
+    SOURCE_USB = "usb"
 
 
 class MgmtBackup(ManagedObject):
@@ -31,7 +33,7 @@ class MgmtBackup(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("MgmtBackup", "mgmtBackup", "export-config", VersionMeta.Version151f, "InputOutput", 0x7ff, [], ["admin", "read-only", "user"], [u'topSystem'], [], [None]),
+        "classic": MoMeta("MgmtBackup", "mgmtBackup", "export-config", VersionMeta.Version151f, "InputOutput", 0x1fff, [], ["admin", "read-only", "user"], [u'topSystem'], [], [None]),
         "modular": MoMeta("MgmtBackup", "mgmtBackup", "export-config", VersionMeta.Version2013e, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'equipmentChassis'], [], [None])
     }
 
@@ -49,11 +51,13 @@ class MgmtBackup(ManagedObject):
             "hostname": MoPropertyMeta("hostname", "hostname", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, r"""(([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:) |((([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6})|(([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?)+)|([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]))""", [], []), 
             "passphrase": MoPropertyMeta("passphrase", "passphrase", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x10, 0, 127, r"""[^\(\)\^%!#$&<;>`~""?\\|'\s]{6,127}""", [], []), 
             "proto": MoPropertyMeta("proto", "proto", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["ftp", "http", "none", "scp", "sftp", "tftp"], []), 
-            "pwd": MoPropertyMeta("pwd", "pwd", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x40, 0, 256, None, [], []), 
-            "remote_file": MoPropertyMeta("remote_file", "remoteFile", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x80, 0, 128, r"""[^\(\)~`'\?\\"";<>\|&\*\^$%]{1,128}""", [], []), 
+            "pwd": MoPropertyMeta("pwd", "pwd", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x40, 0, 255, None, [], []), 
+            "remote_file": MoPropertyMeta("remote_file", "remoteFile", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x80, 0, 255, r"""[^\(\)~`'\?\\"";<>\|&\*\^$%]{1,255}""", [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x100, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "user": MoPropertyMeta("user", "user", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x400, 0, 256, None, [], []), 
+            "user": MoPropertyMeta("user", "user", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x400, 0, 255, None, [], []), 
+            "source": MoPropertyMeta("source", "source", "string", VersionMeta.Version311c, MoPropertyMeta.READ_WRITE, 0x800, None, None, None, ["remote", "usb"], []), 
+            "usb_path": MoPropertyMeta("usb_path", "usbPath", "string", VersionMeta.Version311c, MoPropertyMeta.READ_WRITE, 0x1000, 1, 128, None, [], []), 
         },
 
         "modular": {
@@ -95,6 +99,8 @@ class MgmtBackup(ManagedObject):
             "rn": "rn", 
             "status": "status", 
             "user": "user", 
+            "source": "source", 
+            "usbPath": "usb_path", 
         },
 
         "modular": {
@@ -133,6 +139,8 @@ class MgmtBackup(ManagedObject):
         self.remote_file = None
         self.status = None
         self.user = None
+        self.source = None
+        self.usb_path = None
         self.entity = None
 
         ManagedObject.__init__(self, "MgmtBackup", parent_mo_or_dn, **kwargs)

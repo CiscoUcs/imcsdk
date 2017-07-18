@@ -6,6 +6,7 @@ from ...imcmeta import VersionMeta
 
 
 class StorageControllerConsts:
+    ADMIN_ACTION_CLEAR_ALL_CONFIG = "clear-all-config"
     ADMIN_ACTION_CLEAR_BOOT_DRIVE = "clear-boot-drive"
     ADMIN_ACTION_CLEAR_CACHE = "clear-cache"
     ADMIN_ACTION_CLEAR_FOREIGN_CONFIG = "clear-foreign-config"
@@ -14,6 +15,7 @@ class StorageControllerConsts:
     ADMIN_ACTION_ENABLE_JBOD = "enable-jbod"
     ADMIN_ACTION_GET_TTY_LOG = "get-tty-log"
     ADMIN_ACTION_IMPORT_FOREIGN_CONFIG = "import-foreign-config"
+    ADMIN_ACTION_RESET_DEFAULT_CONFIG = "reset-default-config"
     PRESENCE_EMPTY = "empty"
     PRESENCE_EQUIPPED = "equipped"
     PRESENCE_EQUIPPED_IDENTITY_UNESTABLISHABLE = "equipped-identity-unestablishable"
@@ -43,7 +45,7 @@ class StorageController(ManagedObject):
     prop_meta = {
 
         "classic": {
-            "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["clear-boot-drive", "clear-cache", "clear-foreign-config", "delete-all-vds-reset-pds", "disable-jbod", "enable-jbod", "get-tty-log", "import-foreign-config"], []), 
+            "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["clear-all-config", "clear-boot-drive", "clear-cache", "clear-foreign-config", "delete-all-vds-reset-pds", "disable-jbod", "enable-jbod", "get-tty-log", "import-foreign-config", "reset-default-config"], []), 
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version151f, MoPropertyMeta.NAMING, 0x8, None, None, r"""[a-zA-Z0-9_\-]{1,30}""", [], []), 

@@ -17,7 +17,7 @@ class KmipServer(ManagedObject):
     naming_props = set([u'id'])
 
     mo_meta = {
-        "classic": MoMeta("KmipServer", "kmipServer", "kmip-server-[id]", VersionMeta.Version302b, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'kmipManagement'], [], ["Get", "Set"]),
+        "classic": MoMeta("KmipServer", "kmipServer", "kmip-server-[id]", VersionMeta.Version302b, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'kmipManagement'], [], [None]),
     }
 
 

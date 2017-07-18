@@ -41,7 +41,7 @@ class CommSnmpUser(ManagedObject):
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
             "id": MoPropertyMeta("id", "id", "uint", VersionMeta.Version151f, MoPropertyMeta.NAMING, 0x20, None, None, None, [], ["1-15"]), 
-            "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x40, 0, 31, None, [], []), 
+            "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x40, 0, 31, r"""[a-zA-Z0-9\._\+\-]{0,31}""", [], []), 
             "privacy": MoPropertyMeta("privacy", "privacy", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["", "AES", "DES"], []), 
             "privacy_pwd": MoPropertyMeta("privacy_pwd", "privacyPwd", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x100, None, None, r"""(.{8,64})?""", [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x200, 0, 255, None, [], []), 

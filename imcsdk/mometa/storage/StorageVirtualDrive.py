@@ -16,11 +16,13 @@ class StorageVirtualDriveConsts:
     ADMIN_ACTION_CANCEL_INITIALIZATION = "cancel-initialization"
     ADMIN_ACTION_CLEAR_TRANSPORT_READY = "clear-transport-ready"
     ADMIN_ACTION_ENABLE_SELF_ENCRYPT = "enable-self-encrypt"
+    ADMIN_ACTION_HIDE_VIRTUAL_DRIVE = "hide-virtual-drive"
     ADMIN_ACTION_RECONSTRUCT_VIRTUAL_DRIVE = "reconstruct-virtual-drive"
     ADMIN_ACTION_SET_BOOT_DRIVE = "set-boot-drive"
     ADMIN_ACTION_SET_TRANSPORT_READY = "set-transport-ready"
     ADMIN_ACTION_START_FAST_INITIALIZATION = "start-fast-initialization"
     ADMIN_ACTION_START_FULL_INITIALIZATION = "start-full-initialization"
+    ADMIN_ACTION_UNHIDE_VIRTUAL_DRIVE = "unhide-virtual-drive"
     CACHE_POLICY_ = ""
     CACHE_POLICY_CACHED_IO = "cached-io"
     CACHE_POLICY_DEFAULT = "default"
@@ -57,8 +59,6 @@ class StorageVirtualDriveConsts:
     STRIP_SIZE_512K = "512k"
     STRIP_SIZE_64K = "64k"
     STRIP_SIZE_8K = "8k"
-    ADMIN_ACTION_HIDE_VIRTUAL_DRIVE = "hide-virtual-drive"
-    ADMIN_ACTION_UNHIDE_VIRTUAL_DRIVE = "unhide-virtual-drive"
 
 
 class StorageVirtualDrive(ManagedObject):
@@ -77,7 +77,7 @@ class StorageVirtualDrive(ManagedObject):
 
         "classic": {
             "access_policy": MoPropertyMeta("access_policy", "accessPolicy", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["", "Transport Ready", "blocked", "default", "hidden", "read-only", "read-write"], []), 
-            "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x4, 0, 510, None, ["cancel-initialization", "clear-transport-ready", "enable-self-encrypt", "reconstruct-virtual-drive", "set-boot-drive", "set-transport-ready", "start-fast-initialization", "start-full-initialization"], []), 
+            "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x4, 0, 510, None, ["cancel-initialization", "clear-transport-ready", "enable-self-encrypt", "hide-virtual-drive", "reconstruct-virtual-drive", "set-boot-drive", "set-transport-ready", "start-fast-initialization", "start-full-initialization", "unhide-virtual-drive"], []), 
             "allow_background_init": MoPropertyMeta("allow_background_init", "allowBackgroundInit", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "auto_delete_oldest": MoPropertyMeta("auto_delete_oldest", "autoDeleteOldest", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "auto_snapshot": MoPropertyMeta("auto_snapshot", "autoSnapshot", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 

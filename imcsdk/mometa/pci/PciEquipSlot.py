@@ -16,7 +16,7 @@ class PciEquipSlot(ManagedObject):
     naming_props = set([u'id'])
 
     mo_meta = {
-        "classic": MoMeta("PciEquipSlot", "pciEquipSlot", "equipped-slot-[id]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeRackUnit'], [u'faultInst'], ["Get"]),
+        "classic": MoMeta("PciEquipSlot", "pciEquipSlot", "equipped-slot-[id]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeRackUnit'], [u'faultInst', u'gpuInventory'], ["Get"]),
         "modular": MoMeta("PciEquipSlot", "pciEquipSlot", "equipped-slot-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeServerNode'], [u'faultInst'], ["Get"])
     }
 
@@ -34,6 +34,7 @@ class PciEquipSlot(ManagedObject):
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x8, None, None, r"""((removed|created|modified|deleted),){0,3}(removed|created|modified|deleted){0,1}""", [], []), 
             "vendor": MoPropertyMeta("vendor", "vendor", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "version": MoPropertyMeta("version", "version", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "option_rom_status": MoPropertyMeta("option_rom_status", "optionROMStatus", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
         },
 
         "modular": {
@@ -64,6 +65,7 @@ class PciEquipSlot(ManagedObject):
             "status": "status", 
             "vendor": "vendor", 
             "version": "version", 
+            "optionROMStatus": "option_rom_status", 
         },
 
         "modular": {
@@ -91,6 +93,7 @@ class PciEquipSlot(ManagedObject):
         self.status = None
         self.vendor = None
         self.version = None
+        self.option_rom_status = None
 
         ManagedObject.__init__(self, "PciEquipSlot", parent_mo_or_dn, **kwargs)
 

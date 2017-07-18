@@ -9,6 +9,7 @@ class BiosVfASPMSupportConsts:
     VP_ASPMSUPPORT_AUTO = "Auto"
     VP_ASPMSUPPORT_DISABLED = "Disabled"
     VP_ASPMSUPPORT_FORCE_L0S = "Force L0s"
+    VP_ASPMSUPPORT_L1_ONLY = "L1 Only"
     VP_ASPMSUPPORT_PLATFORM_DEFAULT = "platform-default"
 
 
@@ -31,7 +32,7 @@ class BiosVfASPMSupport(ManagedObject):
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "vp_aspm_support": MoPropertyMeta("vp_aspm_support", "vpASPMSupport", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Auto", "Disabled", "Force L0s", "platform-default"], []), 
+            "vp_aspm_support": MoPropertyMeta("vp_aspm_support", "vpASPMSupport", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Auto", "Disabled", "Force L0s", "L1 Only", "platform-default"], []), 
         },
 
         "modular": {

@@ -55,6 +55,10 @@ class StorageLocalDiskProps(ManagedObject):
             "sequence_number": MoPropertyMeta("sequence_number", "sequenceNumber", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "wear_status_in_days": MoPropertyMeta("wear_status_in_days", "wearStatusInDays", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "copyback_operation_status": MoPropertyMeta("copyback_operation_status", "copybackOperationStatus", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "copyback_percent_complete": MoPropertyMeta("copyback_percent_complete", "copybackPercentComplete", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "percentage_reserved_cap_consumed": MoPropertyMeta("percentage_reserved_cap_consumed", "percentageReservedCapConsumed", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "time_of_last_refresh": MoPropertyMeta("time_of_last_refresh", "timeOfLastRefresh", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
         },
 
         "modular": {
@@ -127,6 +131,10 @@ class StorageLocalDiskProps(ManagedObject):
             "sequenceNumber": "sequence_number", 
             "status": "status", 
             "wearStatusInDays": "wear_status_in_days", 
+            "copybackOperationStatus": "copyback_operation_status", 
+            "copybackPercentComplete": "copyback_percent_complete", 
+            "percentageReservedCapConsumed": "percentage_reserved_cap_consumed", 
+            "timeOfLastRefresh": "time_of_last_refresh", 
         },
 
         "modular": {
@@ -196,6 +204,10 @@ class StorageLocalDiskProps(ManagedObject):
         self.sequence_number = None
         self.status = None
         self.wear_status_in_days = None
+        self.copyback_operation_status = None
+        self.copyback_percent_complete = None
+        self.percentage_reserved_cap_consumed = None
+        self.time_of_last_refresh = None
 
         ManagedObject.__init__(self, "StorageLocalDiskProps", parent_mo_or_dn, **kwargs)
 

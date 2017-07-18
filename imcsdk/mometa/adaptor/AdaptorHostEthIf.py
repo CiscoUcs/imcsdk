@@ -19,7 +19,7 @@ class AdaptorHostEthIf(ManagedObject):
     naming_props = set([u'name'])
 
     mo_meta = {
-        "classic": MoMeta("AdaptorHostEthIf", "adaptorHostEthIf", "host-eth-[name]", VersionMeta.Version151f, "InputOutput", 0x1fff, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [], ["Add", "Get", "Remove", "Set"]),
+        "classic": MoMeta("AdaptorHostEthIf", "adaptorHostEthIf", "host-eth-[name]", VersionMeta.Version151f, "InputOutput", 0x3fff, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [], ["Add", "Get", "Remove", "Set"]),
         "modular": MoMeta("AdaptorHostEthIf", "adaptorHostEthIf", "host-eth-[name]", VersionMeta.Version2013e, "InputOutput", 0x1fff, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [], ["Add", "Get", "Remove", "Set"])
     }
 
@@ -43,6 +43,7 @@ class AdaptorHostEthIf(ManagedObject):
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x800, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "uplink_port": MoPropertyMeta("uplink_port", "uplinkPort", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x1000, None, None, None, ["0", "1"], []), 
             "usnic_count": MoPropertyMeta("usnic_count", "usnicCount", "uint", VersionMeta.Version151x, MoPropertyMeta.READ_ONLY, None, None, None, None, [], ["0-225"]), 
+            "advanced_filter": MoPropertyMeta("advanced_filter", "advancedFilter", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x2000, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
         },
 
         "modular": {
@@ -85,6 +86,7 @@ class AdaptorHostEthIf(ManagedObject):
             "status": "status", 
             "uplinkPort": "uplink_port", 
             "usnicCount": "usnic_count", 
+            "advancedFilter": "advanced_filter", 
         },
 
         "modular": {
@@ -124,6 +126,7 @@ class AdaptorHostEthIf(ManagedObject):
         self.status = None
         self.uplink_port = None
         self.usnic_count = None
+        self.advanced_filter = None
 
         ManagedObject.__init__(self, "AdaptorHostEthIf", parent_mo_or_dn, **kwargs)
 

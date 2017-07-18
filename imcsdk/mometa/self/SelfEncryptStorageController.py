@@ -9,6 +9,8 @@ class SelfEncryptStorageControllerConsts:
     ADMIN_ACTION_DISABLE_SELF_ENCRYPT = "disable-self-encrypt"
     ADMIN_ACTION_ENABLE_SELF_ENCRYPT = "enable-self-encrypt"
     ADMIN_ACTION_MODIFY_SELF_ENCRYPT = "modify-self-encrypt"
+    ADMIN_ACTION_SWITCH_LOCAL_TO_REMOTE = "switch-local-to-remote"
+    ADMIN_ACTION_SWITCH_REMOTE_TO_LOCAL = "switch-remote-to-local"
     ADMIN_ACTION_UNLOCK_SECURED_DRIVES = "unlock-secured-drives"
     KEY_MANAGEMENT_LOCAL = "local"
     KEY_MANAGEMENT_REMOTE = "remote"
@@ -28,7 +30,7 @@ class SelfEncryptStorageController(ManagedObject):
     prop_meta = {
 
         "classic": {
-            "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["disable-self-encrypt", "enable-self-encrypt", "modify-self-encrypt", "unlock-secured-drives"], []), 
+            "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["disable-self-encrypt", "enable-self-encrypt", "modify-self-encrypt", "switch-local-to-remote", "switch-remote-to-local", "unlock-secured-drives"], []), 
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version209c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "existing_security_key": MoPropertyMeta("existing_security_key", "existingSecurityKey", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x8, 1, 33, None, [], []), 
