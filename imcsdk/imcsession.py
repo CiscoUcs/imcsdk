@@ -39,6 +39,8 @@ class ImcSession(object):
         self.__auto_refresh = auto_refresh
         self.__timeout = timeout
         self.__uri = self.__create_uri(port, secure)
+        self.__starship_proxy = None
+        self.__starship_headers = None
         self.__platform = None
         self.__model = None
 
@@ -229,6 +231,8 @@ class ImcSession(object):
         response_str = self.post(uri=imc_uri, data=xml_str, read=read, timeout=timeout)
         if self.__driver.redirect_uri:
             self.__uri = self.__driver.redirect_uri
+        if self.__starship_proxy is not None:
+            self.__uri = self.__starship_proxy
 
         return response_str
 
@@ -627,6 +631,20 @@ class ImcSession(object):
 
         remove_handle_from_list(self)
         return True
+
+    def _set_starship_proxy(self, proxy):
+        """
+        Internal method to set proxy URL in starship environment
+        """
+        self.__starship_proxy = proxy
+        self.__driver.__redirect_uri = proxy
+
+    def _set_starship_headers(self, headers):
+        """
+        Internal method to set proxy URL in starship environment
+        """
+        self.__starship_headers = headers
+        self.__driver.__headers = headers
 
     def _set_dump_xml(self):
         """
