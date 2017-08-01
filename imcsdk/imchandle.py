@@ -34,7 +34,8 @@ class ImcHandle(ImcSession):
         port (int or None): The port number to be used during connection
         secure (bool or None): True for secure connection, otherwise False
         proxy (str): The proxy object to be used to connect
-        auto_refresh (bool): if set to True, it'll refresh the cookie continuously
+        auto_refresh (bool): if set to True, it'll refresh the cookie
+            continuously
         force (bool): if set to True it'll reconnect even if cookie exists
             and is valid for the respective connection.
         timeout (int): timeout value in secs
@@ -59,6 +60,26 @@ class ImcHandle(ImcSession):
                             auto_refresh=auto_refresh, force=force,
                             timeout=timeout)
         self.__to_commit = {}
+        self.__response_timeout = 120
+
+    def __set_internal_timeout(self, timeout):
+        if timeout:
+            return timeout
+        return self.__response_timeout
+
+    def set_response_timeout(self, timeout):
+        """
+        Modifes the response timeout
+        """
+
+        self.__response_timeout = timeout
+
+    def reset_response_timeout(self):
+        """
+        Resets response timeout
+        """
+
+        self.__response_timeout = 120
 
     def __enter__(self):
         """
@@ -116,7 +137,9 @@ class ImcHandle(ImcSession):
             where handle is ImcHandle()
         """
 
-        return self._login(auto_refresh=auto_refresh, force=force, timeout=timeout)
+        timeout = self.__set_internal_timeout(timeout)
+        return self._login(auto_refresh=auto_refresh, force=force,
+                           timeout=timeout)
 
     def logout(self, timeout=None):
         """
@@ -135,6 +158,7 @@ class ImcHandle(ImcSession):
             where handle is ImcHandle()
         """
 
+        timeout = self.__set_internal_timeout(timeout)
         return self._logout(timeout=timeout)
 
     def process_xml_elem(self, elem, timeout=None):
@@ -156,6 +180,7 @@ class ImcHandle(ImcSession):
             objs = handle.process_xml_elem(elem)
         """
 
+        timeout = self.__set_internal_timeout(timeout)
         response = self.post_elem(elem, timeout=timeout)
         if response.error_code != 0:
             raise ImcException(response.error_code, response.error_descr)
@@ -183,6 +208,7 @@ class ImcHandle(ImcSession):
 
         from .imcmethodfactory import aaa_get_compute_auth_tokens
 
+        timeout = self.__set_internal_timeout(timeout)
         auth_token = None
         mo = self.query_classid(class_id=NamingId.COMPUTE_BOARD)
         if not mo:
@@ -231,6 +257,7 @@ class ImcHandle(ImcSession):
         if not dn:
             raise ValueError("Provide dn.")
 
+        timeout = self.__set_internal_timeout(timeout)
         elem = config_resolve_dn(cookie=self.cookie, dn=dn,
                                  in_hierarchical=hierarchy)
         response = self.post_elem(elem, timeout=timeout)
@@ -287,6 +314,7 @@ class ImcHandle(ImcSession):
         if not class_id:
             raise ValueError("Provide Parameter class_id")
 
+        timeout = self.__set_internal_timeout(timeout)
         meta_class_id = imccoreutils.find_class_id_in_mo_meta_ignore_case(
                                                                 class_id)
         if not meta_class_id:
@@ -339,6 +367,7 @@ class ImcHandle(ImcSession):
 
         from .imcmethodfactory import config_resolve_children
 
+        timeout = self.__set_internal_timeout(timeout)
         if not in_mo and not in_dn:
             raise ValueError('[Error]: GetChild: Provide in_mo or in_dn.')
 
@@ -352,7 +381,8 @@ class ImcHandle(ImcSession):
         # When hierarchy and class-id are passed together to Cisco IMC,
         # an empty response is received.
         # Hence, passing the class-id only when hierarchy is not set
-        # When both hierarchy and class-id are set, do local filtering for class-id
+        # When both hierarchy and class-id are set, do local filtering for
+        # class-id
         if class_id and not hierarchy:
             meta_class_id = imccoreutils.find_class_id_in_mo_meta_ignore_case(
                 class_id)
@@ -368,9 +398,8 @@ class ImcHandle(ImcSession):
         if response.error_code != 0:
             raise ImcException(response.error_code, response.error_descr)
 
-        out_mo_list = imccoreutils.extract_molist_from_method_response(response,
-                                                                       hierarchy
-                                                                       )
+        out_mo_list = imccoreutils.extract_molist_from_method_response(
+                                                        response, hierarchy)
         if class_id and hierarchy:
             out_mo_list = imccoreutils.filter_molist_on_class_id(
                                 out_mo_list,
@@ -396,6 +425,7 @@ class ImcHandle(ImcSession):
 
         from .imccoreutils import validate_mo_version
 
+        timeout = self.__set_internal_timeout(timeout)
         validate_mo_version(self, mo)
 
         if modify_present in imcgenutils.AFFIRMATIVE_LIST:
@@ -427,6 +457,7 @@ class ImcHandle(ImcSession):
 
         from .imccoreutils import validate_mo_version
 
+        timeout = self.__set_internal_timeout(timeout)
         validate_mo_version(self, mo)
 
         mo.status = "modified"
@@ -450,6 +481,7 @@ class ImcHandle(ImcSession):
 
         from .imccoreutils import validate_mo_version
 
+        timeout = self.__set_internal_timeout(timeout)
         validate_mo_version(self, mo)
 
         mo.status = "deleted"
@@ -478,6 +510,8 @@ class ImcHandle(ImcSession):
 
         from .imcbasetype import ConfigMap
         from .imcmethodfactory import config_conf_mo
+
+        timeout = self.__set_internal_timeout(timeout)
         mo_dict = self.__to_commit
         if not mo_dict:
             log.debug("Commit Buffer is Empty")
