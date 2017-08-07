@@ -41,7 +41,6 @@ class ImcSession(object):
         self.__uri = self.__create_uri(port, secure)
         self.__starship_proxy = None
         self.__starship_headers = None
-        self.__platform = None
         self.__model = None
 
         self.__imc = ip
@@ -638,6 +637,8 @@ class ImcSession(object):
         """
         self.__starship_proxy = proxy
         self.__driver.__redirect_uri = proxy
+        from imcsdk.imccoreutils import IMC_PLATFORM
+        self.__platform = IMC_PLATFORM.TYPE_CLASSIC
 
     def _set_starship_headers(self, headers):
         """

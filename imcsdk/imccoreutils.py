@@ -859,7 +859,7 @@ def get_server_dn(handle, server_id="1"):
     elif handle.platform == IMC_PLATFORM.TYPE_MODULAR:
         return "sys/chassis-1/server-" + str(server_id)
     else:
-        raise ImcOperationError("Unknown platform type:%s detected" %
+        raise ImcOperationError("Unknown platform", "type:%s detected" %
                                 handle.platform)
 
 
