@@ -644,7 +644,8 @@ class ImcSession(object):
         Internal method to set proxy URL in starship environment
         """
         self.__starship_headers = headers
-        self.__driver.__headers = headers
+        for header in headers:
+            self.__driver.add_header(header, headers[header])
 
     def _set_dump_xml(self):
         """
