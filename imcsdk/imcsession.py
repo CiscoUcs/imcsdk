@@ -226,12 +226,14 @@ class ImcSession(object):
             response = post_xml('<aaaLogin inName="user" inPassword="pass">')
         """
 
-        imc_uri = self.__uri + "/nuova"
+        if self.__starship_proxy is not None:
+            self.__uri = self.__starship_proxy
+            imc_uri = self.__starship_proxy
+        else:
+            imc_uri = self.__uri + "/nuova"
         response_str = self.post(uri=imc_uri, data=xml_str, read=read, timeout=timeout)
         if self.__driver.redirect_uri:
             self.__uri = self.__driver.redirect_uri
-        if self.__starship_proxy is not None:
-            self.__uri = self.__starship_proxy
 
         return response_str
 
