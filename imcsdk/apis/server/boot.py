@@ -17,11 +17,8 @@ This module provides APIs for bios related configuration like boot order
 """
 
 import logging
-import json
 import imcsdk.imccoreutils as imccoreutils
 from imcsdk.mometa.lsboot.LsbootDevPrecision import LsbootDevPrecision
-from imcsdk.imcexception import ImcOperationError
-from imcsdk.apis.utils import _is_valid_arg
 
 log = logging.getLogger('imc')
 
@@ -150,7 +147,8 @@ def _get_device(parent_dn, device_type, device_name):
     if _is_boot_order_precision(parent_dn):
         if device_type not in precision_device_dict:
             return None
-        class_struct = load_class(precision_device_dict[device_type]["class_id"])
+        class_struct = load_class(
+            precision_device_dict[device_type]["class_id"])
         class_obj = class_struct(parent_mo_or_dn=parent_dn, name=device_name)
         if "type" in precision_device_dict[device_type]:
             class_obj.type = precision_device_dict[device_type]["type"]
@@ -200,7 +198,8 @@ def _add_boot_device(handle, parent_dn, boot_device):
             (boot_device["device-type"], boot_device["name"]))
 
     device.order = boot_device["order"]
-    device_props = {key: value for key, value in boot_device.iteritems() if key not in ["order", "device-type", "name"]}
+    device_props = {key: value for key, value in boot_device.iteritems()
+                    if key not in ["order", "device-type", "name"]}
     device.set_prop_multiple(**device_props)
     if hasattr(device, "state"):
         device.state = "enabled"
@@ -245,7 +244,8 @@ def boot_order_precision_set(
             reboot_on_update=False,
             reapply=False,
             configured_boot_mode="Uefi",
-            boot_devices = [{"order":'1', "device-type":"vmedia", "name":"vmedia"},
+            boot_devices = [{"order":'1', "device-type":"vmedia",
+                            "name":"vmedia"},
                             {"order":'2', "device-type":"hdd", "name":"hdd"}]
     """
 
@@ -332,9 +332,11 @@ def boot_order_precision_exists(handle, **kwargs):
         if len(in_boot_order) != len(configured_boot_order):
             return False, "length mismatch"
         for i in range(0, len(in_boot_order)):
-            if not (in_boot_order[i]["order"] == configured_boot_order[i]["order"] and
-                    in_boot_order[i]["device-type"] == configured_boot_order[i]["device-type"] and
-                    in_boot_order[i]["name"] == configured_boot_order[i]["name"]):
+            bt_ord = in_boot_order[i]
+            cfg_bt_ord = configured_boot_order[i]
+            if not (bt_ord["order"] == cfg_bt_ord["order"] and
+                    bt_ord["device-type"] == cfg_bt_ord["device-type"] and
+                    bt_ord["name"] == cfg_bt_ord["name"]):
                 return False, "dictionaries do not match"
     return True, None
 
@@ -426,7 +428,8 @@ def boot_order_policy_set(handle, reboot_on_update=False,
             handle,
             reboot_on_update=False,
             secure_boot=True,
-            boot_devices = [{"order":'1', "device-type":"cdrom", "name":"cdrom0"},
+            boot_devices = [{"order":'1', "device-type":"cdrom",
+                            "name":"cdrom0"},
                             {"order":'2', "device-type":"lan", "name":"lan"}]
 
 
