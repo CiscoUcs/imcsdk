@@ -73,9 +73,11 @@ def vmedia_exists(handle, server_id=1, **kwargs):
     if not (mo.low_power_usb_state or mo.low_power_usb):
         return False, None
     elif mo.low_power_usb_state is None:
-        del kwargs['low_power_usb_state']
+        kwargs.pop('low_power_usb_state', None)
     elif mo.low_power_usb is None:
-        del kwargs['low_power_usb']
+        kwargs.pop('low_power_usb', None)
+
+    kwargs['admin_state'] = "enabled"
 
     if not mo.check_prop_match(**kwargs):
         return False, None

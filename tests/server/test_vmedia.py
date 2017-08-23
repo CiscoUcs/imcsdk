@@ -14,9 +14,9 @@
 from nose.tools import assert_equal
 from ..connection.info import custom_setup, custom_teardown
 
-from imcsdk.apis.server.remotepresence import kvm_setup, kvm_disable, \
-        is_kvm_enabled, sol_setup, sol_disable, is_sol_enabled, \
-        vmedia_setup, vmedia_disable
+from imcsdk.apis.server.vmedia import vmedia_enable
+from imcsdk.apis.server.vmedia import vmedia_disable
+from imcsdk.apis.server.vmedia import vmedia_exists
 
 handle = None
 
@@ -31,30 +31,12 @@ def teardown_module():
     custom_teardown(handle)
 
 
-def test_kvm_enable():
-    kvm_setup(handle, max_sessions=3, port=2069)
-    assert_equal(is_kvm_enabled(handle), True)
-
-
-def test_kvm_disable():
-    kvm_disable(handle)
-    assert_equal(is_kvm_enabled(handle), False)
-
-
-def test_sol_enable():
-    sol_setup(handle, speed="9600", comport="com0", ssh_port=1026)
-    assert_equal(is_sol_enabled(handle), True)
-
-
-def test_sol_disable():
-    sol_disable(handle)
-    assert_equal(is_sol_enabled(handle), False)
-
-
 def test_vmedia_setup():
-    vmedia_setup(handle, encrypt=True, low_power_usb=True)
+    vmedia_enable(handle, encryption_state="enabled", low_power_usb="enabled")
+    assert_equal(vmedia_exists(handle)[0], True)
 
 
 def test_vmedia_disable():
     vmedia_disable(handle)
+    assert_equal(vmedia_exists(handle)[0], False)
 
