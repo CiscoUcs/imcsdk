@@ -15,7 +15,7 @@ from ..connection.info import custom_setup, custom_teardown
 from nose.plugins.skip import SkipTest
 from nose.tools import assert_equal
 
-from imcsdk.apis.server.bios import boot_order_precision_set, \
+from imcsdk.apis.server.boot import boot_order_precision_set, \
         boot_order_policy_set, boot_order_policy_get
 
 handle = None
@@ -58,7 +58,7 @@ boot_order_prec_devices = [
 
 def test_boot_order_precision():
     global handle, boot_order_prec_devices
-    from imcsdk.apis.server.bios import boot_precision_configured_get
+    from imcsdk.apis.server.boot import boot_precision_configured_get
 
     boot_order_precision_set(handle, reboot_on_update=False,
                              configured_boot_mode="Legacy",
@@ -81,7 +81,7 @@ boot_order_prec_devices_2 = [
 
 def test_boot_order_precision_2():
     global handle, boot_order_prec_devices
-    from imcsdk.apis.server.bios import boot_precision_configured_get
+    from imcsdk.apis.server.boot import boot_precision_configured_get
 
     boot_order_precision_set(handle, reboot_on_update=False,
                              configured_boot_mode="Legacy",
@@ -117,7 +117,7 @@ def test_boot_order_policy():
 
 
 def test_boot_order_precision_exists():
-    from imcsdk.apis.server.bios import boot_order_precision_exists
+    from imcsdk.apis.server.boot import boot_order_precision_exists
 
     ret, msg = boot_order_precision_exists(
         handle,
