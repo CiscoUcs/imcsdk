@@ -32,60 +32,100 @@ _LDAP_SERVER_PORTS = ['ldap_server_port1', 'ldap_server_port2',
 LDAP_DN = "sys/ldap-ext"
 
 
-def _set_ldap_servers(mo, ldap_servers):
+def _prepare_ldap_servers(ldap_servers):
     if len(ldap_servers) > len(_LDAP_SERVERS):
         raise ImcOperationError("Configure LDAP", "Cannot configure more than"
                                 "%d servers" % len(_LDAP_SERVERS))
     servers = {}
     ports = {}
     for server in ldap_servers:
-        servers['ldap_server' + str(server['id'])] = server['ip']
-        ports['ldap_server_port' + str(server['id'])] = str(server['port'])
+        if 'id' not in server:
+            raise ImcOperationError("Enable LDAP",
+                                    "Provide 'id'.")
+        id = server['id']
+        if id == 0 or id > 6:
+            raise ImcOperationError("Enable LDAP",
+                                    "Provide valid 'id' (1-6).")
+        id = str(id)
+        if 'ip' in server:
+            servers['ldap_server' + id] = server['ip']
+        if 'port' in server:
+            ports['ldap_server_port' + id] = str(server['port'])
 
+    return servers, ports
+
+
+def _set_ldap_servers(mo, ldap_servers):
+    servers, ports = _prepare_ldap_servers(ldap_servers)
     mo.set_prop_multiple(**servers)
     mo.set_prop_multiple(**ports)
 
 
-def ldap_configure(handle, enabled=False, basedn=None, domain=None,
-                   encryption=True, timeout=60, user_search_precedence='local-user-db',
-                   bind_method='login-credentials', bind_dn=None,
-                   password=None, filter='sAMAccountName',
-                   attribute='CiscoAvPair', group_attribute='memberOf',
-                   group_nested_search=128, group_auth=False,
-                   ldap_servers=[], locate_directory_using_dns=False,
-                   dns_domain_source='extracted-domain',
-                   dns_search_domain=None, dns_search_forest=None, **kwargs):
+def ldap_enable(handle,
+                basedn=None,
+                domain=None,
+                encryption=None,
+                timeout=None,
+                user_search_precedence=None,
+                bind_method=None,
+                bind_dn=None,
+                change_password=False,
+                password=None,
+                filter=None,
+                group_attribute=None,
+                attribute=None,
+                group_nested_search=None,
+                group_auth=None,
+                ldap_servers=[],
+                locate_directory_using_dns=None,
+                dns_domain_source=None,
+                dns_search_domain=None,
+                dns_search_forest=None,
+                **kwargs):
     """
     Configures LDAP
 
     Args:
         handle (ImcHandle)
-        enabled (bool)
-        basedn (str): Represents the Base Distinguished Name. Describes where to load users and groups from.
-                      It must be in the 'dc=domain,dc=com' format for Active Directory servers.
+        basedn (str): Represents the Base Distinguished Name. Describes where
+            to load users and groups from. It must be in the 'dc=domain,dc=com'
+            format for Active Directory servers.
         domain (str): The domain that all users must be in.
-        encryption (bool)
-        timeout (int): [0-180] The number of seconds the Cisco IMC waits until the LDAP search operation times out.
-        user_search_precedence (str): ['local-user-db', 'ldap-user-db']. Preference to search in local user db versus ldap user db
-        bind_method (str): ['login-credentials', 'configured-credentials', 'anonymous']
-        bind_dn (str): Represents the distinguished name (DN) of the user.
-                       This field is applicable only for bind_method='configured-credentials'
-        password (str): The password of the user.
-                        This field is applicable only for bind_method='configured-credentials'
-        filter (str): Represents the filter attribute in the schema on the LDAP server.
-        attribute (str): Represents the role and locale information. Should match the attribute specified on the LDAP server.
-        group_attribute (str): Represents the group attribute in the schema on the LDAP server.
-        group_nested_search (int): Represents the depth of a nested group search
-        group_auth (bool): Enables authentication at the group level for LDAP users that are not found in the local user database.
+        encryption (str): "Disabled", "Enabled", "disabled", "enabled"
+        timeout (int): [0-180] The number of seconds the Cisco IMC waits until
+            the LDAP search operation times out.
+        user_search_precedence (str): ['local-user-db', 'ldap-user-db'].
+            Preference to search in local user db versus ldap user db
+        bind_method (str): ['login-credentials', 'configured-credentials',
+            'anonymous']
+        bind_dn (str): Represents the distinguished name (DN) of the user. This
+            field is applicable only for bind_method='configured-credentials'
+        change_password (bool): True if you want to change the user password.
+        password (str): The password of the user. This field is applicable only
+            for bind_method='configured-credentials'
+        filter (str): Represents the filter attribute in the schema on the LDAP
+            server.
+        attribute (str): Represents the role and locale information. Should
+            match the attribute specified on the LDAP server.
+        group_attribute (str): Represents the group attribute in the schema on
+            the LDAP server.
+        group_nested_search (int): Represents the depth of a nested group
+            search
+        group_auth (str): "disabled" or "enabled". Enables authentication at
+            the group level for LDAP users that are not found in the local user
+            database.
         ldap_servers (list): Represents the list of preconfigured LDAP server.
                              List of dictionaries in the format:-
                              [{"id": 1, "ip": "192.168.1.1", "port": 300},
                               {"id": 2, "ip": "192.168.1.2", "port": 400}]
-        locate_directory_using_dns (bool):
-        dns_domain_source (str): Represents the method to obtain domain name
-                                 ['extracted-domain', 'configured-domain', 'extracted-configured-domain']
-        dns_search_domain: Domain name to be used for DNS query. Disabled when domain_name_source='extracted-domain'
-        dns_search_forest: Forest name to used for DNS query. Disabled when domain_name_source='extracted-domain'
+        locate_directory_using_dns (str): "yes" or "no"
+        dns_domain_source (str): Represents the method to obtain domain name.
+            ['extracted-domain', 'configured-domain',
+            'extracted-configured-domain']
+        dns_search_domain: Domain name to be used for DNS query. Disabled when
+            domain_name_source='extracted-domain'
+        dns_search_forest: Forest name to used for DNS query. Disabled when
+            domain_name_source='extracted-domain'
         kwargs: Key-Value paired arguments. Reserved for future use
 
     Returns:
@@ -95,32 +135,33 @@ def ldap_configure(handle, enabled=False, basedn=None, domain=None,
         ImcOperationError when AaaLdap object doesn't exist
 
     Examples:
-        ldap_configure(handle, enabled=True,
+        ldap_configure(handle,
                        basedn='DC=LAB,DC=cisco,DC=com',
                        domain='LAB.cisco.com',
-                       timeout=20, group_auth=True,
-                       bind_dn='CN=administrator,CN=Users,DC=LAB,DC=cisco,DC=com',
-                       password='abcdefg', ldap_servers=ldap_servers)
+                       timeout=20, group_auth='enabled',
+                       bind_dn='CN=administrator,CN=Users,DC=LAB,DC=cisco,
+                       DC=com', password='abcdefg', ldap_servers=ldap_servers)
     """
 
     mo = _get_mo(handle, dn=LDAP_DN)
 
     params = {
-        'admin_state': ('disabled', 'enabled')[enabled],
+        'admin_state': 'enabled',
         'basedn': basedn,
         'domain': domain,
-        'encryption': ('disabled', 'enabled')[encryption],
-        'timeout': str(timeout),
+        'encryption': encryption,
+        'timeout': str(timeout) if timeout is not None else None,
         'user_search_precedence': user_search_precedence,
         'bind_method': bind_method,
         'bind_dn': bind_dn,
-        'password': password,
+        'password': password if change_password else None,
         'filter': filter,
         'attribute': attribute,
         'group_attribute': group_attribute,
-        'group_nested_search': str(group_nested_search),
-        'group_auth': ('disabled', 'enabled')[group_auth],
-        'locate_directory_using_dns': ('no', 'yes')[locate_directory_using_dns],
+        'group_nested_search':
+            str(group_nested_search) if group_nested_search else None,
+        'group_auth': group_auth,
+        'locate_directory_using_dns': locate_directory_using_dns,
         'dns_domain_source': dns_domain_source,
         'dns_search_domain': dns_search_domain,
         'dns_search_forest': dns_search_forest
@@ -133,7 +174,7 @@ def ldap_configure(handle, enabled=False, basedn=None, domain=None,
 
     mo.set_prop_multiple(**kwargs)
     handle.set_mo(mo)
-    return handle.query_dn(mo.dn)
+    return mo
 
 
 def _check_match(prop1, prop2):
@@ -143,59 +184,20 @@ def _check_match(prop1, prop2):
 
 
 def _check_ldap_server_match(ldap_mo, ldap_servers):
-    mo = AaaLdap(parent_mo_or_dn="sys")
-    _set_ldap_servers(mo, ldap_servers)
-    for server, port in zip(_LDAP_SERVERS, _LDAP_SERVER_PORTS):
-        conf_server = getattr(ldap_mo, server)
-        in_server = getattr(mo, server)
+    servers, ports = _prepare_ldap_servers(ldap_servers)
 
-        match = _check_match(conf_server, in_server)
-        # IMC assigns a default value of port even when a valid server ip is
-        # not assigned. The following logic will skip checking for ports where
-        # the server ip itself is not specified, but default port is set.
-        if match is None:
-            continue
-
-        if not match:
+    for server in servers:
+        if servers[server] != getattr(ldap_mo, server):
             return False
 
-        conf_port = getattr(ldap_mo, port)
-        in_port = getattr(mo, port)
-
-        if _check_match(conf_port, in_port) is False:
+    for port in ports:
+        if ports[port] != getattr(ldap_mo, port):
             return False
 
     return True
 
 
-def _get_ldap_params(kwargs):
-    params = {}
-    if _is_valid_arg('enabled', kwargs):
-        params['admin_state'] = ('disabled', 'enabled')[kwargs.pop('enabled')]
-
-    if _is_valid_arg('encryption', kwargs):
-        params['encryption'] = ('disabled', 'enabled')[kwargs.pop('encryption')]
-
-    if _is_valid_arg('group_auth', kwargs):
-        params['group_auth'] = ('disabled', 'enabled')[kwargs.pop('group_auth')]
-
-    if _is_valid_arg('locate_directory_using_dns', kwargs):
-        params['locate_directory_using_dns'] = ('no', 'yes')[kwargs.pop('locate_directory_using_dns')]
-
-    if _is_valid_arg('timeout', kwargs):
-        params['timeout'] = str(kwargs.pop('timeout'))
-
-    if _is_valid_arg('group_nested_search', kwargs):
-        params['group_nested_search'] = str(kwargs.pop('group_nested_search'))
-
-    # pop the password property if it exists
-    if _is_valid_arg('password', kwargs):
-        kwargs.pop('password')
-
-    return params
-
-
-def ldap_settings_exist(handle, **kwargs):
+def ldap_exists(handle, change_password=False, **kwargs):
     """
     Checks if the specified LDAP settings are already applied
 
@@ -207,29 +209,51 @@ def ldap_settings_exist(handle, **kwargs):
         (True, AaaLdap) if settings match, else (False, None)
 
     Examples:
-        match, mo = ldap_settings_exist(
-                        handle, enabled=True,
-                        basedn='DC=LAB,DC=cisco,DC=com',
-                        domain='LAB.cisco.com',
-                        timeout=20, group_auth=True,
-                        bind_dn='CN=administrator,CN=Users,DC=LAB,DC=cisco,DC=com',
-                        password='abcdefg', ldap_servers=ldap_servers)
+        match, mo = ldap_exists(
+                    handle, enabled=True,
+                    basedn='DC=LAB,DC=cisco,DC=com',
+                    domain='LAB.cisco.com',
+                    timeout=20, group_auth=True,
+                    bind_dn='CN=administrator,CN=Users,DC=LAB,DC=cisco,DC=com',
+                    password='abcdefg', ldap_servers=ldap_servers)
     """
 
     mo = _get_mo(handle, dn=LDAP_DN)
-
-    params = _get_ldap_params(kwargs)
-    if not mo.check_prop_match(**params):
+    if mo is None:
         return False, None
 
     if _is_valid_arg('ldap_servers', kwargs):
         if not _check_ldap_server_match(mo, kwargs.pop('ldap_servers')):
             return False, None
 
+    if 'password' in kwargs and not change_password:
+        kwargs.pop('password', None)
+
+    kwargs['admin_state'] = 'enabled'
     if not mo.check_prop_match(**kwargs):
         return False, None
 
     return True, mo
+
+
+def ldap_disable(handle):
+    """
+    Disables the ldap settings
+
+    Args:
+        handle (ImcHandle)
+
+    Returns:
+        AaaLdap Managed Object
+
+    Examples:
+        ldap_disable(handle)
+    """
+
+    mo = _get_mo(handle, dn=LDAP_DN)
+    mo.admin_state = "disabled"
+    handle.set_mo(mo)
+    return mo
 
 
 def is_ldap_enabled(handle):

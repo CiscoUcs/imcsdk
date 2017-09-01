@@ -14,7 +14,7 @@
 from nose.tools import assert_equal, raises
 from ..connection.info import custom_setup, custom_teardown
 
-from imcsdk.apis.admin.ldap import ldap_configure, ldap_settings_exist,\
+from imcsdk.apis.admin.ldap import ldap_enable, ldap_exists,\
         ldap_role_group_create, ldap_role_group_exists, ldap_role_group_delete,\
         ldap_certificate_management_enable, ldap_certificate_management_disable,\
         is_ldap_certificate_management_enabled
@@ -51,53 +51,53 @@ ldap_servers_3 = [{"id": 1, "ip": "192.168.1.1", "port": 400},
                   {"id": 4, "ip": "1.2.3.4", "port": 800}]
 
 
-def test_ldap_configure():
-    ldap_configure(
-        handle, enabled=True,
+def test_ldap_enable():
+    ldap_enable(
+        handle,
         basedn='DC=QATCSLABTPI02,DC=cisco,DC=com',
         domain='QATCSLABTPI02.cisco.com',
-        timeout=20, group_auth=True,
+        timeout=20, group_auth="enabled",
         bind_dn='CN=administrator,CN=Users,DC=QATCSLABTPI02,DC=cisco,DC=com',
         password='abcdefg', ldap_servers=ldap_servers)
-    match, mo = ldap_settings_exist(
-        handle, enabled=True,
+    match, mo = ldap_exists(
+        handle,
         basedn='DC=QATCSLABTPI02,DC=cisco,DC=com',
         domain='QATCSLABTPI02.cisco.com',
-        timeout=20, group_auth=True,
+        timeout=20, group_auth="enabled",
         bind_dn='CN=administrator,CN=Users,DC=QATCSLABTPI02,DC=cisco,DC=com',
         password='abcdefg', ldap_servers=ldap_servers)
     assert_equal(match, True)
 
 
 def test_ldap_mismatch_config():
-    match, mo = ldap_settings_exist(
-        handle, enabled=True,
+    match, mo = ldap_exists(
+        handle,
         basedn='DC=QATCSLABTPI02,DC=cisco,DC=com',
         domain='QATCSLABTPI02.cisco.com',
-        timeout=100, group_auth=False,
+        timeout=100, group_auth="disabled",
         bind_dn='CN=administrator,CN=Users,DC=QATCSLABTPI02,DC=cisco,DC=com',
         password='abcdefg', ldap_servers=ldap_servers)
     assert_equal(match, False)
 
 
 def test_ldap_mismatch_config_servers():
-    match, mo = ldap_settings_exist(
-        handle, enabled=True,
+    match, mo = ldap_exists(
+        handle,
         basedn='DC=QATCSLABTPI02,DC=cisco,DC=com',
         domain='QATCSLABTPI02.cisco.com',
-        timeout=20, group_auth=True,
+        timeout=20, group_auth="enabled",
         bind_dn='CN=administrator,CN=Users,DC=QATCSLABTPI02,DC=cisco,DC=com',
         password='abcdefg', ldap_servers=ldap_servers_3)
     assert_equal(match, False)
 
 
 @raises(Exception)
-def test_ldap_configure_invalid_servers():
-    ldap_configure(
-        handle, enabled=True,
+def test_ldap_enable_invalid_servers():
+    ldap_enable(
+        handle,
         basedn='DC=QATCSLABTPI02,DC=cisco,DC=com',
         domain='QATCSLABTPI02.cisco.com',
-        timeout=20, group_auth=True,
+        timeout=20, group_auth="enabled",
         bind_dn='CN=administrator,CN=Users,DC=QATCSLABTPI02,DC=cisco,DC=com',
         password='abcdefg', ldap_servers=ldap_servers_2)
 
@@ -125,4 +125,4 @@ def test_ldap_cert_mgmt_disable():
 
 
 def test_ldap_disable():
-    ldap_configure(handle, enabled=False)
+    ldap_enable(handle)
