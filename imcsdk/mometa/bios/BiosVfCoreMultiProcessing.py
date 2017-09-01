@@ -22,6 +22,11 @@ class BiosVfCoreMultiProcessingConsts:
     VP_CORE_MULTI_PROCESSING_21 = "21"
     VP_CORE_MULTI_PROCESSING_22 = "22"
     VP_CORE_MULTI_PROCESSING_23 = "23"
+    VP_CORE_MULTI_PROCESSING_24 = "24"
+    VP_CORE_MULTI_PROCESSING_25 = "25"
+    VP_CORE_MULTI_PROCESSING_26 = "26"
+    VP_CORE_MULTI_PROCESSING_27 = "27"
+    VP_CORE_MULTI_PROCESSING_28 = "28"
     VP_CORE_MULTI_PROCESSING_3 = "3"
     VP_CORE_MULTI_PROCESSING_4 = "4"
     VP_CORE_MULTI_PROCESSING_5 = "5"
@@ -40,7 +45,7 @@ class BiosVfCoreMultiProcessing(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("BiosVfCoreMultiProcessing", "biosVfCoreMultiProcessing", "Core-MultiProcessing", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
+        "classic": MoMeta("BiosVfCoreMultiProcessing", "biosVfCoreMultiProcessing", "Core-MultiProcessing", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
         "modular": MoMeta("BiosVfCoreMultiProcessing", "biosVfCoreMultiProcessing", "Core-MultiProcessing", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
     }
 
@@ -52,7 +57,7 @@ class BiosVfCoreMultiProcessing(ManagedObject):
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "vp_core_multi_processing": MoPropertyMeta("vp_core_multi_processing", "vpCoreMultiProcessing", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["1", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "2", "20", "21", "22", "23", "3", "4", "5", "6", "7", "8", "9", "all", "platform-default"], []), 
+            "vp_core_multi_processing": MoPropertyMeta("vp_core_multi_processing", "vpCoreMultiProcessing", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["1", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "2", "20", "21", "22", "23", "24", "25", "26", "27", "28", "3", "4", "5", "6", "7", "8", "9", "all", "platform-default"], []), 
         },
 
         "modular": {

@@ -8,8 +8,11 @@ from ...imcmeta import VersionMeta
 class LsbootSdConsts:
     STATE_DISABLED = "Disabled"
     STATE_ENABLED = "Enabled"
-    SUBTYPE_SDCARD = "SDCARD"
+    SUBTYPE_ = ""
+    SUBTYPE_FLEX_FLASH = "flex-flash"
+    SUBTYPE_FLEX_UTIL = "flex-util"
     TYPE_SDCARD = "SDCARD"
+    SUBTYPE_SDCARD = "SDCARD"
 
 
 class LsbootSd(ManagedObject):
@@ -35,7 +38,7 @@ class LsbootSd(ManagedObject):
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, None, [], []), 
             "state": MoPropertyMeta("state", "state", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "subtype": MoPropertyMeta("subtype", "subtype", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["SDCARD"], []), 
+            "subtype": MoPropertyMeta("subtype", "subtype", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["", "flex-flash", "flex-util"], []), 
             "type": MoPropertyMeta("type", "type", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["SDCARD"], []), 
         },
 

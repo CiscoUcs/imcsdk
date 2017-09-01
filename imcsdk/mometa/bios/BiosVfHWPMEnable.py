@@ -20,6 +20,7 @@ class BiosVfHWPMEnable(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosVfHWPMEnable", "biosVfHWPMEnable", "HWPM-Enable", VersionMeta.Version2010b, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
+        "modular": MoMeta("BiosVfHWPMEnable", "biosVfHWPMEnable", "HWPM-Enable", VersionMeta.Version303a, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
     }
 
 
@@ -33,11 +34,27 @@ class BiosVfHWPMEnable(ManagedObject):
             "vp_hwpm_enable": MoPropertyMeta("vp_hwpm_enable", "vpHWPMEnable", "string", VersionMeta.Version2010b, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "NATIVE MODE", "OOB MODE", "platform-default"], []), 
         },
 
+        "modular": {
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version303a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "vp_hwpm_enable": MoPropertyMeta("vp_hwpm_enable", "vpHWPMEnable", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "NATIVE MODE", "OOB MODE", "platform-default"], []), 
+        },
+
     }
 
     prop_map = {
 
         "classic": {
+            "childAction": "child_action", 
+            "dn": "dn", 
+            "rn": "rn", 
+            "status": "status", 
+            "vpHWPMEnable": "vp_hwpm_enable", 
+        },
+
+        "modular": {
             "childAction": "child_action", 
             "dn": "dn", 
             "rn": "rn", 
