@@ -52,12 +52,15 @@ class ImcHandle(ImcSession):
     """
 
     def __init__(self, ip, username, password, port=None, secure=None,
-                 proxy=None, auto_refresh=False, force=False, timeout=None):
-
+                 proxy=None, auto_refresh=False, force=False, timeout=None,
+                 redirect_uri=None, headers={}):
         ImcSession.__init__(self, ip=ip, username=username, password=password,
                             port=port, secure=secure, proxy=proxy,
                             auto_refresh=auto_refresh, force=force,
-                            timeout=timeout)
+                            timeout=timeout,
+                            redirect_uri=redirect_uri, headers=headers)
+
+
         self.__to_commit = {}
 
     def __enter__(self):

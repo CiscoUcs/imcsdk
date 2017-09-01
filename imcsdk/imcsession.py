@@ -31,7 +31,10 @@ class ImcSession(object):
     """
 
     def __init__(self, ip, username, password, port=None, secure=None,
-                 proxy=None, auto_refresh=False, force=False, timeout=None):
+
+                 proxy=None, auto_refresh=False, force=False, timeout=None,
+                 redirect_uri=None, headers={}):
+      
         self.__ip = ip
         self.__username = username
         self.__password = password
@@ -59,7 +62,8 @@ class ImcSession(object):
 
         self.__dump_xml = False
         self.__redirect = False
-        self.__driver = ImcDriver(proxy=self.__proxy)
+        self.__driver = ImcDriver(proxy=self.__proxy,
+                                  redirect_uri=redirect_uri, headers=headers)
 
         # In debug mode, log the XMLs to a file
         if os.path.exists('/tmp/imcsdk_debug'):
