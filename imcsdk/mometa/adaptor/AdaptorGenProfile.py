@@ -61,6 +61,7 @@ class AdaptorGenProfile(ManagedObject):
             "vendor": MoPropertyMeta("vendor", "vendor", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "vendor_id": MoPropertyMeta("vendor_id", "vendorId", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
             "vntag_mode": MoPropertyMeta("vntag_mode", "vntagMode", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
+            "pci_link": MoPropertyMeta("pci_link", "pciLink", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
         },
 
     }
@@ -105,6 +106,7 @@ class AdaptorGenProfile(ManagedObject):
             "vendor": "vendor", 
             "vendorId": "vendor_id", 
             "vntagMode": "vntag_mode", 
+            "pciLink": "pci_link", 
         },
 
     }
@@ -126,6 +128,7 @@ class AdaptorGenProfile(ManagedObject):
         self.vendor = None
         self.vendor_id = None
         self.vntag_mode = None
+        self.pci_link = None
 
         ManagedObject.__init__(self, "AdaptorGenProfile", parent_mo_or_dn, **kwargs)
 

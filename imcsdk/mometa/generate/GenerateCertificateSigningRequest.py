@@ -258,6 +258,10 @@ class GenerateCertificateSigningRequestConsts:
     SELF_SIGNED_YES = "Yes"
     _SELF_SIGNED_NO = "no"
     _SELF_SIGNED_YES = "yes"
+    SIGNATURE_ALGORITHM_SHA1 = "sha1"
+    SIGNATURE_ALGORITHM_SHA256 = "sha256"
+    SIGNATURE_ALGORITHM_SHA384 = "sha384"
+    SIGNATURE_ALGORITHM_SHA512 = "sha512"
     COUNTRY_CODE_COCOS_KEELING_ISLANDS = "Cocos (Keeling) Islands"
     COUNTRY_CODE_COTE_D_IVOIRE_IVORY_COAST = "Cote D'Ivoire (Ivory Coast)"
     COUNTRY_CODE_CROATIA_HRVATSKA = "Croatia (Hrvatska)"
@@ -279,8 +283,8 @@ class GenerateCertificateSigningRequest(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("GenerateCertificateSigningRequest", "generateCertificateSigningRequest", "gen-csr-req", VersionMeta.Version209c, "InputOutput", 0x1ffff, [], ["admin", "read-only", "user"], [u'certificateManagement'], [], [None]),
-        "modular": MoMeta("GenerateCertificateSigningRequest", "generateCertificateSigningRequest", "gen-csr-req", VersionMeta.Version2013e, "InputOutput", 0x1ffff, [], ["admin", "read-only", "user"], [u'certificateManagement'], [], [None])
+        "classic": MoMeta("GenerateCertificateSigningRequest", "generateCertificateSigningRequest", "gen-csr-req", VersionMeta.Version209c, "InputOutput", 0x3ffff, [], ["admin", "read-only", "user"], [u'certificateManagement'], [], [None]),
+        "modular": MoMeta("GenerateCertificateSigningRequest", "generateCertificateSigningRequest", "gen-csr-req", VersionMeta.Version2013e, "InputOutput", 0x3ffff, [], ["admin", "read-only", "user"], [u'certificateManagement'], [], [None])
     }
 
 
@@ -288,44 +292,46 @@ class GenerateCertificateSigningRequest(ManagedObject):
 
         "classic": {
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version209c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-            "common_name": MoPropertyMeta("common_name", "commonName", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x2, 1, 243, None, [], []), 
+            "common_name": MoPropertyMeta("common_name", "commonName", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x2, 1, 64, None, [], []), 
             "country_code": MoPropertyMeta("country_code", "countryCode", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x4, 1, 510, None, ["Albania", "Algeria", "American Samoa", "Andorra", "Angola", "Anguilla", "Antarctica", "Antigua and Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Bouvet Island", "Brazil", "British Indian Ocean Territory", "Brunei Darussalam", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Central African Republic", "Chad", "Chile", "China", "Christmas Island", "Cocos (Keeling) Islands", "Colombia", "Comoros", "Congo", "Cook Islands", "Costa Rica", "Cote D'Ivoire (Ivory Coast)", "Croatia (Hrvatska)", "Cuba", "Cyprus", "Czech Republic", "Czechoslovakia", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Timor", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Falkland Islands (Malvinas)", "Faroe Islands", "Fiji", "Finland", "France", "France, Metropolitan", "French Guiana", "French Polynesia", "French Southern Territories", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar", "Great Britain (UK)", "Greece", "Greenland", "Grenada", "Guadeloupe", "Guam", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Heard and McDonald Islands", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea (North)", "Korea (South)", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macau", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Martinique", "Mauritania", "Mauritius", "Mayotte", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "Netherlands Antilles", "Neutral Zone", "New Caledonia", "New Zealand (Aotearoa)", "Nicaragua", "Niger", "Nigeria", "Niue", "Norfolk Island", "Northern Mariana Islands", "Norway", "Oman", "Pakistan", "Palau", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Pitcairn", "Poland", "Portugal", "Puerto Rico", "Qatar", "Reunion", "Romania", "Russian Federation", "Rwanda", "S. Georgia and S. Sandwich Isls.", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Seychelles", "Sierra Leone", "Singapore", "Slovak Republic", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "Spain", "Sri Lanka", "St. Helena", "St. Pierre and Miquelon", "Sudan", "Suriname", "Svalbard and Jan Mayen Islands", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Togo", "Tokelau", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks and Caicos Islands", "Tuvalu", "US Minor Outlying Islands", "USSR (former)", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City State (Holy See)", "Venezuela", "Viet Nam", "Virgin Islands (British)", "Virgin Islands (U.S.)", "Wallis and Futuna Islands", "Western Sahara", "Yemen", "Yugoslavia", "Zaire", "Zambia", "Zimbabwe"], []), 
             "csr_status": MoPropertyMeta("csr_status", "csrStatus", "string", VersionMeta.Version209c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
-            "email": MoPropertyMeta("email", "email", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x10, 0, 510, r"""[_\-a-zA-Z0-9\.\+]+@[a-zA-Z0-9](\.?[\-a-zA-Z0-9]*[a-zA-Z0-9])*""", [], []), 
-            "locality": MoPropertyMeta("locality", "locality", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x20, 1, 243, None, [], []), 
-            "organization": MoPropertyMeta("organization", "organization", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x40, 1, 243, None, [], []), 
-            "organizational_unit": MoPropertyMeta("organizational_unit", "organizationalUnit", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x80, 1, 243, None, [], []), 
+            "email": MoPropertyMeta("email", "email", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x10, 0, 128, r"""[_\-a-zA-Z0-9\.\+]+@[a-zA-Z0-9](\.?[\-a-zA-Z0-9]*[a-zA-Z0-9])*""", [], []), 
+            "locality": MoPropertyMeta("locality", "locality", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x20, 1, 128, None, [], []), 
+            "organization": MoPropertyMeta("organization", "organization", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x40, 1, 64, None, [], []), 
+            "organizational_unit": MoPropertyMeta("organizational_unit", "organizationalUnit", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x80, 1, 64, None, [], []), 
             "protocol": MoPropertyMeta("protocol", "protocol", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["ftp", "http", "none", "scp", "sftp", "tftp"], []), 
-            "pwd": MoPropertyMeta("pwd", "pwd", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x200, 0, 256, None, [], []), 
-            "remote_file": MoPropertyMeta("remote_file", "remoteFile", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x400, None, None, r"""[^\(\)~`'\?\\"";<>\|&\*\^$%]{0,128}""", [], []), 
+            "pwd": MoPropertyMeta("pwd", "pwd", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x200, 0, 255, None, [], []), 
+            "remote_file": MoPropertyMeta("remote_file", "remoteFile", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x400, None, None, r"""[^\(\)~`'\?\\"";<>\|&\*\^$%]{0,255}""", [], []), 
             "remote_server": MoPropertyMeta("remote_server", "remoteServer", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x800, 0, 255, r"""(([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:) |((([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6})|(([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?)+)|([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]))""", [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x1000, 0, 255, None, [], []), 
             "self_signed": MoPropertyMeta("self_signed", "selfSigned", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x2000, None, None, None, ["No", "Yes", "no", "yes"], []), 
-            "state": MoPropertyMeta("state", "state", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x4000, 1, 243, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x8000, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "user": MoPropertyMeta("user", "user", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x10000, 0, 256, None, [], []), 
+            "signature_algorithm": MoPropertyMeta("signature_algorithm", "signatureAlgorithm", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x4000, 0, 510, None, ["sha1", "sha256", "sha384", "sha512"], []), 
+            "state": MoPropertyMeta("state", "state", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x8000, 1, 128, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x10000, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "user": MoPropertyMeta("user", "user", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x20000, 0, 255, None, [], []), 
         },
 
         "modular": {
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-            "common_name": MoPropertyMeta("common_name", "commonName", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 1, 243, None, [], []), 
+            "common_name": MoPropertyMeta("common_name", "commonName", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 1, 64, None, [], []), 
             "country_code": MoPropertyMeta("country_code", "countryCode", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 1, 510, None, ["Albania", "Algeria", "American Samoa", "Andorra", "Angola", "Anguilla", "Antarctica", "Antigua and Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Bouvet Island", "Brazil", "British Indian Ocean Territory", "Brunei Darussalam", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Central African Republic", "Chad", "Chile", "China", "Christmas Island", "Cocos (Keeling) Islands", "Colombia", "Comoros", "Congo", "Cook Islands", "Costa Rica", "Cote D'Ivoire (Ivory Coast)", "Croatia (Hrvatska)", "Cuba", "Cyprus", "Czech Republic", "Czechoslovakia", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Timor", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Falkland Islands (Malvinas)", "Faroe Islands", "Fiji", "Finland", "France", "France, Metropolitan", "French Guiana", "French Polynesia", "French Southern Territories", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar", "Great Britain (UK)", "Greece", "Greenland", "Grenada", "Guadeloupe", "Guam", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Heard and McDonald Islands", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea (North)", "Korea (South)", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macau", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Martinique", "Mauritania", "Mauritius", "Mayotte", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "Netherlands Antilles", "Neutral Zone", "New Caledonia", "New Zealand (Aotearoa)", "Nicaragua", "Niger", "Nigeria", "Niue", "Norfolk Island", "Northern Mariana Islands", "Norway", "Oman", "Pakistan", "Palau", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Pitcairn", "Poland", "Portugal", "Puerto Rico", "Qatar", "Reunion", "Romania", "Russian Federation", "Rwanda", "S. Georgia and S. Sandwich Isls.", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Seychelles", "Sierra Leone", "Singapore", "Slovak Republic", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "Spain", "Sri Lanka", "St. Helena", "St. Pierre and Miquelon", "Sudan", "Suriname", "Svalbard and Jan Mayen Islands", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Togo", "Tokelau", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks and Caicos Islands", "Tuvalu", "US Minor Outlying Islands", "USSR (former)", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City State (Holy See)", "Venezuela", "Viet Nam", "Virgin Islands (British)", "Virgin Islands (U.S.)", "Wallis and Futuna Islands", "Western Sahara", "Yemen", "Yugoslavia", "Zaire", "Zambia", "Zimbabwe"], []), 
             "csr_status": MoPropertyMeta("csr_status", "csrStatus", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
-            "email": MoPropertyMeta("email", "email", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, 0, 510, r"""[_\-a-zA-Z0-9\.\+]+@[a-zA-Z0-9](\.?[\-a-zA-Z0-9]*[a-zA-Z0-9])*""", [], []), 
-            "locality": MoPropertyMeta("locality", "locality", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, 1, 243, None, [], []), 
-            "organization": MoPropertyMeta("organization", "organization", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, 1, 243, None, [], []), 
-            "organizational_unit": MoPropertyMeta("organizational_unit", "organizationalUnit", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, 1, 243, None, [], []), 
+            "email": MoPropertyMeta("email", "email", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, 0, 128, r"""[_\-a-zA-Z0-9\.\+]+@[a-zA-Z0-9](\.?[\-a-zA-Z0-9]*[a-zA-Z0-9])*""", [], []), 
+            "locality": MoPropertyMeta("locality", "locality", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, 1, 128, None, [], []), 
+            "organization": MoPropertyMeta("organization", "organization", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, 1, 64, None, [], []), 
+            "organizational_unit": MoPropertyMeta("organizational_unit", "organizationalUnit", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, 1, 64, None, [], []), 
             "protocol": MoPropertyMeta("protocol", "protocol", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["ftp", "http", "none", "scp", "sftp", "tftp"], []), 
-            "pwd": MoPropertyMeta("pwd", "pwd", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, 0, 256, None, [], []), 
-            "remote_file": MoPropertyMeta("remote_file", "remoteFile", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x400, None, None, r"""[^\(\)~`'\?\\"";<>\|&\*\^$%]{0,128}""", [], []), 
+            "pwd": MoPropertyMeta("pwd", "pwd", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, 0, 255, None, [], []), 
+            "remote_file": MoPropertyMeta("remote_file", "remoteFile", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x400, None, None, r"""[^\(\)~`'\?\\"";<>\|&\*\^$%]{0,255}""", [], []), 
             "remote_server": MoPropertyMeta("remote_server", "remoteServer", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x800, 0, 255, r"""([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:""", [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x1000, 0, 255, None, [], []), 
             "self_signed": MoPropertyMeta("self_signed", "selfSigned", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2000, None, None, None, ["No", "Yes", "no", "yes"], []), 
-            "state": MoPropertyMeta("state", "state", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4000, 1, 243, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8000, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "user": MoPropertyMeta("user", "user", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10000, 0, 256, None, [], []), 
+            "signature_algorithm": MoPropertyMeta("signature_algorithm", "signatureAlgorithm", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x4000, 0, 510, None, ["sha1", "sha256", "sha384", "sha512"], []), 
+            "state": MoPropertyMeta("state", "state", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8000, 1, 128, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10000, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "user": MoPropertyMeta("user", "user", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20000, 0, 255, None, [], []), 
         },
 
     }
@@ -348,6 +354,7 @@ class GenerateCertificateSigningRequest(ManagedObject):
             "remoteServer": "remote_server", 
             "rn": "rn", 
             "selfSigned": "self_signed", 
+            "signatureAlgorithm": "signature_algorithm", 
             "state": "state", 
             "status": "status", 
             "user": "user", 
@@ -369,6 +376,7 @@ class GenerateCertificateSigningRequest(ManagedObject):
             "remoteServer": "remote_server", 
             "rn": "rn", 
             "selfSigned": "self_signed", 
+            "signatureAlgorithm": "signature_algorithm", 
             "state": "state", 
             "status": "status", 
             "user": "user", 
@@ -391,6 +399,7 @@ class GenerateCertificateSigningRequest(ManagedObject):
         self.remote_file = None
         self.remote_server = None
         self.self_signed = None
+        self.signature_algorithm = None
         self.state = None
         self.status = None
         self.user = None

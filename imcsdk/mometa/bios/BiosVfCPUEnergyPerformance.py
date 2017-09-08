@@ -8,9 +8,11 @@ from ...imcmeta import VersionMeta
 class BiosVfCPUEnergyPerformanceConsts:
     VP_CPUENERGY_PERFORMANCE_BALANCED_ENERGY = "balanced-energy"
     VP_CPUENERGY_PERFORMANCE_BALANCED_PERFORMANCE = "balanced-performance"
+    VP_CPUENERGY_PERFORMANCE_BALANCED_POWER = "balanced-power"
     VP_CPUENERGY_PERFORMANCE_ENERGY_EFFICIENT = "energy-efficient"
     VP_CPUENERGY_PERFORMANCE_PERFORMANCE = "performance"
     VP_CPUENERGY_PERFORMANCE_PLATFORM_DEFAULT = "platform-default"
+    VP_CPUENERGY_PERFORMANCE_POWER = "power"
 
 
 class BiosVfCPUEnergyPerformance(ManagedObject):
@@ -32,7 +34,7 @@ class BiosVfCPUEnergyPerformance(ManagedObject):
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "vp_cpu_energy_performance": MoPropertyMeta("vp_cpu_energy_performance", "vpCPUEnergyPerformance", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["balanced-energy", "balanced-performance", "energy-efficient", "performance", "platform-default"], []), 
+            "vp_cpu_energy_performance": MoPropertyMeta("vp_cpu_energy_performance", "vpCPUEnergyPerformance", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["balanced-energy", "balanced-performance", "balanced-power", "energy-efficient", "performance", "platform-default", "power"], []), 
         },
 
         "modular": {

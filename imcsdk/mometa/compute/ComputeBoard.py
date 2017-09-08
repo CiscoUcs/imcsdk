@@ -58,7 +58,7 @@ class ComputeBoard(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("ComputeBoard", "computeBoard", "board", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeRackUnit'], [u'biosVfResumeOnACPowerLoss', u'computeMbPowerStats', u'computeRackUnitMbTempStats', u'equipmentTpm', u'fanPolicy', u'faultInst', u'memoryArray', u'pidCatalog', u'processorUnit', u'storageController', u'storageControllerNVMe', u'storageFlexFlashController', u'storageLocalDiskSlotEp'], ["Get"]),
+        "classic": MoMeta("ComputeBoard", "computeBoard", "board", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeRackUnit'], [u'biosVfResumeOnACPowerLoss', u'computeMbPowerStats', u'computeRackUnitMbTempStats', u'equipmentTpm', u'fanPolicy', u'faultInst', u'memoryArray', u'pidCatalog', u'processorUnit', u'storageController', u'storageControllerNVMe', u'storageFlexFlashController', u'storageFlexUtilController', u'storageLocalDiskSlotEp'], ["Get"]),
         "modular": MoMeta("ComputeBoard", "computeBoard", "board", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeServerNode'], [u'biosVfResumeOnACPowerLoss', u'computeMbPowerStats', u'computeServerNodeMbTempStats', u'equipmentTpm', u'faultInst', u'memoryArray', u'pidCatalog', u'processorUnit', u'storageController', u'storageControllerNVMe', u'storageFlexFlashController', u'storageLocalDiskSlotEp'], ["Get"])
     }
 

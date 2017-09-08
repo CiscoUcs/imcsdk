@@ -6,6 +6,7 @@ from ...imcmeta import VersionMeta
 
 
 class StorageEnclosureConsts:
+    ADMIN_ACTION_RESET_ZONE_SETTINGS = "reset-zone-settings"
     DRIVE_POWER_POLICY_ACTIVE = "active"
     DRIVE_POWER_POLICY_POWER_SAVE = "power-save"
 
@@ -17,19 +18,20 @@ class StorageEnclosure(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "modular": MoMeta("StorageEnclosure", "storageEnclosure", "enc-1", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'equipmentChassis'], [u'storageEnclosureDisk', u'storageEnclosureDiskFwHelper', u'storageEnclosureDiskSlotEp', u'storageEnclosureDiskSlotZoneHelper'], ["Get", "Set"])
+        "modular": MoMeta("StorageEnclosure", "storageEnclosure", "enc-1", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'equipmentChassis'], [u'storageEnclosureDisk', u'storageEnclosureDiskFwHelper', u'storageEnclosureDiskSlotEp', u'storageEnclosureDiskSlotZoneHelper'], ["Get", "Set"])
     }
 
 
     prop_meta = {
 
         "modular": {
+            "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["reset-zone-settings"], []), 
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "description": MoPropertyMeta("description", "description", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
-            "drive_power_policy": MoPropertyMeta("drive_power_policy", "drivePowerPolicy", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["active", "power-save"], []), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
+            "drive_power_policy": MoPropertyMeta("drive_power_policy", "drivePowerPolicy", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["active", "power-save"], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
         },
 
     }
@@ -37,6 +39,7 @@ class StorageEnclosure(ManagedObject):
     prop_map = {
 
         "modular": {
+            "adminAction": "admin_action", 
             "childAction": "child_action", 
             "description": "description", 
             "dn": "dn", 
@@ -49,6 +52,7 @@ class StorageEnclosure(ManagedObject):
 
     def __init__(self, parent_mo_or_dn, **kwargs):
         self._dirty_mask = 0
+        self.admin_action = None
         self.child_action = None
         self.description = None
         self.drive_power_policy = None

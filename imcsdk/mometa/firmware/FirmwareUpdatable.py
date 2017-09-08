@@ -33,6 +33,8 @@ class FirmwareUpdatableConsts:
     _SECURE_BOOT_DISABLED = "disabled"
     SECURE_BOOT_ENABLE = "enable"
     _SECURE_BOOT_ENABLED = "enabled"
+    SOURCE_REMOTE = "remote"
+    SOURCE_USB = "usb"
     TYPE_ADAPTOR = "adaptor"
     TYPE_BLADE_BIOS = "blade-bios"
     TYPE_BLADE_CONTROLLER = "blade-controller"
@@ -47,7 +49,7 @@ class FirmwareUpdatable(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("FirmwareUpdatable", "firmwareUpdatable", "fw-updatable", VersionMeta.Version151f, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'biosUnit', u'mgmtController', u'systemIOController'], [], ["Get"]),
+        "classic": MoMeta("FirmwareUpdatable", "firmwareUpdatable", "fw-updatable", VersionMeta.Version151f, "InputOutput", 0x3fff, [], ["admin", "read-only", "user"], [u'biosUnit', u'mgmtController', u'systemIOController'], [], ["Get"]),
         "modular": MoMeta("FirmwareUpdatable", "firmwareUpdatable", "fw-updatable", VersionMeta.Version2013e, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'biosUnit', u'mgmtController'], [], ["Get"])
     }
 
@@ -72,6 +74,8 @@ class FirmwareUpdatable(ManagedObject):
             "type": MoPropertyMeta("type", "type", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x400, None, None, None, ["adaptor", "blade-bios", "blade-controller", "sas-expander", "sioc"], []), 
             "user": MoPropertyMeta("user", "user", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x800, 0, 256, None, [], []), 
             "version": MoPropertyMeta("version", "version", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "source": MoPropertyMeta("source", "source", "string", VersionMeta.Version311a, MoPropertyMeta.READ_WRITE, 0x1000, None, None, None, ["remote", "usb"], []), 
+            "usb_path": MoPropertyMeta("usb_path", "usbPath", "string", VersionMeta.Version311a, MoPropertyMeta.READ_WRITE, 0x2000, 1, 128, r"""[^\(\)~`'\?\\"";<>\|&\*\^$%]{0,128}""", [], []), 
         },
 
         "modular": {
@@ -116,6 +120,8 @@ class FirmwareUpdatable(ManagedObject):
             "type": "type", 
             "user": "user", 
             "version": "version", 
+            "source": "source", 
+            "usbPath": "usb_path", 
         },
 
         "modular": {
@@ -157,6 +163,8 @@ class FirmwareUpdatable(ManagedObject):
         self.type = None
         self.user = None
         self.version = None
+        self.source = None
+        self.usb_path = None
 
         ManagedObject.__init__(self, "FirmwareUpdatable", parent_mo_or_dn, **kwargs)
 
