@@ -56,6 +56,8 @@ class StorageFlexFlashPhysicalDrive(ManagedObject):
             "write_enabled": MoPropertyMeta("write_enabled", "writeEnabled", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "write_error_count": MoPropertyMeta("write_error_count", "writeErrorCount", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "write_error_threshold": MoPropertyMeta("write_error_threshold", "writeErrorThreshold", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "dirty_partition_map": MoPropertyMeta("dirty_partition_map", "dirtyPartitionMap", "string", VersionMeta.Version311a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "stale_partition_map": MoPropertyMeta("stale_partition_map", "stalePartitionMap", "string", VersionMeta.Version311a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
         },
 
         "modular": {
@@ -130,6 +132,8 @@ class StorageFlexFlashPhysicalDrive(ManagedObject):
             "writeEnabled": "write_enabled", 
             "writeErrorCount": "write_error_count", 
             "writeErrorThreshold": "write_error_threshold", 
+            "dirtyPartitionMap": "dirty_partition_map", 
+            "stalePartitionMap": "stale_partition_map", 
         },
 
         "modular": {
@@ -201,6 +205,8 @@ class StorageFlexFlashPhysicalDrive(ManagedObject):
         self.write_enabled = None
         self.write_error_count = None
         self.write_error_threshold = None
+        self.dirty_partition_map = None
+        self.stale_partition_map = None
 
         ManagedObject.__init__(self, "StorageFlexFlashPhysicalDrive", parent_mo_or_dn, **kwargs)
 

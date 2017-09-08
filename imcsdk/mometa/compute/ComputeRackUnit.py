@@ -49,7 +49,7 @@ class ComputeRackUnit(ManagedObject):
     naming_props = set([u'serverId'])
 
     mo_meta = {
-        "classic": MoMeta("ComputeRackUnit", "computeRackUnit", "rack-unit-[server_id]", VersionMeta.Version151f, "InputOutput", 0xff, [], ["admin", "user"], [u'topSystem'], [u'adaptorUnit', u'biosUnit', u'computeBoard', u'equipmentFanModule', u'equipmentIndicatorLed', u'equipmentLocatorLed', u'equipmentPsu', u'equipmentPsuColdRedundancy', u'eventManagement', u'faultInst', u'lsbootDef', u'lsbootDevPrecision', u'mgmtController', u'networkAdapterUnit', u'oneTimeBootDevice', u'oneTimePrecisionBootDevice', u'pciEquipSlot', u'powerBudget', u'powerMonitor', u'serverUtilization', u'solIf', u'sysdebugTechSupportExport', u'systemIOController'], ["Get", "Set"]),
+        "classic": MoMeta("ComputeRackUnit", "computeRackUnit", "rack-unit-[server_id]", VersionMeta.Version151f, "InputOutput", 0x3ff, [], ["admin", "user"], [u'topSystem'], [u'adaptorUnit', u'biosUnit', u'computeBoard', u'equipmentFanModule', u'equipmentIndicatorLed', u'equipmentLocatorLed', u'equipmentPsu', u'equipmentPsuColdRedundancy', u'eventManagement', u'faultInst', u'lsbootDef', u'lsbootDevPrecision', u'mgmtController', u'networkAdapterUnit', u'oneTimeBootDevice', u'oneTimePrecisionBootDevice', u'pciEquipSlot', u'powerBudget', u'powerMonitor', u'serverUtilization', u'solIf', u'sysdebugTechSupportExport', u'systemIOController', u'x86LiveDebug'], ["Get", "Set"]),
     }
 
 
@@ -60,6 +60,7 @@ class ComputeRackUnit(ManagedObject):
             "admin_power": MoPropertyMeta("admin_power", "adminPower", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["bmc-reset-default", "bmc-reset-immediate", "cmos-reset-immediate", "cycle-immediate", "diagnostic-interrupt", "down", "hard-reset-immediate", "policy", "soft-shut-down", "up"], []), 
             "asset_tag": MoPropertyMeta("asset_tag", "assetTag", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x8, 0, 32, r"""[^!|&]{0,32}""", [], []), 
             "available_memory": MoPropertyMeta("available_memory", "availableMemory", "uint", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
+            "bmc_reset_status": MoPropertyMeta("bmc_reset_status", "bmcResetStatus", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "chassis_serial": MoPropertyMeta("chassis_serial", "chassisSerial", "string", VersionMeta.Version204c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "cimc_reset_reason": MoPropertyMeta("cimc_reset_reason", "cimcResetReason", "string", VersionMeta.Version209c, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
@@ -77,14 +78,19 @@ class ComputeRackUnit(ManagedObject):
             "oper_power": MoPropertyMeta("oper_power", "operPower", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["degraded", "error", "not-supported", "off", "offduty", "offline", "on", "online", "power-save", "test", "unknown"], []), 
             "original_uuid": MoPropertyMeta("original_uuid", "originalUuid", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, r"""(([0-9a-fA-F]){8}\-([0-9a-fA-F]){4}\-([0-9a-fA-F]){4}\-([0-9a-fA-F]){4}\-([0-9a-fA-F]){12})|0""", [], []), 
             "presence": MoPropertyMeta("presence", "presence", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["empty", "equipped", "equipped-identity-unestablishable", "equipped-not-primary", "equipped-with-malformed-fru", "inaccessible", "mismatch", "mismatch-identity-unestablishable", "missing", "unauthorized", "unknown"], []), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, None, [], []), 
+            "reset_components": MoPropertyMeta("reset_components", "resetComponents", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x20, 0, 510, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x40, 0, 255, None, [], []), 
             "serial": MoPropertyMeta("serial", "serial", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "server_id": MoPropertyMeta("server_id", "serverId", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "smart_usb_access": MoPropertyMeta("smart_usb_access", "smartUsbAccess", "string", VersionMeta.Version311a, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
+            "smart_usb_status": MoPropertyMeta("smart_usb_status", "smartUsbStatus", "string", VersionMeta.Version311a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "storage_reset_status": MoPropertyMeta("storage_reset_status", "storageResetStatus", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "total_memory": MoPropertyMeta("total_memory", "totalMemory", "uint", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
-            "usr_lbl": MoPropertyMeta("usr_lbl", "usrLbl", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x80, 0, 64, r"""[ !#$%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}~a-zA-Z0-9]{0,64}""", [], []), 
+            "usr_lbl": MoPropertyMeta("usr_lbl", "usrLbl", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x200, 0, 64, r"""[ !#$%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}~a-zA-Z0-9]{0,64}""", [], []), 
             "uuid": MoPropertyMeta("uuid", "uuid", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, r"""(([0-9a-fA-F]){8}\-([0-9a-fA-F]){4}\-([0-9a-fA-F]){4}\-([0-9a-fA-F]){4}\-([0-9a-fA-F]){12})|0""", [], []), 
             "vendor": MoPropertyMeta("vendor", "vendor", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "vic_reset_status": MoPropertyMeta("vic_reset_status", "vicResetStatus", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
         },
 
     }
@@ -96,6 +102,7 @@ class ComputeRackUnit(ManagedObject):
             "adminPower": "admin_power", 
             "assetTag": "asset_tag", 
             "availableMemory": "available_memory", 
+            "bmcResetStatus": "bmc_reset_status", 
             "chassisSerial": "chassis_serial", 
             "childAction": "child_action", 
             "cimcResetReason": "cimc_reset_reason", 
@@ -113,14 +120,19 @@ class ComputeRackUnit(ManagedObject):
             "operPower": "oper_power", 
             "originalUuid": "original_uuid", 
             "presence": "presence", 
+            "resetComponents": "reset_components", 
             "rn": "rn", 
             "serial": "serial", 
             "serverId": "server_id", 
+            "smartUsbAccess": "smart_usb_access", 
+            "smartUsbStatus": "smart_usb_status", 
             "status": "status", 
+            "storageResetStatus": "storage_reset_status", 
             "totalMemory": "total_memory", 
             "usrLbl": "usr_lbl", 
             "uuid": "uuid", 
             "vendor": "vendor", 
+            "vicResetStatus": "vic_reset_status", 
         },
 
     }
@@ -132,6 +144,7 @@ class ComputeRackUnit(ManagedObject):
         self.admin_power = None
         self.asset_tag = None
         self.available_memory = None
+        self.bmc_reset_status = None
         self.chassis_serial = None
         self.child_action = None
         self.cimc_reset_reason = None
@@ -148,12 +161,17 @@ class ComputeRackUnit(ManagedObject):
         self.oper_power = None
         self.original_uuid = None
         self.presence = None
+        self.reset_components = None
         self.serial = None
+        self.smart_usb_access = None
+        self.smart_usb_status = None
         self.status = None
+        self.storage_reset_status = None
         self.total_memory = None
         self.usr_lbl = None
         self.uuid = None
         self.vendor = None
+        self.vic_reset_status = None
 
         ManagedObject.__init__(self, "ComputeRackUnit", parent_mo_or_dn, **kwargs)
 

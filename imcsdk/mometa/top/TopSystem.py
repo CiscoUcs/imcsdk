@@ -444,7 +444,7 @@ class TopSystem(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("TopSystem", "topSystem", "sys", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'topRoot'], [u'aaaLdap', u'aaaUserEp', u'certificateManagement', u'commSvcEp', u'computeRackUnit', u'huuController', u'iodController', u'kmipManagement', u'mgmtBackup', u'mgmtImporter', u'mgmtInventory', u'osiController', u'storageSasExpander'], ["Get", "Set"]),
+        "classic": MoMeta("TopSystem", "topSystem", "sys", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'topRoot'], [u'aaaLdap', u'aaaUserEp', u'certificateManagement', u'commSvcEp', u'computeRackUnit', u'huuController', u'iodController', u'kmipManagement', u'mgmtBackup', u'mgmtImporter', u'mgmtInventory', u'osiController', u'storageSasExpander', u'systemBoardUnit', u'vicBackupAll', u'vicImporterAll'], ["Get", "Set"]),
         "modular": MoMeta("TopSystem", "topSystem", "sys", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'topRoot'], [u'aaaLdap', u'aaaUserEp', u'certificateManagement', u'commSvcEp', u'equipmentChassis', u'sysdebugTechSupportExport'], ["Get", "Set"])
     }
 

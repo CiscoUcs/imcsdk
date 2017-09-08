@@ -8,6 +8,8 @@ from ...imcmeta import VersionMeta
 class BiosVfWorkLoadConfigConsts:
     VP_WORK_LOAD_CONFIG_BALANCED = "Balanced"
     VP_WORK_LOAD_CONFIG_I_O_SENSITIVE = "I/O Sensitive"
+    VP_WORK_LOAD_CONFIG_NUMA = "NUMA"
+    VP_WORK_LOAD_CONFIG_UMA = "UMA"
     VP_WORK_LOAD_CONFIG_PLATFORM_DEFAULT = "platform-default"
 
 
@@ -29,7 +31,7 @@ class BiosVfWorkLoadConfig(ManagedObject):
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "vp_work_load_config": MoPropertyMeta("vp_work_load_config", "vpWorkLoadConfig", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Balanced", "I/O Sensitive", "platform-default"], []), 
+            "vp_work_load_config": MoPropertyMeta("vp_work_load_config", "vpWorkLoadConfig", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Balanced", "I/O Sensitive", "NUMA", "UMA", "platform-default"], []), 
         },
 
         "modular": {

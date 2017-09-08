@@ -18,6 +18,7 @@ class CommRedfish(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("CommRedfish", "commRedfish", "redfish-svc", VersionMeta.Version301c, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'commSvcEp'], [], ["Get", "Set"]),
+        "modular": MoMeta("CommRedfish", "commRedfish", "redfish-svc", VersionMeta.Version303a, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'commSvcEp'], [], ["Get", "Set"])
     }
 
 
@@ -33,11 +34,31 @@ class CommRedfish(ManagedObject):
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
         },
 
+        "modular": {
+            "active_sessions": MoPropertyMeta("active_sessions", "activeSessions", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
+            "admin_state": MoPropertyMeta("admin_state", "adminState", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version303a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
+            "maximum_sessions": MoPropertyMeta("maximum_sessions", "maximumSessions", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+        },
+
     }
 
     prop_map = {
 
         "classic": {
+            "activeSessions": "active_sessions", 
+            "adminState": "admin_state", 
+            "childAction": "child_action", 
+            "dn": "dn", 
+            "maximumSessions": "maximum_sessions", 
+            "rn": "rn", 
+            "status": "status", 
+        },
+
+        "modular": {
             "activeSessions": "active_sessions", 
             "adminState": "admin_state", 
             "childAction": "child_action", 

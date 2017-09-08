@@ -16,6 +16,8 @@ class StorageFlexFlashControllerConsts:
     CARD_SLOT_SLOT_2 = "slot-2"
     CONFIGURED_MODE_MIRROR = "mirror"
     CONFIGURED_MODE_UTIL = "util"
+    VIRTUAL_DRIVE_NON_REMOVABLE = "non-removable"
+    VIRTUAL_DRIVE_REMOVABLE = "removable"
 
 
 class StorageFlexFlashController(ManagedObject):
@@ -25,7 +27,7 @@ class StorageFlexFlashController(ManagedObject):
     naming_props = set([u'id'])
 
     mo_meta = {
-        "classic": MoMeta("StorageFlexFlashController", "storageFlexFlashController", "storage-flexflash-[id]", VersionMeta.Version202c, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], [u'computeBoard'], [u'faultInst', u'storageFlexFlashControllerProps', u'storageFlexFlashOperationalProfile', u'storageFlexFlashPhysicalDrive', u'storageFlexFlashVirtualDrive', u'storageFlexFlashVirtualDriveImageMap'], ["Get", "Set"]),
+        "classic": MoMeta("StorageFlexFlashController", "storageFlexFlashController", "storage-flexflash-[id]", VersionMeta.Version202c, "InputOutput", 0x7ff, [], ["admin", "read-only", "user"], [u'computeBoard'], [u'faultInst', u'storageFlexFlashControllerProps', u'storageFlexFlashOperationalProfile', u'storageFlexFlashPhysicalDrive', u'storageFlexFlashVirtualDrive', u'storageFlexFlashVirtualDriveImageMap'], ["Get", "Set"]),
         "modular": MoMeta("StorageFlexFlashController", "storageFlexFlashController", "storage-flexflash-[id]", VersionMeta.Version2013e, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], [u'computeBoard'], [u'faultInst', u'storageFlexFlashControllerProps', u'storageFlexFlashOperationalProfile', u'storageFlexFlashPhysicalDrive', u'storageFlexFlashVirtualDrive', u'storageFlexFlashVirtualDriveImageMap'], ["Get", "Set"])
     }
 
@@ -38,7 +40,7 @@ class StorageFlexFlashController(ManagedObject):
             "card_slot": MoPropertyMeta("card_slot", "cardSlot", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x8, 0, 510, None, ["none", "slot-1", "slot-2"], []), 
             "cards_manageable": MoPropertyMeta("cards_manageable", "cardsManageable", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version202c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-            "configured_mode": MoPropertyMeta("configured_mode", "configuredMode", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, 0x10, None, None, None, ["mirror", "util"], []), 
+            "configured_mode": MoPropertyMeta("configured_mode", "configuredMode", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x10, 0, 510, None, ["mirror", "util"], []), 
             "controller_status": MoPropertyMeta("controller_status", "controllerStatus", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, None, [], []), 
             "fw_version": MoPropertyMeta("fw_version", "fwVersion", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
@@ -53,6 +55,7 @@ class StorageFlexFlashController(ManagedObject):
             "startup_fw_version": MoPropertyMeta("startup_fw_version", "startupFwVersion", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "vendor": MoPropertyMeta("vendor", "vendor", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "virtual_drive": MoPropertyMeta("virtual_drive", "virtualDrive", "string", VersionMeta.Version311a, MoPropertyMeta.READ_WRITE, 0x400, 0, 510, None, ["non-removable", "removable"], []), 
         },
 
         "modular": {
@@ -103,6 +106,7 @@ class StorageFlexFlashController(ManagedObject):
             "startupFwVersion": "startup_fw_version", 
             "status": "status", 
             "vendor": "vendor", 
+            "virtualDrive": "virtual_drive", 
         },
 
         "modular": {
@@ -150,6 +154,7 @@ class StorageFlexFlashController(ManagedObject):
         self.startup_fw_version = None
         self.status = None
         self.vendor = None
+        self.virtual_drive = None
 
         ManagedObject.__init__(self, "StorageFlexFlashController", parent_mo_or_dn, **kwargs)
 

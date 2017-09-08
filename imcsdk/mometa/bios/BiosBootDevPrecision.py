@@ -6,8 +6,11 @@ from ...imcmeta import VersionMeta
 
 
 class BiosBootDevPrecisionConsts:
+    SUBTYPE_ANY = "Any"
     SUBTYPE_CIMC_MAPPED_DVD = "cimc-mapped-dvd"
     SUBTYPE_CIMC_MAPPED_HDD = "cimc-mapped-hdd"
+    SUBTYPE_FLEX_FLASH = "flex-flash"
+    SUBTYPE_FLEX_UTIL = "flex-util"
     SUBTYPE_KVM_MAPPED_DVD = "kvm-mapped-dvd"
     SUBTYPE_KVM_MAPPED_FDD = "kvm-mapped-fdd"
     SUBTYPE_KVM_MAPPED_HDD = "kvm-mapped-hdd"
@@ -50,7 +53,7 @@ class BiosBootDevPrecision(ManagedObject):
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
             "slot": MoPropertyMeta("slot", "slot", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, 0x8, None, None, r"""((removed|created|modified|deleted),){0,3}(removed|created|modified|deleted){0,1}""", [], []), 
-            "subtype": MoPropertyMeta("subtype", "subtype", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["cimc-mapped-dvd", "cimc-mapped-hdd", "kvm-mapped-dvd", "kvm-mapped-fdd", "kvm-mapped-hdd", "usb-cd", "usb-fdd", "usb-hdd"], []), 
+            "subtype": MoPropertyMeta("subtype", "subtype", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["Any", "cimc-mapped-dvd", "cimc-mapped-hdd", "flex-flash", "flex-util", "kvm-mapped-dvd", "kvm-mapped-fdd", "kvm-mapped-hdd", "usb-cd", "usb-fdd", "usb-hdd"], []), 
             "type": MoPropertyMeta("type", "type", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["EFI", "HDD", "ISCSI", "PCHSTORAGE", "PXE", "SAN", "SDCARD", "USB", "VMEDIA"], []), 
         },
 
