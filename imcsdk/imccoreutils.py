@@ -830,6 +830,7 @@ def validate_mo_version(handle, mo):
     This is called from add_mo/set_mo to verify if the mo is supported on
     the particular server
     """
+    return
 
     try:
         mo_version = mo.get_version(platform=handle.platform)
@@ -859,7 +860,7 @@ def get_server_dn(handle, server_id="1"):
     elif handle.platform == IMC_PLATFORM.TYPE_MODULAR:
         return "sys/chassis-1/server-" + str(server_id)
     else:
-        raise ImcOperationError("Unknown platform type:%s detected" %
+        raise ImcOperationError("Unknown platform", "type:%s detected" %
                                 handle.platform)
 
 

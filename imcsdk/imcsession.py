@@ -39,7 +39,8 @@ class ImcSession(object):
         self.__auto_refresh = auto_refresh
         self.__timeout = timeout
         self.__uri = self.__create_uri(port, secure)
-        self.__platform = None
+        self.__starship_proxy = None
+        self.__starship_headers = None
         self.__model = None
 
         self.__imc = ip
@@ -225,7 +226,11 @@ class ImcSession(object):
             response = post_xml('<aaaLogin inName="user" inPassword="pass">')
         """
 
-        imc_uri = self.__uri + "/nuova"
+        if self.__starship_proxy is not None:
+            self.__uri = self.__starship_proxy
+            imc_uri = self.__starship_proxy
+        else:
+            imc_uri = self.__uri + "/nuova"
         response_str = self.post(uri=imc_uri, data=xml_str, read=read, timeout=timeout)
         if self.__driver.redirect_uri:
             self.__uri = self.__driver.redirect_uri
@@ -627,6 +632,23 @@ class ImcSession(object):
 
         remove_handle_from_list(self)
         return True
+
+    def _set_starship_proxy(self, proxy):
+        """
+        Internal method to set proxy URL in starship environment
+        """
+        self.__starship_proxy = proxy
+        self.__driver.__redirect_uri = proxy
+        from imcsdk.imccoreutils import IMC_PLATFORM
+        self.__platform = IMC_PLATFORM.TYPE_CLASSIC
+
+    def _set_starship_headers(self, headers):
+        """
+        Internal method to set proxy URL in starship environment
+        """
+        self.__starship_headers = headers
+        for header in headers:
+            self.__driver.add_header(header, headers[header])
 
     def _set_dump_xml(self):
         """

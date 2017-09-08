@@ -328,6 +328,7 @@ class ManagedObject(ImcBase):
                                 xml_obj.set(prop.xml_attribute, value)
                         else:
                             xml_obj.set(prop.xml_attribute, value)
+                        xml_obj.set(prop.xml_attribute, value)
             else:
                 if key not in self.__xtra_props:
                     # This is an internal property
