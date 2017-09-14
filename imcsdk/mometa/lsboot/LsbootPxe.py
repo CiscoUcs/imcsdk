@@ -39,7 +39,7 @@ class LsbootPxe(ManagedObject):
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "subtype": MoPropertyMeta("subtype", "subtype", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["PXE"], []), 
             "type": MoPropertyMeta("type", "type", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x400, None, None, None, ["PXE"], []), 
-            "mac_address": MoPropertyMeta("mac_address", "macAddress", "string", VersionMeta.Version311a, MoPropertyMeta.READ_WRITE, 0x800, None, None, r"""(([0-9a-fA-F][0-9a-fA-F]:){5}([0-9a-fA-F][0-9a-fA-F]))|0""", [""], []), 
+            "mac_address": MoPropertyMeta("mac_address", "macAddress", "string", VersionMeta.Version311d, MoPropertyMeta.READ_WRITE, 0x800, None, None, r"""(([0-9a-fA-F][0-9a-fA-F]:){5}([0-9a-fA-F][0-9a-fA-F]))|0""", [""], []), 
         },
 
         "modular": {

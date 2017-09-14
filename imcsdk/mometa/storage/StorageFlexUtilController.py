@@ -16,26 +16,26 @@ class StorageFlexUtilController(ManagedObject):
     naming_props = set([u'id'])
 
     mo_meta = {
-        "classic": MoMeta("StorageFlexUtilController", "storageFlexUtilController", "storage-flexutil-[id]", VersionMeta.Version311a, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'computeBoard'], [u'storageFlexUtilHealth', u'storageFlexUtilOperationalProfile', u'storageFlexUtilPhysicalDrive', u'storageFlexUtilVirtualDrive', u'storageFlexUtilVirtualDriveImageMap'], [" SET", "GET"]),
+        "classic": MoMeta("StorageFlexUtilController", "storageFlexUtilController", "storage-flexutil-[id]", VersionMeta.Version311d, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'computeBoard'], [u'storageFlexUtilHealth', u'storageFlexUtilOperationalProfile', u'storageFlexUtilPhysicalDrive', u'storageFlexUtilVirtualDrive', u'storageFlexUtilVirtualDriveImageMap'], ["Get", "Set"]),
     }
 
 
     prop_meta = {
 
         "classic": {
-            "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version311a, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["reset-card-configuration"], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version311a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-            "configured_mode": MoPropertyMeta("configured_mode", "configuredMode", "string", VersionMeta.Version311a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "controller_name": MoPropertyMeta("controller_name", "controllerName", "string", VersionMeta.Version311a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "controller_status": MoPropertyMeta("controller_status", "controllerStatus", "string", VersionMeta.Version311a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version311a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
-            "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version311a, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
-            "internal_state": MoPropertyMeta("internal_state", "internalState", "string", VersionMeta.Version311a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "physical_drive_count": MoPropertyMeta("physical_drive_count", "physicalDriveCount", "string", VersionMeta.Version311a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "product_name": MoPropertyMeta("product_name", "productName", "string", VersionMeta.Version311a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version311a, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version311a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "virtual_drive_count": MoPropertyMeta("virtual_drive_count", "virtualDriveCount", "string", VersionMeta.Version311a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version311d, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["reset-card-configuration"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version311d, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "configured_mode": MoPropertyMeta("configured_mode", "configuredMode", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "controller_name": MoPropertyMeta("controller_name", "controllerName", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "controller_status": MoPropertyMeta("controller_status", "controllerStatus", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version311d, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
+            "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
+            "internal_state": MoPropertyMeta("internal_state", "internalState", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "physical_drive_count": MoPropertyMeta("physical_drive_count", "physicalDriveCount", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "product_name": MoPropertyMeta("product_name", "productName", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version311d, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version311d, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "virtual_drive_count": MoPropertyMeta("virtual_drive_count", "virtualDriveCount", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
         },
 
     }

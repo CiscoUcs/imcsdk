@@ -55,7 +55,7 @@ class StorageFlexFlashController(ManagedObject):
             "startup_fw_version": MoPropertyMeta("startup_fw_version", "startupFwVersion", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "vendor": MoPropertyMeta("vendor", "vendor", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "virtual_drive": MoPropertyMeta("virtual_drive", "virtualDrive", "string", VersionMeta.Version311a, MoPropertyMeta.READ_WRITE, 0x400, 0, 510, None, ["non-removable", "removable"], []), 
+            "virtual_drive": MoPropertyMeta("virtual_drive", "virtualDrive", "string", VersionMeta.Version311d, MoPropertyMeta.READ_WRITE, 0x400, 0, 510, None, ["non-removable", "removable"], []), 
         },
 
         "modular": {
