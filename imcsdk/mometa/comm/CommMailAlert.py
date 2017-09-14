@@ -20,8 +20,8 @@ class CommMailAlert(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("CommMailAlert", "commMailAlert", "mail-alert-svc", VersionMeta.Version303a, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'commSvcEp'], [u'mailRecipient'], [None]),
-        "modular": MoMeta("CommMailAlert", "commMailAlert", "mail-alert-svc", VersionMeta.Version303a, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'commSvcEp'], [u'mailRecipient'], [None])
+        "classic": MoMeta("CommMailAlert", "commMailAlert", "mail-alert-svc", VersionMeta.Version303a, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'commSvcEp'], [u'mailRecipient'], ["Get", "Set"]),
+        "modular": MoMeta("CommMailAlert", "commMailAlert", "mail-alert-svc", VersionMeta.Version303a, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'commSvcEp'], [u'mailRecipient'], ["Get", "Set"])
     }
 
 

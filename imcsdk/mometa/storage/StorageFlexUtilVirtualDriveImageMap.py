@@ -20,7 +20,7 @@ class StorageFlexUtilVirtualDriveImageMap(ManagedObject):
     naming_props = set([u'virtualDrive'])
 
     mo_meta = {
-        "classic": MoMeta("StorageFlexUtilVirtualDriveImageMap", "storageFlexUtilVirtualDriveImageMap", "vdrive-map-[virtual_drive]", VersionMeta.Version311d, "InputOutput", 0x7ff, [], ["admin", "read-only", "user"], [u'storageFlexUtilController'], [], [None]),
+        "classic": MoMeta("StorageFlexUtilVirtualDriveImageMap", "storageFlexUtilVirtualDriveImageMap", "vdrive-map-[virtual_drive]", VersionMeta.Version311d, "InputOutput", 0x7ff, [], ["admin", "read-only", "user"], [u'storageFlexUtilController'], [], ["Get", "Set"]),
     }
 
 

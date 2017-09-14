@@ -18,7 +18,7 @@ class LsbootCdd(ManagedObject):
     naming_props = set([u'name'])
 
     mo_meta = {
-        "classic": MoMeta("LsbootCdd", "lsbootCdd", "cdd-[name]", VersionMeta.Version311d, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'lsbootDevPrecision'], [], [None]),
+        "classic": MoMeta("LsbootCdd", "lsbootCdd", "cdd-[name]", VersionMeta.Version311d, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'lsbootDevPrecision'], [], ["Get", "Set"]),
     }
 
 

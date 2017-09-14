@@ -20,7 +20,7 @@ class StorageFlexUtilVirtualDrive(ManagedObject):
     naming_props = set([u'partitionName'])
 
     mo_meta = {
-        "classic": MoMeta("StorageFlexUtilVirtualDrive", "storageFlexUtilVirtualDrive", "vd-[partition_name]", VersionMeta.Version311d, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'storageFlexUtilController'], [], [None]),
+        "classic": MoMeta("StorageFlexUtilVirtualDrive", "storageFlexUtilVirtualDrive", "vd-[partition_name]", VersionMeta.Version311d, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'storageFlexUtilController'], [], ["Get", "Set"]),
     }
 
 

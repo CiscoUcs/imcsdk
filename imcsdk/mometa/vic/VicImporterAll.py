@@ -23,8 +23,8 @@ class VicImporterAll(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("VicImporterAll", "vicImporterAll", "vic-all-importconfig", VersionMeta.Version303a, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], [u'topSystem'], [], [None]),
-        "modular": MoMeta("VicImporterAll", "vicImporterAll", "vic-all-importconfig", VersionMeta.Version303a, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], [u'equipmentChassis'], [], [None])
+        "classic": MoMeta("VicImporterAll", "vicImporterAll", "vic-all-importconfig", VersionMeta.Version303a, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], [u'topSystem'], [], ["Get", "Set"]),
+        "modular": MoMeta("VicImporterAll", "vicImporterAll", "vic-all-importconfig", VersionMeta.Version303a, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], [u'equipmentChassis'], [], ["Get", "Set"])
     }
 
 

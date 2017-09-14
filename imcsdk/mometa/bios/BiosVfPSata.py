@@ -19,7 +19,7 @@ class BiosVfPSata(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("BiosVfPSata", "biosVfPSata", "PSata", VersionMeta.Version311d, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None]),
+        "classic": MoMeta("BiosVfPSata", "biosVfPSata", "PSata", VersionMeta.Version311d, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
     }
 
 

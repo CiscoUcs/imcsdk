@@ -18,7 +18,7 @@ class BiosVfIohErrorEn(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("BiosVfIohErrorEn", "biosVfIohErrorEn", "Ioh-Error-En", VersionMeta.Version303a, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None]),
+        "classic": MoMeta("BiosVfIohErrorEn", "biosVfIohErrorEn", "Ioh-Error-En", VersionMeta.Version303a, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
     }
 
 

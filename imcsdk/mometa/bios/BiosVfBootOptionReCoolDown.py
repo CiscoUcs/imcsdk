@@ -19,7 +19,7 @@ class BiosVfBootOptionReCoolDown(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("BiosVfBootOptionReCoolDown", "biosVfBootOptionReCoolDown", "Boot-option-cool-down-retry", VersionMeta.Version311d, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'biosPlatformDefaults', u'biosSettings'], [], [None]),
+        "classic": MoMeta("BiosVfBootOptionReCoolDown", "biosVfBootOptionReCoolDown", "Boot-option-cool-down-retry", VersionMeta.Version311d, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
     }
 
 

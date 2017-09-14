@@ -21,7 +21,7 @@ class BiosVfSubNumaClustering(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("BiosVfSubNumaClustering", "biosVfSubNumaClustering", "sub-numa-cluster", VersionMeta.Version311d, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None]),
+        "classic": MoMeta("BiosVfSubNumaClustering", "biosVfSubNumaClustering", "sub-numa-cluster", VersionMeta.Version311d, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
     }
 
 

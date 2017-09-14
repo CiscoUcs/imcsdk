@@ -20,7 +20,7 @@ class BiosVfXPTPrefetch(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("BiosVfXPTPrefetch", "biosVfXPTPrefetch", "xpt-prefetch", VersionMeta.Version311d, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None]),
+        "classic": MoMeta("BiosVfXPTPrefetch", "biosVfXPTPrefetch", "xpt-prefetch", VersionMeta.Version311d, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
     }
 
 

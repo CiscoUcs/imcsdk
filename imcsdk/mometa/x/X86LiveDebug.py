@@ -16,7 +16,7 @@ class X86LiveDebug(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("X86LiveDebug", "x86LiveDebug", "live-debug", VersionMeta.Version311d, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeRackUnit'], [], [None]),
+        "classic": MoMeta("X86LiveDebug", "x86LiveDebug", "live-debug", VersionMeta.Version311d, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeRackUnit'], [], ["Get"]),
     }
 
 

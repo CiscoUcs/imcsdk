@@ -16,7 +16,7 @@ class StorageNVMePhysicalDrive(ManagedObject):
     naming_props = set([u'id'])
 
     mo_meta = {
-        "classic": MoMeta("StorageNVMePhysicalDrive", "storageNVMePhysicalDrive", "pd-[id]", VersionMeta.Version311d, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageControllerNVMe'], [], [None]),
+        "classic": MoMeta("StorageNVMePhysicalDrive", "storageNVMePhysicalDrive", "pd-[id]", VersionMeta.Version311d, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageControllerNVMe'], [], ["Get"]),
     }
 
 

@@ -20,7 +20,7 @@ class BiosVfIPV6PXE(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("BiosVfIPV6PXE", "biosVfIPV6PXE", "IPv6-Pxe", VersionMeta.Version311d, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None]),
+        "classic": MoMeta("BiosVfIPV6PXE", "biosVfIPV6PXE", "IPv6-Pxe", VersionMeta.Version311d, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
     }
 
 

@@ -16,7 +16,7 @@ class StorageFlexUtilPhysicalDrive(ManagedObject):
     naming_props = set([u'physicalDriveId'])
 
     mo_meta = {
-        "classic": MoMeta("StorageFlexUtilPhysicalDrive", "storageFlexUtilPhysicalDrive", "card-[physical_drive_id]", VersionMeta.Version311d, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageFlexUtilController'], [], [None]),
+        "classic": MoMeta("StorageFlexUtilPhysicalDrive", "storageFlexUtilPhysicalDrive", "card-[physical_drive_id]", VersionMeta.Version311d, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageFlexUtilController'], [], ["Get"]),
     }
 
 
