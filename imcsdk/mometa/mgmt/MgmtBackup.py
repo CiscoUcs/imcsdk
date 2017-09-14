@@ -56,8 +56,8 @@ class MgmtBackup(ManagedObject):
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x100, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "user": MoPropertyMeta("user", "user", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x400, 0, 255, None, [], []), 
-            "source": MoPropertyMeta("source", "source", "string", VersionMeta.Version311a, MoPropertyMeta.READ_WRITE, 0x800, None, None, None, ["remote", "usb"], []), 
-            "usb_path": MoPropertyMeta("usb_path", "usbPath", "string", VersionMeta.Version311a, MoPropertyMeta.READ_WRITE, 0x1000, 1, 128, None, [], []), 
+            "source": MoPropertyMeta("source", "source", "string", VersionMeta.Version311d, MoPropertyMeta.READ_WRITE, 0x800, None, None, None, ["remote", "usb"], []), 
+            "usb_path": MoPropertyMeta("usb_path", "usbPath", "string", VersionMeta.Version311d, MoPropertyMeta.READ_WRITE, 0x1000, 1, 128, None, [], []), 
         },
 
         "modular": {

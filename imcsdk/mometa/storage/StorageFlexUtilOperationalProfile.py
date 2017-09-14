@@ -16,19 +16,19 @@ class StorageFlexUtilOperationalProfile(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("StorageFlexUtilOperationalProfile", "storageFlexUtilOperationalProfile", "oper-profile", VersionMeta.Version311a, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'storageFlexUtilController'], [], [" SET", "GET"]),
+        "classic": MoMeta("StorageFlexUtilOperationalProfile", "storageFlexUtilOperationalProfile", "oper-profile", VersionMeta.Version311d, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'storageFlexUtilController'], [], [None]),
     }
 
 
     prop_meta = {
 
         "classic": {
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version311a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version311a, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
-            "io_read_error_threshold": MoPropertyMeta("io_read_error_threshold", "ioReadErrorThreshold", "string", VersionMeta.Version311a, MoPropertyMeta.READ_WRITE, 0x4, 0, 510, None, [], ["0-255"]), 
-            "io_write_error_threshold": MoPropertyMeta("io_write_error_threshold", "ioWriteErrorThreshold", "string", VersionMeta.Version311a, MoPropertyMeta.READ_WRITE, 0x8, 0, 510, None, [], ["0-255"]), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version311a, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version311a, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version311d, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version311d, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
+            "io_read_error_threshold": MoPropertyMeta("io_read_error_threshold", "ioReadErrorThreshold", "string", VersionMeta.Version311d, MoPropertyMeta.READ_WRITE, 0x4, 0, 510, None, [], ["0-255"]), 
+            "io_write_error_threshold": MoPropertyMeta("io_write_error_threshold", "ioWriteErrorThreshold", "string", VersionMeta.Version311d, MoPropertyMeta.READ_WRITE, 0x8, 0, 510, None, [], ["0-255"]), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version311d, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version311d, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
         },
 
     }

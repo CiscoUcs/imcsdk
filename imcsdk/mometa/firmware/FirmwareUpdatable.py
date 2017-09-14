@@ -74,8 +74,8 @@ class FirmwareUpdatable(ManagedObject):
             "type": MoPropertyMeta("type", "type", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x400, None, None, None, ["adaptor", "blade-bios", "blade-controller", "sas-expander", "sioc"], []), 
             "user": MoPropertyMeta("user", "user", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x800, 0, 256, None, [], []), 
             "version": MoPropertyMeta("version", "version", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "source": MoPropertyMeta("source", "source", "string", VersionMeta.Version311a, MoPropertyMeta.READ_WRITE, 0x1000, None, None, None, ["remote", "usb"], []), 
-            "usb_path": MoPropertyMeta("usb_path", "usbPath", "string", VersionMeta.Version311a, MoPropertyMeta.READ_WRITE, 0x2000, 1, 128, r"""[^\(\)~`'\?\\"";<>\|&\*\^$%]{0,128}""", [], []), 
+            "source": MoPropertyMeta("source", "source", "string", VersionMeta.Version311d, MoPropertyMeta.READ_WRITE, 0x1000, None, None, None, ["remote", "usb"], []), 
+            "usb_path": MoPropertyMeta("usb_path", "usbPath", "string", VersionMeta.Version311d, MoPropertyMeta.READ_WRITE, 0x2000, 1, 128, r"""[^\(\)~`'\?\\"";<>\|&\*\^$%]{0,128}""", [], []), 
         },
 
         "modular": {

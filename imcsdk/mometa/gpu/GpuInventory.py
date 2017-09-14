@@ -16,7 +16,7 @@ class GpuInventory(ManagedObject):
     naming_props = set([u'id'])
 
     mo_meta = {
-        "classic": MoMeta("GpuInventory", "gpuInventory", "gpu-inv-[id]", VersionMeta.Version303a, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'pciEquipSlot'], [], ["Get"]),
+        "classic": MoMeta("GpuInventory", "gpuInventory", "gpu-inv-[id]", VersionMeta.Version303a, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'pciEquipSlot'], [], [None]),
     }
 
 
