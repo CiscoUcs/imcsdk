@@ -307,11 +307,11 @@ def vmedia_mount_iso_uri(handle, uri, user_id=None, password=None,
     # Map the ISO
     vmedia_mount_create(handle,
                         volume_name=remote_file,
-                        mount_protocol=mount_protocol,
+                        map=mount_protocol,
                         mount_options=mount_options,
                         remote_share=remote_share,
                         remote_file=remote_file,
-                        user_id=user_id,
+                        username=user_id,
                         password=password,
                         server_id=server_id)
 
