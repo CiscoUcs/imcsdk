@@ -496,7 +496,8 @@ def is_controller_jbod_mode_enabled(handle, controller_type,
 
 def controller_encryption_enable(handle, controller_type,
                                  controller_slot, key_id, security_key,
-                                 server_id=1):
+                                 key_management="local", server_id=1,
+                                 **kwargs):
     """
     Enables encryption on the controller
 
@@ -510,6 +511,7 @@ def controller_encryption_enable(handle, controller_type,
                       Max Length is 256 characters.
         security_key (str): Security key used to enable controller security.
                             Max Length is 32 characters.
+        key_management (str): "local" or "remote"
         server_id (int): server_id for UCS 3260 platform
 
     Returns:
@@ -524,17 +526,20 @@ def controller_encryption_enable(handle, controller_type,
     from imcsdk.mometa.self.SelfEncryptStorageController import \
         SelfEncryptStorageController, SelfEncryptStorageControllerConsts
 
-    dn = _get_controller_dn(
-                handle,
-                controller_type,
-                controller_slot,
-                server_id)
-
+    enabled, mo = controller_encryption_exists(handle,
+                                               controller_type,
+                                               controller_slot,
+                                               server_id)
+    if enabled:
+        return mo
+    dn = mo.dn
     mo = SelfEncryptStorageController(parent_mo_or_dn=dn)
     params = {
         'key_id': key_id,
         'security_key': security_key,
-        'admin_action': SelfEncryptStorageControllerConsts.ADMIN_ACTION_ENABLE_SELF_ENCRYPT
+        'key_management': key_management,
+        'admin_action':
+        SelfEncryptStorageControllerConsts.ADMIN_ACTION_ENABLE_SELF_ENCRYPT,
     }
 
     mo.set_prop_multiple(**params)
@@ -570,13 +575,14 @@ def controller_encryption_disable(handle, controller_type,
                 server_id)
 
     mo = SelfEncryptStorageController(parent_mo_or_dn=dn)
-    mo.admin_action = SelfEncryptStorageControllerConsts.ADMIN_ACTION_DISABLE_SELF_ENCRYPT
+    mo.admin_action = \
+        SelfEncryptStorageControllerConsts.ADMIN_ACTION_DISABLE_SELF_ENCRYPT
     handle.set_mo(mo)
     return handle.query_dn(dn)
 
 
-def is_controller_encryption_enabled(handle, controller_type,
-                                     controller_slot, server_id=1):
+def controller_encryption_exists(handle, controller_type, controller_slot,
+                                 server_id=1):
     """
     Checks if encryption is enabled on the controller
 
@@ -597,11 +603,11 @@ def is_controller_encryption_enabled(handle, controller_type,
                             controller_type='SAS',
                             controller_slot='HBA'')
     """
-    controller_mo = _get_controller(handle,
-                                    controller_type,
-                                    controller_slot,
-                                    server_id)
-    return controller_mo.self_encrypt_enabled.lower() in ['yes', 'true']
+
+    mo = _get_controller(handle, controller_type, controller_slot, server_id)
+    if mo.self_encrypt_enabled.lower() in ['yes', 'true']:
+        return True, mo
+    return False, mo
 
 
 def controller_encryption_modify_security_key(handle,
@@ -609,6 +615,7 @@ def controller_encryption_modify_security_key(handle,
                                               controller_slot,
                                               existing_security_key,
                                               security_key,
+                                              key_management="local",
                                               server_id=1):
     """
     Modifies the security key on the controller
@@ -621,7 +628,7 @@ def controller_encryption_modify_security_key(handle,
                                 "MEZZ","0"-"9", "HBA"
         existing_security_key (str): Existing Security Key
         security_key (str): New Security Key
-
+        key_management (str): "local" or "remote"
         server_id (int): server_id for UCS 3260 platform
 
     Returns:
@@ -642,7 +649,8 @@ def controller_encryption_modify_security_key(handle,
     mo = SelfEncryptStorageController(parent_mo_or_dn=dn)
     params = {
         'existing_security_key': existing_security_key,
-        'security_key': security_key
+        'security_key': security_key,
+        'key_management': key_management,
     }
     mo.set_prop_multiple(**params)
     handle.set_mo(mo)
