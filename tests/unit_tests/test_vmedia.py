@@ -16,7 +16,7 @@ from nose.tools import assert_raises
 from imcsdk.imchandle import ImcHandle
 from imcsdk.imcexception import ImcOperationError
 from imcsdk.mometa.comm.CommVMediaMap import CommVMediaMap
-from imcsdk.apis.server.remotepresence import vmedia_mount_iso_uri, \
+from imcsdk.apis.server.vmedia import vmedia_mount_iso_uri, \
                                               vmedia_mount_remove_all, \
                                               vmedia_get_existing_uri, \
                                               vmedia_get_existing_status
@@ -92,14 +92,14 @@ def test_vmedia_get_existing_status(login_mock, query_mock):
         ["In-Progress", "OK", "Error"]
 
 
-@patch('imcsdk.apis.server.remotepresence.vmedia_get_existing_status')
-@patch('imcsdk.apis.server.remotepresence.vmedia_get_existing_uri')
-@patch('imcsdk.apis.server.remotepresence.vmedia_mount_add')
+@patch('imcsdk.apis.server.vmedia.vmedia_get_existing_status')
+@patch('imcsdk.apis.server.vmedia.vmedia_get_existing_uri')
+@patch('imcsdk.apis.server.vmedia.vmedia_mount_create')
 @patch.object(ImcHandle, 'login')
 def test_valid_vmedia_mount_iso_uri(login_mock, add_mount_mock,
                                     exist_mock, state_mock):
     # Patch ImcHandle.login to create a Faux ImcHandle object w/o real CIMC
-    # Patch vmedia_mount_add to simulate CIMC interaction w/o real CIMC
+    # Patch vmedia_mount_create to simulate CIMC interaction w/o real CIMC
     # Patch vmedia_get_existing_uri to simulate existing ISOs
     # Patch vmedia_get_existing_status to simulate ISO status
     login_mock.return_value = True
@@ -120,11 +120,11 @@ def test_valid_vmedia_mount_iso_uri(login_mock, add_mount_mock,
     # Assert values of the mount options
     assert add_mount_mock.call_args[1] == {
         'volume_name': 'test.iso',
-        'mount_protocol': 'www',
+        'map': 'www',
         'mount_options': 'noauto',
         'remote_share': "http://169.254.1.2/",
         'remote_file': 'test.iso',
-        'user_id': '',
+        'username': '',
         'password': '',
         'server_id': 1
     }
@@ -141,10 +141,10 @@ def test_valid_vmedia_mount_iso_uri(login_mock, add_mount_mock,
     assert add_mount_mock.call_args[1] == {
         'volume_name': 'test.iso',
         'mount_options': 'noauto',
-        'mount_protocol': 'www',
+        'map': 'www',
         'remote_share': "https://169.254.1.2/",
         'remote_file': 'test.iso',
-        'user_id': '',
+        'username': '',
         'password': '',
         'server_id': 1
     }
@@ -161,10 +161,10 @@ def test_valid_vmedia_mount_iso_uri(login_mock, add_mount_mock,
     assert add_mount_mock.call_args[1] == {
         'volume_name': 'test.iso',
         'mount_options': 'noauto',
-        'mount_protocol': 'cifs',
+        'map': 'cifs',
         'remote_share': "//169.254.1.2/",
         'remote_file': 'test.iso',
-        'user_id': '',
+        'username': '',
         'password': '',
         'server_id': 1
     }
@@ -181,23 +181,23 @@ def test_valid_vmedia_mount_iso_uri(login_mock, add_mount_mock,
     assert add_mount_mock.call_args[1] == {
         'volume_name': 'test.iso',
         'mount_options': 'noauto',
-        'mount_protocol': 'nfs',
+        'map': 'nfs',
         'remote_share': "169.254.1.2:/",
         'remote_file': 'test.iso',
-        'user_id': '',
+        'username': '',
         'password': '',
         'server_id': 1
     }
 
 
-@patch('imcsdk.apis.server.remotepresence.vmedia_get_existing_status')
-@patch('imcsdk.apis.server.remotepresence.vmedia_get_existing_uri')
-@patch('imcsdk.apis.server.remotepresence.vmedia_mount_add')
+@patch('imcsdk.apis.server.vmedia.vmedia_get_existing_status')
+@patch('imcsdk.apis.server.vmedia.vmedia_get_existing_uri')
+@patch('imcsdk.apis.server.vmedia.vmedia_mount_create')
 @patch.object(ImcHandle, 'login')
 def test_invalid_vmedia_mount_iso_uri(login_mock, add_mount_mock,
                                       exist_mock, state_mock):
     # Patch ImcHandle.login to create a Faux ImcHandle object w/o real CIMC
-    # Patch vmedia_mount_add to simulate CIMC interaction w/o real CIMC
+    # Patch vmedia_mount_create to simulate CIMC interaction w/o real CIMC
     # Patch vmedia_get_existing_uri to simulate existing ISOs
     # Patch vmedia_get_existing_status to simulate ISO status
     login_mock.return_value = True
