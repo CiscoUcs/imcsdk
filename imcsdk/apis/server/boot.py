@@ -49,12 +49,15 @@ def boot_order_precision_get(handle, dump=False, server_id=1):
         in_dn=parent_dn, class_id="BiosBootDevPrecision")
 
     for device in boot_device_list:
+        device_type = device.type if device.type else str(device.type)
         boot_order_list.append({"order": device.order,
-                                "device-type": device.type,
+                                "device-type": device_type,
                                 "name": device.name})
 
     sorted_boot_order_list = sorted(
         boot_order_list, key=lambda item: item["order"])
+
+    log.debug("sorted_boot_order_list:\n%s" % sorted_boot_order_list)
 
     if dump:
         log.info("Precision Boot Order is [Order, Type, Name]:")
@@ -208,8 +211,8 @@ def _add_boot_device(handle, parent_dn, boot_device):
 
 def boot_order_precision_set(
         handle,
-        reboot_on_update=False,
-        reapply=False,
+        reboot_on_update="no",
+        reapply="no",
         configured_boot_mode="Legacy",
         boot_devices=[],
         server_id=1):
@@ -220,8 +223,8 @@ def boot_order_precision_set(
 
     Args:
         handle (ImcHandle)
-        reboot_on_update (bool): True, False
-        reapply(bool): True, False
+        reboot_on_update (string): "yes", "no"
+        reapply(string): "yes", "no"
         configured_boot_mode(string): "Legacy", "Uefi", "None"
         boot_devices (list of dict): format
             [{"order":'1', "device-type":"vmedia", "name":"vmedia"},
@@ -241,8 +244,8 @@ def boot_order_precision_set(
     Examples:
         boot_order_precision_set(
             handle,
-            reboot_on_update=False,
-            reapply=False,
+            reboot_on_update="no",
+            reapply="no",
             configured_boot_mode="Uefi",
             boot_devices = [{"order":'1', "device-type":"vmedia",
                             "name":"vmedia"},
@@ -255,16 +258,10 @@ def boot_order_precision_set(
     boot_devices = sorted(boot_devices, key=lambda x: x["order"])
 
     server_dn = imccoreutils.get_server_dn(handle, server_id)
+
     lsbootdevprecision_mo = LsbootDevPrecision(parent_mo_or_dn=server_dn)
-
-    lsbootdevprecision_mo.reboot_on_update = "no"
-    if reboot_on_update:
-        lsbootdevprecision_mo.reboot_on_update = "yes"
-
-    lsbootdevprecision_mo.reapply = "no"
-    if reapply:
-        lsbootdevprecision_mo.reapply = "yes"
-
+    lsbootdevprecision_mo.reboot_on_update = reboot_on_update
+    lsbootdevprecision_mo.reapply = reapply
     lsbootdevprecision_mo.configured_boot_mode = configured_boot_mode
 
     handle.set_mo(lsbootdevprecision_mo)
@@ -313,12 +310,9 @@ def boot_order_precision_exists(handle, **kwargs):
 
     mo = mos[0]
 
-    reboot_on_update = kwargs.get("reboot_on_update")
-    if isinstance(reboot_on_update, bool):
-        reboot_on_update = ("no", "yes")[reboot_on_update]
-
-    args = {"reboot_on_update": reboot_on_update,
-            "configured_boot_mode": kwargs.get("configured_boot_mode")}
+    args = {
+        "configured_boot_mode": kwargs.get("configured_boot_mode")
+    }
     if not mo.check_prop_match(**args):
         return False, "parent MO property values do not match"
 
@@ -400,8 +394,10 @@ def boot_order_policy_get(handle, dump=False, server_id=1):
     return sorted_boot_order_list
 
 
-def boot_order_policy_set(handle, reboot_on_update=False,
-                          secure_boot=False, boot_devices=[], server_id=1):
+def boot_order_policy_set(handle, reboot_on_update="no",
+                          secure_boot="disabled",
+                          boot_devices=[],
+                          server_id=1):
     """
     This method will set the boot order policy passed from the user
     This is the deprecated way of setting the boot order
@@ -409,8 +405,8 @@ def boot_order_policy_set(handle, reboot_on_update=False,
 
     Args:
         handle (ImcHandle)
-        reboot_on_update (bool): True, False
-        secure_boot (bool): secure boot
+        reboot_on_update (string): "yes", "no"
+        secure_boot (string): "enabled", "disabled"
         boot_devices (list of dict): format
             [{"order":'1', "device-type":"cdrom", "name":"cdrom0"},
              {"order":'2', "device-type":"lan", "name":"lan"}]
@@ -426,8 +422,8 @@ def boot_order_policy_set(handle, reboot_on_update=False,
     Examples:
         boot_order_policy_set(
             handle,
-            reboot_on_update=False,
-            secure_boot=True,
+            reboot_on_update="yes",
+            secure_boot="enabled",
             boot_devices = [{"order":'1', "device-type":"cdrom",
                             "name":"cdrom0"},
                             {"order":'2', "device-type":"lan", "name":"lan"}]
@@ -444,13 +440,13 @@ def boot_order_policy_set(handle, reboot_on_update=False,
     server_dn = imccoreutils.get_server_dn(handle, server_id)
 
     boot_policy = LsbootDef(parent_mo_or_dn=server_dn)
-    boot_policy.reboot_on_update = ("no", "yes")[reboot_on_update]
+    boot_policy.reboot_on_update = reboot_on_update
     handle.set_mo(boot_policy)
 
     secure_boot_policy = LsbootBootSecurity(parent_mo_or_dn=boot_policy.dn)
     # Secure boot policy is supported only from ImcVersion 2.0(1a)
     if handle.version >= secure_boot_policy.get_version(handle.platform):
-        secure_boot_policy.secure_boot = ("disabled", "enabled")[secure_boot]
+        secure_boot_policy.secure_boot = secure_boot
         handle.set_mo(secure_boot_policy)
 
     boot_policy_child_mos = handle.query_children(in_dn=boot_policy.dn)
