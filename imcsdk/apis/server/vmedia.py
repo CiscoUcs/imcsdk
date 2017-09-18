@@ -19,11 +19,14 @@ import os
 import time
 import urlparse
 import re
+import logging
 
 from imcsdk.mometa.comm.CommVMedia import CommVMedia
 from imcsdk.mometa.comm.CommVMediaMap import CommVMediaMap
 from imcsdk.imcexception import ImcOperationError
 from imcsdk.apis.admin.ipmi import _get_comm_mo_dn
+
+log = logging.getLogger('imc')
 
 CIFS_URI_PATTERN = re.compile('^//\d+\.\d+\.\d+\.\d+\/')
 NFS_URI_PATTERN = re.compile('^\d+\.\d+\.\d+\.\d+\:\/')
@@ -441,4 +444,5 @@ def vmedia_mount_remove_image(handle, image_type, server_id=1):
         virt_media_type = virt_media.remote_file.split('.')[-1]
         if virt_media_type == image_type:
             handle.remove_mo(virt_media)
+            log.warning("Removing existing mapping '%s'" % virt_media.dn)
             break
