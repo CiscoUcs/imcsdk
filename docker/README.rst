@@ -114,18 +114,18 @@ Once inside the container, make sure that all the packages needed for CIMC 3.0 a
 
         [root@cimc-3 /]# python2.7.13 -V
         Python 2.7.13
-         
+
         [root@cimc-3 /]# openssl version
         OpenSSL 1.0.1e-fips 11 Feb 2013
-         
+
         [root@cimc-3 /]# pip list | grep 'imcsdk\|redfish\|requests'
-        imcsdk (0.9.2.0)
+        imcsdk (0.9.3.0)
         redfish (1.0.0)
         requests (2.13.0)
-         
+
         [root@cimc-3 /]# ansible --version
         ansible 2.3.0.0
-         
+
         [root@cimc-3 /]# curl --version
         curl 7.29.0
 
@@ -143,22 +143,22 @@ Test if ``imcsdk`` APIs work with CIMC 3.0 inside the container.  Below, we use 
         >>> from imcsdk.imchandle import ImcHandle
         >>> from imcsdk.apis.server.inventory import inventory_get
         >>> imcsdk.__version__
-        '0.9.2.0'
-         
+        '0.9.3.0'
+
         >>> handle = ImcHandle("10.18.253.253", "admin", "SomePassword")
         >>> handle.login()
         True
-         
+
         >>> handle.version._ImcVersion__version
         '3.0(1c)'
-         
+
         >>> bios_settings = handle.query_dn('sys/rack-unit-1/bios/bios-settings')
         >>> bios_settings.__dict__
         {'status': None, 'dn': 'sys/rack-unit-1/bios/bios-settings', '_ManagedObject__xtra_props': {}, '_ManagedObject__parent_dn': 'sys/rack-unit-1/bios', '_dirty_mask': 0, '_handle': <imcsdk.imchandle.ImcHandle object at 0x7f799136ec90>, '_child': [], '_ManagedObject__xtra_props_dirty_mask': 1, '_ManagedObject__status': None, 'rn': 'bios-settings', '_ManagedObject__parent_mo': None, '_class_id': 'BiosSettings', 'child_action': None}
-         
+
         >>> inventory_get(handle=handle)
         {'10.18.253.253': {'vic': [{'dn': 'sys/rack-unit-1/adaptor-MLOM', 'vendor': 'Cisco Systems Inc', 'model': 'UCSC-MLOM-CSC-02', 'pci_slot': 'MLOM', 'id': 'MLOM', 'serial': 'FCH20477D4X'}], 'vHBAs': [], 'tpm': [{'dn': 'sys/rack-unit-1/board/tpm', 'model': 'NA', 'vendor': 'NA', 'serial': 'NA', 'tpm_revision': 'NA'}
-         
+
         >>> (Press CTRL+D to exit)
         [root@cimc-3 /]# exit
 
@@ -179,23 +179,23 @@ Below, we use Python's ``requests`` library with **RedFish** URIs (``/redfish/v1
         >>> ro = requests.get("https://10.18.253.253/redfish/v1/Systems", verify=False, auth=("admin", "SomePassword"))
         >>> ro
         <Response [200]>
-         
+
         >>> ro_json = ro.json()
         >>> uri = "https://10.18.253.253" + ro_json['Members'][0]['@odata.id']
         >>> ro = requests.get(uri, verify=False, auth=("admin", "SomePassword"))
         >>> ro
         <Response [200]>
-         
+
         >>> ro_json = ro.json()
         >>> ro_json['Model']
         u'UCS C220 M4S'
-         
+
         >>> ro_json['SerialNumber']
         u'FCH2047V0LJ'
-         
+
         >>> ro_json['BiosVersion']
         u'C220M4.3.0.1b.0.1201161639'
-         
+
         >>> (Press CTRL+D to exit)
         [root@cimc-3 /]# exit
 
@@ -246,7 +246,7 @@ Test if we can use ``curl`` to get objects from RedFish URIs inside the containe
             "@odata.id":"/redfish/v1/MessageRegistry"
           }
         }
-         
+
         [root@cimc-3 /]# curl --insecure -u admin:SomePassword https://10.18.253.253/redfish/v1/Systems
         {
           "Members":[{
@@ -259,7 +259,7 @@ Test if we can use ``curl`` to get objects from RedFish URIs inside the containe
           "Name":"Computer System Collection",
           "@odata.context":"/redfish/v1/$metadata#Systems"
         }
-         
+
         [root@cimc-3 /]# curl --insecure -u admin:SomePassword https://10.18.253.253/redfish/v1/Systems/FCH2047V0LJ
         {
           "SerialNumber":"FCH2047V0LJ",
@@ -322,7 +322,7 @@ Test if we can use ``curl`` to get objects from RedFish URIs inside the containe
             "@odata.id":"/redfish/v1/Systems/FCH2047V0LJ/EthernetInterfaces"
           }
         }
-         
+
         [root@cimc-3 /]# exit
 
 
