@@ -19,11 +19,14 @@ import os
 import time
 import urlparse
 import re
+import logging
 
 from imcsdk.mometa.comm.CommVMedia import CommVMedia
 from imcsdk.mometa.comm.CommVMediaMap import CommVMediaMap
 from imcsdk.imcexception import ImcOperationError
 from imcsdk.apis.admin.ipmi import _get_comm_mo_dn
+
+log = logging.getLogger('imc')
 
 CIFS_URI_PATTERN = re.compile('^//\d+\.\d+\.\d+\.\d+\/')
 NFS_URI_PATTERN = re.compile('^\d+\.\d+\.\d+\.\d+\:\/')
@@ -181,7 +184,8 @@ def vmedia_mount_create(handle, volume_name, remote_share, remote_file,
             username="abcd",
             password="xyz")
     """
-    vmedia_mount_remove_all(handle, server_id)
+    image_type = remote_file.split('.')[-1]
+    vmedia_mount_remove_image(handle, image_type)
 
     mo = CommVMediaMap(parent_mo_or_dn=_get_vmedia_mo_dn(handle, server_id),
                        volume_name=volume_name)
@@ -214,35 +218,35 @@ def vmedia_mount_create(handle, volume_name, remote_share, remote_file,
 
 
 def vmedia_mount_exists(handle, volume_name, server_id=1, **kwargs):
+    import re
 
     try:
         mo = vmedia_mount_get(handle, volume_name)
     except ImcOperationError:
         return False, None
 
-    if 'timeout' in kwargs:
-        del kwargs['timeout']
-
-    if 'username' in kwargs:
-        username = kwargs['username']
-        del kwargs['username']
-
-    if 'password' in kwargs:
-        password = kwargs['password']
-        del kwargs['password']
-
-    if 'mount_options' in kwargs:
-        mount_options = kwargs['mount_options']
-        if username:
-            if password:
-                mount_options = "username=%s,password=**********,%s" % (
-                    username, mount_options)
-            else:
-                mount_options = "username=%s,password=,%s" % (
-                    username, mount_options)
-            kwargs['mount_options'] = mount_options
+    kwargs.pop('timeout', None)
+    kwargs.pop('password', None)
+    username = kwargs.pop('username', None)
+    mount_options = kwargs.pop('mount_options', None)
 
     if not mo.check_prop_match(**kwargs):
+        return False, None
+
+    mo_mount_options = [x.strip() for x in mo.mount_options.split(',')]
+
+    if mount_options:
+        mount_options = [x.strip() for x in mount_options.split(',')][0]
+        if mount_options not in mo_mount_options:
+            return False, None
+
+    if username and mo.map in ['cifs', 'www']:
+        mo_username = re.search(r'username=(\S*?),',
+                                mo.mount_options).groups()[0]
+        if username != mo_username:
+            return False, None
+
+    if mo.mapping_status != 'OK':
         return False, None
 
     return True, mo
@@ -410,3 +414,35 @@ def vmedia_mount_remove_all(handle, server_id=1):
                                 'media mappings'.format(handle.ip))
     # Return True if all mappings removed
     return True
+
+
+def vmedia_mount_remove_image(handle, image_type, server_id=1):
+    """
+    This method will remove the vmedia mapping of specific type
+
+    Args:
+        handle (ImcHandle)
+        image_type (str): 'iso' or 'img'
+        server_id (int): Server Id to be specified for C3260 platforms
+
+    Raises:
+        Exception if mapping is able to be removed
+
+    Returns:
+        True
+
+    Examples:
+        vmedia_mount_remove_image(handle, image_type='iso')
+    """
+
+    # Get all current virtually mapped ISOs
+    virt_media_maps = handle.query_children(in_dn=_get_vmedia_mo_dn(handle,
+                                                                    server_id))
+    # Loop over each mapped ISO
+    for virt_media in virt_media_maps:
+        # Remove the mapped ISO
+        virt_media_type = virt_media.remote_file.split('.')[-1]
+        if virt_media_type == image_type:
+            handle.remove_mo(virt_media)
+            log.warning("Removing existing mapping '%s'" % virt_media.dn)
+            break
