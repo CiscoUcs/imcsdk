@@ -43,8 +43,8 @@ class SysdebugTechSupportExport(ManagedObject):
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x80, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "user": MoPropertyMeta("user", "user", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x200, 0, 255, None, [], []), 
-            "source": MoPropertyMeta("source", "source", "string", VersionMeta.Version311a, MoPropertyMeta.READ_WRITE, 0x400, None, None, None, ["remote", "usb"], []), 
-            "usb_path": MoPropertyMeta("usb_path", "usbPath", "string", VersionMeta.Version311a, MoPropertyMeta.READ_WRITE, 0x800, 1, 128, None, [], []), 
+            "source": MoPropertyMeta("source", "source", "string", VersionMeta.Version311d, MoPropertyMeta.READ_WRITE, 0x400, None, None, None, ["remote", "usb"], []), 
+            "usb_path": MoPropertyMeta("usb_path", "usbPath", "string", VersionMeta.Version311d, MoPropertyMeta.READ_WRITE, 0x800, 1, 128, None, [], []), 
         },
 
         "modular": {

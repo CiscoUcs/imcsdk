@@ -320,3 +320,101 @@ def bios_profile_generate_json(handle, name, server_id=1, file_name=None):
         f.close()
 
     return output
+
+
+def bios_tokens_set(handle, tokens={}, server_id=1):
+    """
+    Args:
+        handle (ImcHandle)
+        tokens (dictionary) : (key, value) pair of bios tokens with key being the name of the token
+        server_id (int): Id of the server to perform
+                         this operation on C3260 platforms.
+
+    Returns:
+        None
+
+    Examples:
+        bios_tokens_set(handle,
+                        tokens = {
+                            "BaudRate": "19200",
+                            "IntelVTDATSSupport": "enabled",
+                            "ConsoleRedirection": "com-1",
+                            "FlowControl": "rts-cts"},
+                        server_id=2)
+    """
+
+    from imcsdk.imccoreutils import load_class
+
+    parent_dn = _get_bios_dn(handle, server_id) + "/bios-settings"
+    mo_table = _get_bios_mo_table(handle, tokens, server_id)
+
+    for mo_name, props in mo_table.items():
+        mo_class = load_class(mo_name)
+        mo_obj = mo_class(parent_mo_or_dn=parent_dn, **props)
+        handle.set_mo(mo_obj)
+
+
+def bios_tokens_exist(handle, tokens={}, server_id=1):
+    """
+    Args:
+        handle (ImcHandle)
+        tokens (dictionary) : (key, value) pair of bios tokens with key being the name of the token
+        server_id (int): Id of the server to perform
+                         this operation on C3260 platforms.
+
+    Returns:
+        True/False based on the match with the server side tokens
+
+    Examples:
+        bios_tokens_exist(handle,
+                          tokens = {
+                            "BaudRate": "19200",
+                            "IntelVTDATSSupport": "enabled",
+                            "ConsoleRedirection": "com-1",
+                            "FlowControl": "rts-cts"},
+                          server_id=2)
+"""
+
+    parent_dn = _get_bios_dn(handle, server_id) + "/bios-settings"
+    mo_table = _get_bios_mo_table(handle, tokens, server_id)
+
+    for mo_name, props in mo_table.items():
+        cimc_mos = handle.query_classid(class_id=mo_name)
+        cimc_mo = None
+        for mo in cimc_mos:
+            if mo.dn.startswith(parent_dn):
+                cimc_mo = mo
+                break
+
+        if cimc_mo is None:
+            return False
+
+        # Skip comparison when the value to be checked with is "platform-default"
+        modified_props = {x: props[x] for x in props if props[x] != "platform-default"}
+
+        if not cimc_mo.check_prop_match(**modified_props):
+            return False
+
+    return True
+
+
+def _get_bios_mo_table(handle, tokens={}, server_id=1):
+    from imcsdk.imcbiostables import bios_tokens_table
+
+    mo_table = {}
+
+    for token, value in tokens.items():
+        bios_tokens_table_platform = bios_tokens_table.get(handle.platform,
+                                                           bios_tokens_table[
+                                                               'classic'])
+        entry = bios_tokens_table_platform.get(token)
+        if entry is None:
+            log.warning("Token not found: %s Platform: %s" % token,
+                        handle.platform)
+            continue
+
+        mo_props = mo_table.get(entry["mo_name"], {})
+        mo_props[entry["prop_name"]] = value
+        mo_table[entry["mo_name"]] = mo_props
+
+    return mo_table

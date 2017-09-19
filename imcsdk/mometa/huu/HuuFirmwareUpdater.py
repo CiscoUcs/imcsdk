@@ -52,7 +52,7 @@ class HuuFirmwareUpdater(ManagedObject):
             "update_type": MoPropertyMeta("update_type", "updateType", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x4000, 0, 510, None, ["delay", "delay_reboot", "immediate"], []), 
             "username": MoPropertyMeta("username", "username", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8000, None, None, None, [], []), 
             "verify_update": MoPropertyMeta("verify_update", "verifyUpdate", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10000, None, None, None, ["No", "Yes", "false", "no", "true", "yes"], []), 
-            "boot_medium": MoPropertyMeta("boot_medium", "bootMedium", "string", VersionMeta.Version311a, MoPropertyMeta.READ_WRITE, 0x20000, 0, 510, None, ["microsd", "vmedia"], []), 
+            "boot_medium": MoPropertyMeta("boot_medium", "bootMedium", "string", VersionMeta.Version311d, MoPropertyMeta.READ_WRITE, 0x20000, 0, 510, None, ["microsd", "vmedia"], []), 
         },
 
         "modular": {

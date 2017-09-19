@@ -38,7 +38,7 @@ def sol_enable(handle, speed=None, comport=None, ssh_port=None, server_id=1,
 
     Args:
         handle (ImcHandle)
-        speed (string): "9600", "19200", "38400", "57600", "115200"
+        speed (int): 9600, 19200, 38400, 57600, 115200
         comport (string): "com0", "com1"
         ssh_port (int): port for ssh
         server_id (int): Server Id to be specified for C3260 platforms
@@ -50,9 +50,9 @@ def sol_enable(handle, speed=None, comport=None, ssh_port=None, server_id=1,
     mo = sol_get(handle, server_id=server_id, caller="sol_enable")
     params = {
         "admin_state": SolIfConsts.ADMIN_STATE_ENABLE,
-        "speed": str(speed),
+        "speed": str(speed) if speed else None,
         "comport": comport,
-        "ssh_port": str(ssh_port),
+        "ssh_port": str(ssh_port) if ssh_port else None,
     }
 
     mo.set_prop_multiple(**kwargs)

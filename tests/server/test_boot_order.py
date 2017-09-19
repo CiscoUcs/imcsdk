@@ -60,7 +60,7 @@ def test_boot_order_precision():
     global handle, boot_order_prec_devices
     from imcsdk.apis.server.boot import boot_precision_configured_get
 
-    boot_order_precision_set(handle, reboot_on_update=False,
+    boot_order_precision_set(handle, reboot_on_update="no",
                              configured_boot_mode="Legacy",
                              boot_devices=boot_order_prec_devices)
 
@@ -83,7 +83,7 @@ def test_boot_order_precision_2():
     global handle, boot_order_prec_devices
     from imcsdk.apis.server.boot import boot_precision_configured_get
 
-    boot_order_precision_set(handle, reboot_on_update=False,
+    boot_order_precision_set(handle, reboot_on_update="no",
                              configured_boot_mode="Legacy",
                              boot_devices=boot_order_prec_devices_2)
 
@@ -103,8 +103,8 @@ boot_order_policy_devices = [{"order": '1', "device-type": "storage", "name": "e
 def test_boot_order_policy():
     global handle, boot_order_policy_devices
 
-    boot_order_policy_set(handle, reboot_on_update=True,
-                          secure_boot=False,
+    boot_order_policy_set(handle, reboot_on_update="yes",
+                          secure_boot="disabled",
                           boot_devices=boot_order_policy_devices)
 
     rcvd_dev_list = boot_order_policy_get(handle)
@@ -121,7 +121,7 @@ def test_boot_order_precision_exists():
 
     ret, msg = boot_order_precision_exists(
         handle,
-        reboot_on_update=False,
+        reboot_on_update="no",
         configured_boot_mode="Legacy",
         boot_devices=boot_order_prec_devices_2,
         server_id=1

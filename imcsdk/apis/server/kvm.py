@@ -51,8 +51,8 @@ def kvm_enable(handle, total_sessions=None, port=None, encryption_state=None,
     kvm_mo = CommKvm(parent_mo_or_dn=_get_comm_mo_dn(handle, server_id))
     params = {
         "admin_state": "enabled",
-        "total_sessions": str(total_sessions),
-        "port": str(port),
+        "total_sessions": str(total_sessions) if total_sessions else None,
+        "port": str(port) if port else None,
         "encryption_state": encryption_state,
         "local_video_state": local_video_state,
     }

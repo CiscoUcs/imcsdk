@@ -207,7 +207,7 @@ class ManagedObject(ImcBase):
                                  "Class [%s]: Prop <%s> "
                                  % (self.__class__.__name__, prop_name))
 
-            if kwargs[prop_name] != getattr(self, prop_name):
+            if str(kwargs[prop_name]) != getattr(self, prop_name):
                 return False
         return True
 

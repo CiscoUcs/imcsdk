@@ -28,7 +28,7 @@ from imcsdk.apis.server.storage import virtual_drive_create
 from imcsdk.apis.server.storage import virtual_drive_delete
 from imcsdk.apis.server.storage import virtual_drive_exists
 from imcsdk.apis.server.storage import controller_encryption_enable, \
-    controller_encryption_disable, is_controller_encryption_enabled, \
+    controller_encryption_disable, controller_encryption_exists, \
     controller_encryption_modify_security_key, \
     controller_encryption_key_id_generate, controller_encryption_key_generate
 from imcsdk.apis.server.storage import \
@@ -227,9 +227,9 @@ def test_controller_encryption_enable():
                                  controller_type=CONTROLLER_TYPE,
                                  controller_slot=CONTROLLER_SLOT,
                                  key_id='Nbv12345', security_key='Nbv12345')
-    assert_equal(is_controller_encryption_enabled(handle,
-                                                  CONTROLLER_TYPE,
-                                                  CONTROLLER_SLOT),
+    assert_equal(controller_encryption_exists(handle,
+                                              CONTROLLER_TYPE,
+                                              CONTROLLER_SLOT)[0],
                  True)
 
 
@@ -393,8 +393,7 @@ def test_controller_encryption_disable():
     controller_encryption_disable(handle,
                                   controller_type=CONTROLLER_TYPE,
                                   controller_slot=CONTROLLER_SLOT)
-    assert_equal(is_controller_encryption_enabled(
-                            handle,
-                            controller_type=CONTROLLER_TYPE,
-                            controller_slot=CONTROLLER_SLOT),
+    assert_equal(controller_encryption_exists(handle,
+                                        controller_type=CONTROLLER_TYPE,
+                                        controller_slot=CONTROLLER_SLOT)[0],
                  False)
