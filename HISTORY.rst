@@ -2,6 +2,27 @@
 History
 =======
 
+0.9.3.0 (2017-09-19)
+--------------------
+* Adds support for IMC version 3.0(2b), 3.0(3a) and 3.1(1d)
+* Adds support for HX platform
+* Fixes sync_mo
+* Containerizes imcsdk support for CIMC 3.0 using Docker
+* Adds context manager support for ImcHandle
+* Redesigned APIs for the following,
+
+  * BIOS
+  * Boot Order
+  * Certificate
+  * KVM
+  * LDAP
+  * NTP
+  * SNMP
+  * SOL
+  * Syslog
+  * Storage
+  * vMedia
+
 0.9.2.0 (2017-02-10)
 --------------------
 * Adds support for IMC version 3.0(1c)
