@@ -118,7 +118,7 @@ class TLSConnection(httplib.HTTPSConnection):
             self.sock = sock
             self._tunnel()
 
-        if sys.version_info >= (2, 7, 9):
+        if hasattr(ssl, 'SSLContext'):
             # Since python 2.7.9, tls 1.1 and 1.2 are supported via
             # SSLContext
             ssl_context = ssl.SSLContext(ssl.PROTOCOL_SSLv23)
