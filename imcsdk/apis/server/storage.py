@@ -50,7 +50,7 @@ def _flatten_list(drive_list):
     # [[1]] => [1]
     # [[1,2],[3,4]] => [1, 2, 3, 4]
     if not (isinstance(drive_list, list) and isinstance(drive_list[0], list)):
-        raise "drive_list needs a list of list(s). i.e [[1,2],[3,4]]"
+        raise ValueError("drive_list needs a list of list(s). i.e [[1,2],[3,4]]")
     dg_list = []
     for each in drive_list:
         for sub_each in each:
@@ -82,7 +82,7 @@ def _human_to_bytes(size_str):
                'PB': 5, 'EB': 6, 'ZB': 7, 'YB': 8}
     s = size_str.split()
     if s[1] not in convert:
-        raise "unknown size format" + size_str
+        raise ValueError("unknown size format - {0}".format(size_str))
     return int(s[0]) << (10 * convert[s[1]])
 
 
@@ -97,7 +97,7 @@ def _bytes_to_human(size, output_format=None):
     if output_format is None:
         output_format = unit[int(math.floor(math.log(size, 2))/10)]
     if output_format not in convert:
-        raise "unknown output format" + output_format
+        raise ValueError("unknown output format - {0}".format(output_format))
     return str(size >> (10 * convert[output_format])) + ' ' + output_format
 
 
@@ -140,7 +140,7 @@ def _raid_max_size_get(raid_level, total_size, min_size, span_depth):
             60: total_size - (span_depth * 2 * min_size)}
 
     if raid_level not in size:
-        raise "Unsupported Raid level" + str(raid_level)
+        raise ValueError("Unsupported Raid level - {0}".format(raid_level))
     return size[raid_level]
 
 
