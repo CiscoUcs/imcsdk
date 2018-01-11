@@ -22,6 +22,8 @@ from imcsdk.mometa.huu.HuuFirmwareUpdater import HuuFirmwareUpdater, \
 from imcsdk.mometa.huu.HuuFirmwareUpdateStatus import HuuFirmwareUpdateStatus
 from imcsdk.mometa.top.TopSystem import TopSystem
 from imcsdk.mometa.huu.HuuController import HuuController
+from past.utils import old_div
+
 
 log = logging.getLogger('imc')
 
@@ -160,7 +162,7 @@ def firmware_huu_update_monitor(handle, timeout=60, interval=10, server_id=1):
 
             time.sleep(interval)
             secs = (datetime.datetime.now() - start).total_seconds()
-            if int(secs / 60) > timeout:
+            if int(old_div(secs, 60)) > timeout:
                 log_progress("Monitor API timeout",
                              "rerun firmware_huu_update_monitor")
                 break

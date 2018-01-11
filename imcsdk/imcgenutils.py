@@ -27,6 +27,8 @@ import subprocess
 
 import logging
 
+from past.utils import old_div
+
 log = logging.getLogger('imc')
 
 from .imcexception import ImcWarning, ImcValidationException
@@ -146,7 +148,7 @@ class Progress(object):
         from sys import stdout
 
         self._seen += size
-        percent = self._seen * 100 / total
+        percent = self._seen * old_div(100, total)
         if percent < self._percent:
             return
         status = r"%10d  [%3.2f%%]" % (self._seen, percent)
@@ -420,7 +422,7 @@ def expand_key(key, clen):
     import hashlib
     from array import array
 
-    blocks = (clen + 19) / 20
+    blocks = old_div((clen + 19), 20)
     x_key = []
     seed = key
     for i_cnt in xrange(blocks):

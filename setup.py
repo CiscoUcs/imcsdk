@@ -36,7 +36,7 @@ setup(
     package_dir={'imcsdk':
                  'imcsdk'},
     include_package_data=True,
-    install_requires=['pyparsing'],
+    install_requires=['future', 'pyparsing'],
     license="http://www.apache.org/licenses/LICENSE-2.0",
     zip_safe=False,
     keywords='imcsdk',
