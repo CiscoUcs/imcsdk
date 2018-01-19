@@ -27,6 +27,7 @@ from imcsdk.mometa.self.SelfEncryptStorageController import \
     SelfEncryptStorageController, SelfEncryptStorageControllerConsts
 from imcsdk.mometa.storage.StorageLocalDisk import StorageLocalDiskConsts
 from imcsdk.mometa.storage.StorageController import StorageControllerConsts
+from past.utils import old_div
 
 log = logging.getLogger('imc')
 
@@ -95,7 +96,7 @@ def _bytes_to_human(size, output_format=None):
                'PB': 5, 'EB': 6, 'ZB': 7, 'YB': 8}
     unit = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
     if output_format is None:
-        output_format = unit[int(math.floor(math.log(size, 2))/10)]
+        output_format = unit[int(math.floor(old_div(math.log(size, 2)), 10))]
     if output_format not in convert:
         raise ValueError("unknown output format - {0}".format(output_format))
     return str(size >> (10 * convert[output_format])) + ' ' + output_format
@@ -132,10 +133,10 @@ def _vd_span_depth_get(drive_list):
 
 def _raid_max_size_get(raid_level, total_size, min_size, span_depth):
     size = {0: total_size,
-            1: total_size/2,
+            1: old_div(total_size, 2),
             5: total_size - (span_depth * 1 * min_size),
             6: total_size - (span_depth * 2 * min_size),
-            10: total_size/2,
+            10: old_div(total_size, 2),
             50: total_size - (span_depth * 1 * min_size),
             60: total_size - (span_depth * 2 * min_size)}
 
