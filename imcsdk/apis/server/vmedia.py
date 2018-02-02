@@ -252,13 +252,14 @@ def vmedia_mount_exists(handle, volume_name, server_id=1, **kwargs):
     return True, mo
 
 
-def vmedia_mount_iso_uri(handle, uri, user_id=None, password=None,
-                         timeout=60, interval=5, server_id=1):
+def vmedia_mount_iso_uri(handle, uri, volume_name=None, user_id=None,
+                         password=None, timeout=60, interval=5, server_id=1):
     """
     This method will setup the vmedia mapping
     Args:
         handle (ImcHandle)
         uri (string): URI of the ISO image
+        volume_name (string): optional name of volume
         user_id (string): optional username
         password (string): optional password
         timeout (int): optional timeout to wait for ISO map status to be 'OK'
@@ -302,6 +303,9 @@ def vmedia_mount_iso_uri(handle, uri, user_id=None, password=None,
         raise ValueError("Unsupported protocol: " +
                          urlparse.urlsplit(uri).scheme)
 
+    # Use remote filename if no volume_name givien
+    if not volume_name:
+        volume_name = remote_file
     # Convert no user/pass to blank strings
     if not user_id:
         user_id = ''
@@ -310,7 +314,7 @@ def vmedia_mount_iso_uri(handle, uri, user_id=None, password=None,
 
     # Map the ISO
     vmedia_mount_create(handle,
-                        volume_name=remote_file,
+                        volume_name=volume_name[:45],
                         map=mount_protocol,
                         mount_options=mount_options,
                         remote_share=remote_share,
