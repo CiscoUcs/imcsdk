@@ -205,7 +205,7 @@ def _add_boot_device(handle, parent_dn, boot_device):
                     if key not in ["order", "device-type", "name"]}
     device.set_prop_multiple(**device_props)
     if hasattr(device, "state"):
-        device.state = "enabled"
+        device.state = "Enabled"
     handle.add_mo(device, modify_present=True)
 
 
