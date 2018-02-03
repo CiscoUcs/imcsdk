@@ -17,9 +17,12 @@ This module implements all the kvm and sol related samples
 """
 import os
 import time
-import urlparse
 import re
 import logging
+try:
+    from urllib.parse import urlparse
+except ImportError:
+    import urlparse
 
 from imcsdk.mometa.comm.CommVMedia import CommVMedia
 from imcsdk.mometa.comm.CommVMediaMap import CommVMediaMap
