@@ -119,7 +119,7 @@ Once inside the container, make sure that all the packages needed for CIMC 3.0 a
         OpenSSL 1.0.1e-fips 11 Feb 2013
 
         [root@cimc-3 /]# pip list | grep 'imcsdk\|redfish\|requests'
-        imcsdk (0.9.3.0)
+        imcsdk (0.9.3.1)
         redfish (1.0.0)
         requests (2.13.0)
 
@@ -143,7 +143,7 @@ Test if ``imcsdk`` APIs work with CIMC 3.0 inside the container.  Below, we use 
         >>> from imcsdk.imchandle import ImcHandle
         >>> from imcsdk.apis.server.inventory import inventory_get
         >>> imcsdk.__version__
-        '0.9.3.0'
+        '0.9.3.1'
 
         >>> handle = ImcHandle("10.18.253.253", "admin", "SomePassword")
         >>> handle.login()
