@@ -25,20 +25,20 @@ class LdapCACertificateManagement(ManagedObject):
 
         "classic": {
             "binding_certificate": MoPropertyMeta("binding_certificate", "bindingCertificate", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-            "description": MoPropertyMeta("description", "description", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "description": MoPropertyMeta("description", "description", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
         },
 
         "modular": {
             "binding_certificate": MoPropertyMeta("binding_certificate", "bindingCertificate", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-            "description": MoPropertyMeta("description", "description", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "description": MoPropertyMeta("description", "description", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
         },
 
     }
@@ -47,20 +47,20 @@ class LdapCACertificateManagement(ManagedObject):
 
         "classic": {
             "bindingCertificate": "binding_certificate", 
-            "childAction": "child_action", 
-            "description": "description", 
             "dn": "dn", 
             "rn": "rn", 
             "status": "status", 
+            "childAction": "child_action", 
+            "description": "description", 
         },
 
         "modular": {
             "bindingCertificate": "binding_certificate", 
-            "childAction": "child_action", 
-            "description": "description", 
             "dn": "dn", 
             "rn": "rn", 
             "status": "status", 
+            "childAction": "child_action", 
+            "description": "description", 
         },
 
     }
@@ -68,9 +68,9 @@ class LdapCACertificateManagement(ManagedObject):
     def __init__(self, parent_mo_or_dn, **kwargs):
         self._dirty_mask = 0
         self.binding_certificate = None
+        self.status = None
         self.child_action = None
         self.description = None
-        self.status = None
 
         ManagedObject.__init__(self, "LdapCACertificateManagement", parent_mo_or_dn, **kwargs)
 

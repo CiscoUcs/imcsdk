@@ -474,7 +474,6 @@ class BiosVfPCISlotOptionROMEnable(ManagedObject):
     prop_meta = {
 
         "classic": {
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
@@ -504,6 +503,7 @@ class BiosVfPCISlotOptionROMEnable(ManagedObject):
             "vp_slot_n1_state": MoPropertyMeta("vp_slot_n1_state", "vpSlotN1State", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x8000000, None, None, None, ["Disabled", "Enabled", "Legacy Only", "UEFI Only", "disabled", "enabled", "platform-default"], []), 
             "vp_slot_n2_state": MoPropertyMeta("vp_slot_n2_state", "vpSlotN2State", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x10000000, None, None, None, ["Disabled", "Enabled", "Legacy Only", "UEFI Only", "disabled", "enabled", "platform-default"], []), 
             "vp_slot_sas_state": MoPropertyMeta("vp_slot_sas_state", "vpSlotSASState", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x20000000, None, None, None, ["Disabled", "Enabled", "Legacy Only", "UEFI Only", "disabled", "enabled", "platform-default"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "vp_slot11_link_speed": MoPropertyMeta("vp_slot11_link_speed", "vpSlot11LinkSpeed", "string", VersionMeta.Version311d, MoPropertyMeta.READ_WRITE, 0x40000000, None, None, None, ["Auto", "Disabled", "GEN1", "GEN2", "GEN3", "platform-default"], []), 
             "vp_slot11_state": MoPropertyMeta("vp_slot11_state", "vpSlot11State", "string", VersionMeta.Version311d, MoPropertyMeta.READ_WRITE, 0x80000000, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []), 
             "vp_slot12_link_speed": MoPropertyMeta("vp_slot12_link_speed", "vpSlot12LinkSpeed", "string", VersionMeta.Version311d, MoPropertyMeta.READ_WRITE, 0x100000000, None, None, None, ["Auto", "Disabled", "GEN1", "GEN2", "GEN3", "platform-default"], []), 
@@ -536,7 +536,6 @@ class BiosVfPCISlotOptionROMEnable(ManagedObject):
         },
 
         "modular": {
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
@@ -566,6 +565,7 @@ class BiosVfPCISlotOptionROMEnable(ManagedObject):
             "vp_slot_n1_state": MoPropertyMeta("vp_slot_n1_state", "vpSlotN1State", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8000000, None, None, None, ["Disabled", "Enabled", "Legacy Only", "UEFI Only", "disabled", "enabled", "platform-default"], []), 
             "vp_slot_n2_state": MoPropertyMeta("vp_slot_n2_state", "vpSlotN2State", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10000000, None, None, None, ["Disabled", "Enabled", "Legacy Only", "UEFI Only", "disabled", "enabled", "platform-default"], []), 
             "vp_slot_sas_state": MoPropertyMeta("vp_slot_sas_state", "vpSlotSASState", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20000000, None, None, None, ["Disabled", "Enabled", "Legacy Only", "UEFI Only", "disabled", "enabled", "platform-default"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "vp_ioe_slot1_state": MoPropertyMeta("vp_ioe_slot1_state", "vpIOESlot1State", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40000000, None, None, None, ["Disabled", "Enabled", "Legacy Only", "UEFI Only", "disabled", "enabled", "platform-default"], []), 
             "vp_ioe_slot2_state": MoPropertyMeta("vp_ioe_slot2_state", "vpIOESlot2State", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80000000, None, None, None, ["Disabled", "Enabled", "Legacy Only", "UEFI Only", "disabled", "enabled", "platform-default"], []), 
             "vp_slot_ioe_mezz1_link_speed": MoPropertyMeta("vp_slot_ioe_mezz1_link_speed", "vpSlotIOEMezz1LinkSpeed", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x100000000, None, None, None, ["Auto", "Disabled", "GEN1", "GEN2", "GEN3", "platform-default"], []), 
@@ -594,7 +594,6 @@ class BiosVfPCISlotOptionROMEnable(ManagedObject):
     prop_map = {
 
         "classic": {
-            "childAction": "child_action", 
             "dn": "dn", 
             "rn": "rn", 
             "status": "status", 
@@ -624,6 +623,7 @@ class BiosVfPCISlotOptionROMEnable(ManagedObject):
             "vpSlotN1State": "vp_slot_n1_state", 
             "vpSlotN2State": "vp_slot_n2_state", 
             "vpSlotSASState": "vp_slot_sas_state", 
+            "childAction": "child_action", 
             "vpSlot11LinkSpeed": "vp_slot11_link_speed", 
             "vpSlot11State": "vp_slot11_state", 
             "vpSlot12LinkSpeed": "vp_slot12_link_speed", 
@@ -656,7 +656,6 @@ class BiosVfPCISlotOptionROMEnable(ManagedObject):
         },
 
         "modular": {
-            "childAction": "child_action", 
             "dn": "dn", 
             "rn": "rn", 
             "status": "status", 
@@ -686,6 +685,7 @@ class BiosVfPCISlotOptionROMEnable(ManagedObject):
             "vpSlotN1State": "vp_slot_n1_state", 
             "vpSlotN2State": "vp_slot_n2_state", 
             "vpSlotSASState": "vp_slot_sas_state", 
+            "childAction": "child_action", 
             "vpIOESlot1State": "vp_ioe_slot1_state", 
             "vpIOESlot2State": "vp_ioe_slot2_state", 
             "vpSlotIOEMezz1LinkSpeed": "vp_slot_ioe_mezz1_link_speed", 
@@ -713,7 +713,6 @@ class BiosVfPCISlotOptionROMEnable(ManagedObject):
 
     def __init__(self, parent_mo_or_dn, **kwargs):
         self._dirty_mask = 0
-        self.child_action = None
         self.status = None
         self.vp_slot10_link_speed = None
         self.vp_slot10_state = None
@@ -741,6 +740,7 @@ class BiosVfPCISlotOptionROMEnable(ManagedObject):
         self.vp_slot_n1_state = None
         self.vp_slot_n2_state = None
         self.vp_slot_sas_state = None
+        self.child_action = None
         self.vp_slot11_link_speed = None
         self.vp_slot11_state = None
         self.vp_slot12_link_speed = None

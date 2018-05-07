@@ -27,19 +27,19 @@ class BiosVfLvDIMMSupport(ManagedObject):
     prop_meta = {
 
         "classic": {
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "vp_lv_ddr_mode": MoPropertyMeta("vp_lv_ddr_mode", "vpLvDDRMode", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["auto", "performance-mode", "platform-default", "power-saving-mode"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
         },
 
         "modular": {
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "vp_lv_ddr_mode": MoPropertyMeta("vp_lv_ddr_mode", "vpLvDDRMode", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["auto", "performance-mode", "platform-default", "power-saving-mode"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
         },
 
     }
@@ -47,28 +47,28 @@ class BiosVfLvDIMMSupport(ManagedObject):
     prop_map = {
 
         "classic": {
-            "childAction": "child_action", 
             "dn": "dn", 
             "rn": "rn", 
             "status": "status", 
             "vpLvDDRMode": "vp_lv_ddr_mode", 
+            "childAction": "child_action", 
         },
 
         "modular": {
-            "childAction": "child_action", 
             "dn": "dn", 
             "rn": "rn", 
             "status": "status", 
             "vpLvDDRMode": "vp_lv_ddr_mode", 
+            "childAction": "child_action", 
         },
 
     }
 
     def __init__(self, parent_mo_or_dn, **kwargs):
         self._dirty_mask = 0
-        self.child_action = None
         self.status = None
         self.vp_lv_ddr_mode = None
+        self.child_action = None
 
         ManagedObject.__init__(self, "BiosVfLvDIMMSupport", parent_mo_or_dn, **kwargs)
 

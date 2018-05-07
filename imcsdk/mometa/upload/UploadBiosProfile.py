@@ -29,8 +29,6 @@ class UploadBiosProfile(ManagedObject):
     prop_meta = {
 
         "classic": {
-            "bios_profile_upload_status": MoPropertyMeta("bios_profile_upload_status", "biosProfileUploadStatus", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version301c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
             "protocol": MoPropertyMeta("protocol", "protocol", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["ftp", "http", "none", "scp", "sftp", "tftp"], []), 
             "pwd": MoPropertyMeta("pwd", "pwd", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
@@ -39,11 +37,11 @@ class UploadBiosProfile(ManagedObject):
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x40, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "user": MoPropertyMeta("user", "user", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x100, 0, 255, None, [], []), 
+            "bios_profile_upload_status": MoPropertyMeta("bios_profile_upload_status", "biosProfileUploadStatus", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version301c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
         },
 
         "modular": {
-            "bios_profile_upload_status": MoPropertyMeta("bios_profile_upload_status", "biosProfileUploadStatus", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version301c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
             "protocol": MoPropertyMeta("protocol", "protocol", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["ftp", "http", "none", "scp", "sftp", "tftp"], []), 
             "pwd": MoPropertyMeta("pwd", "pwd", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
@@ -52,6 +50,8 @@ class UploadBiosProfile(ManagedObject):
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x40, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "user": MoPropertyMeta("user", "user", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x100, 0, 255, None, [], []), 
+            "bios_profile_upload_status": MoPropertyMeta("bios_profile_upload_status", "biosProfileUploadStatus", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version301c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
         },
 
     }
@@ -59,8 +59,6 @@ class UploadBiosProfile(ManagedObject):
     prop_map = {
 
         "classic": {
-            "biosProfileUploadStatus": "bios_profile_upload_status", 
-            "childAction": "child_action", 
             "dn": "dn", 
             "protocol": "protocol", 
             "pwd": "pwd", 
@@ -69,11 +67,11 @@ class UploadBiosProfile(ManagedObject):
             "rn": "rn", 
             "status": "status", 
             "user": "user", 
+            "biosProfileUploadStatus": "bios_profile_upload_status", 
+            "childAction": "child_action", 
         },
 
         "modular": {
-            "biosProfileUploadStatus": "bios_profile_upload_status", 
-            "childAction": "child_action", 
             "dn": "dn", 
             "protocol": "protocol", 
             "pwd": "pwd", 
@@ -82,20 +80,22 @@ class UploadBiosProfile(ManagedObject):
             "rn": "rn", 
             "status": "status", 
             "user": "user", 
+            "biosProfileUploadStatus": "bios_profile_upload_status", 
+            "childAction": "child_action", 
         },
 
     }
 
     def __init__(self, parent_mo_or_dn, **kwargs):
         self._dirty_mask = 0
-        self.bios_profile_upload_status = None
-        self.child_action = None
         self.protocol = None
         self.pwd = None
         self.remote_file = None
         self.remote_server = None
         self.status = None
         self.user = None
+        self.bios_profile_upload_status = None
+        self.child_action = None
 
         ManagedObject.__init__(self, "UploadBiosProfile", parent_mo_or_dn, **kwargs)
 

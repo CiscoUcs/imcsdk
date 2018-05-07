@@ -24,9 +24,7 @@ class CommKvm(ManagedObject):
     prop_meta = {
 
         "classic": {
-            "active_sessions": MoPropertyMeta("active_sessions", "activeSessions", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
             "admin_state": MoPropertyMeta("admin_state", "adminState", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "encryption_state": MoPropertyMeta("encryption_state", "encryptionState", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
             "local_video_state": MoPropertyMeta("local_video_state", "localVideoState", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
@@ -34,12 +32,12 @@ class CommKvm(ManagedObject):
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x40, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "total_sessions": MoPropertyMeta("total_sessions", "totalSessions", "uint", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, [], ["1-4"]), 
+            "active_sessions": MoPropertyMeta("active_sessions", "activeSessions", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
         },
 
         "modular": {
-            "active_sessions": MoPropertyMeta("active_sessions", "activeSessions", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
             "admin_state": MoPropertyMeta("admin_state", "adminState", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "encryption_state": MoPropertyMeta("encryption_state", "encryptionState", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
             "local_video_state": MoPropertyMeta("local_video_state", "localVideoState", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
@@ -47,6 +45,8 @@ class CommKvm(ManagedObject):
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "total_sessions": MoPropertyMeta("total_sessions", "totalSessions", "uint", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, [], ["1-4"]), 
+            "active_sessions": MoPropertyMeta("active_sessions", "activeSessions", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
         },
 
     }
@@ -54,9 +54,7 @@ class CommKvm(ManagedObject):
     prop_map = {
 
         "classic": {
-            "activeSessions": "active_sessions", 
             "adminState": "admin_state", 
-            "childAction": "child_action", 
             "dn": "dn", 
             "encryptionState": "encryption_state", 
             "localVideoState": "local_video_state", 
@@ -64,12 +62,12 @@ class CommKvm(ManagedObject):
             "rn": "rn", 
             "status": "status", 
             "totalSessions": "total_sessions", 
+            "activeSessions": "active_sessions", 
+            "childAction": "child_action", 
         },
 
         "modular": {
-            "activeSessions": "active_sessions", 
             "adminState": "admin_state", 
-            "childAction": "child_action", 
             "dn": "dn", 
             "encryptionState": "encryption_state", 
             "localVideoState": "local_video_state", 
@@ -77,20 +75,22 @@ class CommKvm(ManagedObject):
             "rn": "rn", 
             "status": "status", 
             "totalSessions": "total_sessions", 
+            "activeSessions": "active_sessions", 
+            "childAction": "child_action", 
         },
 
     }
 
     def __init__(self, parent_mo_or_dn, **kwargs):
         self._dirty_mask = 0
-        self.active_sessions = None
         self.admin_state = None
-        self.child_action = None
         self.encryption_state = None
         self.local_video_state = None
         self.port = None
         self.status = None
         self.total_sessions = None
+        self.active_sessions = None
+        self.child_action = None
 
         ManagedObject.__init__(self, "CommKvm", parent_mo_or_dn, **kwargs)
 

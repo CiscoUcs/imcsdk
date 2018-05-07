@@ -39,7 +39,6 @@ class LsbootVMedia(ManagedObject):
 
         "classic": {
             "access": MoPropertyMeta("access", "access", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["", "read-only-local", "read-only-remote", "read-write-drive", "read-write-local", "read-write-remote"], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version201a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version201a, MoPropertyMeta.NAMING, 0x8, None, None, r"""(([a-zA-Z0-9]{1})|([a-zA-Z0-9]{1}[a-zA-Z0-9_\-]{0,28}[a-zA-Z0-9]{1})|([a-zA-Z0-9]{2}))""", [], []), 
             "order": MoPropertyMeta("order", "order", "uint", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, [], ["1-255"]), 
@@ -48,11 +47,11 @@ class LsbootVMedia(ManagedObject):
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "subtype": MoPropertyMeta("subtype", "subtype", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["", "cimc-mapped-dvd", "cimc-mapped-hdd", "kvm-mapped-dvd", "kvm-mapped-fdd", "kvm-mapped-hdd"], []), 
             "type": MoPropertyMeta("type", "type", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["VMEDIA"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version201a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
         },
 
         "modular": {
             "access": MoPropertyMeta("access", "access", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["", "read-only-local", "read-only-remote", "read-write-drive", "read-write-local", "read-write-remote"], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version2013e, MoPropertyMeta.NAMING, 0x8, None, None, r"""(([a-zA-Z0-9]{1})|([a-zA-Z0-9]{1}[a-zA-Z0-9_\-]{0,28}[a-zA-Z0-9]{1})|([a-zA-Z0-9]{2}))""", [], []), 
             "order": MoPropertyMeta("order", "order", "uint", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, [], ["1-255"]), 
@@ -61,6 +60,7 @@ class LsbootVMedia(ManagedObject):
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "subtype": MoPropertyMeta("subtype", "subtype", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["", "cimc-mapped-dvd", "cimc-mapped-hdd", "kvm-mapped-dvd", "kvm-mapped-fdd", "kvm-mapped-hdd"], []), 
             "type": MoPropertyMeta("type", "type", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["VMEDIA"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
         },
 
     }
@@ -69,7 +69,6 @@ class LsbootVMedia(ManagedObject):
 
         "classic": {
             "access": "access", 
-            "childAction": "child_action", 
             "dn": "dn", 
             "name": "name", 
             "order": "order", 
@@ -78,11 +77,11 @@ class LsbootVMedia(ManagedObject):
             "status": "status", 
             "subtype": "subtype", 
             "type": "type", 
+            "childAction": "child_action", 
         },
 
         "modular": {
             "access": "access", 
-            "childAction": "child_action", 
             "dn": "dn", 
             "name": "name", 
             "order": "order", 
@@ -91,6 +90,7 @@ class LsbootVMedia(ManagedObject):
             "status": "status", 
             "subtype": "subtype", 
             "type": "type", 
+            "childAction": "child_action", 
         },
 
     }
@@ -99,12 +99,12 @@ class LsbootVMedia(ManagedObject):
         self._dirty_mask = 0
         self.name = name
         self.access = None
-        self.child_action = None
         self.order = None
         self.state = None
         self.status = None
         self.subtype = None
         self.type = None
+        self.child_action = None
 
         ManagedObject.__init__(self, "LsbootVMedia", parent_mo_or_dn, **kwargs)
 

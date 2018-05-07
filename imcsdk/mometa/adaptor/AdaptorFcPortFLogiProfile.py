@@ -24,21 +24,21 @@ class AdaptorFcPortFLogiProfile(ManagedObject):
     prop_meta = {
 
         "classic": {
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
             "retries": MoPropertyMeta("retries", "retries", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["INFINITE"], ["0-4294967295"]), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "timeout": MoPropertyMeta("timeout", "timeout", "uint", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, [], ["1000-255000"]), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
         },
 
         "modular": {
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
             "retries": MoPropertyMeta("retries", "retries", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["INFINITE"], ["0-4294967295"]), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "timeout": MoPropertyMeta("timeout", "timeout", "uint", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, [], ["1000-255000"]), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
         },
 
     }
@@ -46,31 +46,31 @@ class AdaptorFcPortFLogiProfile(ManagedObject):
     prop_map = {
 
         "classic": {
-            "childAction": "child_action", 
             "dn": "dn", 
             "retries": "retries", 
             "rn": "rn", 
             "status": "status", 
             "timeout": "timeout", 
+            "childAction": "child_action", 
         },
 
         "modular": {
-            "childAction": "child_action", 
             "dn": "dn", 
             "retries": "retries", 
             "rn": "rn", 
             "status": "status", 
             "timeout": "timeout", 
+            "childAction": "child_action", 
         },
 
     }
 
     def __init__(self, parent_mo_or_dn, **kwargs):
         self._dirty_mask = 0
-        self.child_action = None
         self.retries = None
         self.status = None
         self.timeout = None
+        self.child_action = None
 
         ManagedObject.__init__(self, "AdaptorFcPortFLogiProfile", parent_mo_or_dn, **kwargs)
 

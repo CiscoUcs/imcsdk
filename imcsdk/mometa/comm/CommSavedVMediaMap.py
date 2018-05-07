@@ -31,34 +31,34 @@ class CommSavedVMediaMap(ManagedObject):
 
         "classic": {
             "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["delete-volume", "remap-volume"], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version301c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "volume_name": MoPropertyMeta("volume_name", "volumeName", "string", VersionMeta.Version301c, MoPropertyMeta.NAMING, 0x20, None, None, r"""[\-\.:_a-zA-Z0-9]{1,47}""", [], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version301c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "drive_type": MoPropertyMeta("drive_type", "driveType", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, None, None, None, ["cd", "floppy"], []), 
             "map": MoPropertyMeta("map", "map", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, None, None, None, ["cifs", "nfs", "www"], []), 
             "mount_options": MoPropertyMeta("mount_options", "mountOptions", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, 1, 248, None, [], []), 
             "password": MoPropertyMeta("password", "password", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
             "remote_file": MoPropertyMeta("remote_file", "remoteFile", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, None, None, r"""[ !#$%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}~a-zA-Z0-9]{1,235}""", [], []), 
             "remote_share": MoPropertyMeta("remote_share", "remoteShare", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, None, None, r"""[ !#$%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}~a-zA-Z0-9]{1,235}""", [], []), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "username": MoPropertyMeta("username", "username", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
-            "volume_name": MoPropertyMeta("volume_name", "volumeName", "string", VersionMeta.Version301c, MoPropertyMeta.NAMING, 0x20, None, None, r"""[\-\.:_a-zA-Z0-9]{1,47}""", [], []), 
         },
 
         "modular": {
             "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["delete-volume", "remap-volume"], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version301c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "volume_name": MoPropertyMeta("volume_name", "volumeName", "string", VersionMeta.Version301c, MoPropertyMeta.NAMING, 0x20, None, None, r"""[\-\.:_a-zA-Z0-9]{1,47}""", [], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version301c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "drive_type": MoPropertyMeta("drive_type", "driveType", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, None, None, None, ["cd", "floppy"], []), 
             "map": MoPropertyMeta("map", "map", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, None, None, None, ["cifs", "nfs", "www"], []), 
             "mount_options": MoPropertyMeta("mount_options", "mountOptions", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, 1, 248, None, [], []), 
             "password": MoPropertyMeta("password", "password", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
             "remote_file": MoPropertyMeta("remote_file", "remoteFile", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, None, None, r"""[ !#$%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}~a-zA-Z0-9]{1,235}""", [], []), 
             "remote_share": MoPropertyMeta("remote_share", "remoteShare", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, None, None, r"""[ !#$%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}~a-zA-Z0-9]{1,235}""", [], []), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "username": MoPropertyMeta("username", "username", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
-            "volume_name": MoPropertyMeta("volume_name", "volumeName", "string", VersionMeta.Version301c, MoPropertyMeta.NAMING, 0x20, None, None, r"""[\-\.:_a-zA-Z0-9]{1,47}""", [], []), 
         },
 
     }
@@ -67,34 +67,34 @@ class CommSavedVMediaMap(ManagedObject):
 
         "classic": {
             "adminAction": "admin_action", 
-            "childAction": "child_action", 
             "dn": "dn", 
+            "rn": "rn", 
+            "status": "status", 
+            "volumeName": "volume_name", 
+            "childAction": "child_action", 
             "driveType": "drive_type", 
             "map": "map", 
             "mountOptions": "mount_options", 
             "password": "password", 
             "remoteFile": "remote_file", 
             "remoteShare": "remote_share", 
-            "rn": "rn", 
-            "status": "status", 
             "username": "username", 
-            "volumeName": "volume_name", 
         },
 
         "modular": {
             "adminAction": "admin_action", 
-            "childAction": "child_action", 
             "dn": "dn", 
+            "rn": "rn", 
+            "status": "status", 
+            "volumeName": "volume_name", 
+            "childAction": "child_action", 
             "driveType": "drive_type", 
             "map": "map", 
             "mountOptions": "mount_options", 
             "password": "password", 
             "remoteFile": "remote_file", 
             "remoteShare": "remote_share", 
-            "rn": "rn", 
-            "status": "status", 
             "username": "username", 
-            "volumeName": "volume_name", 
         },
 
     }
@@ -103,6 +103,7 @@ class CommSavedVMediaMap(ManagedObject):
         self._dirty_mask = 0
         self.volume_name = volume_name
         self.admin_action = None
+        self.status = None
         self.child_action = None
         self.drive_type = None
         self.map = None
@@ -110,7 +111,6 @@ class CommSavedVMediaMap(ManagedObject):
         self.password = None
         self.remote_file = None
         self.remote_share = None
-        self.status = None
         self.username = None
 
         ManagedObject.__init__(self, "CommSavedVMediaMap", parent_mo_or_dn, **kwargs)

@@ -29,9 +29,7 @@ class UploadPIDCatalog(ManagedObject):
     prop_meta = {
 
         "classic": {
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
-            "pid_upload_status": MoPropertyMeta("pid_upload_status", "pidUploadStatus", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "protocol": MoPropertyMeta("protocol", "protocol", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["ftp", "http", "none", "scp", "sftp", "tftp"], []), 
             "pwd": MoPropertyMeta("pwd", "pwd", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
             "remote_file": MoPropertyMeta("remote_file", "remoteFile", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, r"""[^\(\)~`'\?\\"";<>\|&\*\^$%]{0,255}""", [], []), 
@@ -39,12 +37,12 @@ class UploadPIDCatalog(ManagedObject):
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "user": MoPropertyMeta("user", "user", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x100, 0, 255, None, [], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "pid_upload_status": MoPropertyMeta("pid_upload_status", "pidUploadStatus", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
         },
 
         "modular": {
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
-            "pid_upload_status": MoPropertyMeta("pid_upload_status", "pidUploadStatus", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "protocol": MoPropertyMeta("protocol", "protocol", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["ftp", "http", "none", "scp", "sftp", "tftp"], []), 
             "pwd": MoPropertyMeta("pwd", "pwd", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
             "remote_file": MoPropertyMeta("remote_file", "remoteFile", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, r"""[^\(\)~`'\?\\"";<>\|&\*\^$%]{0,255}""", [], []), 
@@ -52,6 +50,8 @@ class UploadPIDCatalog(ManagedObject):
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "user": MoPropertyMeta("user", "user", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x100, 0, 255, None, [], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "pid_upload_status": MoPropertyMeta("pid_upload_status", "pidUploadStatus", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
         },
 
     }
@@ -59,9 +59,7 @@ class UploadPIDCatalog(ManagedObject):
     prop_map = {
 
         "classic": {
-            "childAction": "child_action", 
             "dn": "dn", 
-            "pidUploadStatus": "pid_upload_status", 
             "protocol": "protocol", 
             "pwd": "pwd", 
             "remoteFile": "remote_file", 
@@ -69,12 +67,12 @@ class UploadPIDCatalog(ManagedObject):
             "rn": "rn", 
             "status": "status", 
             "user": "user", 
+            "childAction": "child_action", 
+            "pidUploadStatus": "pid_upload_status", 
         },
 
         "modular": {
-            "childAction": "child_action", 
             "dn": "dn", 
-            "pidUploadStatus": "pid_upload_status", 
             "protocol": "protocol", 
             "pwd": "pwd", 
             "remoteFile": "remote_file", 
@@ -82,20 +80,22 @@ class UploadPIDCatalog(ManagedObject):
             "rn": "rn", 
             "status": "status", 
             "user": "user", 
+            "childAction": "child_action", 
+            "pidUploadStatus": "pid_upload_status", 
         },
 
     }
 
     def __init__(self, parent_mo_or_dn, **kwargs):
         self._dirty_mask = 0
-        self.child_action = None
-        self.pid_upload_status = None
         self.protocol = None
         self.pwd = None
         self.remote_file = None
         self.remote_server = None
         self.status = None
         self.user = None
+        self.child_action = None
+        self.pid_upload_status = None
 
         ManagedObject.__init__(self, "UploadPIDCatalog", parent_mo_or_dn, **kwargs)
 

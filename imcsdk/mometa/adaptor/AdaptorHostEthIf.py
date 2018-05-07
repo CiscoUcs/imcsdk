@@ -30,11 +30,8 @@ class AdaptorHostEthIf(ManagedObject):
             "advanced_filter": MoPropertyMeta("advanced_filter", "advancedFilter", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
             "cdn": MoPropertyMeta("cdn", "cdn", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x4, None, None, r"""[a-zA-Z0-9\-\._:]{0,32}""", [], []), 
             "channel_number": MoPropertyMeta("channel_number", "channelNumber", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, [], ["1-1000"]), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "class_of_service": MoPropertyMeta("class_of_service", "classOfService", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, r"""[0-6]""", [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, None, [], []), 
-            "if_type": MoPropertyMeta("if_type", "ifType", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["virtual"], []), 
-            "iscsi_boot": MoPropertyMeta("iscsi_boot", "iscsiBoot", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
             "mac": MoPropertyMeta("mac", "mac", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x40, None, None, r"""(([0-9a-fA-F][0-9a-fA-F]:){5}([0-9a-fA-F][0-9a-fA-F]))|0""", ["AUTO"], []), 
             "mtu": MoPropertyMeta("mtu", "mtu", "uint", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, [], ["1500-9000"]), 
             "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version151f, MoPropertyMeta.NAMING, 0x100, None, None, r"""[a-zA-Z0-9\-\._:]{1,31}""", [], []), 
@@ -43,6 +40,9 @@ class AdaptorHostEthIf(ManagedObject):
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x800, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x1000, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "uplink_port": MoPropertyMeta("uplink_port", "uplinkPort", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2000, None, None, None, ["0", "1"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "if_type": MoPropertyMeta("if_type", "ifType", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["virtual"], []), 
+            "iscsi_boot": MoPropertyMeta("iscsi_boot", "iscsiBoot", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
             "usnic_count": MoPropertyMeta("usnic_count", "usnicCount", "uint", VersionMeta.Version151x, MoPropertyMeta.READ_ONLY, None, None, None, None, [], ["0-225"]), 
         },
 
@@ -50,11 +50,8 @@ class AdaptorHostEthIf(ManagedObject):
             "advanced_filter": MoPropertyMeta("advanced_filter", "advancedFilter", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
             "cdn": MoPropertyMeta("cdn", "cdn", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x4, None, None, r"""[a-zA-Z0-9\-\._:]{0,32}""", [], []), 
             "channel_number": MoPropertyMeta("channel_number", "channelNumber", "uint", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, [], ["1-1000"]), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "class_of_service": MoPropertyMeta("class_of_service", "classOfService", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, r"""[0-6]""", [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, None, [], []), 
-            "if_type": MoPropertyMeta("if_type", "ifType", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["virtual"], []), 
-            "iscsi_boot": MoPropertyMeta("iscsi_boot", "iscsiBoot", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
             "mac": MoPropertyMeta("mac", "mac", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, None, None, r"""(([0-9a-fA-F][0-9a-fA-F]:){5}([0-9a-fA-F][0-9a-fA-F]))|0""", ["AUTO"], []), 
             "mtu": MoPropertyMeta("mtu", "mtu", "uint", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, [], ["1500-9000"]), 
             "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version2013e, MoPropertyMeta.NAMING, 0x100, None, None, r"""[a-zA-Z0-9\-\._:]{1,31}""", [], []), 
@@ -63,6 +60,9 @@ class AdaptorHostEthIf(ManagedObject):
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x800, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x1000, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "uplink_port": MoPropertyMeta("uplink_port", "uplinkPort", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2000, None, None, None, ["0", "1"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "if_type": MoPropertyMeta("if_type", "ifType", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["virtual"], []), 
+            "iscsi_boot": MoPropertyMeta("iscsi_boot", "iscsiBoot", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
             "usnic_count": MoPropertyMeta("usnic_count", "usnicCount", "uint", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], ["0-225"]), 
         },
 
@@ -74,11 +74,8 @@ class AdaptorHostEthIf(ManagedObject):
             "advancedFilter": "advanced_filter", 
             "cdn": "cdn", 
             "channelNumber": "channel_number", 
-            "childAction": "child_action", 
             "classOfService": "class_of_service", 
             "dn": "dn", 
-            "ifType": "if_type", 
-            "iscsiBoot": "iscsi_boot", 
             "mac": "mac", 
             "mtu": "mtu", 
             "name": "name", 
@@ -87,6 +84,9 @@ class AdaptorHostEthIf(ManagedObject):
             "rn": "rn", 
             "status": "status", 
             "uplinkPort": "uplink_port", 
+            "childAction": "child_action", 
+            "ifType": "if_type", 
+            "iscsiBoot": "iscsi_boot", 
             "usnicCount": "usnic_count", 
         },
 
@@ -94,11 +94,8 @@ class AdaptorHostEthIf(ManagedObject):
             "advancedFilter": "advanced_filter", 
             "cdn": "cdn", 
             "channelNumber": "channel_number", 
-            "childAction": "child_action", 
             "classOfService": "class_of_service", 
             "dn": "dn", 
-            "ifType": "if_type", 
-            "iscsiBoot": "iscsi_boot", 
             "mac": "mac", 
             "mtu": "mtu", 
             "name": "name", 
@@ -107,6 +104,9 @@ class AdaptorHostEthIf(ManagedObject):
             "rn": "rn", 
             "status": "status", 
             "uplinkPort": "uplink_port", 
+            "childAction": "child_action", 
+            "ifType": "if_type", 
+            "iscsiBoot": "iscsi_boot", 
             "usnicCount": "usnic_count", 
         },
 
@@ -118,16 +118,16 @@ class AdaptorHostEthIf(ManagedObject):
         self.advanced_filter = None
         self.cdn = None
         self.channel_number = None
-        self.child_action = None
         self.class_of_service = None
-        self.if_type = None
-        self.iscsi_boot = None
         self.mac = None
         self.mtu = None
         self.port_profile = None
         self.pxe_boot = None
         self.status = None
         self.uplink_port = None
+        self.child_action = None
+        self.if_type = None
+        self.iscsi_boot = None
         self.usnic_count = None
 
         ManagedObject.__init__(self, "AdaptorHostEthIf", parent_mo_or_dn, **kwargs)

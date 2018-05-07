@@ -26,20 +26,20 @@ class ActivatePIDCatalog(ManagedObject):
 
         "classic": {
             "admin_state": MoPropertyMeta("admin_state", "adminState", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["trigger", "triggered"], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
-            "pid_activation_status": MoPropertyMeta("pid_activation_status", "pidActivationStatus", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "pid_activation_status": MoPropertyMeta("pid_activation_status", "pidActivationStatus", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
         },
 
         "modular": {
             "admin_state": MoPropertyMeta("admin_state", "adminState", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["trigger", "triggered"], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
-            "pid_activation_status": MoPropertyMeta("pid_activation_status", "pidActivationStatus", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "pid_activation_status": MoPropertyMeta("pid_activation_status", "pidActivationStatus", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
         },
 
     }
@@ -48,20 +48,20 @@ class ActivatePIDCatalog(ManagedObject):
 
         "classic": {
             "adminState": "admin_state", 
-            "childAction": "child_action", 
             "dn": "dn", 
-            "pidActivationStatus": "pid_activation_status", 
             "rn": "rn", 
             "status": "status", 
+            "childAction": "child_action", 
+            "pidActivationStatus": "pid_activation_status", 
         },
 
         "modular": {
             "adminState": "admin_state", 
-            "childAction": "child_action", 
             "dn": "dn", 
-            "pidActivationStatus": "pid_activation_status", 
             "rn": "rn", 
             "status": "status", 
+            "childAction": "child_action", 
+            "pidActivationStatus": "pid_activation_status", 
         },
 
     }
@@ -69,9 +69,9 @@ class ActivatePIDCatalog(ManagedObject):
     def __init__(self, parent_mo_or_dn, **kwargs):
         self._dirty_mask = 0
         self.admin_state = None
+        self.status = None
         self.child_action = None
         self.pid_activation_status = None
-        self.status = None
 
         ManagedObject.__init__(self, "ActivatePIDCatalog", parent_mo_or_dn, **kwargs)
 

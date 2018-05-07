@@ -29,7 +29,6 @@ class AaaLdapRoleGroup(ManagedObject):
 
         "classic": {
             "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["clear"], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "domain": MoPropertyMeta("domain", "domain", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, 1, 255, None, [], []), 
             "id": MoPropertyMeta("id", "id", "uint", VersionMeta.Version151f, MoPropertyMeta.NAMING, 0x10, None, None, None, [], ["1-28"]), 
@@ -37,11 +36,11 @@ class AaaLdapRoleGroup(ManagedObject):
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x40, 0, 255, None, [], []), 
             "role": MoPropertyMeta("role", "role", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["", "admin", "read-only", "user"], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
         },
 
         "modular": {
             "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["clear"], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "domain": MoPropertyMeta("domain", "domain", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, 1, 255, None, [], []), 
             "id": MoPropertyMeta("id", "id", "uint", VersionMeta.Version2013e, MoPropertyMeta.NAMING, 0x10, None, None, None, [], ["1-28"]), 
@@ -49,6 +48,7 @@ class AaaLdapRoleGroup(ManagedObject):
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, 0, 255, None, [], []), 
             "role": MoPropertyMeta("role", "role", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["", "admin", "read-only", "user"], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
         },
 
     }
@@ -57,7 +57,6 @@ class AaaLdapRoleGroup(ManagedObject):
 
         "classic": {
             "adminAction": "admin_action", 
-            "childAction": "child_action", 
             "dn": "dn", 
             "domain": "domain", 
             "id": "id", 
@@ -65,11 +64,11 @@ class AaaLdapRoleGroup(ManagedObject):
             "rn": "rn", 
             "role": "role", 
             "status": "status", 
+            "childAction": "child_action", 
         },
 
         "modular": {
             "adminAction": "admin_action", 
-            "childAction": "child_action", 
             "dn": "dn", 
             "domain": "domain", 
             "id": "id", 
@@ -77,6 +76,7 @@ class AaaLdapRoleGroup(ManagedObject):
             "rn": "rn", 
             "role": "role", 
             "status": "status", 
+            "childAction": "child_action", 
         },
 
     }
@@ -85,11 +85,11 @@ class AaaLdapRoleGroup(ManagedObject):
         self._dirty_mask = 0
         self.id = id
         self.admin_action = None
-        self.child_action = None
         self.domain = None
         self.name = None
         self.role = None
         self.status = None
+        self.child_action = None
 
         ManagedObject.__init__(self, "AaaLdapRoleGroup", parent_mo_or_dn, **kwargs)
 

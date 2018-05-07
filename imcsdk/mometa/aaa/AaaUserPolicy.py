@@ -24,21 +24,21 @@ class AaaUserPolicy(ManagedObject):
     prop_meta = {
 
         "classic": {
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version209c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
-            "password_policy_rules": MoPropertyMeta("password_policy_rules", "passwordPolicyRules", "string", VersionMeta.Version209c, MoPropertyMeta.READ_ONLY, None, 0, 2500, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "user_password_policy": MoPropertyMeta("user_password_policy", "userPasswordPolicy", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version209c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "password_policy_rules": MoPropertyMeta("password_policy_rules", "passwordPolicyRules", "string", VersionMeta.Version209c, MoPropertyMeta.READ_ONLY, None, 0, 2500, None, [], []), 
         },
 
         "modular": {
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
-            "password_policy_rules": MoPropertyMeta("password_policy_rules", "passwordPolicyRules", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 2500, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "user_password_policy": MoPropertyMeta("user_password_policy", "userPasswordPolicy", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "password_policy_rules": MoPropertyMeta("password_policy_rules", "passwordPolicyRules", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 2500, None, [], []), 
         },
 
     }
@@ -46,31 +46,31 @@ class AaaUserPolicy(ManagedObject):
     prop_map = {
 
         "classic": {
-            "childAction": "child_action", 
             "dn": "dn", 
-            "passwordPolicyRules": "password_policy_rules", 
             "rn": "rn", 
             "status": "status", 
             "userPasswordPolicy": "user_password_policy", 
+            "childAction": "child_action", 
+            "passwordPolicyRules": "password_policy_rules", 
         },
 
         "modular": {
-            "childAction": "child_action", 
             "dn": "dn", 
-            "passwordPolicyRules": "password_policy_rules", 
             "rn": "rn", 
             "status": "status", 
             "userPasswordPolicy": "user_password_policy", 
+            "childAction": "child_action", 
+            "passwordPolicyRules": "password_policy_rules", 
         },
 
     }
 
     def __init__(self, parent_mo_or_dn, **kwargs):
         self._dirty_mask = 0
-        self.child_action = None
-        self.password_policy_rules = None
         self.status = None
         self.user_password_policy = None
+        self.child_action = None
+        self.password_policy_rules = None
 
         ManagedObject.__init__(self, "AaaUserPolicy", parent_mo_or_dn, **kwargs)
 

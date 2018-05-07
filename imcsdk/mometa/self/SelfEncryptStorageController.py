@@ -32,7 +32,6 @@ class SelfEncryptStorageController(ManagedObject):
 
         "classic": {
             "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["disable-self-encrypt", "enable-self-encrypt", "modify-self-encrypt", "switch-local-to-remote", "switch-remote-to-local", "unlock-secured-drives"], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version209c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "existing_security_key": MoPropertyMeta("existing_security_key", "existingSecurityKey", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x8, 1, 33, None, [], []), 
             "key_id": MoPropertyMeta("key_id", "keyId", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x10, 1, 256, None, [], []), 
@@ -40,11 +39,11 @@ class SelfEncryptStorageController(ManagedObject):
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x40, 0, 255, None, [], []), 
             "security_key": MoPropertyMeta("security_key", "securityKey", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x80, 1, 33, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version209c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
         },
 
         "modular": {
             "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["disable-self-encrypt", "enable-self-encrypt", "modify-self-encrypt", "switch-local-to-remote", "switch-remote-to-local", "unlock-secured-drives"], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version303a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "existing_security_key": MoPropertyMeta("existing_security_key", "existingSecurityKey", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x8, 1, 33, None, [], []), 
             "key_id": MoPropertyMeta("key_id", "keyId", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x10, 1, 256, None, [], []), 
@@ -52,6 +51,7 @@ class SelfEncryptStorageController(ManagedObject):
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x40, 0, 255, None, [], []), 
             "security_key": MoPropertyMeta("security_key", "securityKey", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x80, 1, 33, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version303a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
         },
 
     }
@@ -60,7 +60,6 @@ class SelfEncryptStorageController(ManagedObject):
 
         "classic": {
             "adminAction": "admin_action", 
-            "childAction": "child_action", 
             "dn": "dn", 
             "existingSecurityKey": "existing_security_key", 
             "keyId": "key_id", 
@@ -68,11 +67,11 @@ class SelfEncryptStorageController(ManagedObject):
             "rn": "rn", 
             "securityKey": "security_key", 
             "status": "status", 
+            "childAction": "child_action", 
         },
 
         "modular": {
             "adminAction": "admin_action", 
-            "childAction": "child_action", 
             "dn": "dn", 
             "existingSecurityKey": "existing_security_key", 
             "keyId": "key_id", 
@@ -80,6 +79,7 @@ class SelfEncryptStorageController(ManagedObject):
             "rn": "rn", 
             "securityKey": "security_key", 
             "status": "status", 
+            "childAction": "child_action", 
         },
 
     }
@@ -87,12 +87,12 @@ class SelfEncryptStorageController(ManagedObject):
     def __init__(self, parent_mo_or_dn, **kwargs):
         self._dirty_mask = 0
         self.admin_action = None
-        self.child_action = None
         self.existing_security_key = None
         self.key_id = None
         self.key_management = None
         self.security_key = None
         self.status = None
+        self.child_action = None
 
         ManagedObject.__init__(self, "SelfEncryptStorageController", parent_mo_or_dn, **kwargs)
 

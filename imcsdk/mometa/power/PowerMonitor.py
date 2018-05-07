@@ -45,9 +45,9 @@ class PowerMonitor(ManagedObject):
             "domain": MoPropertyMeta("domain", "domain", "string", VersionMeta.Version2013e, MoPropertyMeta.NAMING, None, None, None, None, ["CPU", "Memory", "Platform"], []), 
             "maximum": MoPropertyMeta("maximum", "maximum", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
             "minimum": MoPropertyMeta("minimum", "minimum", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
+            "period": MoPropertyMeta("period", "period", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x8, None, None, r"""((removed|created|modified|deleted),){0,3}(removed|created|modified|deleted){0,1}""", [], []), 
-            "period": MoPropertyMeta("period", "period", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
         },
 
     }
@@ -74,9 +74,9 @@ class PowerMonitor(ManagedObject):
             "domain": "domain", 
             "maximum": "maximum", 
             "minimum": "minimum", 
+            "period": "period", 
             "rn": "rn", 
             "status": "status", 
-            "period": "period", 
         },
 
     }

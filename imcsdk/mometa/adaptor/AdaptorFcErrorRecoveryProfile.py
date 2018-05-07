@@ -24,7 +24,6 @@ class AdaptorFcErrorRecoveryProfile(ManagedObject):
     prop_meta = {
 
         "classic": {
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
             "error_detect_timeout": MoPropertyMeta("error_detect_timeout", "errorDetectTimeout", "uint", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, [], ["1000-100000"]), 
             "fcp_error_recovery": MoPropertyMeta("fcp_error_recovery", "fcpErrorRecovery", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
@@ -35,10 +34,10 @@ class AdaptorFcErrorRecoveryProfile(ManagedObject):
             "resource_allocation_timeout": MoPropertyMeta("resource_allocation_timeout", "resourceAllocationTimeout", "uint", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, [], ["5000-100000"]), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x200, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x400, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
         },
 
         "modular": {
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
             "error_detect_timeout": MoPropertyMeta("error_detect_timeout", "errorDetectTimeout", "uint", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, [], ["1000-100000"]), 
             "fcp_error_recovery": MoPropertyMeta("fcp_error_recovery", "fcpErrorRecovery", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
@@ -49,6 +48,7 @@ class AdaptorFcErrorRecoveryProfile(ManagedObject):
             "resource_allocation_timeout": MoPropertyMeta("resource_allocation_timeout", "resourceAllocationTimeout", "uint", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, [], ["5000-100000"]), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x400, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
         },
 
     }
@@ -56,7 +56,6 @@ class AdaptorFcErrorRecoveryProfile(ManagedObject):
     prop_map = {
 
         "classic": {
-            "childAction": "child_action", 
             "dn": "dn", 
             "errorDetectTimeout": "error_detect_timeout", 
             "fcpErrorRecovery": "fcp_error_recovery", 
@@ -67,10 +66,10 @@ class AdaptorFcErrorRecoveryProfile(ManagedObject):
             "resourceAllocationTimeout": "resource_allocation_timeout", 
             "rn": "rn", 
             "status": "status", 
+            "childAction": "child_action", 
         },
 
         "modular": {
-            "childAction": "child_action", 
             "dn": "dn", 
             "errorDetectTimeout": "error_detect_timeout", 
             "fcpErrorRecovery": "fcp_error_recovery", 
@@ -81,13 +80,13 @@ class AdaptorFcErrorRecoveryProfile(ManagedObject):
             "resourceAllocationTimeout": "resource_allocation_timeout", 
             "rn": "rn", 
             "status": "status", 
+            "childAction": "child_action", 
         },
 
     }
 
     def __init__(self, parent_mo_or_dn, **kwargs):
         self._dirty_mask = 0
-        self.child_action = None
         self.error_detect_timeout = None
         self.fcp_error_recovery = None
         self.io_timeout_retry = None
@@ -96,6 +95,7 @@ class AdaptorFcErrorRecoveryProfile(ManagedObject):
         self.port_down_timeout = None
         self.resource_allocation_timeout = None
         self.status = None
+        self.child_action = None
 
         ManagedObject.__init__(self, "AdaptorFcErrorRecoveryProfile", parent_mo_or_dn, **kwargs)
 

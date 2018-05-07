@@ -29,12 +29,9 @@ class StorageFlexFlashOperationalProfile(ManagedObject):
 
         "classic": {
             "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["clear-errors"], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version202c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-            "controller": MoPropertyMeta("controller", "controller", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "io_read_error_threshold": MoPropertyMeta("io_read_error_threshold", "ioReadErrorThreshold", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x8, 0, 510, None, [], ["0-255"]), 
             "io_write_error_threshold": MoPropertyMeta("io_write_error_threshold", "ioWriteErrorThreshold", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x10, 0, 510, None, [], ["0-255"]), 
-            "operating_mode": MoPropertyMeta("operating_mode", "operatingMode", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "raid_primary_member": MoPropertyMeta("raid_primary_member", "raidPrimaryMember", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x20, 0, 510, None, ["slot-1", "slot-2"], []), 
             "raid_secondary_role": MoPropertyMeta("raid_secondary_role", "raidSecondaryRole", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x40, 0, 510, None, ["active", "initializing"], []), 
             "rd_err_count_slot1_threshold": MoPropertyMeta("rd_err_count_slot1_threshold", "rdErrCountSlot1Threshold", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x80, 0, 510, None, [], ["0-255"]), 
@@ -44,16 +41,16 @@ class StorageFlexFlashOperationalProfile(ManagedObject):
             "virtual_drives_enabled": MoPropertyMeta("virtual_drives_enabled", "virtualDrivesEnabled", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x800, 0, 30, None, [], []), 
             "wr_err_count_slot1_threshold": MoPropertyMeta("wr_err_count_slot1_threshold", "wrErrCountSlot1Threshold", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x1000, 0, 510, None, [], ["0-255"]), 
             "wr_err_count_slot2_threshold": MoPropertyMeta("wr_err_count_slot2_threshold", "wrErrCountSlot2Threshold", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x2000, 0, 510, None, [], ["0-255"]), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version202c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "controller": MoPropertyMeta("controller", "controller", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "operating_mode": MoPropertyMeta("operating_mode", "operatingMode", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
         },
 
         "modular": {
             "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["clear-errors"], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-            "controller": MoPropertyMeta("controller", "controller", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "io_read_error_threshold": MoPropertyMeta("io_read_error_threshold", "ioReadErrorThreshold", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, 0, 510, r"""([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]){0,1}""", [], []), 
             "io_write_error_threshold": MoPropertyMeta("io_write_error_threshold", "ioWriteErrorThreshold", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, 0, 510, r"""([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]){0,1}""", [], []), 
-            "operating_mode": MoPropertyMeta("operating_mode", "operatingMode", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "raid_primary_member": MoPropertyMeta("raid_primary_member", "raidPrimaryMember", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, 0, 510, None, ["slot-1", "slot-2"], []), 
             "raid_secondary_role": MoPropertyMeta("raid_secondary_role", "raidSecondaryRole", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, 0, 510, None, ["active", "initializing"], []), 
             "rd_err_count_slot1_threshold": MoPropertyMeta("rd_err_count_slot1_threshold", "rdErrCountSlot1Threshold", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, 0, 510, r"""([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]){0,1}""", [], []), 
@@ -63,6 +60,9 @@ class StorageFlexFlashOperationalProfile(ManagedObject):
             "virtual_drives_enabled": MoPropertyMeta("virtual_drives_enabled", "virtualDrivesEnabled", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x800, 0, 30, None, [], []), 
             "wr_err_count_slot1_threshold": MoPropertyMeta("wr_err_count_slot1_threshold", "wrErrCountSlot1Threshold", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x1000, 0, 510, r"""([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]){0,1}""", [], []), 
             "wr_err_count_slot2_threshold": MoPropertyMeta("wr_err_count_slot2_threshold", "wrErrCountSlot2Threshold", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2000, 0, 510, r"""([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]){0,1}""", [], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "controller": MoPropertyMeta("controller", "controller", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "operating_mode": MoPropertyMeta("operating_mode", "operatingMode", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
         },
 
     }
@@ -71,12 +71,9 @@ class StorageFlexFlashOperationalProfile(ManagedObject):
 
         "classic": {
             "adminAction": "admin_action", 
-            "childAction": "child_action", 
-            "controller": "controller", 
             "dn": "dn", 
             "ioReadErrorThreshold": "io_read_error_threshold", 
             "ioWriteErrorThreshold": "io_write_error_threshold", 
-            "operatingMode": "operating_mode", 
             "raidPrimaryMember": "raid_primary_member", 
             "raidSecondaryRole": "raid_secondary_role", 
             "rdErrCountSlot1Threshold": "rd_err_count_slot1_threshold", 
@@ -86,16 +83,16 @@ class StorageFlexFlashOperationalProfile(ManagedObject):
             "virtualDrivesEnabled": "virtual_drives_enabled", 
             "wrErrCountSlot1Threshold": "wr_err_count_slot1_threshold", 
             "wrErrCountSlot2Threshold": "wr_err_count_slot2_threshold", 
+            "childAction": "child_action", 
+            "controller": "controller", 
+            "operatingMode": "operating_mode", 
         },
 
         "modular": {
             "adminAction": "admin_action", 
-            "childAction": "child_action", 
-            "controller": "controller", 
             "dn": "dn", 
             "ioReadErrorThreshold": "io_read_error_threshold", 
             "ioWriteErrorThreshold": "io_write_error_threshold", 
-            "operatingMode": "operating_mode", 
             "raidPrimaryMember": "raid_primary_member", 
             "raidSecondaryRole": "raid_secondary_role", 
             "rdErrCountSlot1Threshold": "rd_err_count_slot1_threshold", 
@@ -105,6 +102,9 @@ class StorageFlexFlashOperationalProfile(ManagedObject):
             "virtualDrivesEnabled": "virtual_drives_enabled", 
             "wrErrCountSlot1Threshold": "wr_err_count_slot1_threshold", 
             "wrErrCountSlot2Threshold": "wr_err_count_slot2_threshold", 
+            "childAction": "child_action", 
+            "controller": "controller", 
+            "operatingMode": "operating_mode", 
         },
 
     }
@@ -112,11 +112,8 @@ class StorageFlexFlashOperationalProfile(ManagedObject):
     def __init__(self, parent_mo_or_dn, **kwargs):
         self._dirty_mask = 0
         self.admin_action = None
-        self.child_action = None
-        self.controller = None
         self.io_read_error_threshold = None
         self.io_write_error_threshold = None
-        self.operating_mode = None
         self.raid_primary_member = None
         self.raid_secondary_role = None
         self.rd_err_count_slot1_threshold = None
@@ -125,6 +122,9 @@ class StorageFlexFlashOperationalProfile(ManagedObject):
         self.virtual_drives_enabled = None
         self.wr_err_count_slot1_threshold = None
         self.wr_err_count_slot2_threshold = None
+        self.child_action = None
+        self.controller = None
+        self.operating_mode = None
 
         ManagedObject.__init__(self, "StorageFlexFlashOperationalProfile", parent_mo_or_dn, **kwargs)
 

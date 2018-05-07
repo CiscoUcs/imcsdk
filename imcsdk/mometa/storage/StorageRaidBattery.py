@@ -26,8 +26,11 @@ class StorageRaidBattery(ManagedObject):
     prop_meta = {
 
         "classic": {
-            "absolute_state_of_charge": MoPropertyMeta("absolute_state_of_charge", "absoluteStateOfCharge", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["disable-auto-learn", "enable-auto-learn", "start-learn-cycle"], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "absolute_state_of_charge": MoPropertyMeta("absolute_state_of_charge", "absoluteStateOfCharge", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "battery_present": MoPropertyMeta("battery_present", "batteryPresent", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "battery_status": MoPropertyMeta("battery_status", "batteryStatus", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "battery_type": MoPropertyMeta("battery_type", "batteryType", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
@@ -38,7 +41,6 @@ class StorageRaidBattery(ManagedObject):
             "date_of_manufacture": MoPropertyMeta("date_of_manufacture", "dateOfManufacture", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "design_capacity": MoPropertyMeta("design_capacity", "designCapacity", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "design_voltage": MoPropertyMeta("design_voltage", "designVoltage", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "expected_margin_of_error": MoPropertyMeta("expected_margin_of_error", "expectedMarginOfError", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "firmware_version": MoPropertyMeta("firmware_version", "firmwareVersion", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "full_capacity": MoPropertyMeta("full_capacity", "fullCapacity", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
@@ -51,17 +53,18 @@ class StorageRaidBattery(ManagedObject):
             "relative_state_of_charge": MoPropertyMeta("relative_state_of_charge", "relativeStateOfCharge", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "remaining_capacity": MoPropertyMeta("remaining_capacity", "remainingCapacity", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "retention_time": MoPropertyMeta("retention_time", "retentionTime", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
             "serial_number": MoPropertyMeta("serial_number", "serialNumber", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "temperature": MoPropertyMeta("temperature", "temperature", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "temperature_high": MoPropertyMeta("temperature_high", "temperatureHigh", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "voltage": MoPropertyMeta("voltage", "voltage", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
         },
 
         "modular": {
-            "absolute_state_of_charge": MoPropertyMeta("absolute_state_of_charge", "absoluteStateOfCharge", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["disable-auto-learn", "enable-auto-learn", "start-learn-cycle"], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "absolute_state_of_charge": MoPropertyMeta("absolute_state_of_charge", "absoluteStateOfCharge", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "battery_present": MoPropertyMeta("battery_present", "batteryPresent", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "battery_status": MoPropertyMeta("battery_status", "batteryStatus", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "battery_type": MoPropertyMeta("battery_type", "batteryType", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
@@ -72,7 +75,6 @@ class StorageRaidBattery(ManagedObject):
             "date_of_manufacture": MoPropertyMeta("date_of_manufacture", "dateOfManufacture", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "design_capacity": MoPropertyMeta("design_capacity", "designCapacity", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "design_voltage": MoPropertyMeta("design_voltage", "designVoltage", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "expected_margin_of_error": MoPropertyMeta("expected_margin_of_error", "expectedMarginOfError", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "firmware_version": MoPropertyMeta("firmware_version", "firmwareVersion", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "full_capacity": MoPropertyMeta("full_capacity", "fullCapacity", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
@@ -85,9 +87,7 @@ class StorageRaidBattery(ManagedObject):
             "relative_state_of_charge": MoPropertyMeta("relative_state_of_charge", "relativeStateOfCharge", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "remaining_capacity": MoPropertyMeta("remaining_capacity", "remainingCapacity", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "retention_time": MoPropertyMeta("retention_time", "retentionTime", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
             "serial_number": MoPropertyMeta("serial_number", "serialNumber", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "temperature": MoPropertyMeta("temperature", "temperature", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "temperature_high": MoPropertyMeta("temperature_high", "temperatureHigh", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "voltage": MoPropertyMeta("voltage", "voltage", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
@@ -98,8 +98,11 @@ class StorageRaidBattery(ManagedObject):
     prop_map = {
 
         "classic": {
-            "absoluteStateOfCharge": "absolute_state_of_charge", 
             "adminAction": "admin_action", 
+            "dn": "dn", 
+            "rn": "rn", 
+            "status": "status", 
+            "absoluteStateOfCharge": "absolute_state_of_charge", 
             "batteryPresent": "battery_present", 
             "batteryStatus": "battery_status", 
             "batteryType": "battery_type", 
@@ -110,7 +113,6 @@ class StorageRaidBattery(ManagedObject):
             "dateOfManufacture": "date_of_manufacture", 
             "designCapacity": "design_capacity", 
             "designVoltage": "design_voltage", 
-            "dn": "dn", 
             "expectedMarginOfError": "expected_margin_of_error", 
             "firmwareVersion": "firmware_version", 
             "fullCapacity": "full_capacity", 
@@ -123,17 +125,18 @@ class StorageRaidBattery(ManagedObject):
             "relativeStateOfCharge": "relative_state_of_charge", 
             "remainingCapacity": "remaining_capacity", 
             "retentionTime": "retention_time", 
-            "rn": "rn", 
             "serialNumber": "serial_number", 
-            "status": "status", 
             "temperature": "temperature", 
             "temperatureHigh": "temperature_high", 
             "voltage": "voltage", 
         },
 
         "modular": {
-            "absoluteStateOfCharge": "absolute_state_of_charge", 
             "adminAction": "admin_action", 
+            "dn": "dn", 
+            "rn": "rn", 
+            "status": "status", 
+            "absoluteStateOfCharge": "absolute_state_of_charge", 
             "batteryPresent": "battery_present", 
             "batteryStatus": "battery_status", 
             "batteryType": "battery_type", 
@@ -144,7 +147,6 @@ class StorageRaidBattery(ManagedObject):
             "dateOfManufacture": "date_of_manufacture", 
             "designCapacity": "design_capacity", 
             "designVoltage": "design_voltage", 
-            "dn": "dn", 
             "expectedMarginOfError": "expected_margin_of_error", 
             "firmwareVersion": "firmware_version", 
             "fullCapacity": "full_capacity", 
@@ -157,9 +159,7 @@ class StorageRaidBattery(ManagedObject):
             "relativeStateOfCharge": "relative_state_of_charge", 
             "remainingCapacity": "remaining_capacity", 
             "retentionTime": "retention_time", 
-            "rn": "rn", 
             "serialNumber": "serial_number", 
-            "status": "status", 
             "temperature": "temperature", 
             "temperatureHigh": "temperature_high", 
             "voltage": "voltage", 
@@ -169,8 +169,9 @@ class StorageRaidBattery(ManagedObject):
 
     def __init__(self, parent_mo_or_dn, **kwargs):
         self._dirty_mask = 0
-        self.absolute_state_of_charge = None
         self.admin_action = None
+        self.status = None
+        self.absolute_state_of_charge = None
         self.battery_present = None
         self.battery_status = None
         self.battery_type = None
@@ -194,7 +195,6 @@ class StorageRaidBattery(ManagedObject):
         self.remaining_capacity = None
         self.retention_time = None
         self.serial_number = None
-        self.status = None
         self.temperature = None
         self.temperature_high = None
         self.voltage = None

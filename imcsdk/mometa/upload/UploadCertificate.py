@@ -32,7 +32,6 @@ class UploadCertificate(ManagedObject):
         "classic": {
             "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["remote-cert-upload"], []), 
             "certificate_content": MoPropertyMeta("certificate_content", "certificateContent", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, [], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version209c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
             "protocol": MoPropertyMeta("protocol", "protocol", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["ftp", "http", "none", "scp", "sftp", "tftp"], []), 
             "pwd": MoPropertyMeta("pwd", "pwd", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, None, [], []), 
@@ -41,12 +40,12 @@ class UploadCertificate(ManagedObject):
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x100, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "user": MoPropertyMeta("user", "user", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x400, 0, 255, None, [], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version209c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
         },
 
         "modular": {
             "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["remote-cert-upload"], []), 
             "certificate_content": MoPropertyMeta("certificate_content", "certificateContent", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, [], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
             "protocol": MoPropertyMeta("protocol", "protocol", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["ftp", "http", "none", "scp", "sftp", "tftp"], []), 
             "pwd": MoPropertyMeta("pwd", "pwd", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, None, [], []), 
@@ -55,6 +54,7 @@ class UploadCertificate(ManagedObject):
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x100, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "user": MoPropertyMeta("user", "user", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x400, 0, 255, None, [], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
         },
 
     }
@@ -64,7 +64,6 @@ class UploadCertificate(ManagedObject):
         "classic": {
             "adminAction": "admin_action", 
             "certificateContent": "certificate_content", 
-            "childAction": "child_action", 
             "dn": "dn", 
             "protocol": "protocol", 
             "pwd": "pwd", 
@@ -73,12 +72,12 @@ class UploadCertificate(ManagedObject):
             "rn": "rn", 
             "status": "status", 
             "user": "user", 
+            "childAction": "child_action", 
         },
 
         "modular": {
             "adminAction": "admin_action", 
             "certificateContent": "certificate_content", 
-            "childAction": "child_action", 
             "dn": "dn", 
             "protocol": "protocol", 
             "pwd": "pwd", 
@@ -87,6 +86,7 @@ class UploadCertificate(ManagedObject):
             "rn": "rn", 
             "status": "status", 
             "user": "user", 
+            "childAction": "child_action", 
         },
 
     }
@@ -95,13 +95,13 @@ class UploadCertificate(ManagedObject):
         self._dirty_mask = 0
         self.admin_action = None
         self.certificate_content = None
-        self.child_action = None
         self.protocol = None
         self.pwd = None
         self.remote_file = None
         self.remote_server = None
         self.status = None
         self.user = None
+        self.child_action = None
 
         ManagedObject.__init__(self, "UploadCertificate", parent_mo_or_dn, **kwargs)
 
