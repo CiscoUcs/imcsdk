@@ -406,6 +406,36 @@ def virtual_drive_start_full_initialize(handle, controller_type,
     handle.set_mo(vd)
     return handle.query_dn(vd.dn)
 
+def virtual_drive_cancel_initialization(handle, controller_type,
+                                        controller_slot, name, server_id=1):
+    """
+    Cancel full initialization on the virtual drive
+
+    Args:
+        handle (ImcHandle)
+        controller_type (str): Controller type
+                               'SAS'
+        controller_slot (str): Controller slot name/number
+                                "MEZZ","0"-"9", "HBA"
+        name (string): name of the virtual drive
+        server_id (int): server_id for UCS 3260 platform
+
+    Returns:
+        StorageVirtualDrive object
+
+    Examples:
+        virtual_drive_cancel_initialize(handle, 'SAS', 'HBA', 'test_vd')
+    """
+    from imcsdk.mometa.storage.StorageVirtualDrive import \
+        StorageVirtualDriveConsts
+    vd = vd_query_by_name(handle=handle,
+                          controller_type=controller_type,
+                          controller_slot=controller_slot,
+                          name=name,
+                          server_id=server_id)
+    vd.admin_action = StorageVirtualDriveConsts.ADMIN_ACTION_CANCEL_INITIALIZATION
+    handle.set_mo(vd)
+    return handle.query_dn(vd.dn)
 
 def virtual_drive_set_boot_drive(handle, controller_type, controller_slot, name, server_id=1):
     """
