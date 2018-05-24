@@ -32,7 +32,6 @@ class AaaUser(ManagedObject):
         "classic": {
             "account_status": MoPropertyMeta("account_status", "accountStatus", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["active", "inactive"], []), 
             "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version208d, MoPropertyMeta.READ_WRITE, 0x4, 0, 510, None, ["clear"], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
             "id": MoPropertyMeta("id", "id", "uint", VersionMeta.Version151f, MoPropertyMeta.NAMING, 0x10, None, None, None, [], ["1-15"]), 
             "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x20, None, None, r"""[a-zA-Z0-9\._\+\-]{0,16}""", [], []), 
@@ -40,12 +39,12 @@ class AaaUser(ManagedObject):
             "pwd": MoPropertyMeta("pwd", "pwd", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x80, None, None, r"""[!""#%&'\(\)\*\+,\-\./:;<>@\[\\\]\^_`\{\|\}~a-zA-Z0-9]{0,20}""", [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x100, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
         },
 
         "modular": {
             "account_status": MoPropertyMeta("account_status", "accountStatus", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["active", "inactive"], []), 
             "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 510, None, ["clear"], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
             "id": MoPropertyMeta("id", "id", "uint", VersionMeta.Version2013e, MoPropertyMeta.NAMING, 0x10, None, None, None, [], ["1-15"]), 
             "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, None, None, r"""[a-zA-Z0-9\._\+\-]{0,16}""", [], []), 
@@ -53,6 +52,7 @@ class AaaUser(ManagedObject):
             "pwd": MoPropertyMeta("pwd", "pwd", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, None, None, r"""[!""#%&'\(\)\*\+,\-\./:;<>@\[\\\]\^_`\{\|\}~a-zA-Z0-9]{0,20}""", [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x100, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
         },
 
     }
@@ -62,7 +62,6 @@ class AaaUser(ManagedObject):
         "classic": {
             "accountStatus": "account_status", 
             "adminAction": "admin_action", 
-            "childAction": "child_action", 
             "dn": "dn", 
             "id": "id", 
             "name": "name", 
@@ -70,12 +69,12 @@ class AaaUser(ManagedObject):
             "pwd": "pwd", 
             "rn": "rn", 
             "status": "status", 
+            "childAction": "child_action", 
         },
 
         "modular": {
             "accountStatus": "account_status", 
             "adminAction": "admin_action", 
-            "childAction": "child_action", 
             "dn": "dn", 
             "id": "id", 
             "name": "name", 
@@ -83,6 +82,7 @@ class AaaUser(ManagedObject):
             "pwd": "pwd", 
             "rn": "rn", 
             "status": "status", 
+            "childAction": "child_action", 
         },
 
     }
@@ -92,11 +92,11 @@ class AaaUser(ManagedObject):
         self.id = id
         self.account_status = None
         self.admin_action = None
-        self.child_action = None
         self.name = None
         self.priv = None
         self.pwd = None
         self.status = None
+        self.child_action = None
 
         ManagedObject.__init__(self, "AaaUser", parent_mo_or_dn, **kwargs)
 

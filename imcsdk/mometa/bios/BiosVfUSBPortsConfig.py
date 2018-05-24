@@ -58,7 +58,6 @@ class BiosVfUSBPortsConfig(ManagedObject):
     prop_meta = {
 
         "classic": {
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
@@ -69,10 +68,10 @@ class BiosVfUSBPortsConfig(ManagedObject):
             "vp_usb_port_rear": MoPropertyMeta("vp_usb_port_rear", "vpUsbPortRear", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []), 
             "vp_usb_port_sd_card": MoPropertyMeta("vp_usb_port_sd_card", "vpUsbPortSDCard", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []), 
             "vp_usb_port_v_media": MoPropertyMeta("vp_usb_port_v_media", "vpUsbPortVMedia", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x400, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
         },
 
         "modular": {
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
@@ -83,6 +82,7 @@ class BiosVfUSBPortsConfig(ManagedObject):
             "vp_usb_port_rear": MoPropertyMeta("vp_usb_port_rear", "vpUsbPortRear", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []), 
             "vp_usb_port_sd_card": MoPropertyMeta("vp_usb_port_sd_card", "vpUsbPortSDCard", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x200, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []), 
             "vp_usb_port_v_media": MoPropertyMeta("vp_usb_port_v_media", "vpUsbPortVMedia", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x400, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
         },
 
     }
@@ -90,7 +90,6 @@ class BiosVfUSBPortsConfig(ManagedObject):
     prop_map = {
 
         "classic": {
-            "childAction": "child_action", 
             "dn": "dn", 
             "rn": "rn", 
             "status": "status", 
@@ -101,10 +100,10 @@ class BiosVfUSBPortsConfig(ManagedObject):
             "vpUsbPortRear": "vp_usb_port_rear", 
             "vpUsbPortSDCard": "vp_usb_port_sd_card", 
             "vpUsbPortVMedia": "vp_usb_port_v_media", 
+            "childAction": "child_action", 
         },
 
         "modular": {
-            "childAction": "child_action", 
             "dn": "dn", 
             "rn": "rn", 
             "status": "status", 
@@ -115,13 +114,13 @@ class BiosVfUSBPortsConfig(ManagedObject):
             "vpUsbPortRear": "vp_usb_port_rear", 
             "vpUsbPortSDCard": "vp_usb_port_sd_card", 
             "vpUsbPortVMedia": "vp_usb_port_v_media", 
+            "childAction": "child_action", 
         },
 
     }
 
     def __init__(self, parent_mo_or_dn, **kwargs):
         self._dirty_mask = 0
-        self.child_action = None
         self.status = None
         self.vp_all_usb_devices = None
         self.vp_usb_port_front = None
@@ -130,6 +129,7 @@ class BiosVfUSBPortsConfig(ManagedObject):
         self.vp_usb_port_rear = None
         self.vp_usb_port_sd_card = None
         self.vp_usb_port_v_media = None
+        self.child_action = None
 
         ManagedObject.__init__(self, "BiosVfUSBPortsConfig", parent_mo_or_dn, **kwargs)
 

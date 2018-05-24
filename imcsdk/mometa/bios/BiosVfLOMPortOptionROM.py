@@ -56,7 +56,6 @@ class BiosVfLOMPortOptionROM(ManagedObject):
     prop_meta = {
 
         "classic": {
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
@@ -65,10 +64,10 @@ class BiosVfLOMPortOptionROM(ManagedObject):
             "vp_lom_port2_state": MoPropertyMeta("vp_lom_port2_state", "vpLOMPort2State", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["Disabled", "Enabled", "Legacy Only", "UEFI Only", "disabled", "enabled", "platform-default"], []), 
             "vp_lom_port3_state": MoPropertyMeta("vp_lom_port3_state", "vpLOMPort3State", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["Disabled", "Enabled", "Legacy Only", "UEFI Only", "disabled", "enabled", "platform-default"], []), 
             "vp_lom_ports_all_state": MoPropertyMeta("vp_lom_ports_all_state", "vpLOMPortsAllState", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
         },
 
         "modular": {
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
@@ -77,6 +76,7 @@ class BiosVfLOMPortOptionROM(ManagedObject):
             "vp_lom_port2_state": MoPropertyMeta("vp_lom_port2_state", "vpLOMPort2State", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["Disabled", "Enabled", "Legacy Only", "UEFI Only", "disabled", "enabled", "platform-default"], []), 
             "vp_lom_port3_state": MoPropertyMeta("vp_lom_port3_state", "vpLOMPort3State", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["Disabled", "Enabled", "Legacy Only", "UEFI Only", "disabled", "enabled", "platform-default"], []), 
             "vp_lom_ports_all_state": MoPropertyMeta("vp_lom_ports_all_state", "vpLOMPortsAllState", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
         },
 
     }
@@ -84,7 +84,6 @@ class BiosVfLOMPortOptionROM(ManagedObject):
     prop_map = {
 
         "classic": {
-            "childAction": "child_action", 
             "dn": "dn", 
             "rn": "rn", 
             "status": "status", 
@@ -93,10 +92,10 @@ class BiosVfLOMPortOptionROM(ManagedObject):
             "vpLOMPort2State": "vp_lom_port2_state", 
             "vpLOMPort3State": "vp_lom_port3_state", 
             "vpLOMPortsAllState": "vp_lom_ports_all_state", 
+            "childAction": "child_action", 
         },
 
         "modular": {
-            "childAction": "child_action", 
             "dn": "dn", 
             "rn": "rn", 
             "status": "status", 
@@ -105,19 +104,20 @@ class BiosVfLOMPortOptionROM(ManagedObject):
             "vpLOMPort2State": "vp_lom_port2_state", 
             "vpLOMPort3State": "vp_lom_port3_state", 
             "vpLOMPortsAllState": "vp_lom_ports_all_state", 
+            "childAction": "child_action", 
         },
 
     }
 
     def __init__(self, parent_mo_or_dn, **kwargs):
         self._dirty_mask = 0
-        self.child_action = None
         self.status = None
         self.vp_lom_port0_state = None
         self.vp_lom_port1_state = None
         self.vp_lom_port2_state = None
         self.vp_lom_port3_state = None
         self.vp_lom_ports_all_state = None
+        self.child_action = None
 
         ManagedObject.__init__(self, "BiosVfLOMPortOptionROM", parent_mo_or_dn, **kwargs)
 

@@ -28,7 +28,6 @@ class StorageFlexFlashVirtualDriveImageMap(ManagedObject):
 
         "classic": {
             "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["map", "unmap"], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version202c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "map": MoPropertyMeta("map", "map", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x8, 0, 510, None, ["cifs", "nfs"], []), 
             "mount_options": MoPropertyMeta("mount_options", "mountOptions", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x10, 1, 510, None, [], []), 
@@ -39,12 +38,12 @@ class StorageFlexFlashVirtualDriveImageMap(ManagedObject):
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "to_enable_mapping": MoPropertyMeta("to_enable_mapping", "toEnableMapping", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, 0x400, None, None, None, ["No", "Yes", "false", "no", "true", "yes"], []), 
             "username": MoPropertyMeta("username", "username", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x800, 0, 255, None, [], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version202c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "virtual_drive": MoPropertyMeta("virtual_drive", "virtualDrive", "string", VersionMeta.Version202c, MoPropertyMeta.NAMING, None, 0, 510, None, [], []), 
         },
 
         "modular": {
             "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["map", "unmap"], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "map": MoPropertyMeta("map", "map", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, 0, 510, None, ["cifs", "nfs"], []), 
             "mount_options": MoPropertyMeta("mount_options", "mountOptions", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, 1, 510, None, [], []), 
@@ -55,6 +54,7 @@ class StorageFlexFlashVirtualDriveImageMap(ManagedObject):
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "to_enable_mapping": MoPropertyMeta("to_enable_mapping", "toEnableMapping", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x400, None, None, None, ["No", "Yes", "no", "yes"], []), 
             "username": MoPropertyMeta("username", "username", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x800, 0, 255, None, [], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "virtual_drive": MoPropertyMeta("virtual_drive", "virtualDrive", "string", VersionMeta.Version2013e, MoPropertyMeta.NAMING, None, 0, 510, None, [], []), 
         },
 
@@ -64,7 +64,6 @@ class StorageFlexFlashVirtualDriveImageMap(ManagedObject):
 
         "classic": {
             "adminAction": "admin_action", 
-            "childAction": "child_action", 
             "dn": "dn", 
             "map": "map", 
             "mountOptions": "mount_options", 
@@ -75,12 +74,12 @@ class StorageFlexFlashVirtualDriveImageMap(ManagedObject):
             "status": "status", 
             "toEnableMapping": "to_enable_mapping", 
             "username": "username", 
+            "childAction": "child_action", 
             "virtualDrive": "virtual_drive", 
         },
 
         "modular": {
             "adminAction": "admin_action", 
-            "childAction": "child_action", 
             "dn": "dn", 
             "map": "map", 
             "mountOptions": "mount_options", 
@@ -91,6 +90,7 @@ class StorageFlexFlashVirtualDriveImageMap(ManagedObject):
             "status": "status", 
             "toEnableMapping": "to_enable_mapping", 
             "username": "username", 
+            "childAction": "child_action", 
             "virtualDrive": "virtual_drive", 
         },
 
@@ -100,7 +100,6 @@ class StorageFlexFlashVirtualDriveImageMap(ManagedObject):
         self._dirty_mask = 0
         self.virtual_drive = virtual_drive
         self.admin_action = None
-        self.child_action = None
         self.map = None
         self.mount_options = None
         self.password = None
@@ -109,6 +108,7 @@ class StorageFlexFlashVirtualDriveImageMap(ManagedObject):
         self.status = None
         self.to_enable_mapping = None
         self.username = None
+        self.child_action = None
 
         ManagedObject.__init__(self, "StorageFlexFlashVirtualDriveImageMap", parent_mo_or_dn, **kwargs)
 

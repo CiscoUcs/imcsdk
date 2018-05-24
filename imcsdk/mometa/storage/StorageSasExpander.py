@@ -43,11 +43,11 @@ class StorageSasExpander(ManagedObject):
             "description": MoPropertyMeta("description", "description", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
             "id": MoPropertyMeta("id", "id", "uint", VersionMeta.Version2013e, MoPropertyMeta.NAMING, None, None, None, None, [], ["0-999"]), 
+            "mixed6_g12_g_drive_support": MoPropertyMeta("mixed6_g12_g_drive_support", "mixed6G12GDriveSupport", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
             "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "mixed6_g12_g_drive_support": MoPropertyMeta("mixed6_g12_g_drive_support", "mixed6G12GDriveSupport", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
             "sas_address": MoPropertyMeta("sas_address", "sasAddress", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
         },
 
     }
@@ -71,11 +71,11 @@ class StorageSasExpander(ManagedObject):
             "description": "description", 
             "dn": "dn", 
             "id": "id", 
+            "mixed6G12GDriveSupport": "mixed6_g12_g_drive_support", 
             "name": "name", 
             "rn": "rn", 
-            "status": "status", 
-            "mixed6G12GDriveSupport": "mixed6_g12_g_drive_support", 
             "sasAddress": "sas_address", 
+            "status": "status", 
         },
 
     }

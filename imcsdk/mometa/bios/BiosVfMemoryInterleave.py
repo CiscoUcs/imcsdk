@@ -44,23 +44,23 @@ class BiosVfMemoryInterleave(ManagedObject):
     prop_meta = {
 
         "classic": {
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "vp_channel_inter_leave": MoPropertyMeta("vp_channel_inter_leave", "vpChannelInterLeave", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["1-way", "2-way", "3-way", "4-way", "auto", "platform-default"], []), 
             "vp_memory_inter_leave": MoPropertyMeta("vp_memory_inter_leave", "vpMemoryInterLeave", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["1 Way Node Interleave", "2 Way Node Interleave", "4 Way Node Interleave", "8 Way Node Interleave", "Disabled", "Enabled", "disabled", "enabled", "platform-default"], []), 
             "vp_rank_inter_leave": MoPropertyMeta("vp_rank_inter_leave", "vpRankInterLeave", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["1-way", "2-way", "4-way", "8-way", "auto", "platform-default"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
         },
 
         "modular": {
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "vp_channel_inter_leave": MoPropertyMeta("vp_channel_inter_leave", "vpChannelInterLeave", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["1-way", "2-way", "3-way", "4-way", "auto", "platform-default"], []), 
             "vp_memory_inter_leave": MoPropertyMeta("vp_memory_inter_leave", "vpMemoryInterLeave", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["1 Way Node Interleave", "2 Way Node Interleave", "4 Way Node Interleave", "8 Way Node Interleave", "Disabled", "Enabled", "platform-default"], []), 
             "vp_rank_inter_leave": MoPropertyMeta("vp_rank_inter_leave", "vpRankInterLeave", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["1-way", "2-way", "4-way", "8-way", "auto", "platform-default"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
         },
 
     }
@@ -68,34 +68,34 @@ class BiosVfMemoryInterleave(ManagedObject):
     prop_map = {
 
         "classic": {
-            "childAction": "child_action", 
             "dn": "dn", 
             "rn": "rn", 
             "status": "status", 
             "vpChannelInterLeave": "vp_channel_inter_leave", 
             "vpMemoryInterLeave": "vp_memory_inter_leave", 
             "vpRankInterLeave": "vp_rank_inter_leave", 
+            "childAction": "child_action", 
         },
 
         "modular": {
-            "childAction": "child_action", 
             "dn": "dn", 
             "rn": "rn", 
             "status": "status", 
             "vpChannelInterLeave": "vp_channel_inter_leave", 
             "vpMemoryInterLeave": "vp_memory_inter_leave", 
             "vpRankInterLeave": "vp_rank_inter_leave", 
+            "childAction": "child_action", 
         },
 
     }
 
     def __init__(self, parent_mo_or_dn, **kwargs):
         self._dirty_mask = 0
-        self.child_action = None
         self.status = None
         self.vp_channel_inter_leave = None
         self.vp_memory_inter_leave = None
         self.vp_rank_inter_leave = None
+        self.child_action = None
 
         ManagedObject.__init__(self, "BiosVfMemoryInterleave", parent_mo_or_dn, **kwargs)
 

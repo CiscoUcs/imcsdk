@@ -24,8 +24,6 @@ class IpBlocking(ManagedObject):
     prop_meta = {
 
         "classic": {
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-            "description": MoPropertyMeta("description", "description", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
             "enable": MoPropertyMeta("enable", "enable", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["No", "Yes", "false", "no", "true", "yes"], []), 
             "fail_count": MoPropertyMeta("fail_count", "failCount", "uint", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, [], ["3-10"]), 
@@ -33,11 +31,11 @@ class IpBlocking(ManagedObject):
             "penalty_time": MoPropertyMeta("penalty_time", "penaltyTime", "uint", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, [], ["300-900"]), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x40, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "description": MoPropertyMeta("description", "description", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
         },
 
         "modular": {
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-            "description": MoPropertyMeta("description", "description", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
             "enable": MoPropertyMeta("enable", "enable", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["No", "Yes", "no", "yes"], []), 
             "fail_count": MoPropertyMeta("fail_count", "failCount", "uint", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, [], ["3-10"]), 
@@ -45,6 +43,8 @@ class IpBlocking(ManagedObject):
             "penalty_time": MoPropertyMeta("penalty_time", "penaltyTime", "uint", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, [], ["300-900"]), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "description": MoPropertyMeta("description", "description", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
         },
 
     }
@@ -52,8 +52,6 @@ class IpBlocking(ManagedObject):
     prop_map = {
 
         "classic": {
-            "childAction": "child_action", 
-            "description": "description", 
             "dn": "dn", 
             "enable": "enable", 
             "failCount": "fail_count", 
@@ -61,11 +59,11 @@ class IpBlocking(ManagedObject):
             "penaltyTime": "penalty_time", 
             "rn": "rn", 
             "status": "status", 
+            "childAction": "child_action", 
+            "description": "description", 
         },
 
         "modular": {
-            "childAction": "child_action", 
-            "description": "description", 
             "dn": "dn", 
             "enable": "enable", 
             "failCount": "fail_count", 
@@ -73,19 +71,21 @@ class IpBlocking(ManagedObject):
             "penaltyTime": "penalty_time", 
             "rn": "rn", 
             "status": "status", 
+            "childAction": "child_action", 
+            "description": "description", 
         },
 
     }
 
     def __init__(self, parent_mo_or_dn, **kwargs):
         self._dirty_mask = 0
-        self.child_action = None
-        self.description = None
         self.enable = None
         self.fail_count = None
         self.fail_window = None
         self.penalty_time = None
         self.status = None
+        self.child_action = None
+        self.description = None
 
         ManagedObject.__init__(self, "IpBlocking", parent_mo_or_dn, **kwargs)
 

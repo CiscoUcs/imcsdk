@@ -52,10 +52,12 @@ class MemoryArray(ManagedObject):
     prop_meta = {
 
         "classic": {
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-            "curr_capacity": MoPropertyMeta("curr_capacity", "currCapacity", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["unspecified"], ["0-4294967295"]), 
             "dimm_black_list": MoPropertyMeta("dimm_black_list", "dimmBlackList", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["Disabled", "Enabled", "disable", "disabled", "enable", "enabled"], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "curr_capacity": MoPropertyMeta("curr_capacity", "currCapacity", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["unspecified"], ["0-4294967295"]), 
             "failed_memory": MoPropertyMeta("failed_memory", "failedMemory", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["unspecified"], ["0-4294967295"]), 
             "id": MoPropertyMeta("id", "id", "uint", VersionMeta.Version151f, MoPropertyMeta.NAMING, None, None, None, None, [], ["1-8"]), 
             "ignored_memory": MoPropertyMeta("ignored_memory", "ignoredMemory", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["unspecified"], ["0-4294967295"]), 
@@ -68,15 +70,15 @@ class MemoryArray(ManagedObject):
             "populated": MoPropertyMeta("populated", "populated", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["unspecified"], ["0-4294967295"]), 
             "presence": MoPropertyMeta("presence", "presence", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["empty", "equipped", "equipped-identity-unestablishable", "equipped-not-primary", "equipped-with-malformed-fru", "inaccessible", "mismatch", "mismatch-identity-unestablishable", "missing", "not-supported", "unauthorized", "unknown"], []), 
             "redundant_memory": MoPropertyMeta("redundant_memory", "redundantMemory", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["unspecified"], ["0-4294967295"]), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
         },
 
         "modular": {
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-            "curr_capacity": MoPropertyMeta("curr_capacity", "currCapacity", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["unspecified"], ["0-4294967295"]), 
             "dimm_black_list": MoPropertyMeta("dimm_black_list", "dimmBlackList", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["Disabled", "Enabled", "disable", "disabled", "enable", "enabled"], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "curr_capacity": MoPropertyMeta("curr_capacity", "currCapacity", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["unspecified"], ["0-4294967295"]), 
             "failed_memory": MoPropertyMeta("failed_memory", "failedMemory", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["unspecified"], ["0-4294967295"]), 
             "id": MoPropertyMeta("id", "id", "uint", VersionMeta.Version2013e, MoPropertyMeta.NAMING, None, None, None, None, [], ["1-8"]), 
             "ignored_memory": MoPropertyMeta("ignored_memory", "ignoredMemory", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["unspecified"], ["0-4294967295"]), 
@@ -89,8 +91,6 @@ class MemoryArray(ManagedObject):
             "populated": MoPropertyMeta("populated", "populated", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["unspecified"], ["0-4294967295"]), 
             "presence": MoPropertyMeta("presence", "presence", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["empty", "equipped", "equipped-identity-unestablishable", "equipped-not-primary", "equipped-with-malformed-fru", "inaccessible", "mismatch", "mismatch-identity-unestablishable", "missing", "not-supported", "unauthorized", "unknown"], []), 
             "redundant_memory": MoPropertyMeta("redundant_memory", "redundantMemory", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["unspecified"], ["0-4294967295"]), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
         },
 
     }
@@ -98,10 +98,12 @@ class MemoryArray(ManagedObject):
     prop_map = {
 
         "classic": {
-            "childAction": "child_action", 
-            "currCapacity": "curr_capacity", 
             "dimmBlackList": "dimm_black_list", 
             "dn": "dn", 
+            "rn": "rn", 
+            "status": "status", 
+            "childAction": "child_action", 
+            "currCapacity": "curr_capacity", 
             "failedMemory": "failed_memory", 
             "id": "id", 
             "ignoredMemory": "ignored_memory", 
@@ -114,15 +116,15 @@ class MemoryArray(ManagedObject):
             "populated": "populated", 
             "presence": "presence", 
             "redundantMemory": "redundant_memory", 
-            "rn": "rn", 
-            "status": "status", 
         },
 
         "modular": {
-            "childAction": "child_action", 
-            "currCapacity": "curr_capacity", 
             "dimmBlackList": "dimm_black_list", 
             "dn": "dn", 
+            "rn": "rn", 
+            "status": "status", 
+            "childAction": "child_action", 
+            "currCapacity": "curr_capacity", 
             "failedMemory": "failed_memory", 
             "id": "id", 
             "ignoredMemory": "ignored_memory", 
@@ -135,8 +137,6 @@ class MemoryArray(ManagedObject):
             "populated": "populated", 
             "presence": "presence", 
             "redundantMemory": "redundant_memory", 
-            "rn": "rn", 
-            "status": "status", 
         },
 
     }
@@ -144,9 +144,10 @@ class MemoryArray(ManagedObject):
     def __init__(self, parent_mo_or_dn, id, **kwargs):
         self._dirty_mask = 0
         self.id = id
+        self.dimm_black_list = None
+        self.status = None
         self.child_action = None
         self.curr_capacity = None
-        self.dimm_black_list = None
         self.failed_memory = None
         self.ignored_memory = None
         self.max_devices = None
@@ -158,7 +159,6 @@ class MemoryArray(ManagedObject):
         self.populated = None
         self.presence = None
         self.redundant_memory = None
-        self.status = None
 
         ManagedObject.__init__(self, "MemoryArray", parent_mo_or_dn, **kwargs)
 

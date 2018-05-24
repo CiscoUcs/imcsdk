@@ -47,7 +47,6 @@ class OsiStart(ManagedObject):
             "answer_file_share_path": MoPropertyMeta("answer_file_share_path", "answerFileSharePath", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x20, 0, 510, None, [], []), 
             "answer_file_share_type": MoPropertyMeta("answer_file_share_type", "answerFileShareType", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["scp", "sftp", "www"], []), 
             "answer_file_username": MoPropertyMeta("answer_file_username", "answerFileUsername", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, [], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version301c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "config_share_file": MoPropertyMeta("config_share_file", "configShareFile", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x100, 0, 510, None, [], []), 
             "config_share_ip": MoPropertyMeta("config_share_ip", "configShareIp", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x200, 0, 255, r"""(([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6})|(([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?)+)|([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])""", [], []), 
             "config_share_password": MoPropertyMeta("config_share_password", "configSharePassword", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x400, None, None, None, [], []), 
@@ -56,9 +55,7 @@ class OsiStart(ManagedObject):
             "config_share_username": MoPropertyMeta("config_share_username", "configShareUsername", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x2000, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x4000, 0, 255, None, [], []), 
             "iso_share": MoPropertyMeta("iso_share", "isoShare", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, 0x8000, None, None, r"""[ !#$%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}~a-zA-Z0-9]{1,255}""", [], []), 
-            "iso_share_file": MoPropertyMeta("iso_share_file", "isoShareFile", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "iso_share_ip": MoPropertyMeta("iso_share_ip", "isoShareIp", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x10000, 0, 255, r"""(([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:) |((([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6})|(([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?)+)|([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]))""", [], []), 
-            "iso_share_path": MoPropertyMeta("iso_share_path", "isoSharePath", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "iso_share_type": MoPropertyMeta("iso_share_type", "isoShareType", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x20000, None, None, None, ["cifs", "nfs", "sd", "www"], []), 
             "password": MoPropertyMeta("password", "password", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x40000, None, None, None, [], []), 
             "remote_share_file": MoPropertyMeta("remote_share_file", "remoteShareFile", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x80000, 0, 510, None, [], []), 
@@ -71,6 +68,9 @@ class OsiStart(ManagedObject):
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x4000000, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "time_out": MoPropertyMeta("time_out", "timeOut", "uint", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x8000000, None, None, None, [], ["30-240"]), 
             "username": MoPropertyMeta("username", "username", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x10000000, None, None, None, [], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version301c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "iso_share_file": MoPropertyMeta("iso_share_file", "isoShareFile", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "iso_share_path": MoPropertyMeta("iso_share_path", "isoSharePath", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
         },
 
         "modular": {
@@ -81,7 +81,6 @@ class OsiStart(ManagedObject):
             "answer_file_share_path": MoPropertyMeta("answer_file_share_path", "answerFileSharePath", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x20, 0, 510, None, [], []), 
             "answer_file_share_type": MoPropertyMeta("answer_file_share_type", "answerFileShareType", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["scp", "sftp", "www"], []), 
             "answer_file_username": MoPropertyMeta("answer_file_username", "answerFileUsername", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, [], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version301c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "config_share_file": MoPropertyMeta("config_share_file", "configShareFile", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x100, 0, 510, None, [], []), 
             "config_share_ip": MoPropertyMeta("config_share_ip", "configShareIp", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x200, 0, 255, r"""(([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6})|(([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?)+)|([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])""", [], []), 
             "config_share_password": MoPropertyMeta("config_share_password", "configSharePassword", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x400, None, None, None, [], []), 
@@ -90,9 +89,7 @@ class OsiStart(ManagedObject):
             "config_share_username": MoPropertyMeta("config_share_username", "configShareUsername", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x2000, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x4000, 0, 255, None, [], []), 
             "iso_share": MoPropertyMeta("iso_share", "isoShare", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, 0x8000, None, None, r"""[ !#$%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}~a-zA-Z0-9]{1,255}""", [], []), 
-            "iso_share_file": MoPropertyMeta("iso_share_file", "isoShareFile", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "iso_share_ip": MoPropertyMeta("iso_share_ip", "isoShareIp", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x10000, 0, 255, r"""([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:""", [], []), 
-            "iso_share_path": MoPropertyMeta("iso_share_path", "isoSharePath", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "iso_share_type": MoPropertyMeta("iso_share_type", "isoShareType", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x20000, None, None, None, ["cifs", "nfs", "sd", "www"], []), 
             "password": MoPropertyMeta("password", "password", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x40000, None, None, None, [], []), 
             "remote_share_file": MoPropertyMeta("remote_share_file", "remoteShareFile", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x80000, 0, 510, None, [], []), 
@@ -105,6 +102,9 @@ class OsiStart(ManagedObject):
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x4000000, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "time_out": MoPropertyMeta("time_out", "timeOut", "uint", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x8000000, None, None, None, [], ["30-240"]), 
             "username": MoPropertyMeta("username", "username", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x10000000, None, None, None, [], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version301c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "iso_share_file": MoPropertyMeta("iso_share_file", "isoShareFile", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "iso_share_path": MoPropertyMeta("iso_share_path", "isoSharePath", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
         },
 
     }
@@ -119,7 +119,6 @@ class OsiStart(ManagedObject):
             "answerFileSharePath": "answer_file_share_path", 
             "answerFileShareType": "answer_file_share_type", 
             "answerFileUsername": "answer_file_username", 
-            "childAction": "child_action", 
             "configShareFile": "config_share_file", 
             "configShareIp": "config_share_ip", 
             "configSharePassword": "config_share_password", 
@@ -128,9 +127,7 @@ class OsiStart(ManagedObject):
             "configShareUsername": "config_share_username", 
             "dn": "dn", 
             "isoShare": "iso_share", 
-            "isoShareFile": "iso_share_file", 
             "isoShareIp": "iso_share_ip", 
-            "isoSharePath": "iso_share_path", 
             "isoShareType": "iso_share_type", 
             "password": "password", 
             "remoteShareFile": "remote_share_file", 
@@ -143,6 +140,9 @@ class OsiStart(ManagedObject):
             "status": "status", 
             "timeOut": "time_out", 
             "username": "username", 
+            "childAction": "child_action", 
+            "isoShareFile": "iso_share_file", 
+            "isoSharePath": "iso_share_path", 
         },
 
         "modular": {
@@ -153,7 +153,6 @@ class OsiStart(ManagedObject):
             "answerFileSharePath": "answer_file_share_path", 
             "answerFileShareType": "answer_file_share_type", 
             "answerFileUsername": "answer_file_username", 
-            "childAction": "child_action", 
             "configShareFile": "config_share_file", 
             "configShareIp": "config_share_ip", 
             "configSharePassword": "config_share_password", 
@@ -162,9 +161,7 @@ class OsiStart(ManagedObject):
             "configShareUsername": "config_share_username", 
             "dn": "dn", 
             "isoShare": "iso_share", 
-            "isoShareFile": "iso_share_file", 
             "isoShareIp": "iso_share_ip", 
-            "isoSharePath": "iso_share_path", 
             "isoShareType": "iso_share_type", 
             "password": "password", 
             "remoteShareFile": "remote_share_file", 
@@ -177,6 +174,9 @@ class OsiStart(ManagedObject):
             "status": "status", 
             "timeOut": "time_out", 
             "username": "username", 
+            "childAction": "child_action", 
+            "isoShareFile": "iso_share_file", 
+            "isoSharePath": "iso_share_path", 
         },
 
     }
@@ -190,7 +190,6 @@ class OsiStart(ManagedObject):
         self.answer_file_share_path = None
         self.answer_file_share_type = None
         self.answer_file_username = None
-        self.child_action = None
         self.config_share_file = None
         self.config_share_ip = None
         self.config_share_password = None
@@ -198,9 +197,7 @@ class OsiStart(ManagedObject):
         self.config_share_type = None
         self.config_share_username = None
         self.iso_share = None
-        self.iso_share_file = None
         self.iso_share_ip = None
-        self.iso_share_path = None
         self.iso_share_type = None
         self.password = None
         self.remote_share_file = None
@@ -212,6 +209,9 @@ class OsiStart(ManagedObject):
         self.status = None
         self.time_out = None
         self.username = None
+        self.child_action = None
+        self.iso_share_file = None
+        self.iso_share_path = None
 
         ManagedObject.__init__(self, "OsiStart", parent_mo_or_dn, **kwargs)
 

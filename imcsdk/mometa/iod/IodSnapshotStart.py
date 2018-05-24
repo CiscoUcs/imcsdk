@@ -33,12 +33,9 @@ class IodSnapshotStart(ManagedObject):
 
         "classic": {
             "admin_state": MoPropertyMeta("admin_state", "adminState", "string", VersionMeta.Version151x, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["trigger", "triggered"], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151x, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151x, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "iso_share": MoPropertyMeta("iso_share", "isoShare", "string", VersionMeta.Version151x, MoPropertyMeta.READ_ONLY, 0x8, None, None, r"""[ !#$%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}~a-zA-Z0-9]{1,255}""", [], []), 
-            "iso_share_file": MoPropertyMeta("iso_share_file", "isoShareFile", "string", VersionMeta.Version151x, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "iso_share_ip": MoPropertyMeta("iso_share_ip", "isoShareIp", "string", VersionMeta.Version151x, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, r"""(([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:) |((([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6})|(([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?)+)|([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]))""", [], []), 
-            "iso_share_path": MoPropertyMeta("iso_share_path", "isoSharePath", "string", VersionMeta.Version151x, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "iso_share_type": MoPropertyMeta("iso_share_type", "isoShareType", "string", VersionMeta.Version151x, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["cifs", "nfs", "sd", "www"], []), 
             "mount_option": MoPropertyMeta("mount_option", "mountOption", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, [], []), 
             "password": MoPropertyMeta("password", "password", "string", VersionMeta.Version151x, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, [], []), 
@@ -52,16 +49,16 @@ class IodSnapshotStart(ManagedObject):
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151x, MoPropertyMeta.READ_WRITE, 0x8000, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "time_out": MoPropertyMeta("time_out", "timeOut", "uint", VersionMeta.Version151x, MoPropertyMeta.READ_WRITE, 0x10000, None, None, None, [], ["30-240"]), 
             "username": MoPropertyMeta("username", "username", "string", VersionMeta.Version151x, MoPropertyMeta.READ_WRITE, 0x20000, None, None, None, [], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151x, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "iso_share_file": MoPropertyMeta("iso_share_file", "isoShareFile", "string", VersionMeta.Version151x, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "iso_share_path": MoPropertyMeta("iso_share_path", "isoSharePath", "string", VersionMeta.Version151x, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
         },
 
         "modular": {
             "admin_state": MoPropertyMeta("admin_state", "adminState", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["trigger", "triggered"], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "iso_share": MoPropertyMeta("iso_share", "isoShare", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x8, None, None, r"""[ !#$%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}~a-zA-Z0-9]{1,255}""", [], []), 
-            "iso_share_file": MoPropertyMeta("iso_share_file", "isoShareFile", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "iso_share_ip": MoPropertyMeta("iso_share_ip", "isoShareIp", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, r"""([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:""", [], []), 
-            "iso_share_path": MoPropertyMeta("iso_share_path", "isoSharePath", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "iso_share_type": MoPropertyMeta("iso_share_type", "isoShareType", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["cifs", "nfs", "sd", "www"], []), 
             "mount_option": MoPropertyMeta("mount_option", "mountOption", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, [], []), 
             "password": MoPropertyMeta("password", "password", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, [], []), 
@@ -75,6 +72,9 @@ class IodSnapshotStart(ManagedObject):
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8000, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "time_out": MoPropertyMeta("time_out", "timeOut", "uint", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10000, None, None, None, [], ["30-240"]), 
             "username": MoPropertyMeta("username", "username", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20000, None, None, None, [], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "iso_share_file": MoPropertyMeta("iso_share_file", "isoShareFile", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "iso_share_path": MoPropertyMeta("iso_share_path", "isoSharePath", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
         },
 
     }
@@ -83,12 +83,9 @@ class IodSnapshotStart(ManagedObject):
 
         "classic": {
             "adminState": "admin_state", 
-            "childAction": "child_action", 
             "dn": "dn", 
             "isoShare": "iso_share", 
-            "isoShareFile": "iso_share_file", 
             "isoShareIp": "iso_share_ip", 
-            "isoSharePath": "iso_share_path", 
             "isoShareType": "iso_share_type", 
             "mountOption": "mount_option", 
             "password": "password", 
@@ -102,16 +99,16 @@ class IodSnapshotStart(ManagedObject):
             "status": "status", 
             "timeOut": "time_out", 
             "username": "username", 
+            "childAction": "child_action", 
+            "isoShareFile": "iso_share_file", 
+            "isoSharePath": "iso_share_path", 
         },
 
         "modular": {
             "adminState": "admin_state", 
-            "childAction": "child_action", 
             "dn": "dn", 
             "isoShare": "iso_share", 
-            "isoShareFile": "iso_share_file", 
             "isoShareIp": "iso_share_ip", 
-            "isoSharePath": "iso_share_path", 
             "isoShareType": "iso_share_type", 
             "mountOption": "mount_option", 
             "password": "password", 
@@ -125,6 +122,9 @@ class IodSnapshotStart(ManagedObject):
             "status": "status", 
             "timeOut": "time_out", 
             "username": "username", 
+            "childAction": "child_action", 
+            "isoShareFile": "iso_share_file", 
+            "isoSharePath": "iso_share_path", 
         },
 
     }
@@ -132,11 +132,8 @@ class IodSnapshotStart(ManagedObject):
     def __init__(self, parent_mo_or_dn, **kwargs):
         self._dirty_mask = 0
         self.admin_state = None
-        self.child_action = None
         self.iso_share = None
-        self.iso_share_file = None
         self.iso_share_ip = None
-        self.iso_share_path = None
         self.iso_share_type = None
         self.mount_option = None
         self.password = None
@@ -149,6 +146,9 @@ class IodSnapshotStart(ManagedObject):
         self.status = None
         self.time_out = None
         self.username = None
+        self.child_action = None
+        self.iso_share_file = None
+        self.iso_share_path = None
 
         ManagedObject.__init__(self, "IodSnapshotStart", parent_mo_or_dn, **kwargs)
 

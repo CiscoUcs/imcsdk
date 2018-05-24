@@ -31,6 +31,7 @@ class StorageFlexFlashPhysicalDrive(ManagedObject):
             "card_type": MoPropertyMeta("card_type", "cardType", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version202c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "controller": MoPropertyMeta("controller", "controller", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "dirty_partition_map": MoPropertyMeta("dirty_partition_map", "dirtyPartitionMap", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
             "drives_enabled": MoPropertyMeta("drives_enabled", "drivesEnabled", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "health": MoPropertyMeta("health", "health", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
@@ -51,13 +52,12 @@ class StorageFlexFlashPhysicalDrive(ManagedObject):
             "serial_number": MoPropertyMeta("serial_number", "serialNumber", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "signature": MoPropertyMeta("signature", "signature", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "slot_number": MoPropertyMeta("slot_number", "slotNumber", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "stale_partition_map": MoPropertyMeta("stale_partition_map", "stalePartitionMap", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "sync_mode": MoPropertyMeta("sync_mode", "syncMode", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "write_enabled": MoPropertyMeta("write_enabled", "writeEnabled", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "write_error_count": MoPropertyMeta("write_error_count", "writeErrorCount", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "write_error_threshold": MoPropertyMeta("write_error_threshold", "writeErrorThreshold", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "dirty_partition_map": MoPropertyMeta("dirty_partition_map", "dirtyPartitionMap", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "stale_partition_map": MoPropertyMeta("stale_partition_map", "stalePartitionMap", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
         },
 
         "modular": {
@@ -107,6 +107,7 @@ class StorageFlexFlashPhysicalDrive(ManagedObject):
             "cardType": "card_type", 
             "childAction": "child_action", 
             "controller": "controller", 
+            "dirtyPartitionMap": "dirty_partition_map", 
             "dn": "dn", 
             "drivesEnabled": "drives_enabled", 
             "health": "health", 
@@ -127,13 +128,12 @@ class StorageFlexFlashPhysicalDrive(ManagedObject):
             "serialNumber": "serial_number", 
             "signature": "signature", 
             "slotNumber": "slot_number", 
+            "stalePartitionMap": "stale_partition_map", 
             "status": "status", 
             "syncMode": "sync_mode", 
             "writeEnabled": "write_enabled", 
             "writeErrorCount": "write_error_count", 
             "writeErrorThreshold": "write_error_threshold", 
-            "dirtyPartitionMap": "dirty_partition_map", 
-            "stalePartitionMap": "stale_partition_map", 
         },
 
         "modular": {
@@ -183,6 +183,7 @@ class StorageFlexFlashPhysicalDrive(ManagedObject):
         self.card_type = None
         self.child_action = None
         self.controller = None
+        self.dirty_partition_map = None
         self.drives_enabled = None
         self.health = None
         self.manufacturer_date = None
@@ -200,13 +201,12 @@ class StorageFlexFlashPhysicalDrive(ManagedObject):
         self.serial_number = None
         self.signature = None
         self.slot_number = None
+        self.stale_partition_map = None
         self.status = None
         self.sync_mode = None
         self.write_enabled = None
         self.write_error_count = None
         self.write_error_threshold = None
-        self.dirty_partition_map = None
-        self.stale_partition_map = None
 
         ManagedObject.__init__(self, "StorageFlexFlashPhysicalDrive", parent_mo_or_dn, **kwargs)
 

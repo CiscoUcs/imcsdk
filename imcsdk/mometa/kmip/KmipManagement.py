@@ -27,26 +27,26 @@ class KmipManagement(ManagedObject):
 
         "classic": {
             "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version302b, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["delete-client-certificate", "delete-client-private-key", "delete-root-ca-certificate"], []), 
-            "client_certificate": MoPropertyMeta("client_certificate", "clientCertificate", "string", VersionMeta.Version302b, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "client_private_key": MoPropertyMeta("client_private_key", "clientPrivateKey", "string", VersionMeta.Version302b, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "description": MoPropertyMeta("description", "description", "string", VersionMeta.Version302b, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version302b, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version302b, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
             "secure_key_management": MoPropertyMeta("secure_key_management", "secureKeyManagement", "string", VersionMeta.Version302b, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
-            "server_root_ca_certificate": MoPropertyMeta("server_root_ca_certificate", "serverRootCACertificate", "string", VersionMeta.Version302b, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version302b, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "client_certificate": MoPropertyMeta("client_certificate", "clientCertificate", "string", VersionMeta.Version302b, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "client_private_key": MoPropertyMeta("client_private_key", "clientPrivateKey", "string", VersionMeta.Version302b, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "description": MoPropertyMeta("description", "description", "string", VersionMeta.Version302b, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "server_root_ca_certificate": MoPropertyMeta("server_root_ca_certificate", "serverRootCACertificate", "string", VersionMeta.Version302b, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
         },
 
         "modular": {
             "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["delete-client-certificate", "delete-client-private-key", "delete-root-ca-certificate"], []), 
-            "client_certificate": MoPropertyMeta("client_certificate", "clientCertificate", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "client_private_key": MoPropertyMeta("client_private_key", "clientPrivateKey", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "description": MoPropertyMeta("description", "description", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
             "secure_key_management": MoPropertyMeta("secure_key_management", "secureKeyManagement", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
-            "server_root_ca_certificate": MoPropertyMeta("server_root_ca_certificate", "serverRootCACertificate", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "client_certificate": MoPropertyMeta("client_certificate", "clientCertificate", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "client_private_key": MoPropertyMeta("client_private_key", "clientPrivateKey", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "description": MoPropertyMeta("description", "description", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "server_root_ca_certificate": MoPropertyMeta("server_root_ca_certificate", "serverRootCACertificate", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
         },
 
     }
@@ -55,26 +55,26 @@ class KmipManagement(ManagedObject):
 
         "classic": {
             "adminAction": "admin_action", 
-            "clientCertificate": "client_certificate", 
-            "clientPrivateKey": "client_private_key", 
-            "description": "description", 
             "dn": "dn", 
             "rn": "rn", 
             "secureKeyManagement": "secure_key_management", 
-            "serverRootCACertificate": "server_root_ca_certificate", 
             "status": "status", 
+            "clientCertificate": "client_certificate", 
+            "clientPrivateKey": "client_private_key", 
+            "description": "description", 
+            "serverRootCACertificate": "server_root_ca_certificate", 
         },
 
         "modular": {
             "adminAction": "admin_action", 
-            "clientCertificate": "client_certificate", 
-            "clientPrivateKey": "client_private_key", 
-            "description": "description", 
             "dn": "dn", 
             "rn": "rn", 
             "secureKeyManagement": "secure_key_management", 
-            "serverRootCACertificate": "server_root_ca_certificate", 
             "status": "status", 
+            "clientCertificate": "client_certificate", 
+            "clientPrivateKey": "client_private_key", 
+            "description": "description", 
+            "serverRootCACertificate": "server_root_ca_certificate", 
         },
 
     }
@@ -82,12 +82,12 @@ class KmipManagement(ManagedObject):
     def __init__(self, parent_mo_or_dn, **kwargs):
         self._dirty_mask = 0
         self.admin_action = None
+        self.secure_key_management = None
+        self.status = None
         self.client_certificate = None
         self.client_private_key = None
         self.description = None
-        self.secure_key_management = None
         self.server_root_ca_certificate = None
-        self.status = None
 
         ManagedObject.__init__(self, "KmipManagement", parent_mo_or_dn, **kwargs)
 

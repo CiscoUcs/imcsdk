@@ -35,29 +35,29 @@ class BiosProfile(ManagedObject):
         "classic": {
             "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["activate", "delete"], []), 
             "backup_on_activate": MoPropertyMeta("backup_on_activate", "backupOnActivate", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["No", "Yes", "false", "no", "true", "yes"], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version301c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-            "description": MoPropertyMeta("description", "description", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
             "enabled": MoPropertyMeta("enabled", "enabled", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["No", "Yes", "false", "no", "true", "yes"], []), 
-            "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version301c, MoPropertyMeta.NAMING, None, 0, 510, None, [], []), 
             "reboot_on_activate": MoPropertyMeta("reboot_on_activate", "rebootOnActivate", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["No", "Yes", "false", "no", "true", "yes"], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x40, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version301c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "description": MoPropertyMeta("description", "description", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version301c, MoPropertyMeta.NAMING, None, 0, 510, None, [], []), 
         },
 
         "modular": {
             "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["activate", "delete"], []), 
             "backup_on_activate": MoPropertyMeta("backup_on_activate", "backupOnActivate", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["No", "Yes", "no", "yes"], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version301c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-            "description": MoPropertyMeta("description", "description", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
             "enabled": MoPropertyMeta("enabled", "enabled", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["No", "Yes", "no", "yes"], []), 
-            "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version301c, MoPropertyMeta.NAMING, None, 0, 510, None, [], []), 
             "reboot_on_activate": MoPropertyMeta("reboot_on_activate", "rebootOnActivate", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["No", "Yes", "no", "yes"], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x40, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version301c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "description": MoPropertyMeta("description", "description", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version301c, MoPropertyMeta.NAMING, None, 0, 510, None, [], []), 
         },
 
     }
@@ -67,29 +67,29 @@ class BiosProfile(ManagedObject):
         "classic": {
             "adminAction": "admin_action", 
             "backupOnActivate": "backup_on_activate", 
-            "childAction": "child_action", 
-            "description": "description", 
             "dn": "dn", 
             "enabled": "enabled", 
-            "id": "id", 
-            "name": "name", 
             "rebootOnActivate": "reboot_on_activate", 
             "rn": "rn", 
             "status": "status", 
+            "childAction": "child_action", 
+            "description": "description", 
+            "id": "id", 
+            "name": "name", 
         },
 
         "modular": {
             "adminAction": "admin_action", 
             "backupOnActivate": "backup_on_activate", 
-            "childAction": "child_action", 
-            "description": "description", 
             "dn": "dn", 
             "enabled": "enabled", 
-            "id": "id", 
-            "name": "name", 
             "rebootOnActivate": "reboot_on_activate", 
             "rn": "rn", 
             "status": "status", 
+            "childAction": "child_action", 
+            "description": "description", 
+            "id": "id", 
+            "name": "name", 
         },
 
     }
@@ -99,12 +99,12 @@ class BiosProfile(ManagedObject):
         self.name = name
         self.admin_action = None
         self.backup_on_activate = None
-        self.child_action = None
-        self.description = None
         self.enabled = None
-        self.id = None
         self.reboot_on_activate = None
         self.status = None
+        self.child_action = None
+        self.description = None
+        self.id = None
 
         ManagedObject.__init__(self, "BiosProfile", parent_mo_or_dn, **kwargs)
 

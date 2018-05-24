@@ -58,7 +58,6 @@ class BiosVfConsoleRedirection(ManagedObject):
     prop_meta = {
 
         "classic": {
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
@@ -68,11 +67,11 @@ class BiosVfConsoleRedirection(ManagedObject):
             "vp_putty_key_pad": MoPropertyMeta("vp_putty_key_pad", "vpPuttyKeyPad", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["ESCN", "LINUX", "SCO", "VT100", "VT400", "XTERMR6", "platform-default"], []), 
             "vp_redirection_after_post": MoPropertyMeta("vp_redirection_after_post", "vpRedirectionAfterPOST", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["Always Enable", "Bootloader", "platform-default"], []), 
             "vp_terminal_type": MoPropertyMeta("vp_terminal_type", "vpTerminalType", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["pc-ansi", "platform-default", "vt-utf8", "vt100", "vt100-plus"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "vp_legacy_os_redirection": MoPropertyMeta("vp_legacy_os_redirection", "vpLegacyOSRedirection", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x400, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []), 
         },
 
         "modular": {
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
@@ -82,6 +81,7 @@ class BiosVfConsoleRedirection(ManagedObject):
             "vp_putty_key_pad": MoPropertyMeta("vp_putty_key_pad", "vpPuttyKeyPad", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["ESCN", "LINUX", "SCO", "VT100", "VT400", "XTERMR6", "platform-default"], []), 
             "vp_redirection_after_post": MoPropertyMeta("vp_redirection_after_post", "vpRedirectionAfterPOST", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["Always Enable", "Bootloader", "platform-default"], []), 
             "vp_terminal_type": MoPropertyMeta("vp_terminal_type", "vpTerminalType", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["pc-ansi", "platform-default", "vt-utf8", "vt100", "vt100-plus"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
         },
 
     }
@@ -89,7 +89,6 @@ class BiosVfConsoleRedirection(ManagedObject):
     prop_map = {
 
         "classic": {
-            "childAction": "child_action", 
             "dn": "dn", 
             "rn": "rn", 
             "status": "status", 
@@ -99,11 +98,11 @@ class BiosVfConsoleRedirection(ManagedObject):
             "vpPuttyKeyPad": "vp_putty_key_pad", 
             "vpRedirectionAfterPOST": "vp_redirection_after_post", 
             "vpTerminalType": "vp_terminal_type", 
+            "childAction": "child_action", 
             "vpLegacyOSRedirection": "vp_legacy_os_redirection", 
         },
 
         "modular": {
-            "childAction": "child_action", 
             "dn": "dn", 
             "rn": "rn", 
             "status": "status", 
@@ -113,13 +112,13 @@ class BiosVfConsoleRedirection(ManagedObject):
             "vpPuttyKeyPad": "vp_putty_key_pad", 
             "vpRedirectionAfterPOST": "vp_redirection_after_post", 
             "vpTerminalType": "vp_terminal_type", 
+            "childAction": "child_action", 
         },
 
     }
 
     def __init__(self, parent_mo_or_dn, **kwargs):
         self._dirty_mask = 0
-        self.child_action = None
         self.status = None
         self.vp_baud_rate = None
         self.vp_console_redirection = None
@@ -127,6 +126,7 @@ class BiosVfConsoleRedirection(ManagedObject):
         self.vp_putty_key_pad = None
         self.vp_redirection_after_post = None
         self.vp_terminal_type = None
+        self.child_action = None
         self.vp_legacy_os_redirection = None
 
         ManagedObject.__init__(self, "BiosVfConsoleRedirection", parent_mo_or_dn, **kwargs)
