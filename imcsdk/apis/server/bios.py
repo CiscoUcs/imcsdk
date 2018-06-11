@@ -409,8 +409,8 @@ def _get_bios_mo_table(handle, tokens={}, server_id=1):
                                                                'classic'])
         entry = bios_tokens_table_platform.get(token)
         if entry is None:
-            log.warning("Token not found: %s Platform: %s" % token,
-                        handle.platform)
+            log.warning("Token not found: %s Platform: %s" % (token,
+                        handle.platform))
             continue
 
         mo_props = mo_table.get(entry["mo_name"], {})
