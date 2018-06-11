@@ -96,6 +96,7 @@ class ManagedObject(ImcBase):
             for prop_name, prop_value in imcgenutils.iteritems(kwargs):
                 if not imccoreutils.prop_exists(self, prop_name):
                     log.debug("Unknown property %s" % prop_name)
+                    continue
                 self.__set_prop(prop_name, prop_value)
 
     @property
