@@ -19,15 +19,13 @@ import os
 import time
 import re
 import logging
-try:
-    from urllib.parse import urlsplit
-except ImportError:
-    from urlparse import urlsplit
 
 from imcsdk.mometa.comm.CommVMedia import CommVMedia
 from imcsdk.mometa.comm.CommVMediaMap import CommVMediaMap
 from imcsdk.imcexception import ImcOperationError
 from imcsdk.apis.admin.ipmi import _get_comm_mo_dn
+
+from six.moves import urllib
 
 log = logging.getLogger('imc')
 
@@ -293,9 +291,9 @@ def vmedia_mount_iso_uri(handle, uri, volume_name=None, user_id=None,
     mount_options = "noauto"
 
     # Set the Map based on the protocol
-    if urlsplit(uri).scheme == 'http':
+    if urllib.parse.urlsplit(uri).scheme == 'http':
         mount_protocol = "www"
-    elif urlsplit(uri).scheme == 'https':
+    elif urllib.parse.urlsplit(uri).scheme == 'https':
         mount_protocol = "www"
     elif CIFS_URI_PATTERN.match(uri):
         mount_protocol = "cifs"
@@ -304,7 +302,7 @@ def vmedia_mount_iso_uri(handle, uri, volume_name=None, user_id=None,
     else:
         # Raise ValueError and bail
         raise ValueError("Unsupported protocol: " +
-                         urlsplit(uri).scheme)
+                         urllib.parse.urlsplit(uri).scheme)
 
     # Use remote filename if no volume_name givien
     if not volume_name:

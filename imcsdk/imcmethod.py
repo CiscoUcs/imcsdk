@@ -156,7 +156,6 @@ class ExternalMethod(ImcBase):
                         if child_obj:
                             self.set_attr(child_name,
                                           child_obj)
-                            # print child_method_obj.__dict__
                             child_obj.from_xml(child_elem, handle)
 
     def __str__(self):

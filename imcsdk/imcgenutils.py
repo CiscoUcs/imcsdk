@@ -24,12 +24,14 @@ import sys
 import platform
 import re
 import subprocess
-
 import logging
+import six
+
+from six.moves import range
+from .imcexception import ImcWarning, ImcValidationException
 
 log = logging.getLogger('imc')
 
-from .imcexception import ImcWarning, ImcValidationException
 
 AFFIRMATIVE_LIST = ['true', 'True', 'TRUE', True, 'yes', 'Yes', 'YES']
 
@@ -67,7 +69,6 @@ def to_python_propname(word):
     """
     Converts any word to lowercase word separated by underscore
     """
-
     return re.sub('_+', '_',
                   re.sub('^_', '',
                     re.sub('[/\-: +]', '_',
@@ -174,10 +175,6 @@ def download_file(driver, file_url, file_dir, file_name, progress=Progress()):
         download_file(driver=ImcDriver(), file_url="http://fileurl",
             file_dir='/home/user/backup', file_name='my_config_backup.xml')
     """
-
-    import os
-    from sys import stdout
-
     destination_file = os.path.join(file_dir, file_name)
     response = driver.post(uri=file_url, read=False)
 
@@ -412,18 +409,13 @@ def expand_key(key, clen):
     """
     Internal method supporting encryption and decryption functionality.
     """
-    try:
-        xrange
-    except:
-        xrange = range
-
     import hashlib
     from array import array
 
     blocks = (clen + 19) / 20
     x_key = []
     seed = key
-    for i_cnt in xrange(blocks):
+    for i_cnt in range(blocks):
         seed = hashlib.md5(key + seed).digest()
         x_key.append(seed)
     j_str = ''.join(x_key)
@@ -444,11 +436,6 @@ def encrypt_password(password, key):
     import hmac
     import base64
 
-    try:
-        xrange
-    except:
-        xrange = range
-
     h_hash = get_sha_hash
     uhash = h_hash(','.join(str(x) for x in
                             [repr(time()), repr(os.getpid()),
@@ -459,7 +446,7 @@ def encrypt_password(password, key):
     password_stream = array('L', password + '0000'[pwd_len & 3:])
     x_key = expand_key(k_enc, pwd_len + 4)
 
-    for i_cnt in xrange(len(password_stream)):
+    for i_cnt in range(len(password_stream)):
         password_stream[i_cnt] = password_stream[i_cnt] ^ x_key[i_cnt]
 
     cipher_t = uhash + password_stream.tostring()[:pwd_len]
@@ -479,11 +466,6 @@ def decrypt_password(cipher, key):
     import base64
     from array import array
 
-    try:
-        xrange
-    except:
-        xrange = range
-
     h_hash = get_sha_hash
 
     cipher += "\n"
@@ -501,7 +483,7 @@ def decrypt_password(cipher, key):
     password_stream = array('L', password_stream)
     x_key = expand_key(k_enc, cipher_len + 4)
 
-    for i in xrange(len(password_stream)):
+    for i in range(len(password_stream)):
         password_stream[i] = password_stream[i] ^ x_key[i]
 
     decrypted_password = password_stream.tostring()[:cipher_len]
@@ -512,8 +494,4 @@ def iteritems(d):
     """
     Factor-out Py2-to-3 differences in dictionary item iterator methods
     """
-
-    try:
-        return d.iteritems()
-    except AttributeError:
-        return d.items()
+    return six.iteritems(d)

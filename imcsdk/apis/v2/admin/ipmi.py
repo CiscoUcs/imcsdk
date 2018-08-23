@@ -53,7 +53,7 @@ def ipmi_enable(handle, priv=None, key=None, server_id=1):
 
     Example:
         if ipmi_enable(handle):
-            print "IPMI Enabled"
+            print("IPMI Enabled")
     """
 
     # Verify key is a hex number
