@@ -7,20 +7,17 @@ try:
 except ImportError:
     from distutils.core import setup
 
+with open('requirements.txt') as rf:
+    requirements = rf.readlines()
+
+with open('test-requirements.txt') as rf:
+    test_requirements = rf.readlines()
 
 with open('README.rst') as readme_file:
     readme = readme_file.read()
 
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
-
-requirements = [
-    # TODO: put package requirements here
-]
-
-test_requirements = [
-    # TODO: put package test requirements here
-]
 
 setup(
     name='imcsdk',
@@ -36,7 +33,7 @@ setup(
     package_dir={'imcsdk':
                  'imcsdk'},
     include_package_data=True,
-    install_requires=['pyparsing'],
+    install_requires=requirements,
     license="http://www.apache.org/licenses/LICENSE-2.0",
     zip_safe=False,
     keywords='imcsdk',
@@ -53,7 +50,7 @@ setup(
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
     ],
-    tests_require=['nose'],
+    tests_require=test_requirements,
     test_suite='nose.collector',
     extras_require={
         'ssl': ['pyOpenSSL'],
