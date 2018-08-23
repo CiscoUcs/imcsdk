@@ -58,7 +58,8 @@ def extract_root_elem(xml_str):
         '''
         root_element = extract_root_elem(xml_str)
     """
-
+    if type(xml_str) is not str:
+        xml_str = xml_str.decode('utf-8')
     xml_str = xml_str.strip("\x00")
     root_elem = ET.fromstring(xml_str)
     return root_elem
@@ -82,7 +83,8 @@ def from_xml_str(xml_str, handle=None):
         '''\n
         root_element = extract_root_elem(xml_str)\n
     """
-
+    if type(xml_str) is not str:
+        xml_str = xml_str.decode('utf-8')
     xml_str = xml_str.strip("\x00")
     root_elem = ET.fromstring(xml_str)
     if root_elem.tag == "error":

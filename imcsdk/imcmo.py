@@ -23,6 +23,7 @@ import os
 from . import imcgenutils
 from . import imccoreutils
 from . import imccoremeta
+import six
 
 try:
     import xml.etree.cElementTree as ET
@@ -53,7 +54,7 @@ class ManagedObject(ImcBase):
     This class structures/represents all the managed objects.
     """
 
-    DUMMY_DIRTY = "0x1L"
+    DUMMY_DIRTY = "0x1"
     __internal_prop = frozenset(
         ["_dirty_mask", "_class_id", "_child", "_handle", ''])
 
@@ -74,7 +75,7 @@ class ManagedObject(ImcBase):
                 self.__parent_mo = parent_mo_or_dn
                 self.__parent_dn = self.__parent_mo.dn
             elif isinstance(parent_mo_or_dn, str) or \
-                    isinstance(parent_mo_or_dn, unicode):
+                    isinstance(parent_mo_or_dn, six.text_type):
                 self.__parent_dn = str(parent_mo_or_dn)
             else:
                 raise ValueError('parent mo or dn must be specified')

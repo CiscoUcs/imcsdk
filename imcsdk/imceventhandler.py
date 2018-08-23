@@ -18,15 +18,12 @@ IMC server.
 
 from __future__ import print_function
 
-try:
-    from Queue import Queue
-except:
-    from queue import Queue
-
-from threading import Condition, Lock, Thread
 import datetime
 import logging
 import time
+
+from threading import Condition, Lock, Thread
+from six.moves import queue
 
 from . import imcmo
 from . import imccoreutils
@@ -64,7 +61,7 @@ class WatchBlock(object):
         self.params = params
         self.overflow = False
         self.error_code = 0  # TODO:error_code to call notify as per PowerTool
-        self.event_q = Queue()  # infinite size Queue
+        self.event_q = queue.Queue()  # infinite size Queue
 
     def dequeue(self, miliseconds_timeout):
         """Internal method to dequeue the events."""

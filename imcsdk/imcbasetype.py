@@ -20,12 +20,15 @@ It contains supporting classes for Filter and External Method.
 from .imccore import BaseObject
 
 
+import six
+
+
 class Method(BaseObject):
     """This is Method class."""
     def __init__(self, **kwargs):
         BaseObject.__init__(self, "Method", "method")
         if kwargs:
-            for n, v in kwargs.iteritems():
+            for n, v in six.iteritems(kwargs):
                 self.attr_set(n, v)
 
 
@@ -34,7 +37,7 @@ class ConfigConfig(BaseObject):
     def __init__(self, **kwargs):
         BaseObject.__init__(self, "ConfigConfig", "configConfig")
         if kwargs:
-            for n, v in kwargs.iteritems():
+            for n, v in six.iteritems(kwargs):
                 self.attr_set(n, v)
 
 
@@ -43,7 +46,7 @@ class ConfigMap(BaseObject):
     def __init__(self, **kwargs):
         BaseObject.__init__(self, "ConfigMap", "configMap")
         if kwargs:
-            for n, v in kwargs.iteritems():
+            for n, v in six.iteritems(kwargs):
                 self.attr_set(n, v)
 
 
@@ -52,7 +55,7 @@ class ConfigSet(BaseObject):
     def __init__(self, **kwargs):
         BaseObject.__init__(self, "ConfigSet", "configSet")
         if kwargs:
-            for n, v in kwargs.iteritems():
+            for n, v in six.iteritems(kwargs):
                 self.attr_set(n, v)
 
 
@@ -65,7 +68,7 @@ class FailedMo(BaseObject):
         self.error_descr = None
         self.name = None
         if kwargs:
-            for n, v in kwargs.iteritems():
+            for n, v in six.iteritems(kwargs):
                 self.attr_set(n, v)
 
 
@@ -74,7 +77,7 @@ class FailedMos(BaseObject):
     def __init__(self, **kwargs):
         BaseObject.__init__(self, "FailedMos", "failedMos")
         if kwargs:
-            for n, v in kwargs.iteritems():
+            for n, v in six.iteritems(kwargs):
                 self.attr_set(n, v)
 
 
@@ -83,7 +86,7 @@ class FilterFilter(BaseObject):
     def __init__(self, **kwargs):
         BaseObject.__init__(self, "FilterFilter", "filter")
         if kwargs:
-            for n, v in kwargs.iteritems():
+            for n, v in six.iteritems(kwargs):
                 self.attr_set(n, v)
 
 
@@ -93,6 +96,6 @@ class Pair(BaseObject):
         BaseObject.__init__(self, "Pair", "pair")
         self.key = None
         if kwargs:
-            for n, v in kwargs.iteritems():
+            for n, v in six.iteritems(kwargs):
                 self.attr_set(n, v)
 

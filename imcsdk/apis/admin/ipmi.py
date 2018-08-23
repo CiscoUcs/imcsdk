@@ -54,7 +54,7 @@ def ipmi_enable(handle, priv=CommIpmiLanConsts.PRIV_ADMIN,
 
     Example:
         if ipmi_enable(handle):
-            print "IPMI Enabled"
+            print("IPMI Enabled")
     """
 
     # Verify key is a hex number

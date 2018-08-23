@@ -89,7 +89,7 @@ class ParseFilter(object):
         """
 
         # print  str, loc, toks
-        # print toks[0][0::2]
+        # print(toks[0][0::2])
         and_filter = AndFilter()
         for op_filter in toks[0][0::2]:
             and_filter.child_add(op_filter)
@@ -102,7 +102,7 @@ class ParseFilter(object):
         """
 
         # print  str, loc, toks
-        # print toks[0][0::2]
+        # print(toks[0][0::2])
         or_filter = OrFilter()
         for op_filter in toks[0][0::2]:
             or_filter.child_add(op_filter)

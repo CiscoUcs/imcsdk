@@ -201,7 +201,6 @@ def find_class_id_in_mo_meta_ignore_case(class_id):
         return None
     if class_id in MO_CLASS_ID:
         return class_id
-    # print class_id
     l_class_id = class_id.lower()
     for key in MO_CLASS_ID:
         if key.lower() == l_class_id:
@@ -272,10 +271,10 @@ def write_object(mo_or_list):
         for mo in mo_or_list:
             if (isinstance(mo, imcmo.ManagedObject) or
                     isinstance(mo, imcmo.GenericMo)):
-                print (mo)
+                print(mo)
     elif (isinstance(mo_or_list, imcmo.ManagedObject) or
             isinstance(mo_or_list, imcmo.GenericMo)):
-        print (mo_or_list)
+        print(mo_or_list)
 
 
 def extract_molist_from_method_response(method_response,
@@ -386,8 +385,6 @@ def write_mo_tree(mo, level=0, depth=None, show_level=[],
             tree_dict[key_all_mo][mo.class_id] = [mo]
         else:
             tree_dict[key_all_mo][mo.class_id].append(mo)
-
-    # print tree_dict
 
     if print_tree:
         if not show_level:
