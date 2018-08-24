@@ -1,6 +1,11 @@
 =======
 History
 =======
+0.9.5 (2018-08-24)
+--------------------
+* Fixed an issue with missed requirement files
+* Added Python 3.6,3.7 to package meta 
+
 0.9.4 (2018-08-24)
 --------------------
 * Support for Python3
