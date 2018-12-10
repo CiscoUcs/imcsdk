@@ -11,6 +11,8 @@ class AdaptorHostFcIfConsts:
     IF_TYPE_VIRTUAL = "virtual"
     UPLINK_PORT_0 = "0"
     UPLINK_PORT_1 = "1"
+    UPLINK_PORT_2 = "2"
+    UPLINK_PORT_3 = "3"
     WWNN_AUTO = "AUTO"
     WWPN_AUTO = "AUTO"
 
@@ -38,7 +40,7 @@ class AdaptorHostFcIf(ManagedObject):
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x40, 0, 255, None, [], []), 
             "san_boot": MoPropertyMeta("san_boot", "sanBoot", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "uplink_port": MoPropertyMeta("uplink_port", "uplinkPort", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["0", "1"], []), 
+            "uplink_port": MoPropertyMeta("uplink_port", "uplinkPort", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["0", "1", "2", "3"], []), 
             "wwnn": MoPropertyMeta("wwnn", "wwnn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x400, 0, 256, r"""(([A-Fa-f0-9][A-Fa-f0-9]:){7}[A-Fa-f0-9][A-Fa-f0-9])|0""", ["AUTO"], []), 
             "wwpn": MoPropertyMeta("wwpn", "wwpn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x800, 0, 256, r"""(([A-Fa-f0-9][A-Fa-f0-9]:){7}[A-Fa-f0-9][A-Fa-f0-9])|0""", ["AUTO"], []), 
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 

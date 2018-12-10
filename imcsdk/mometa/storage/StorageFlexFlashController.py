@@ -16,8 +16,10 @@ class StorageFlexFlashControllerConsts:
     CARD_SLOT_SLOT_2 = "slot-2"
     CONFIGURED_MODE_MIRROR = "mirror"
     CONFIGURED_MODE_UTIL = "util"
-    VIRTUAL_DRIVE_NON_REMOVABLE = "non-removable"
-    VIRTUAL_DRIVE_REMOVABLE = "removable"
+    VIRTUAL_DRIVE_NON_REMOVABLE = "Non-Removable"
+    VIRTUAL_DRIVE_REMOVABLE = "Removable"
+    _VIRTUAL_DRIVE_NON_REMOVABLE = "non-removable"
+    _VIRTUAL_DRIVE_REMOVABLE = "removable"
 
 
 class StorageFlexFlashController(ManagedObject):
@@ -55,7 +57,7 @@ class StorageFlexFlashController(ManagedObject):
             "running_fw_version": MoPropertyMeta("running_fw_version", "runningFwVersion", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "startup_fw_version": MoPropertyMeta("startup_fw_version", "startupFwVersion", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "vendor": MoPropertyMeta("vendor", "vendor", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "virtual_drive": MoPropertyMeta("virtual_drive", "virtualDrive", "string", VersionMeta.Version311d, MoPropertyMeta.READ_WRITE, 0x400, 0, 510, None, ["non-removable", "removable"], []), 
+            "virtual_drive": MoPropertyMeta("virtual_drive", "virtualDrive", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x400, 0, 510, None, ["Non-Removable", "Removable", "non-removable", "removable"], []), 
         },
 
         "modular": {

@@ -41,7 +41,7 @@ class BiosVfHWPMEnable(ManagedObject):
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "vp_hwpm_enable": MoPropertyMeta("vp_hwpm_enable", "vpHWPMEnable", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "NATIVE MODE", "OOB MODE", "platform-default"], []), 
+            "vp_hwpm_enable": MoPropertyMeta("vp_hwpm_enable", "vpHWPMEnable", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "HWPM Native Mode", "HWPM OOB Mode", "NATIVE MODE", "Native Mode with no Legacy", "OOB MODE", "platform-default"], []), 
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version303a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
         },
 

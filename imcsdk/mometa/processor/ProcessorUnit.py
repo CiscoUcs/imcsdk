@@ -7,12 +7,14 @@ from ...imcmeta import VersionMeta
 
 class ProcessorUnitConsts:
     ARCH_DUAL_CORE_OPTERON = "Dual-Core_Opteron"
+    ARCH_EPYC = "Epyc"
     ARCH_INTEL_P4_C = "Intel_P4_C"
     ARCH_OPTERON = "Opteron"
     ARCH_PENTIUM_4 = "Pentium_4"
     ARCH_TURION_64 = "Turion_64"
     ARCH_XEON = "Xeon"
     ARCH_XEON_MP = "Xeon_MP"
+    ARCH_ZEN = "Zen"
     ARCH_ANY = "any"
     CORES_UNSPECIFIED = "unspecified"
     CORES_ENABLED_UNSPECIFIED = "unspecified"
@@ -77,7 +79,7 @@ class ProcessorUnit(ManagedObject):
     prop_meta = {
 
         "classic": {
-            "arch": MoPropertyMeta("arch", "arch", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["Dual-Core_Opteron", "Intel_P4_C", "Opteron", "Pentium_4", "Turion_64", "Xeon", "Xeon_MP", "any"], []), 
+            "arch": MoPropertyMeta("arch", "arch", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["Dual-Core_Opteron", "Epyc", "Intel_P4_C", "Opteron", "Pentium_4", "Turion_64", "Xeon", "Xeon_MP", "Zen", "any"], []), 
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "cores": MoPropertyMeta("cores", "cores", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["unspecified"], ["0-65535"]), 
             "cores_enabled": MoPropertyMeta("cores_enabled", "coresEnabled", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["unspecified"], ["0-65535"]), 

@@ -49,7 +49,7 @@ class ComputeRackUnit(ManagedObject):
     naming_props = set([u'serverId'])
 
     mo_meta = {
-        "classic": MoMeta("ComputeRackUnit", "computeRackUnit", "rack-unit-[server_id]", VersionMeta.Version151f, "InputOutput", 0x3ff, [], ["admin", "user"], [u'topSystem'], [u'adaptorUnit', u'biosUnit', u'computeBoard', u'equipmentFanModule', u'equipmentIndicatorLed', u'equipmentLocatorLed', u'equipmentPsu', u'equipmentPsuColdRedundancy', u'eventManagement', u'faultInst', u'lsbootDef', u'lsbootDevPrecision', u'mgmtController', u'networkAdapterUnit', u'oneTimeBootDevice', u'oneTimePrecisionBootDevice', u'pciEquipSlot', u'powerBudget', u'powerMonitor', u'serverUtilization', u'solIf', u'sysdebugTechSupportExport', u'systemIOController', u'x86LiveDebug'], ["Get", "Set"]),
+        "classic": MoMeta("ComputeRackUnit", "computeRackUnit", "rack-unit-[server_id]", VersionMeta.Version151f, "InputOutput", 0x3ff, [], ["admin", "user"], [u'topSystem'], [u'adaptorUnit', u'biosUnit', u'computeBoard', u'equipmentFanModule', u'equipmentIndicatorLed', u'equipmentLocatorLed', u'equipmentPsu', u'equipmentPsuColdRedundancy', u'eventManagement', u'faultInst', u'lsbootDef', u'lsbootDevPrecision', u'mgmtController', u'moKvInvHolder', u'networkAdapterUnit', u'oneTimeBootDevice', u'oneTimePrecisionBootDevice', u'pciEquipSlot', u'powerBudget', u'powerMonitor', u'serverUtilization', u'solIf', u'sysdebugTechSupportExport', u'systemIOController', u'x86LiveDebug'], ["Get", "Set"]),
     }
 
 
@@ -82,7 +82,8 @@ class ComputeRackUnit(ManagedObject):
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x40, 0, 255, None, [], []), 
             "serial": MoPropertyMeta("serial", "serial", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "server_id": MoPropertyMeta("server_id", "serverId", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "smart_usb_access": MoPropertyMeta("smart_usb_access", "smartUsbAccess", "string", VersionMeta.Version311d, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
+            "slot_id": MoPropertyMeta("slot_id", "slotId", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "smart_usb_access": MoPropertyMeta("smart_usb_access", "smartUsbAccess", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
             "smart_usb_status": MoPropertyMeta("smart_usb_status", "smartUsbStatus", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "storage_reset_status": MoPropertyMeta("storage_reset_status", "storageResetStatus", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
@@ -124,6 +125,7 @@ class ComputeRackUnit(ManagedObject):
             "rn": "rn", 
             "serial": "serial", 
             "serverId": "server_id", 
+            "slotId": "slot_id", 
             "smartUsbAccess": "smart_usb_access", 
             "smartUsbStatus": "smart_usb_status", 
             "status": "status", 
@@ -163,6 +165,7 @@ class ComputeRackUnit(ManagedObject):
         self.presence = None
         self.reset_components = None
         self.serial = None
+        self.slot_id = None
         self.smart_usb_access = None
         self.smart_usb_status = None
         self.status = None

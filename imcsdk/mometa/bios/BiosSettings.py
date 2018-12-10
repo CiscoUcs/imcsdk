@@ -16,7 +16,7 @@ class BiosSettings(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("BiosSettings", "biosSettings", "bios-settings", VersionMeta.Version151f, "InputOutput", 0xf, [], ["admin", "read-only", "user"], [u'biosUnit'], [u'biosVfIMCInterleave'], ["Get"]),
+        "classic": MoMeta("BiosSettings", "biosSettings", "bios-settings", VersionMeta.Version151f, "InputOutput", 0xf, [], ["admin", "read-only", "user"], [u'biosUnit'], [], ["Get"]),
         "modular": MoMeta("BiosSettings", "biosSettings", "bios-settings", VersionMeta.Version2013e, "InputOutput", 0xf, [], ["admin", "read-only", "user"], [u'biosUnit'], [], ["Get"])
     }
 

@@ -37,8 +37,8 @@ class StorageController(ManagedObject):
     naming_props = set([u'type', u'id'])
 
     mo_meta = {
-        "classic": MoMeta("StorageController", "storageController", "storage-[type]-[id]", VersionMeta.Version151f, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'computeBoard'], [u'faultInst', u'firmwareBootDefinition', u'firmwareRunning', u'generatedStorageControllerKeyId', u'selfEncryptStorageController', u'storageControllerHealth', u'storageControllerProps', u'storageControllerSettings', u'storageLocalDisk', u'storageLocalDiskProps', u'storageRaidBattery', u'storageVirtualDrive', u'storageVirtualDriveCreatorUsingUnusedPhysicalDrive', u'storageVirtualDriveCreatorUsingVirtualDriveGroup', u'suggestedStorageControllerSecurityKey'], ["Get", "Set"]),
-        "modular": MoMeta("StorageController", "storageController", "storage-[type]-[id]", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'computeBoard'], [u'faultInst', u'firmwareBootDefinition', u'firmwareRunning', u'generatedStorageControllerKeyId', u'selfEncryptStorageController', u'storageControllerHealth', u'storageControllerProps', u'storageControllerSettings', u'storageLocalDisk', u'storageLocalDiskEp', u'storageLocalDiskProps', u'storageRaidBattery', u'storageVirtualDrive', u'storageVirtualDriveCreatorUsingUnusedPhysicalDrive', u'storageVirtualDriveCreatorUsingVirtualDriveGroup', u'suggestedStorageControllerSecurityKey'], ["Get", "Set"])
+        "classic": MoMeta("StorageController", "storageController", "storage-[type]-[id]", VersionMeta.Version151f, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'computeBoard'], [u'faultInst', u'firmwareBootDefinition', u'firmwareRunning', u'generatedStorageControllerKeyId', u'selfEncryptStorageController', u'storageControllerHealth', u'storageControllerNextConsistencyCheckSchedule', u'storageControllerNextPatrolReadSchedule', u'storageControllerProps', u'storageControllerSettings', u'storageLocalDisk', u'storageLocalDiskProps', u'storageRaidBattery', u'storageVirtualDrive', u'storageVirtualDriveCreatorUsingUnusedPhysicalDrive', u'storageVirtualDriveCreatorUsingVirtualDriveGroup', u'suggestedStorageControllerSecurityKey'], ["Get", "Set"]),
+        "modular": MoMeta("StorageController", "storageController", "storage-[type]-[id]", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'computeBoard'], [u'faultInst', u'firmwareBootDefinition', u'firmwareRunning', u'generatedStorageControllerKeyId', u'selfEncryptStorageController', u'storageControllerHealth', u'storageControllerNextConsistencyCheckSchedule', u'storageControllerNextPatrolReadSchedule', u'storageControllerProps', u'storageControllerSettings', u'storageLocalDisk', u'storageLocalDiskEp', u'storageLocalDiskProps', u'storageRaidBattery', u'storageVirtualDrive', u'storageVirtualDriveCreatorUsingUnusedPhysicalDrive', u'storageVirtualDriveCreatorUsingVirtualDriveGroup', u'suggestedStorageControllerSecurityKey'], ["Get", "Set"])
     }
 
 
@@ -54,6 +54,7 @@ class StorageController(ManagedObject):
             "model": MoPropertyMeta("model", "model", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "pci_slot": MoPropertyMeta("pci_slot", "pciSlot", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "presence": MoPropertyMeta("presence", "presence", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["empty", "equipped", "equipped-identity-unestablishable", "equipped-not-primary", "equipped-with-malformed-fru", "inaccessible", "mismatch", "mismatch-identity-unestablishable", "missing", "not-supported", "unauthorized", "unknown"], []), 
+            "product_pid": MoPropertyMeta("product_pid", "productPID", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "raid_support": MoPropertyMeta("raid_support", "raidSupport", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "self_encrypt_enabled": MoPropertyMeta("self_encrypt_enabled", "selfEncryptEnabled", "string", VersionMeta.Version209c, MoPropertyMeta.READ_ONLY, None, None, None, None, ["No", "Yes", "false", "no", "true", "yes"], []), 
             "serial": MoPropertyMeta("serial", "serial", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
@@ -71,6 +72,7 @@ class StorageController(ManagedObject):
             "model": MoPropertyMeta("model", "model", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "pci_slot": MoPropertyMeta("pci_slot", "pciSlot", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "presence": MoPropertyMeta("presence", "presence", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["empty", "equipped", "equipped-identity-unestablishable", "equipped-not-primary", "equipped-with-malformed-fru", "inaccessible", "mismatch", "mismatch-identity-unestablishable", "missing", "not-supported", "unauthorized", "unknown"], []), 
+            "product_pid": MoPropertyMeta("product_pid", "productPID", "string", VersionMeta.Version401c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "raid_support": MoPropertyMeta("raid_support", "raidSupport", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "self_encrypt_enabled": MoPropertyMeta("self_encrypt_enabled", "selfEncryptEnabled", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["No", "Yes", "no", "yes"], []), 
             "serial": MoPropertyMeta("serial", "serial", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
@@ -92,6 +94,7 @@ class StorageController(ManagedObject):
             "model": "model", 
             "pciSlot": "pci_slot", 
             "presence": "presence", 
+            "productPID": "product_pid", 
             "raidSupport": "raid_support", 
             "selfEncryptEnabled": "self_encrypt_enabled", 
             "serial": "serial", 
@@ -109,6 +112,7 @@ class StorageController(ManagedObject):
             "model": "model", 
             "pciSlot": "pci_slot", 
             "presence": "presence", 
+            "productPID": "product_pid", 
             "raidSupport": "raid_support", 
             "selfEncryptEnabled": "self_encrypt_enabled", 
             "serial": "serial", 
@@ -128,6 +132,7 @@ class StorageController(ManagedObject):
         self.model = None
         self.pci_slot = None
         self.presence = None
+        self.product_pid = None
         self.raid_support = None
         self.self_encrypt_enabled = None
         self.serial = None

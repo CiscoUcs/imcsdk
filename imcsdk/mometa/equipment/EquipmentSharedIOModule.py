@@ -29,8 +29,10 @@ class EquipmentSharedIOModule(ManagedObject):
             "description": MoPropertyMeta("description", "description", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
             "fip_mode": MoPropertyMeta("fip_mode", "fipMode", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "iptype": MoPropertyMeta("iptype", "iptype", "string", VersionMeta.Version313h, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
             "iscsi_boot_capable": MoPropertyMeta("iscsi_boot_capable", "iscsiBootCapable", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "lldp": MoPropertyMeta("lldp", "lldp", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "mac_address": MoPropertyMeta("mac_address", "macAddress", "string", VersionMeta.Version313h, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
             "pci_link": MoPropertyMeta("pci_link", "pciLink", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "product_id": MoPropertyMeta("product_id", "productId", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
@@ -54,8 +56,10 @@ class EquipmentSharedIOModule(ManagedObject):
             "description": "description", 
             "dn": "dn", 
             "fipMode": "fip_mode", 
+            "iptype": "iptype", 
             "iscsiBootCapable": "iscsi_boot_capable", 
             "lldp": "lldp", 
+            "macAddress": "mac_address", 
             "pciLink": "pci_link", 
             "productId": "product_id", 
             "rn": "rn", 
@@ -78,8 +82,10 @@ class EquipmentSharedIOModule(ManagedObject):
         self.current_firmware_version = None
         self.description = None
         self.fip_mode = None
+        self.iptype = None
         self.iscsi_boot_capable = None
         self.lldp = None
+        self.mac_address = None
         self.pci_link = None
         self.product_id = None
         self.serial_number = None

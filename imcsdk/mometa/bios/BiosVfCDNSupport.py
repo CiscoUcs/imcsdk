@@ -7,7 +7,10 @@ from ...imcmeta import VersionMeta
 
 class BiosVfCDNSupportConsts:
     VP_CDNSUPPORT_DISABLED = "Disabled"
+    VP_CDNSUPPORT_ENABLED = "Enabled"
     VP_CDNSUPPORT_LOMS_ONLY = "LOMs Only"
+    _VP_CDNSUPPORT_DISABLED = "disabled"
+    _VP_CDNSUPPORT_ENABLED = "enabled"
     VP_CDNSUPPORT_PLATFORM_DEFAULT = "platform-default"
 
 
@@ -29,7 +32,7 @@ class BiosVfCDNSupport(ManagedObject):
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "vp_cdn_support": MoPropertyMeta("vp_cdn_support", "vpCDNSupport", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "LOMs Only", "platform-default"], []), 
+            "vp_cdn_support": MoPropertyMeta("vp_cdn_support", "vpCDNSupport", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "LOMs Only", "disabled", "enabled", "platform-default"], []), 
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version201a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
         },
 

@@ -13,40 +13,40 @@ class StorageFlexUtilPhysicalDrive(ManagedObject):
     """This is StorageFlexUtilPhysicalDrive class."""
 
     consts = StorageFlexUtilPhysicalDriveConsts()
-    naming_props = set([u'physicalDriveId'])
+    naming_props = set([u'physicalDrive'])
 
     mo_meta = {
-        "classic": MoMeta("StorageFlexUtilPhysicalDrive", "storageFlexUtilPhysicalDrive", "card-[physical_drive_id]", VersionMeta.Version311d, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageFlexUtilController'], [], ["Get"]),
+        "classic": MoMeta("StorageFlexUtilPhysicalDrive", "storageFlexUtilPhysicalDrive", "card-[physical_drive]", VersionMeta.Version304a, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageFlexUtilController'], [], ["Get"]),
     }
 
 
     prop_meta = {
 
         "classic": {
-            "block_size": MoPropertyMeta("block_size", "blockSize", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "capacity": MoPropertyMeta("capacity", "capacity", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version311d, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-            "controller": MoPropertyMeta("controller", "controller", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
-            "drives_enabled": MoPropertyMeta("drives_enabled", "drivesEnabled", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "health": MoPropertyMeta("health", "health", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "manufacturer_date": MoPropertyMeta("manufacturer_date", "manufacturerDate", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "manufacturer_id": MoPropertyMeta("manufacturer_id", "manufacturerId", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "oem_id": MoPropertyMeta("oem_id", "oemId", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "partition_count": MoPropertyMeta("partition_count", "partitionCount", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "pd_status": MoPropertyMeta("pd_status", "pdStatus", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "physical_drive": MoPropertyMeta("physical_drive", "physicalDrive", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "product_name": MoPropertyMeta("product_name", "productName", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "product_revision": MoPropertyMeta("product_revision", "productRevision", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "read_error_count": MoPropertyMeta("read_error_count", "readErrorCount", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "read_error_threshold": MoPropertyMeta("read_error_threshold", "readErrorThreshold", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
-            "serial_number": MoPropertyMeta("serial_number", "serialNumber", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "signature": MoPropertyMeta("signature", "signature", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "write_enabled": MoPropertyMeta("write_enabled", "writeEnabled", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "write_error_count": MoPropertyMeta("write_error_count", "writeErrorCount", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "write_error_threshold": MoPropertyMeta("write_error_threshold", "writeErrorThreshold", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "block_size": MoPropertyMeta("block_size", "blockSize", "string", VersionMeta.Version304a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "capacity": MoPropertyMeta("capacity", "capacity", "string", VersionMeta.Version304a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version304a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "controller": MoPropertyMeta("controller", "controller", "string", VersionMeta.Version304a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version304a, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
+            "drives_enabled": MoPropertyMeta("drives_enabled", "drivesEnabled", "string", VersionMeta.Version304a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "health": MoPropertyMeta("health", "health", "string", VersionMeta.Version304a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "manufacturer_date": MoPropertyMeta("manufacturer_date", "manufacturerDate", "string", VersionMeta.Version304a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "manufacturer_id": MoPropertyMeta("manufacturer_id", "manufacturerId", "string", VersionMeta.Version304a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "oem_id": MoPropertyMeta("oem_id", "oemId", "string", VersionMeta.Version304a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "partition_count": MoPropertyMeta("partition_count", "partitionCount", "string", VersionMeta.Version304a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "pd_status": MoPropertyMeta("pd_status", "pdStatus", "string", VersionMeta.Version304a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "physical_drive": MoPropertyMeta("physical_drive", "physicalDrive", "string", VersionMeta.Version304a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "product_name": MoPropertyMeta("product_name", "productName", "string", VersionMeta.Version304a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "product_revision": MoPropertyMeta("product_revision", "productRevision", "string", VersionMeta.Version304a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "read_error_count": MoPropertyMeta("read_error_count", "readErrorCount", "string", VersionMeta.Version304a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "read_error_threshold": MoPropertyMeta("read_error_threshold", "readErrorThreshold", "string", VersionMeta.Version304a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version304a, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
+            "serial_number": MoPropertyMeta("serial_number", "serialNumber", "string", VersionMeta.Version304a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "signature": MoPropertyMeta("signature", "signature", "string", VersionMeta.Version304a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version304a, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "write_enabled": MoPropertyMeta("write_enabled", "writeEnabled", "string", VersionMeta.Version304a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "write_error_count": MoPropertyMeta("write_error_count", "writeErrorCount", "string", VersionMeta.Version304a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "write_error_threshold": MoPropertyMeta("write_error_threshold", "writeErrorThreshold", "string", VersionMeta.Version304a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
         },
 
     }
@@ -82,9 +82,9 @@ class StorageFlexUtilPhysicalDrive(ManagedObject):
 
     }
 
-    def __init__(self, parent_mo_or_dn, physical_drive_id, **kwargs):
+    def __init__(self, parent_mo_or_dn, physical_drive, **kwargs):
         self._dirty_mask = 0
-        self.physical_drive_id = physical_drive_id
+        self.physical_drive = physical_drive
         self.block_size = None
         self.capacity = None
         self.child_action = None
@@ -96,7 +96,6 @@ class StorageFlexUtilPhysicalDrive(ManagedObject):
         self.oem_id = None
         self.partition_count = None
         self.pd_status = None
-        self.physical_drive = None
         self.product_name = None
         self.product_revision = None
         self.read_error_count = None

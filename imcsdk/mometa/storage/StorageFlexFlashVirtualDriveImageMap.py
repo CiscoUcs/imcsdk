@@ -10,6 +10,7 @@ class StorageFlexFlashVirtualDriveImageMapConsts:
     ADMIN_ACTION_UNMAP = "unmap"
     MAP_CIFS = "cifs"
     MAP_NFS = "nfs"
+    MAP_WWW = "www"
 
 
 class StorageFlexFlashVirtualDriveImageMap(ManagedObject):
@@ -29,7 +30,7 @@ class StorageFlexFlashVirtualDriveImageMap(ManagedObject):
         "classic": {
             "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["map", "unmap"], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
-            "map": MoPropertyMeta("map", "map", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x8, 0, 510, None, ["cifs", "nfs"], []), 
+            "map": MoPropertyMeta("map", "map", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x8, 0, 510, None, ["cifs", "nfs", "www"], []), 
             "mount_options": MoPropertyMeta("mount_options", "mountOptions", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x10, 1, 510, None, [], []), 
             "password": MoPropertyMeta("password", "password", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, None, [], []), 
             "remote_file": MoPropertyMeta("remote_file", "remoteFile", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x40, 0, 255, r"""[ !#$%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}~a-zA-Z0-9]{1,255}""", [], []), 

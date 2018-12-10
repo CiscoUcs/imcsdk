@@ -42,6 +42,7 @@ class StorageLocalDiskProps(ManagedObject):
             "non_coerced_size": MoPropertyMeta("non_coerced_size", "nonCoercedSize", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "operating_temperature": MoPropertyMeta("operating_temperature", "operatingTemperature", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "other_error_count": MoPropertyMeta("other_error_count", "otherErrorCount", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "pd_state": MoPropertyMeta("pd_state", "pdState", "string", VersionMeta.Version313h, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "pd_status": MoPropertyMeta("pd_status", "pdStatus", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "percentage_life_left": MoPropertyMeta("percentage_life_left", "percentageLifeLeft", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "percentage_reserved_cap_consumed": MoPropertyMeta("percentage_reserved_cap_consumed", "percentageReservedCapConsumed", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
@@ -80,6 +81,7 @@ class StorageLocalDiskProps(ManagedObject):
             "non_coerced_size": MoPropertyMeta("non_coerced_size", "nonCoercedSize", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "operating_temperature": MoPropertyMeta("operating_temperature", "operatingTemperature", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "other_error_count": MoPropertyMeta("other_error_count", "otherErrorCount", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "pd_state": MoPropertyMeta("pd_state", "pdState", "string", VersionMeta.Version313h, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "pd_status": MoPropertyMeta("pd_status", "pdStatus", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "percentage_life_left": MoPropertyMeta("percentage_life_left", "percentageLifeLeft", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "percentage_reserved_cap_consumed": MoPropertyMeta("percentage_reserved_cap_consumed", "percentageReservedCapConsumed", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
@@ -122,6 +124,7 @@ class StorageLocalDiskProps(ManagedObject):
             "nonCoercedSize": "non_coerced_size", 
             "operatingTemperature": "operating_temperature", 
             "otherErrorCount": "other_error_count", 
+            "pdState": "pd_state", 
             "pdStatus": "pd_status", 
             "percentageLifeLeft": "percentage_life_left", 
             "percentageReservedCapConsumed": "percentage_reserved_cap_consumed", 
@@ -160,6 +163,7 @@ class StorageLocalDiskProps(ManagedObject):
             "nonCoercedSize": "non_coerced_size", 
             "operatingTemperature": "operating_temperature", 
             "otherErrorCount": "other_error_count", 
+            "pdState": "pd_state", 
             "pdStatus": "pd_status", 
             "percentageLifeLeft": "percentage_life_left", 
             "percentageReservedCapConsumed": "percentage_reserved_cap_consumed", 
@@ -200,6 +204,7 @@ class StorageLocalDiskProps(ManagedObject):
         self.non_coerced_size = None
         self.operating_temperature = None
         self.other_error_count = None
+        self.pd_state = None
         self.pd_status = None
         self.percentage_life_left = None
         self.percentage_reserved_cap_consumed = None

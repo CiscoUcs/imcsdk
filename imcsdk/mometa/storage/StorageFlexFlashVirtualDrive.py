@@ -40,6 +40,7 @@ class StorageFlexFlashVirtualDrive(ManagedObject):
             "last_operation_status": MoPropertyMeta("last_operation_status", "lastOperationStatus", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "operation_in_progress": MoPropertyMeta("operation_in_progress", "operationInProgress", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "partition_id": MoPropertyMeta("partition_id", "partitionId", "string", VersionMeta.Version202c, MoPropertyMeta.NAMING, None, 0, 510, None, [], []), 
+            "resident_image": MoPropertyMeta("resident_image", "residentImage", "string", VersionMeta.Version304a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "size": MoPropertyMeta("size", "size", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "virtual_drive": MoPropertyMeta("virtual_drive", "virtualDrive", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
         },
@@ -78,6 +79,7 @@ class StorageFlexFlashVirtualDrive(ManagedObject):
             "lastOperationStatus": "last_operation_status", 
             "operationInProgress": "operation_in_progress", 
             "partitionId": "partition_id", 
+            "residentImage": "resident_image", 
             "size": "size", 
             "virtualDrive": "virtual_drive", 
         },
@@ -113,6 +115,7 @@ class StorageFlexFlashVirtualDrive(ManagedObject):
         self.host_accessible = None
         self.last_operation_status = None
         self.operation_in_progress = None
+        self.resident_image = None
         self.size = None
         self.virtual_drive = None
 

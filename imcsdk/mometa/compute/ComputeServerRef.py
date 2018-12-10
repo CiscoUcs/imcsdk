@@ -6,7 +6,11 @@ from ...imcmeta import VersionMeta
 
 
 class ComputeServerRefConsts:
-    pass
+    DRIVE_PATH_ = ""
+    DRIVE_PATH_PATH_0 = "PATH_0"
+    DRIVE_PATH_PATH_1 = "PATH_1"
+    DRIVE_PATH_PATH_BOTH = "PATH_BOTH"
+    DRIVE_PATH_PATH_NONE = "PATH_NONE"
 
 
 class ComputeServerRef(ManagedObject):
@@ -25,6 +29,7 @@ class ComputeServerRef(ManagedObject):
         "modular": {
             "diskstate": MoPropertyMeta("diskstate", "diskstate", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
+            "drive_path": MoPropertyMeta("drive_path", "drivePath", "string", VersionMeta.Version313h, MoPropertyMeta.READ_ONLY, None, None, None, None, ["", "PATH_0", "PATH_1", "PATH_BOTH", "PATH_NONE"], []), 
             "ownership": MoPropertyMeta("ownership", "ownership", "string", VersionMeta.Version2013e, MoPropertyMeta.NAMING, None, None, None, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
             "slot": MoPropertyMeta("slot", "slot", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
@@ -38,6 +43,7 @@ class ComputeServerRef(ManagedObject):
         "modular": {
             "diskstate": "diskstate", 
             "dn": "dn", 
+            "drivePath": "drive_path", 
             "ownership": "ownership", 
             "rn": "rn", 
             "slot": "slot", 
@@ -50,6 +56,7 @@ class ComputeServerRef(ManagedObject):
         self._dirty_mask = 0
         self.ownership = ownership
         self.diskstate = None
+        self.drive_path = None
         self.slot = None
         self.status = None
 

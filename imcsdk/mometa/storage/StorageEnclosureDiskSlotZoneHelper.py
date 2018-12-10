@@ -8,8 +8,12 @@ from ...imcmeta import VersionMeta
 class StorageEnclosureDiskSlotZoneHelperConsts:
     ADMIN_STATE_TRIGGER = "trigger"
     ADMIN_STATE_TRIGGERED = "triggered"
+    DRIVE_PATH_ = ""
+    DRIVE_PATH_PATH_0 = "PATH_0"
+    DRIVE_PATH_PATH_1 = "PATH_1"
+    DRIVE_PATH_PATH_BOTH = "PATH_BOTH"
+    DRIVE_PATH_PATH_NONE = "PATH_NONE"
     OWNERSHIP_ = ""
-    OWNERSHIP_LSI_2 = "LSI-2"
     OWNERSHIP_HOTSPARE = "hotspare"
     OWNERSHIP_NONE = "none"
     OWNERSHIP_SERVER1 = "server1"
@@ -24,7 +28,7 @@ class StorageEnclosureDiskSlotZoneHelper(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "modular": MoMeta("StorageEnclosureDiskSlotZoneHelper", "storageEnclosureDiskSlotZoneHelper", "zone-drive", VersionMeta.Version2013e, "InputOutput", 0xff, [], ["admin"], [u'storageEnclosure'], [], ["Get", "Set"])
+        "modular": MoMeta("StorageEnclosureDiskSlotZoneHelper", "storageEnclosureDiskSlotZoneHelper", "zone-drive", VersionMeta.Version2013e, "InputOutput", 0x1ff, [], ["admin"], [u'storageEnclosure'], [], ["Get", "Set"])
     }
 
 
@@ -33,12 +37,13 @@ class StorageEnclosureDiskSlotZoneHelper(ManagedObject):
         "modular": {
             "admin_state": MoPropertyMeta("admin_state", "adminState", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["trigger", "triggered"], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
+            "drive_path": MoPropertyMeta("drive_path", "drivePath", "string", VersionMeta.Version313h, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "PATH_0", "PATH_1", "PATH_BOTH", "PATH_NONE"], []), 
             "oper_status": MoPropertyMeta("oper_status", "operStatus", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "ownership": MoPropertyMeta("ownership", "ownership", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "LSI-2", "hotspare", "none", "server1", "server2", "shared"], []), 
-            "ownership_controller": MoPropertyMeta("ownership_controller", "ownershipController", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, [], []), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, None, [], []), 
-            "slot_list": MoPropertyMeta("slot_list", "slotList", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, 1, 512, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "ownership": MoPropertyMeta("ownership", "ownership", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "hotspare", "none", "server1", "server2", "shared"], []), 
+            "ownership_controller": MoPropertyMeta("ownership_controller", "ownershipController", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, 0, 255, None, [], []), 
+            "slot_list": MoPropertyMeta("slot_list", "slotList", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, 1, 512, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
         },
 
     }
@@ -48,6 +53,7 @@ class StorageEnclosureDiskSlotZoneHelper(ManagedObject):
         "modular": {
             "adminState": "admin_state", 
             "dn": "dn", 
+            "drivePath": "drive_path", 
             "operStatus": "oper_status", 
             "ownership": "ownership", 
             "ownershipController": "ownership_controller", 
@@ -61,6 +67,7 @@ class StorageEnclosureDiskSlotZoneHelper(ManagedObject):
     def __init__(self, parent_mo_or_dn, **kwargs):
         self._dirty_mask = 0
         self.admin_state = None
+        self.drive_path = None
         self.oper_status = None
         self.ownership = None
         self.ownership_controller = None

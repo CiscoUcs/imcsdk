@@ -6,6 +6,7 @@ from ...imcmeta import VersionMeta
 
 
 class StorageLocalDiskConsts:
+    ADMIN_ACTION_ABORT_COPYBACK = "abort-copyback"
     ADMIN_ACTION_DISABLE_SED_FOREIGN_DRIVES = "disable-sed-foreign-drives"
     ADMIN_ACTION_DISABLE_SELF_ENCRYPT = "disable-self-encrypt"
     ADMIN_ACTION_ENABLE_SELF_ENCRYPT = "enable-self-encrypt"
@@ -15,9 +16,12 @@ class StorageLocalDiskConsts:
     ADMIN_ACTION_MAKE_GLOBAL_HOT_SPARE = "make-global-hot-spare"
     ADMIN_ACTION_MAKE_JBOD = "make-jbod"
     ADMIN_ACTION_MAKE_UNCONFIGURED_GOOD = "make-unconfigured-good"
+    ADMIN_ACTION_PAUSE_COPYBACK = "pause-copyback"
     ADMIN_ACTION_PREPARE_FOR_REMOVAL = "prepare-for-removal"
     ADMIN_ACTION_REMOVE_HOT_SPARE = "remove-hot-spare"
+    ADMIN_ACTION_RESUME_COPYBACK = "resume-copyback"
     ADMIN_ACTION_SET_BOOT_DRIVE = "set-boot-drive"
+    ADMIN_ACTION_START_COPYBACK = "start-copyback"
     ADMIN_ACTION_UNDO_PREPARE_FOR_REMOVAL = "undo-prepare-for-removal"
     DEDICATED_HOT_SPARE_FOR_VDID_ = ""
     LOCATOR_LEDSTATUS_OFF = "off"
@@ -31,20 +35,21 @@ class StorageLocalDisk(ManagedObject):
     naming_props = set([u'id'])
 
     mo_meta = {
-        "classic": MoMeta("StorageLocalDisk", "storageLocalDisk", "pd-[id]", VersionMeta.Version151f, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'storageController'], [u'faultInst', u'storageLocalDiskProps', u'storageOperation'], ["Get", "Set"]),
-        "modular": MoMeta("StorageLocalDisk", "storageLocalDisk", "pd-[id]", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'storageController'], [u'faultInst', u'storageLocalDiskProps', u'storageOperation'], ["Get", "Set"])
+        "classic": MoMeta("StorageLocalDisk", "storageLocalDisk", "pd-[id]", VersionMeta.Version151f, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'storageController'], [u'faultInst', u'storageLocalDiskProps', u'storageOperation'], ["Get", "Set"]),
+        "modular": MoMeta("StorageLocalDisk", "storageLocalDisk", "pd-[id]", VersionMeta.Version2013e, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'storageController'], [u'faultInst', u'storageLocalDiskProps', u'storageOperation'], ["Get", "Set"])
     }
 
 
     prop_meta = {
 
         "classic": {
-            "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["disable-sed-foreign-drives", "disable-self-encrypt", "enable-self-encrypt", "locator-led-off", "locator-led-on", "make-dedicated-hot-spare", "make-global-hot-spare", "make-jbod", "make-unconfigured-good", "prepare-for-removal", "remove-hot-spare", "set-boot-drive", "undo-prepare-for-removal"], []), 
+            "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["abort-copyback", "disable-sed-foreign-drives", "disable-self-encrypt", "enable-self-encrypt", "locator-led-off", "locator-led-on", "make-dedicated-hot-spare", "make-global-hot-spare", "make-jbod", "make-unconfigured-good", "pause-copyback", "prepare-for-removal", "remove-hot-spare", "resume-copyback", "set-boot-drive", "start-copyback", "undo-prepare-for-removal"], []), 
             "dedicated_hot_spare_for_vd_id": MoPropertyMeta("dedicated_hot_spare_for_vd_id", "dedicatedHotSpareForVDId", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, [""], ["0-4294967295"]), 
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
-            "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version151f, MoPropertyMeta.NAMING, 0x10, 0, 510, None, [], ["0-256"]), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "destination_pd_id": MoPropertyMeta("destination_pd_id", "destinationPDId", "string", VersionMeta.Version313h, MoPropertyMeta.READ_WRITE, 0x8, 0, 510, None, [], ["0-4294967295"]), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
+            "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version151f, MoPropertyMeta.NAMING, 0x20, 0, 510, None, [], ["0-256"]), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x40, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "coerced_size": MoPropertyMeta("coerced_size", "coercedSize", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "drive_firmware": MoPropertyMeta("drive_firmware", "driveFirmware", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
@@ -64,6 +69,7 @@ class StorageLocalDisk(ManagedObject):
             "locked": MoPropertyMeta("locked", "locked", "string", VersionMeta.Version209c, MoPropertyMeta.READ_ONLY, None, None, None, None, ["No", "Yes", "false", "no", "true", "yes"], []), 
             "media_type": MoPropertyMeta("media_type", "mediaType", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "online": MoPropertyMeta("online", "online", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "pd_state": MoPropertyMeta("pd_state", "pdState", "string", VersionMeta.Version313h, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "pd_status": MoPropertyMeta("pd_status", "pdStatus", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "predictive_failure_count": MoPropertyMeta("predictive_failure_count", "predictiveFailureCount", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "product_id": MoPropertyMeta("product_id", "productId", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
@@ -72,12 +78,13 @@ class StorageLocalDisk(ManagedObject):
         },
 
         "modular": {
-            "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["disable-sed-foreign-drives", "disable-self-encrypt", "enable-self-encrypt", "locator-led-off", "locator-led-on", "make-dedicated-hot-spare", "make-global-hot-spare", "make-jbod", "make-unconfigured-good", "prepare-for-removal", "remove-hot-spare", "set-boot-drive", "undo-prepare-for-removal"], []), 
+            "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["abort-copyback", "disable-sed-foreign-drives", "disable-self-encrypt", "enable-self-encrypt", "locator-led-off", "locator-led-on", "make-dedicated-hot-spare", "make-global-hot-spare", "make-jbod", "make-unconfigured-good", "pause-copyback", "prepare-for-removal", "remove-hot-spare", "resume-copyback", "set-boot-drive", "start-copyback", "undo-prepare-for-removal"], []), 
             "dedicated_hot_spare_for_vd_id": MoPropertyMeta("dedicated_hot_spare_for_vd_id", "dedicatedHotSpareForVDId", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 510, None, [], ["0-4294967295"]), 
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
-            "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version2013e, MoPropertyMeta.NAMING, 0x10, 0, 510, None, [], ["0-256"]), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "destination_pd_id": MoPropertyMeta("destination_pd_id", "destinationPDId", "string", VersionMeta.Version313h, MoPropertyMeta.READ_WRITE, 0x8, 0, 510, None, [], ["0-4294967295"]), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
+            "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version2013e, MoPropertyMeta.NAMING, 0x20, 0, 510, None, [], ["0-256"]), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "coerced_size": MoPropertyMeta("coerced_size", "coercedSize", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "drive_firmware": MoPropertyMeta("drive_firmware", "driveFirmware", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
@@ -93,9 +100,11 @@ class StorageLocalDisk(ManagedObject):
             "health": MoPropertyMeta("health", "health", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "interface_type": MoPropertyMeta("interface_type", "interfaceType", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "link_speed": MoPropertyMeta("link_speed", "linkSpeed", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "locator_led_status": MoPropertyMeta("locator_led_status", "locatorLEDStatus", "string", VersionMeta.Version401c, MoPropertyMeta.READ_ONLY, None, None, None, None, ["off", "on"], []), 
             "locked": MoPropertyMeta("locked", "locked", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["No", "Yes", "no", "yes"], []), 
             "media_type": MoPropertyMeta("media_type", "mediaType", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "online": MoPropertyMeta("online", "online", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "pd_state": MoPropertyMeta("pd_state", "pdState", "string", VersionMeta.Version313h, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "pd_status": MoPropertyMeta("pd_status", "pdStatus", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "predictive_failure_count": MoPropertyMeta("predictive_failure_count", "predictiveFailureCount", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "product_id": MoPropertyMeta("product_id", "productId", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
@@ -110,6 +119,7 @@ class StorageLocalDisk(ManagedObject):
         "classic": {
             "adminAction": "admin_action", 
             "dedicatedHotSpareForVDId": "dedicated_hot_spare_for_vd_id", 
+            "destinationPDId": "destination_pd_id", 
             "dn": "dn", 
             "id": "id", 
             "rn": "rn", 
@@ -133,6 +143,7 @@ class StorageLocalDisk(ManagedObject):
             "locked": "locked", 
             "mediaType": "media_type", 
             "online": "online", 
+            "pdState": "pd_state", 
             "pdStatus": "pd_status", 
             "predictiveFailureCount": "predictive_failure_count", 
             "productId": "product_id", 
@@ -143,6 +154,7 @@ class StorageLocalDisk(ManagedObject):
         "modular": {
             "adminAction": "admin_action", 
             "dedicatedHotSpareForVDId": "dedicated_hot_spare_for_vd_id", 
+            "destinationPDId": "destination_pd_id", 
             "dn": "dn", 
             "id": "id", 
             "rn": "rn", 
@@ -162,9 +174,11 @@ class StorageLocalDisk(ManagedObject):
             "health": "health", 
             "interfaceType": "interface_type", 
             "linkSpeed": "link_speed", 
+            "locatorLEDStatus": "locator_led_status", 
             "locked": "locked", 
             "mediaType": "media_type", 
             "online": "online", 
+            "pdState": "pd_state", 
             "pdStatus": "pd_status", 
             "predictiveFailureCount": "predictive_failure_count", 
             "productId": "product_id", 
@@ -179,6 +193,7 @@ class StorageLocalDisk(ManagedObject):
         self.id = id
         self.admin_action = None
         self.dedicated_hot_spare_for_vd_id = None
+        self.destination_pd_id = None
         self.status = None
         self.child_action = None
         self.coerced_size = None
@@ -199,6 +214,7 @@ class StorageLocalDisk(ManagedObject):
         self.locked = None
         self.media_type = None
         self.online = None
+        self.pd_state = None
         self.pd_status = None
         self.predictive_failure_count = None
         self.product_id = None

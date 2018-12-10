@@ -10,6 +10,8 @@ class BiosVfExtendedAPICConsts:
     VP_EXTENDED_APIC_ENABLED = "Enabled"
     VP_EXTENDED_APIC_X2_APIC = "X2APIC"
     VP_EXTENDED_APIC_XAPIC = "XAPIC"
+    _VP_EXTENDED_APIC_DISABLED = "disabled"
+    _VP_EXTENDED_APIC_ENABLED = "enabled"
     VP_EXTENDED_APIC_PLATFORM_DEFAULT = "platform-default"
 
 
@@ -31,7 +33,7 @@ class BiosVfExtendedAPIC(ManagedObject):
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "vp_extended_apic": MoPropertyMeta("vp_extended_apic", "vpExtendedAPIC", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "X2APIC", "XAPIC", "platform-default"], []), 
+            "vp_extended_apic": MoPropertyMeta("vp_extended_apic", "vpExtendedAPIC", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "X2APIC", "XAPIC", "disabled", "enabled", "platform-default"], []), 
         },
 
         "modular": {
