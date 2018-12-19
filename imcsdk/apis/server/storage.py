@@ -521,7 +521,7 @@ def controller_encryption_enable(handle, controller_type,
         controller_encryption_enable(handle,
                                  controller_type='SAS',
                                  controller_slot='HBA'',
-                                 key_id='ABCD12345', security_key='12345')
+                                 key_id='*****', security_key='*****')
     """
     from imcsdk.mometa.self.SelfEncryptStorageController import \
         SelfEncryptStorageController, SelfEncryptStorageControllerConsts
