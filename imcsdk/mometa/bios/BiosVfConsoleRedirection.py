@@ -41,6 +41,11 @@ class BiosVfConsoleRedirectionConsts:
     VP_TERMINAL_TYPE_VT_UTF8 = "vt-utf8"
     VP_TERMINAL_TYPE_VT100 = "vt100"
     VP_TERMINAL_TYPE_VT100_PLUS = "vt100-plus"
+    VP_BAUD_RATE_115_2K = "115.2k"
+    VP_BAUD_RATE_19_2K = "19.2k"
+    VP_BAUD_RATE_38_4K = "38.4k"
+    VP_BAUD_RATE_57_6K = "57.6k"
+    VP_BAUD_RATE_9_6K = "9.6k"
 
 
 class BiosVfConsoleRedirection(ManagedObject):
@@ -75,9 +80,9 @@ class BiosVfConsoleRedirection(ManagedObject):
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "vp_baud_rate": MoPropertyMeta("vp_baud_rate", "vpBaudRate", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["115200", "19200", "38400", "57600", "9600", "platform-default"], []), 
+            "vp_baud_rate": MoPropertyMeta("vp_baud_rate", "vpBaudRate", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["115.2k", "115200", "19.2k", "19200", "38.4k", "38400", "57.6k", "57600", "9.6k", "9600", "platform-default"], []), 
             "vp_console_redirection": MoPropertyMeta("vp_console_redirection", "vpConsoleRedirection", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["com-0", "com-1", "disabled", "enabled", "platform-default", "serial-port-a"], []), 
-            "vp_flow_control": MoPropertyMeta("vp_flow_control", "vpFlowControl", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["none", "platform-default", "rts-cts"], []), 
+            "vp_flow_control": MoPropertyMeta("vp_flow_control", "vpFlowControl", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["RTS-CTS", "none", "platform-default", "rts-cts"], []), 
             "vp_putty_key_pad": MoPropertyMeta("vp_putty_key_pad", "vpPuttyKeyPad", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["ESCN", "LINUX", "SCO", "VT100", "VT400", "XTERMR6", "platform-default"], []), 
             "vp_redirection_after_post": MoPropertyMeta("vp_redirection_after_post", "vpRedirectionAfterPOST", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["Always Enable", "Bootloader", "platform-default"], []), 
             "vp_terminal_type": MoPropertyMeta("vp_terminal_type", "vpTerminalType", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["pc-ansi", "platform-default", "vt-utf8", "vt100", "vt100-plus"], []), 

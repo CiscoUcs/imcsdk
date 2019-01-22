@@ -10,6 +10,8 @@ class AdaptorHostEthIfConsts:
     MAC_AUTO = "AUTO"
     UPLINK_PORT_0 = "0"
     UPLINK_PORT_1 = "1"
+    UPLINK_PORT_2 = "2"
+    UPLINK_PORT_3 = "3"
 
 
 class AdaptorHostEthIf(ManagedObject):
@@ -39,7 +41,7 @@ class AdaptorHostEthIf(ManagedObject):
             "pxe_boot": MoPropertyMeta("pxe_boot", "pxeBoot", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x400, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x800, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x1000, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "uplink_port": MoPropertyMeta("uplink_port", "uplinkPort", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2000, None, None, None, ["0", "1"], []), 
+            "uplink_port": MoPropertyMeta("uplink_port", "uplinkPort", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2000, None, None, None, ["0", "1", "2", "3"], []), 
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "if_type": MoPropertyMeta("if_type", "ifType", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["virtual"], []), 
             "iscsi_boot": MoPropertyMeta("iscsi_boot", "iscsiBoot", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 

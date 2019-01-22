@@ -55,6 +55,12 @@ def vmedia_enable(handle, encryption_state=None, low_power_usb=None,
         vmedia_enable(handle, True, True)
     """
 
+    if encryption_state: encryption_state = 'enabled'
+    else: encryption_state = 'disabled'
+
+    if low_power_usb: low_power_usb = 'enabled'
+    else: low_power_usb = 'disabled'
+
     mo = CommVMedia(parent_mo_or_dn=_get_comm_mo_dn(handle, server_id))
     params = {
         "admin_state": "enabled",

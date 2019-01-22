@@ -40,7 +40,7 @@ class CommSavedVMediaMap(ManagedObject):
             "map": MoPropertyMeta("map", "map", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, None, None, None, ["cifs", "nfs", "www"], []), 
             "mount_options": MoPropertyMeta("mount_options", "mountOptions", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, 1, 248, None, [], []), 
             "password": MoPropertyMeta("password", "password", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
-            "remote_file": MoPropertyMeta("remote_file", "remoteFile", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, None, None, r"""[ !#$%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}~a-zA-Z0-9]{1,235}""", [], []), 
+            "remote_file": MoPropertyMeta("remote_file", "remoteFile", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, None, None, r"""[ !#$=%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}~a-zA-Z0-9]{1,255}""", [], []), 
             "remote_share": MoPropertyMeta("remote_share", "remoteShare", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, None, None, r"""[ !#$%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}~a-zA-Z0-9]{1,235}""", [], []), 
             "username": MoPropertyMeta("username", "username", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
         },

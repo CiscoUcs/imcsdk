@@ -27,6 +27,7 @@ class StorageLocalDiskUsage(ManagedObject):
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
             "number_of_blocks": MoPropertyMeta("number_of_blocks", "numberOfBlocks", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "pd_status": MoPropertyMeta("pd_status", "pdStatus", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "physical_drive": MoPropertyMeta("physical_drive", "physicalDrive", "string", VersionMeta.Version151f, MoPropertyMeta.NAMING, None, 0, 510, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
             "span": MoPropertyMeta("span", "span", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
@@ -40,6 +41,7 @@ class StorageLocalDiskUsage(ManagedObject):
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
             "number_of_blocks": MoPropertyMeta("number_of_blocks", "numberOfBlocks", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "pd_status": MoPropertyMeta("pd_status", "pdStatus", "string", VersionMeta.Version313h, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "physical_drive": MoPropertyMeta("physical_drive", "physicalDrive", "string", VersionMeta.Version2013e, MoPropertyMeta.NAMING, None, 0, 510, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
             "span": MoPropertyMeta("span", "span", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
@@ -57,6 +59,7 @@ class StorageLocalDiskUsage(ManagedObject):
             "childAction": "child_action", 
             "dn": "dn", 
             "numberOfBlocks": "number_of_blocks", 
+            "pdStatus": "pd_status", 
             "physicalDrive": "physical_drive", 
             "rn": "rn", 
             "span": "span", 
@@ -70,6 +73,7 @@ class StorageLocalDiskUsage(ManagedObject):
             "childAction": "child_action", 
             "dn": "dn", 
             "numberOfBlocks": "number_of_blocks", 
+            "pdStatus": "pd_status", 
             "physicalDrive": "physical_drive", 
             "rn": "rn", 
             "span": "span", 
@@ -86,6 +90,7 @@ class StorageLocalDiskUsage(ManagedObject):
         self.physical_drive = physical_drive
         self.child_action = None
         self.number_of_blocks = None
+        self.pd_status = None
         self.span = None
         self.starting_block = None
         self.state = None

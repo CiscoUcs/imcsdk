@@ -20,29 +20,30 @@ class StorageFlexUtilVirtualDrive(ManagedObject):
     naming_props = set([u'partitionName'])
 
     mo_meta = {
-        "classic": MoMeta("StorageFlexUtilVirtualDrive", "storageFlexUtilVirtualDrive", "vd-[partition_name]", VersionMeta.Version311d, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'storageFlexUtilController'], [], ["Get", "Set"]),
+        "classic": MoMeta("StorageFlexUtilVirtualDrive", "storageFlexUtilVirtualDrive", "vd-[partition_name]", VersionMeta.Version304a, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'storageFlexUtilController'], [], ["Get", "Set"]),
     }
 
 
     prop_meta = {
 
         "classic": {
-            "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version311d, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["cancel-update", "disable-vd", "enable-vd", "erase-vd", "update-vd"], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version311d, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version311d, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
-            "drive_scope": MoPropertyMeta("drive_scope", "driveScope", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "drive_status": MoPropertyMeta("drive_status", "driveStatus", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "drive_type": MoPropertyMeta("drive_type", "driveType", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "host_accessible": MoPropertyMeta("host_accessible", "hostAccessible", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "last_operation_status": MoPropertyMeta("last_operation_status", "lastOperationStatus", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "lun_id": MoPropertyMeta("lun_id", "lunId", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "operation_in_progress": MoPropertyMeta("operation_in_progress", "operationInProgress", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "partition_id": MoPropertyMeta("partition_id", "partitionId", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "partition_name": MoPropertyMeta("partition_name", "partitionName", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version311d, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
-            "size": MoPropertyMeta("size", "size", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version311d, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "virtual_drive": MoPropertyMeta("virtual_drive", "virtualDrive", "string", VersionMeta.Version311d, MoPropertyMeta.NAMING, None, 0, 510, None, [], []), 
+            "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["cancel-update", "disable-vd", "enable-vd", "erase-vd", "update-vd"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version304a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
+            "drive_scope": MoPropertyMeta("drive_scope", "driveScope", "string", VersionMeta.Version304a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "drive_status": MoPropertyMeta("drive_status", "driveStatus", "string", VersionMeta.Version304a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "drive_type": MoPropertyMeta("drive_type", "driveType", "string", VersionMeta.Version304a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "host_accessible": MoPropertyMeta("host_accessible", "hostAccessible", "string", VersionMeta.Version304a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "last_operation_status": MoPropertyMeta("last_operation_status", "lastOperationStatus", "string", VersionMeta.Version304a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "lun_id": MoPropertyMeta("lun_id", "lunId", "string", VersionMeta.Version304a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "operation_in_progress": MoPropertyMeta("operation_in_progress", "operationInProgress", "string", VersionMeta.Version304a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "partition_id": MoPropertyMeta("partition_id", "partitionId", "string", VersionMeta.Version304a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "partition_name": MoPropertyMeta("partition_name", "partitionName", "string", VersionMeta.Version304a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "resident_image": MoPropertyMeta("resident_image", "residentImage", "string", VersionMeta.Version304a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
+            "size": MoPropertyMeta("size", "size", "string", VersionMeta.Version304a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "virtual_drive": MoPropertyMeta("virtual_drive", "virtualDrive", "string", VersionMeta.Version304a, MoPropertyMeta.NAMING, None, 0, 510, None, [], []), 
         },
 
     }
@@ -62,6 +63,7 @@ class StorageFlexUtilVirtualDrive(ManagedObject):
             "operationInProgress": "operation_in_progress", 
             "partitionId": "partition_id", 
             "partitionName": "partition_name", 
+            "residentImage": "resident_image", 
             "rn": "rn", 
             "size": "size", 
             "status": "status", 
@@ -83,6 +85,7 @@ class StorageFlexUtilVirtualDrive(ManagedObject):
         self.lun_id = None
         self.operation_in_progress = None
         self.partition_id = None
+        self.resident_image = None
         self.size = None
         self.status = None
         self.virtual_drive = None

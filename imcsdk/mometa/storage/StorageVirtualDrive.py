@@ -59,6 +59,9 @@ class StorageVirtualDriveConsts:
     STRIP_SIZE_512K = "512k"
     STRIP_SIZE_64K = "64k"
     STRIP_SIZE_8K = "8k"
+    __REQUESTED_WRITE_CACHE_POLICY_ALWAYS_WRITE_BACK = "always-write-back"
+    __REQUESTED_WRITE_CACHE_POLICY_WRITE_BACK_GOOD_BBU = "write-back-good-bbu"
+    __REQUESTED_WRITE_CACHE_POLICY_WRITE_THROUGH = "write-through"
 
 
 class StorageVirtualDrive(ManagedObject):
@@ -121,7 +124,7 @@ class StorageVirtualDrive(ManagedObject):
             "physical_drives_list": MoPropertyMeta("physical_drives_list", "physicalDrivesList", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x100, 1, 510, r"""(\d+(,\d+)*)""", [], []), 
             "raid_level": MoPropertyMeta("raid_level", "raidLevel", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, 0, 510, None, ["0", "1", "5", "6"], []), 
             "read_policy": MoPropertyMeta("read_policy", "readPolicy", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x400, None, None, None, ["always-read-ahead", "default", "no-read-ahead"], []), 
-            "requested_write_cache_policy": MoPropertyMeta("requested_write_cache_policy", "requestedWriteCachePolicy", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x800, 0, 510, None, ["Always Write Back", "Write Back Good BBU", "Write Through", "default"], []), 
+            "requested_write_cache_policy": MoPropertyMeta("requested_write_cache_policy", "requestedWriteCachePolicy", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x800, 0, 510, None, ["Always Write Back", "Write Back Good BBU", "Write Through", "always-write-back", "default", "write-back-good-bbu", "write-through"], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x1000, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2000, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "virtual_drive_name": MoPropertyMeta("virtual_drive_name", "virtualDriveName", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x4000, 0, 15, None, [], []), 

@@ -70,6 +70,8 @@ class StorageControllerProps(ManagedObject):
             "supports_raid00": MoPropertyMeta("supports_raid00", "supportsRaid00", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "supports_raid1": MoPropertyMeta("supports_raid1", "supportsRaid1", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "supports_raid10": MoPropertyMeta("supports_raid10", "supportsRaid10", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "supports_raid10_with_more_than2_drives": MoPropertyMeta("supports_raid10_with_more_than2_drives", "supportsRaid10WithMoreThan2Drives", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "supports_raid1_with_more_than2_drives": MoPropertyMeta("supports_raid1_with_more_than2_drives", "supportsRaid1WithMoreThan2Drives", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "supports_raid1e": MoPropertyMeta("supports_raid1e", "supportsRaid1e", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "supports_raid1e0rlq0": MoPropertyMeta("supports_raid1e0rlq0", "supportsRaid1e0rlq0", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "supports_raid1erlq0": MoPropertyMeta("supports_raid1erlq0", "supportsRaid1erlq0", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
@@ -130,6 +132,8 @@ class StorageControllerProps(ManagedObject):
             "supports_raid00": MoPropertyMeta("supports_raid00", "supportsRaid00", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "supports_raid1": MoPropertyMeta("supports_raid1", "supportsRaid1", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "supports_raid10": MoPropertyMeta("supports_raid10", "supportsRaid10", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "supports_raid10_with_more_than2_drives": MoPropertyMeta("supports_raid10_with_more_than2_drives", "supportsRaid10WithMoreThan2Drives", "string", VersionMeta.Version313h, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "supports_raid1_with_more_than2_drives": MoPropertyMeta("supports_raid1_with_more_than2_drives", "supportsRaid1WithMoreThan2Drives", "string", VersionMeta.Version313h, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "supports_raid1e": MoPropertyMeta("supports_raid1e", "supportsRaid1e", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "supports_raid1e0rlq0": MoPropertyMeta("supports_raid1e0rlq0", "supportsRaid1e0rlq0", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "supports_raid1erlq0": MoPropertyMeta("supports_raid1erlq0", "supportsRaid1erlq0", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
@@ -194,6 +198,8 @@ class StorageControllerProps(ManagedObject):
             "supportsRaid00": "supports_raid00", 
             "supportsRaid1": "supports_raid1", 
             "supportsRaid10": "supports_raid10", 
+            "supportsRaid10WithMoreThan2Drives": "supports_raid10_with_more_than2_drives", 
+            "supportsRaid1WithMoreThan2Drives": "supports_raid1_with_more_than2_drives", 
             "supportsRaid1e": "supports_raid1e", 
             "supportsRaid1e0rlq0": "supports_raid1e0rlq0", 
             "supportsRaid1erlq0": "supports_raid1erlq0", 
@@ -254,6 +260,8 @@ class StorageControllerProps(ManagedObject):
             "supportsRaid00": "supports_raid00", 
             "supportsRaid1": "supports_raid1", 
             "supportsRaid10": "supports_raid10", 
+            "supportsRaid10WithMoreThan2Drives": "supports_raid10_with_more_than2_drives", 
+            "supportsRaid1WithMoreThan2Drives": "supports_raid1_with_more_than2_drives", 
             "supportsRaid1e": "supports_raid1e", 
             "supportsRaid1e0rlq0": "supports_raid1e0rlq0", 
             "supportsRaid1erlq0": "supports_raid1erlq0", 
@@ -315,6 +323,8 @@ class StorageControllerProps(ManagedObject):
         self.supports_raid00 = None
         self.supports_raid1 = None
         self.supports_raid10 = None
+        self.supports_raid10_with_more_than2_drives = None
+        self.supports_raid1_with_more_than2_drives = None
         self.supports_raid1e = None
         self.supports_raid1e0rlq0 = None
         self.supports_raid1erlq0 = None

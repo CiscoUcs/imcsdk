@@ -6,6 +6,7 @@ from ...imcmeta import VersionMeta
 
 
 class FirmwareBootUnitConsts:
+    ADMIN_STATE_CANCEL_PENDING_ACTIVATE = "cancel-pending-activate"
     ADMIN_STATE_TRIGGER = "trigger"
     ADMIN_STATE_TRIGGERED = "triggered"
     IGNORE_COMP_CHECK_FALSE = "false"
@@ -47,7 +48,7 @@ class FirmwareBootUnit(ManagedObject):
     prop_meta = {
 
         "classic": {
-            "admin_state": MoPropertyMeta("admin_state", "adminState", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["trigger", "triggered"], []), 
+            "admin_state": MoPropertyMeta("admin_state", "adminState", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["cancel-pending-activate", "trigger", "triggered"], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "image": MoPropertyMeta("image", "image", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["backup", "running"], []), 
             "reset_on_activate": MoPropertyMeta("reset_on_activate", "resetOnActivate", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["No", "Yes", "false", "no", "true", "yes"], []), 
@@ -62,7 +63,7 @@ class FirmwareBootUnit(ManagedObject):
         },
 
         "modular": {
-            "admin_state": MoPropertyMeta("admin_state", "adminState", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["trigger", "triggered"], []), 
+            "admin_state": MoPropertyMeta("admin_state", "adminState", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["cancel-pending-activate", "trigger", "triggered"], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "image": MoPropertyMeta("image", "image", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["backup", "running"], []), 
             "reset_on_activate": MoPropertyMeta("reset_on_activate", "resetOnActivate", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["No", "Yes", "no", "yes"], []), 

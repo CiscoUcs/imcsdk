@@ -11,6 +11,7 @@ class LsbootDevPrecisionConsts:
     CONFIGURED_BOOT_MODE_UEFI = "Uefi"
     LAST_CONFIGURED_BOOT_ORDER_SOURCE_BIOS = "BIOS"
     LAST_CONFIGURED_BOOT_ORDER_SOURCE_CIMC = "CIMC"
+    LAST_CONFIGURED_BOOT_ORDER_SOURCE_CIMCONE_TIME_BOOT = "CIMCOneTimeBoot"
     LAST_CONFIGURED_BOOT_ORDER_SOURCE_UNKNOWN = "UNKNOWN"
     PURPOSE_OPERATIONAL = "operational"
     PURPOSE_UTILITY = "utility"
@@ -46,7 +47,7 @@ class LsbootDevPrecision(ManagedObject):
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version201a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-            "last_configured_boot_order_source": MoPropertyMeta("last_configured_boot_order_source", "lastConfiguredBootOrderSource", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["BIOS", "CIMC", "UNKNOWN"], []), 
+            "last_configured_boot_order_source": MoPropertyMeta("last_configured_boot_order_source", "lastConfiguredBootOrderSource", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["BIOS", "CIMC", "CIMCOneTimeBoot", "UNKNOWN"], []), 
             "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, r"""[\-\.:_a-zA-Z0-9]{0,16}""", [], []), 
             "purpose": MoPropertyMeta("purpose", "purpose", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["operational", "utility"], []), 
         },

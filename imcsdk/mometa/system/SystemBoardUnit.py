@@ -26,10 +26,16 @@ class SystemBoardUnit(ManagedObject):
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version311d, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "cpu1_pkg_id": MoPropertyMeta("cpu1_pkg_id", "cpu1PkgId", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 255, None, [], []), 
             "cpu2_pkg_id": MoPropertyMeta("cpu2_pkg_id", "cpu2PkgId", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 255, None, [], []), 
-            "cpu3_pkg_id": MoPropertyMeta("cpu3_pkg_id", "cpu3PkgId", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 255, None, [], []), 
-            "cpu4_pkg_id": MoPropertyMeta("cpu4_pkg_id", "cpu4PkgId", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 255, None, [], []), 
+            "cpu3_pkg_id": MoPropertyMeta("cpu3_pkg_id", "cpu3PkgId", "string", VersionMeta.Version312b, MoPropertyMeta.READ_ONLY, None, 0, 255, None, [], []), 
+            "cpu4_pkg_id": MoPropertyMeta("cpu4_pkg_id", "cpu4PkgId", "string", VersionMeta.Version312b, MoPropertyMeta.READ_ONLY, None, 0, 255, None, [], []), 
+            "cpu_module1": MoPropertyMeta("cpu_module1", "cpuModule1", "string", VersionMeta.Version312b, MoPropertyMeta.READ_ONLY, None, 0, 255, None, [], []), 
+            "cpu_module2": MoPropertyMeta("cpu_module2", "cpuModule2", "string", VersionMeta.Version312b, MoPropertyMeta.READ_ONLY, None, 0, 255, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
             "hdd_backplane": MoPropertyMeta("hdd_backplane", "hddBackplane", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 255, None, [], []), 
+            "hdd_module1": MoPropertyMeta("hdd_module1", "hddModule1", "string", VersionMeta.Version312b, MoPropertyMeta.READ_ONLY, None, 0, 255, None, [], []), 
+            "hdd_module2": MoPropertyMeta("hdd_module2", "hddModule2", "string", VersionMeta.Version312b, MoPropertyMeta.READ_ONLY, None, 0, 255, None, [], []), 
+            "hdd_module3": MoPropertyMeta("hdd_module3", "hddModule3", "string", VersionMeta.Version312b, MoPropertyMeta.READ_ONLY, None, 0, 255, None, [], []), 
+            "hdd_module4": MoPropertyMeta("hdd_module4", "hddModule4", "string", VersionMeta.Version312b, MoPropertyMeta.READ_ONLY, None, 0, 255, None, [], []), 
             "intrusion_sensor": MoPropertyMeta("intrusion_sensor", "intrusionSensor", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 255, None, [], []), 
             "rear_bp_sku_type": MoPropertyMeta("rear_bp_sku_type", "rearBpSkuType", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 255, None, [], []), 
             "riser1": MoPropertyMeta("riser1", "riser1", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 255, None, [], []), 
@@ -51,8 +57,14 @@ class SystemBoardUnit(ManagedObject):
             "cpu2PkgId": "cpu2_pkg_id", 
             "cpu3PkgId": "cpu3_pkg_id", 
             "cpu4PkgId": "cpu4_pkg_id", 
+            "cpuModule1": "cpu_module1", 
+            "cpuModule2": "cpu_module2", 
             "dn": "dn", 
             "hddBackplane": "hdd_backplane", 
+            "hddModule1": "hdd_module1", 
+            "hddModule2": "hdd_module2", 
+            "hddModule3": "hdd_module3", 
+            "hddModule4": "hdd_module4", 
             "intrusionSensor": "intrusion_sensor", 
             "rearBpSkuType": "rear_bp_sku_type", 
             "riser1": "riser1", 
@@ -73,7 +85,13 @@ class SystemBoardUnit(ManagedObject):
         self.cpu2_pkg_id = None
         self.cpu3_pkg_id = None
         self.cpu4_pkg_id = None
+        self.cpu_module1 = None
+        self.cpu_module2 = None
         self.hdd_backplane = None
+        self.hdd_module1 = None
+        self.hdd_module2 = None
+        self.hdd_module3 = None
+        self.hdd_module4 = None
         self.intrusion_sensor = None
         self.rear_bp_sku_type = None
         self.riser1 = None

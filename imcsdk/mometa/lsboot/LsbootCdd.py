@@ -18,21 +18,21 @@ class LsbootCdd(ManagedObject):
     naming_props = set([u'name'])
 
     mo_meta = {
-        "classic": MoMeta("LsbootCdd", "lsbootCdd", "cdd-[name]", VersionMeta.Version311d, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'lsbootDevPrecision'], [], ["Get", "Set"]),
+        "classic": MoMeta("LsbootCdd", "lsbootCdd", "cdd-[name]", VersionMeta.Version304a, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'lsbootDevPrecision'], [], ["Get", "Set"]),
     }
 
 
     prop_meta = {
 
         "classic": {
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version311d, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version311d, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
-            "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version311d, MoPropertyMeta.READ_WRITE, 0x4, None, None, r"""(([a-zA-Z0-9]{1})|([a-zA-Z0-9]{1}[a-zA-Z0-9_\-]{0,28}[a-zA-Z0-9]{1})|([a-zA-Z0-9]{2}))""", [], []), 
-            "order": MoPropertyMeta("order", "order", "uint", VersionMeta.Version311d, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, [], ["1-255"]), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version311d, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
-            "state": MoPropertyMeta("state", "state", "string", VersionMeta.Version311d, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version311d, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "type": MoPropertyMeta("type", "type", "string", VersionMeta.Version311d, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["LOCALCDD"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version304a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
+            "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x4, None, None, r"""(([a-zA-Z0-9]{1})|([a-zA-Z0-9]{1}[a-zA-Z0-9_\-]{0,28}[a-zA-Z0-9]{1})|([a-zA-Z0-9]{2}))""", [], []), 
+            "order": MoPropertyMeta("order", "order", "uint", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, [], ["1-255"]), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
+            "state": MoPropertyMeta("state", "state", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "type": MoPropertyMeta("type", "type", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["LOCALCDD"], []), 
         },
 
     }
