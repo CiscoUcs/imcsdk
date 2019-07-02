@@ -16,53 +16,55 @@ class StorageNVMePhysicalDrive(ManagedObject):
     naming_props = set([u'id'])
 
     mo_meta = {
-        "classic": MoMeta("StorageNVMePhysicalDrive", "storageNVMePhysicalDrive", "pd-[id]", VersionMeta.Version401a, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageControllerNVMe'], [], ["Get"]),
-        "modular": MoMeta("StorageNVMePhysicalDrive", "storageNVMePhysicalDrive", "pd-[id]", VersionMeta.Version313h, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageControllerNVMe'], [], ["Get"])
+        "classic": MoMeta("StorageNVMePhysicalDrive", "storageNVMePhysicalDrive", "pd-[id]", VersionMeta.Version313a, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageControllerNVMe'], [u'faultInst'], ["Get"]),
+        "modular": MoMeta("StorageNVMePhysicalDrive", "storageNVMePhysicalDrive", "pd-[id]", VersionMeta.Version313a, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageControllerNVMe'], [u'faultInst'], ["Get"])
     }
 
 
     prop_meta = {
 
         "classic": {
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version401a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-            "controller_temperature": MoPropertyMeta("controller_temperature", "controllerTemperature", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
-            "drive_life_used": MoPropertyMeta("drive_life_used", "driveLifeUsed", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "firmware_version": MoPropertyMeta("firmware_version", "firmwareVersion", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version401a, MoPropertyMeta.NAMING, None, 0, 510, None, [], []), 
-            "led_fault_status": MoPropertyMeta("led_fault_status", "ledFaultStatus", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "pd_chip_temp_celsius": MoPropertyMeta("pd_chip_temp_celsius", "pdChipTempCelsius", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "pd_status": MoPropertyMeta("pd_status", "pdStatus", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "percentage_total_power_on_hour": MoPropertyMeta("percentage_total_power_on_hour", "percentageTotalPowerOnHour", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "performance_level": MoPropertyMeta("performance_level", "performanceLevel", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "product_name": MoPropertyMeta("product_name", "productName", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
-            "serial": MoPropertyMeta("serial", "serial", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "shutdown_temperature": MoPropertyMeta("shutdown_temperature", "shutdownTemperature", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "throttle_start_temperature": MoPropertyMeta("throttle_start_temperature", "throttleStartTemperature", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "vendor": MoPropertyMeta("vendor", "vendor", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version313a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "controller_temperature": MoPropertyMeta("controller_temperature", "controllerTemperature", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
+            "drive_life_used": MoPropertyMeta("drive_life_used", "driveLifeUsed", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "firmware_version": MoPropertyMeta("firmware_version", "firmwareVersion", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version313a, MoPropertyMeta.NAMING, None, 0, 510, None, [], []), 
+            "led_fault_status": MoPropertyMeta("led_fault_status", "ledFaultStatus", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "lifeleftin_days": MoPropertyMeta("lifeleftin_days", "lifeleftinDays", "string", VersionMeta.Version402c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "pd_chip_temp_celsius": MoPropertyMeta("pd_chip_temp_celsius", "pdChipTempCelsius", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "pd_status": MoPropertyMeta("pd_status", "pdStatus", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "percentage_total_power_on_hour": MoPropertyMeta("percentage_total_power_on_hour", "percentageTotalPowerOnHour", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "performance_level": MoPropertyMeta("performance_level", "performanceLevel", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "product_name": MoPropertyMeta("product_name", "productName", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
+            "serial": MoPropertyMeta("serial", "serial", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "shutdown_temperature": MoPropertyMeta("shutdown_temperature", "shutdownTemperature", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "throttle_start_temperature": MoPropertyMeta("throttle_start_temperature", "throttleStartTemperature", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "vendor": MoPropertyMeta("vendor", "vendor", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
         },
 
         "modular": {
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version313h, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-            "controller_temperature": MoPropertyMeta("controller_temperature", "controllerTemperature", "string", VersionMeta.Version313h, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version313h, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
-            "drive_life_used": MoPropertyMeta("drive_life_used", "driveLifeUsed", "string", VersionMeta.Version313h, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "firmware_version": MoPropertyMeta("firmware_version", "firmwareVersion", "string", VersionMeta.Version313h, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version313h, MoPropertyMeta.NAMING, None, 0, 510, None, [], []), 
-            "led_fault_status": MoPropertyMeta("led_fault_status", "ledFaultStatus", "string", VersionMeta.Version313h, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "model": MoPropertyMeta("model", "model", "string", VersionMeta.Version313h, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "pd_chip_temp_celsius": MoPropertyMeta("pd_chip_temp_celsius", "pdChipTempCelsius", "string", VersionMeta.Version313h, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "pd_status": MoPropertyMeta("pd_status", "pdStatus", "string", VersionMeta.Version313h, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "percentage_total_power_on_hour": MoPropertyMeta("percentage_total_power_on_hour", "percentageTotalPowerOnHour", "string", VersionMeta.Version313h, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "performance_level": MoPropertyMeta("performance_level", "performanceLevel", "string", VersionMeta.Version313h, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version313h, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
-            "serial": MoPropertyMeta("serial", "serial", "string", VersionMeta.Version313h, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "shutdown_temperature": MoPropertyMeta("shutdown_temperature", "shutdownTemperature", "string", VersionMeta.Version313h, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version313h, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "throttle_start_temperature": MoPropertyMeta("throttle_start_temperature", "throttleStartTemperature", "string", VersionMeta.Version313h, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "vendor": MoPropertyMeta("vendor", "vendor", "string", VersionMeta.Version313h, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version313a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "controller_temperature": MoPropertyMeta("controller_temperature", "controllerTemperature", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
+            "drive_life_used": MoPropertyMeta("drive_life_used", "driveLifeUsed", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "firmware_version": MoPropertyMeta("firmware_version", "firmwareVersion", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version313a, MoPropertyMeta.NAMING, None, 0, 510, None, [], []), 
+            "led_fault_status": MoPropertyMeta("led_fault_status", "ledFaultStatus", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "lifeleftin_days": MoPropertyMeta("lifeleftin_days", "lifeleftinDays", "string", VersionMeta.Version402c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "model": MoPropertyMeta("model", "model", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "pd_chip_temp_celsius": MoPropertyMeta("pd_chip_temp_celsius", "pdChipTempCelsius", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "pd_status": MoPropertyMeta("pd_status", "pdStatus", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "percentage_total_power_on_hour": MoPropertyMeta("percentage_total_power_on_hour", "percentageTotalPowerOnHour", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "performance_level": MoPropertyMeta("performance_level", "performanceLevel", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
+            "serial": MoPropertyMeta("serial", "serial", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "shutdown_temperature": MoPropertyMeta("shutdown_temperature", "shutdownTemperature", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "throttle_start_temperature": MoPropertyMeta("throttle_start_temperature", "throttleStartTemperature", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "vendor": MoPropertyMeta("vendor", "vendor", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
         },
 
     }
@@ -77,6 +79,7 @@ class StorageNVMePhysicalDrive(ManagedObject):
             "firmwareVersion": "firmware_version", 
             "id": "id", 
             "ledFaultStatus": "led_fault_status", 
+            "lifeleftinDays": "lifeleftin_days", 
             "pdChipTempCelsius": "pd_chip_temp_celsius", 
             "pdStatus": "pd_status", 
             "percentageTotalPowerOnHour": "percentage_total_power_on_hour", 
@@ -98,6 +101,7 @@ class StorageNVMePhysicalDrive(ManagedObject):
             "firmwareVersion": "firmware_version", 
             "id": "id", 
             "ledFaultStatus": "led_fault_status", 
+            "lifeleftinDays": "lifeleftin_days", 
             "model": "model", 
             "pdChipTempCelsius": "pd_chip_temp_celsius", 
             "pdStatus": "pd_status", 
@@ -121,6 +125,7 @@ class StorageNVMePhysicalDrive(ManagedObject):
         self.drive_life_used = None
         self.firmware_version = None
         self.led_fault_status = None
+        self.lifeleftin_days = None
         self.pd_chip_temp_celsius = None
         self.pd_status = None
         self.percentage_total_power_on_hour = None

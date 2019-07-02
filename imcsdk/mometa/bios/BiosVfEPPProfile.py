@@ -21,7 +21,7 @@ class BiosVfEPPProfile(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosVfEPPProfile", "biosVfEPPProfile", "epp-profile", VersionMeta.Version304a, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None]),
-        "modular": MoMeta("BiosVfEPPProfile", "biosVfEPPProfile", "epp-profile", VersionMeta.Version313h, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
+        "modular": MoMeta("BiosVfEPPProfile", "biosVfEPPProfile", "epp-profile", VersionMeta.Version313a, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
     }
 
 
@@ -36,11 +36,11 @@ class BiosVfEPPProfile(ManagedObject):
         },
 
         "modular": {
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version313h, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version313h, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version313h, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "vp_epp_profile": MoPropertyMeta("vp_epp_profile", "vpEPPProfile", "string", VersionMeta.Version313h, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Balanced Performance", "Balanced Power", "Performance", "Power", "platform-default"], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version313h, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version313a, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version313a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version313a, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "vp_epp_profile": MoPropertyMeta("vp_epp_profile", "vpEPPProfile", "string", VersionMeta.Version313a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Balanced Performance", "Balanced Power", "Performance", "Power", "platform-default"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version313a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
         },
 
     }

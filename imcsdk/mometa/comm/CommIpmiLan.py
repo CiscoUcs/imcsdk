@@ -43,6 +43,7 @@ class CommIpmiLan(ManagedObject):
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "port": MoPropertyMeta("port", "port", "uint", VersionMeta.Version402c, MoPropertyMeta.READ_ONLY, None, None, None, None, [], ["1-65535"]), 
         },
 
     }
@@ -67,6 +68,7 @@ class CommIpmiLan(ManagedObject):
             "rn": "rn", 
             "status": "status", 
             "childAction": "child_action", 
+            "port": "port", 
         },
 
     }
@@ -78,6 +80,7 @@ class CommIpmiLan(ManagedObject):
         self.priv = None
         self.status = None
         self.child_action = None
+        self.port = None
 
         ManagedObject.__init__(self, "CommIpmiLan", parent_mo_or_dn, **kwargs)
 

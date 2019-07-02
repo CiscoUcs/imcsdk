@@ -30,6 +30,7 @@ class PciEquipSlot(ManagedObject):
             "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version151f, MoPropertyMeta.NAMING, None, None, None, None, [], []), 
             "model": MoPropertyMeta("model", "model", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "option_rom_status": MoPropertyMeta("option_rom_status", "optionROMStatus", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "pid": MoPropertyMeta("pid", "pid", "string", VersionMeta.Version402c, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
             "smbios_id": MoPropertyMeta("smbios_id", "smbiosId", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x8, None, None, r"""((removed|created|modified|deleted),){0,3}(removed|created|modified|deleted){0,1}""", [], []), 
@@ -44,6 +45,7 @@ class PciEquipSlot(ManagedObject):
             "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version2013e, MoPropertyMeta.NAMING, None, None, None, None, [], []), 
             "model": MoPropertyMeta("model", "model", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "option_rom_status": MoPropertyMeta("option_rom_status", "optionROMStatus", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "pid": MoPropertyMeta("pid", "pid", "string", VersionMeta.Version402c, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
             "smbios_id": MoPropertyMeta("smbios_id", "smbiosId", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x8, None, None, r"""((removed|created|modified|deleted),){0,3}(removed|created|modified|deleted){0,1}""", [], []), 
@@ -62,6 +64,7 @@ class PciEquipSlot(ManagedObject):
             "id": "id", 
             "model": "model", 
             "optionROMStatus": "option_rom_status", 
+            "pid": "pid", 
             "rn": "rn", 
             "smbiosId": "smbios_id", 
             "status": "status", 
@@ -76,6 +79,7 @@ class PciEquipSlot(ManagedObject):
             "id": "id", 
             "model": "model", 
             "optionROMStatus": "option_rom_status", 
+            "pid": "pid", 
             "rn": "rn", 
             "smbiosId": "smbios_id", 
             "status": "status", 
@@ -92,6 +96,7 @@ class PciEquipSlot(ManagedObject):
         self.controller_reported = None
         self.model = None
         self.option_rom_status = None
+        self.pid = None
         self.smbios_id = None
         self.status = None
         self.vendor = None

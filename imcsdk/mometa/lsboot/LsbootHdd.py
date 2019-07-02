@@ -27,14 +27,14 @@ class LsbootHdd(ManagedObject):
     prop_meta = {
 
         "classic": {
-            "boot_loader_descr": MoPropertyMeta("boot_loader_descr", "boot-loader-descr", "string", VersionMeta.Version401a, MoPropertyMeta.READ_WRITE, 0x2, 0, 128, None, [], []), 
-            "boot_loader_name": MoPropertyMeta("boot_loader_name", "boot-loader-name", "string", VersionMeta.Version401a, MoPropertyMeta.READ_WRITE, 0x4, 0, 128, None, [], []), 
-            "boot_loader_path": MoPropertyMeta("boot_loader_path", "boot-loader-path", "string", VersionMeta.Version401a, MoPropertyMeta.READ_WRITE, 0x8, None, None, r"""[^\(\)~`'\?"";<>\|&\*\^$%]{0,256}""", [], []), 
+            "boot_loader_descr": MoPropertyMeta("boot_loader_descr", "boot-loader-descr", "string", VersionMeta.Version313a, MoPropertyMeta.READ_WRITE, 0x2, 0, 128, None, [], []), 
+            "boot_loader_name": MoPropertyMeta("boot_loader_name", "boot-loader-name", "string", VersionMeta.Version313a, MoPropertyMeta.READ_WRITE, 0x4, 0, 128, None, [], []), 
+            "boot_loader_path": MoPropertyMeta("boot_loader_path", "boot-loader-path", "string", VersionMeta.Version313a, MoPropertyMeta.READ_WRITE, 0x8, None, None, r"""[^\(\)~`'\?"";<>\|&\*\^$%]{0,256}""", [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
             "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version201a, MoPropertyMeta.NAMING, 0x20, None, None, r"""(([a-zA-Z0-9]{1})|([a-zA-Z0-9]{1}[a-zA-Z0-9_\-]{0,28}[a-zA-Z0-9]{1})|([a-zA-Z0-9]{2}))""", [], []), 
             "order": MoPropertyMeta("order", "order", "uint", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, [], ["1-255"]), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x80, 0, 255, None, [], []), 
-            "slot": MoPropertyMeta("slot", "slot", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x100, None, None, r"""([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]|MRAID|RAID|M|HBA|SAS){0,1}""", [], []), 
+            "slot": MoPropertyMeta("slot", "slot", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x100, None, None, r"""([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]|MRAID|RAID|M|HBA|SAS|MSTOR-RAID){0,1}""", [], []), 
             "state": MoPropertyMeta("state", "state", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x400, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "subtype": MoPropertyMeta("subtype", "subtype", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x800, None, None, None, ["LOCALHDD"], []), 
@@ -43,9 +43,9 @@ class LsbootHdd(ManagedObject):
         },
 
         "modular": {
-            "boot_loader_descr": MoPropertyMeta("boot_loader_descr", "boot-loader-descr", "string", VersionMeta.Version313h, MoPropertyMeta.READ_WRITE, 0x2, 0, 128, None, [], []), 
-            "boot_loader_name": MoPropertyMeta("boot_loader_name", "boot-loader-name", "string", VersionMeta.Version313h, MoPropertyMeta.READ_WRITE, 0x4, 0, 128, None, [], []), 
-            "boot_loader_path": MoPropertyMeta("boot_loader_path", "boot-loader-path", "string", VersionMeta.Version313h, MoPropertyMeta.READ_WRITE, 0x8, None, None, r"""[^\(\)~`'\?"";<>\|&\*\^$%]{0,256}""", [], []), 
+            "boot_loader_descr": MoPropertyMeta("boot_loader_descr", "boot-loader-descr", "string", VersionMeta.Version313a, MoPropertyMeta.READ_WRITE, 0x2, 0, 128, None, [], []), 
+            "boot_loader_name": MoPropertyMeta("boot_loader_name", "boot-loader-name", "string", VersionMeta.Version313a, MoPropertyMeta.READ_WRITE, 0x4, 0, 128, None, [], []), 
+            "boot_loader_path": MoPropertyMeta("boot_loader_path", "boot-loader-path", "string", VersionMeta.Version313a, MoPropertyMeta.READ_WRITE, 0x8, None, None, r"""[^\(\)~`'\?"";<>\|&\*\^$%]{0,256}""", [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
             "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version2013e, MoPropertyMeta.NAMING, 0x20, None, None, r"""(([a-zA-Z0-9]{1})|([a-zA-Z0-9]{1}[a-zA-Z0-9_\-]{0,28}[a-zA-Z0-9]{1})|([a-zA-Z0-9]{2}))""", [], []), 
             "order": MoPropertyMeta("order", "order", "uint", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, [], ["1-255"]), 

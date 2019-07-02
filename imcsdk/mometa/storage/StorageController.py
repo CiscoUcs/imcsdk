@@ -53,12 +53,14 @@ class StorageController(ManagedObject):
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "model": MoPropertyMeta("model", "model", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "pci_slot": MoPropertyMeta("pci_slot", "pciSlot", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "pid": MoPropertyMeta("pid", "pid", "string", VersionMeta.Version402c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "presence": MoPropertyMeta("presence", "presence", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["empty", "equipped", "equipped-identity-unestablishable", "equipped-not-primary", "equipped-with-malformed-fru", "inaccessible", "mismatch", "mismatch-identity-unestablishable", "missing", "not-supported", "unauthorized", "unknown"], []), 
             "product_pid": MoPropertyMeta("product_pid", "productPID", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "raid_support": MoPropertyMeta("raid_support", "raidSupport", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "self_encrypt_enabled": MoPropertyMeta("self_encrypt_enabled", "selfEncryptEnabled", "string", VersionMeta.Version209c, MoPropertyMeta.READ_ONLY, None, None, None, None, ["No", "Yes", "false", "no", "true", "yes"], []), 
             "serial": MoPropertyMeta("serial", "serial", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "type": MoPropertyMeta("type", "type", "string", VersionMeta.Version151f, MoPropertyMeta.NAMING, None, None, None, None, [], []), 
+            "type_plus_slot_id": MoPropertyMeta("type_plus_slot_id", "typePlusSlotId", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
             "vendor": MoPropertyMeta("vendor", "vendor", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
         },
 
@@ -71,12 +73,14 @@ class StorageController(ManagedObject):
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "model": MoPropertyMeta("model", "model", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "pci_slot": MoPropertyMeta("pci_slot", "pciSlot", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "pid": MoPropertyMeta("pid", "pid", "string", VersionMeta.Version402c, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
             "presence": MoPropertyMeta("presence", "presence", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["empty", "equipped", "equipped-identity-unestablishable", "equipped-not-primary", "equipped-with-malformed-fru", "inaccessible", "mismatch", "mismatch-identity-unestablishable", "missing", "not-supported", "unauthorized", "unknown"], []), 
-            "product_pid": MoPropertyMeta("product_pid", "productPID", "string", VersionMeta.Version401c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "product_pid": MoPropertyMeta("product_pid", "productPID", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "raid_support": MoPropertyMeta("raid_support", "raidSupport", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "self_encrypt_enabled": MoPropertyMeta("self_encrypt_enabled", "selfEncryptEnabled", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["No", "Yes", "no", "yes"], []), 
             "serial": MoPropertyMeta("serial", "serial", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "type": MoPropertyMeta("type", "type", "string", VersionMeta.Version2013e, MoPropertyMeta.NAMING, None, None, None, None, [], []), 
+            "type_plus_slot_id": MoPropertyMeta("type_plus_slot_id", "typePlusSlotId", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
             "vendor": MoPropertyMeta("vendor", "vendor", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
         },
 
@@ -93,12 +97,14 @@ class StorageController(ManagedObject):
             "childAction": "child_action", 
             "model": "model", 
             "pciSlot": "pci_slot", 
+            "pid": "pid", 
             "presence": "presence", 
             "productPID": "product_pid", 
             "raidSupport": "raid_support", 
             "selfEncryptEnabled": "self_encrypt_enabled", 
             "serial": "serial", 
             "type": "type", 
+            "typePlusSlotId": "type_plus_slot_id", 
             "vendor": "vendor", 
         },
 
@@ -111,12 +117,14 @@ class StorageController(ManagedObject):
             "childAction": "child_action", 
             "model": "model", 
             "pciSlot": "pci_slot", 
+            "pid": "pid", 
             "presence": "presence", 
             "productPID": "product_pid", 
             "raidSupport": "raid_support", 
             "selfEncryptEnabled": "self_encrypt_enabled", 
             "serial": "serial", 
             "type": "type", 
+            "typePlusSlotId": "type_plus_slot_id", 
             "vendor": "vendor", 
         },
 
@@ -131,11 +139,13 @@ class StorageController(ManagedObject):
         self.child_action = None
         self.model = None
         self.pci_slot = None
+        self.pid = None
         self.presence = None
         self.product_pid = None
         self.raid_support = None
         self.self_encrypt_enabled = None
         self.serial = None
+        self.type_plus_slot_id = None
         self.vendor = None
 
         ManagedObject.__init__(self, "StorageController", parent_mo_or_dn, **kwargs)
