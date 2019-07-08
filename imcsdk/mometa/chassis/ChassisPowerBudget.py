@@ -26,7 +26,7 @@ class ChassisPowerBudget(ManagedObject):
         "modular": {
             "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["reset-power-profile-default", "start-power-char"], []), 
             "admin_state": MoPropertyMeta("admin_state", "adminState", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
-            "auto_eff_budget": MoPropertyMeta("auto_eff_budget", "autoEffBudget", "string", VersionMeta.Version401c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "auto_eff_budget": MoPropertyMeta("auto_eff_budget", "autoEffBudget", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "auto_min_budget": MoPropertyMeta("auto_min_budget", "autoMinBudget", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "budget": MoPropertyMeta("budget", "budget", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, 0, 510, None, [], ["0-4294967295"]), 
             "cap_budget": MoPropertyMeta("cap_budget", "capBudget", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 

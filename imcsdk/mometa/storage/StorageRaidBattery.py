@@ -18,8 +18,8 @@ class StorageRaidBattery(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("StorageRaidBattery", "storageRaidBattery", "raid-battery", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'storageController'], [u'faultInst', u'storageOperation'], ["Get", "Set"]),
-        "modular": MoMeta("StorageRaidBattery", "storageRaidBattery", "raid-battery", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'storageController'], [u'faultInst', u'storageOperation'], ["Get", "Set"])
+        "classic": MoMeta("StorageRaidBattery", "storageRaidBattery", "raid-battery", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'storageController'], [u'faultInst'], ["Get", "Set"]),
+        "modular": MoMeta("StorageRaidBattery", "storageRaidBattery", "raid-battery", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'storageController'], [u'faultInst'], ["Get", "Set"])
     }
 
 

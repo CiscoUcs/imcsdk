@@ -59,7 +59,7 @@ class CommSnmp(ManagedObject):
             "admin_state": MoPropertyMeta("admin_state", "adminState", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
             "com2_sec": MoPropertyMeta("com2_sec", "com2Sec", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["None", "disabled", "full", "limited"], []), 
             "community": MoPropertyMeta("community", "community", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, None, None, r"""[!#$%\(\)\*\+,\-\./:<=\[\]\^_\{\}~a-zA-Z0-9]{0,18}""", [], []), 
-            "config_change": MoPropertyMeta("config_change", "configChange", "string", VersionMeta.Version401c, MoPropertyMeta.READ_WRITE, 0x10, 0, 510, None, ["commit", "no-commit"], []), 
+            "config_change": MoPropertyMeta("config_change", "configChange", "string", VersionMeta.Version401a, MoPropertyMeta.READ_WRITE, 0x10, 0, 510, None, ["commit", "no-commit"], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, None, [], []), 
             "engine_id_key": MoPropertyMeta("engine_id_key", "engineIdKey", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, 0, 27, r"""[^#!&]{0,27}""", [], []), 
             "port": MoPropertyMeta("port", "port", "uint", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, [], ["1-65535"]), 
@@ -73,7 +73,7 @@ class CommSnmp(ManagedObject):
             "engine_id": MoPropertyMeta("engine_id", "engineId", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 255, None, [], []), 
             "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, r"""[\-\.:_a-zA-Z0-9]{0,16}""", [], []), 
             "proto": MoPropertyMeta("proto", "proto", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["all", "none", "tcp", "udp"], []), 
-            "snmp_config_in_progress": MoPropertyMeta("snmp_config_in_progress", "snmpConfigInProgress", "string", VersionMeta.Version401c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "snmp_config_in_progress": MoPropertyMeta("snmp_config_in_progress", "snmpConfigInProgress", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
         },
 
     }

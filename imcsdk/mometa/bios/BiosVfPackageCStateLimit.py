@@ -12,7 +12,6 @@ class BiosVfPackageCStateLimitConsts:
     VP_PACKAGE_CSTATE_LIMIT_C2 = "C2"
     VP_PACKAGE_CSTATE_LIMIT_C6_NON_RETENTION = "C6 Non Retention"
     VP_PACKAGE_CSTATE_LIMIT_C6_RETENTION = "C6 Retention"
-    _VP_PACKAGE_CSTATE_LIMIT_C6_NON_RETENTION = "C6 non Retention"
     VP_PACKAGE_CSTATE_LIMIT_NO_LIMIT = "No Limit"
     VP_PACKAGE_CSTATE_LIMIT_PLATFORM_DEFAULT = "platform-default"
     VP_PACKAGE_CSTATE_LIMIT_C0_STATE = "c0-state"
@@ -42,7 +41,7 @@ class BiosVfPackageCStateLimit(ManagedObject):
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "vp_package_c_state_limit": MoPropertyMeta("vp_package_c_state_limit", "vpPackageCStateLimit", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Auto", "C0 C1 State", "C0/C1", "C2", "C6 Non Retention", "C6 Retention", "C6 non Retention", "No Limit", "platform-default"], []), 
+            "vp_package_c_state_limit": MoPropertyMeta("vp_package_c_state_limit", "vpPackageCStateLimit", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Auto", "C0 C1 State", "C0/C1", "C2", "C6 Non Retention", "C6 Retention", "No Limit", "platform-default"], []), 
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
         },
 

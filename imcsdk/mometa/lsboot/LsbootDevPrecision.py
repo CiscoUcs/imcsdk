@@ -60,7 +60,7 @@ class LsbootDevPrecision(ManagedObject):
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-            "last_configured_boot_order_source": MoPropertyMeta("last_configured_boot_order_source", "lastConfiguredBootOrderSource", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["BIOS", "CIMC", "UNKNOWN"], []), 
+            "last_configured_boot_order_source": MoPropertyMeta("last_configured_boot_order_source", "lastConfiguredBootOrderSource", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["BIOS", "CIMC", "CIMCOneTimeBoot", "UNKNOWN"], []), 
             "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, r"""[\-\.:_a-zA-Z0-9]{0,16}""", [], []), 
             "purpose": MoPropertyMeta("purpose", "purpose", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["operational", "utility"], []), 
         },

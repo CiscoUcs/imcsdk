@@ -38,6 +38,7 @@ class FirmwareUpdatableConsts:
     TYPE_ADAPTOR = "adaptor"
     TYPE_BLADE_BIOS = "blade-bios"
     TYPE_BLADE_CONTROLLER = "blade-controller"
+    TYPE_DEVICE_CONNECTOR = "device-connector"
     TYPE_SAS_EXPANDER = "sas-expander"
     TYPE_SIOC = "sioc"
 
@@ -66,7 +67,7 @@ class FirmwareUpdatable(ManagedObject):
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x80, 0, 255, None, [], []), 
             "secure_boot": MoPropertyMeta("secure_boot", "secureBoot", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["Disabled", "Enabled", "disable", "disabled", "enable", "enabled"], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "type": MoPropertyMeta("type", "type", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x400, None, None, None, ["adaptor", "blade-bios", "blade-controller", "sas-expander", "sioc"], []), 
+            "type": MoPropertyMeta("type", "type", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x400, None, None, None, ["adaptor", "blade-bios", "blade-controller", "device-connector", "sas-expander", "sioc"], []), 
             "user": MoPropertyMeta("user", "user", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x800, 0, 256, None, [], []), 
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "deployment": MoPropertyMeta("deployment", "deployment", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["backup", "primary"], []), 
@@ -88,7 +89,7 @@ class FirmwareUpdatable(ManagedObject):
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, 0, 255, None, [], []), 
             "secure_boot": MoPropertyMeta("secure_boot", "secureBoot", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["Disabled", "Enabled", "disable", "disabled", "enable", "enabled"], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "type": MoPropertyMeta("type", "type", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x400, None, None, None, ["adaptor", "blade-bios", "blade-controller", "sas-expander", "sioc"], []), 
+            "type": MoPropertyMeta("type", "type", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x400, None, None, None, ["adaptor", "blade-bios", "blade-controller", "device-connector", "sas-expander", "sioc"], []), 
             "user": MoPropertyMeta("user", "user", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x800, 0, 256, None, [], []), 
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "deployment": MoPropertyMeta("deployment", "deployment", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["backup", "primary"], []), 

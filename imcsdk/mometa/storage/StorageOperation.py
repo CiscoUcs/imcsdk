@@ -16,8 +16,8 @@ class StorageOperation(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("StorageOperation", "storageOperation", "storage-operation", VersionMeta.Version201a, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageLocalDisk', u'storageRaidBattery', u'storageVirtualDrive'], [], ["Get"]),
-        "modular": MoMeta("StorageOperation", "storageOperation", "storage-operation", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageLocalDisk', u'storageRaidBattery', u'storageVirtualDrive'], [], ["Get"])
+        "classic": MoMeta("StorageOperation", "storageOperation", "storage-operation", VersionMeta.Version201a, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageLocalDisk', u'storageVirtualDrive'], [], ["Get"]),
+        "modular": MoMeta("StorageOperation", "storageOperation", "storage-operation", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageLocalDisk', u'storageVirtualDrive'], [], ["Get"])
     }
 
 
@@ -28,7 +28,7 @@ class StorageOperation(ManagedObject):
             "current_lrop": MoPropertyMeta("current_lrop", "currentLrop", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
             "elapsed_seconds": MoPropertyMeta("elapsed_seconds", "elapsedSeconds", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "estimated_seconds_remaining": MoPropertyMeta("estimated_seconds_remaining", "estimatedSecondsRemaining", "string", VersionMeta.Version313h, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "estimated_seconds_remaining": MoPropertyMeta("estimated_seconds_remaining", "estimatedSecondsRemaining", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "lrop_in_progress": MoPropertyMeta("lrop_in_progress", "lropInProgress", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "progress_percent": MoPropertyMeta("progress_percent", "progressPercent", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
@@ -40,7 +40,7 @@ class StorageOperation(ManagedObject):
             "current_lrop": MoPropertyMeta("current_lrop", "currentLrop", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
             "elapsed_seconds": MoPropertyMeta("elapsed_seconds", "elapsedSeconds", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "estimated_seconds_remaining": MoPropertyMeta("estimated_seconds_remaining", "estimatedSecondsRemaining", "string", VersionMeta.Version313h, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "estimated_seconds_remaining": MoPropertyMeta("estimated_seconds_remaining", "estimatedSecondsRemaining", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "lrop_in_progress": MoPropertyMeta("lrop_in_progress", "lropInProgress", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "progress_percent": MoPropertyMeta("progress_percent", "progressPercent", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
