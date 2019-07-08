@@ -1,10 +1,19 @@
 =======
 History
 =======
+
+0.9.7 (2019-07-08)
+---------------------
+* Adds support for IMC version 4.0(1c), 4.0(2b)
+
+0.9.6 (2018-10-10)
+---------------------
+* Updated requirements to include setuptools
+
 0.9.5 (2018-08-24)
 --------------------
 * Fixed an issue with missed requirement files
-* Added Python 3.6,3.7 to package meta 
+* Added Python 3.6,3.7 to package meta
 
 0.9.4 (2018-08-24)
 --------------------
