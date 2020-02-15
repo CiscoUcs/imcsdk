@@ -112,12 +112,20 @@ def _print_component_upgrade_summary(handle):
         log.info("%20s: %s" % (obj.component, obj.update_status))
 
 
-def firmware_huu_update_monitor(handle, timeout=60, interval=10, server_id=1):
+def firmware_huu_update_monitor(handle, secure_adapter_update=True,
+                                timeout=60, interval=10, server_id=1):
     """
     This method monitors status of a firmware upgrade.
 
     Args:
         handle(ImcHandle)
+        secure_adapter_update(bool): If set to False, secure adapater update
+                                     will be disabled as part of the
+                                     monitoring loop allowing for adapater
+                                     downgrades.  This should be used with
+                                     caution, adapter downgrades can
+                                     reintroduce security issues that are
+                                     fixed in newer adapter firmware versions.
         timeout(int): Timeout in minutes for monitor API.
         interval(int): frequency of monitoring in seconds
         server_id(int): Server id for monitoring firmware upgrade
@@ -128,14 +136,23 @@ def firmware_huu_update_monitor(handle, timeout=60, interval=10, server_id=1):
     Examples:
         firmware_huu_update_monitor(handle, 60, 10)
     """
+    from ..mometa.compute.ComputeRackUnit import ComputeRackUnit
+    from ..mometa.adapter.AdapterSecureUpdate import AdapterSecureUpdate
     current_status = []
     start = datetime.datetime.now()
+
+    secure_update = "enabled" if secure_adapter_update else "disabled"
 
     top_system = TopSystem()
     if handle.platform == IMC_PLATFORM.TYPE_CLASSIC:
         parent_dn = top_system.dn
+        adapter_secure_mo = ComputeRackUnit(parent_mo_or_dn=top_system,
+                                            server_id="1")
+        adapter_secure_mo.adaptor_secure_update = secure_update
     elif handle.platform == IMC_PLATFORM.TYPE_MODULAR:
         parent_dn = get_server_dn(handle, str(server_id))
+        adapter_secure_mo = AdapterSecureUpdate(parent_mo_or_dn=parent_dn)
+        adapter_secure_mo.secure_update = secure_udpate
 
     huu = HuuController(parent_mo_or_dn=parent_dn)
     huu_firmware_updater = HuuFirmwareUpdater(parent_mo_or_dn=huu.dn)
@@ -157,6 +174,13 @@ def firmware_huu_update_monitor(handle, timeout=60, interval=10, server_id=1):
                 log_progress("Firmware Upgrade is still running",
                              update_obj.overall_status)
                 current_status.append(update_obj.overall_status)
+                if ('HUU Discovery In Progress' in update_obj.overall_status):
+                    # by design secure adapter update is enabled when
+                    # the host reboots so if we want to allow adapter
+                    # downgrade we need to set this in the monitor loop
+                    log.info('Setting secure adapter update to %s',
+                             secure_update)
+                    handle.set_mo(adapter_secure_mo)
 
             time.sleep(interval)
             secs = (datetime.datetime.now() - start).total_seconds()
