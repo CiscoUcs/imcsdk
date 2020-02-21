@@ -168,6 +168,9 @@ class ImcVersion(object):
     def __eq__(self, version):
         return self.compare_to(version) == 0
 
+    def __ne__(self, version):
+        return self.compare_to(version) != 0
+
     def __str__(self):
         return self.__version
 
