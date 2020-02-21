@@ -89,6 +89,15 @@ class ImcVersion(object):
         if self._set_versions(match_obj):
             return
 
+        # handle de special builds "66.77(67.1582251418)"
+        match_pattern = re.compile("^(?P<major>[1-9][0-9]{0,2})\."
+                                   "(?P<minor>(([0-9])|([1-9][0-9]{0,2})))\("
+                                   "(?P<mr>(([0-9])|([1-9][0-9]{0,2})))\."
+                                   "(?P<patch>(([0-9])|([1-9][0-9]{0,})))\)$")
+        match_obj = re.match(match_pattern, version)
+        if self._set_versions(match_obj):
+            return
+
     def _set_versions(self, match_obj):
         if not match_obj:
             return False
