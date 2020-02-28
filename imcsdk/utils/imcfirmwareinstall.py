@@ -16,7 +16,10 @@ import time
 import datetime
 import logging
 from imcsdk.imcgenutils import *
-from imcsdk.imccoreutils import IMC_PLATFORM, get_server_dn
+from imcsdk.imccoreutils import IMC_PLATFORM, get_server_dn, \
+    get_mo_property_meta
+from imcsdk.mometa.adapter.AdapterSecureUpdate import AdapterSecureUpdate
+from imcsdk.mometa.compute.ComputeRackUnit import ComputeRackUnit
 from imcsdk.mometa.huu.HuuFirmwareUpdater import HuuFirmwareUpdater, \
     HuuFirmwareUpdaterConsts
 from imcsdk.mometa.huu.HuuFirmwareUpdateStatus import HuuFirmwareUpdateStatus
@@ -112,6 +115,33 @@ def _print_component_upgrade_summary(handle):
         log.info("%20s: %s" % (obj.component, obj.update_status))
 
 
+def _disable_secure_adapter_update(handle, parent_dn):
+    """
+    Disables secure adapter update so adapters can be downgraded.
+    If the CIMC version doesn't support disabling secure adapter update,
+    a warning is logged.
+    """
+    if handle.platform == IMC_PLATFORM.TYPE_CLASSIC:
+        asu_prop_meta = get_mo_property_meta('ComputeRackUnit',
+                                             key='adaptor_secure_update',
+                                             platform=handle.platform)
+        adapter_secure_mo = ComputeRackUnit(parent_mo_or_dn=parent_dn,
+                                            server_id="1")
+        adapter_secure_mo.adaptor_secure_update = 'disabled'
+    elif handle.platform == IMC_PLATFORM.TYPE_MODULAR:
+        asu_prop_meta = get_mo_property_meta('AdapterSecureUpdate',
+                                             key='secure_update',
+                                             platform=handle.platform)
+        adapter_secure_mo = AdapterSecureUpdate(parent_mo_or_dn=parent_dn)
+        adapter_secure_mo.secure_update = 'disabled'
+    if handle.version < asu_prop_meta.version:
+        log.warning("CIMC version does not support disabling secure adapter "
+                    "update.")
+        return
+    log.info("Disabling secure adapter update")
+    handle.set_mo(adapter_secure_mo)
+
+
 def firmware_huu_update_monitor(handle, secure_adapter_update=True,
                                 timeout=60, interval=10, server_id=1):
     """
@@ -136,23 +166,14 @@ def firmware_huu_update_monitor(handle, secure_adapter_update=True,
     Examples:
         firmware_huu_update_monitor(handle, 60, 10)
     """
-    from ..mometa.compute.ComputeRackUnit import ComputeRackUnit
-    from ..mometa.adapter.AdapterSecureUpdate import AdapterSecureUpdate
     current_status = []
     start = datetime.datetime.now()
-
-    secure_update = "enabled" if secure_adapter_update else "disabled"
 
     top_system = TopSystem()
     if handle.platform == IMC_PLATFORM.TYPE_CLASSIC:
         parent_dn = top_system.dn
-        adapter_secure_mo = ComputeRackUnit(parent_mo_or_dn=top_system,
-                                            server_id="1")
-        adapter_secure_mo.adaptor_secure_update = secure_update
     elif handle.platform == IMC_PLATFORM.TYPE_MODULAR:
         parent_dn = get_server_dn(handle, str(server_id))
-        adapter_secure_mo = AdapterSecureUpdate(parent_mo_or_dn=parent_dn)
-        adapter_secure_mo.secure_update = secure_udpate
 
     huu = HuuController(parent_mo_or_dn=parent_dn)
     huu_firmware_updater = HuuFirmwareUpdater(parent_mo_or_dn=huu.dn)
@@ -174,13 +195,13 @@ def firmware_huu_update_monitor(handle, secure_adapter_update=True,
                 log_progress("Firmware Upgrade is still running",
                              update_obj.overall_status)
                 current_status.append(update_obj.overall_status)
-                if ('HUU Discovery In Progress' in update_obj.overall_status):
+                if (not secure_update and
+                    'HUU Discovery In Progress' in update_obj.overall_status):
                     # by design secure adapter update is enabled when
                     # the host reboots so if we want to allow adapter
-                    # downgrade we need to set this in the monitor loop
-                    log.info('Setting secure adapter update to %s',
-                             secure_update)
-                    handle.set_mo(adapter_secure_mo)
+                    # downgrade we need to set it to disabled in the monitor
+                    # loop
+                    _disable_secure_adapter_update(handle, parent_dn)
 
             time.sleep(interval)
             secs = (datetime.datetime.now() - start).total_seconds()
