@@ -195,7 +195,7 @@ def firmware_huu_update_monitor(handle, secure_adapter_update=True,
                 log_progress("Firmware Upgrade is still running",
                              update_obj.overall_status)
                 current_status.append(update_obj.overall_status)
-                if (not secure_update and
+                if (not secure_adapter_update and
                     'HUU Discovery In Progress' in update_obj.overall_status):
                     # by design secure adapter update is enabled when
                     # the host reboots so if we want to allow adapter
