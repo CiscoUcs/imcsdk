@@ -414,14 +414,21 @@ def vmedia_mount_remove_all(handle, server_id=1):
     Examples:
         vmedia_mount_remove_all(handle)
     """
+    from imcsdk.mometa.comm.CommSavedVMediaMap import CommSavedVMediaMapConsts
 
     # Get all current virtually mapped ISOs
     virt_media_maps = handle.query_children(in_dn=_get_vmedia_mo_dn(handle,
                                                                     server_id))
     # Loop over each mapped ISO
     for virt_media in virt_media_maps:
+        # Remove the saved mapping
+        if virt_media.get_class_id() == 'CommSavedVMediaMap':
+            virt_media.admin_action = \
+                CommSavedVMediaMapConsts.ADMIN_ACTION_DELETE_VOLUME
+            handle.set_mo(virt_media)
         # Remove the mapped ISO
-        handle.remove_mo(virt_media)
+        elif virt_media.get_class_id() == 'CommVMediaMap':
+            handle.remove_mo(virt_media)
     # Raise error if all mappings not removed
     if len(handle.query_children(in_dn="sys/svc-ext/vmedia-svc")) > 0:
         raise ImcOperationError('Remove Virtual Media',
