@@ -16,8 +16,8 @@ class HuuController(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("HuuController", "huuController", "huu", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'topSystem'], [u'huuFirmwareCatalog', u'huuFirmwareRunning', u'huuFirmwareUpdateCancel', u'huuFirmwareUpdater'], ["Get"]),
-        "modular": MoMeta("HuuController", "huuController", "huu", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeServerNode'], [u'huuFirmwareCatalog', u'huuFirmwareRunning', u'huuFirmwareUpdateCancel', u'huuFirmwareUpdater'], ["Get"])
+        "classic": MoMeta("HuuController", "huuController", "huu", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['topSystem'], ['huuFirmwareCatalog', 'huuFirmwareRunning', 'huuFirmwareUpdateCancel', 'huuFirmwareUpdater'], ["Get"]),
+        "modular": MoMeta("HuuController", "huuController", "huu", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['computeServerNode'], ['huuFirmwareCatalog', 'huuFirmwareRunning', 'huuFirmwareUpdateCancel', 'huuFirmwareUpdater'], ["Get"])
     }
 
 

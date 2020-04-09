@@ -16,8 +16,8 @@ class GeneratedStorageControllerKeyId(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("GeneratedStorageControllerKeyId", "generatedStorageControllerKeyId", "gen-key-id", VersionMeta.Version209c, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageController'], [], ["Get"]),
-        "modular": MoMeta("GeneratedStorageControllerKeyId", "generatedStorageControllerKeyId", "gen-key-id", VersionMeta.Version303a, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageController'], [], ["Get"])
+        "classic": MoMeta("GeneratedStorageControllerKeyId", "generatedStorageControllerKeyId", "gen-key-id", VersionMeta.Version209c, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['storageController'], [], ["Get"]),
+        "modular": MoMeta("GeneratedStorageControllerKeyId", "generatedStorageControllerKeyId", "gen-key-id", VersionMeta.Version303a, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['storageController'], [], ["Get"])
     }
 
 

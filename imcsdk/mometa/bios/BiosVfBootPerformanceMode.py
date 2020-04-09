@@ -19,8 +19,8 @@ class BiosVfBootPerformanceMode(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("BiosVfBootPerformanceMode", "biosVfBootPerformanceMode", "Boot-Performance-Mode", VersionMeta.Version303a, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfBootPerformanceMode", "biosVfBootPerformanceMode", "Boot-Performance-Mode", VersionMeta.Version303a, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
+        "classic": MoMeta("BiosVfBootPerformanceMode", "biosVfBootPerformanceMode", "Boot-Performance-Mode", VersionMeta.Version303a, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], ["Get", "Set"]),
+        "modular": MoMeta("BiosVfBootPerformanceMode", "biosVfBootPerformanceMode", "Boot-Performance-Mode", VersionMeta.Version303a, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], ["Get", "Set"])
     }
 
 

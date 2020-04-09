@@ -13,11 +13,11 @@ class NetworkAdapterEthIf(ManagedObject):
     """This is NetworkAdapterEthIf class."""
 
     consts = NetworkAdapterEthIfConsts()
-    naming_props = set([u'id'])
+    naming_props = set(['id'])
 
     mo_meta = {
-        "classic": MoMeta("NetworkAdapterEthIf", "networkAdapterEthIf", "eth-[id]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'networkAdapterUnit'], [], ["Get"]),
-        "modular": MoMeta("NetworkAdapterEthIf", "networkAdapterEthIf", "eth-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'networkAdapterUnit'], [], ["Get"])
+        "classic": MoMeta("NetworkAdapterEthIf", "networkAdapterEthIf", "eth-[id]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['networkAdapterUnit'], [], ["Get"]),
+        "modular": MoMeta("NetworkAdapterEthIf", "networkAdapterEthIf", "eth-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['networkAdapterUnit'], [], ["Get"])
     }
 
 

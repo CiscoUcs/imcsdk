@@ -21,11 +21,11 @@ class MemoryPersistentMemoryNamespace(ManagedObject):
     """This is MemoryPersistentMemoryNamespace class."""
 
     consts = MemoryPersistentMemoryNamespaceConsts()
-    naming_props = set([u'uuid'])
+    naming_props = set(['uuid'])
 
     mo_meta = {
-        "classic": MoMeta("MemoryPersistentMemoryNamespace", "memoryPersistentMemoryNamespace", "ns-[uuid]", VersionMeta.Version404b, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'memoryPersistentMemoryRegion'], [], [None]),
-        "modular": MoMeta("MemoryPersistentMemoryNamespace", "memoryPersistentMemoryNamespace", "ns-[uuid]", VersionMeta.Version404b, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'memoryPersistentMemoryRegion'], [], [None])
+        "classic": MoMeta("MemoryPersistentMemoryNamespace", "memoryPersistentMemoryNamespace", "ns-[uuid]", VersionMeta.Version404b, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['memoryPersistentMemoryRegion'], [], [None]),
+        "modular": MoMeta("MemoryPersistentMemoryNamespace", "memoryPersistentMemoryNamespace", "ns-[uuid]", VersionMeta.Version404b, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['memoryPersistentMemoryRegion'], [], [None])
     }
 
 

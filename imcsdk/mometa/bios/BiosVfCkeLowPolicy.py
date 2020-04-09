@@ -20,8 +20,8 @@ class BiosVfCkeLowPolicy(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("BiosVfCkeLowPolicy", "biosVfCkeLowPolicy", "Cke-Low-Policy", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfCkeLowPolicy", "biosVfCkeLowPolicy", "Cke-Low-Policy", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
+        "classic": MoMeta("BiosVfCkeLowPolicy", "biosVfCkeLowPolicy", "Cke-Low-Policy", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], ["Get", "Set"]),
+        "modular": MoMeta("BiosVfCkeLowPolicy", "biosVfCkeLowPolicy", "Cke-Low-Policy", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], ["Get", "Set"])
     }
 
 

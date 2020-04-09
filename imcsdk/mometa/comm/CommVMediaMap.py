@@ -18,11 +18,11 @@ class CommVMediaMap(ManagedObject):
     """This is CommVMediaMap class."""
 
     consts = CommVMediaMapConsts()
-    naming_props = set([u'volumeName'])
+    naming_props = set(['volumeName'])
 
     mo_meta = {
-        "classic": MoMeta("CommVMediaMap", "commVMediaMap", "vmmap-[volume_name]", VersionMeta.Version151f, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'commVMedia'], [], ["Add", "Get"]),
-        "modular": MoMeta("CommVMediaMap", "commVMediaMap", "vmmap-[volume_name]", VersionMeta.Version2013e, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'commVMedia'], [], ["Add", "Get"])
+        "classic": MoMeta("CommVMediaMap", "commVMediaMap", "vmmap-[volume_name]", VersionMeta.Version151f, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], ['commVMedia'], [], ["Add", "Get"]),
+        "modular": MoMeta("CommVMediaMap", "commVMediaMap", "vmmap-[volume_name]", VersionMeta.Version2013e, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], ['commVMedia'], [], ["Add", "Get"])
     }
 
 
@@ -51,8 +51,8 @@ class CommVMediaMap(ManagedObject):
             "map": MoPropertyMeta("map", "map", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["cifs", "nfs", "www"], []), 
             "mount_options": MoPropertyMeta("mount_options", "mountOptions", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, 1, 248, None, [], []), 
             "password": MoPropertyMeta("password", "password", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, None, [], []), 
-            "remote_file": MoPropertyMeta("remote_file", "remoteFile", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, None, None, r"""[ !#$%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}=~a-zA-Z0-9]{1,768}""", [], []), 
-            "remote_share": MoPropertyMeta("remote_share", "remoteShare", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, None, None, r"""[ !#$%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}~a-zA-Z0-9]{1,768}""", [], []), 
+            "remote_file": MoPropertyMeta("remote_file", "remoteFile", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, None, None, r"""[ !#$%&\(\)\+,\-\./:\?@\[\]_\{\}=~a-zA-Z0-9]{1,768}""", [], []), 
+            "remote_share": MoPropertyMeta("remote_share", "remoteShare", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, None, None, r"""[ !#$%&\(\)\+,\-\./:\?@\[\]_\{\}~a-zA-Z0-9]{1,768}""", [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x100, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "username": MoPropertyMeta("username", "username", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x400, 0, 255, None, [], []), 

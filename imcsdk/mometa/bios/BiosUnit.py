@@ -16,8 +16,8 @@ class BiosUnit(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("BiosUnit", "biosUnit", "bios", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'computeRackUnit'], [u'biosBOT', u'biosPlatformDefaults', u'biosProfileManagement', u'biosSettings', u'firmwareBootDefinition', u'firmwareRunning', u'firmwareUpdatable'], ["Get", "Set"]),
-        "modular": MoMeta("BiosUnit", "biosUnit", "bios", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'computeServerNode'], [u'biosBOT', u'biosPlatformDefaults', u'biosProfileManagement', u'biosSettings', u'firmwareBootDefinition', u'firmwareRunning', u'firmwareUpdatable'], ["Get", "Set"])
+        "classic": MoMeta("BiosUnit", "biosUnit", "bios", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], ['computeRackUnit'], ['biosBOT', 'biosPlatformDefaults', 'biosProfileManagement', 'biosSettings', 'firmwareBootDefinition', 'firmwareRunning', 'firmwareUpdatable'], ["Get", "Set"]),
+        "modular": MoMeta("BiosUnit", "biosUnit", "bios", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], ['computeServerNode'], ['biosBOT', 'biosPlatformDefaults', 'biosProfileManagement', 'biosSettings', 'firmwareBootDefinition', 'firmwareRunning', 'firmwareUpdatable'], ["Get", "Set"])
     }
 
 

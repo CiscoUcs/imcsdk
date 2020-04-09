@@ -13,11 +13,11 @@ class AdaptorFcPersistentBindings(ManagedObject):
     """This is AdaptorFcPersistentBindings class."""
 
     consts = AdaptorFcPersistentBindingsConsts()
-    naming_props = set([u'index'])
+    naming_props = set(['index'])
 
     mo_meta = {
-        "classic": MoMeta("AdaptorFcPersistentBindings", "adaptorFcPersistentBindings", "perbi-[index]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'adaptorHostFcIf'], [], ["Get"]),
-        "modular": MoMeta("AdaptorFcPersistentBindings", "adaptorFcPersistentBindings", "perbi-[index]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'adaptorHostFcIf'], [], ["Get"])
+        "classic": MoMeta("AdaptorFcPersistentBindings", "adaptorFcPersistentBindings", "perbi-[index]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['adaptorHostFcIf'], [], ["Get"]),
+        "modular": MoMeta("AdaptorFcPersistentBindings", "adaptorFcPersistentBindings", "perbi-[index]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['adaptorHostFcIf'], [], ["Get"])
     }
 
 

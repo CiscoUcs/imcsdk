@@ -27,11 +27,11 @@ class MemoryPersistentMemoryLogicalNamespace(ManagedObject):
     """This is MemoryPersistentMemoryLogicalNamespace class."""
 
     consts = MemoryPersistentMemoryLogicalNamespaceConsts()
-    naming_props = set([u'name'])
+    naming_props = set(['name'])
 
     mo_meta = {
-        "classic": MoMeta("MemoryPersistentMemoryLogicalNamespace", "memoryPersistentMemoryLogicalNamespace", "lns-[name]", VersionMeta.Version404b, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'memoryPersistentMemoryLogicalConfiguration'], [], [None]),
-        "modular": MoMeta("MemoryPersistentMemoryLogicalNamespace", "memoryPersistentMemoryLogicalNamespace", "lns-[name]", VersionMeta.Version404b, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'memoryPersistentMemoryLogicalConfiguration'], [], [None])
+        "classic": MoMeta("MemoryPersistentMemoryLogicalNamespace", "memoryPersistentMemoryLogicalNamespace", "lns-[name]", VersionMeta.Version404b, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], ['memoryPersistentMemoryLogicalConfiguration'], [], [None]),
+        "modular": MoMeta("MemoryPersistentMemoryLogicalNamespace", "memoryPersistentMemoryLogicalNamespace", "lns-[name]", VersionMeta.Version404b, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], ['memoryPersistentMemoryLogicalConfiguration'], [], [None])
     }
 
 

@@ -68,11 +68,11 @@ class StorageVirtualDrive(ManagedObject):
     """This is StorageVirtualDrive class."""
 
     consts = StorageVirtualDriveConsts()
-    naming_props = set([u'id'])
+    naming_props = set(['id'])
 
     mo_meta = {
-        "classic": MoMeta("StorageVirtualDrive", "storageVirtualDrive", "vd-[id]", VersionMeta.Version151f, "InputOutput", 0x7fff, [], ["admin", "read-only", "user"], [u'storageController'], [u'faultInst', u'storageLocalDiskUsage', u'storageOperation'], ["Get", "Remove", "Set"]),
-        "modular": MoMeta("StorageVirtualDrive", "storageVirtualDrive", "vd-[id]", VersionMeta.Version2013e, "InputOutput", 0x7fff, [], ["admin", "read-only", "user"], [u'storageController'], [u'faultInst', u'storageLocalDiskUsage', u'storageOperation'], ["Get", "Remove", "Set"])
+        "classic": MoMeta("StorageVirtualDrive", "storageVirtualDrive", "vd-[id]", VersionMeta.Version151f, "InputOutput", 0x7fff, [], ["admin", "read-only", "user"], ['storageController'], ['faultInst', 'storageLocalDiskUsage', 'storageOperation'], ["Get", "Remove", "Set"]),
+        "modular": MoMeta("StorageVirtualDrive", "storageVirtualDrive", "vd-[id]", VersionMeta.Version2013e, "InputOutput", 0x7fff, [], ["admin", "read-only", "user"], ['storageController'], ['faultInst', 'storageLocalDiskUsage', 'storageOperation'], ["Get", "Remove", "Set"])
     }
 
 
@@ -86,7 +86,7 @@ class StorageVirtualDrive(ManagedObject):
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, None, [], []), 
             "hotspare_action": MoPropertyMeta("hotspare_action", "hotspareAction", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, 0, 510, None, ["exclude-all", "include-all", "include-dhsp"], []), 
             "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version151f, MoPropertyMeta.NAMING, 0x80, 0, 510, None, [], ["0-4294967295"]), 
-            "physical_drives_list": MoPropertyMeta("physical_drives_list", "physicalDrivesList", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x100, 1, 510, r"""(\d+(,\d+)*)""", [], []), 
+            "physical_drives_list": MoPropertyMeta("physical_drives_list", "physicalDrivesList", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x100, 1, 512, r"""(\d+(,\d+)*)""", [], []), 
             "raid_level": MoPropertyMeta("raid_level", "raidLevel", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x200, 0, 510, None, ["0", "1", "5", "6"], []), 
             "read_policy": MoPropertyMeta("read_policy", "readPolicy", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x400, None, None, None, ["", "always-read-ahead", "default", "no-read-ahead"], []), 
             "requested_write_cache_policy": MoPropertyMeta("requested_write_cache_policy", "requestedWriteCachePolicy", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x800, 0, 510, None, ["Always Write Back", "Write Back Good BBU", "Write Through", "always-write-back", "default", "write-back-good-bbu", "write-through"], []), 
@@ -121,7 +121,7 @@ class StorageVirtualDrive(ManagedObject):
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, None, [], []), 
             "hotspare_action": MoPropertyMeta("hotspare_action", "hotspareAction", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, 0, 510, None, ["exclude-all", "include-all", "include-dhsp"], []), 
             "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version2013e, MoPropertyMeta.NAMING, 0x80, 0, 510, None, [], ["0-4294967295"]), 
-            "physical_drives_list": MoPropertyMeta("physical_drives_list", "physicalDrivesList", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x100, 1, 510, r"""(\d+(,\d+)*)""", [], []), 
+            "physical_drives_list": MoPropertyMeta("physical_drives_list", "physicalDrivesList", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x100, 1, 512, r"""(\d+(,\d+)*)""", [], []), 
             "raid_level": MoPropertyMeta("raid_level", "raidLevel", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, 0, 510, None, ["0", "1", "5", "6"], []), 
             "read_policy": MoPropertyMeta("read_policy", "readPolicy", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x400, None, None, None, ["always-read-ahead", "default", "no-read-ahead"], []), 
             "requested_write_cache_policy": MoPropertyMeta("requested_write_cache_policy", "requestedWriteCachePolicy", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x800, 0, 510, None, ["Always Write Back", "Write Back Good BBU", "Write Through", "always-write-back", "default", "write-back-good-bbu", "write-through"], []), 

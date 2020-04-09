@@ -13,11 +13,11 @@ class HuuFirmwareCatalogComponent(ManagedObject):
     """This is HuuFirmwareCatalogComponent class."""
 
     consts = HuuFirmwareCatalogComponentConsts()
-    naming_props = set([u'id'])
+    naming_props = set(['id'])
 
     mo_meta = {
-        "classic": MoMeta("HuuFirmwareCatalogComponent", "huuFirmwareCatalogComponent", "id-[id]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'huuFirmwareCatalog'], [], ["Get"]),
-        "modular": MoMeta("HuuFirmwareCatalogComponent", "huuFirmwareCatalogComponent", "id-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'huuFirmwareCatalog'], [], ["Get"])
+        "classic": MoMeta("HuuFirmwareCatalogComponent", "huuFirmwareCatalogComponent", "id-[id]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['huuFirmwareCatalog'], [], ["Get"]),
+        "modular": MoMeta("HuuFirmwareCatalogComponent", "huuFirmwareCatalogComponent", "id-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['huuFirmwareCatalog'], [], ["Get"])
     }
 
 

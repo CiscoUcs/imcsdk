@@ -15,11 +15,11 @@ class LsbootPchStorage(ManagedObject):
     """This is LsbootPchStorage class."""
 
     consts = LsbootPchStorageConsts()
-    naming_props = set([u'name'])
+    naming_props = set(['name'])
 
     mo_meta = {
-        "classic": MoMeta("LsbootPchStorage", "lsbootPchStorage", "pchstorage-[name]", VersionMeta.Version201a, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'lsbootDevPrecision'], [], ["Add", "Get", "Remove", "Set"]),
-        "modular": MoMeta("LsbootPchStorage", "lsbootPchStorage", "pchstorage-[name]", VersionMeta.Version2013e, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'lsbootDevPrecision'], [], ["Add", "Get", "Remove", "Set"])
+        "classic": MoMeta("LsbootPchStorage", "lsbootPchStorage", "pchstorage-[name]", VersionMeta.Version201a, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], ['lsbootDevPrecision'], [], ["Add", "Get", "Remove", "Set"]),
+        "modular": MoMeta("LsbootPchStorage", "lsbootPchStorage", "pchstorage-[name]", VersionMeta.Version2013e, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], ['lsbootDevPrecision'], [], ["Add", "Get", "Remove", "Set"])
     }
 
 

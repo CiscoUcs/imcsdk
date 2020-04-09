@@ -16,7 +16,7 @@ class MoKvInvHolder(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("MoKvInvHolder", "moKvInvHolder", "inv-kv-hostOs", VersionMeta.Version401a, "OutputOnly", 0xf, [], ["read-only"], [u'computeRackUnit'], [u'moInvKv'], [None]),
+        "classic": MoMeta("MoKvInvHolder", "moKvInvHolder", "inv-kv-hostOs", VersionMeta.Version401a, "OutputOnly", 0xf, [], ["read-only"], ['computeRackUnit'], ['moInvKv'], [None]),
     }
 
 

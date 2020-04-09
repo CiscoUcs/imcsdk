@@ -16,8 +16,8 @@ class StorageControllerProps(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("StorageControllerProps", "storageControllerProps", "controller-props", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageController'], [], ["Get"]),
-        "modular": MoMeta("StorageControllerProps", "storageControllerProps", "controller-props", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageController'], [], ["Get"])
+        "classic": MoMeta("StorageControllerProps", "storageControllerProps", "controller-props", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['storageController'], [], ["Get"]),
+        "modular": MoMeta("StorageControllerProps", "storageControllerProps", "controller-props", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['storageController'], [], ["Get"])
     }
 
 
@@ -70,8 +70,8 @@ class StorageControllerProps(ManagedObject):
             "supports_raid00": MoPropertyMeta("supports_raid00", "supportsRaid00", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "supports_raid1": MoPropertyMeta("supports_raid1", "supportsRaid1", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "supports_raid10": MoPropertyMeta("supports_raid10", "supportsRaid10", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "supports_raid10_with_more_than2_drives": MoPropertyMeta("supports_raid10_with_more_than2_drives", "supportsRaid10WithMoreThan2Drives", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "supports_raid1_with_more_than2_drives": MoPropertyMeta("supports_raid1_with_more_than2_drives", "supportsRaid1WithMoreThan2Drives", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "supports_raid10_with_more_than2_drives": MoPropertyMeta("supports_raid10_with_more_than2_drives", "supportsRaid10WithMoreThan2Drives", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "supports_raid1_with_more_than2_drives": MoPropertyMeta("supports_raid1_with_more_than2_drives", "supportsRaid1WithMoreThan2Drives", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "supports_raid1e": MoPropertyMeta("supports_raid1e", "supportsRaid1e", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "supports_raid1e0rlq0": MoPropertyMeta("supports_raid1e0rlq0", "supportsRaid1e0rlq0", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "supports_raid1erlq0": MoPropertyMeta("supports_raid1erlq0", "supportsRaid1erlq0", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
@@ -132,8 +132,8 @@ class StorageControllerProps(ManagedObject):
             "supports_raid00": MoPropertyMeta("supports_raid00", "supportsRaid00", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "supports_raid1": MoPropertyMeta("supports_raid1", "supportsRaid1", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "supports_raid10": MoPropertyMeta("supports_raid10", "supportsRaid10", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "supports_raid10_with_more_than2_drives": MoPropertyMeta("supports_raid10_with_more_than2_drives", "supportsRaid10WithMoreThan2Drives", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "supports_raid1_with_more_than2_drives": MoPropertyMeta("supports_raid1_with_more_than2_drives", "supportsRaid1WithMoreThan2Drives", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "supports_raid10_with_more_than2_drives": MoPropertyMeta("supports_raid10_with_more_than2_drives", "supportsRaid10WithMoreThan2Drives", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "supports_raid1_with_more_than2_drives": MoPropertyMeta("supports_raid1_with_more_than2_drives", "supportsRaid1WithMoreThan2Drives", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "supports_raid1e": MoPropertyMeta("supports_raid1e", "supportsRaid1e", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "supports_raid1e0rlq0": MoPropertyMeta("supports_raid1e0rlq0", "supportsRaid1e0rlq0", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "supports_raid1erlq0": MoPropertyMeta("supports_raid1erlq0", "supportsRaid1erlq0", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 

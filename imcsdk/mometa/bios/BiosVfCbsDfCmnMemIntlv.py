@@ -21,7 +21,7 @@ class BiosVfCbsDfCmnMemIntlv(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("BiosVfCbsDfCmnMemIntlv", "biosVfCbsDfCmnMemIntlv", "mem-interleave", VersionMeta.Version401a, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None]),
+        "classic": MoMeta("BiosVfCbsDfCmnMemIntlv", "biosVfCbsDfCmnMemIntlv", "mem-interleave", VersionMeta.Version401a, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], [None]),
     }
 
 

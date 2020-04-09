@@ -20,8 +20,8 @@ class LsbootLan(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("LsbootLan", "lsbootLan", "lan-read-only", VersionMeta.Version151f, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'lsbootDef'], [], ["Add", "Get", "Remove", "Set"]),
-        "modular": MoMeta("LsbootLan", "lsbootLan", "lan-read-only", VersionMeta.Version2013e, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'lsbootDef'], [], ["Add", "Get", "Remove", "Set"])
+        "classic": MoMeta("LsbootLan", "lsbootLan", "lan-read-only", VersionMeta.Version151f, "InputOutput", 0xff, [], ["admin", "read-only", "user"], ['lsbootDef'], [], ["Add", "Get", "Remove", "Set"]),
+        "modular": MoMeta("LsbootLan", "lsbootLan", "lan-read-only", VersionMeta.Version2013e, "InputOutput", 0xff, [], ["admin", "read-only", "user"], ['lsbootDef'], [], ["Add", "Get", "Remove", "Set"])
     }
 
 

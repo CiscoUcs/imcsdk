@@ -13,11 +13,11 @@ class StorageUnusedLocalDisk(ManagedObject):
     """This is StorageUnusedLocalDisk class."""
 
     consts = StorageUnusedLocalDiskConsts()
-    naming_props = set([u'id'])
+    naming_props = set(['id'])
 
     mo_meta = {
-        "classic": MoMeta("StorageUnusedLocalDisk", "storageUnusedLocalDisk", "pd-[id]", VersionMeta.Version201a, "InputOutput", 0xf, [], ["admin", "read-only", "user"], [u'storageVirtualDriveCreatorUsingUnusedPhysicalDrive'], [], ["Get"]),
-        "modular": MoMeta("StorageUnusedLocalDisk", "storageUnusedLocalDisk", "pd-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageVirtualDriveCreatorUsingUnusedPhysicalDrive'], [], ["Get"])
+        "classic": MoMeta("StorageUnusedLocalDisk", "storageUnusedLocalDisk", "pd-[id]", VersionMeta.Version201a, "InputOutput", 0xf, [], ["admin", "read-only", "user"], ['storageVirtualDriveCreatorUsingUnusedPhysicalDrive'], [], ["Get"]),
+        "modular": MoMeta("StorageUnusedLocalDisk", "storageUnusedLocalDisk", "pd-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['storageVirtualDriveCreatorUsingUnusedPhysicalDrive'], [], ["Get"])
     }
 
 

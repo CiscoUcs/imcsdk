@@ -16,8 +16,8 @@ class HuuFirmwareCatalog(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("HuuFirmwareCatalog", "huuFirmwareCatalog", "firmwareCatalog", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'huuController'], [u'huuFirmwareCatalogComponent'], ["Get"]),
-        "modular": MoMeta("HuuFirmwareCatalog", "huuFirmwareCatalog", "firmwareCatalog", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'huuController'], [u'huuFirmwareCatalogComponent'], ["Get"])
+        "classic": MoMeta("HuuFirmwareCatalog", "huuFirmwareCatalog", "firmwareCatalog", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['huuController'], ['huuFirmwareCatalogComponent'], ["Get"]),
+        "modular": MoMeta("HuuFirmwareCatalog", "huuFirmwareCatalog", "firmwareCatalog", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['huuController'], ['huuFirmwareCatalogComponent'], ["Get"])
     }
 
 

@@ -27,11 +27,11 @@ class BiosBootDev(ManagedObject):
     """This is BiosBootDev class."""
 
     consts = BiosBootDevConsts()
-    naming_props = set([u'order'])
+    naming_props = set(['order'])
 
     mo_meta = {
-        "classic": MoMeta("BiosBootDev", "biosBootDev", "bdv-[order]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'biosBootDevGrp'], [], ["Get"]),
-        "modular": MoMeta("BiosBootDev", "biosBootDev", "bdv-[order]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'biosBootDevGrp'], [], ["Get"])
+        "classic": MoMeta("BiosBootDev", "biosBootDev", "bdv-[order]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['biosBootDevGrp'], [], ["Get"]),
+        "modular": MoMeta("BiosBootDev", "biosBootDev", "bdv-[order]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['biosBootDevGrp'], [], ["Get"])
     }
 
 

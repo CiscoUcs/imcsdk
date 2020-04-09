@@ -26,11 +26,11 @@ class StorageFlexFlashController(ManagedObject):
     """This is StorageFlexFlashController class."""
 
     consts = StorageFlexFlashControllerConsts()
-    naming_props = set([u'id'])
+    naming_props = set(['id'])
 
     mo_meta = {
-        "classic": MoMeta("StorageFlexFlashController", "storageFlexFlashController", "storage-flexflash-[id]", VersionMeta.Version202c, "InputOutput", 0x7ff, [], ["admin", "read-only", "user"], [u'computeBoard'], [u'faultInst', u'storageFlexFlashControllerProps', u'storageFlexFlashOperationalProfile', u'storageFlexFlashPhysicalDrive', u'storageFlexFlashVirtualDrive', u'storageFlexFlashVirtualDriveImageMap'], ["Get", "Set"]),
-        "modular": MoMeta("StorageFlexFlashController", "storageFlexFlashController", "storage-flexflash-[id]", VersionMeta.Version2013e, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], [u'computeBoard'], [u'faultInst', u'storageFlexFlashControllerProps', u'storageFlexFlashOperationalProfile', u'storageFlexFlashPhysicalDrive', u'storageFlexFlashVirtualDrive', u'storageFlexFlashVirtualDriveImageMap'], ["Get", "Set"])
+        "classic": MoMeta("StorageFlexFlashController", "storageFlexFlashController", "storage-flexflash-[id]", VersionMeta.Version202c, "InputOutput", 0x7ff, [], ["admin", "read-only", "user"], ['computeBoard'], ['faultInst', 'storageFlexFlashControllerProps', 'storageFlexFlashOperationalProfile', 'storageFlexFlashPhysicalDrive', 'storageFlexFlashVirtualDrive', 'storageFlexFlashVirtualDriveImageMap'], ["Get", "Set"]),
+        "modular": MoMeta("StorageFlexFlashController", "storageFlexFlashController", "storage-flexflash-[id]", VersionMeta.Version2013e, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], ['computeBoard'], ['faultInst', 'storageFlexFlashControllerProps', 'storageFlexFlashOperationalProfile', 'storageFlexFlashPhysicalDrive', 'storageFlexFlashVirtualDrive', 'storageFlexFlashVirtualDriveImageMap'], ["Get", "Set"])
     }
 
 
@@ -42,8 +42,8 @@ class StorageFlexFlashController(ManagedObject):
             "card_slot": MoPropertyMeta("card_slot", "cardSlot", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x8, 0, 510, None, ["none", "slot-1", "slot-2"], []), 
             "configured_mode": MoPropertyMeta("configured_mode", "configuredMode", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x10, 0, 510, None, ["mirror", "util"], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, None, [], []), 
-            "non_util_partition_name": MoPropertyMeta("non_util_partition_name", "nonUtilPartitionName", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x40, 0, 510, None, [], []), 
-            "partition_name": MoPropertyMeta("partition_name", "partitionName", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x80, 0, 510, None, [], []), 
+            "non_util_partition_name": MoPropertyMeta("non_util_partition_name", "nonUtilPartitionName", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x40, 0, 15, None, [], []), 
+            "partition_name": MoPropertyMeta("partition_name", "partitionName", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x80, 0, 15, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x100, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "cards_manageable": MoPropertyMeta("cards_manageable", "cardsManageable", "string", VersionMeta.Version202c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
@@ -66,8 +66,8 @@ class StorageFlexFlashController(ManagedObject):
             "card_slot": MoPropertyMeta("card_slot", "cardSlot", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, 0, 510, None, ["none", "slot-1", "slot-2"], []), 
             "configured_mode": MoPropertyMeta("configured_mode", "configuredMode", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x10, None, None, None, ["mirror", "util"], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, None, [], []), 
-            "non_util_partition_name": MoPropertyMeta("non_util_partition_name", "nonUtilPartitionName", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, 0, 510, None, [], []), 
-            "partition_name": MoPropertyMeta("partition_name", "partitionName", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, 0, 510, None, [], []), 
+            "non_util_partition_name": MoPropertyMeta("non_util_partition_name", "nonUtilPartitionName", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, 0, 15, None, [], []), 
+            "partition_name": MoPropertyMeta("partition_name", "partitionName", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, 0, 15, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x100, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "cards_manageable": MoPropertyMeta("cards_manageable", "cardsManageable", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 

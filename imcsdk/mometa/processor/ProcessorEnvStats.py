@@ -16,8 +16,8 @@ class ProcessorEnvStats(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("ProcessorEnvStats", "processorEnvStats", "env-stats", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'processorUnit'], [], ["Get"]),
-        "modular": MoMeta("ProcessorEnvStats", "processorEnvStats", "env-stats", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'processorUnit'], [], ["Get"])
+        "classic": MoMeta("ProcessorEnvStats", "processorEnvStats", "env-stats", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['processorUnit'], [], ["Get"]),
+        "modular": MoMeta("ProcessorEnvStats", "processorEnvStats", "env-stats", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['processorUnit'], [], ["Get"])
     }
 
 

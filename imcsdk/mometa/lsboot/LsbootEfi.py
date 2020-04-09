@@ -17,8 +17,8 @@ class LsbootEfi(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("LsbootEfi", "lsbootEfi", "efi-read-only", VersionMeta.Version151f, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'lsbootDef'], [], ["Add", "Get", "Remove", "Set"]),
-        "modular": MoMeta("LsbootEfi", "lsbootEfi", "efi-read-only", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'lsbootDef'], [], ["Add", "Get", "Remove", "Set"])
+        "classic": MoMeta("LsbootEfi", "lsbootEfi", "efi-read-only", VersionMeta.Version151f, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], ['lsbootDef'], [], ["Add", "Get", "Remove", "Set"]),
+        "modular": MoMeta("LsbootEfi", "lsbootEfi", "efi-read-only", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], ['lsbootDef'], [], ["Add", "Get", "Remove", "Set"])
     }
 
 

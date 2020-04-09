@@ -17,10 +17,10 @@ class StorageFlexUtilVirtualDriveImageMap(ManagedObject):
     """This is StorageFlexUtilVirtualDriveImageMap class."""
 
     consts = StorageFlexUtilVirtualDriveImageMapConsts()
-    naming_props = set([u'virtualDrive'])
+    naming_props = set(['virtualDrive'])
 
     mo_meta = {
-        "classic": MoMeta("StorageFlexUtilVirtualDriveImageMap", "storageFlexUtilVirtualDriveImageMap", "vdrive-map-[virtual_drive]", VersionMeta.Version304a, "InputOutput", 0x7ff, [], ["admin", "read-only", "user"], [u'storageFlexUtilController'], [], ["Get", "Set"]),
+        "classic": MoMeta("StorageFlexUtilVirtualDriveImageMap", "storageFlexUtilVirtualDriveImageMap", "vdrive-map-[virtual_drive]", VersionMeta.Version304a, "InputOutput", 0x7ff, [], ["admin", "read-only", "user"], ['storageFlexUtilController'], [], ["Get", "Set"]),
     }
 
 
@@ -31,7 +31,7 @@ class StorageFlexUtilVirtualDriveImageMap(ManagedObject):
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version304a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "map": MoPropertyMeta("map", "map", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x8, 0, 510, None, ["cifs", "nfs", "www"], []), 
-            "mount_options": MoPropertyMeta("mount_options", "mountOptions", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x10, 1, 510, None, [], []), 
+            "mount_options": MoPropertyMeta("mount_options", "mountOptions", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x10, 1, 248, None, [], []), 
             "password": MoPropertyMeta("password", "password", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x20, 0, 510, None, [], []), 
             "remote_file": MoPropertyMeta("remote_file", "remoteFile", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x40, 0, 510, r"""[ !#$%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}~a-zA-Z0-9]{1,235}""", [], []), 
             "remote_share": MoPropertyMeta("remote_share", "remoteShare", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x80, 0, 510, r"""[ !#$%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}~a-zA-Z0-9]{1,235}""", [], []), 

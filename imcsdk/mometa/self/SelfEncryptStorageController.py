@@ -23,8 +23,8 @@ class SelfEncryptStorageController(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("SelfEncryptStorageController", "selfEncryptStorageController", "ctr-self-encrypt", VersionMeta.Version209c, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'storageController'], [], ["Get", "Set"]),
-        "modular": MoMeta("SelfEncryptStorageController", "selfEncryptStorageController", "ctr-self-encrypt", VersionMeta.Version303a, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'storageController'], [], ["Get", "Set"])
+        "classic": MoMeta("SelfEncryptStorageController", "selfEncryptStorageController", "ctr-self-encrypt", VersionMeta.Version209c, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], ['storageController'], [], ["Get", "Set"]),
+        "modular": MoMeta("SelfEncryptStorageController", "selfEncryptStorageController", "ctr-self-encrypt", VersionMeta.Version303a, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], ['storageController'], [], ["Get", "Set"])
     }
 
 

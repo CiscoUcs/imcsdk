@@ -19,7 +19,7 @@ class AdvancedPowerProfile(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("AdvancedPowerProfile", "advancedPowerProfile", "advpwrprof", VersionMeta.Version202c, "InputOutput", 0x7ffff, [], ["admin", "read-only", "user"], [u'powerBudget'], [], ["Get", "Set"]),
+        "classic": MoMeta("AdvancedPowerProfile", "advancedPowerProfile", "advpwrprof", VersionMeta.Version202c, "InputOutput", 0x7ffff, [], ["admin", "read-only", "user"], ['powerBudget'], [], ["Get", "Set"]),
     }
 
 

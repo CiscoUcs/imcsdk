@@ -20,11 +20,11 @@ class LsbootPxe(ManagedObject):
     """This is LsbootPxe class."""
 
     consts = LsbootPxeConsts()
-    naming_props = set([u'name'])
+    naming_props = set(['name'])
 
     mo_meta = {
-        "classic": MoMeta("LsbootPxe", "lsbootPxe", "pxe-[name]", VersionMeta.Version201a, "InputOutput", 0x1fff, [], ["admin", "read-only", "user"], [u'lsbootDevPrecision'], [], ["Add", "Get", "Remove", "Set"]),
-        "modular": MoMeta("LsbootPxe", "lsbootPxe", "pxe-[name]", VersionMeta.Version2013e, "InputOutput", 0x1fff, [], ["admin", "read-only", "user"], [u'lsbootDevPrecision'], [], ["Add", "Get", "Remove", "Set"])
+        "classic": MoMeta("LsbootPxe", "lsbootPxe", "pxe-[name]", VersionMeta.Version201a, "InputOutput", 0x1fff, [], ["admin", "read-only", "user"], ['lsbootDevPrecision'], [], ["Add", "Get", "Remove", "Set"]),
+        "modular": MoMeta("LsbootPxe", "lsbootPxe", "pxe-[name]", VersionMeta.Version2013e, "InputOutput", 0x1fff, [], ["admin", "read-only", "user"], ['lsbootDevPrecision'], [], ["Add", "Get", "Remove", "Set"])
     }
 
 
@@ -32,7 +32,7 @@ class LsbootPxe(ManagedObject):
 
         "classic": {
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
-            "iptype": MoPropertyMeta("iptype", "iptype", "string", VersionMeta.Version313a, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["", "IPv4", "IPv6"], []), 
+            "iptype": MoPropertyMeta("iptype", "iptype", "string", VersionMeta.Version401a, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["", "IPv4", "IPv6"], []), 
             "mac_address": MoPropertyMeta("mac_address", "macAddress", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x8, None, None, r"""(([0-9a-fA-F][0-9a-fA-F]:){5}([0-9a-fA-F][0-9a-fA-F]))|0""", [""], []), 
             "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version201a, MoPropertyMeta.NAMING, 0x10, None, None, r"""(([a-zA-Z0-9]{1})|([a-zA-Z0-9]{1}[a-zA-Z0-9_\-]{0,28}[a-zA-Z0-9]{1})|([a-zA-Z0-9]{2}))""", [], []), 
             "order": MoPropertyMeta("order", "order", "uint", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, [], ["1-255"]), 
@@ -48,8 +48,8 @@ class LsbootPxe(ManagedObject):
 
         "modular": {
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
-            "iptype": MoPropertyMeta("iptype", "iptype", "string", VersionMeta.Version313a, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["", "IPv4", "IPv6"], []), 
-            "mac_address": MoPropertyMeta("mac_address", "macAddress", "string", VersionMeta.Version313a, MoPropertyMeta.READ_WRITE, 0x8, None, None, r"""(([0-9a-fA-F][0-9a-fA-F]:){5}([0-9a-fA-F][0-9a-fA-F]))|0""", [""], []), 
+            "iptype": MoPropertyMeta("iptype", "iptype", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["", "IPv4", "IPv6"], []), 
+            "mac_address": MoPropertyMeta("mac_address", "macAddress", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x8, None, None, r"""(([0-9a-fA-F][0-9a-fA-F]:){5}([0-9a-fA-F][0-9a-fA-F]))|0""", [""], []), 
             "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version2013e, MoPropertyMeta.NAMING, 0x10, None, None, r"""(([a-zA-Z0-9]{1})|([a-zA-Z0-9]{1}[a-zA-Z0-9_\-]{0,28}[a-zA-Z0-9]{1})|([a-zA-Z0-9]{2}))""", [], []), 
             "order": MoPropertyMeta("order", "order", "uint", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, [], ["1-255"]), 
             "port": MoPropertyMeta("port", "port", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, None, None, r"""([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]){0,1}""", [], []), 

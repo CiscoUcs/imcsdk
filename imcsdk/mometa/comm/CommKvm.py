@@ -16,8 +16,8 @@ class CommKvm(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("CommKvm", "commKvm", "kvm-svc", VersionMeta.Version151f, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'commSvcEp'], [], ["Get", "Set"]),
-        "modular": MoMeta("CommKvm", "commKvm", "kvm-svc", VersionMeta.Version2013e, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'commSvcRack'], [], ["Get", "Set"])
+        "classic": MoMeta("CommKvm", "commKvm", "kvm-svc", VersionMeta.Version151f, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], ['commSvcEp'], [], ["Get", "Set"]),
+        "modular": MoMeta("CommKvm", "commKvm", "kvm-svc", VersionMeta.Version2013e, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], ['commSvcRack'], [], ["Get", "Set"])
     }
 
 

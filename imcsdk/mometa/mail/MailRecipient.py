@@ -14,11 +14,11 @@ class MailRecipient(ManagedObject):
     """This is MailRecipient class."""
 
     consts = MailRecipientConsts()
-    naming_props = set([u'id'])
+    naming_props = set(['id'])
 
     mo_meta = {
-        "classic": MoMeta("MailRecipient", "mailRecipient", "mail-recipient-[id]", VersionMeta.Version303a, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'commMailAlert'], [], ["Get", "Remove", "Set"]),
-        "modular": MoMeta("MailRecipient", "mailRecipient", "mail-recipient-[id]", VersionMeta.Version303a, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'commMailAlert'], [], ["Get", "Remove", "Set"])
+        "classic": MoMeta("MailRecipient", "mailRecipient", "mail-recipient-[id]", VersionMeta.Version303a, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], ['commMailAlert'], [], ["Get", "Remove", "Set"]),
+        "modular": MoMeta("MailRecipient", "mailRecipient", "mail-recipient-[id]", VersionMeta.Version303a, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], ['commMailAlert'], [], ["Get", "Remove", "Set"])
     }
 
 

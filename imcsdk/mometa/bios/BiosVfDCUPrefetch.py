@@ -25,8 +25,8 @@ class BiosVfDCUPrefetch(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("BiosVfDCUPrefetch", "biosVfDCUPrefetch", "DCU-Prefetch", VersionMeta.Version151f, "InputOutput", 0x3f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfDCUPrefetch", "biosVfDCUPrefetch", "DCU-Prefetch", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
+        "classic": MoMeta("BiosVfDCUPrefetch", "biosVfDCUPrefetch", "DCU-Prefetch", VersionMeta.Version151f, "InputOutput", 0x3f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], ["Get", "Set"]),
+        "modular": MoMeta("BiosVfDCUPrefetch", "biosVfDCUPrefetch", "DCU-Prefetch", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], ["Get", "Set"])
     }
 
 

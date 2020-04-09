@@ -20,7 +20,7 @@ class ComputeRackUnitMbTempStats(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("ComputeRackUnitMbTempStats", "computeRackUnitMbTempStats", "temp-stats", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeBoard'], [], ["Get"]),
+        "classic": MoMeta("ComputeRackUnitMbTempStats", "computeRackUnitMbTempStats", "temp-stats", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['computeBoard'], [], ["Get"]),
     }
 
 

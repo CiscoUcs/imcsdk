@@ -16,8 +16,8 @@ class LdapCACertificateManagement(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("LdapCACertificateManagement", "ldapCACertificateManagement", "ldap-ca-cert-mgmt", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "user"], [u'aaaLdap'], [u'downloadLdapCACertificate', u'exportLdapCACertificate', u'ldapCACertificate'], ["Get", "Set"]),
-        "modular": MoMeta("LdapCACertificateManagement", "ldapCACertificateManagement", "ldap-ca-cert-mgmt", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'aaaLdap'], [u'downloadLdapCACertificate', u'exportLdapCACertificate', u'ldapCACertificate'], ["Get", "Set"])
+        "classic": MoMeta("LdapCACertificateManagement", "ldapCACertificateManagement", "ldap-ca-cert-mgmt", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "user"], ['aaaLdap'], ['downloadLdapCACertificate', 'exportLdapCACertificate', 'ldapCACertificate'], ["Get", "Set"]),
+        "modular": MoMeta("LdapCACertificateManagement", "ldapCACertificateManagement", "ldap-ca-cert-mgmt", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], ['aaaLdap'], ['downloadLdapCACertificate', 'exportLdapCACertificate', 'ldapCACertificate'], ["Get", "Set"])
     }
 
 

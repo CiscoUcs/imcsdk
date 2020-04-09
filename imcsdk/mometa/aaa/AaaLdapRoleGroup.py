@@ -17,11 +17,11 @@ class AaaLdapRoleGroup(ManagedObject):
     """This is AaaLdapRoleGroup class."""
 
     consts = AaaLdapRoleGroupConsts()
-    naming_props = set([u'id'])
+    naming_props = set(['id'])
 
     mo_meta = {
-        "classic": MoMeta("AaaLdapRoleGroup", "aaaLdapRoleGroup", "rolegroup-[id]", VersionMeta.Version151f, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'aaaLdap'], [], ["Get", "Set"]),
-        "modular": MoMeta("AaaLdapRoleGroup", "aaaLdapRoleGroup", "rolegroup-[id]", VersionMeta.Version2013e, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'aaaLdap'], [], ["Get", "Set"])
+        "classic": MoMeta("AaaLdapRoleGroup", "aaaLdapRoleGroup", "rolegroup-[id]", VersionMeta.Version151f, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], ['aaaLdap'], [], ["Get", "Set"]),
+        "modular": MoMeta("AaaLdapRoleGroup", "aaaLdapRoleGroup", "rolegroup-[id]", VersionMeta.Version2013e, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], ['aaaLdap'], [], ["Get", "Set"])
     }
 
 

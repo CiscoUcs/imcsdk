@@ -17,11 +17,11 @@ class StorageFlexFlashVirtualDriveImageMap(ManagedObject):
     """This is StorageFlexFlashVirtualDriveImageMap class."""
 
     consts = StorageFlexFlashVirtualDriveImageMapConsts()
-    naming_props = set([u'virtualDrive'])
+    naming_props = set(['virtualDrive'])
 
     mo_meta = {
-        "classic": MoMeta("StorageFlexFlashVirtualDriveImageMap", "storageFlexFlashVirtualDriveImageMap", "vdrive-map-[virtual_drive]", VersionMeta.Version202c, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'storageFlexFlashController'], [], ["Get", "Set"]),
-        "modular": MoMeta("StorageFlexFlashVirtualDriveImageMap", "storageFlexFlashVirtualDriveImageMap", "vdrive-map-[virtual_drive]", VersionMeta.Version2013e, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'storageFlexFlashController'], [], ["Get", "Set"])
+        "classic": MoMeta("StorageFlexFlashVirtualDriveImageMap", "storageFlexFlashVirtualDriveImageMap", "vdrive-map-[virtual_drive]", VersionMeta.Version202c, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], ['storageFlexFlashController'], [], ["Get", "Set"]),
+        "modular": MoMeta("StorageFlexFlashVirtualDriveImageMap", "storageFlexFlashVirtualDriveImageMap", "vdrive-map-[virtual_drive]", VersionMeta.Version2013e, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], ['storageFlexFlashController'], [], ["Get", "Set"])
     }
 
 
@@ -31,7 +31,7 @@ class StorageFlexFlashVirtualDriveImageMap(ManagedObject):
             "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["map", "unmap"], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "map": MoPropertyMeta("map", "map", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x8, 0, 510, None, ["cifs", "nfs", "www"], []), 
-            "mount_options": MoPropertyMeta("mount_options", "mountOptions", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x10, 1, 510, None, [], []), 
+            "mount_options": MoPropertyMeta("mount_options", "mountOptions", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x10, 1, 248, None, [], []), 
             "password": MoPropertyMeta("password", "password", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, None, [], []), 
             "remote_file": MoPropertyMeta("remote_file", "remoteFile", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x40, 0, 255, r"""[ !#$%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}~a-zA-Z0-9]{1,255}""", [], []), 
             "remote_share": MoPropertyMeta("remote_share", "remoteShare", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x80, 0, 510, r"""[ !#$%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}~a-zA-Z0-9]{1,235}""", [], []), 
@@ -47,7 +47,7 @@ class StorageFlexFlashVirtualDriveImageMap(ManagedObject):
             "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["map", "unmap"], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "map": MoPropertyMeta("map", "map", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, 0, 510, None, ["cifs", "nfs"], []), 
-            "mount_options": MoPropertyMeta("mount_options", "mountOptions", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, 1, 510, None, [], []), 
+            "mount_options": MoPropertyMeta("mount_options", "mountOptions", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, 1, 248, None, [], []), 
             "password": MoPropertyMeta("password", "password", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, None, [], []), 
             "remote_file": MoPropertyMeta("remote_file", "remoteFile", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, 0, 255, r"""[ !#$%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}~a-zA-Z0-9]{1,255}""", [], []), 
             "remote_share": MoPropertyMeta("remote_share", "remoteShare", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, 0, 510, r"""[ !#$%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}~a-zA-Z0-9]{1,235}""", [], []), 

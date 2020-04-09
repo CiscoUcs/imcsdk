@@ -21,11 +21,11 @@ class AdaptorHostFcIf(ManagedObject):
     """This is AdaptorHostFcIf class."""
 
     consts = AdaptorHostFcIfConsts()
-    naming_props = set([u'name'])
+    naming_props = set(['name'])
 
     mo_meta = {
-        "classic": MoMeta("AdaptorHostFcIf", "adaptorHostFcIf", "host-fc-[name]", VersionMeta.Version151f, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [u'adaptorFcPersistentBindings'], ["Add", "Get", "Remove", "Set"]),
-        "modular": MoMeta("AdaptorHostFcIf", "adaptorHostFcIf", "host-fc-[name]", VersionMeta.Version2013e, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [u'adaptorFcPersistentBindings'], ["Add", "Get", "Remove", "Set"])
+        "classic": MoMeta("AdaptorHostFcIf", "adaptorHostFcIf", "host-fc-[name]", VersionMeta.Version151f, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], ['adaptorUnit'], ['adaptorFcPersistentBindings'], ["Add", "Get", "Remove", "Set"]),
+        "modular": MoMeta("AdaptorHostFcIf", "adaptorHostFcIf", "host-fc-[name]", VersionMeta.Version2013e, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], ['adaptorUnit'], ['adaptorFcPersistentBindings'], ["Add", "Get", "Remove", "Set"])
     }
 
 
@@ -36,7 +36,7 @@ class AdaptorHostFcIf(ManagedObject):
             "channel_number": MoPropertyMeta("channel_number", "channelNumber", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, [], ["1-1000"]), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
             "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version151f, MoPropertyMeta.NAMING, 0x10, None, None, r"""[a-zA-Z0-9\-\._:]{1,31}""", [], []), 
-            "port_profile": MoPropertyMeta("port_profile", "portProfile", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x20, None, None, r"""[a-zA-Z0-9_\-]{0,80}""", [], []), 
+            "port_profile": MoPropertyMeta("port_profile", "portProfile", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x20, None, None, r"""(([a-zA-Z0-9_]{1})|([a-zA-Z0-9_]{1}[a-zA-Z0-9_\-]{0,62}))""", [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x40, 0, 255, None, [], []), 
             "san_boot": MoPropertyMeta("san_boot", "sanBoot", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
@@ -52,7 +52,7 @@ class AdaptorHostFcIf(ManagedObject):
             "channel_number": MoPropertyMeta("channel_number", "channelNumber", "uint", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, [], ["1-1000"]), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
             "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version2013e, MoPropertyMeta.NAMING, 0x10, None, None, r"""[a-zA-Z0-9\-\._:]{1,31}""", [], []), 
-            "port_profile": MoPropertyMeta("port_profile", "portProfile", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, None, None, r"""[a-zA-Z0-9_\-]{0,80}""", [], []), 
+            "port_profile": MoPropertyMeta("port_profile", "portProfile", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, None, None, r"""(([a-zA-Z0-9_]{1})|([a-zA-Z0-9_]{1}[a-zA-Z0-9_\-]{0,79}))""", [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, 0, 255, None, [], []), 
             "san_boot": MoPropertyMeta("san_boot", "sanBoot", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 

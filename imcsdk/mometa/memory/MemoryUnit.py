@@ -123,11 +123,11 @@ class MemoryUnit(ManagedObject):
     """This is MemoryUnit class."""
 
     consts = MemoryUnitConsts()
-    naming_props = set([u'id'])
+    naming_props = set(['id'])
 
     mo_meta = {
-        "classic": MoMeta("MemoryUnit", "memoryUnit", "mem-[id]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'memoryArray'], [u'faultInst', u'memoryUnitEnvStats'], ["Get"]),
-        "modular": MoMeta("MemoryUnit", "memoryUnit", "mem-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'memoryArray'], [u'faultInst', u'memoryUnitEnvStats'], ["Get"])
+        "classic": MoMeta("MemoryUnit", "memoryUnit", "mem-[id]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['memoryArray'], ['faultInst', 'memoryUnitEnvStats'], ["Get"]),
+        "modular": MoMeta("MemoryUnit", "memoryUnit", "mem-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['memoryArray'], ['faultInst', 'memoryUnitEnvStats'], ["Get"])
     }
 
 

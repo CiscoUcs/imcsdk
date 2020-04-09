@@ -68,11 +68,11 @@ class ProcessorUnit(ManagedObject):
     """This is ProcessorUnit class."""
 
     consts = ProcessorUnitConsts()
-    naming_props = set([u'id'])
+    naming_props = set(['id'])
 
     mo_meta = {
-        "classic": MoMeta("ProcessorUnit", "processorUnit", "cpu-[id]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeBoard'], [u'faultInst', u'processorEnvStats'], ["Get"]),
-        "modular": MoMeta("ProcessorUnit", "processorUnit", "cpu-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeBoard'], [u'faultInst', u'processorEnvStats'], ["Get"])
+        "classic": MoMeta("ProcessorUnit", "processorUnit", "cpu-[id]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['computeBoard'], ['faultInst', 'processorEnvStats'], ["Get"]),
+        "modular": MoMeta("ProcessorUnit", "processorUnit", "cpu-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['computeBoard'], ['faultInst', 'processorEnvStats'], ["Get"])
     }
 
 

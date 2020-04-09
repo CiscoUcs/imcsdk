@@ -16,8 +16,8 @@ class StorageFlexFlashControllerProps(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("StorageFlexFlashControllerProps", "storageFlexFlashControllerProps", "flexflashcontroller-props", VersionMeta.Version202c, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageFlexFlashController'], [], ["Get"]),
-        "modular": MoMeta("StorageFlexFlashControllerProps", "storageFlexFlashControllerProps", "flexflashcontroller-props", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageFlexFlashController'], [], ["Get"])
+        "classic": MoMeta("StorageFlexFlashControllerProps", "storageFlexFlashControllerProps", "flexflashcontroller-props", VersionMeta.Version202c, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['storageFlexFlashController'], [], ["Get"]),
+        "modular": MoMeta("StorageFlexFlashControllerProps", "storageFlexFlashControllerProps", "flexflashcontroller-props", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['storageFlexFlashController'], [], ["Get"])
     }
 
 

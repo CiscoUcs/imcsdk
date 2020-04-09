@@ -20,8 +20,8 @@ class AdaptorLinkTraining(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("AdaptorLinkTraining", "adaptorLinkTraining", "link-training", VersionMeta.Version204c, "InputOutput", 0x3f, [], ["admin", "user"], [u'adaptorExtEthIf'], [], ["Get", "Set"]),
-        "modular": MoMeta("AdaptorLinkTraining", "adaptorLinkTraining", "link-training", VersionMeta.Version303a, "InputOutput", 0x3f, [], ["admin", "user"], [u'adaptorExtEthIf'], [], ["Get", "Set"])
+        "classic": MoMeta("AdaptorLinkTraining", "adaptorLinkTraining", "link-training", VersionMeta.Version204c, "InputOutput", 0x3f, [], ["admin", "user"], ['adaptorExtEthIf'], [], ["Get", "Set"]),
+        "modular": MoMeta("AdaptorLinkTraining", "adaptorLinkTraining", "link-training", VersionMeta.Version303a, "InputOutput", 0x3f, [], ["admin", "user"], ['adaptorExtEthIf'], [], ["Get", "Set"])
     }
 
 

@@ -19,8 +19,8 @@ class BiosVfIntelSpeedSelect(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("BiosVfIntelSpeedSelect", "biosVfIntelSpeedSelect", "Intel-Speed-Select", VersionMeta.Version404b, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'biosPlatformDefaults', u'biosSettings'], [], [None]),
-        "modular": MoMeta("BiosVfIntelSpeedSelect", "biosVfIntelSpeedSelect", "Intel-Speed-Select", VersionMeta.Version404b, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
+        "classic": MoMeta("BiosVfIntelSpeedSelect", "biosVfIntelSpeedSelect", "Intel-Speed-Select", VersionMeta.Version404b, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], ['biosPlatformDefaults', 'biosSettings'], [], [None]),
+        "modular": MoMeta("BiosVfIntelSpeedSelect", "biosVfIntelSpeedSelect", "Intel-Speed-Select", VersionMeta.Version404b, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], ['biosPlatformDefaults', 'biosSettings'], [], [None])
     }
 
 

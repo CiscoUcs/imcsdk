@@ -16,7 +16,7 @@ class EquipmentPsuColdRedundancy(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("EquipmentPsuColdRedundancy", "equipmentPsuColdRedundancy", "psu-cold-redundancy", VersionMeta.Version204c, "InputOutput", 0x1f, [], ["admin"], [u'computeRackUnit'], [], ["Get", "Set"]),
+        "classic": MoMeta("EquipmentPsuColdRedundancy", "equipmentPsuColdRedundancy", "psu-cold-redundancy", VersionMeta.Version204c, "InputOutput", 0x1f, [], ["admin"], ['computeRackUnit'], [], ["Get", "Set"]),
     }
 
 

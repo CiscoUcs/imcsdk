@@ -16,8 +16,8 @@ class CurrentCertificate(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("CurrentCertificate", "currentCertificate", "curr-cert", VersionMeta.Version209c, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'certificateManagement'], [], [None]),
-        "modular": MoMeta("CurrentCertificate", "currentCertificate", "curr-cert", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'certificateManagement'], [], [None])
+        "classic": MoMeta("CurrentCertificate", "currentCertificate", "curr-cert", VersionMeta.Version209c, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['certificateManagement'], [], [None]),
+        "modular": MoMeta("CurrentCertificate", "currentCertificate", "curr-cert", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['certificateManagement'], [], [None])
     }
 
 

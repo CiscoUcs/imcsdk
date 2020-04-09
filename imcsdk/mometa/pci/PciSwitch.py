@@ -13,10 +13,10 @@ class PciSwitch(ManagedObject):
     """This is PciSwitch class."""
 
     consts = PciSwitchConsts()
-    naming_props = set([u'id'])
+    naming_props = set(['id'])
 
     mo_meta = {
-        "classic": MoMeta("PciSwitch", "pciSwitch", "pci-switch-[id]", VersionMeta.Version402c, "OutputOnly", 0xf, [], ["read-only"], [u'computeBoard'], [u'faultInst', u'pciLink'], [None]),
+        "classic": MoMeta("PciSwitch", "pciSwitch", "pci-switch-[id]", VersionMeta.Version402c, "OutputOnly", 0xf, [], ["read-only"], ['computeBoard'], ['faultInst', 'pciLink'], [None]),
     }
 
 

@@ -141,11 +141,11 @@ class MemoryPersistentMemoryUnit(ManagedObject):
     """This is MemoryPersistentMemoryUnit class."""
 
     consts = MemoryPersistentMemoryUnitConsts()
-    naming_props = set([u'id'])
+    naming_props = set(['id'])
 
     mo_meta = {
-        "classic": MoMeta("MemoryPersistentMemoryUnit", "memoryPersistentMemoryUnit", "pmem-[id]", VersionMeta.Version404b, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'memoryArray'], [], [None]),
-        "modular": MoMeta("MemoryPersistentMemoryUnit", "memoryPersistentMemoryUnit", "pmem-[id]", VersionMeta.Version404b, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'memoryArray'], [], [None])
+        "classic": MoMeta("MemoryPersistentMemoryUnit", "memoryPersistentMemoryUnit", "pmem-[id]", VersionMeta.Version404b, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['memoryArray'], [], [None]),
+        "modular": MoMeta("MemoryPersistentMemoryUnit", "memoryPersistentMemoryUnit", "pmem-[id]", VersionMeta.Version404b, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['memoryArray'], [], [None])
     }
 
 

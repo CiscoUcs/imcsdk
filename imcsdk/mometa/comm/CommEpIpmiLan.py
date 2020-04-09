@@ -18,7 +18,7 @@ class CommEpIpmiLan(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "modular": MoMeta("CommEpIpmiLan", "commEpIpmiLan", "cmc-ipmi-lan", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'equipmentSharedIOModule', u'equipmentSystemIOController'], [], ["Get", "Set"])
+        "modular": MoMeta("CommEpIpmiLan", "commEpIpmiLan", "cmc-ipmi-lan", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], ['equipmentSharedIOModule', 'equipmentSystemIOController'], [], ["Get", "Set"])
     }
 
 
@@ -29,7 +29,7 @@ class CommEpIpmiLan(ManagedObject):
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "key": MoPropertyMeta("key", "key", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, None, None, r"""[a-fA-F0-9]{40}""", [], []), 
-            "port": MoPropertyMeta("port", "port", "uint", VersionMeta.Version402c, MoPropertyMeta.READ_ONLY, None, None, None, None, [], ["1-65535"]), 
+            "port": MoPropertyMeta("port", "port", "uint", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, None, None, None, None, [], ["1-65535"]), 
             "priv": MoPropertyMeta("priv", "priv", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["admin", "read-only", "user"], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 

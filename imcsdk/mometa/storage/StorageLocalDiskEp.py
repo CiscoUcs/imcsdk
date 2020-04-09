@@ -13,10 +13,10 @@ class StorageLocalDiskEp(ManagedObject):
     """This is StorageLocalDiskEp class."""
 
     consts = StorageLocalDiskEpConsts()
-    naming_props = set([u'id'])
+    naming_props = set(['id'])
 
     mo_meta = {
-        "modular": MoMeta("StorageLocalDiskEp", "storageLocalDiskEp", "diskRef-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageController'], [u'faultInst'], ["Get"])
+        "modular": MoMeta("StorageLocalDiskEp", "storageLocalDiskEp", "diskRef-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['storageController'], ['faultInst'], ["Get"])
     }
 
 

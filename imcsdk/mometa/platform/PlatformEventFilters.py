@@ -16,11 +16,11 @@ class PlatformEventFilters(ManagedObject):
     """This is PlatformEventFilters class."""
 
     consts = PlatformEventFiltersConsts()
-    naming_props = set([u'id'])
+    naming_props = set(['id'])
 
     mo_meta = {
-        "classic": MoMeta("PlatformEventFilters", "platformEventFilters", "pef-[id]", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'eventManagement'], [], ["Get", "Set"]),
-        "modular": MoMeta("PlatformEventFilters", "platformEventFilters", "pef-[id]", VersionMeta.Version301c, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'eventManagement'], [], ["Get", "Set"])
+        "classic": MoMeta("PlatformEventFilters", "platformEventFilters", "pef-[id]", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], ['eventManagement'], [], ["Get", "Set"]),
+        "modular": MoMeta("PlatformEventFilters", "platformEventFilters", "pef-[id]", VersionMeta.Version301c, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], ['eventManagement'], [], ["Get", "Set"])
     }
 
 

@@ -13,10 +13,10 @@ class MoInvKv(ManagedObject):
     """This is MoInvKv class."""
 
     consts = MoInvKvConsts()
-    naming_props = set([u'key'])
+    naming_props = set(['key'])
 
     mo_meta = {
-        "classic": MoMeta("MoInvKv", "moInvKv", "kv-[key]", VersionMeta.Version401a, "OutputOnly", 0xf, [], ["read-only"], [u'moKvInvHolder'], [], [None]),
+        "classic": MoMeta("MoInvKv", "moInvKv", "kv-[key]", VersionMeta.Version401a, "OutputOnly", 0xf, [], ["read-only"], ['moKvInvHolder'], [], [None]),
     }
 
 

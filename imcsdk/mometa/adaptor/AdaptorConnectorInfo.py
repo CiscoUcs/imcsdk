@@ -16,8 +16,8 @@ class AdaptorConnectorInfo(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("AdaptorConnectorInfo", "adaptorConnectorInfo", "connector-info", VersionMeta.Version204c, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'adaptorExtEthIf'], [], ["Get"]),
-        "modular": MoMeta("AdaptorConnectorInfo", "adaptorConnectorInfo", "connector-info", VersionMeta.Version303a, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'adaptorExtEthIf'], [], ["Get"])
+        "classic": MoMeta("AdaptorConnectorInfo", "adaptorConnectorInfo", "connector-info", VersionMeta.Version204c, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['adaptorExtEthIf'], [], ["Get"]),
+        "modular": MoMeta("AdaptorConnectorInfo", "adaptorConnectorInfo", "connector-info", VersionMeta.Version303a, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['adaptorExtEthIf'], [], ["Get"])
     }
 
 

@@ -16,20 +16,20 @@ class LsbootSan(ManagedObject):
     """This is LsbootSan class."""
 
     consts = LsbootSanConsts()
-    naming_props = set([u'name'])
+    naming_props = set(['name'])
 
     mo_meta = {
-        "classic": MoMeta("LsbootSan", "lsbootSan", "san-[name]", VersionMeta.Version201a, "InputOutput", 0x3fff, [], ["admin", "read-only", "user"], [u'lsbootDevPrecision'], [], ["Add", "Get", "Remove", "Set"]),
-        "modular": MoMeta("LsbootSan", "lsbootSan", "san-[name]", VersionMeta.Version2013e, "InputOutput", 0x3fff, [], ["admin", "read-only", "user"], [u'lsbootDevPrecision'], [], ["Add", "Get", "Remove", "Set"])
+        "classic": MoMeta("LsbootSan", "lsbootSan", "san-[name]", VersionMeta.Version201a, "InputOutput", 0x3fff, [], ["admin", "read-only", "user"], ['lsbootDevPrecision'], [], ["Add", "Get", "Remove", "Set"]),
+        "modular": MoMeta("LsbootSan", "lsbootSan", "san-[name]", VersionMeta.Version2013e, "InputOutput", 0x3fff, [], ["admin", "read-only", "user"], ['lsbootDevPrecision'], [], ["Add", "Get", "Remove", "Set"])
     }
 
 
     prop_meta = {
 
         "classic": {
-            "boot_loader_descr": MoPropertyMeta("boot_loader_descr", "boot-loader-descr", "string", VersionMeta.Version313a, MoPropertyMeta.READ_WRITE, 0x2, 0, 128, None, [], []), 
-            "boot_loader_name": MoPropertyMeta("boot_loader_name", "boot-loader-name", "string", VersionMeta.Version313a, MoPropertyMeta.READ_WRITE, 0x4, 0, 128, None, [], []), 
-            "boot_loader_path": MoPropertyMeta("boot_loader_path", "boot-loader-path", "string", VersionMeta.Version313a, MoPropertyMeta.READ_WRITE, 0x8, None, None, r"""[^\(\)~`'\?"";<>\|&\*\^$%]{0,256}""", [], []), 
+            "boot_loader_descr": MoPropertyMeta("boot_loader_descr", "boot-loader-descr", "string", VersionMeta.Version401a, MoPropertyMeta.READ_WRITE, 0x2, 0, 128, None, [], []), 
+            "boot_loader_name": MoPropertyMeta("boot_loader_name", "boot-loader-name", "string", VersionMeta.Version401a, MoPropertyMeta.READ_WRITE, 0x4, 0, 128, None, [], []), 
+            "boot_loader_path": MoPropertyMeta("boot_loader_path", "boot-loader-path", "string", VersionMeta.Version401a, MoPropertyMeta.READ_WRITE, 0x8, None, None, r"""[^\(\)~`'\?"";<>\|&\*\^$%]{0,256}""", [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
             "lun": MoPropertyMeta("lun", "lun", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x20, None, None, r"""([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]){0,1}""", [], []), 
             "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version201a, MoPropertyMeta.NAMING, 0x40, None, None, r"""(([a-zA-Z0-9]{1})|([a-zA-Z0-9]{1}[a-zA-Z0-9_\-]{0,28}[a-zA-Z0-9]{1})|([a-zA-Z0-9]{2}))""", [], []), 
@@ -44,9 +44,9 @@ class LsbootSan(ManagedObject):
         },
 
         "modular": {
-            "boot_loader_descr": MoPropertyMeta("boot_loader_descr", "boot-loader-descr", "string", VersionMeta.Version313a, MoPropertyMeta.READ_WRITE, 0x2, 0, 128, None, [], []), 
-            "boot_loader_name": MoPropertyMeta("boot_loader_name", "boot-loader-name", "string", VersionMeta.Version313a, MoPropertyMeta.READ_WRITE, 0x4, 0, 128, None, [], []), 
-            "boot_loader_path": MoPropertyMeta("boot_loader_path", "boot-loader-path", "string", VersionMeta.Version313a, MoPropertyMeta.READ_WRITE, 0x8, None, None, r"""[^\(\)~`'\?"";<>\|&\*\^$%]{0,256}""", [], []), 
+            "boot_loader_descr": MoPropertyMeta("boot_loader_descr", "boot-loader-descr", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x2, 0, 128, None, [], []), 
+            "boot_loader_name": MoPropertyMeta("boot_loader_name", "boot-loader-name", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x4, 0, 128, None, [], []), 
+            "boot_loader_path": MoPropertyMeta("boot_loader_path", "boot-loader-path", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x8, None, None, r"""[^\(\)~`'\?"";<>\|&\*\^$%]{0,256}""", [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
             "lun": MoPropertyMeta("lun", "lun", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, None, None, r"""([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]){0,1}""", [], []), 
             "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version2013e, MoPropertyMeta.NAMING, 0x40, None, None, r"""(([a-zA-Z0-9]{1})|([a-zA-Z0-9]{1}[a-zA-Z0-9_\-]{0,28}[a-zA-Z0-9]{1})|([a-zA-Z0-9]{2}))""", [], []), 

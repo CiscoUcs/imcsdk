@@ -19,8 +19,8 @@ class BiosVfCiscoDebugLevel(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("BiosVfCiscoDebugLevel", "biosVfCiscoDebugLevel", "Cisco-Debug-Level", VersionMeta.Version402c, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None]),
-        "modular": MoMeta("BiosVfCiscoDebugLevel", "biosVfCiscoDebugLevel", "Cisco-Debug-Level", VersionMeta.Version402c, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
+        "classic": MoMeta("BiosVfCiscoDebugLevel", "biosVfCiscoDebugLevel", "Cisco-Debug-Level", VersionMeta.Version402c, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], [None]),
+        "modular": MoMeta("BiosVfCiscoDebugLevel", "biosVfCiscoDebugLevel", "Cisco-Debug-Level", VersionMeta.Version404b, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], [None])
     }
 
 
@@ -35,11 +35,11 @@ class BiosVfCiscoDebugLevel(ManagedObject):
         },
 
         "modular": {
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version402c, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version402c, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version402c, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "vp_cisco_debug_level": MoPropertyMeta("vp_cisco_debug_level", "vpCiscoDebugLevel", "string", VersionMeta.Version402c, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Maximum", "Minimum", "Normal", "platform-default"], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version402c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "vp_cisco_debug_level": MoPropertyMeta("vp_cisco_debug_level", "vpCiscoDebugLevel", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Maximum", "Minimum", "Normal", "platform-default"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version404b, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
         },
 
     }

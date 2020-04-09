@@ -13,11 +13,11 @@ class PidCatalogHdd(ManagedObject):
     """This is PidCatalogHdd class."""
 
     consts = PidCatalogHddConsts()
-    naming_props = set([u'disk'])
+    naming_props = set(['disk'])
 
     mo_meta = {
-        "classic": MoMeta("PidCatalogHdd", "pidCatalogHdd", "pid-hdd-[disk]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'pidCatalog'], [], ["Get"]),
-        "modular": MoMeta("PidCatalogHdd", "pidCatalogHdd", "pid-hdd-[disk]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'pidCatalog'], [], ["Get"])
+        "classic": MoMeta("PidCatalogHdd", "pidCatalogHdd", "pid-hdd-[disk]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['pidCatalog'], [], ["Get"]),
+        "modular": MoMeta("PidCatalogHdd", "pidCatalogHdd", "pid-hdd-[disk]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['pidCatalog'], [], ["Get"])
     }
 
 

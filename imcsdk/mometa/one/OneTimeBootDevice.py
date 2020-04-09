@@ -19,8 +19,8 @@ class OneTimeBootDevice(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("OneTimeBootDevice", "oneTimeBootDevice", "boot-one-time", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'computeRackUnit'], [], ["Get", "Set"]),
-        "modular": MoMeta("OneTimeBootDevice", "oneTimeBootDevice", "boot-one-time", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'computeServerNode'], [], ["Get", "Set"])
+        "classic": MoMeta("OneTimeBootDevice", "oneTimeBootDevice", "boot-one-time", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], ['computeRackUnit'], [], ["Get", "Set"]),
+        "modular": MoMeta("OneTimeBootDevice", "oneTimeBootDevice", "boot-one-time", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], ['computeServerNode'], [], ["Get", "Set"])
     }
 
 

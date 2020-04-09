@@ -16,6 +16,9 @@ class ComputeRackUnitConsts:
     ADMIN_POWER_POLICY = "policy"
     ADMIN_POWER_SOFT_SHUT_DOWN = "soft-shut-down"
     ADMIN_POWER_UP = "up"
+    BIOS_POST_STATE_COMPLETED = "completed"
+    BIOS_POST_STATE_PENDING = "pending"
+    BIOS_POST_STATE_UNKNOWN = "unknown"
     MEMORY_SPEED_ = ""
     MEMORY_SPEED_UNSPECIFIED = "unspecified"
     OPER_POWER_DEGRADED = "degraded"
@@ -46,10 +49,10 @@ class ComputeRackUnit(ManagedObject):
     """This is ComputeRackUnit class."""
 
     consts = ComputeRackUnitConsts()
-    naming_props = set([u'serverId'])
+    naming_props = set(['serverId'])
 
     mo_meta = {
-        "classic": MoMeta("ComputeRackUnit", "computeRackUnit", "rack-unit-[server_id]", VersionMeta.Version151f, "InputOutput", 0x3ff, [], ["admin", "user"], [u'topSystem'], [u'adaptorUnit', u'biosUnit', u'computeBoard', u'equipmentFanModule', u'equipmentIndicatorLed', u'equipmentLocatorLed', u'equipmentPsu', u'equipmentPsuColdRedundancy', u'eventManagement', u'faultInst', u'lsbootDef', u'lsbootDevPrecision', u'mgmtController', u'moKvInvHolder', u'networkAdapterUnit', u'oneTimeBootDevice', u'oneTimePrecisionBootDevice', u'pciEquipSlot', u'powerBudget', u'powerMonitor', u'serverUtilization', u'solIf', u'sysdebugTechSupportExport', u'systemIOController', u'x86LiveDebug'], ["Get", "Set"]),
+        "classic": MoMeta("ComputeRackUnit", "computeRackUnit", "rack-unit-[server_id]", VersionMeta.Version151f, "InputOutput", 0x3ff, [], ["admin", "user"], ['topSystem'], ['adaptorUnit', 'biosUnit', 'computeBoard', 'equipmentFanModule', 'equipmentIndicatorLed', 'equipmentLocatorLed', 'equipmentPsu', 'equipmentPsuColdRedundancy', 'eventManagement', 'faultInst', 'lsbootDef', 'lsbootDevPrecision', 'mgmtController', 'moKvInvHolder', 'networkAdapterUnit', 'oneTimeBootDevice', 'oneTimePrecisionBootDevice', 'pciEquipSlot', 'powerBudget', 'powerMonitor', 'serverUtilization', 'solIf', 'sysdebugTechSupportExport', 'systemIOController', 'x86LiveDebug'], ["Get", "Set"]),
     }
 
 
@@ -60,6 +63,7 @@ class ComputeRackUnit(ManagedObject):
             "admin_power": MoPropertyMeta("admin_power", "adminPower", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["bmc-reset-default", "bmc-reset-immediate", "cmos-reset-immediate", "cycle-immediate", "diagnostic-interrupt", "down", "hard-reset-immediate", "policy", "soft-shut-down", "up"], []), 
             "asset_tag": MoPropertyMeta("asset_tag", "assetTag", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x8, 0, 32, r"""[^!|&]{0,32}""", [], []), 
             "available_memory": MoPropertyMeta("available_memory", "availableMemory", "uint", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
+            "bios_post_state": MoPropertyMeta("bios_post_state", "biosPostState", "string", VersionMeta.Version410a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["completed", "pending", "unknown"], []), 
             "bmc_reset_status": MoPropertyMeta("bmc_reset_status", "bmcResetStatus", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "chassis_serial": MoPropertyMeta("chassis_serial", "chassisSerial", "string", VersionMeta.Version204c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
@@ -103,6 +107,7 @@ class ComputeRackUnit(ManagedObject):
             "adminPower": "admin_power", 
             "assetTag": "asset_tag", 
             "availableMemory": "available_memory", 
+            "biosPostState": "bios_post_state", 
             "bmcResetStatus": "bmc_reset_status", 
             "chassisSerial": "chassis_serial", 
             "childAction": "child_action", 
@@ -146,6 +151,7 @@ class ComputeRackUnit(ManagedObject):
         self.admin_power = None
         self.asset_tag = None
         self.available_memory = None
+        self.bios_post_state = None
         self.bmc_reset_status = None
         self.chassis_serial = None
         self.child_action = None

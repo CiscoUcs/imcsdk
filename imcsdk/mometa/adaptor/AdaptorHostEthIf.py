@@ -18,11 +18,11 @@ class AdaptorHostEthIf(ManagedObject):
     """This is AdaptorHostEthIf class."""
 
     consts = AdaptorHostEthIfConsts()
-    naming_props = set([u'name'])
+    naming_props = set(['name'])
 
     mo_meta = {
-        "classic": MoMeta("AdaptorHostEthIf", "adaptorHostEthIf", "host-eth-[name]", VersionMeta.Version151f, "InputOutput", 0x3fff, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [], ["Add", "Get", "Remove", "Set"]),
-        "modular": MoMeta("AdaptorHostEthIf", "adaptorHostEthIf", "host-eth-[name]", VersionMeta.Version2013e, "InputOutput", 0x3fff, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [], ["Add", "Get", "Remove", "Set"])
+        "classic": MoMeta("AdaptorHostEthIf", "adaptorHostEthIf", "host-eth-[name]", VersionMeta.Version151f, "InputOutput", 0x3fff, [], ["admin", "read-only", "user"], ['adaptorUnit'], [], ["Add", "Get", "Remove", "Set"]),
+        "modular": MoMeta("AdaptorHostEthIf", "adaptorHostEthIf", "host-eth-[name]", VersionMeta.Version2013e, "InputOutput", 0x3fff, [], ["admin", "read-only", "user"], ['adaptorUnit'], [], ["Add", "Get", "Remove", "Set"])
     }
 
 
@@ -37,7 +37,7 @@ class AdaptorHostEthIf(ManagedObject):
             "mac": MoPropertyMeta("mac", "mac", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x40, None, None, r"""(([0-9a-fA-F][0-9a-fA-F]:){5}([0-9a-fA-F][0-9a-fA-F]))|0""", ["AUTO"], []), 
             "mtu": MoPropertyMeta("mtu", "mtu", "uint", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, [], ["1500-9000"]), 
             "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version151f, MoPropertyMeta.NAMING, 0x100, None, None, r"""[a-zA-Z0-9\-\._:]{1,31}""", [], []), 
-            "port_profile": MoPropertyMeta("port_profile", "portProfile", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x200, None, None, r"""[a-zA-Z0-9_\-]{0,80}""", [], []), 
+            "port_profile": MoPropertyMeta("port_profile", "portProfile", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x200, None, None, r"""(([a-zA-Z0-9_]{1})|([a-zA-Z0-9_]{1}[a-zA-Z0-9_\-]{0,62}))""", [], []), 
             "pxe_boot": MoPropertyMeta("pxe_boot", "pxeBoot", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x400, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x800, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x1000, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
@@ -57,7 +57,7 @@ class AdaptorHostEthIf(ManagedObject):
             "mac": MoPropertyMeta("mac", "mac", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, None, None, r"""(([0-9a-fA-F][0-9a-fA-F]:){5}([0-9a-fA-F][0-9a-fA-F]))|0""", ["AUTO"], []), 
             "mtu": MoPropertyMeta("mtu", "mtu", "uint", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, [], ["1500-9000"]), 
             "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version2013e, MoPropertyMeta.NAMING, 0x100, None, None, r"""[a-zA-Z0-9\-\._:]{1,31}""", [], []), 
-            "port_profile": MoPropertyMeta("port_profile", "portProfile", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, None, None, r"""[a-zA-Z0-9_\-]{0,80}""", [], []), 
+            "port_profile": MoPropertyMeta("port_profile", "portProfile", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, None, None, r"""(([a-zA-Z0-9_]{1})|([a-zA-Z0-9_]{1}[a-zA-Z0-9_\-]{0,79}))""", [], []), 
             "pxe_boot": MoPropertyMeta("pxe_boot", "pxeBoot", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x400, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x800, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x1000, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
