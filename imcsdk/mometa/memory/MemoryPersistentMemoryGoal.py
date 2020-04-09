@@ -15,11 +15,11 @@ class MemoryPersistentMemoryGoal(ManagedObject):
     """This is MemoryPersistentMemoryGoal class."""
 
     consts = MemoryPersistentMemoryGoalConsts()
-    naming_props = set([u'socketId'])
+    naming_props = set(['socketId'])
 
     mo_meta = {
-        "classic": MoMeta("MemoryPersistentMemoryGoal", "memoryPersistentMemoryGoal", "goal-[socket_id]", VersionMeta.Version404b, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'memoryPersistentMemoryLogicalConfiguration'], [], [None]),
-        "modular": MoMeta("MemoryPersistentMemoryGoal", "memoryPersistentMemoryGoal", "goal-[socket_id]", VersionMeta.Version404b, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'memoryPersistentMemoryLogicalConfiguration'], [], [None])
+        "classic": MoMeta("MemoryPersistentMemoryGoal", "memoryPersistentMemoryGoal", "goal-[socket_id]", VersionMeta.Version404b, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], ['memoryPersistentMemoryLogicalConfiguration'], [], [None]),
+        "modular": MoMeta("MemoryPersistentMemoryGoal", "memoryPersistentMemoryGoal", "goal-[socket_id]", VersionMeta.Version404b, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], ['memoryPersistentMemoryLogicalConfiguration'], [], [None])
     }
 
 

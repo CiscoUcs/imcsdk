@@ -20,8 +20,8 @@ class BiosVfUsbXhciSupport(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("BiosVfUsbXhciSupport", "biosVfUsbXhciSupport", "UsbXhci-Support", VersionMeta.Version303a, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfUsbXhciSupport", "biosVfUsbXhciSupport", "UsbXhci-Support", VersionMeta.Version303a, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
+        "classic": MoMeta("BiosVfUsbXhciSupport", "biosVfUsbXhciSupport", "UsbXhci-Support", VersionMeta.Version303a, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], ["Get", "Set"]),
+        "modular": MoMeta("BiosVfUsbXhciSupport", "biosVfUsbXhciSupport", "UsbXhci-Support", VersionMeta.Version303a, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], ["Get", "Set"])
     }
 
 

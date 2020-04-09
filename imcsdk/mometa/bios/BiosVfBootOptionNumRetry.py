@@ -19,7 +19,7 @@ class BiosVfBootOptionNumRetry(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("BiosVfBootOptionNumRetry", "biosVfBootOptionNumRetry", "Boot-option-num-retry", VersionMeta.Version304a, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
+        "classic": MoMeta("BiosVfBootOptionNumRetry", "biosVfBootOptionNumRetry", "Boot-option-num-retry", VersionMeta.Version304a, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], ['biosPlatformDefaults', 'biosSettings'], [], ["Get", "Set"]),
     }
 
 

@@ -13,11 +13,11 @@ class AdaptorFcBootTable(ManagedObject):
     """This is AdaptorFcBootTable class."""
 
     consts = AdaptorFcBootTableConsts()
-    naming_props = set([u'index'])
+    naming_props = set(['index'])
 
     mo_meta = {
-        "classic": MoMeta("AdaptorFcBootTable", "adaptorFcBootTable", "fcboot-[index]", VersionMeta.Version151f, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'adaptorHostFcIf'], [], ["Add", "Get", "Set"]),
-        "modular": MoMeta("AdaptorFcBootTable", "adaptorFcBootTable", "fcboot-[index]", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'adaptorHostFcIf'], [], ["Add", "Get", "Set"])
+        "classic": MoMeta("AdaptorFcBootTable", "adaptorFcBootTable", "fcboot-[index]", VersionMeta.Version151f, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], ['adaptorHostFcIf'], [], ["Add", "Get", "Set"]),
+        "modular": MoMeta("AdaptorFcBootTable", "adaptorFcBootTable", "fcboot-[index]", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], ['adaptorHostFcIf'], [], ["Add", "Get", "Set"])
     }
 
 

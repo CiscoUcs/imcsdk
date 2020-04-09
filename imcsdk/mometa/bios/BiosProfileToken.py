@@ -13,11 +13,11 @@ class BiosProfileToken(ManagedObject):
     """This is BiosProfileToken class."""
 
     consts = BiosProfileTokenConsts()
-    naming_props = set([u'name'])
+    naming_props = set(['name'])
 
     mo_meta = {
-        "classic": MoMeta("BiosProfileToken", "biosProfileToken", "token-[name]", VersionMeta.Version301c, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'biosProfile'], [], ["Get"]),
-        "modular": MoMeta("BiosProfileToken", "biosProfileToken", "token-[name]", VersionMeta.Version301c, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'biosProfile'], [], ["Get"])
+        "classic": MoMeta("BiosProfileToken", "biosProfileToken", "token-[name]", VersionMeta.Version301c, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['biosProfile'], [], ["Get"]),
+        "modular": MoMeta("BiosProfileToken", "biosProfileToken", "token-[name]", VersionMeta.Version301c, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['biosProfile'], [], ["Get"])
     }
 
 

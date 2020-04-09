@@ -23,11 +23,11 @@ class SysdebugMEpLog(ManagedObject):
     """This is SysdebugMEpLog class."""
 
     consts = SysdebugMEpLogConsts()
-    naming_props = set([u'type', u'id'])
+    naming_props = set(['type', 'id'])
 
     mo_meta = {
-        "classic": MoMeta("SysdebugMEpLog", "sysdebugMEpLog", "log-[type]-[id]", VersionMeta.Version151f, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'mgmtController'], [u'faultInst'], ["Get", "Set"]),
-        "modular": MoMeta("SysdebugMEpLog", "sysdebugMEpLog", "log-[type]-[id]", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'mgmtController'], [u'faultInst'], ["Get", "Set"])
+        "classic": MoMeta("SysdebugMEpLog", "sysdebugMEpLog", "log-[type]-[id]", VersionMeta.Version151f, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], ['mgmtController'], ['faultInst'], ["Get", "Set"]),
+        "modular": MoMeta("SysdebugMEpLog", "sysdebugMEpLog", "log-[type]-[id]", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], ['mgmtController'], ['faultInst'], ["Get", "Set"])
     }
 
 

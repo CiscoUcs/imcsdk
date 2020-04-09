@@ -16,35 +16,35 @@ class StorageControllerNextConsistencyCheckSchedule(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("StorageControllerNextConsistencyCheckSchedule", "storageControllerNextConsistencyCheckSchedule", "consistency-check", VersionMeta.Version313a, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageController'], [], [None]),
-        "modular": MoMeta("StorageControllerNextConsistencyCheckSchedule", "storageControllerNextConsistencyCheckSchedule", "consistency-check", VersionMeta.Version313a, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageController'], [], [None])
+        "classic": MoMeta("StorageControllerNextConsistencyCheckSchedule", "storageControllerNextConsistencyCheckSchedule", "consistency-check", VersionMeta.Version401a, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['storageController'], [], [None]),
+        "modular": MoMeta("StorageControllerNextConsistencyCheckSchedule", "storageControllerNextConsistencyCheckSchedule", "consistency-check", VersionMeta.Version404b, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['storageController'], [], [None])
     }
 
 
     prop_meta = {
 
         "classic": {
-            "cc_schedule_mode": MoPropertyMeta("cc_schedule_mode", "ccScheduleMode", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "cc_state": MoPropertyMeta("cc_state", "ccState", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version313a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
-            "exec_frequency": MoPropertyMeta("exec_frequency", "execFrequency", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "next_exec_time": MoPropertyMeta("next_exec_time", "nextExecTime", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "cc_schedule_mode": MoPropertyMeta("cc_schedule_mode", "ccScheduleMode", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "cc_state": MoPropertyMeta("cc_state", "ccState", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version401a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
+            "exec_frequency": MoPropertyMeta("exec_frequency", "execFrequency", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "next_exec_time": MoPropertyMeta("next_exec_time", "nextExecTime", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
         },
 
         "modular": {
-            "cc_schedule_mode": MoPropertyMeta("cc_schedule_mode", "ccScheduleMode", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "cc_state": MoPropertyMeta("cc_state", "ccState", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version313a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
-            "exec_frequency": MoPropertyMeta("exec_frequency", "execFrequency", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "next_exec_time": MoPropertyMeta("next_exec_time", "nextExecTime", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "cc_schedule_mode": MoPropertyMeta("cc_schedule_mode", "ccScheduleMode", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "cc_state": MoPropertyMeta("cc_state", "ccState", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version404b, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
+            "exec_frequency": MoPropertyMeta("exec_frequency", "execFrequency", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "next_exec_time": MoPropertyMeta("next_exec_time", "nextExecTime", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
         },
 
     }

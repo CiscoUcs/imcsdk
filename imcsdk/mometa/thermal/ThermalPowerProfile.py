@@ -16,7 +16,7 @@ class ThermalPowerProfile(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "modular": MoMeta("ThermalPowerProfile", "thermalPowerProfile", "thermal-prof", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'powerBudget'], [], ["Get", "Set"])
+        "modular": MoMeta("ThermalPowerProfile", "thermalPowerProfile", "thermal-prof", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], ['powerBudget'], [], ["Get", "Set"])
     }
 
 

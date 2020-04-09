@@ -21,8 +21,8 @@ class MemoryPersistentMemoryBackup(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("MemoryPersistentMemoryBackup", "memoryPersistentMemoryBackup", "export-config", VersionMeta.Version404b, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'memoryPersistentMemoryConfiguration'], [], [None]),
-        "modular": MoMeta("MemoryPersistentMemoryBackup", "memoryPersistentMemoryBackup", "export-config", VersionMeta.Version404b, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], [u'memoryPersistentMemoryConfiguration'], [], [None])
+        "classic": MoMeta("MemoryPersistentMemoryBackup", "memoryPersistentMemoryBackup", "export-config", VersionMeta.Version404b, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], ['memoryPersistentMemoryConfiguration'], [], [None]),
+        "modular": MoMeta("MemoryPersistentMemoryBackup", "memoryPersistentMemoryBackup", "export-config", VersionMeta.Version404b, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], ['memoryPersistentMemoryConfiguration'], [], [None])
     }
 
 
@@ -44,7 +44,7 @@ class MemoryPersistentMemoryBackup(ManagedObject):
 
         "modular": {
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
-            "hostname": MoPropertyMeta("hostname", "hostname", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, r"""(https?://)?([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:""", [], []), 
+            "hostname": MoPropertyMeta("hostname", "hostname", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, r"""(([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6})|(([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?)+)|(https?://)?([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])""", [], []), 
             "proto": MoPropertyMeta("proto", "proto", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["ftp", "http", "none", "scp", "sftp", "tftp"], []), 
             "pwd": MoPropertyMeta("pwd", "pwd", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
             "remote_file": MoPropertyMeta("remote_file", "remoteFile", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, r"""[^\(\)~`'\?\\"";<>\|&\*\^$%]{1,255}""", [], []), 

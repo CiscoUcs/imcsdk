@@ -21,8 +21,8 @@ class LsbootDef(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("LsbootDef", "lsbootDef", "boot-policy", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'computeRackUnit'], [u'lsbootBootSecurity', u'lsbootEfi', u'lsbootLan', u'lsbootStorage', u'lsbootVirtualMedia'], ["Get", "Set"]),
-        "modular": MoMeta("LsbootDef", "lsbootDef", "boot-policy", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'computeServerNode'], [u'lsbootBootSecurity', u'lsbootEfi', u'lsbootLan', u'lsbootStorage', u'lsbootVirtualMedia'], ["Get", "Set"])
+        "classic": MoMeta("LsbootDef", "lsbootDef", "boot-policy", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], ['computeRackUnit'], ['lsbootBootSecurity', 'lsbootEfi', 'lsbootLan', 'lsbootStorage', 'lsbootVirtualMedia'], ["Get", "Set"]),
+        "modular": MoMeta("LsbootDef", "lsbootDef", "boot-policy", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], ['computeServerNode'], ['lsbootBootSecurity', 'lsbootEfi', 'lsbootLan', 'lsbootStorage', 'lsbootVirtualMedia'], ["Get", "Set"])
     }
 
 

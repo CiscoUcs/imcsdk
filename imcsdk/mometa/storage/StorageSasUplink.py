@@ -16,7 +16,7 @@ class StorageSasUplink(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "modular": MoMeta("StorageSasUplink", "storageSasUplink", "uplink", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["read-only"], [u'storageSasExpander'], [], ["Get"])
+        "modular": MoMeta("StorageSasUplink", "storageSasUplink", "uplink", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["read-only"], ['storageSasExpander'], [], ["Get"])
     }
 
 

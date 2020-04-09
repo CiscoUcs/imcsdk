@@ -23,8 +23,8 @@ class AdaptorFcGenProfile(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("AdaptorFcGenProfile", "adaptorFcGenProfile", "general", VersionMeta.Version151f, "InputOutput", 0x1fff, [], ["admin", "read-only", "user"], [u'adaptorHostFcIf'], [], ["Get", "Set"]),
-        "modular": MoMeta("AdaptorFcGenProfile", "adaptorFcGenProfile", "general", VersionMeta.Version2013e, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], [u'adaptorHostFcIf'], [], ["Get", "Set"])
+        "classic": MoMeta("AdaptorFcGenProfile", "adaptorFcGenProfile", "general", VersionMeta.Version151f, "InputOutput", 0x1fff, [], ["admin", "read-only", "user"], ['adaptorHostFcIf'], [], ["Get", "Set"]),
+        "modular": MoMeta("AdaptorFcGenProfile", "adaptorFcGenProfile", "general", VersionMeta.Version2013e, "InputOutput", 0xfff, [], ["admin", "read-only", "user"], ['adaptorHostFcIf'], [], ["Get", "Set"])
     }
 
 
@@ -56,7 +56,7 @@ class AdaptorFcGenProfile(ManagedObject):
             "rate_limit": MoPropertyMeta("rate_limit", "rateLimit", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, None, None, r"""(([1-9]\d?\d?\d?|10000) Mbps)""", ["OFF"], ["1-100000"]), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x100, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "vhba_type": MoPropertyMeta("vhba_type", "vhbaType", "string", VersionMeta.Version402c, MoPropertyMeta.READ_WRITE, 0x400, None, None, None, ["fc-initiator", "fc-nvme-initiator", "fc-nvme-target", "fc-target"], []), 
+            "vhba_type": MoPropertyMeta("vhba_type", "vhbaType", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x400, None, None, None, ["fc-initiator", "fc-nvme-initiator", "fc-nvme-target", "fc-target"], []), 
             "vlan": MoPropertyMeta("vlan", "vlan", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x800, None, None, None, ["NONE"], ["1-4094"]), 
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "pci_link": MoPropertyMeta("pci_link", "pciLink", "uint", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, None, None, None, None, [], ["0-1"]), 

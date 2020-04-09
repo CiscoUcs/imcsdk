@@ -18,7 +18,7 @@ class BiosVfSmtMode(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("BiosVfSmtMode", "biosVfSmtMode", "smt-mode", VersionMeta.Version401a, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None]),
+        "classic": MoMeta("BiosVfSmtMode", "biosVfSmtMode", "smt-mode", VersionMeta.Version401a, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], [None]),
     }
 
 

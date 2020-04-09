@@ -16,8 +16,8 @@ class CertificateManagement(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("CertificateManagement", "certificateManagement", "cert-mgmt", VersionMeta.Version209c, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'topSystem'], [u'currentCertificate', u'generateCertificateSigningRequest', u'uploadCertificate'], ["Get"]),
-        "modular": MoMeta("CertificateManagement", "certificateManagement", "cert-mgmt", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'topSystem'], [u'currentCertificate', u'generateCertificateSigningRequest', u'uploadCertificate'], ["Get"])
+        "classic": MoMeta("CertificateManagement", "certificateManagement", "cert-mgmt", VersionMeta.Version209c, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['topSystem'], ['currentCertificate', 'generateCertificateSigningRequest', 'uploadCertificate'], ["Get"]),
+        "modular": MoMeta("CertificateManagement", "certificateManagement", "cert-mgmt", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['topSystem'], ['currentCertificate', 'generateCertificateSigningRequest', 'uploadCertificate'], ["Get"])
     }
 
 

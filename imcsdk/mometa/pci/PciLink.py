@@ -13,10 +13,10 @@ class PciLink(ManagedObject):
     """This is PciLink class."""
 
     consts = PciLinkConsts()
-    naming_props = set([u'adapter'])
+    naming_props = set(['adapter'])
 
     mo_meta = {
-        "classic": MoMeta("PciLink", "pciLink", "pci-link-[adapter]", VersionMeta.Version402c, "OutputOnly", 0xf, [], ["read-only"], [u'pciSwitch'], [], [None]),
+        "classic": MoMeta("PciLink", "pciLink", "pci-link-[adapter]", VersionMeta.Version402c, "OutputOnly", 0xf, [], ["read-only"], ['pciSwitch'], [], [None]),
     }
 
 

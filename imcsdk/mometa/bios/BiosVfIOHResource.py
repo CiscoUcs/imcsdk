@@ -21,8 +21,8 @@ class BiosVfIOHResource(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("BiosVfIOHResource", "biosVfIOHResource", "ioh-resource", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfIOHResource", "biosVfIOHResource", "ioh-resource", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
+        "classic": MoMeta("BiosVfIOHResource", "biosVfIOHResource", "ioh-resource", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], ["Get", "Set"]),
+        "modular": MoMeta("BiosVfIOHResource", "biosVfIOHResource", "ioh-resource", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], ["Get", "Set"])
     }
 
 

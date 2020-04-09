@@ -16,8 +16,8 @@ class MemoryPersistentMemoryConfigResult(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("MemoryPersistentMemoryConfigResult", "memoryPersistentMemoryConfigResult", "cfg-result", VersionMeta.Version404b, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'memoryPersistentMemoryConfiguration'], [u'memoryPersistentMemoryNamespaceConfigResult'], [None]),
-        "modular": MoMeta("MemoryPersistentMemoryConfigResult", "memoryPersistentMemoryConfigResult", "cfg-result", VersionMeta.Version404b, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'memoryPersistentMemoryConfiguration'], [u'memoryPersistentMemoryNamespaceConfigResult'], [None])
+        "classic": MoMeta("MemoryPersistentMemoryConfigResult", "memoryPersistentMemoryConfigResult", "cfg-result", VersionMeta.Version404b, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['memoryPersistentMemoryConfiguration'], ['memoryPersistentMemoryNamespaceConfigResult'], [None]),
+        "modular": MoMeta("MemoryPersistentMemoryConfigResult", "memoryPersistentMemoryConfigResult", "cfg-result", VersionMeta.Version404b, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['memoryPersistentMemoryConfiguration'], ['memoryPersistentMemoryNamespaceConfigResult'], [None])
     }
 
 

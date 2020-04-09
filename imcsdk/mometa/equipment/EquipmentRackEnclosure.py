@@ -16,7 +16,7 @@ class EquipmentRackEnclosure(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("EquipmentRackEnclosure", "equipmentRackEnclosure", "sys/rack-enclosure-1", VersionMeta.Version401a, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'topSystem'], [], [None]),
+        "classic": MoMeta("EquipmentRackEnclosure", "equipmentRackEnclosure", "sys/rack-enclosure-1", VersionMeta.Version401a, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['topSystem'], [], [None]),
     }
 
 

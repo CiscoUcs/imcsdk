@@ -82,11 +82,11 @@ class EquipmentFanModule(ManagedObject):
     """This is EquipmentFanModule class."""
 
     consts = EquipmentFanModuleConsts()
-    naming_props = set([u'tray', u'id'])
+    naming_props = set(['tray', 'id'])
 
     mo_meta = {
-        "classic": MoMeta("EquipmentFanModule", "equipmentFanModule", "fan-module-[tray]-[id]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeRackUnit'], [u'equipmentFan'], ["Get"]),
-        "modular": MoMeta("EquipmentFanModule", "equipmentFanModule", "fan-module-[tray]-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeServerNode', u'equipmentChassis'], [u'equipmentFan'], ["Get"])
+        "classic": MoMeta("EquipmentFanModule", "equipmentFanModule", "fan-module-[tray]-[id]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['computeRackUnit'], ['equipmentFan'], ["Get"]),
+        "modular": MoMeta("EquipmentFanModule", "equipmentFanModule", "fan-module-[tray]-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['computeServerNode', 'equipmentChassis'], ['equipmentFan'], ["Get"])
     }
 
 

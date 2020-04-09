@@ -23,8 +23,8 @@ class FirmwareBootDefinition(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("FirmwareBootDefinition", "firmwareBootDefinition", "fw-boot-def", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'biosUnit', u'mgmtController', u'storageController', u'systemIOController'], [u'firmwareBootUnit'], ["Get"]),
-        "modular": MoMeta("FirmwareBootDefinition", "firmwareBootDefinition", "fw-boot-def", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'biosUnit', u'mgmtController', u'storageController'], [u'firmwareBootUnit'], ["Get"])
+        "classic": MoMeta("FirmwareBootDefinition", "firmwareBootDefinition", "fw-boot-def", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['biosUnit', 'mgmtController', 'storageController', 'systemIOController'], ['firmwareBootUnit'], ["Get"]),
+        "modular": MoMeta("FirmwareBootDefinition", "firmwareBootDefinition", "fw-boot-def", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['biosUnit', 'mgmtController', 'storageController'], ['firmwareBootUnit'], ["Get"])
     }
 
 

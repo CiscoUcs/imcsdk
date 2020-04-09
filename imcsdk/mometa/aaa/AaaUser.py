@@ -19,11 +19,11 @@ class AaaUser(ManagedObject):
     """This is AaaUser class."""
 
     consts = AaaUserConsts()
-    naming_props = set([u'id'])
+    naming_props = set(['id'])
 
     mo_meta = {
-        "classic": MoMeta("AaaUser", "aaaUser", "user-[id]", VersionMeta.Version151f, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], [u'aaaUserEp'], [], ["Get", "Set"]),
-        "modular": MoMeta("AaaUser", "aaaUser", "user-[id]", VersionMeta.Version2013e, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], [u'aaaUserEp'], [], ["Get", "Set"])
+        "classic": MoMeta("AaaUser", "aaaUser", "user-[id]", VersionMeta.Version151f, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], ['aaaUserEp'], [], ["Get", "Set"]),
+        "modular": MoMeta("AaaUser", "aaaUser", "user-[id]", VersionMeta.Version2013e, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], ['aaaUserEp'], [], ["Get", "Set"])
     }
 
 

@@ -13,10 +13,10 @@ class EquipmentSharedIOModule(ManagedObject):
     """This is EquipmentSharedIOModule class."""
 
     consts = EquipmentSharedIOModuleConsts()
-    naming_props = set([u'slotId'])
+    naming_props = set(['slotId'])
 
     mo_meta = {
-        "modular": MoMeta("EquipmentSharedIOModule", "equipmentSharedIOModule", "shared-io-module-[slot_id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'equipmentSystemIOController'], [u'commEpIpmiLan', u'computeSharedIOMbPowerStats', u'computeSharedIOMbTempStats', u'mgmtController'], ["Get"])
+        "modular": MoMeta("EquipmentSharedIOModule", "equipmentSharedIOModule", "shared-io-module-[slot_id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['equipmentSystemIOController'], ['commEpIpmiLan', 'computeSharedIOMbPowerStats', 'computeSharedIOMbTempStats', 'mgmtController'], ["Get"])
     }
 
 
@@ -29,10 +29,10 @@ class EquipmentSharedIOModule(ManagedObject):
             "description": MoPropertyMeta("description", "description", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
             "fip_mode": MoPropertyMeta("fip_mode", "fipMode", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "iptype": MoPropertyMeta("iptype", "iptype", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
+            "iptype": MoPropertyMeta("iptype", "iptype", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
             "iscsi_boot_capable": MoPropertyMeta("iscsi_boot_capable", "iscsiBootCapable", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "lldp": MoPropertyMeta("lldp", "lldp", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "mac_address": MoPropertyMeta("mac_address", "macAddress", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
+            "mac_address": MoPropertyMeta("mac_address", "macAddress", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
             "pci_link": MoPropertyMeta("pci_link", "pciLink", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "product_id": MoPropertyMeta("product_id", "productId", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 

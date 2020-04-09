@@ -29,8 +29,8 @@ class EquipmentLocatorLed(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("EquipmentLocatorLed", "equipmentLocatorLed", "locator-led", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'computeRackUnit'], [], ["Get", "Set"]),
-        "modular": MoMeta("EquipmentLocatorLed", "equipmentLocatorLed", "locator-led", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'computeServerNode'], [], ["Get", "Set"])
+        "classic": MoMeta("EquipmentLocatorLed", "equipmentLocatorLed", "locator-led", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], ['computeRackUnit'], [], ["Get", "Set"]),
+        "modular": MoMeta("EquipmentLocatorLed", "equipmentLocatorLed", "locator-led", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], ['computeServerNode'], [], ["Get", "Set"])
     }
 
 

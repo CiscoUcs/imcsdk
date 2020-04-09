@@ -13,11 +13,11 @@ class StorageFlexFlashPhysicalDrive(ManagedObject):
     """This is StorageFlexFlashPhysicalDrive class."""
 
     consts = StorageFlexFlashPhysicalDriveConsts()
-    naming_props = set([u'physicalDriveId'])
+    naming_props = set(['physicalDriveId'])
 
     mo_meta = {
-        "classic": MoMeta("StorageFlexFlashPhysicalDrive", "storageFlexFlashPhysicalDrive", "card-[physical_drive_id]", VersionMeta.Version202c, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageFlexFlashController'], [u'faultInst'], ["Get"]),
-        "modular": MoMeta("StorageFlexFlashPhysicalDrive", "storageFlexFlashPhysicalDrive", "card-[physical_drive_id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageFlexFlashController'], [u'faultInst'], ["Get"])
+        "classic": MoMeta("StorageFlexFlashPhysicalDrive", "storageFlexFlashPhysicalDrive", "card-[physical_drive_id]", VersionMeta.Version202c, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['storageFlexFlashController'], ['faultInst'], ["Get"]),
+        "modular": MoMeta("StorageFlexFlashPhysicalDrive", "storageFlexFlashPhysicalDrive", "card-[physical_drive_id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['storageFlexFlashController'], ['faultInst'], ["Get"])
     }
 
 

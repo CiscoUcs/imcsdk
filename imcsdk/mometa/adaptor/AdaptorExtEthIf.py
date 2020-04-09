@@ -49,11 +49,11 @@ class AdaptorExtEthIf(ManagedObject):
     """This is AdaptorExtEthIf class."""
 
     consts = AdaptorExtEthIfConsts()
-    naming_props = set([u'portId'])
+    naming_props = set(['portId'])
 
     mo_meta = {
-        "classic": MoMeta("AdaptorExtEthIf", "adaptorExtEthIf", "ext-eth-[port_id]", VersionMeta.Version151f, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [u'adaptorConnectorInfo', u'adaptorLinkTraining', u'adaptorPortProfiles'], ["Get", "Set"]),
-        "modular": MoMeta("AdaptorExtEthIf", "adaptorExtEthIf", "ext-eth-[port_id]", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'adaptorUnit'], [u'adaptorConnectorInfo', u'adaptorLinkTraining', u'adaptorPortProfiles'], ["Get", "Set"])
+        "classic": MoMeta("AdaptorExtEthIf", "adaptorExtEthIf", "ext-eth-[port_id]", VersionMeta.Version151f, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], ['adaptorUnit'], ['adaptorConnectorInfo', 'adaptorLinkTraining', 'adaptorPortProfiles'], ["Get", "Set"]),
+        "modular": MoMeta("AdaptorExtEthIf", "adaptorExtEthIf", "ext-eth-[port_id]", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], ['adaptorUnit'], ['adaptorConnectorInfo', 'adaptorLinkTraining', 'adaptorPortProfiles'], ["Get", "Set"])
     }
 
 
@@ -76,7 +76,7 @@ class AdaptorExtEthIf(ManagedObject):
         },
 
         "modular": {
-            "admin_fec_mode": MoPropertyMeta("admin_fec_mode", "adminFecMode", "string", VersionMeta.Version401a, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["Auto", "Off", "cl74", "cl91"], []), 
+            "admin_fec_mode": MoPropertyMeta("admin_fec_mode", "adminFecMode", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["Auto", "Off", "cl74", "cl91"], []), 
             "admin_speed": MoPropertyMeta("admin_speed", "adminSpeed", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["-", "40Gbps", "4x10Gbps", "Auto"], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
             "port_id": MoPropertyMeta("port_id", "portId", "string", VersionMeta.Version2013e, MoPropertyMeta.NAMING, 0x10, None, None, None, ["0", "1", "2", "3"], []), 
@@ -86,7 +86,7 @@ class AdaptorExtEthIf(ManagedObject):
             "if_type": MoPropertyMeta("if_type", "ifType", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["aggregation", "physical", "unknown", "virtual"], []), 
             "link_state": MoPropertyMeta("link_state", "linkState", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["admin-down", "down", "error", "unallocated", "unavailable", "unknown", "up"], []), 
             "mac": MoPropertyMeta("mac", "mac", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, r"""(([0-9a-fA-F][0-9a-fA-F]:){5}([0-9a-fA-F][0-9a-fA-F]))|0""", [], []), 
-            "oper_fec_mode": MoPropertyMeta("oper_fec_mode", "operFecMode", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["Auto", "Off", "cl74", "cl91"], []), 
+            "oper_fec_mode": MoPropertyMeta("oper_fec_mode", "operFecMode", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, None, None, None, None, ["Auto", "Off", "cl74", "cl91"], []), 
             "oper_speed": MoPropertyMeta("oper_speed", "operSpeed", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["-", "100Gbps", "10Gbps", "1Gbps", "25Gbps", "40Gbps", "4x10Gbps", "Auto"], []), 
             "transport": MoPropertyMeta("transport", "transport", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
         },

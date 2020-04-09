@@ -22,8 +22,8 @@ class BiosVfLegacyUSBSupport(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("BiosVfLegacyUSBSupport", "biosVfLegacyUSBSupport", "LegacyUSB-Support", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfLegacyUSBSupport", "biosVfLegacyUSBSupport", "LegacyUSB-Support", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
+        "classic": MoMeta("BiosVfLegacyUSBSupport", "biosVfLegacyUSBSupport", "LegacyUSB-Support", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], ["Get", "Set"]),
+        "modular": MoMeta("BiosVfLegacyUSBSupport", "biosVfLegacyUSBSupport", "LegacyUSB-Support", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], ["Get", "Set"])
     }
 
 

@@ -28,8 +28,8 @@ class SolIf(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("SolIf", "solIf", "sol-if", VersionMeta.Version151f, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'computeRackUnit'], [], ["Get", "Set"]),
-        "modular": MoMeta("SolIf", "solIf", "sol-if", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'computeServerNode'], [], ["Get", "Set"])
+        "classic": MoMeta("SolIf", "solIf", "sol-if", VersionMeta.Version151f, "InputOutput", 0xff, [], ["admin", "read-only", "user"], ['computeRackUnit'], [], ["Get", "Set"]),
+        "modular": MoMeta("SolIf", "solIf", "sol-if", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], ['computeServerNode'], [], ["Get", "Set"])
     }
 
 
@@ -56,7 +56,7 @@ class SolIf(ManagedObject):
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, r"""[\-\.:_a-zA-Z0-9]{0,16}""", [], []), 
-            "port": MoPropertyMeta("port", "port", "uint", VersionMeta.Version402c, MoPropertyMeta.READ_ONLY, None, None, None, None, [], ["1-65535"]), 
+            "port": MoPropertyMeta("port", "port", "uint", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, None, None, None, None, [], ["1-65535"]), 
         },
 
     }

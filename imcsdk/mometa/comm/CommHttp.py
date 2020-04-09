@@ -23,8 +23,8 @@ class CommHttp(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("CommHttp", "commHttp", "http-svc", VersionMeta.Version151f, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'commSvcEp'], [], ["Get", "Set"]),
-        "modular": MoMeta("CommHttp", "commHttp", "http-svc", VersionMeta.Version2013e, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'commSvcEp'], [], ["Get", "Set"])
+        "classic": MoMeta("CommHttp", "commHttp", "http-svc", VersionMeta.Version151f, "InputOutput", 0xff, [], ["admin", "read-only", "user"], ['commSvcEp'], [], ["Get", "Set"]),
+        "modular": MoMeta("CommHttp", "commHttp", "http-svc", VersionMeta.Version2013e, "InputOutput", 0xff, [], ["admin", "read-only", "user"], ['commSvcEp'], [], ["Get", "Set"])
     }
 
 

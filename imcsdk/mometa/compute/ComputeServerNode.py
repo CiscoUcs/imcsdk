@@ -17,6 +17,9 @@ class ComputeServerNodeConsts:
     ADMIN_POWER_SOFT_SHUT_DOWN = "soft-shut-down"
     ADMIN_POWER_UP = "up"
     AVAILABLE_MEMORY_ = ""
+    BIOS_POST_STATE_COMPLETED = "completed"
+    BIOS_POST_STATE_PENDING = "pending"
+    BIOS_POST_STATE_UNKNOWN = "unknown"
     MEMORY_SPEED_ = ""
     MEMORY_SPEED_UNSPECIFIED = "unspecified"
     OPER_POWER_DEGRADED = "degraded"
@@ -48,10 +51,10 @@ class ComputeServerNode(ManagedObject):
     """This is ComputeServerNode class."""
 
     consts = ComputeServerNodeConsts()
-    naming_props = set([u'serverId'])
+    naming_props = set(['serverId'])
 
     mo_meta = {
-        "modular": MoMeta("ComputeServerNode", "computeServerNode", "server-[server_id]", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'equipmentChassis'], [u'adapterSecureUpdate', u'adaptorUnit', u'biosUnit', u'bmcResetReason', u'commSvcRack', u'computeBoard', u'equipmentFanModule', u'equipmentIndicatorLed', u'equipmentLocatorLed', u'equipmentPsu', u'faultInst', u'huuController', u'ioExpander', u'iodController', u'kmipManagement', u'lsbootDef', u'lsbootDevPrecision', u'mgmtBackupServer', u'mgmtController', u'mgmtImporterServer', u'networkAdapterUnit', u'oneTimeBootDevice', u'oneTimePrecisionBootDevice', u'osiController', u'pciEquipSlot', u'powerBudget', u'powerMonitor', u'serverUtilization', u'solIf'], ["Get", "Set"])
+        "modular": MoMeta("ComputeServerNode", "computeServerNode", "server-[server_id]", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], ['equipmentChassis'], ['adapterSecureUpdate', 'adaptorUnit', 'biosUnit', 'bmcResetReason', 'commSvcRack', 'computeBoard', 'equipmentFanModule', 'equipmentIndicatorLed', 'equipmentLocatorLed', 'equipmentPsu', 'faultInst', 'huuController', 'ioExpander', 'iodController', 'kmipManagement', 'lsbootDef', 'lsbootDevPrecision', 'mgmtBackupServer', 'mgmtController', 'mgmtImporterServer', 'networkAdapterUnit', 'oneTimeBootDevice', 'oneTimePrecisionBootDevice', 'osiController', 'pciEquipSlot', 'powerBudget', 'powerMonitor', 'serverUtilization', 'solIf'], ["Get", "Set"])
     }
 
 
@@ -60,6 +63,7 @@ class ComputeServerNode(ManagedObject):
         "modular": {
             "admin_power": MoPropertyMeta("admin_power", "adminPower", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["bmc-reset-default", "bmc-reset-immediate", "cmos-reset-immediate", "cycle-immediate", "diagnostic-interrupt", "down", "hard-reset-immediate", "policy", "soft-shut-down", "up"], []), 
             "available_memory": MoPropertyMeta("available_memory", "availableMemory", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [""], ["0-4294967295"]), 
+            "bios_post_state": MoPropertyMeta("bios_post_state", "biosPostState", "string", VersionMeta.Version410a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["completed", "pending", "unknown"], []), 
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "memory_speed": MoPropertyMeta("memory_speed", "memorySpeed", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["", "unspecified"], ["0-4294967295"]), 
@@ -92,6 +96,7 @@ class ComputeServerNode(ManagedObject):
         "modular": {
             "adminPower": "admin_power", 
             "availableMemory": "available_memory", 
+            "biosPostState": "bios_post_state", 
             "childAction": "child_action", 
             "dn": "dn", 
             "memorySpeed": "memory_speed", 
@@ -124,6 +129,7 @@ class ComputeServerNode(ManagedObject):
         self.server_id = server_id
         self.admin_power = None
         self.available_memory = None
+        self.bios_post_state = None
         self.child_action = None
         self.memory_speed = None
         self.model = None

@@ -21,7 +21,7 @@ class BiosVfCbsCmnMemCtrlBankGroupSwapDdr4(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("BiosVfCbsCmnMemCtrlBankGroupSwapDdr4", "biosVfCbsCmnMemCtrlBankGroupSwapDdr4", "bank-groupswap", VersionMeta.Version401a, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None]),
+        "classic": MoMeta("BiosVfCbsCmnMemCtrlBankGroupSwapDdr4", "biosVfCbsCmnMemCtrlBankGroupSwapDdr4", "bank-groupswap", VersionMeta.Version401a, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], [None]),
     }
 
 

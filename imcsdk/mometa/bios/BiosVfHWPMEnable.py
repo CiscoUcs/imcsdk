@@ -22,8 +22,8 @@ class BiosVfHWPMEnable(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("BiosVfHWPMEnable", "biosVfHWPMEnable", "HWPM-Enable", VersionMeta.Version2010b, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfHWPMEnable", "biosVfHWPMEnable", "HWPM-Enable", VersionMeta.Version303a, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
+        "classic": MoMeta("BiosVfHWPMEnable", "biosVfHWPMEnable", "HWPM-Enable", VersionMeta.Version2010b, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], ["Get", "Set"]),
+        "modular": MoMeta("BiosVfHWPMEnable", "biosVfHWPMEnable", "HWPM-Enable", VersionMeta.Version303a, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], ["Get", "Set"])
     }
 
 

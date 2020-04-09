@@ -16,8 +16,8 @@ class IpBlocking(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("IpBlocking", "ipBlocking", "ip-block", VersionMeta.Version151f, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'mgmtIf'], [], ["Get", "Set"]),
-        "modular": MoMeta("IpBlocking", "ipBlocking", "ip-block", VersionMeta.Version2013e, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'mgmtIf'], [], ["Get", "Set"])
+        "classic": MoMeta("IpBlocking", "ipBlocking", "ip-block", VersionMeta.Version151f, "InputOutput", 0xff, [], ["admin", "read-only", "user"], ['mgmtIf'], [], ["Get", "Set"]),
+        "modular": MoMeta("IpBlocking", "ipBlocking", "ip-block", VersionMeta.Version2013e, "InputOutput", 0xff, [], ["admin", "read-only", "user"], ['mgmtIf'], [], ["Get", "Set"])
     }
 
 

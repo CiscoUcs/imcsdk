@@ -20,7 +20,7 @@ class BiosVfClosedLoopThermThrotl(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("BiosVfClosedLoopThermThrotl", "biosVfClosedLoopThermThrotl", "Closed-Loop-Therm-Throtl", VersionMeta.Version303a, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
+        "classic": MoMeta("BiosVfClosedLoopThermThrotl", "biosVfClosedLoopThermThrotl", "Closed-Loop-Therm-Throtl", VersionMeta.Version303a, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], ["Get", "Set"]),
     }
 
 

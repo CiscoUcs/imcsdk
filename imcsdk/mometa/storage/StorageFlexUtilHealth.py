@@ -16,7 +16,7 @@ class StorageFlexUtilHealth(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("StorageFlexUtilHealth", "storageFlexUtilHealth", "health", VersionMeta.Version304a, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageFlexUtilController'], [], ["Get"]),
+        "classic": MoMeta("StorageFlexUtilHealth", "storageFlexUtilHealth", "health", VersionMeta.Version304a, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['storageFlexUtilController'], [], ["Get"]),
     }
 
 

@@ -13,11 +13,11 @@ class HuuUpdateComponentStatus(ManagedObject):
     """This is HuuUpdateComponentStatus class."""
 
     consts = HuuUpdateComponentStatusConsts()
-    naming_props = set([u'component'])
+    naming_props = set(['component'])
 
     mo_meta = {
-        "classic": MoMeta("HuuUpdateComponentStatus", "huuUpdateComponentStatus", "component-[component]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'huuFirmwareUpdateStatus'], [], ["Get"]),
-        "modular": MoMeta("HuuUpdateComponentStatus", "huuUpdateComponentStatus", "component-[component]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'huuFirmwareUpdateStatus'], [], ["Get"])
+        "classic": MoMeta("HuuUpdateComponentStatus", "huuUpdateComponentStatus", "component-[component]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['huuFirmwareUpdateStatus'], [], ["Get"]),
+        "modular": MoMeta("HuuUpdateComponentStatus", "huuUpdateComponentStatus", "component-[component]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['huuFirmwareUpdateStatus'], [], ["Get"])
     }
 
 

@@ -20,11 +20,11 @@ class AdaptorUnit(ManagedObject):
     """This is AdaptorUnit class."""
 
     consts = AdaptorUnitConsts()
-    naming_props = set([u'id'])
+    naming_props = set(['id'])
 
     mo_meta = {
-        "classic": MoMeta("AdaptorUnit", "adaptorUnit", "adaptor-[id]", VersionMeta.Version151f, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'computeRackUnit'], [u'adaptorCfgBackup', u'adaptorCfgImporter', u'adaptorExtEthIf', u'adaptorHostEthIf', u'adaptorHostFcIf', u'faultInst', u'mgmtController'], ["Get", "Set"]),
-        "modular": MoMeta("AdaptorUnit", "adaptorUnit", "adaptor-[id]", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'computeServerNode'], [u'adaptorCfgBackup', u'adaptorCfgImporter', u'adaptorExtEthIf', u'adaptorHostEthIf', u'adaptorHostFcIf', u'faultInst', u'mgmtController'], ["Get", "Set"])
+        "classic": MoMeta("AdaptorUnit", "adaptorUnit", "adaptor-[id]", VersionMeta.Version151f, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], ['computeRackUnit'], ['adaptorCfgBackup', 'adaptorCfgImporter', 'adaptorExtEthIf', 'adaptorHostEthIf', 'adaptorHostFcIf', 'faultInst', 'mgmtController'], ["Get", "Set"]),
+        "modular": MoMeta("AdaptorUnit", "adaptorUnit", "adaptor-[id]", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], ['computeServerNode'], ['adaptorCfgBackup', 'adaptorCfgImporter', 'adaptorExtEthIf', 'adaptorHostEthIf', 'adaptorHostFcIf', 'faultInst', 'mgmtController'], ["Get", "Set"])
     }
 
 

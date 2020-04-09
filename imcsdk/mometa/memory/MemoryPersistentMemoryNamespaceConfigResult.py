@@ -23,11 +23,11 @@ class MemoryPersistentMemoryNamespaceConfigResult(ManagedObject):
     """This is MemoryPersistentMemoryNamespaceConfigResult class."""
 
     consts = MemoryPersistentMemoryNamespaceConfigResultConsts()
-    naming_props = set([u'name'])
+    naming_props = set(['name'])
 
     mo_meta = {
-        "classic": MoMeta("MemoryPersistentMemoryNamespaceConfigResult", "memoryPersistentMemoryNamespaceConfigResult", "nscr-[name]", VersionMeta.Version404b, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'memoryPersistentMemoryConfigResult'], [], [None]),
-        "modular": MoMeta("MemoryPersistentMemoryNamespaceConfigResult", "memoryPersistentMemoryNamespaceConfigResult", "nscr-[name]", VersionMeta.Version404b, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'memoryPersistentMemoryConfigResult'], [], [None])
+        "classic": MoMeta("MemoryPersistentMemoryNamespaceConfigResult", "memoryPersistentMemoryNamespaceConfigResult", "nscr-[name]", VersionMeta.Version404b, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['memoryPersistentMemoryConfigResult'], [], [None]),
+        "modular": MoMeta("MemoryPersistentMemoryNamespaceConfigResult", "memoryPersistentMemoryNamespaceConfigResult", "nscr-[name]", VersionMeta.Version404b, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['memoryPersistentMemoryConfigResult'], [], [None])
     }
 
 

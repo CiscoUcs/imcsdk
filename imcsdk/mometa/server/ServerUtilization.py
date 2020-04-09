@@ -16,8 +16,8 @@ class ServerUtilization(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("ServerUtilization", "serverUtilization", "utilization", VersionMeta.Version202c, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeRackUnit'], [], ["Get"]),
-        "modular": MoMeta("ServerUtilization", "serverUtilization", "utilization", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeServerNode'], [], ["Get"])
+        "classic": MoMeta("ServerUtilization", "serverUtilization", "utilization", VersionMeta.Version202c, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['computeRackUnit'], [], ["Get"]),
+        "modular": MoMeta("ServerUtilization", "serverUtilization", "utilization", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['computeServerNode'], [], ["Get"])
     }
 
 

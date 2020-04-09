@@ -22,8 +22,8 @@ class BiosVfCPUEnergyPerformance(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("BiosVfCPUEnergyPerformance", "biosVfCPUEnergyPerformance", "CPU-EngPerfBias", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfCPUEnergyPerformance", "biosVfCPUEnergyPerformance", "CPU-EngPerfBias", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
+        "classic": MoMeta("BiosVfCPUEnergyPerformance", "biosVfCPUEnergyPerformance", "CPU-EngPerfBias", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], ["Get", "Set"]),
+        "modular": MoMeta("BiosVfCPUEnergyPerformance", "biosVfCPUEnergyPerformance", "CPU-EngPerfBias", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], ["Get", "Set"])
     }
 
 

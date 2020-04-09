@@ -16,8 +16,8 @@ class BiosProfileManagement(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("BiosProfileManagement", "biosProfileManagement", "profile-mgmt", VersionMeta.Version301c, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'biosUnit'], [u'biosProfile', u'uploadBiosProfile'], ["Get", "Set"]),
-        "modular": MoMeta("BiosProfileManagement", "biosProfileManagement", "profile-mgmt", VersionMeta.Version301c, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'biosUnit'], [u'biosProfile', u'uploadBiosProfile'], ["Get", "Set"])
+        "classic": MoMeta("BiosProfileManagement", "biosProfileManagement", "profile-mgmt", VersionMeta.Version301c, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], ['biosUnit'], ['biosProfile', 'uploadBiosProfile'], ["Get", "Set"]),
+        "modular": MoMeta("BiosProfileManagement", "biosProfileManagement", "profile-mgmt", VersionMeta.Version301c, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], ['biosUnit'], ['biosProfile', 'uploadBiosProfile'], ["Get", "Set"])
     }
 
 

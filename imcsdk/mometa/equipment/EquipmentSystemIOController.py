@@ -15,10 +15,10 @@ class EquipmentSystemIOController(ManagedObject):
     """This is EquipmentSystemIOController class."""
 
     consts = EquipmentSystemIOControllerConsts()
-    naming_props = set([u'id'])
+    naming_props = set(['id'])
 
     mo_meta = {
-        "modular": MoMeta("EquipmentSystemIOController", "equipmentSystemIOController", "slot-[id]", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'equipmentChassis'], [u'commEpIpmiLan', u'equipmentSharedIOModule', u'faultInst', u'mgmtController', u'siocResetReason', u'systemIOControllerNVMe'], ["Get", "Set"])
+        "modular": MoMeta("EquipmentSystemIOController", "equipmentSystemIOController", "slot-[id]", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], ['equipmentChassis'], ['commEpIpmiLan', 'equipmentSharedIOModule', 'faultInst', 'mgmtController', 'siocResetReason', 'systemIOControllerNVMe'], ["Get", "Set"])
     }
 
 
@@ -30,7 +30,7 @@ class EquipmentSystemIOController(ManagedObject):
             "description": MoPropertyMeta("description", "description", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "id": MoPropertyMeta("id", "id", "uint", VersionMeta.Version2013e, MoPropertyMeta.NAMING, None, None, None, None, [], ["1-2"]), 
-            "pid": MoPropertyMeta("pid", "pid", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "pid": MoPropertyMeta("pid", "pid", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
         },

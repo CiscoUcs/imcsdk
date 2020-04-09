@@ -20,8 +20,8 @@ class BiosVfIntelVirtualizationTechnology(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("BiosVfIntelVirtualizationTechnology", "biosVfIntelVirtualizationTechnology", "Intel-Virtualization-Technology", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfIntelVirtualizationTechnology", "biosVfIntelVirtualizationTechnology", "Intel-Virtualization-Technology", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
+        "classic": MoMeta("BiosVfIntelVirtualizationTechnology", "biosVfIntelVirtualizationTechnology", "Intel-Virtualization-Technology", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], ['biosPlatformDefaults', 'biosSettings'], [], ["Get", "Set"]),
+        "modular": MoMeta("BiosVfIntelVirtualizationTechnology", "biosVfIntelVirtualizationTechnology", "Intel-Virtualization-Technology", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], ['biosPlatformDefaults', 'biosSettings'], [], ["Get", "Set"])
     }
 
 

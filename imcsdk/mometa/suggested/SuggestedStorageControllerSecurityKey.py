@@ -16,8 +16,8 @@ class SuggestedStorageControllerSecurityKey(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("SuggestedStorageControllerSecurityKey", "suggestedStorageControllerSecurityKey", "suggested-sec-key", VersionMeta.Version209c, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageController'], [], ["Get"]),
-        "modular": MoMeta("SuggestedStorageControllerSecurityKey", "suggestedStorageControllerSecurityKey", "suggested-sec-key", VersionMeta.Version303a, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageController'], [], ["Get"])
+        "classic": MoMeta("SuggestedStorageControllerSecurityKey", "suggestedStorageControllerSecurityKey", "suggested-sec-key", VersionMeta.Version209c, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['storageController'], [], ["Get"]),
+        "modular": MoMeta("SuggestedStorageControllerSecurityKey", "suggestedStorageControllerSecurityKey", "suggested-sec-key", VersionMeta.Version303a, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['storageController'], [], ["Get"])
     }
 
 

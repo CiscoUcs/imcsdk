@@ -17,8 +17,8 @@ class CommRedfish(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("CommRedfish", "commRedfish", "redfish-svc", VersionMeta.Version301c, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'commSvcEp'], [], ["Get", "Set"]),
-        "modular": MoMeta("CommRedfish", "commRedfish", "redfish-svc", VersionMeta.Version303a, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'commSvcEp'], [], ["Get", "Set"])
+        "classic": MoMeta("CommRedfish", "commRedfish", "redfish-svc", VersionMeta.Version301c, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], ['commSvcEp'], [], ["Get", "Set"]),
+        "modular": MoMeta("CommRedfish", "commRedfish", "redfish-svc", VersionMeta.Version303a, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], ['commSvcEp'], [], ["Get", "Set"])
     }
 
 

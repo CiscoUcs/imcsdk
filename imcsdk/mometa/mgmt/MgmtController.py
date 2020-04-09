@@ -23,8 +23,8 @@ class MgmtController(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("MgmtController", "mgmtController", "mgmt", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'adaptorUnit', u'cloudDeviceConnectorEp', u'computeRackUnit', u'storageSasExpander'], [u'firmwareBootDefinition', u'firmwareRunning', u'firmwareUpdatable', u'mgmtIf', u'sysdebugMEpLog'], ["Get"]),
-        "modular": MoMeta("MgmtController", "mgmtController", "mgmt", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'adaptorUnit', u'cloudDeviceConnectorEp', u'computeServerNode', u'equipmentSharedIOModule', u'equipmentSystemIOController', u'storageSasExpander'], [u'firmwareBootDefinition', u'firmwareRunning', u'firmwareUpdatable', u'mgmtIf', u'sysdebugMEpLog'], ["Get"])
+        "classic": MoMeta("MgmtController", "mgmtController", "mgmt", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['adaptorUnit', 'cloudDeviceConnectorEp', 'computeRackUnit', 'storageSasExpander'], ['firmwareBootDefinition', 'firmwareRunning', 'firmwareUpdatable', 'mgmtIf', 'sysdebugMEpLog'], ["Get"]),
+        "modular": MoMeta("MgmtController", "mgmtController", "mgmt", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['adaptorUnit', 'cloudDeviceConnectorEp', 'computeServerNode', 'equipmentSharedIOModule', 'equipmentSystemIOController', 'storageSasExpander'], ['firmwareBootDefinition', 'firmwareRunning', 'firmwareUpdatable', 'mgmtIf', 'sysdebugMEpLog'], ["Get"])
     }
 
 

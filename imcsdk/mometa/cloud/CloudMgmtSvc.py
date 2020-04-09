@@ -16,8 +16,8 @@ class CloudMgmtSvc(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("CloudMgmtSvc", "cloudMgmtSvc", "cloud-mgmt", VersionMeta.Version402c, "OutputOnly", 0xf, [], ["read-only"], [u'topSystem'], [u'cloudDeviceConnectorEp'], [None]),
-        "modular": MoMeta("CloudMgmtSvc", "cloudMgmtSvc", "cloud-mgmt", VersionMeta.Version404b, "OutputOnly", 0xf, [], ["read-only"], [u'topSystem'], [u'cloudDeviceConnectorEp'], [None])
+        "classic": MoMeta("CloudMgmtSvc", "cloudMgmtSvc", "cloud-mgmt", VersionMeta.Version402c, "OutputOnly", 0xf, [], ["read-only"], ['topSystem'], ['cloudDeviceConnectorEp'], [None]),
+        "modular": MoMeta("CloudMgmtSvc", "cloudMgmtSvc", "cloud-mgmt", VersionMeta.Version410a, "OutputOnly", 0xf, [], ["read-only"], ['topSystem'], ['cloudDeviceConnectorEp'], [None])
     }
 
 
@@ -32,11 +32,11 @@ class CloudMgmtSvc(ManagedObject):
         },
 
         "modular": {
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version404b, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-            "description": MoPropertyMeta("description", "description", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version410a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "description": MoPropertyMeta("description", "description", "string", VersionMeta.Version410a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version410a, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version410a, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version410a, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
         },
 
     }

@@ -17,8 +17,8 @@ class MemoryPersistentMemoryConfiguration(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("MemoryPersistentMemoryConfiguration", "memoryPersistentMemoryConfiguration", "pmemory-config", VersionMeta.Version404b, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeBoard'], [u'memoryPersistentMemoryBackup', u'memoryPersistentMemoryConfigResult', u'memoryPersistentMemoryImporter', u'memoryPersistentMemoryRegion'], [None]),
-        "modular": MoMeta("MemoryPersistentMemoryConfiguration", "memoryPersistentMemoryConfiguration", "pmemory-config", VersionMeta.Version404b, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeBoard'], [u'memoryPersistentMemoryBackup', u'memoryPersistentMemoryConfigResult', u'memoryPersistentMemoryImporter', u'memoryPersistentMemoryRegion'], [None])
+        "classic": MoMeta("MemoryPersistentMemoryConfiguration", "memoryPersistentMemoryConfiguration", "pmemory-config", VersionMeta.Version404b, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['computeBoard'], ['memoryPersistentMemoryBackup', 'memoryPersistentMemoryConfigResult', 'memoryPersistentMemoryImporter', 'memoryPersistentMemoryRegion'], [None]),
+        "modular": MoMeta("MemoryPersistentMemoryConfiguration", "memoryPersistentMemoryConfiguration", "pmemory-config", VersionMeta.Version404b, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['computeBoard'], ['memoryPersistentMemoryBackup', 'memoryPersistentMemoryConfigResult', 'memoryPersistentMemoryImporter', 'memoryPersistentMemoryRegion'], [None])
     }
 
 

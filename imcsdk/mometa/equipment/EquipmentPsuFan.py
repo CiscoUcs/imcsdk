@@ -82,10 +82,10 @@ class EquipmentPsuFan(ManagedObject):
     """This is EquipmentPsuFan class."""
 
     consts = EquipmentPsuFanConsts()
-    naming_props = set([u'id'])
+    naming_props = set(['id'])
 
     mo_meta = {
-        "classic": MoMeta("EquipmentPsuFan", "equipmentPsuFan", "fan-[id]", VersionMeta.Version202c, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'equipmentPsu'], [], ["Get"]),
+        "classic": MoMeta("EquipmentPsuFan", "equipmentPsuFan", "fan-[id]", VersionMeta.Version202c, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['equipmentPsu'], [], ["Get"]),
     }
 
 

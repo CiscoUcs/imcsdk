@@ -31,11 +31,11 @@ class MemoryPersistentMemoryRegion(ManagedObject):
     """This is MemoryPersistentMemoryRegion class."""
 
     consts = MemoryPersistentMemoryRegionConsts()
-    naming_props = set([u'id'])
+    naming_props = set(['id'])
 
     mo_meta = {
-        "classic": MoMeta("MemoryPersistentMemoryRegion", "memoryPersistentMemoryRegion", "region-[id]", VersionMeta.Version404b, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'memoryPersistentMemoryConfiguration'], [u'memoryPersistentMemoryNamespace'], [None]),
-        "modular": MoMeta("MemoryPersistentMemoryRegion", "memoryPersistentMemoryRegion", "region-[id]", VersionMeta.Version404b, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'memoryPersistentMemoryConfiguration'], [u'memoryPersistentMemoryNamespace'], [None])
+        "classic": MoMeta("MemoryPersistentMemoryRegion", "memoryPersistentMemoryRegion", "region-[id]", VersionMeta.Version404b, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['memoryPersistentMemoryConfiguration'], ['memoryPersistentMemoryNamespace'], [None]),
+        "modular": MoMeta("MemoryPersistentMemoryRegion", "memoryPersistentMemoryRegion", "region-[id]", VersionMeta.Version404b, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['memoryPersistentMemoryConfiguration'], ['memoryPersistentMemoryNamespace'], [None])
     }
 
 

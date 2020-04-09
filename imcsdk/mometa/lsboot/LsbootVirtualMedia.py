@@ -15,11 +15,11 @@ class LsbootVirtualMedia(ManagedObject):
     """This is LsbootVirtualMedia class."""
 
     consts = LsbootVirtualMediaConsts()
-    naming_props = set([u'access'])
+    naming_props = set(['access'])
 
     mo_meta = {
-        "classic": MoMeta("LsbootVirtualMedia", "lsbootVirtualMedia", "vm-[access]", VersionMeta.Version151f, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'lsbootDef'], [], ["Add", "Get"]),
-        "modular": MoMeta("LsbootVirtualMedia", "lsbootVirtualMedia", "vm-[access]", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], [u'lsbootDef'], [], ["Add", "Get"])
+        "classic": MoMeta("LsbootVirtualMedia", "lsbootVirtualMedia", "vm-[access]", VersionMeta.Version151f, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], ['lsbootDef'], [], ["Add", "Get"]),
+        "modular": MoMeta("LsbootVirtualMedia", "lsbootVirtualMedia", "vm-[access]", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], ['lsbootDef'], [], ["Add", "Get"])
     }
 
 

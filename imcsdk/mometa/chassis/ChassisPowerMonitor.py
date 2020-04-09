@@ -16,7 +16,7 @@ class ChassisPowerMonitor(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "modular": MoMeta("ChassisPowerMonitor", "chassisPowerMonitor", "pwrmonitor", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'equipmentChassis'], [], ["Get"])
+        "modular": MoMeta("ChassisPowerMonitor", "chassisPowerMonitor", "pwrmonitor", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['equipmentChassis'], [], ["Get"])
     }
 
 

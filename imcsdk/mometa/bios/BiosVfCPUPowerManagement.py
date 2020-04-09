@@ -20,8 +20,8 @@ class BiosVfCPUPowerManagement(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("BiosVfCPUPowerManagement", "biosVfCPUPowerManagement", "CPU-PowerManagement", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfCPUPowerManagement", "biosVfCPUPowerManagement", "CPU-PowerManagement", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
+        "classic": MoMeta("BiosVfCPUPowerManagement", "biosVfCPUPowerManagement", "CPU-PowerManagement", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], ["Get", "Set"]),
+        "modular": MoMeta("BiosVfCPUPowerManagement", "biosVfCPUPowerManagement", "CPU-PowerManagement", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], ["Get", "Set"])
     }
 
 

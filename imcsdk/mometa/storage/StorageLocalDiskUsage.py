@@ -13,11 +13,11 @@ class StorageLocalDiskUsage(ManagedObject):
     """This is StorageLocalDiskUsage class."""
 
     consts = StorageLocalDiskUsageConsts()
-    naming_props = set([u'physicalDrive'])
+    naming_props = set(['physicalDrive'])
 
     mo_meta = {
-        "classic": MoMeta("StorageLocalDiskUsage", "storageLocalDiskUsage", "pd-[physical_drive]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageVirtualDrive'], [], ["Get"]),
-        "modular": MoMeta("StorageLocalDiskUsage", "storageLocalDiskUsage", "pd-[physical_drive]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'storageVirtualDrive'], [], ["Get"])
+        "classic": MoMeta("StorageLocalDiskUsage", "storageLocalDiskUsage", "pd-[physical_drive]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['storageVirtualDrive'], [], ["Get"]),
+        "modular": MoMeta("StorageLocalDiskUsage", "storageLocalDiskUsage", "pd-[physical_drive]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['storageVirtualDrive'], [], ["Get"])
     }
 
 
@@ -27,7 +27,7 @@ class StorageLocalDiskUsage(ManagedObject):
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
             "number_of_blocks": MoPropertyMeta("number_of_blocks", "numberOfBlocks", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "pd_status": MoPropertyMeta("pd_status", "pdStatus", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "pd_status": MoPropertyMeta("pd_status", "pdStatus", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "physical_drive": MoPropertyMeta("physical_drive", "physicalDrive", "string", VersionMeta.Version151f, MoPropertyMeta.NAMING, None, 0, 510, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
             "span": MoPropertyMeta("span", "span", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
@@ -41,7 +41,7 @@ class StorageLocalDiskUsage(ManagedObject):
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
             "number_of_blocks": MoPropertyMeta("number_of_blocks", "numberOfBlocks", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "pd_status": MoPropertyMeta("pd_status", "pdStatus", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
+            "pd_status": MoPropertyMeta("pd_status", "pdStatus", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
             "physical_drive": MoPropertyMeta("physical_drive", "physicalDrive", "string", VersionMeta.Version2013e, MoPropertyMeta.NAMING, None, 0, 510, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
             "span": MoPropertyMeta("span", "span", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 

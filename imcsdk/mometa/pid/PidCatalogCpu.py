@@ -13,11 +13,11 @@ class PidCatalogCpu(ManagedObject):
     """This is PidCatalogCpu class."""
 
     consts = PidCatalogCpuConsts()
-    naming_props = set([u'id'])
+    naming_props = set(['id'])
 
     mo_meta = {
-        "classic": MoMeta("PidCatalogCpu", "pidCatalogCpu", "pid-cpu-[id]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'pidCatalog'], [], ["Get"]),
-        "modular": MoMeta("PidCatalogCpu", "pidCatalogCpu", "pid-cpu-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'pidCatalog'], [], ["Get"])
+        "classic": MoMeta("PidCatalogCpu", "pidCatalogCpu", "pid-cpu-[id]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['pidCatalog'], [], ["Get"]),
+        "modular": MoMeta("PidCatalogCpu", "pidCatalogCpu", "pid-cpu-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['pidCatalog'], [], ["Get"])
     }
 
 

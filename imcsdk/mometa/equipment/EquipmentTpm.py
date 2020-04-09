@@ -40,8 +40,8 @@ class EquipmentTpm(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("EquipmentTpm", "equipmentTpm", "tpm", VersionMeta.Version201a, "OutputOnly", 0xf, [], ["read-only"], [u'computeBoard'], [], ["Get"]),
-        "modular": MoMeta("EquipmentTpm", "equipmentTpm", "tpm", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["read-only"], [u'computeBoard'], [], ["Get"])
+        "classic": MoMeta("EquipmentTpm", "equipmentTpm", "tpm", VersionMeta.Version201a, "OutputOnly", 0xf, [], ["read-only"], ['computeBoard'], [], ["Get"]),
+        "modular": MoMeta("EquipmentTpm", "equipmentTpm", "tpm", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["read-only"], ['computeBoard'], [], ["Get"])
     }
 
 

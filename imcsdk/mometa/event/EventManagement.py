@@ -16,8 +16,8 @@ class EventManagement(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("EventManagement", "eventManagement", "event-management", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'computeRackUnit'], [u'platformEventFilters'], ["Get", "Set"]),
-        "modular": MoMeta("EventManagement", "eventManagement", "event-management", VersionMeta.Version301c, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'equipmentChassis'], [u'platformEventFilters'], ["Get", "Set"])
+        "classic": MoMeta("EventManagement", "eventManagement", "event-management", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], ['computeRackUnit'], ['platformEventFilters'], ["Get", "Set"]),
+        "modular": MoMeta("EventManagement", "eventManagement", "event-management", VersionMeta.Version301c, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], ['equipmentChassis'], ['platformEventFilters'], ["Get", "Set"])
     }
 
 

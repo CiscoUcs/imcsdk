@@ -20,7 +20,7 @@ class BiosVfConfigTDP(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("BiosVfConfigTDP", "biosVfConfigTDP", "Config-TDP", VersionMeta.Version303a, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
+        "classic": MoMeta("BiosVfConfigTDP", "biosVfConfigTDP", "Config-TDP", VersionMeta.Version303a, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], ["Get", "Set"]),
     }
 
 

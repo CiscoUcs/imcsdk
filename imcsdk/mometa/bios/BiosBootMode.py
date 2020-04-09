@@ -18,8 +18,8 @@ class BiosBootMode(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("BiosBootMode", "biosBootMode", "boot-mode", VersionMeta.Version201a, "OutputOnly", 0xf, [], ["admin", "user"], [u'biosBOT'], [], ["Get"]),
-        "modular": MoMeta("BiosBootMode", "biosBootMode", "boot-mode", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "user"], [u'biosBOT'], [], ["Get"])
+        "classic": MoMeta("BiosBootMode", "biosBootMode", "boot-mode", VersionMeta.Version201a, "OutputOnly", 0xf, [], ["admin", "user"], ['biosBOT'], [], ["Get"]),
+        "modular": MoMeta("BiosBootMode", "biosBootMode", "boot-mode", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "user"], ['biosBOT'], [], ["Get"])
     }
 
 

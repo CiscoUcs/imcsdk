@@ -21,7 +21,7 @@ class BiosVfCbsCmnCpuL1StreamHwPrefetcher(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("BiosVfCbsCmnCpuL1StreamHwPrefetcher", "biosVfCbsCmnCpuL1StreamHwPrefetcher", "cpu-l1-prefetch", VersionMeta.Version401a, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None]),
+        "classic": MoMeta("BiosVfCbsCmnCpuL1StreamHwPrefetcher", "biosVfCbsCmnCpuL1StreamHwPrefetcher", "cpu-l1-prefetch", VersionMeta.Version401a, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], [None]),
     }
 
 

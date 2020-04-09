@@ -23,11 +23,11 @@ class EquipmentIndicatorLed(ManagedObject):
     """This is EquipmentIndicatorLed class."""
 
     consts = EquipmentIndicatorLedConsts()
-    naming_props = set([u'id'])
+    naming_props = set(['id'])
 
     mo_meta = {
-        "classic": MoMeta("EquipmentIndicatorLed", "equipmentIndicatorLed", "indicator-led-[id]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeRackUnit'], [], ["Get"]),
-        "modular": MoMeta("EquipmentIndicatorLed", "equipmentIndicatorLed", "indicator-led-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'computeServerNode', u'equipmentChassis'], [], ["Get"])
+        "classic": MoMeta("EquipmentIndicatorLed", "equipmentIndicatorLed", "indicator-led-[id]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['computeRackUnit'], [], ["Get"]),
+        "modular": MoMeta("EquipmentIndicatorLed", "equipmentIndicatorLed", "indicator-led-[id]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['computeServerNode', 'equipmentChassis'], [], ["Get"])
     }
 
 

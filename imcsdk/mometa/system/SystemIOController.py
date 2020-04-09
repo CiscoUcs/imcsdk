@@ -13,10 +13,10 @@ class SystemIOController(ManagedObject):
     """This is SystemIOController class."""
 
     consts = SystemIOControllerConsts()
-    naming_props = set([u'id'])
+    naming_props = set(['id'])
 
     mo_meta = {
-        "classic": MoMeta("SystemIOController", "systemIOController", "sioc-[id]", VersionMeta.Version202c, "OutputOnly", 0xf, [], ["read-only"], [u'computeRackUnit'], [u'firmwareBootDefinition', u'firmwareRunning', u'firmwareUpdatable'], ["Get"]),
+        "classic": MoMeta("SystemIOController", "systemIOController", "sioc-[id]", VersionMeta.Version202c, "OutputOnly", 0xf, [], ["read-only"], ['computeRackUnit'], ['firmwareBootDefinition', 'firmwareRunning', 'firmwareUpdatable'], ["Get"]),
     }
 
 

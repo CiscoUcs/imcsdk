@@ -11,6 +11,7 @@ class BiosVfSelectMemoryRASConfigurationConsts:
     VP_SELECT_MEMORY_RASCONFIGURATION_MAXIMUM_PERFORMANCE = "maximum-performance"
     VP_SELECT_MEMORY_RASCONFIGURATION_MIRROR_MODE_1LM = "mirror-mode-1lm"
     VP_SELECT_MEMORY_RASCONFIGURATION_MIRRORING = "mirroring"
+    VP_SELECT_MEMORY_RASCONFIGURATION_PARTIAL_MIRROR_MODE_1LM = "partial-mirror-mode-1lm"
     VP_SELECT_MEMORY_RASCONFIGURATION_PLATFORM_DEFAULT = "platform-default"
     VP_SELECT_MEMORY_RASCONFIGURATION_SPARING = "sparing"
 
@@ -22,8 +23,8 @@ class BiosVfSelectMemoryRASConfiguration(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("BiosVfSelectMemoryRASConfiguration", "biosVfSelectMemoryRASConfiguration", "SelectMemory-RAS-configuration", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfSelectMemoryRASConfiguration", "biosVfSelectMemoryRASConfiguration", "SelectMemory-RAS-configuration", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'biosPlatformDefaults', u'biosSettings'], [], ["Get", "Set"])
+        "classic": MoMeta("BiosVfSelectMemoryRASConfiguration", "biosVfSelectMemoryRASConfiguration", "SelectMemory-RAS-configuration", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], ['biosPlatformDefaults', 'biosSettings'], [], ["Get", "Set"]),
+        "modular": MoMeta("BiosVfSelectMemoryRASConfiguration", "biosVfSelectMemoryRASConfiguration", "SelectMemory-RAS-configuration", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], ['biosPlatformDefaults', 'biosSettings'], [], ["Get", "Set"])
     }
 
 
@@ -33,7 +34,7 @@ class BiosVfSelectMemoryRASConfiguration(ManagedObject):
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "vp_select_memory_ras_configuration": MoPropertyMeta("vp_select_memory_ras_configuration", "vpSelectMemoryRASConfiguration", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["adddc-sparing", "lockstep", "maximum-performance", "mirror-mode-1lm", "mirroring", "platform-default", "sparing"], []), 
+            "vp_select_memory_ras_configuration": MoPropertyMeta("vp_select_memory_ras_configuration", "vpSelectMemoryRASConfiguration", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["adddc-sparing", "lockstep", "maximum-performance", "mirror-mode-1lm", "mirroring", "partial-mirror-mode-1lm", "platform-default", "sparing"], []), 
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
         },
 
@@ -41,7 +42,7 @@ class BiosVfSelectMemoryRASConfiguration(ManagedObject):
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "vp_select_memory_ras_configuration": MoPropertyMeta("vp_select_memory_ras_configuration", "vpSelectMemoryRASConfiguration", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["adddc-sparing", "lockstep", "maximum-performance", "mirror-mode-1lm", "mirroring", "platform-default", "sparing"], []), 
+            "vp_select_memory_ras_configuration": MoPropertyMeta("vp_select_memory_ras_configuration", "vpSelectMemoryRASConfiguration", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["adddc-sparing", "lockstep", "maximum-performance", "mirror-mode-1lm", "mirroring", "partial-mirror-mode-1lm", "platform-default", "sparing"], []), 
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
         },
 

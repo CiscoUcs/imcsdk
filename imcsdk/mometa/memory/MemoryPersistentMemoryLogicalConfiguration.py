@@ -31,8 +31,8 @@ class MemoryPersistentMemoryLogicalConfiguration(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("MemoryPersistentMemoryLogicalConfiguration", "memoryPersistentMemoryLogicalConfiguration", "pmemory-lconfig", VersionMeta.Version404b, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'computeBoard'], [u'memoryPersistentMemoryDimms', u'memoryPersistentMemoryGoal', u'memoryPersistentMemoryLogicalNamespace', u'memoryPersistentMemorySecurity'], [None]),
-        "modular": MoMeta("MemoryPersistentMemoryLogicalConfiguration", "memoryPersistentMemoryLogicalConfiguration", "pmemory-lconfig", VersionMeta.Version404b, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'computeBoard'], [u'memoryPersistentMemoryDimms', u'memoryPersistentMemoryGoal', u'memoryPersistentMemoryLogicalNamespace', u'memoryPersistentMemorySecurity'], [None])
+        "classic": MoMeta("MemoryPersistentMemoryLogicalConfiguration", "memoryPersistentMemoryLogicalConfiguration", "pmemory-lconfig", VersionMeta.Version404b, "InputOutput", 0xff, [], ["admin", "read-only", "user"], ['computeBoard'], ['memoryPersistentMemoryDimms', 'memoryPersistentMemoryGoal', 'memoryPersistentMemoryLogicalNamespace', 'memoryPersistentMemorySecurity'], [None]),
+        "modular": MoMeta("MemoryPersistentMemoryLogicalConfiguration", "memoryPersistentMemoryLogicalConfiguration", "pmemory-lconfig", VersionMeta.Version404b, "InputOutput", 0xff, [], ["admin", "read-only", "user"], ['computeBoard'], ['memoryPersistentMemoryDimms', 'memoryPersistentMemoryGoal', 'memoryPersistentMemoryLogicalNamespace', 'memoryPersistentMemorySecurity'], [None])
     }
 
 

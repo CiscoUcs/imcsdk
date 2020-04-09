@@ -16,8 +16,8 @@ class IodController(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("IodController", "iodController", "iod", VersionMeta.Version151x, "OutputOnly", 0xf, [], ["read-only"], [u'topSystem'], [u'iodSnapshotCancel', u'iodSnapshotStart', u'iodSnapshotStatus'], ["Get"]),
-        "modular": MoMeta("IodController", "iodController", "iod", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["read-only"], [u'computeServerNode'], [u'iodSnapshotCancel', u'iodSnapshotStart', u'iodSnapshotStatus'], ["Get"])
+        "classic": MoMeta("IodController", "iodController", "iod", VersionMeta.Version151x, "OutputOnly", 0xf, [], ["read-only"], ['topSystem'], ['iodSnapshotCancel', 'iodSnapshotStart', 'iodSnapshotStatus'], ["Get"]),
+        "modular": MoMeta("IodController", "iodController", "iod", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["read-only"], ['computeServerNode'], ['iodSnapshotCancel', 'iodSnapshotStart', 'iodSnapshotStatus'], ["Get"])
     }
 
 

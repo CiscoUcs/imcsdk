@@ -32,11 +32,11 @@ class BiosBootDevPrecision(ManagedObject):
     """This is BiosBootDevPrecision class."""
 
     consts = BiosBootDevPrecisionConsts()
-    naming_props = set([u'order'])
+    naming_props = set(['order'])
 
     mo_meta = {
-        "classic": MoMeta("BiosBootDevPrecision", "biosBootDevPrecision", "bdvp-[order]", VersionMeta.Version201a, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'biosBOT'], [], ["Get"]),
-        "modular": MoMeta("BiosBootDevPrecision", "biosBootDevPrecision", "bdvp-[order]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'biosBOT'], [], ["Get"])
+        "classic": MoMeta("BiosBootDevPrecision", "biosBootDevPrecision", "bdvp-[order]", VersionMeta.Version201a, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['biosBOT'], [], ["Get"]),
+        "modular": MoMeta("BiosBootDevPrecision", "biosBootDevPrecision", "bdvp-[order]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['biosBOT'], [], ["Get"])
     }
 
 

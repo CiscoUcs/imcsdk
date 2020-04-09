@@ -15,11 +15,11 @@ class LsbootUefiShell(ManagedObject):
     """This is LsbootUefiShell class."""
 
     consts = LsbootUefiShellConsts()
-    naming_props = set([u'name'])
+    naming_props = set(['name'])
 
     mo_meta = {
-        "classic": MoMeta("LsbootUefiShell", "lsbootUefiShell", "uefishell-[name]", VersionMeta.Version201a, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'lsbootDevPrecision'], [], ["Add", "Get", "Remove", "Set"]),
-        "modular": MoMeta("LsbootUefiShell", "lsbootUefiShell", "uefishell-[name]", VersionMeta.Version2013e, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'lsbootDevPrecision'], [], ["Add", "Get", "Remove", "Set"])
+        "classic": MoMeta("LsbootUefiShell", "lsbootUefiShell", "uefishell-[name]", VersionMeta.Version201a, "InputOutput", 0xff, [], ["admin", "read-only", "user"], ['lsbootDevPrecision'], [], ["Add", "Get", "Remove", "Set"]),
+        "modular": MoMeta("LsbootUefiShell", "lsbootUefiShell", "uefishell-[name]", VersionMeta.Version2013e, "InputOutput", 0xff, [], ["admin", "read-only", "user"], ['lsbootDevPrecision'], [], ["Add", "Get", "Remove", "Set"])
     }
 
 

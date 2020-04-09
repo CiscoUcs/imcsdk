@@ -17,11 +17,11 @@ class MemoryPersistentMemoryDimms(ManagedObject):
     """This is MemoryPersistentMemoryDimms class."""
 
     consts = MemoryPersistentMemoryDimmsConsts()
-    naming_props = set([u'socketId'])
+    naming_props = set(['socketId'])
 
     mo_meta = {
-        "classic": MoMeta("MemoryPersistentMemoryDimms", "memoryPersistentMemoryDimms", "pmemory-dimms-[socket_id]", VersionMeta.Version404b, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'memoryPersistentMemoryLogicalConfiguration'], [], [None]),
-        "modular": MoMeta("MemoryPersistentMemoryDimms", "memoryPersistentMemoryDimms", "pmemory-dimms-[socket_id]", VersionMeta.Version404b, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'memoryPersistentMemoryLogicalConfiguration'], [], [None])
+        "classic": MoMeta("MemoryPersistentMemoryDimms", "memoryPersistentMemoryDimms", "pmemory-dimms-[socket_id]", VersionMeta.Version404b, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], ['memoryPersistentMemoryLogicalConfiguration'], [], [None]),
+        "modular": MoMeta("MemoryPersistentMemoryDimms", "memoryPersistentMemoryDimms", "pmemory-dimms-[socket_id]", VersionMeta.Version404b, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], ['memoryPersistentMemoryLogicalConfiguration'], [], [None])
     }
 
 

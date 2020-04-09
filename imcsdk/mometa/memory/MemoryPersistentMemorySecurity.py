@@ -16,8 +16,8 @@ class MemoryPersistentMemorySecurity(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("MemoryPersistentMemorySecurity", "memoryPersistentMemorySecurity", "pmemory-security", VersionMeta.Version404b, "InputOutput", 0xf, [], ["admin", "read-only", "user"], [u'memoryPersistentMemoryLogicalConfiguration'], [u'memoryPersistentMemoryLocalSecurity'], [None]),
-        "modular": MoMeta("MemoryPersistentMemorySecurity", "memoryPersistentMemorySecurity", "pmemory-security", VersionMeta.Version404b, "InputOutput", 0xf, [], ["admin", "read-only", "user"], [u'memoryPersistentMemoryLogicalConfiguration'], [u'memoryPersistentMemoryLocalSecurity'], [None])
+        "classic": MoMeta("MemoryPersistentMemorySecurity", "memoryPersistentMemorySecurity", "pmemory-security", VersionMeta.Version404b, "InputOutput", 0xf, [], ["admin", "read-only", "user"], ['memoryPersistentMemoryLogicalConfiguration'], ['memoryPersistentMemoryLocalSecurity'], [None]),
+        "modular": MoMeta("MemoryPersistentMemorySecurity", "memoryPersistentMemorySecurity", "pmemory-security", VersionMeta.Version404b, "InputOutput", 0xf, [], ["admin", "read-only", "user"], ['memoryPersistentMemoryLogicalConfiguration'], ['memoryPersistentMemoryLocalSecurity'], [None])
     }
 
 

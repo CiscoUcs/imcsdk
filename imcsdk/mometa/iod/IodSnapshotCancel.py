@@ -17,8 +17,8 @@ class IodSnapshotCancel(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("IodSnapshotCancel", "iodSnapshotCancel", "snapshotCancel", VersionMeta.Version151x, "InputOutput", 0x3f, [], ["admin"], [u'iodController'], [], [None]),
-        "modular": MoMeta("IodSnapshotCancel", "iodSnapshotCancel", "snapshotCancel", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin"], [u'iodController'], [], [None])
+        "classic": MoMeta("IodSnapshotCancel", "iodSnapshotCancel", "snapshotCancel", VersionMeta.Version151x, "InputOutput", 0x3f, [], ["admin"], ['iodController'], [], [None]),
+        "modular": MoMeta("IodSnapshotCancel", "iodSnapshotCancel", "snapshotCancel", VersionMeta.Version2013e, "InputOutput", 0x3f, [], ["admin"], ['iodController'], [], [None])
     }
 
 

@@ -20,8 +20,8 @@ class AdaptorEthInterruptProfile(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("AdaptorEthInterruptProfile", "adaptorEthInterruptProfile", "eth-int", VersionMeta.Version151f, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'adaptorHostEthIf'], [], ["Get", "Set"]),
-        "modular": MoMeta("AdaptorEthInterruptProfile", "adaptorEthInterruptProfile", "eth-int", VersionMeta.Version2013e, "InputOutput", 0xff, [], ["admin", "read-only", "user"], [u'adaptorHostEthIf'], [], ["Get", "Set"])
+        "classic": MoMeta("AdaptorEthInterruptProfile", "adaptorEthInterruptProfile", "eth-int", VersionMeta.Version151f, "InputOutput", 0xff, [], ["admin", "read-only", "user"], ['adaptorHostEthIf'], [], ["Get", "Set"]),
+        "modular": MoMeta("AdaptorEthInterruptProfile", "adaptorEthInterruptProfile", "eth-int", VersionMeta.Version2013e, "InputOutput", 0xff, [], ["admin", "read-only", "user"], ['adaptorHostEthIf'], [], ["Get", "Set"])
     }
 
 

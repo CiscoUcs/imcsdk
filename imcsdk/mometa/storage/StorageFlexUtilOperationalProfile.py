@@ -16,7 +16,7 @@ class StorageFlexUtilOperationalProfile(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("StorageFlexUtilOperationalProfile", "storageFlexUtilOperationalProfile", "oper-profile", VersionMeta.Version304a, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], [u'storageFlexUtilController'], [], ["Get", "Set"]),
+        "classic": MoMeta("StorageFlexUtilOperationalProfile", "storageFlexUtilOperationalProfile", "oper-profile", VersionMeta.Version304a, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], ['storageFlexUtilController'], [], ["Get", "Set"]),
     }
 
 

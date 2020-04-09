@@ -20,7 +20,7 @@ class FanPolicy(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("FanPolicy", "fanPolicy", "fan-policy", VersionMeta.Version301c, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], [u'computeBoard'], [], ["Get", "Set"]),
+        "classic": MoMeta("FanPolicy", "fanPolicy", "fan-policy", VersionMeta.Version301c, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], ['computeBoard'], [], ["Get", "Set"]),
     }
 
 

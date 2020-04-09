@@ -20,8 +20,8 @@ class BiosVfDCPMMFirmwareDowngrade(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("BiosVfDCPMMFirmwareDowngrade", "biosVfDCPMMFirmwareDowngrade", "DCPMM-Firmware-Downgrade", VersionMeta.Version404b, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None]),
-        "modular": MoMeta("BiosVfDCPMMFirmwareDowngrade", "biosVfDCPMMFirmwareDowngrade", "DCPMM-Firmware-Downgrade", VersionMeta.Version404b, "InputOutput", 0x1f, [], ["admin"], [u'biosPlatformDefaults', u'biosSettings'], [], [None])
+        "classic": MoMeta("BiosVfDCPMMFirmwareDowngrade", "biosVfDCPMMFirmwareDowngrade", "DCPMM-Firmware-Downgrade", VersionMeta.Version404b, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], [None]),
+        "modular": MoMeta("BiosVfDCPMMFirmwareDowngrade", "biosVfDCPMMFirmwareDowngrade", "DCPMM-Firmware-Downgrade", VersionMeta.Version404b, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], [None])
     }
 
 

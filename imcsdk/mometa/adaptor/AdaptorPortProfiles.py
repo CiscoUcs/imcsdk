@@ -16,8 +16,8 @@ class AdaptorPortProfiles(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("AdaptorPortProfiles", "adaptorPortProfiles", "port-profiles", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'adaptorExtEthIf'], [], ["Get"]),
-        "modular": MoMeta("AdaptorPortProfiles", "adaptorPortProfiles", "port-profiles", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], [u'adaptorExtEthIf'], [], ["Get"])
+        "classic": MoMeta("AdaptorPortProfiles", "adaptorPortProfiles", "port-profiles", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['adaptorExtEthIf'], [], ["Get"]),
+        "modular": MoMeta("AdaptorPortProfiles", "adaptorPortProfiles", "port-profiles", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['adaptorExtEthIf'], [], ["Get"])
     }
 
 
