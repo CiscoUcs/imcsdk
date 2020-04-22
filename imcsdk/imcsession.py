@@ -18,6 +18,7 @@ import os
 from threading import Timer
 
 from .imcexception import ImcException, ImcLoginError
+from .imccoremeta import ImcVersion
 from .imcdriver import ImcDriver
 from .imcgenutils import Progress
 
@@ -97,10 +98,6 @@ class ImcSession(object):
     @property
     def session_id(self):
         return self.__session_id
-
-    @property
-    def version(self):
-        return self.__version
 
     @property
     def refresh_period(self):
@@ -538,7 +535,7 @@ class ImcSession(object):
             raise ImcException(response.error_code,
                                response.error_descr)
         firmware = response.out_config.child[0]
-        self.__version = ImcVersion(firmware.version)
+        self._set_version(firmware.version)
 
     def _update_domain_name_and_ip(self):
         from .imcmethodfactory import config_resolve_dn
@@ -633,14 +630,17 @@ class ImcSession(object):
         remove_handle_from_list(self)
         return True
 
+    def _is_starship(self):
+        if self.__starship_proxy:
+            return True
+        return False
+
     def _set_starship_proxy(self, proxy):
         """
         Internal method to set proxy URL in starship environment
         """
         self.__starship_proxy = proxy
         self.__driver.__redirect_uri = proxy
-        from imcsdk.imccoreutils import IMC_PLATFORM
-        self.__platform = IMC_PLATFORM.TYPE_CLASSIC
 
     def _set_starship_headers(self, headers):
         """
@@ -649,6 +649,12 @@ class ImcSession(object):
         self.__starship_headers = headers
         for header in headers:
             self.__driver.add_header(header, headers[header])
+
+        # set cookie for to_xml to work correctly
+        if headers["x-barracuda-session"]:
+            self.__cookie = headers["x-barracuda-session"]
+        else:
+            self.__cookie = headers["x-barracuda-apikey"]
 
     def _set_dump_xml(self):
         """
@@ -677,11 +683,18 @@ class ImcSession(object):
                 if model.startswith(prefix):
                     self.__platform = IMC_PLATFORM.TYPE_MODULAR
 
-    def _set_model(self, model):
+    def _set_version(self, version):
+        self.__version = ImcVersion(version)
+
+    def _set_model(self, model, force=False):
         """
         Internal method to set the server model
         Not to be exposed at the handle
         """
+        if force and model:
+            self.__model = model
+            return
+
         from .imccoreutils import IMC_PLATFORM
         class_ids = {
             IMC_PLATFORM.TYPE_MODULAR: "ComputeServerNode",

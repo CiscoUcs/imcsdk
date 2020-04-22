@@ -46,6 +46,7 @@ class ImcVersion(object):
         self.__minor = None
         self.__mr = None
         self.__patch = None
+        self.__spin = None
 
         match_pattern = re.compile("^(?P<major>[1-9][0-9]{0,2})\."
                                    "(?P<minor>(([0-9])|([1-9][0-9]{0,1})))\("
@@ -89,15 +90,6 @@ class ImcVersion(object):
         if self._set_versions(match_obj):
             return
 
-        # handle de special builds "66.77(67.1582251418)"
-        match_pattern = re.compile("^(?P<major>[1-9][0-9]{0,2})\."
-                                   "(?P<minor>(([0-9])|([1-9][0-9]{0,2})))\("
-                                   "(?P<mr>(([0-9])|([1-9][0-9]{0,2})))\."
-                                   "(?P<patch>(([0-9])|([1-9][0-9]{0,})))\)$")
-        match_obj = re.match(match_pattern, version)
-        if self._set_versions(match_obj):
-            return
-
     def _set_versions(self, match_obj):
         if not match_obj:
             return False
@@ -107,7 +99,19 @@ class ImcVersion(object):
         self.__minor = match_dict.get("minor")
         self.__mr = match_dict.get("mr")
         self.__patch = match_dict.get("patch")
+        self.__spin = match_dict.get("spin")
 
+        # for spin builds 4.0(1S52), the patch version will be None
+        # In this scenario assume the version to be highest patch z
+        if self.__patch is None:
+            self.__patch = 'z'
+        elif self.__patch.isdigit() and self.__mr.isdigit():
+            log.debug("Interim version encountered: %s. MR version has been bumped up." % self.version)
+            self.__mr = str(int(self.__mr) + 1)
+            self.__patch = 'a'
+        elif self.__patch.isalpha() and self.__spin:
+            log.debug("Interim version encountered: %s. patch version has been bumped up." % self.version)
+            self.__patch = str(chr(ord(self.__patch)+1))
         return True
 
     @property
@@ -176,9 +180,6 @@ class ImcVersion(object):
 
     def __eq__(self, version):
         return self.compare_to(version) == 0
-
-    def __ne__(self, version):
-        return self.compare_to(version) != 0
 
     def __str__(self):
         return self.__version
@@ -302,11 +303,11 @@ class MoPropertyMeta(object):
 
         if input_value is None:
             log.debug("<%s> Value should not be None" % self.name)
-            return False
+            return False, error_msg
 
         if self.__restriction.min_length:
             if len(input_value) >= self.__restriction.min_length:
-                return True
+                return True, error_msg
             else:
                 error_msg = (str(self.name) +
                              " minimum character should be  " +
@@ -314,7 +315,7 @@ class MoPropertyMeta(object):
 
         if self.__restriction.max_length:
             if len(input_value) <= self.__restriction.max_length:
-                return True
+                return True, error_msg
             else:
                 error_msg = (str(self.name) + " maximum character should be " +
                              str(self.__restriction.max_length))
@@ -337,7 +338,7 @@ class MoPropertyMeta(object):
                     fits_in_range = True
                     break
             if fits_in_range:
-                return True
+                return True, error_msg
             else:
                 error_msg = ("Value " + str(value) +
                              " does not fit the range" +
@@ -349,7 +350,7 @@ class MoPropertyMeta(object):
                 '|'.join(['('+x+')' for x in self.__restriction.value_set]))
             match = re.match(pattern, input_value, 0)
             if match:
-                return True
+                return True, error_msg
             else:
                 error_msg = (str(self.name) + " should adhere to regex " +
                              str(pattern))
@@ -357,21 +358,29 @@ class MoPropertyMeta(object):
             pattern = "^" + self.__restriction.pattern + "$"
             match = re.match(pattern, input_value, 0)
             if match:
-                return True
+                return True, error_msg
             else:
                 error_msg = (str(self.name) + " should adhere to regex " +
                              str(pattern))
         elif self.__restriction.value_set \
                 and len(self.__restriction.value_set) > 0:
             if input_value in self.__restriction.value_set:
-                return True
+                return True, error_msg
             else:
                 error_msg = (str(self.name) + " valid values are " +
                              str(self.__restriction.value_set))
+
+        if self.field_type == "uint" and \
+            self.__restriction.range_val and \
+            len(self.__restriction.range_val) > 0:
+            if not str(input_value).isdigit():
+                error_msg = ("Value " + str(input_value) +
+                             " does not fit the range " +
+                             str(self.__restriction.range_val))
         if error_msg:
-            log.debug(error_msg)
-            return False
-        return True
+            # log.debug(error_msg)
+            return False, error_msg
+        return True, error_msg
 
     def __str__(self):
         """

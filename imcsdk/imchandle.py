@@ -13,6 +13,7 @@
 
 
 import logging
+from collections import OrderedDict
 
 from . import imcgenutils
 from . import imccoreutils
@@ -21,6 +22,8 @@ from .imcconstants import NamingId
 from .imcsession import ImcSession
 
 log = logging.getLogger('imc')
+
+CONFIG_CONF_MOS_BUFFER_SIZE = 10
 
 
 class ImcHandle(ImcSession):
@@ -58,7 +61,7 @@ class ImcHandle(ImcSession):
                             port=port, secure=secure, proxy=proxy,
                             auto_refresh=auto_refresh, force=force,
                             timeout=timeout)
-        self.__to_commit = {}
+        self.__to_commit = OrderedDict()
 
     def __enter__(self):
         """
@@ -77,6 +80,12 @@ class ImcHandle(ImcSession):
         """
 
         self._logout()
+
+    def is_starship(self):
+        """
+        Check if SDK is running in starship mode
+        """
+        return self._is_starship()
 
     def set_starship_proxy(self, proxy):
         """
@@ -457,6 +466,34 @@ class ImcHandle(ImcSession):
         self.__to_commit[mo.dn] = mo
         self._commit(timeout=timeout)
 
+    def remove_mos(self, mos, timeout=None):
+        """
+        removes multiple managed objects in a single request
+
+        Args:
+            mos (managedobject): List of managed objects
+            timeout (int): timeout value in secs
+
+        Returns:
+            dict: {'response_status': string,
+                    'response_mos': {'dn':
+                                        {'is_configured': bool,
+                                         'response_object': MO or ImcException
+                                        }
+                                    }
+                  }
+
+        Example:
+            obj = handle.remove_mos(mos)
+        """
+        for mo in mos:
+            mo.status = "deleted"
+            if mo.parent_mo:
+                mo.parent_mo.child_remove(mo)
+            self.__to_commit[mo.dn] = mo
+
+        return self._commit_mos(timeout)
+
     def remove_mo(self, mo, timeout=None):
         """
         Removes a managed object.
@@ -504,7 +541,7 @@ class ImcHandle(ImcSession):
         from .imcmethodfactory import config_conf_mo
         mo_dict = self.__to_commit
         if not mo_dict:
-            log.debug("Commit Buffer is Empty")
+            # log.debug("Commit Buffer is Empty")
             return None
 
         config_map = ConfigMap()
@@ -516,10 +553,192 @@ class ImcHandle(ImcSession):
                                   in_hierarchical=False)
             response = self.post_elem(elem, timeout=timeout)
             if response.error_code != 0:
-                self.__to_commit = {}
+                self.__to_commit.clear()
                 raise ImcException(response.error_code, response.error_descr)
 
             for out_mo in response.out_config.child:
                 out_mo.sync_mo(mo_dict[out_mo.dn])
 
-        self.__to_commit = {}
+        self.__to_commit.clear()
+
+    def add_mos(self, mos, modify_present=True, timeout=None):
+        """
+        adds multiple managed objects in a single request
+
+        Args:
+            mos (managedobject): List of managed objects
+            timeout (int): timeout value in secs
+
+        Returns:
+            dict: {'response_status': string,
+                    'response_mos': {'dn':
+                                        {'is_configured': bool,
+                                         'response_object': MO or ImcException
+                                        }
+                                    }
+                  }
+
+        Example:
+            obj = handle.set_mos(mos)
+        """
+        for mo in mos:
+            if modify_present in imcgenutils.AFFIRMATIVE_LIST:
+                if self.query_dn(mo.dn) is None:
+                    mo.status = "created"
+                else:
+                    mo.status = "modified"
+            else:
+                mo.status = "created"
+
+            self.__to_commit[mo.dn] = mo
+
+        return self._commit_mos(timeout)
+
+    def set_mos(self, mos, timeout=None):
+        """
+        Sets multiple managed objects in a single request
+
+        Args:
+            mos (managedobject): List of managed objects
+            timeout (int): timeout value in secs
+
+        Returns:
+            dict: {'response_status': string,
+                    'response_mos': {'dn':
+                                        {'is_configured': bool,
+                                         'response_object': MO or ImcException
+                                        }
+                                    }
+                  }
+
+        Example:
+            obj = handle.set_mos(mos)
+        """
+        for mo in mos:
+            self.__to_commit[mo.dn] = mo
+
+        return self._commit_mos(timeout)
+
+    def __process_config_conf_mos(self, mos, timeout=None):
+        """
+        Internal method to process configconfmos.
+        IMC XmlApi method 'configConfMos' support maximum 10 MOs in single
+        request.
+        """
+
+        from .imcbasetype import ConfigMap, Pair, FailedMos
+        from .imccore import OperationStatus, ImcErrorResponse
+        from .imcmethodfactory import config_conf_mos
+        from .imccoreutils import ConfigConfMosConstants as Const
+        from .imcexception import ImcException
+
+        if not mos:
+            return None
+
+        response_status = None
+
+        config_map = ConfigMap()
+        for mo in mos:
+            child_list = mo.child
+            while len(child_list) > 0:
+                current_child_list = child_list
+                child_list = []
+                for child_mo in current_child_list:
+                    child_list.extend(child_mo.child)
+
+            pair = Pair()
+            pair.key = mo.dn
+            pair.child_add(mo)
+            config_map.child_add(pair)
+
+        elem = config_conf_mos(self.cookie, config_map, False)
+        failed = {}
+        passed = {}
+
+        response = self.post_elem(elem, timeout)
+        if isinstance(response, ImcErrorResponse):
+            error_code = response.error_code
+            error_descr = response.error_descr
+            # clear the commit buffer incase of an exception
+            self.__to_commit.clear()
+            raise ImcException(error_code, error_descr)
+        for ch in response.out_configs.child:
+            if isinstance(ch, OperationStatus):
+                response_status = ch.operation_status
+                continue
+
+            for chd in ch.child:
+                if isinstance(ch, Pair):
+                    passed[chd.dn] = chd
+                elif isinstance(ch, FailedMos):
+                    failed[chd.dn] = chd.error_descr
+        mos_dict = {
+            Const.RESPONSE_PASSED_MOS: passed,
+            Const.RESPONSE_FAILED_MOS: failed
+        }
+
+        response_dict = {
+            Const.RESPONSE_STATUS: response_status,
+            Const.RESPONSE_MOS: mos_dict
+        }
+
+        return response_dict
+
+    def _commit_mos(self, timeout=None):
+        """Method to send multiple mos in a single XML API request"""
+
+        from .imccoreutils import ConfigConfMosConstants as Const
+        mo_dict = self.__to_commit
+        if not mo_dict:
+            # log.debug("Commit Buffer is Empty")
+            return None
+
+        status = 0
+
+        # status_dict is used to convert a string value of status to an integer
+        status_dict = {
+            Const.RESPONSE_STATUS_FAIL: 1,
+            Const.RESPONSE_STATUS_SUCCESS: 2,
+            Const.RESPONSE_STATUS_PART_SUCCESS: 4
+        }
+
+        # this is the final dictionary to be returned
+        ret = {
+            Const.RESPONSE_STATUS: None,
+            Const.RESPONSE_MOS: {}
+        }
+
+        mos = mo_dict.values()
+        for i in range(0, len(mos), CONFIG_CONF_MOS_BUFFER_SIZE):
+            # Configure the mo list received in batches of 10 on the endpoint
+            mos_ = list(mos)[i: i + CONFIG_CONF_MOS_BUFFER_SIZE]
+            response_dict_ = self.__process_config_conf_mos(mos_, timeout)
+
+            # Fetch the status from configuration of a batch and save it in
+            # the overall status
+            status_str = response_dict_[Const.RESPONSE_STATUS]
+            status |= status_dict[status_str]
+
+            # Update the ret dictionary
+            response_mos_ = response_dict_[Const.RESPONSE_MOS]
+            passed = ret[Const.RESPONSE_MOS].get(Const.RESPONSE_PASSED_MOS, {})
+            failed = ret[Const.RESPONSE_MOS].get(Const.RESPONSE_FAILED_MOS, {})
+            passed.update(response_mos_[Const.RESPONSE_PASSED_MOS])
+            failed.update(response_mos_[Const.RESPONSE_FAILED_MOS])
+
+            ret[Const.RESPONSE_MOS][Const.RESPONSE_PASSED_MOS] = passed
+            ret[Const.RESPONSE_MOS][Const.RESPONSE_FAILED_MOS] = failed
+
+
+        if status == 0:
+            ret[Const.RESPONSE_STATUS] = None
+        elif status == 1:
+            ret[Const.RESPONSE_STATUS] = Const.RESPONSE_STATUS_FAIL
+        elif status == 2:
+            ret[Const.RESPONSE_STATUS] = Const.RESPONSE_STATUS_SUCCESS
+        elif status >= 3:
+            ret[Const.RESPONSE_STATUS] = Const.RESPONSE_STATUS_PART_SUCCESS
+
+        # Always cleanup the commit buffer
+        self.__to_commit.clear()
+        return ret

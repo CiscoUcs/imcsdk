@@ -114,6 +114,12 @@ class ExternalMethod(ImcBase):
                                                prop_meta.xml_attribute,
                                                cookie=self.cookie)
             elif getattr(self, prop):
+                # do not set cookie when in starship mode
+                if prop == 'cookie':
+                    cookie = getattr(self, prop)
+                    handle = imccoreutils.get_handle_from_cookie(cookie)
+                    if handle and handle.is_starship():
+                        continue
                 xml_obj.set(prop_meta.xml_attribute, getattr(self, prop))
 
         self.child_to_xml(xml_obj, option, cookie=self.cookie)
@@ -156,6 +162,7 @@ class ExternalMethod(ImcBase):
                         if child_obj:
                             self.set_attr(child_name,
                                           child_obj)
+                            # print child_method_obj.__dict__
                             child_obj.from_xml(child_elem, handle)
 
     def __str__(self):

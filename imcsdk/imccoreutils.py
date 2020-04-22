@@ -26,18 +26,31 @@ from . import mometa
 from . import methodmeta
 from . imcmeta import MO_CLASS_ID, METHOD_CLASS_ID, OTHER_TYPE_CLASS_ID, \
     MO_CLASS_META
-from .imcexception import ImcOperationError, ImcValidationException
+from .imcexception import ImcOperationError, ImcValidationException, \
+    ImcOperationErrorDetail
 from .imccoremeta import MoPropertyMeta
 
 log = logging.getLogger('imc')
+
+
+class ConfigConfMosConstants:
+    RESPONSE_MO_IS_CONFIGURED = 'is_configured'
+    RESPONSE_OBJECT = 'response_object'
+    RESPONSE_MOS = 'response_mos'
+    RESPONSE_STATUS = 'response_status'
+    RESPONSE_STATUS_FAIL = 'failure'
+    RESPONSE_STATUS_SUCCESS = 'success'
+    RESPONSE_STATUS_PART_SUCCESS = 'paritial success'
+    RESPONSE_FAILED_MOS = 'failed'
+    RESPONSE_PASSED_MOS = 'passed'
 
 
 class IMC_PLATFORM:
     TYPE_MODULAR = "modular"
     TYPE_CLASSIC = "classic"
 
-IMC_PLATFORM_LIST = [IMC_PLATFORM.TYPE_MODULAR,
-                     IMC_PLATFORM.TYPE_CLASSIC]
+IMC_PLATFORM_LIST = [IMC_PLATFORM.TYPE_CLASSIC,
+                     IMC_PLATFORM.TYPE_MODULAR]
 global_handles = []
 
 
@@ -59,6 +72,8 @@ def get_imc_obj(class_id, elem, mo_obj=None):
 
     from . import imcmethod
     from . import imcmo
+    from . import imccore
+
     if class_id in METHOD_CLASS_ID:
         return imcmethod.ExternalMethod(class_id)
     elif class_id in MO_CLASS_ID:
@@ -85,6 +100,9 @@ def get_imc_obj(class_id, elem, mo_obj=None):
     elif class_id in OTHER_TYPE_CLASS_ID:
         module_ = load_module(class_id)
         return getattr(module_, class_id)()
+    elif class_id == 'OperationStatus':
+        mo_obj = imccore.OperationStatus(operation_status=elem.text)
+        return mo_obj
 
     # This case handles object types that are not known to this version
     # of the SDK. This case can arise when the IMC server has higher
@@ -746,15 +764,26 @@ def get_prop_meta(mo, prop, platform=None):
 
 def validate_property_value(mo, prop, value):
 
+    messages = []
     for platform in IMC_PLATFORM_LIST:
         prop_ = _get_property_from_prop_meta_for_platform(
                 mo,
                 prop,
                 platform)
-        if prop_ and prop_.validate_property_value(value):
-            return True
+        if prop_:
+            match, msg = prop_.validate_property_value(value)
+            if match:
+                return match, msg
+            else:
+                messages.append("[" + platform + "]:" + msg)
 
-    return False
+    msg = ""
+    if len(messages) != 0:
+        msg = "Validation Errors are: "
+        for s in messages:
+            msg += s + ", "
+
+    return False, msg
 
 
 def is_writable_prop(mo, prop, platform=None):
@@ -885,6 +914,21 @@ def get_dn_prefix_for_platform(handle):
         return ""
 
 
+def is_platform_m4(handle):
+    return match_platform_type(handle, "M4")
+
+
+def is_platform_m5(handle):
+    return match_platform_type(handle, "M5") or \
+        match_platform_type(handle, "C125")
+
+
+def match_platform_type(handle, match_string):
+    if handle.model:
+        return handle.model.find(match_string) != -1
+    return False
+
+
 def _set_server_dn(handle, kwargs):
     server_id = kwargs.get("server_id", "1")
     return get_server_dn(handle, str(server_id))
@@ -907,3 +951,52 @@ def add_handle_to_list(handle):
 def remove_handle_from_list(handle):
     if handle and handle in global_handles:
         global_handles.remove(handle)
+
+
+def default_cb(dn, *args):
+    return dn
+
+
+def process_conf_mos_response(response, api='process_conf_mos_response',
+                              raise_exception=True,
+                              error_msg='Configuration Error',
+                              callback=default_cb, *cbargs):
+    from imcsdk.imccoreutils import ConfigConfMosConstants as Const
+    messages = []
+    if response[Const.RESPONSE_STATUS] != Const.RESPONSE_STATUS_SUCCESS:
+        for dn, error in sorted(response[Const.RESPONSE_MOS][
+                Const.RESPONSE_FAILED_MOS].iteritems()):
+            d = {}
+            # log.debug("Error(%s) while processing dn(%s)" % (error, dn))
+            d["Object"] = callback(dn, *cbargs)
+            d["Error"] = error
+            messages.append(d)
+
+        if len(messages) != 0 and raise_exception:
+            raise ImcOperationErrorDetail(api, error_msg,
+                                          messages)
+
+    return messages
+
+
+def sanitize_message(message):
+    message = message.lstrip('Operation failed. ')
+
+    return message
+
+
+def sanitize_xml_parsing_error(text):
+    import re
+    text = sanitize_message(text)
+    if "XML PARSING ERROR:" not in text:
+        return text
+
+    text = text.replace("XML PARSING ERROR:", "")
+    text = text.split(".")[0]
+    match = re.search(r'\[facet.*\]\s', text)
+    if match:
+        replace = match.group()
+        text = text.replace(replace, "")
+
+    text = text.strip()
+    return text
