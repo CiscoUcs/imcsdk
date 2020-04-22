@@ -18,7 +18,6 @@ This module contains the ImcSdk Core classes.
 from __future__ import absolute_import
 from .imccore import ImcBase
 from . import imccoreutils
-from . import imcgenutils
 
 try:
     import xml.etree.cElementTree as ET
@@ -131,7 +130,7 @@ class ExternalMethod(ImcBase):
 
         self._handle = handle
         if elem.attrib:
-            for attr_name, attr_value in imcgenutils.iteritems(elem.attrib):
+            for attr_name, attr_value in elem.attrib.items():
                 if attr_name in self.__property_map:
                     attr = self.__property_map[attr_name]
                     method_prop_meta = self.__property_meta[attr]
@@ -170,7 +169,7 @@ class ExternalMethod(ImcBase):
         out_str = "\n"
         out_str += "External Method\t\t\t:\t" + str(self._class_id) + "\n"
         out_str += "-" * len("External Method") + "\n"
-        for prop, prop_value in sorted(imcgenutils.iteritems(self.__dict__)):
+        for prop, prop_value in sorted(self.__dict__.items()):
             if "ExternalMethod" in prop:
                 continue
             out_str += str(prop).ljust(tab_size * 4) + ':' + str(

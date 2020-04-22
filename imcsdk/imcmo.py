@@ -93,7 +93,7 @@ class ManagedObject(ImcBase):
             self.__parent_mo.child_add(self)
 
         if kwargs:
-            for prop_name, prop_value in imcgenutils.iteritems(kwargs):
+            for prop_name, prop_value in kwargs.items():
                 if prop_name not in self.__internal_prop and \
                         not imccoreutils.prop_exists(self, prop_name):
                     log.debug("Unknown property %s" % prop_name)
@@ -248,7 +248,7 @@ class ManagedObject(ImcBase):
         out_str = "\n"
         out_str += "Managed Object\t\t\t:\t" + str(self._class_id) + "\n"
         out_str += "-" * len("Managed Object") + "\n"
-        for prop, prop_value in sorted(imcgenutils.iteritems(self.__dict__)):
+        for prop, prop_value in sorted(self.__dict__.items()):
             if prop in ManagedObject.__internal_prop or prop.startswith(
                     "_ManagedObject__"):
                 continue
@@ -392,7 +392,7 @@ class ManagedObject(ImcBase):
         self._handle = handle
         if elem.attrib:
             if self.__class__.__name__ != "ManagedObject":
-                for attr_name, attr_value in imcgenutils.iteritems(elem.attrib):
+                for attr_name, attr_value in elem.attrib.items():
                     if imccoreutils.property_exists_in_prop_map(self,
                                                                 attr_name):
                         attr_name = \
@@ -405,7 +405,7 @@ class ManagedObject(ImcBase):
                             False)
                     object.__setattr__(self, attr_name, attr_value)
             else:
-                for attr_name, attr_value in imcgenutils.iteritems(elem.attrib):
+                for attr_name, attr_value in elem.attrib.items():
                     object.__setattr__(self, attr_name, attr_value)
 
         if hasattr(self, 'rn') and not hasattr(self, 'dn'):
@@ -437,7 +437,7 @@ class ManagedObject(ImcBase):
         Method to return string representation of a managed object.
         """
 
-        for prop, prop_value in sorted(imcgenutils.iteritems(self.__dict__)):
+        for prop, prop_value in sorted(self.__dict__.items()):
             if prop in ManagedObject.__internal_prop or prop.startswith(
                     "_ManagedObject__"):
                 continue
@@ -533,7 +533,7 @@ class GenericMo(ImcBase):
         ImcBase.__init__(self, class_id)
 
         if kwargs:
-            for key, value in imcgenutils.iteritems(kwargs):
+            for key, value in kwargs.items():
                 self.__dict__[key] = str(value)
                 self.__properties[key] = str(value)
 
@@ -621,7 +621,7 @@ class GenericMo(ImcBase):
         self._handle = handle
         self._class_id = elem.tag
         if elem.attrib:
-            for name, value in imcgenutils.iteritems(elem.attrib):
+            for name, value in elem.attrib.items():
                 self.__dict__[name] = value
                 self.__properties[name] = str(value)
 
@@ -727,7 +727,7 @@ class GenericMo(ImcBase):
             out_str += 'GenericMo'.ljust(ts * 4) + ':' + str(
                 self._class_id) + "\n"
             out_str += "-" * len("GenericMo") + "\n"
-            for prop, prop_val in sorted(imcgenutils.iteritems(self.__dict__)):
+            for prop, prop_val in sorted(self.__dict__.items()):
                 if prop.startswith('_'):
                     continue
                 out_str += str(prop).ljust(ts * 4) + ':' + str(prop_val) + "\n"

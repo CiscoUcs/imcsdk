@@ -489,9 +489,3 @@ def decrypt_password(cipher, key):
     decrypted_password = password_stream.tostring()[:cipher_len]
     return decrypted_password
 
-
-def iteritems(d):
-    """
-    Factor-out Py2-to-3 differences in dictionary item iterator methods
-    """
-    return six.iteritems(d)

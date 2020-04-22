@@ -17,7 +17,7 @@ class BiosVfPartialMirrorValue2(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosVfPartialMirrorValue2", "biosVfPartialMirrorValue2", "Partial-Mirror-Value2", VersionMeta.Version411c, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], [None]),
-        "modular": MoMeta("BiosVfPartialMirrorValue2", "biosVfPartialMirrorValue2", "Partial-Mirror-Value2", VersionMeta.Version410a, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], [None])
+        "modular": MoMeta("BiosVfPartialMirrorValue2", "biosVfPartialMirrorValue2", "Partial-Mirror-Value2", VersionMeta.Version411c, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], [None])
     }
 
 
@@ -32,11 +32,11 @@ class BiosVfPartialMirrorValue2(ManagedObject):
         },
 
         "modular": {
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version410a, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []),
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version410a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version410a, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
-            "vp_partial_mirror_value2": MoPropertyMeta("vp_partial_mirror_value2", "vpPartialMirrorValue2", "string", VersionMeta.Version410a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["platform-default"], ["0-65535"]),
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version410a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version411c, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []),
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version411c, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version411c, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
+            "vp_partial_mirror_value2": MoPropertyMeta("vp_partial_mirror_value2", "vpPartialMirrorValue2", "string", VersionMeta.Version411c, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["platform-default"], ["0-65535"]),
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version411c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
         },
 
     }

@@ -34,7 +34,7 @@ class PidCatalog(ManagedObject):
         },
 
         "modular": {
-            "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version410a, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["delete-pid-catalog"], []),
+            "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version411c, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["delete-pid-catalog"], []),
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "created", "deleted", "modified", "removed"], []),

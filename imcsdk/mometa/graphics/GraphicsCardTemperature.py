@@ -16,18 +16,18 @@ class GraphicsCardTemperature(ManagedObject):
     naming_props = set(['id'])
 
     mo_meta = {
-        "modular": MoMeta("GraphicsCardTemperature", "graphicsCardTemperature", "graphics-card-temp-[id]", VersionMeta.Version410a, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['pciEquipSlot'], [], [None])
+        "modular": MoMeta("GraphicsCardTemperature", "graphicsCardTemperature", "graphics-card-temp-[id]", VersionMeta.Version411c, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['pciEquipSlot'], [], [None])
     }
 
 
     prop_meta = {
 
         "modular": {
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version410a, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []),
-            "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version410a, MoPropertyMeta.NAMING, None, 0, 510, None, [], []),
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version410a, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []),
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version410a, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
-            "temperature": MoPropertyMeta("temperature", "temperature", "string", VersionMeta.Version410a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version411c, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []),
+            "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version411c, MoPropertyMeta.NAMING, None, 0, 510, None, [], []),
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version411c, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []),
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version411c, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
+            "temperature": MoPropertyMeta("temperature", "temperature", "string", VersionMeta.Version411c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
         },
 
     }
