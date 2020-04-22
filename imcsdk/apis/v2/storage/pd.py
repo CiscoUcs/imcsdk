@@ -20,7 +20,7 @@ import logging
 
 from imcsdk.imcexception import ImcOperationError
 from imcsdk.mometa.storage.StorageLocalDisk import StorageLocalDiskConsts
-from imcsdk.apis.storage.controller import _get_controller_dn
+from imcsdk.apis.v2.storage.controller import _get_controller_dn
 
 log = logging.getLogger('imc')
 
@@ -124,7 +124,7 @@ def pd_set_jbod(handle,
         pd_set_jbod(handle, controller_type='SAS', controller_slot='HBA'',
                     drive_slot=4')
     """
-    from imcsdk.apis.storage.controller import controller_jbod_exists
+    from imcsdk.apis.v2.storage.controller import controller_jbod_exists
 
     if not controller_jbod_exists(handle,
                                   controller_type,

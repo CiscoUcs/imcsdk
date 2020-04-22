@@ -22,7 +22,7 @@ from imcsdk.imcexception import ImcOperationErrorDetail
 from imcsdk.imccoreutils import process_conf_mos_response
 from imcsdk.imccoreutils import ConfigConfMosConstants as ccmconst
 from imcsdk.imccoreutils import sanitize_message
-from imcsdk.apis.utils import _get_mo, _is_valid_arg, _is_invalid_value,\
+from imcsdk.apis.v2.utils import _get_mo, _is_valid_arg, _is_invalid_value,\
     _validate_api_prop
 from imcsdk.mometa.aaa.AaaLdapRoleGroup import AaaLdapRoleGroup
 

@@ -21,14 +21,14 @@ import logging
 import time
 
 from imcsdk.imccoreutils import get_server_dn
-from imcsdk.apis.utils import _get_mo
+from imcsdk.apis.v2.utils import _get_mo
 from imcsdk.imcexception import ImcOperationError, ImcOperationErrorDetail
 from imcsdk.imccoreutils import process_conf_mos_response, sanitize_message
 from imcsdk.mometa.adaptor.AdaptorUnit import AdaptorUnitConsts
 from imcsdk.mometa.adaptor.AdaptorExtEthIf import AdaptorExtEthIfConsts
-from imcsdk.apis.server.serveractions import _wait_for_power_state, \
+from imcsdk.apis.v2.server.serveractions import _wait_for_power_state, \
      server_power_cycle, server_power_state_get
-from imcsdk.apis.server.adaptor import adaptor_properties_get
+from imcsdk.apis.v2.server.adaptor import adaptor_properties_get
 
 log = logging.getLogger('imc')
 

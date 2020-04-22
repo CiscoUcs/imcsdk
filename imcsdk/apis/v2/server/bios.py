@@ -22,7 +22,7 @@ import imcsdk.imccoreutils as imccoreutils
 from imcsdk.imccoreutils import is_platform_m4, is_platform_m5
 from imcsdk.imcgenutils import iteritems
 from imcsdk.imcexception import ImcOperationError, ImcException
-from imcsdk.apis.utils import _is_valid_arg
+from imcsdk.apis.v2.utils import _is_valid_arg
 
 log = logging.getLogger('imc')
 

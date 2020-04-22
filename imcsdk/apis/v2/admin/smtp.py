@@ -18,7 +18,7 @@ This module implements all the smtp related functionality
 from imcsdk.imcexception import ImcOperationError
 from imcsdk.mometa.mail.MailRecipient import MailRecipientConsts
 from imcsdk.mometa.comm.CommMailAlert import CommMailAlertConsts
-from imcsdk.apis.utils import _get_mo, _is_invalid_value
+from imcsdk.apis.v2.utils import _get_mo, _is_invalid_value
 
 import logging
 

@@ -20,11 +20,11 @@ import logging
 
 from imcsdk.imcexception import ImcOperationError, ImcOperationErrorDetail
 from imcsdk.imcexception import ImcException
-from imcsdk.apis.utils import _get_mo
+from imcsdk.apis.v2.utils import _get_mo
 from imcsdk.imccoreutils import process_conf_mos_response, sanitize_message
-from imcsdk.apis.versionconstraints.snmp import \
+from imcsdk.apis.v2.versionconstraints.snmp import \
     snmp_multiple_config_with_configcommit_for_hp_and_above
-from imcsdk.apis.versionconstraints.snmp import \
+from imcsdk.apis.v2.versionconstraints.snmp import \
     snmp_commit_explicitly_for_hp_and_above
 
 

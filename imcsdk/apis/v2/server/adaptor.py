@@ -18,7 +18,7 @@ and create vnics and vhbas
 """
 
 from imcsdk.imccoreutils import get_server_dn
-from imcsdk.apis.utils import _get_mo
+from imcsdk.apis.v2.utils import _get_mo
 
 
 def _get_adaptor_dn(handle, adaptor_slot, server_id=1):

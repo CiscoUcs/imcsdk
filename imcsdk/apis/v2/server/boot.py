@@ -395,7 +395,7 @@ def boot_precision_configured_get(handle, server_id=1):
 
 def boot_order_precision_exists(handle, **kwargs):
     from imcsdk.imccoreutils import _set_server_dn
-    from imcsdk.apis.utils import _is_valid_arg
+    from imcsdk.apis.v2.utils import _is_valid_arg
 
     server_dn = _set_server_dn(handle, kwargs)
     mos = handle.query_children(in_dn=server_dn,
@@ -589,7 +589,7 @@ def sanitize_input_from_intersight(handle, boot_devices):
         We also convert from intersight device type to sdk device type
     """
     import copy
-    from imcsdk.apis.versionconstraints.boot import fix_bootloader_options
+    from imcsdk.apis.v2.versionconstraints.boot import fix_bootloader_options
     log.debug("##### Input boot devices %s" % boot_devices)
     # if order is present, then it is not an input from intersight
     if len(boot_devices) > 0 and "order" in boot_devices[0]:

@@ -23,7 +23,7 @@ import logging
 
 from imcsdk.mometa.comm.CommVMedia import CommVMedia
 from imcsdk.mometa.comm.CommVMediaMap import CommVMediaMap
-from imcsdk.apis.admin.ipmi import _get_comm_mo_dn
+from imcsdk.apis.v2.admin.ipmi import _get_comm_mo_dn
 from imcsdk.mometa.comm.CommVMediaMap import CommVMediaMapConsts
 from imcsdk.imccoreutils import process_conf_mos_response, sanitize_message
 from imcsdk.imcexception import ImcOperationError, ImcOperationErrorDetail
