@@ -1,6 +1,10 @@
 History
 =======
 
+0.9.8 (2020-04-22)
+---------------------
+* Adds support for IMC version 4.1(1c), 4.1(1d)
+
 0.9.7 (2019-07-08)
 ---------------------
 * Adds support for IMC version 4.0(1c), 4.0(2b)
