@@ -67,8 +67,8 @@ class AdaptorEthGenProfile(ManagedObject):
         "modular": {
             "arfs": MoPropertyMeta("arfs", "arfs", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []),
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
-            "multi_queue": MoPropertyMeta("multi_queue", "multiQueue", "string", VersionMeta.Version402c, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []),
-            "no_of_sub_vni_cs": MoPropertyMeta("no_of_sub_vni_cs", "noOfSubVNICs", "uint", VersionMeta.Version402c, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, [], ["1-64"]),
+            "multi_queue": MoPropertyMeta("multi_queue", "multiQueue", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []),
+            "no_of_sub_vni_cs": MoPropertyMeta("no_of_sub_vni_cs", "noOfSubVNICs", "uint", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, [], ["1-64"]),
             "nvgre": MoPropertyMeta("nvgre", "nvgre", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []),
             "order": MoPropertyMeta("order", "order", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, None, None, r"""[0-9]|1[0-7]""", ["ANY"], []),
             "rate_limit": MoPropertyMeta("rate_limit", "rateLimit", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, None, None, r"""(([1-9]\d?\d?\d?|10000) Mbps)""", ["OFF"], ["1-100000"]),

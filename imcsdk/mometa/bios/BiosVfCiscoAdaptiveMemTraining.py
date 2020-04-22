@@ -21,7 +21,7 @@ class BiosVfCiscoAdaptiveMemTraining(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosVfCiscoAdaptiveMemTraining", "biosVfCiscoAdaptiveMemTraining", "Cisco-Adap-Mem", VersionMeta.Version402c, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], [None]),
-        "modular": MoMeta("BiosVfCiscoAdaptiveMemTraining", "biosVfCiscoAdaptiveMemTraining", "Cisco-Adap-Mem", VersionMeta.Version402c, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], [None])
+        "modular": MoMeta("BiosVfCiscoAdaptiveMemTraining", "biosVfCiscoAdaptiveMemTraining", "Cisco-Adap-Mem", VersionMeta.Version404b, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], [None])
     }
 
 
@@ -36,11 +36,11 @@ class BiosVfCiscoAdaptiveMemTraining(ManagedObject):
         },
 
         "modular": {
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version402c, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []),
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version402c, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version402c, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
-            "vp_cisco_adaptive_mem_training": MoPropertyMeta("vp_cisco_adaptive_mem_training", "vpCiscoAdaptiveMemTraining", "string", VersionMeta.Version402c, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []),
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version402c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []),
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
+            "vp_cisco_adaptive_mem_training": MoPropertyMeta("vp_cisco_adaptive_mem_training", "vpCiscoAdaptiveMemTraining", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []),
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version404b, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
         },
 
     }

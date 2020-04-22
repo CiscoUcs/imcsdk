@@ -56,7 +56,7 @@ class CommSnmpUser(ManagedObject):
             "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["clear"], []),
             "auth": MoPropertyMeta("auth", "auth", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["", "MD5", "SHA"], []),
             "auth_pwd": MoPropertyMeta("auth_pwd", "authPwd", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, None, None, r"""(.{8,64})?""", [], []),
-            "config_change": MoPropertyMeta("config_change", "configChange", "string", VersionMeta.Version401a, MoPropertyMeta.READ_WRITE, 0x10, 0, 510, None, ["commit", "no-commit"], []),
+            "config_change": MoPropertyMeta("config_change", "configChange", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x10, 0, 510, None, ["commit", "no-commit"], []),
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, None, [], []),
             "id": MoPropertyMeta("id", "id", "uint", VersionMeta.Version2013e, MoPropertyMeta.NAMING, 0x40, None, None, None, [], ["1-15"]),
             "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, 0, 31, r"""[a-zA-Z0-9\._\+\-]{0,31}""", [], []),

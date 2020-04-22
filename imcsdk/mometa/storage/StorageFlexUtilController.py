@@ -25,7 +25,7 @@ class StorageFlexUtilController(ManagedObject):
         "classic": {
             "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["reset-card-configuration"], []),
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version304a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
-            "configured_mode": MoPropertyMeta("configured_mode", "configuredMode", "string", VersionMeta.Version313a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
+            "configured_mode": MoPropertyMeta("configured_mode", "configuredMode", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "controller_name": MoPropertyMeta("controller_name", "controllerName", "string", VersionMeta.Version304a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "controller_status": MoPropertyMeta("controller_status", "controllerStatus", "string", VersionMeta.Version304a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
