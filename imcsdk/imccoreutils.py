@@ -965,7 +965,7 @@ def process_conf_mos_response(response, api='process_conf_mos_response',
     messages = []
     if response[Const.RESPONSE_STATUS] != Const.RESPONSE_STATUS_SUCCESS:
         for dn, error in sorted(response[Const.RESPONSE_MOS][
-                Const.RESPONSE_FAILED_MOS].iteritems()):
+                Const.RESPONSE_FAILED_MOS].items()):
             d = {}
             # log.debug("Error(%s) while processing dn(%s)" % (error, dn))
             d["Object"] = callback(dn, *cbargs)

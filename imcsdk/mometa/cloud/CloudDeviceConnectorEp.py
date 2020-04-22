@@ -17,7 +17,7 @@ class CloudDeviceConnectorEp(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("CloudDeviceConnectorEp", "cloudDeviceConnectorEp", "device-connector", VersionMeta.Version402c, "OutputOnly", 0xf, [], ["read-only"], ['cloudMgmtSvc'], ['faultInst', 'mgmtController'], [None]),
-        "modular": MoMeta("CloudDeviceConnectorEp", "cloudDeviceConnectorEp", "device-connector", VersionMeta.Version410a, "OutputOnly", 0xf, [], ["read-only"], ['cloudMgmtSvc'], ['faultInst', 'mgmtController'], [None])
+        "modular": MoMeta("CloudDeviceConnectorEp", "cloudDeviceConnectorEp", "device-connector", VersionMeta.Version411c, "OutputOnly", 0xf, [], ["read-only"], ['cloudMgmtSvc'], ['faultInst', 'mgmtController'], [None])
     }
 
 
@@ -32,11 +32,11 @@ class CloudDeviceConnectorEp(ManagedObject):
         },
 
         "modular": {
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version410a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
-            "description": MoPropertyMeta("description", "description", "string", VersionMeta.Version410a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version410a, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []),
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version410a, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []),
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version410a, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version411c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
+            "description": MoPropertyMeta("description", "description", "string", VersionMeta.Version411c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version411c, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []),
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version411c, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []),
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version411c, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
         },
 
     }

@@ -63,7 +63,7 @@ class ComputeServerNode(ManagedObject):
         "modular": {
             "admin_power": MoPropertyMeta("admin_power", "adminPower", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["bmc-reset-default", "bmc-reset-immediate", "cmos-reset-immediate", "cycle-immediate", "diagnostic-interrupt", "down", "hard-reset-immediate", "policy", "soft-shut-down", "up"], []),
             "available_memory": MoPropertyMeta("available_memory", "availableMemory", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [""], ["0-4294967295"]),
-            "bios_post_state": MoPropertyMeta("bios_post_state", "biosPostState", "string", VersionMeta.Version410a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["completed", "pending", "unknown"], []),
+            "bios_post_state": MoPropertyMeta("bios_post_state", "biosPostState", "string", VersionMeta.Version411c, MoPropertyMeta.READ_ONLY, None, None, None, None, ["completed", "pending", "unknown"], []),
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
             "memory_speed": MoPropertyMeta("memory_speed", "memorySpeed", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["", "unspecified"], ["0-4294967295"]),

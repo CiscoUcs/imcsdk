@@ -17,7 +17,7 @@ class GraphicsCard(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("GraphicsCard", "graphicsCard", "graphics-card-[id]", VersionMeta.Version402c, "OutputOnly", 0xf, [], ["read-only"], ['computeBoard'], [], [None]),
-        "modular": MoMeta("GraphicsCard", "graphicsCard", "graphics-card-[id]", VersionMeta.Version410a, "OutputOnly", 0xf, [], ["read-only"], ['computeBoard'], [], [None])
+        "modular": MoMeta("GraphicsCard", "graphicsCard", "graphics-card-[id]", VersionMeta.Version411c, "OutputOnly", 0xf, [], ["read-only"], ['computeBoard'], [], [None])
     }
 
 
@@ -36,15 +36,15 @@ class GraphicsCard(ManagedObject):
         },
 
         "modular": {
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version410a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version410a, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []),
-            "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version410a, MoPropertyMeta.NAMING, None, 0, 510, None, [], []),
-            "no_of_gp_us": MoPropertyMeta("no_of_gp_us", "noOfGPUs", "string", VersionMeta.Version410a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
-            "pid": MoPropertyMeta("pid", "pid", "string", VersionMeta.Version410a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
-            "product_name": MoPropertyMeta("product_name", "productName", "string", VersionMeta.Version410a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version410a, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []),
-            "slot_name": MoPropertyMeta("slot_name", "slotName", "string", VersionMeta.Version410a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version410a, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version411c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version411c, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []),
+            "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version411c, MoPropertyMeta.NAMING, None, 0, 510, None, [], []),
+            "no_of_gp_us": MoPropertyMeta("no_of_gp_us", "noOfGPUs", "string", VersionMeta.Version411c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
+            "pid": MoPropertyMeta("pid", "pid", "string", VersionMeta.Version411c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
+            "product_name": MoPropertyMeta("product_name", "productName", "string", VersionMeta.Version411c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version411c, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []),
+            "slot_name": MoPropertyMeta("slot_name", "slotName", "string", VersionMeta.Version411c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version411c, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
         },
 
     }
