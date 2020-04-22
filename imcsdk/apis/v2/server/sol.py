@@ -51,9 +51,10 @@ def sol_enable(handle, speed=None, comport=None, ssh_port=None, server_id=1,
     params = {
         "admin_state": SolIfConsts.ADMIN_STATE_ENABLE,
         "speed": str(speed) if speed else None,
-        "comport": comport,
         "ssh_port": str(ssh_port) if ssh_port else None,
     }
+    if 'c480-m5' not in handle.model.lower():
+        params["comport"] = comport
 
     mo.set_prop_multiple(**kwargs)
     mo.set_prop_multiple(**params)

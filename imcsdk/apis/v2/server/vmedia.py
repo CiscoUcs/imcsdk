@@ -17,16 +17,16 @@ This module implements all the kvm and sol related samples
 """
 import os
 import time
+import urlparse
 import re
 import logging
 
 from imcsdk.mometa.comm.CommVMedia import CommVMedia
 from imcsdk.mometa.comm.CommVMediaMap import CommVMediaMap
-from imcsdk.imcexception import ImcOperationError
 from imcsdk.apis.admin.ipmi import _get_comm_mo_dn
-
-from six.moves import urllib
-
+from imcsdk.mometa.comm.CommVMediaMap import CommVMediaMapConsts
+from imcsdk.imccoreutils import process_conf_mos_response, sanitize_message
+from imcsdk.imcexception import ImcOperationError, ImcOperationErrorDetail
 
 log = logging.getLogger('imc')
 
@@ -167,6 +167,145 @@ def vmedia_mount_get(handle, volume_name, server_id=1):
     return mo
 
 
+def vmedia_mounts_callback(dn, dn_to_vmedia_dict):
+    return dn_to_vmedia_dict.get(dn, "Unknown Virtual Media mapping: " + dn)
+
+
+def vmedia_mount_create_all(handle, mappings = None, server_id=1, timeout=60):
+    """
+        This method will make one request to create all the vmedia mappings
+        Args:
+            handle (ImcHandle)
+            mappings (list): list of mappings dict
+              keys:
+                volume_name (string): Name of the volume or identity of the image
+                map (string): "cifs", "nfs", "www"
+                mount_options (string): Options to be passed while mounting the image
+                remote_share (string): URI of the image
+                remote_file (string): name of the image
+                username (string): username
+                password (string): password
+            server_id (int): Server Id to be specified for C3260 platforms
+
+        Returns:
+            List of CommVMediaMap object
+
+        Examples:
+            vmedia_mount_create_all(
+                handle,
+                mappings=[{volume_name: "A",
+                map: "www"
+                mount_options: "ro"
+                remote_share: "http://10.10.10.20/test/"
+                remote_file: "a.iso"
+                username: ""
+                password: ""}]
+            )
+        """
+
+    api = 'vmedia_mount_create_all'
+    mos = []
+    dn_to_vmedia_dict = {}
+
+    for mapping in mappings:
+
+        volume_name  = mapping.get('volume_name')
+        map          = mapping.get('map')
+        remote_share = mapping.get('remote_share')
+        remote_file  = mapping.get('remote_file')
+        _validate_api_prop('volume_name', volume_name, api)
+        _validate_api_prop('map',map, api)
+        _validate_api_prop('remote_share', remote_share, api)
+        _validate_api_prop('remote_file', remote_file,api)
+        params = {
+            'map':         map,
+            'remote_file':  remote_file,
+            'remote_share': remote_share
+        }
+        if mapping.get('mount_options'):
+            params['mount_options'] = mapping.get('mount_options')
+        if map != CommVMediaMapConsts.MAP_NFS:
+            mount_options = mapping.get('mount_options')
+
+            #In CIMC, security context authentication protocol for CIFS Share, is always set to "ntlm" by default.
+            #If authentication protocol is set to none, CIMC rejects the mapping and the deployment fails.
+            #Hence, removing the security context from parameters mount_options if the authentication protocol is set to none.
+
+            mount_options_array = mount_options.split(",")
+            for option in mount_options_array:
+                if "sec" in option and len(option.split("=")) >= 2 and option.split("=")[1] == "none":
+                    mount_options_array.remove(option)
+            if len(mount_options_array) == 0:
+                del params['mount_options']
+            else:
+                new_mount_options = ','.join([str(element) for element in mount_options_array])
+                params['mount_options'] = new_mount_options
+            if mapping.get('username'):
+                params['username'] = mapping.get('username')
+            if mapping.get('password'):
+                params['password'] = mapping.get('password')
+
+        mo = CommVMediaMap(parent_mo_or_dn=_get_vmedia_mo_dn(handle, server_id),
+                           volume_name=volume_name)
+        mo.set_prop_multiple(**params)
+        mos.append(mo)
+        dn_to_vmedia_dict[mo.dn] = mo.volume_name
+
+    response = handle.set_mos(mos)
+    if response:
+        ret = process_conf_mos_response(response, api, False, 'Create Virtual Media mapping failed',vmedia_mounts_callback,
+                                               dn_to_vmedia_dict)
+        if len(ret) != 0:
+            error_msg = 'Create Virtual Media mapping failed:\n'
+            for item in ret:
+                obj = item["Object"]
+                error = item["Error"]
+                error = sanitize_message(error)
+                error_msg += "[Virtual Media mapping " + obj + "] " + error + "\n"
+
+            raise ImcOperationErrorDetail(api, error_msg, ret)
+
+    mapping_error_msg = ''
+    timeout_error_msg = ''
+    for mo in mos:
+        wait_time = 0
+        interval = 10
+        while wait_time < timeout:
+            mapping_mo = handle.query_dn(mo.dn)
+            if mapping_mo:
+                existing_mapping_status = mapping_mo.mapping_status
+                if existing_mapping_status.lower() == "ok":
+                    break
+                elif re.match(r"error", existing_mapping_status.lower()):
+                    mapping_error_msg += "[Virtual Media mapping "+ mo.volume_name + "] " +existing_mapping_status + "\n"
+                    break
+
+            time.sleep(interval)
+            wait_time += interval
+
+        if wait_time >= timeout:
+            timeout_error_msg += "[Virtual Media mapping "+ mo.volume_name +"] \n"
+
+    if len(mapping_error_msg) != 0:
+        raise ImcOperationErrorDetail(api,"Create Virtual Media mapping failed: "+ mapping_error_msg,[])
+
+    if len(timeout_error_msg) != 0:
+        raise ImcOperationErrorDetail(api,"Create Virtual Media mapping timed out: "+ timeout_error_msg,[])
+
+    results = {}
+    results["changed"] = True
+    results["msg"] = ""
+    results["msg_params"] = ret
+
+    return results
+
+
+def _validate_api_prop(prop, value, api):
+    if value is None:
+        raise ImcOperationError(api, "Required property '%s' missing." % (
+           api, prop))
+
+
 def vmedia_mount_create(handle, volume_name, remote_share, remote_file,
                         map="www", mount_options="noauto", username="",
                         password="", server_id=1, timeout=60):
@@ -304,9 +443,9 @@ def vmedia_mount_iso_uri(handle, uri, user_id=None, password=None,
     mount_options = "noauto"
 
     # Set the Map based on the protocol
-    if urllib.parse.urlsplit(uri).scheme == 'http':
+    if urlparse.urlsplit(uri).scheme == 'http':
         mount_protocol = "www"
-    elif urllib.parse.urlsplit(uri).scheme == 'https':
+    elif urlparse.urlsplit(uri).scheme == 'https':
         mount_protocol = "www"
     elif CIFS_URI_PATTERN.match(uri):
         mount_protocol = "cifs"
@@ -315,7 +454,7 @@ def vmedia_mount_iso_uri(handle, uri, user_id=None, password=None,
     else:
         # Raise ValueError and bail
         raise ValueError("Unsupported protocol: " +
-                         urllib.parse.urlsplit(uri).scheme)
+                         urlparse.urlsplit(uri).scheme)
 
     # Convert no user/pass to blank strings
     if not user_id:
@@ -397,38 +536,44 @@ def vmedia_mount_delete(handle, volume_name, server_id=1):
     handle.remove_mo(vmediamap_mo)
 
 
-def vmedia_mount_remove_all(handle, server_id=1):
+def vmedia_mount_remove_all(handle, volumes= None, server_id=1):
     """
-    This method will remove all the vmedia mappings
+    This method will remove all the mapped vmedia mappings and saved vmedia mappings with the specified volumes
 
     Args:
         handle (ImcHandle)
+        volumes(list): list of volumes which need to be removed from saved vmedia mapping lists
         server_id (int): Server Id to be specified for C3260 platforms
 
     Raises:
         Exception if mapping is able to be removed
 
     Returns:
-        True
+        None
 
     Examples:
-        vmedia_mount_remove_all(handle)
+        vmedia_mount_remove_all(handle,[a,b])
     """
+    from imcsdk.mometa.comm.CommSavedVMediaMap import CommSavedVMediaMapConsts
 
-    # Get all current virtually mapped ISOs
+    # Get all current virtually mapped and saved mappings
     virt_media_maps = handle.query_children(in_dn=_get_vmedia_mo_dn(handle,
                                                                     server_id))
-    # Loop over each mapped ISO
+    mos = []
+    # Loop over each mapping
     for virt_media in virt_media_maps:
-        # Remove the mapped ISO
-        handle.remove_mo(virt_media)
-    # Raise error if all mappings not removed
-    if len(handle.query_children(in_dn="sys/svc-ext/vmedia-svc")) > 0:
-        raise ImcOperationError('Remove Virtual Media',
-                                '{0}: ERROR - Unable remove all virtual' +
-                                'media mappings'.format(handle.ip))
-    # Return True if all mappings removed
-    return True
+        if virt_media.get_class_id() == 'CommSavedVMediaMap' and virt_media.volume_name in volumes:
+            virt_media.admin_action = CommSavedVMediaMapConsts.ADMIN_ACTION_DELETE_VOLUME
+            mos.append(virt_media)
+        elif virt_media.get_class_id() == 'CommVMediaMap':
+            virt_media.status = 'deleted'
+            mos.append(virt_media)
+
+    response = handle.set_mos(mos)
+    if response:
+        process_conf_mos_response(response, 'vmedia_mount_remove_all')
+
+
 
 
 def vmedia_mount_remove_image(handle, image_type, server_id=1):

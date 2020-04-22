@@ -56,6 +56,15 @@ def ipmi_enable(handle, priv=None, key=None, server_id=1):
             print("IPMI Enabled")
     """
 
+    from imcsdk.imcexception import ImcOperationError
+    # Enable policy if only user mode is ipmi
+    mos = handle.query_classid(class_id="AaaUserPolicy")
+    userPolicy = mos[0]
+
+    if userPolicy.user_mode != None and userPolicy.user_mode == 'non-ipmi':
+        raise ImcOperationError("Enable IPMI over LAN", 
+                                "IPMI user mode is disabled on the endpoint.")
+
     # Verify key is a hex number
     try:
         if key:

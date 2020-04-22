@@ -39,7 +39,7 @@ def _is_valid_severity_level(min_severity_level):
 
 
 def smtp_enable(handle, ip_address=None, port=None, min_severity_level=None,
-                **kwargs):
+                from_address=None, **kwargs):
     """
     Enables SMTP Policy and sets the given properties
 
@@ -49,6 +49,7 @@ def smtp_enable(handle, ip_address=None, port=None, min_severity_level=None,
         port (int): Port number of the SMTP server
         min_severity_level (str): Minimum fault severity level
             Valid values: "condition", "critical", "major", "minor", "warning"
+        from_address(str): Email id that will be displayed as the source in the mail alert
         kwargs: key-value paired arguments for future use
 
     Returns:
@@ -70,7 +71,8 @@ def smtp_enable(handle, ip_address=None, port=None, min_severity_level=None,
         'admin_state': 'enabled',
         'ip_address': ip_address,
         'port': str(port) if port is not None else None,
-        'min_severity_level': min_severity_level
+        'min_severity_level': min_severity_level,
+        'from_address': from_address
     }
     mo.set_prop_multiple(**params)
     mo.set_prop_multiple(**kwargs)

@@ -17,9 +17,14 @@ This module provides APIs for bios related configuration like boot order
 """
 
 import logging
+import re
+
 import imcsdk.imccoreutils as imccoreutils
 import imcsdk.imcgenutils as imcgenutils
+from imcsdk.imcexception import ImcOperationError, ImcOperationErrorDetail
 from imcsdk.mometa.lsboot.LsbootDevPrecision import LsbootDevPrecision
+
+import imcsdk.apis.server.pxe as pxe
 
 log = logging.getLogger('imc')
 
@@ -97,8 +102,7 @@ precision_device_dict = {
     },
     "sdcard": {
         "class_id": "LsbootSd",
-        "type": "SDCARD",
-        "subtype": "SDCARD"
+        "type": "SDCARD"
     },
     "uefishell": {
         "class_id": "LsbootUefiShell",
@@ -142,7 +146,7 @@ def _is_boot_order_policy(dn):
 
 def _get_device_type(policy_type, in_device):
     if policy_type == "boot-order-policy":
-        for device_type, device_props in imcgenutils.iteritems(policy_device_dict):
+        for device_type, device_props in policy_device_dict.iteritems():
             if device_props["class_id"] == in_device._class_id and \
                     device_props["access"] == in_device.access:
                 return device_type
@@ -208,6 +212,8 @@ def _add_boot_device(handle, parent_mo_or_dn, boot_device):
         None
     """
 
+    from imcsdk.imccoreutils import is_platform_m4
+
     log.debug("######### %s" % boot_device)
     device = _get_device(parent_mo_or_dn,
                          boot_device["device-type"],
@@ -218,8 +224,29 @@ def _add_boot_device(handle, parent_mo_or_dn, boot_device):
             (boot_device["device-type"], boot_device["name"]))
 
     device.order = boot_device["order"]
-    device_props = {key: str(value) for key, value in imcgenutils.iteritems(boot_device)
+    device_props = {key: str(value)
+                    for key, value in imcgenutils.iteritems(boot_device)
                     if key not in ["order", "device-type", "name"]}
+
+    # For M4, mac_address will not be sent
+    if boot_device['device-type'] == 'pxe' and is_platform_m4(handle):
+        device_props.pop("mac_address", None)
+
+    if boot_device['device-type'] == 'pxe':
+        device_props.pop("interface_source", None)
+
+    # If slot == "", do not send it in xml request
+    if boot_device['device-type'] in ['hdd', 'pxe', 'san', 'iscsi']:
+        slot = device_props.get("slot")
+        if slot is None or slot == "":
+            device_props.pop("slot", None)
+
+    # If subtype == "", do not send it in xml request
+    if boot_device['device-type'] in ['vmedia', 'sdcard', 'usb']:
+        subtype = device_props.get("subtype")
+        if subtype is None or subtype == "":
+            device_props.pop("subtype", None)
+
     device.set_prop_multiple(**device_props)
     if hasattr(device, "state"):
         device.state = boot_device['state']
@@ -274,13 +301,20 @@ def boot_order_precision_set(
     """
     from imcsdk.mometa.lsboot.LsbootDef import LsbootDef
     from imcsdk.mometa.lsboot.LsbootBootSecurity import LsbootBootSecurity
+    from imcsdk.imccoreutils import is_platform_m4
 
-    boot_devices = sanitize_input_from_intersight(boot_devices)
+    boot_devices = sanitize_input_from_intersight(handle, boot_devices)
 
     # Insert version check here to gracefully handle older versions of CIMC
 
     # IMC expects the devices to be configured in sorted order
     boot_devices = sorted(boot_devices, key=lambda x: int(x["order"]))
+
+    # filter pxe device
+    # enable pxe boot on respective interface
+    # derive logical port
+    pxe.disable_pxeboot_vnics_all(handle)
+    pxe.prepare_pxe_devices(handle, boot_devices)
 
     server_dn = imccoreutils.get_server_dn(handle, server_id)
 
@@ -298,10 +332,12 @@ def boot_order_precision_set(
     # clean existing configuration
     # Need to check if doing this everytime will have any adverse impact
     boot_order_child_mos = handle.query_children(in_dn=lsbootdev.dn)
+
+    #check the version as CSCvh47929 fix is applied to later versions
     for mo in boot_order_child_mos:
-        if mo.get_class_id() == "LsbootCdd":
-            # Deletion of LsbootCdd is not yet supported using XML API
-            # Remove this check when CSCvh47929 is fixed
+        if str(handle.version) < "3.1(3a)" and mo.get_class_id() == "LsbootCdd":
+            # Deletion of LsbootCdd is not supported using XML API for older versions
+            # although CSCvh47929 is fixed
             # Existing Cdd device will automatically move down the
             # order when configuring other devices with CDD device's order
             continue
@@ -313,11 +349,25 @@ def boot_order_precision_set(
     if secure_boot == "no":
         lsbootdev.configured_boot_mode = configured_boot_mode
 
-    for device in boot_devices:
-        _add_boot_device(handle, lsbootdev, device)
 
+    i = 0
+    #check the version and skip if the device is of type localcdd
+    for device in boot_devices:
+        if device["device-type"] == "cdd" and (is_platform_m4(handle) or str(handle.version) < "3.1(3a)"):
+            i = i + 1
+            continue
+        if device['device-type'] == 'pxe' and is_platform_m4(handle) and device['interface_source'] == 'mac':
+            i = i + 1
+            continue
+
+        #if the list has cdd, reorder the policy types that are after cdd  as cdd will be skipped
+        #and CIMC expects the devices in sorted order.
+        if i != 0:
+            device["order"] = str(int(device["order"]) - i)
+        _add_boot_device(handle, lsbootdev, device)
     handle.set_mo(lsbootdev)
     return lsbootdev
+
 
 
 def boot_precision_configured_get(handle, server_id=1):
@@ -363,7 +413,7 @@ def boot_order_precision_exists(handle, **kwargs):
 
     if _is_valid_arg("boot_devices", kwargs):
         boot_devices = kwargs["boot_devices"]
-        boot_devices = sanitize_input_from_intersight(boot_devices)
+        boot_devices = sanitize_input_from_intersight(handle, boot_devices)
 
         in_boot_order = sorted(
             boot_devices,
@@ -530,15 +580,16 @@ def convert_type(intersight_type):
     return switcher.get(intersight_type, None)
 
 
-def sanitize_input_from_intersight(boot_devices):
+def sanitize_input_from_intersight(handle, boot_devices):
     """
         Intersight always sends boot devices in the right order. For this
-        reason the order propery is not populated by intersight policy 
+        reason the order propery is not populated by intersight policy
         service. We populate the order property here.
 
         We also convert from intersight device type to sdk device type
     """
     import copy
+    from imcsdk.apis.versionconstraints.boot import fix_bootloader_options
     log.debug("##### Input boot devices %s" % boot_devices)
     # if order is present, then it is not an input from intersight
     if len(boot_devices) > 0 and "order" in boot_devices[0]:
@@ -557,19 +608,35 @@ def sanitize_input_from_intersight(boot_devices):
 
         enabled = each.get("Enabled", True)
         if enabled:
-            each["state"] = "Enabled"
+            each["state"] = "enabled"
         else:
-            each["state"] = "Disabled"
+            each["state"] = "disabled"
 
         # convert MacAddress to mac_address
         if each["device-type"] == "pxe":
             if each["MacAddress"]:
                 each["mac_address"] = each["MacAddress"]
             each.pop("MacAddress", None)
+            if each["InterfaceSource"]:
+                each["interface_source"] = each["InterfaceSource"]
+            each.pop("InterfaceSource", None)
+            if each["InterfaceName"]:
+                each["interface_name"] = each["InterfaceName"]
+            each.pop("InterfaceName", None)
+        elif each["device-type"] in ["vmedia", "sdcard", "usb"]:
+            if each["Subtype"] == "None":
+                each.pop("Subtype")
 
         each.pop("ObjectType", None)
         each.pop("Type", None)
         each.pop("Enabled", None)
+
+        fix_bootloader_options(handle, each)
+
+        # Check for any other properties which are "None" and pop them out
+        each = {k: v for k, v in each.iteritems() if v != "None"}
+
         bd.append({k.lower(): v for k, v in each.items()})
     log.debug("##### Sanitized boot devices %s" % bd)
     return bd
+

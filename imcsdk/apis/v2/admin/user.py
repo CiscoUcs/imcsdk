@@ -423,13 +423,14 @@ def local_users_update(handle, users=None):
     Raises:
         IMCOperationError for various failure scenarios. A sample IMC Exception looks something like this:
         "Update Local Users failed, error: User:dum1 - [ErrorCode]: 2003[ErrorDescription]: Operation failed. Matching old password(s), please enter a different password.;
+    Note: This error msg format is being used in Cisco Intersight to map error messages to respective users. Please excercise caution before changing it in the API.
     """
 
     from imcsdk.mometa.aaa.AaaUser import AaaUser
     from imcsdk.imccoreutils import sanitize_message
     api = "Update Local Users"
     if users is None:
-        raise ImcOperationError(api, "Users are invalid")
+        users = []
     if len(users) > MAX_USERS:
         raise ImcOperationError(api, "Number of users exceeded max allowed limit on IMC")
     update_users = False

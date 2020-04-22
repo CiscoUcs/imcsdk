@@ -14,12 +14,85 @@
 """
 This module performs the operations related to snmp server, user and traps.
 """
+import time
+import datetime
+import logging
 
 from imcsdk.imcexception import ImcOperationError, ImcOperationErrorDetail
+from imcsdk.imcexception import ImcException
 from imcsdk.apis.utils import _get_mo
 from imcsdk.imccoreutils import process_conf_mos_response, sanitize_message
+from imcsdk.apis.versionconstraints.snmp import \
+    snmp_multiple_config_with_configcommit_for_hp_and_above
+from imcsdk.apis.versionconstraints.snmp import \
+    snmp_commit_explicitly_for_hp_and_above
+
+
+log = logging.getLogger('imc')
 
 SNMP_DN = 'sys/svc-ext/snmp-svc'
+
+
+def _set_snmp(handle, mo, timeout=90):
+    start = datetime.datetime.now()
+    while True:
+        try:
+            handle.set_mo(mo)
+            return mo
+        except ImcException as e:
+            log.debug(str(e))
+            engine_id_error = "configuration changes in progress"
+            if engine_id_error not in e.error_descr.lower():
+                raise
+        if (datetime.datetime.now() - start).total_seconds() > timeout:
+            raise ImcOperationError("SNMP Enable",
+                                    "Error: %s" % str(e))
+        time.sleep(10)
+
+
+def _reset(handle, local_mo, community, trap_community, engine_id_key):
+    '''
+    The following issues exist when server in a factory reset condition, and if
+    enabling SNMP with any of the community, trap_community, engine_id_key
+    property with value as empty string.
+
+    GP, GPMR1:
+    CIMC returns an error - "CIMC may be running any critical operation or in
+    error state. Retry after sometime or reboot CIMC if necessary"
+
+    GPMR2, HP:
+    CIMC does not return error, but SNMP remains disabled.
+
+    Bug Ids - CSCvf87365, CSCvi17984
+
+    This function sets and unsets the above properties if both new and
+    existing value of any of these properties is empty string.
+    '''
+
+    import random
+    from imcsdk.mometa.comm.CommSnmp import CommSnmpConsts
+
+    input_params = locals()
+    mo = _get_mo(handle, dn=SNMP_DN)
+
+    params = {
+        "community": "init",
+        "trap_community": "init",
+        "engine_id_key": str(random.randint(1, 101))
+    }
+
+    reset = False
+    for prop, val in params.iteritems():
+        if getattr(mo, prop) == "" and input_params[prop] == "":
+            log.debug("Reset %s." % prop)
+            setattr(mo, prop, val)
+            reset = True
+
+    if reset:
+        log.debug("Initiating reset.")
+        mo.admin_state = CommSnmpConsts.ADMIN_STATE_ENABLED
+        _set_snmp(handle, mo)
+        log.debug("Ending reset.")
 
 
 def snmp_enable(handle, port=None, community=None,
@@ -56,6 +129,10 @@ def snmp_enable(handle, port=None, community=None,
 
     mo = _get_mo(handle, dn=SNMP_DN)
 
+    # always reset if any of the community, trap_community, engine_id_key
+    # is empty string both in CIMC and in modify request.
+    _reset(handle, mo, community, trap_community, engine_id_key)
+
     params = {
         'admin_state': CommSnmpConsts.ADMIN_STATE_ENABLED,
         'port': str(port) if port is not None else None,
@@ -69,8 +146,9 @@ def snmp_enable(handle, port=None, community=None,
 
     mo.set_prop_multiple(**params)
     mo.set_prop_multiple(**kwargs)
-    handle.set_mo(mo)
-    return mo
+
+    log.debug("Configuring SNMP.")
+    return _set_snmp(handle, mo)
 
 
 def snmp_disable(handle):
@@ -363,6 +441,10 @@ def snmp_trap_add_all(handle, traps=None):
         mos.append(mo)
         dn_to_trap_dict[mo.dn] = mo.hostname
 
+    # Optimize SNMP transaction performance for CIMC version HP(4.0) and above
+    # via setting parameter 'config_change' to 'no-commit'
+    mos = snmp_multiple_config_with_configcommit_for_hp_and_above(handle, mos)
+
     response = handle.set_mos(mos)
     if response:
         ret = process_conf_mos_response(response, api, False,
@@ -378,6 +460,10 @@ def snmp_trap_add_all(handle, traps=None):
                 error_msg += "[Trap " + obj + "] " + error + "\n"
 
             raise ImcOperationErrorDetail(api, error_msg, ret)
+
+    # Optimize SNMP transaction performance for CIMC version HP(4.0) and above
+    # via doing explicit commit using newly introduced MO 'CommSnmpConfigCommit'
+    snmp_commit_explicitly_for_hp_and_above(handle, SNMP_DN)
 
     results = {}
     results["changed"] = True
@@ -424,9 +510,17 @@ def snmp_trap_delete_all(handle):
         trap.admin_action = CommSnmpTrapConsts.ADMIN_ACTION_CLEAR
         mos.append(trap)
 
+    # Optimize SNMP transaction performance for CIMC version HP(4.0) and above
+    # via setting parameter 'config_change' to 'no-commit'
+    mos = snmp_multiple_config_with_configcommit_for_hp_and_above(handle, mos)
+
     response = handle.set_mos(mos)
     if response:
         process_conf_mos_response(response, api)
+
+    # Optimize SNMP transaction performance for CIMC version HP(4.0) and above
+    # via doing explicit commit using newly introduced MO 'CommSnmpConfigCommit'
+    snmp_commit_explicitly_for_hp_and_above(handle, SNMP_DN)
 
 
 def snmp_trap_exists_any(handle):
@@ -747,7 +841,6 @@ def snmp_user_add_all(handle, users=None):
             }
 
         if security_level == CommSnmpUserConsts.SECURITY_LEVEL_AUTHNOPRIV:
-            #_validate_api_prop('auth', auth, api, True, ['MD5', 'SHA'])
             _validate_api_prop('auth_pwd', auth_pwd, api)
             params['auth'] = auth
             params['auth_pwd'] = auth_pwd
@@ -767,6 +860,10 @@ def snmp_user_add_all(handle, users=None):
         mos.append(mo)
         dn_to_user_dict[mo.dn] = mo.name
 
+    # Optimize SNMP transaction performance for CIMC version HP(4.0) and above
+    # via setting parameter 'config_change' to 'no-commit'
+    mos = snmp_multiple_config_with_configcommit_for_hp_and_above(handle, mos)
+
     response = handle.set_mos(mos)
     if response:
         ret = process_conf_mos_response(response, api, False,
@@ -782,6 +879,10 @@ def snmp_user_add_all(handle, users=None):
                 error_msg += "[User " + obj + "] " + error + "\n"
 
             raise ImcOperationErrorDetail(api, error_msg, ret)
+
+    # Optimize SNMP transaction performance for CIMC version HP(4.0) and above
+    # via doing explicit commit using newly introduced MO 'CommSnmpConfigCommit'
+    snmp_commit_explicitly_for_hp_and_above(handle, SNMP_DN)
 
     results = {}
     results["changed"] = True
@@ -828,9 +929,17 @@ def snmp_user_delete_all(handle):
         user.admin_action = CommSnmpUserConsts.ADMIN_ACTION_CLEAR
         mos.append(user)
 
+    # Optimize SNMP transaction performance for CIMC version HP(4.0) and above
+    # via setting parameter 'config_change' to 'no-commit'
+    mos = snmp_multiple_config_with_configcommit_for_hp_and_above(handle, mos)
+
     response = handle.set_mos(mos)
     if response:
         process_conf_mos_response(response, api)
+
+    # Optimize SNMP transaction performance for CIMC version HP(4.0) and above
+    # via doing explicit commit using newly introduced MO 'CommSnmpConfigCommit'
+    snmp_commit_explicitly_for_hp_and_above(handle, SNMP_DN)
 
 
 def snmp_user_exists_any(handle):
