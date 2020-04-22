@@ -18,7 +18,7 @@ and create vnics and vhbas
 """
 
 from imcsdk.imccoreutils import get_server_dn
-from imcsdk.apis.utils import _get_mo
+from imcsdk.apis.v2.utils import _get_mo
 
 
 def _get_adaptor_dn(handle, adaptor_slot, server_id=1):
@@ -71,7 +71,7 @@ def adaptor_properties_get(handle, adaptor_slot, server_id=1, **kwargs):
 
 
 def adaptor_properties_set(handle, adaptor_slot, lldp=None, fip_mode=None,
-                                 vntag_mode=None, num_vmfex_ifs=None,
+                                 vntag_mode=None, num_vmfex_ifs=None, port_channel_enable=None,
                                  server_id=1, **kwargs):
     """
     This method setups the vic adaptor properties.
@@ -81,6 +81,7 @@ def adaptor_properties_set(handle, adaptor_slot, lldp=None, fip_mode=None,
         adaptor_slot (string): PCI slot number of the adaptor
         fip_mode (bool): Enable fip mode
         vntag_mode (bool): Enable vntag mode
+        port_channel_enable (bool) : Enable Port Channel Configuration
         num_vmfex_ifs (int): Number of vmfex interfaces to be configured when \
                              adaptor is in vntag mode
                              When the vntag mode is being disabled,
@@ -117,10 +118,10 @@ def adaptor_properties_set(handle, adaptor_slot, lldp=None, fip_mode=None,
     mo.fip_mode = values.get(fip_mode)
     mo.vntag_mode = values.get(vntag_mode)
     mo.lldp = values.get(lldp)
+    mo.port_channel_enable = values.get(port_channel_enable)
 
     handle.set_mo(mo)
     return handle.query_dn(mo.dn)
-
 
 def adaptor_reset(handle, adaptor_slot, server_id=1, **kwargs):
     """

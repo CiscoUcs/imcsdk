@@ -15,7 +15,7 @@
 This module implements all the ssh related functionality
 """
 
-from imcsdk.apis.utils import _get_mo
+from imcsdk.apis.v2.utils import _get_mo
 from imcsdk.imcexception import ImcOperationError
 
 import logging

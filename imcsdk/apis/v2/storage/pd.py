@@ -20,7 +20,7 @@ import logging
 
 from imcsdk.imcexception import ImcOperationError
 from imcsdk.mometa.storage.StorageLocalDisk import StorageLocalDiskConsts
-from imcsdk.apis.storage.controller import _get_controller_dn
+from imcsdk.apis.v2.storage.controller import _get_controller_dn
 
 log = logging.getLogger('imc')
 
@@ -61,7 +61,7 @@ def _pd_set_action(handle, controller_type, controller_slot, drive_slot,
     mo = pd_get(handle, controller_type, controller_slot, drive_slot,
                 server_id)
     if mo is None:
-        raise ImcOperationError("Get Physical drive: %d" % drive_slot,
+        raise ImcOperationError("Get Physical drive: %s" % drive_slot,
                                 "Not found")
     mo.admin_action = action
     mo.set_prop_multiple(**kwargs)
@@ -124,13 +124,13 @@ def pd_set_jbod(handle,
         pd_set_jbod(handle, controller_type='SAS', controller_slot='HBA'',
                     drive_slot=4')
     """
-    from imcsdk.apis.storage.controller import controller_jbod_exists
+    from imcsdk.apis.v2.storage.controller import controller_jbod_exists
 
     if not controller_jbod_exists(handle,
                                   controller_type,
                                   controller_slot,
                                   server_id):
-        raise ImcOperationError("Enable JBOD mode on Physical drive: %d" % drive_slot,
+        raise ImcOperationError("Enable JBOD mode on Physical drive: %s" % drive_slot,
                                 "Controller JBOD mode is not enabled")
 
     action = StorageLocalDiskConsts.ADMIN_ACTION_MAKE_JBOD
@@ -428,7 +428,7 @@ def pd_state_set(handle,
     }
 
     if drive_state not in ds_map:
-        raise ImcOperationError("Get Physical drive: %d" % drive_slot,
+        raise ImcOperationError("Get Physical drive: %s" % drive_slot,
                                 "Invalid drive state. Valid values are  %s"
                                 % str(", ".join(ds_map.keys())))
 
@@ -489,7 +489,7 @@ def pd_state_exists(handle,
     }
 
     if drive_state not in ds_map:
-        raise ImcOperationError("Get Physical drive: %d" % drive_slot,
+        raise ImcOperationError("Get Physical drive: %s" % drive_slot,
                                 "Invalid drive state. Valid values are  %s"
                                 % str(", ".join(ds_map.keys())))
 
@@ -498,7 +498,7 @@ def pd_state_exists(handle,
     if mo is None:
         return False, None
 
-    mo_drive_state = mo.drive_state
+    mo_drive_state = mo.pd_status
     expected_drive_state = ds_map[drive_state]
 
     if drive_state == "boot_drive":
@@ -506,7 +506,6 @@ def pd_state_exists(handle,
 
     if expected_drive_state is None:
         return False, mo
-
     return mo_drive_state == expected_drive_state, mo
 
 
@@ -569,14 +568,14 @@ def pd_encryption_enable(handle,
     capable = pd_encryption_capable(handle, controller_type, controller_slot,
                                     drive_slot, server_id)
     if not capable:
-        raise ImcOperationError("Enable encryption on the Physical drive: %d" % drive_slot,
+        raise ImcOperationError("Enable encryption on the Physical drive: %s" % drive_slot,
                                 "Drive is not FDE capable.")
 
     # 2) disk should be in JBOD mode.
     pd = pd_get(handle, controller_type, controller_slot, drive_slot,
                 server_id)
     if pd.drive_state != "JBOD":
-        raise ImcOperationError("Enable encryption on the Physical drive: %d" % drive_slot,
+        raise ImcOperationError("Enable encryption on the Physical drive: %s" % drive_slot,
                                 "Drive is not in JBOD mode")
 
     action = StorageLocalDiskConsts.ADMIN_ACTION_ENABLE_SELF_ENCRYPT

@@ -27,18 +27,18 @@ class StorageFlexUtilVirtualDriveImageMap(ManagedObject):
     prop_meta = {
 
         "classic": {
-            "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["map", "unmap"], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version304a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
-            "map": MoPropertyMeta("map", "map", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x8, 0, 510, None, ["cifs", "nfs", "www"], []), 
-            "mount_options": MoPropertyMeta("mount_options", "mountOptions", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x10, 1, 248, None, [], []), 
-            "password": MoPropertyMeta("password", "password", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x20, 0, 510, None, [], []), 
-            "remote_file": MoPropertyMeta("remote_file", "remoteFile", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x40, 0, 510, r"""[ !#$%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}~a-zA-Z0-9]{1,235}""", [], []), 
-            "remote_share": MoPropertyMeta("remote_share", "remoteShare", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x80, 0, 510, r"""[ !#$%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}~a-zA-Z0-9]{1,235}""", [], []), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x100, 0, 255, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "username": MoPropertyMeta("username", "username", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x400, 0, 510, None, [], []), 
-            "virtual_drive": MoPropertyMeta("virtual_drive", "virtualDrive", "string", VersionMeta.Version304a, MoPropertyMeta.NAMING, None, 0, 510, None, [], []), 
+            "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["map", "unmap"], []),
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version304a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
+            "map": MoPropertyMeta("map", "map", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x8, 0, 510, None, ["cifs", "nfs", "www"], []),
+            "mount_options": MoPropertyMeta("mount_options", "mountOptions", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x10, 1, 248, None, [], []),
+            "password": MoPropertyMeta("password", "password", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x20, 0, 510, None, [], []),
+            "remote_file": MoPropertyMeta("remote_file", "remoteFile", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x40, 0, 510, r"""[ !#$%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}~a-zA-Z0-9]{1,235}""", [], []),
+            "remote_share": MoPropertyMeta("remote_share", "remoteShare", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x80, 0, 510, r"""[ !#$%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}~a-zA-Z0-9]{1,235}""", [], []),
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x100, 0, 255, None, [], []),
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
+            "username": MoPropertyMeta("username", "username", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x400, 0, 510, None, [], []),
+            "virtual_drive": MoPropertyMeta("virtual_drive", "virtualDrive", "string", VersionMeta.Version304a, MoPropertyMeta.NAMING, None, 0, 510, None, [], []),
         },
 
     }

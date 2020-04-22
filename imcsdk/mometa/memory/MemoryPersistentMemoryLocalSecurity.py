@@ -24,21 +24,21 @@ class MemoryPersistentMemoryLocalSecurity(ManagedObject):
     prop_meta = {
 
         "classic": {
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version404b, MoPropertyMeta.INTERNAL, 0x2, None, None, None, [], []), 
-            "deployed_secure_passphrase": MoPropertyMeta("deployed_secure_passphrase", "deployedSecurePassphrase", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x4, 1, 32, None, [], []), 
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
-            "secure_passphrase": MoPropertyMeta("secure_passphrase", "securePassphrase", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x20, 1, 32, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version404b, MoPropertyMeta.INTERNAL, 0x2, None, None, None, [], []),
+            "deployed_secure_passphrase": MoPropertyMeta("deployed_secure_passphrase", "deployedSecurePassphrase", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x4, 1, 32, None, [], []),
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []),
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []),
+            "secure_passphrase": MoPropertyMeta("secure_passphrase", "securePassphrase", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x20, 1, 32, None, [], []),
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
         },
 
         "modular": {
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version404b, MoPropertyMeta.INTERNAL, 0x2, None, None, None, [], []), 
-            "deployed_secure_passphrase": MoPropertyMeta("deployed_secure_passphrase", "deployedSecurePassphrase", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x4, 1, 32, None, [], []), 
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
-            "secure_passphrase": MoPropertyMeta("secure_passphrase", "securePassphrase", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x20, 1, 32, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version404b, MoPropertyMeta.INTERNAL, 0x2, None, None, None, [], []),
+            "deployed_secure_passphrase": MoPropertyMeta("deployed_secure_passphrase", "deployedSecurePassphrase", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x4, 1, 32, None, [], []),
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []),
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []),
+            "secure_passphrase": MoPropertyMeta("secure_passphrase", "securePassphrase", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x20, 1, 32, None, [], []),
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
         },
 
     }

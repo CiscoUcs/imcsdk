@@ -137,6 +137,7 @@ class NamingId:
     BIOS_VF_HARDWARE_PREFETCH = "biosVfHardwarePrefetch"
     BIOS_VF_IMCINTERLEAVE = "biosVfIMCInterleave"
     BIOS_VF_IOHRESOURCE = "biosVfIOHResource"
+    BIOS_VF_IPV4_PXE = "biosVfIPV4PXE"
     BIOS_VF_IPV6_PXE = "biosVfIPV6PXE"
     BIOS_VF_INTEL_HYPER_THREADING_TECH = "biosVfIntelHyperThreadingTech"
     BIOS_VF_INTEL_SPEED_SELECT = "biosVfIntelSpeedSelect"
@@ -152,8 +153,10 @@ class NamingId:
     BIOS_VF_MMCFGBASE = "biosVfMMCFGBase"
     BIOS_VF_MEMORY_INTERLEAVE = "biosVfMemoryInterleave"
     BIOS_VF_MEMORY_MAPPED_IOABOVE4_GB = "biosVfMemoryMappedIOAbove4GB"
+    BIOS_VF_MEMORY_SIZE_LIMIT = "biosVfMemorySizeLimit"
     BIOS_VF_MIRRORING_MODE = "biosVfMirroringMode"
     BIOS_VF_NUMAOPTIMIZED = "biosVfNUMAOptimized"
+    BIOS_VF_NETWORK_STACK = "biosVfNetworkStack"
     BIOS_VF_OSBOOT_WATCHDOG_TIMER = "biosVfOSBootWatchdogTimer"
     BIOS_VF_OSBOOT_WATCHDOG_TIMER_POLICY = "biosVfOSBootWatchdogTimerPolicy"
     BIOS_VF_OSBOOT_WATCHDOG_TIMER_TIMEOUT = "biosVfOSBootWatchdogTimerTimeout"
@@ -163,11 +166,18 @@ class NamingId:
     BIOS_VF_OUT_OF_BAND_MGMT_PORT = "biosVfOutOfBandMgmtPort"
     BIOS_VF_PCIOPTION_ROMS = "biosVfPCIOptionROMs"
     BIOS_VF_PCISLOT_OPTION_ROMENABLE = "biosVfPCISlotOptionROMEnable"
+    BIOS_VF_PCIE_RASSUPPORT = "biosVfPCIeRASSupport"
     BIOS_VF_PCIE_SSDHOT_PLUG_SUPPORT = "biosVfPCIeSSDHotPlugSupport"
     BIOS_VF_POSTERROR_PAUSE = "biosVfPOSTErrorPause"
     BIOS_VF_PSATA = "biosVfPSata"
     BIOS_VF_PSTATE_COORD_TYPE = "biosVfPStateCoordType"
     BIOS_VF_PACKAGE_CSTATE_LIMIT = "biosVfPackageCStateLimit"
+    BIOS_VF_PARTIAL_MIRROR_MODE_CONFIG = "biosVfPartialMirrorModeConfig"
+    BIOS_VF_PARTIAL_MIRROR_PERCENT = "biosVfPartialMirrorPercent"
+    BIOS_VF_PARTIAL_MIRROR_VALUE1 = "biosVfPartialMirrorValue1"
+    BIOS_VF_PARTIAL_MIRROR_VALUE2 = "biosVfPartialMirrorValue2"
+    BIOS_VF_PARTIAL_MIRROR_VALUE3 = "biosVfPartialMirrorValue3"
+    BIOS_VF_PARTIAL_MIRROR_VALUE4 = "biosVfPartialMirrorValue4"
     BIOS_VF_PATROL_SCRUB = "biosVfPatrolScrub"
     BIOS_VF_PATROL_SCRUB_DURATION = "biosVfPatrolScrubDuration"
     BIOS_VF_PCH_USB30_MODE = "biosVfPchUsb30Mode"
@@ -184,6 +194,7 @@ class NamingId:
     BIOS_VF_SMEE = "biosVfSMEE"
     BIOS_VF_SATA_MODE_SELECT = "biosVfSataModeSelect"
     BIOS_VF_SELECT_MEMORY_RASCONFIGURATION = "biosVfSelectMemoryRASConfiguration"
+    BIOS_VF_SELECT_PPR_TYPE = "biosVfSelectPprType"
     BIOS_VF_SERIAL_PORT_AENABLE = "biosVfSerialPortAEnable"
     BIOS_VF_SINGLE_PCTLENABLE = "biosVfSinglePCTLEnable"
     BIOS_VF_SMT_MODE = "biosVfSmtMode"
@@ -438,6 +449,7 @@ class NamingId:
     EQUIPMENT_CHASSIS_LOCATOR_LED = "equipmentChassisLocatorLed"
     EQUIPMENT_SHARED_IOMODULE = "equipmentSharedIOModule"
     EQUIPMENT_SYSTEM_IOCONTROLLER = "equipmentSystemIOController"
+    GRAPHICS_CARD_TEMPERATURE = "graphicsCardTemperature"
     IO_CONTROLLER_NVME_PHYSICAL_DRIVE = "ioControllerNVMePhysicalDrive"
     IO_EXPANDER = "ioExpander"
     MGMT_BACKUP_SERVER = "mgmtBackupServer"
@@ -453,6 +465,33 @@ class NamingId:
     SYSTEM_IOCONTROLLER_NVME = "systemIOControllerNVMe"
     THERMAL_POWER_PROFILE = "thermalPowerProfile"
 
+
+class YesOrNo:
+    _NO = "No"
+    _YES = "Yes"
+    FALSE = "false"
+    NO = "no"
+    TRUE = "true"
+    YES = "yes"
+
+class BootOrderEnum:
+    BOOT_ORDER_ENUM_1 = "1"
+    BOOT_ORDER_ENUM_2 = "2"
+    BOOT_ORDER_ENUM_3 = "3"
+    BOOT_ORDER_ENUM_4 = "4"
+    BOOT_ORDER_ENUM_5 = "5"
+
+class EmptyStringOrHostNameOrIPv4Address:
+    VALUE_0_0_0_0 = "0.0.0.0"
+
+class EmptyStringOrHostNameOrIPv4AddressOrIPv6Address:
+    pass
+
+class EnabledDisabled:
+    _DISABLED = "Disabled"
+    _ENABLED = "Enabled"
+    DISABLED = "disabled"
+    ENABLED = "enabled"
 
 class NamingPropertyId:
     ABSOLUTE_STATE_OF_CHARGE = "absoluteStateOfCharge"
@@ -520,6 +559,7 @@ class NamingPropertyId:
     BIND_DN = "bindDn"
     BIND_METHOD = "bindMethod"
     BINDING_CERTIFICATE = "bindingCertificate"
+    BIOS_POST_STATE = "biosPostState"
     BIOS_PROFILE_UPLOAD_STATUS = "biosProfileUploadStatus"
     BLOCK_COUNT = "blockCount"
     BLOCK_SIZE = "blockSize"
@@ -939,6 +979,12 @@ class NamingPropertyId:
     MOUNT_OPTIONS = "mountOptions"
     MTU = "mtu"
     MULTI_QUEUE = "multiQueue"
+    MULTI_QUEUE_CLASS_OF_SERVICE = "multiQueueClassOfService"
+    MULTI_QUEUE_MEMORY_REGIONS = "multiQueueMemoryRegions"
+    MULTI_QUEUE_PAIRS = "multiQueuePairs"
+    MULTI_QUEUE_RESOURCE_GROUPS = "multiQueueResourceGroups"
+    MULTI_QUEUE_ROCE_VERSION1 = "multiQueueRoceVersion1"
+    MULTI_QUEUE_ROCE_VERSION2 = "multiQueueRoceVersion2"
     NAME = "name"
     NCQ_STATUS = "ncqStatus"
     NEW_VERSION = "newVersion"
@@ -1114,6 +1160,7 @@ class NamingPropertyId:
     RAW_SIZE = "rawSize"
     RD_ERR_COUNT_SLOT1_THRESHOLD = "rdErrCountSlot1Threshold"
     RD_ERR_COUNT_SLOT2_THRESHOLD = "rdErrCountSlot2Threshold"
+    RDMA_CLASS_OF_SERVICE = "rdmaClassOfService"
     READ_AHEAD_POLICY = "readAheadPolicy"
     READ_ERROR_COUNT = "readErrorCount"
     READ_ERROR_THRESHOLD = "readErrorThreshold"
@@ -1164,6 +1211,8 @@ class NamingPropertyId:
     RISER1 = "riser1"
     RISER2 = "riser2"
     RN = "rn"
+    ROCE_VERSION1 = "roceVersion1"
+    ROCE_VERSION2 = "roceVersion2"
     ROLE = "role"
     RULE = "rule"
     RUNNING_FIRMWARE_VERSION = "runningFirmwareVersion"
@@ -1366,6 +1415,7 @@ class NamingPropertyId:
     USED_PHYSICAL_DRIVE_IDS = "usedPhysicalDriveIds"
     USER = "user"
     USER_DISABLE_ON_LOCKOUT = "userDisableOnLockout"
+    USER_MODE = "userMode"
     USER_PASSWORD_POLICY = "userPasswordPolicy"
     USER_SEARCH_PRECEDENCE = "userSearchPrecedence"
     USERNAME = "username"
@@ -1473,6 +1523,7 @@ class NamingPropertyId:
     VP_IOESLOT2_STATE = "vpIOESlot2State"
     VP_IOHRESOURCE = "vpIOHResource"
     VP_IPPREFETCH = "vpIPPrefetch"
+    VP_IPV4_PXE = "vpIPV4PXE"
     VP_IPV6_PXE = "vpIPV6PXE"
     VP_INTEL_HYPER_THREADING_TECH = "vpIntelHyperThreadingTech"
     VP_INTEL_SPEED_SELECT = "vpIntelSpeedSelect"
@@ -1498,8 +1549,10 @@ class NamingPropertyId:
     VP_MAKE_DEVICE_NON_BOOTABLE = "vpMakeDeviceNonBootable"
     VP_MEMORY_INTER_LEAVE = "vpMemoryInterLeave"
     VP_MEMORY_MAPPED_IOABOVE4_GB = "vpMemoryMappedIOAbove4GB"
+    VP_MEMORY_SIZE_LIMIT = "vpMemorySizeLimit"
     VP_MIRRORING_MODE = "vpMirroringMode"
     VP_NUMAOPTIMIZED = "vpNUMAOptimized"
+    VP_NETWORK_STACK = "vpNetworkStack"
     VP_OSBOOT_WATCHDOG_TIMER = "vpOSBootWatchdogTimer"
     VP_OSBOOT_WATCHDOG_TIMER_POLICY = "vpOSBootWatchdogTimerPolicy"
     VP_OSBOOT_WATCHDOG_TIMER_TIMEOUT = "vpOSBootWatchdogTimerTimeout"
@@ -1509,12 +1562,19 @@ class NamingPropertyId:
     VP_ONBOARD_SCUSTORAGE_SUPPORT = "vpOnboardSCUStorageSupport"
     VP_OUT_OF_BAND_MGMT_PORT = "vpOutOfBandMgmtPort"
     VP_PCIOPTION_ROMS = "vpPCIOptionROMs"
+    VP_PCIE_RASSUPPORT = "vpPCIeRASSupport"
     VP_PCIE_SSDHOT_PLUG_SUPPORT = "vpPCIeSSDHotPlugSupport"
     VP_POPSUPPORT = "vpPOPSupport"
     VP_POSTERROR_PAUSE = "vpPOSTErrorPause"
     VP_PSATA = "vpPSata"
     VP_PSTATE_COORD_TYPE = "vpPStateCoordType"
     VP_PACKAGE_CSTATE_LIMIT = "vpPackageCStateLimit"
+    VP_PARTIAL_MIRROR_MODE_CONFIG = "vpPartialMirrorModeConfig"
+    VP_PARTIAL_MIRROR_PERCENT = "vpPartialMirrorPercent"
+    VP_PARTIAL_MIRROR_VALUE1 = "vpPartialMirrorValue1"
+    VP_PARTIAL_MIRROR_VALUE2 = "vpPartialMirrorValue2"
+    VP_PARTIAL_MIRROR_VALUE3 = "vpPartialMirrorValue3"
+    VP_PARTIAL_MIRROR_VALUE4 = "vpPartialMirrorValue4"
     VP_PATROL_SCRUB = "vpPatrolScrub"
     VP_PATROL_SCRUB_DURATION = "vpPatrolScrubDuration"
     VP_PCH_USB30_MODE = "vpPchUsb30Mode"
@@ -1534,6 +1594,7 @@ class NamingPropertyId:
     VP_SNC = "vpSNC"
     VP_SATA_MODE_SELECT = "vpSataModeSelect"
     VP_SELECT_MEMORY_RASCONFIGURATION = "vpSelectMemoryRASConfiguration"
+    VP_SELECT_PPR_TYPE = "vpSelectPprType"
     VP_SERIAL_PORT_AENABLE = "vpSerialPortAEnable"
     VP_SINGLE_PCTLENABLE = "vpSinglePCTLEnable"
     VP_SLOT10_LINK_SPEED = "vpSlot10LinkSpeed"
@@ -1693,36 +1754,17 @@ class NamingPropertyId:
     WWNN = "wwnn"
     WWPN = "wwpn"
 
-class Status:
-    CREATED = "created"
-    DELETED = "deleted"
-    MODIFIED = "modified"
-    REMOVED = "removed"
-
-class BootOrderEnum:
-    BOOT_ORDER_ENUM_1 = "1"
-    BOOT_ORDER_ENUM_2 = "2"
-    BOOT_ORDER_ENUM_3 = "3"
-    BOOT_ORDER_ENUM_4 = "4"
-    BOOT_ORDER_ENUM_5 = "5"
-
-class EnabledDisabled:
-    _DISABLED = "Disabled"
-    _ENABLED = "Enabled"
-    DISABLED = "disabled"
-    ENABLED = "enabled"
-
-class EmptyStringOrHostNameOrIPv4AddressOrIPv6Address:
-    pass
-
 class ObjectStatus:
     CREATED = "created"
     DELETED = "deleted"
     MODIFIED = "modified"
     REMOVED = "removed"
 
-class EmptyStringOrHostNameOrIPv4Address:
-    VALUE_0_0_0_0 = "0.0.0.0"
+class Status:
+    CREATED = "created"
+    DELETED = "deleted"
+    MODIFIED = "modified"
+    REMOVED = "removed"
 
 class SyslogSeverity:
     ALERT = "alert"
@@ -1733,12 +1775,4 @@ class SyslogSeverity:
     INFORMATIONAL = "informational"
     NOTICE = "notice"
     WARNING = "warning"
-
-class YesOrNo:
-    _NO = "No"
-    _YES = "Yes"
-    FALSE = "false"
-    NO = "no"
-    TRUE = "true"
-    YES = "yes"
 

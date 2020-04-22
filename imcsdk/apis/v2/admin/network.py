@@ -17,7 +17,7 @@ This module implements all the services
 """
 from imcsdk.imcexception import ImcOperationError, ImcValidationException
 from imcsdk.imccoreutils import IMC_PLATFORM
-from imcsdk.apis.utils import _is_valid_arg
+from imcsdk.apis.v2.utils import _is_valid_arg
 
 
 def _get_mgmtif_mo_dn(handle):

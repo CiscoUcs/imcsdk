@@ -80,11 +80,10 @@ class ManagedObject(ImcBase):
             else:
                 raise ValueError('parent mo or dn must be specified')
 
-        if not from_xml_response:
-            self._rn_set()
-            self._dn_set()
-
-        mo_meta = imccoreutils.get_mo_meta(self)
+        platform = None
+        if kwargs and '_handle' in kwargs:
+            platform = kwargs['_handle'].platform
+        mo_meta = imccoreutils.get_mo_meta(self, platform=platform)
         xml_attribute = mo_meta.xml_attribute
 
         ImcBase.__init__(self, imcgenutils.word_u(xml_attribute))
@@ -95,9 +94,14 @@ class ManagedObject(ImcBase):
 
         if kwargs:
             for prop_name, prop_value in imcgenutils.iteritems(kwargs):
-                if not imccoreutils.prop_exists(self, prop_name):
+                if prop_name not in self.__internal_prop and \
+                        not imccoreutils.prop_exists(self, prop_name):
                     log.debug("Unknown property %s" % prop_name)
                 self.__set_prop(prop_name, prop_value)
+
+        if not from_xml_response:
+            self._rn_set()
+            self._dn_set()
 
     @property
     def parent_mo(self):
@@ -139,9 +143,8 @@ class ManagedObject(ImcBase):
                 self.__set_prop(name, value)
             else:
                 if value:
-                    if not imccoreutils.validate_property_value(self,
-                                                                name,
-                                                                value):
+                    match, msg = imccoreutils.validate_property_value(self, name, value)
+                    if not match:
                         raise ValueError("Invalid Value Exception - "
                                          "[%s]: Prop <%s>, Value<%s>. "
                                          % (self.__class__.__name__,
@@ -180,14 +183,15 @@ class ManagedObject(ImcBase):
 
         if value is None:
             return
-        if not forced:
+        if not forced and name not in ManagedObject.__internal_prop:
             prop = imccoreutils.get_prop_meta(self, name)
             if not imccoreutils.is_writable_prop(self, name):
                 if getattr(self, name) is not None or \
                                 prop.access != \
                                 imccoremeta.MoPropertyMeta.CREATE_ONLY:
                     raise ValueError("%s is not a read-write property." % name)
-            if not imccoreutils.validate_property_value(self, name, value):
+            is_valid, msg = imccoreutils.validate_property_value(self, name, value)
+            if not is_valid:
                 raise ValueError("Invalid Value Exception - "
                                  "[%s]: Prop <%s>, Value<%s>. "
                                  % (self.__class__.__name__,
@@ -211,6 +215,19 @@ class ManagedObject(ImcBase):
             if str(kwargs[prop_name]) != getattr(self, prop_name):
                 return False
         return True
+
+    def validate_inputs(self, **kwargs):
+        validation_errors = []
+        for prop in kwargs:
+            if not imccoreutils.prop_exists(self, prop):
+                continue
+            if not kwargs[prop]:
+                continue
+            print("prop ", prop)
+            is_valid, msg = imccoreutils.validate_property_value(self, prop, kwargs[prop])
+            if not is_valid:
+                validation_errors.append({"prop": prop, "error": "Invalid value error", "msg": msg})
+        return validation_errors
 
     def set_prop_multiple(self, **kwargs):
         for prop_name in kwargs:
@@ -268,7 +285,8 @@ class ManagedObject(ImcBase):
 
         import re
 
-        mo_meta = imccoreutils.get_mo_meta(self)
+        platform = self._handle.platform if self._handle else None
+        mo_meta = imccoreutils.get_mo_meta(self, platform=platform)
         rn_pattern = mo_meta.rn
         for prop in re.findall(r"""\[([^\]]*)\]""", rn_pattern):
             if imccoreutils.prop_exists(self, prop):
@@ -327,8 +345,14 @@ class ManagedObject(ImcBase):
                         if handle:
                             if prop.version <= handle.version:
                                 xml_obj.set(prop.xml_attribute, value)
+                            else:
+                                log.debug('## Not sending property: %s' % prop.name)
+                                log.debug('## handle.version:%s prop.version:%s', handle.version, prop.version)
                         else:
                             xml_obj.set(prop.xml_attribute, value)
+                        # xml_obj.set(prop.xml_attribute, value)
+                        # The above has been commented out to allow higher layers set newer properties on older servers
+                        # The version check will take care of not sending the newer properties on older servers.
             else:
                 if key not in self.__xtra_props:
                     # This is an internal property

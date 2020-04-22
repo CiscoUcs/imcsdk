@@ -66,8 +66,18 @@ class ImcOperationError(ImcWrapperException):
     """
 
     def __init__(self, operation, error):
-        message = "%s failed, error: %s" % (operation, error)
+        message = "%s failed. Error: %s" % (operation, error)
         super(ImcOperationError, self).__init__(message)
+
+
+class ImcOperationErrorDetail(ImcWrapperException):
+    """
+    Configuration Error with details
+    """
+    def __init__(self, operation, error, error_params):
+        self.msg = error
+        self.msg_params = error_params
+        super(ImcOperationErrorDetail, self).__init__(error)
 
 
 class ImcError(Exception):

@@ -25,12 +25,12 @@ class PsuRedundancyPolicy(ManagedObject):
     prop_meta = {
 
         "classic": {
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version401a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version401a, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
-            "redundancy_policy": MoPropertyMeta("redundancy_policy", "redundancyPolicy", "string", VersionMeta.Version401a, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["grid", "n-plus-one", "non-redundant"], []), 
-            "redundancy_status": MoPropertyMeta("redundancy_status", "redundancyStatus", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version401a, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version401a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version401a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version401a, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []),
+            "redundancy_policy": MoPropertyMeta("redundancy_policy", "redundancyPolicy", "string", VersionMeta.Version401a, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["grid", "n-plus-one", "non-redundant"], []),
+            "redundancy_status": MoPropertyMeta("redundancy_status", "redundancyStatus", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version401a, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []),
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version401a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
         },
 
     }

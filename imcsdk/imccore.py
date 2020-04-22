@@ -200,4 +200,32 @@ class BaseObject(ImcBase):
                 cln = imcgenutils.word_u(child_elem.tag)
                 child = imccoreutils.get_imc_obj(cln, child_elem)
                 self._child.append(child)
+                if isinstance(child, OperationStatus):
+                    continue
                 child.from_xml(child_elem, handle)
+
+
+class ImcErrorResponse(object):
+    """class ImcErrorResponse."""
+
+    def __init__(self, error_code=None, error_descr=None):
+        self.error_code = error_code
+        self.error_descr = error_descr
+
+
+class ImcCustomMethod(ImcBase):
+    """class ImcCustomMethod."""
+
+    def __init__(self, class_id, tag_name=None):
+        self._tag_name = tag_name
+        ImcBase.__init__(self, class_id)
+
+
+class OperationStatus(ImcCustomMethod):
+    """class OperationStatus"""
+
+    def __init__(self, **kwargs):
+        ImcCustomMethod.__init__(self, "OperationStatus", "operationStatus")
+        if kwargs:
+            for n, v in imcgenutils.iteritems(kwargs):
+                self.attr_set(n, v)

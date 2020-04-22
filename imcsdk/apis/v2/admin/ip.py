@@ -18,7 +18,7 @@ This module implements the APIs for IP Blocking and IP Filtering
 import logging
 from imcsdk.mometa.ip.IpBlocking import IpBlocking
 from imcsdk.mometa.ip.IpFiltering import IpFiltering, IpFilteringConsts
-from imcsdk.apis.utils import _get_mo, _is_valid_arg, _is_invalid_value
+from imcsdk.apis.v2.utils import _get_mo, _is_valid_arg, _is_invalid_value
 from imcsdk.imccoreutils import get_server_dn, IMC_PLATFORM
 from imcsdk.imcexception import ImcOperationError
 

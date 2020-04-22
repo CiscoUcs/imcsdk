@@ -21,8 +21,8 @@ import math
 import logging
 
 from imcsdk.imcexception import ImcOperationError, ImcException, ImcOperationErrorDetail
-from imcsdk.apis.storage.controller import _get_controller_dn
-from imcsdk.apis.storage.pd import pd_get
+from imcsdk.apis.v2.storage.controller import _get_controller_dn
+from imcsdk.apis.v2.storage.pd import pd_get
 from imcsdk.mometa.storage.StorageVirtualDriveCreatorUsingUnusedPhysicalDrive \
     import StorageVirtualDriveCreatorUsingUnusedPhysicalDrive as vd_creator
 from imcsdk.mometa.storage.StorageVirtualDriveCreatorUsingVirtualDriveGroup \
@@ -145,7 +145,7 @@ def _raid_max_size_get(raid_level, total_size, min_size, span_depth):
 
     if raid_level not in size:
         raise ImcOperationError("Create Virtual Drive",
-                                "Unsupported Raid level <%d>" % raid_level)
+                                "Unsupported Raid level <%s>" % raid_level)
     return size[raid_level]
 
 
@@ -184,7 +184,7 @@ def _existing_vd_maxsize_get(handle, vd_carve, id):
     mo = handle.query_dn(dn)
     if mo is None:
         raise ImcOperationError("Create Virtual drive using existing Virtual drives",
-                                "Existing Drive: %d does not exist OR " \
+                                "Existing Drive: %s does not exist OR " \
                                 "No space is available to create another Virtual " \
                                 "drive." % id)
     return mo.max_available_space
@@ -313,7 +313,7 @@ def vd_create_using_existing_vd(handle,
                                'SAS'
         controller_slot (str): Controller slot name/number
                                 "MEZZ","0"-"9", "HBA"
-        shared_virtual_drive_id (int): Id of the existing virtual drive
+        shared_virtual_drive_id (str): Id of the existing virtual drive
         virtual_drive_name (str): Name of the virtual drive
         access_policy (str): Access-policy for the virtual drive
                 ['read-write', 'read-only', 'hidden', 'default', 'blocked']
@@ -360,7 +360,7 @@ def vd_create_using_existing_vd(handle,
     if size and size.strip():
         params["size"] = size
     else:
-        params["size"] = _existing_vd_maxsize_get(handle=handle, 
+        params["size"] = _existing_vd_maxsize_get(handle=handle,
             vd_carve=mo, id=shared_virtual_drive_id)
 
     mo.set_prop_multiple(**params)
@@ -374,14 +374,14 @@ def vd_get(handle, controller_type, controller_slot, id, server_id=1):
     dn = slot_dn + "/vd-" + str(id)
     mo = handle.query_dn(dn)
     if mo is None:
-        raise ImcOperationError("Get Virtual drive: %d" % id,
+        raise ImcOperationError("Get Virtual drive: %s" % id,
                                 "Not found")
     return mo
 
-def vd_update(handle, 
-            controller_type, 
-            controller_slot, 
-            id, 
+def vd_update(handle,
+            controller_type,
+            controller_slot,
+            id,
             server_id=1,
             access_policy=None,
             read_policy=None,
@@ -398,13 +398,13 @@ def vd_update(handle,
 
     if read_policy is not None:
         mo.read_policy = read_policy
-    
+
     if cache_policy is not None:
         mo.cache_policy = cache_policy
-    
+
     if disk_cache_policy is not None:
         mo.disk_cache_policy = disk_cache_policy
-    
+
     if write_policy is not None:
         mo.requested_write_cache_policy = write_policy
 
@@ -417,7 +417,7 @@ def _vd_set_action(handle, controller_type, controller_slot, id,
                    server_id=1, **kwargs):
     mo = vd_get(handle, controller_type, controller_slot, id, server_id)
     if mo is None:
-        raise ImcOperationError("Configure Virtual drive: %d" % id,
+        raise ImcOperationError("Configure Virtual drive: %s" % id,
                                 "Not found")
     mo.admin_action = action
     mo.set_prop_multiple(**kwargs)
@@ -468,7 +468,7 @@ def vd_delete(handle, controller_type, controller_slot, id, server_id=1,
         vd_delete(handle=imc, controller_type='SAS', controller_slot='MEZZ',
                   id=1)
     """
-    from imcsdk.apis.storage.controller import controller_clear_boot_drive
+    from imcsdk.apis.v2.storage.controller import controller_clear_boot_drive
 
     mo = vd_get(handle=handle,
                 controller_type=controller_type,
@@ -499,7 +499,7 @@ def vd_delete_all(handle, controller_type, controller_slot, server_id=1,
         vd_delete_all(handle=imc, controller_type='SAS',
                       controller_slot='MEZZ', id=1)
     """
-    from imcsdk.apis.storage.controller import controller_clear_boot_drive
+    from imcsdk.apis.v2.storage.controller import controller_clear_boot_drive
 
     controller_dn = _get_controller_dn(handle, controller_type,
                                        controller_slot, server_id)
@@ -636,7 +636,7 @@ def vd_boot_drive_disable(handle, controller_type, controller_slot, id,
     Examples:
         vd_set_boot_drive(handle, 'SAS', 'HBA', 'test_vd')
     """
-    from imcsdk.apis.storage.controller import controller_clear_boot_drive
+    from imcsdk.apis.v2.storage.controller import controller_clear_boot_drive
 
     vd = vd_get(handle, controller_type, controller_slot, id, server_id)
     if vd.boot_drive.lower() not in ('true', 'yes'):

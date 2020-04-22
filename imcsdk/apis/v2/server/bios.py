@@ -18,11 +18,11 @@ This module provides APIs for bios related configuration like boot order
 
 import logging
 import json
-import sys
 import imcsdk.imccoreutils as imccoreutils
+from imcsdk.imccoreutils import is_platform_m4, is_platform_m5
 from imcsdk.imcgenutils import iteritems
 from imcsdk.imcexception import ImcOperationError, ImcException
-from imcsdk.apis.utils import _is_valid_arg
+from imcsdk.apis.v2.utils import _is_valid_arg
 
 log = logging.getLogger('imc')
 
@@ -350,6 +350,7 @@ def bios_tokens_set(handle, tokens={}, server_id=1):
 
     from imcsdk.imccoreutils import load_class, sanitize_xml_parsing_error
     from imcsdk.mometa.bios.BiosSettings import BiosSettings
+    from imcsdk.imccoremeta import ImcVersion
 
     messages = []
     ret = {}
@@ -361,6 +362,11 @@ def bios_tokens_set(handle, tokens={}, server_id=1):
     # Prepare the filtered table i.e. send only those MOs that exist on the server
     table = {k: v for k, v in iteritems(mo_table) if k in server_mos}
 
+    log.debug("Mo Table       Count: %s Values: %s" % (len(mo_table), mo_table))
+    log.debug("Server Table   Count: %s Values: %s" % (len(server_mos), server_mos))
+    log.debug("Filtered Table Count: %s Values: %s" % (len(table), table))
+
+    processed_tokens = []
     # Separate the MOs which have only platform-default
     for mo_name, props in table.items():
         non_default_props = {k: v for k, v in iteritems(props) if v != "platform-default"}
@@ -369,12 +375,39 @@ def bios_tokens_set(handle, tokens={}, server_id=1):
             # filter properties to only those applicable to the server
             server_mo_props = server_mos[mo_name]
             filtered_props = {k: v for k, v in iteritems(props) if k in server_mo_props and server_mo_props[k]}
+
+            if len(filtered_props) == 0:
+                log.debug("skipping token %s props: %s server_mo_props %s " % (mo_name, props, server_mo_props))
+                processed_tokens.append(mo_name)
+                continue
+
             # load an instance of the class
             mo_class = load_class(mo_name)
             filtered_props["_handle"] = handle
             mo_obj = mo_class(parent_mo_or_dn=bios_mo, **filtered_props)
+
+            # HACK for CIMC ISSUE. 'rn' is different for M4 and M5
+            # rn for M5 for this token has been corrected in GP-MR2
+            if mo_name == "BiosVfSataModeSelect" and \
+                    is_platform_m5(handle) and \
+                    handle.version < ImcVersion("3.1(3a)"):
+                mo_obj.rn = "SataModeSelect"
+                mo_obj.dn = bios_mo.dn + "/" + mo_obj.rn
+
+            # In HP release, for Janus platform, vp_cbs_cmn_cpu_gen_downcore_ctrl token
+            # does not have a platform default value supported on the endpoint
+            if mo_name == "BiosVfCbsCmnCpuGenDowncoreCtrl" and \
+                    mo_obj.vp_cbs_cmn_cpu_gen_downcore_ctrl == "platform-default" and \
+                    handle.version == ImcVersion("4.0(1a)"):
+                mo_obj.vp_cbs_cmn_cpu_gen_downcore_ctrl = "Auto"
+
             # pop the object from the table dictionary
-            table.pop(mo_name)
+            processed_tokens.append(mo_name)
+
+    for each in processed_tokens:
+        table.pop(each)
+
+    log.debug("Modified Tokens Count: %s Values: %s" % (len(table), table))
 
     # Send all the MOs with default properties in one shot
     handle.set_mo(bios_mo)
@@ -386,11 +419,35 @@ def bios_tokens_set(handle, tokens={}, server_id=1):
         filtered_props = {k: v for k, v in iteritems(props)
                           if k in server_mo_props and server_mo_props[k]}
 
+        # REALLY DIRTY HACK!!
+        # C6 Non Retention - Works on M5, fails on M4
+        # C6 non Retention - Works on M4, fails on M5
+        if mo_name == "BiosVfPackageCStateLimit" and is_platform_m4(handle) and "vp_package_c_state_limit" in filtered_props:
+            if filtered_props["vp_package_c_state_limit"] == "C6 Non Retention":
+                filtered_props["vp_package_c_state_limit"] = "C6 non Retention"
+
         if len(filtered_props) != 0:
             mo_class = load_class(mo_name)
             filtered_props["_handle"] = handle
             try:
                 mo_obj = mo_class(parent_mo_or_dn=bios_mo.dn, **filtered_props)
+
+                # HACK for CIMC ISSUE. 'rn' is different for M4 and M5
+                # rn for M5 for this token has been corrected in GP-MR2
+                if mo_name == "BiosVfSataModeSelect" and \
+                        is_platform_m5(handle) and \
+                        handle.version < ImcVersion("3.1(3a)"):
+                    mo_obj.rn = "SataModeSelect"
+                    mo_obj.dn = bios_mo.dn + "/" + mo_obj.rn
+
+                # HP and below only "Disabled" was supported for this token
+                # In HP, "disabled" was also supported and hence need to send the older
+                # version of this value for an older server
+                if mo_name == "BiosVfCDNSupport" and \
+                        mo_obj.vp_cdn_support == "disabled" and \
+                        handle.version < ImcVersion("4.0(1a)"):
+                    mo_obj.vp_cdn_support = "Disabled"
+
                 handle.set_mo(mo_obj)
             except ImcException as e:
                 d["Object"] = mo_name

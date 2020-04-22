@@ -23,16 +23,16 @@ class PciLink(ManagedObject):
     prop_meta = {
 
         "classic": {
-            "adapter": MoPropertyMeta("adapter", "adapter", "string", VersionMeta.Version402c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version402c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version402c, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
-            "link_speed": MoPropertyMeta("link_speed", "linkSpeed", "string", VersionMeta.Version402c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "link_status": MoPropertyMeta("link_status", "linkStatus", "string", VersionMeta.Version402c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "link_width": MoPropertyMeta("link_width", "linkWidth", "string", VersionMeta.Version402c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version402c, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
-            "slot": MoPropertyMeta("slot", "slot", "string", VersionMeta.Version402c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "slot_status": MoPropertyMeta("slot_status", "slotStatus", "string", VersionMeta.Version402c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version402c, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "adapter": MoPropertyMeta("adapter", "adapter", "string", VersionMeta.Version402c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version402c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version402c, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []),
+            "link_speed": MoPropertyMeta("link_speed", "linkSpeed", "string", VersionMeta.Version402c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
+            "link_status": MoPropertyMeta("link_status", "linkStatus", "string", VersionMeta.Version402c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
+            "link_width": MoPropertyMeta("link_width", "linkWidth", "string", VersionMeta.Version402c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version402c, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []),
+            "slot": MoPropertyMeta("slot", "slot", "string", VersionMeta.Version402c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
+            "slot_status": MoPropertyMeta("slot_status", "slotStatus", "string", VersionMeta.Version402c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version402c, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
         },
 
     }

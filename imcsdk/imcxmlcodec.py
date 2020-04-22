@@ -21,6 +21,7 @@ except ImportError:
 from . import imcgenutils
 from . import imccoreutils
 from . import imcexception as ex
+from .imccore import ImcErrorResponse
 
 
 def to_xml_str(elem):
@@ -58,8 +59,7 @@ def extract_root_elem(xml_str):
         '''
         root_element = extract_root_elem(xml_str)
     """
-    if type(xml_str) is not str:
-        xml_str = xml_str.decode('utf-8')
+
     xml_str = xml_str.strip("\x00")
     root_elem = ET.fromstring(xml_str)
     return root_elem
@@ -83,14 +83,15 @@ def from_xml_str(xml_str, handle=None):
         '''\n
         root_element = extract_root_elem(xml_str)\n
     """
-    if type(xml_str) is not str:
-        xml_str = xml_str.decode('utf-8')
+
     xml_str = xml_str.strip("\x00")
     root_elem = ET.fromstring(xml_str)
     if root_elem.tag == "error":
         error_code = root_elem.attrib['errorCode']
         error_descr = root_elem.attrib['errorDescr']
-        raise ex.ImcException(error_code, error_descr)
+        response = ImcErrorResponse(error_code=error_code, error_descr=error_descr)
+        # Do not raise an exception, it is upto the top level application to understand what type of object is returned
+        return response
 
     class_id = imcgenutils.word_u(root_elem.tag)
     response = imccoreutils.get_imc_obj(class_id, root_elem)

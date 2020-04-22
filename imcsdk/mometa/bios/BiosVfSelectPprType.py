@@ -19,7 +19,7 @@ class BiosVfSelectPprType(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("BiosVfSelectPprType", "biosVfSelectPprType", "select-ppr-type", VersionMeta.Version410a, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], [None]),
+        "classic": MoMeta("BiosVfSelectPprType", "biosVfSelectPprType", "select-ppr-type", VersionMeta.Version411c, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], [None]),
         "modular": MoMeta("BiosVfSelectPprType", "biosVfSelectPprType", "select-ppr-type", VersionMeta.Version410a, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], [None])
     }
 
@@ -27,19 +27,19 @@ class BiosVfSelectPprType(ManagedObject):
     prop_meta = {
 
         "classic": {
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version410a, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version410a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version410a, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "vp_select_ppr_type": MoPropertyMeta("vp_select_ppr_type", "vpSelectPprType", "string", VersionMeta.Version410a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Hard PPR", "disabled", "platform-default"], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version410a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version411c, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []),
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version411c, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version411c, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
+            "vp_select_ppr_type": MoPropertyMeta("vp_select_ppr_type", "vpSelectPprType", "string", VersionMeta.Version411c, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Hard PPR", "disabled", "platform-default"], []),
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version411c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
         },
 
         "modular": {
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version410a, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version410a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version410a, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "vp_select_ppr_type": MoPropertyMeta("vp_select_ppr_type", "vpSelectPprType", "string", VersionMeta.Version410a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Hard PPR", "disabled", "platform-default"], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version410a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version410a, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []),
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version410a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version410a, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
+            "vp_select_ppr_type": MoPropertyMeta("vp_select_ppr_type", "vpSelectPprType", "string", VersionMeta.Version410a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Hard PPR", "disabled", "platform-default"], []),
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version410a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
         },
 
     }

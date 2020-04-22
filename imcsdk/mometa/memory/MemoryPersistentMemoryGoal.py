@@ -26,23 +26,23 @@ class MemoryPersistentMemoryGoal(ManagedObject):
     prop_meta = {
 
         "classic": {
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
-            "memory_mode_percentage": MoPropertyMeta("memory_mode_percentage", "memoryModePercentage", "uint", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, [], ["0-100"]), 
-            "persistent_memory_type": MoPropertyMeta("persistent_memory_type", "persistentMemoryType", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["app-direct", "app-direct-non-interleaved"], []), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
-            "socket_id": MoPropertyMeta("socket_id", "socketId", "string", VersionMeta.Version404b, MoPropertyMeta.NAMING, 0x20, None, None, None, ["ALL"], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version404b, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []),
+            "memory_mode_percentage": MoPropertyMeta("memory_mode_percentage", "memoryModePercentage", "uint", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, [], ["0-100"]),
+            "persistent_memory_type": MoPropertyMeta("persistent_memory_type", "persistentMemoryType", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["app-direct", "app-direct-non-interleaved"], []),
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []),
+            "socket_id": MoPropertyMeta("socket_id", "socketId", "string", VersionMeta.Version404b, MoPropertyMeta.NAMING, 0x20, None, None, None, ["ALL"], []),
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version404b, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
         },
 
         "modular": {
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
-            "memory_mode_percentage": MoPropertyMeta("memory_mode_percentage", "memoryModePercentage", "uint", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, [], ["0-100"]), 
-            "persistent_memory_type": MoPropertyMeta("persistent_memory_type", "persistentMemoryType", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["app-direct", "app-direct-non-interleaved"], []), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []), 
-            "socket_id": MoPropertyMeta("socket_id", "socketId", "string", VersionMeta.Version404b, MoPropertyMeta.NAMING, 0x20, None, None, None, ["ALL"], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version404b, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []),
+            "memory_mode_percentage": MoPropertyMeta("memory_mode_percentage", "memoryModePercentage", "uint", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, [], ["0-100"]),
+            "persistent_memory_type": MoPropertyMeta("persistent_memory_type", "persistentMemoryType", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["app-direct", "app-direct-non-interleaved"], []),
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []),
+            "socket_id": MoPropertyMeta("socket_id", "socketId", "string", VersionMeta.Version404b, MoPropertyMeta.NAMING, 0x20, None, None, None, ["ALL"], []),
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version404b, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
         },
 
     }

@@ -24,19 +24,19 @@ class Error(ManagedObject):
     prop_meta = {
 
         "classic": {
-            "cookie": MoPropertyMeta("cookie", "cookie", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
-            "error_code": MoPropertyMeta("error_code", "errorCode", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
-            "error_descr": MoPropertyMeta("error_descr", "errorDescr", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
-            "invocation_result": MoPropertyMeta("invocation_result", "invocationResult", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
-            "response": MoPropertyMeta("response", "response", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["No", "Yes", "false", "no", "true", "yes"], []), 
+            "cookie": MoPropertyMeta("cookie", "cookie", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []),
+            "error_code": MoPropertyMeta("error_code", "errorCode", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []),
+            "error_descr": MoPropertyMeta("error_descr", "errorDescr", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []),
+            "invocation_result": MoPropertyMeta("invocation_result", "invocationResult", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []),
+            "response": MoPropertyMeta("response", "response", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["No", "Yes", "false", "no", "true", "yes"], []),
         },
 
         "modular": {
-            "cookie": MoPropertyMeta("cookie", "cookie", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
-            "error_code": MoPropertyMeta("error_code", "errorCode", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
-            "error_descr": MoPropertyMeta("error_descr", "errorDescr", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
-            "invocation_result": MoPropertyMeta("invocation_result", "invocationResult", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []), 
-            "response": MoPropertyMeta("response", "response", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["No", "Yes", "no", "yes"], []), 
+            "cookie": MoPropertyMeta("cookie", "cookie", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []),
+            "error_code": MoPropertyMeta("error_code", "errorCode", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []),
+            "error_descr": MoPropertyMeta("error_descr", "errorDescr", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []),
+            "invocation_result": MoPropertyMeta("invocation_result", "invocationResult", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []),
+            "response": MoPropertyMeta("response", "response", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["No", "Yes", "no", "yes"], []),
         },
 
     }
