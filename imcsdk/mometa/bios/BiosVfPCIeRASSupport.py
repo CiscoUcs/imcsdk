@@ -20,7 +20,7 @@ class BiosVfPCIeRASSupport(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("BiosVfPCIeRASSupport", "biosVfPCIeRASSupport", "PCIe-RAS-Support", VersionMeta.Version410a, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], [None]),
+        "classic": MoMeta("BiosVfPCIeRASSupport", "biosVfPCIeRASSupport", "PCIe-RAS-Support", VersionMeta.Version411c, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], [None]),
         "modular": MoMeta("BiosVfPCIeRASSupport", "biosVfPCIeRASSupport", "PCIe-RAS-Support", VersionMeta.Version410a, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], [None])
     }
 
@@ -28,19 +28,19 @@ class BiosVfPCIeRASSupport(ManagedObject):
     prop_meta = {
 
         "classic": {
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version410a, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version410a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version410a, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "vp_pc_ie_ras_support": MoPropertyMeta("vp_pc_ie_ras_support", "vpPCIeRASSupport", "string", VersionMeta.Version410a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version410a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version411c, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []),
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version411c, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version411c, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
+            "vp_pc_ie_ras_support": MoPropertyMeta("vp_pc_ie_ras_support", "vpPCIeRASSupport", "string", VersionMeta.Version411c, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []),
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version411c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
         },
 
         "modular": {
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version410a, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version410a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version410a, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "vp_pc_ie_ras_support": MoPropertyMeta("vp_pc_ie_ras_support", "vpPCIeRASSupport", "string", VersionMeta.Version410a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []), 
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version410a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version410a, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []),
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version410a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version410a, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
+            "vp_pc_ie_ras_support": MoPropertyMeta("vp_pc_ie_ras_support", "vpPCIeRASSupport", "string", VersionMeta.Version410a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []),
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version410a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
         },
 
     }

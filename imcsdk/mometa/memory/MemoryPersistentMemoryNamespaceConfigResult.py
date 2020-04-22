@@ -34,25 +34,25 @@ class MemoryPersistentMemoryNamespaceConfigResult(ManagedObject):
     prop_meta = {
 
         "classic": {
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version404b, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-            "config_status": MoPropertyMeta("config_status", "configStatus", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
-            "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version404b, MoPropertyMeta.NAMING, None, None, None, None, [], []), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
-            "socket_id": MoPropertyMeta("socket_id", "socketId", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, None, None, None, None, ["1", "2", "3", "4"], []), 
-            "socket_local_dimm_number": MoPropertyMeta("socket_local_dimm_number", "socketLocalDimmNumber", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, None, None, None, None, ["10", "12", "2", "4", "6", "8", "Not applicable"], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, 0x8, None, None, r"""((removed|created|modified|deleted),){0,3}(removed|created|modified|deleted){0,1}""", [], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version404b, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
+            "config_status": MoPropertyMeta("config_status", "configStatus", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []),
+            "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version404b, MoPropertyMeta.NAMING, None, None, None, None, [], []),
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []),
+            "socket_id": MoPropertyMeta("socket_id", "socketId", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, None, None, None, None, ["1", "2", "3", "4"], []),
+            "socket_local_dimm_number": MoPropertyMeta("socket_local_dimm_number", "socketLocalDimmNumber", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, None, None, None, None, ["10", "12", "2", "4", "6", "8", "Not applicable"], []),
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, 0x8, None, None, r"""((removed|created|modified|deleted),){0,3}(removed|created|modified|deleted){0,1}""", [], []),
         },
 
         "modular": {
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version404b, MoPropertyMeta.INTERNAL, None, None, None, None, [], []), 
-            "config_status": MoPropertyMeta("config_status", "configStatus", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []), 
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []), 
-            "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version404b, MoPropertyMeta.NAMING, None, None, None, None, [], []), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []), 
-            "socket_id": MoPropertyMeta("socket_id", "socketId", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, None, None, None, None, ["1", "2", "3", "4"], []), 
-            "socket_local_dimm_number": MoPropertyMeta("socket_local_dimm_number", "socketLocalDimmNumber", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, None, None, None, None, ["10", "12", "2", "4", "6", "8", "Not applicable"], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, 0x8, None, None, r"""((removed|created|modified|deleted),){0,3}(removed|created|modified|deleted){0,1}""", [], []), 
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version404b, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
+            "config_status": MoPropertyMeta("config_status", "configStatus", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []),
+            "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version404b, MoPropertyMeta.NAMING, None, None, None, None, [], []),
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []),
+            "socket_id": MoPropertyMeta("socket_id", "socketId", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, None, None, None, None, ["1", "2", "3", "4"], []),
+            "socket_local_dimm_number": MoPropertyMeta("socket_local_dimm_number", "socketLocalDimmNumber", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, None, None, None, None, ["10", "12", "2", "4", "6", "8", "Not applicable"], []),
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, 0x8, None, None, r"""((removed|created|modified|deleted),){0,3}(removed|created|modified|deleted){0,1}""", [], []),
         },
 
     }

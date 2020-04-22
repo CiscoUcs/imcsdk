@@ -23,11 +23,11 @@ class EquipmentPsuColdRedundancy(ManagedObject):
     prop_meta = {
 
         "classic": {
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
-            "enabled": MoPropertyMeta("enabled", "enabled", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["No", "Yes", "false", "no", "true", "yes"], []), 
-            "overall_status": MoPropertyMeta("overall_status", "overallStatus", "string", VersionMeta.Version208d, MoPropertyMeta.READ_ONLY, None, 0, 710, None, [], []), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []),
+            "enabled": MoPropertyMeta("enabled", "enabled", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["No", "Yes", "false", "no", "true", "yes"], []),
+            "overall_status": MoPropertyMeta("overall_status", "overallStatus", "string", VersionMeta.Version208d, MoPropertyMeta.READ_ONLY, None, 0, 710, None, [], []),
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []),
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
         },
 
     }

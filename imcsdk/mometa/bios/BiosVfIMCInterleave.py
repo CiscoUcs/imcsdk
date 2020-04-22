@@ -20,24 +20,24 @@ class BiosVfIMCInterleave(ManagedObject):
 
     mo_meta = {
         "classic": MoMeta("BiosVfIMCInterleave", "biosVfIMCInterleave", "imc-interleave", VersionMeta.Version304a, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], ["Get", "Set"]),
-        "modular": MoMeta("BiosVfIMCInterleave", "biosVfIMCInterleave", "imc-interleave", VersionMeta.Version404b, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], ["Get", "Set"])
+        "modular": MoMeta("BiosVfIMCInterleave", "biosVfIMCInterleave", "imc-interleave", VersionMeta.Version313a, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], ["Get", "Set"])
     }
 
 
     prop_meta = {
 
         "classic": {
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "vp_imc_interleave": MoPropertyMeta("vp_imc_interleave", "vpIMCInterleave", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["1-way Interleave", "2-way Interleave", "Auto", "platform-default"], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []),
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
+            "vp_imc_interleave": MoPropertyMeta("vp_imc_interleave", "vpIMCInterleave", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["1-way Interleave", "2-way Interleave", "Auto", "platform-default"], []),
         },
 
         "modular": {
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []), 
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []), 
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []), 
-            "vp_imc_interleave": MoPropertyMeta("vp_imc_interleave", "vpIMCInterleave", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["1-way Interleave", "2-way Interleave", "Auto", "platform-default"], []), 
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version313a, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []),
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version313a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version313a, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
+            "vp_imc_interleave": MoPropertyMeta("vp_imc_interleave", "vpIMCInterleave", "string", VersionMeta.Version313a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["1-way Interleave", "2-way Interleave", "Auto", "platform-default"], []),
         },
 
     }
