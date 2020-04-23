@@ -1,6 +1,10 @@
 History
 =======
 
+0.9.10 (2020-04-23)
+---------------------
+* More python3 compatibility fixes
+
 0.9.9 (2020-04-22)
 ---------------------
 * Fixes an issue with version meta 
