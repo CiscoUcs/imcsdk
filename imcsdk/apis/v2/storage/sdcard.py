@@ -360,7 +360,7 @@ def _apply_config_card_action_util(handle, mos_dict, vds):
     api = "sd_card_virtual_drive_set"
     mos = []
     controller_dn = mos_dict['flexflash_controller'].dn
-    for vd_type, vd in vds.iteritems():
+    for vd_type, vd in vds.items():
         if not vd.vd_enable:
             continue
         # skip OS if only one slot is available in utility mode in M4
@@ -445,7 +445,7 @@ def _compare(expected_vds, existing_vds):
     if len(expected_vds) != len(existing_vds):
         exists = False
 
-    for exp_vd_type, exp_vd in expected_vds.iteritems():
+    for exp_vd_type, exp_vd in expected_vds.items():
         if exp_vd_type not in existing_vds:
             exists = False
             break
@@ -552,7 +552,7 @@ def _sd_card_config_set_m4(handle, expected_vds, existing_vds, mos_dict=None):
                     existing_os_vd.vd_mo.admin_action = "disable-vd"
                     handle.set_mo(existing_os_vd.vd_mo)
 
-            for expected_vd_type, expected_vd in expected_vds.iteritems():
+            for expected_vd_type, expected_vd in expected_vds.items():
                 existing_vd = existing_vds.get(expected_vd_type, None)
                 if existing_vd is None:
                     continue
@@ -633,7 +633,7 @@ def _sd_card_config_set_m5(handle, expected_vds, existing_vds, mos_dict):
             raise ImcOperationError("sd_card_config_set_m5",
                                     "Maximum two VD's can be enabled")
 
-    for expected_type, expected_vd in expected_vds.iteritems():
+    for expected_type, expected_vd in expected_vds.items():
         if expected_type == 'OS':
             continue
         existing_vd = existing_vds.get(expected_type, None)
@@ -789,7 +789,7 @@ def _get_expected_vds(virtual_drives={}):
 
 def _get_config_str(vds):
     config_str = ""
-    for vd_type, vd in vds.iteritems():
+    for vd_type, vd in vds.items():
         config_str += "%s: " % vd_type
         config_str += "{"
         config_str += str(vd)

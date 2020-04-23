@@ -145,7 +145,7 @@ def _is_boot_order_policy(dn):
 
 def _get_device_type(policy_type, in_device):
     if policy_type == "boot-order-policy":
-        for device_type, device_props in policy_device_dict.iteritems():
+        for device_type, device_props in policy_device_dict.items():
             if device_props["class_id"] == in_device._class_id and \
                     device_props["access"] == in_device.access:
                 return device_type
@@ -633,7 +633,7 @@ def sanitize_input_from_intersight(handle, boot_devices):
         fix_bootloader_options(handle, each)
 
         # Check for any other properties which are "None" and pop them out
-        each = {k: v for k, v in each.iteritems() if v != "None"}
+        each = {k: v for k, v in each.items() if v != "None"}
 
         bd.append({k.lower(): v for k, v in each.items()})
     log.debug("##### Sanitized boot devices %s" % bd)
