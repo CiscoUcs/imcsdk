@@ -20,7 +20,6 @@ import logging
 import json
 import imcsdk.imccoreutils as imccoreutils
 from imcsdk.imccoreutils import is_platform_m4, is_platform_m5
-from imcsdk.imcgenutils import iteritems
 from imcsdk.imcexception import ImcOperationError, ImcException
 from imcsdk.apis.v2.utils import _is_valid_arg
 
@@ -360,7 +359,7 @@ def bios_tokens_set(handle, tokens={}, server_id=1):
     server_mos = _get_server_bios_mo_table(handle, dn=bios_mo.dn)
 
     # Prepare the filtered table i.e. send only those MOs that exist on the server
-    table = {k: v for k, v in iteritems(mo_table) if k in server_mos}
+    table = {k: v for k, v in mo_table.items() if k in server_mos}
 
     log.debug("Mo Table       Count: %s Values: %s" % (len(mo_table), mo_table))
     log.debug("Server Table   Count: %s Values: %s" % (len(server_mos), server_mos))
@@ -369,12 +368,12 @@ def bios_tokens_set(handle, tokens={}, server_id=1):
     processed_tokens = []
     # Separate the MOs which have only platform-default
     for mo_name, props in table.items():
-        non_default_props = {k: v for k, v in iteritems(props) if v != "platform-default"}
+        non_default_props = {k: v for k, v in props.items() if v != "platform-default"}
         # if there are no non-default props, it can be batched
         if len(non_default_props) == 0:
             # filter properties to only those applicable to the server
             server_mo_props = server_mos[mo_name]
-            filtered_props = {k: v for k, v in iteritems(props) if k in server_mo_props and server_mo_props[k]}
+            filtered_props = {k: v for k, v in props.items() if k in server_mo_props and server_mo_props[k]}
 
             if len(filtered_props) == 0:
                 log.debug("skipping token %s props: %s server_mo_props %s " % (mo_name, props, server_mo_props))
@@ -416,7 +415,7 @@ def bios_tokens_set(handle, tokens={}, server_id=1):
     for mo_name, props in table.items():
         d = {}
         server_mo_props = server_mos[mo_name]
-        filtered_props = {k: v for k, v in iteritems(props)
+        filtered_props = {k: v for k, v in props.items()
                           if k in server_mo_props and server_mo_props[k]}
 
         # REALLY DIRTY HACK!!
@@ -562,7 +561,7 @@ def _get_server_bios_mo_table(handle, dn):
     mo_table = {}
 
     for mo in mos:
-        props = {k: v for k, v in iteritems(mo.__dict__) if k.startswith('vp')}
+        props = {k: v for k, v in mo.__dict__.items() if k.startswith('vp')}
         mo_table[mo._class_id] = props
 
     return mo_table

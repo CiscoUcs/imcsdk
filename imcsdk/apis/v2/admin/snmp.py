@@ -82,7 +82,7 @@ def _reset(handle, local_mo, community, trap_community, engine_id_key):
     }
 
     reset = False
-    for prop, val in params.iteritems():
+    for prop, val in params.items():
         if getattr(mo, prop) == "" and input_params[prop] == "":
             log.debug("Reset %s." % prop)
             setattr(mo, prop, val)

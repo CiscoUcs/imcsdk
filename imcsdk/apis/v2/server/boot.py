@@ -20,7 +20,6 @@ import logging
 import re
 
 import imcsdk.imccoreutils as imccoreutils
-import imcsdk.imcgenutils as imcgenutils
 from imcsdk.imcexception import ImcOperationError, ImcOperationErrorDetail
 from imcsdk.mometa.lsboot.LsbootDevPrecision import LsbootDevPrecision
 
@@ -146,7 +145,7 @@ def _is_boot_order_policy(dn):
 
 def _get_device_type(policy_type, in_device):
     if policy_type == "boot-order-policy":
-        for device_type, device_props in policy_device_dict.iteritems():
+        for device_type, device_props in policy_device_dict.items():
             if device_props["class_id"] == in_device._class_id and \
                     device_props["access"] == in_device.access:
                 return device_type
@@ -225,7 +224,7 @@ def _add_boot_device(handle, parent_mo_or_dn, boot_device):
 
     device.order = boot_device["order"]
     device_props = {key: str(value)
-                    for key, value in imcgenutils.iteritems(boot_device)
+                    for key, value in boot_device.items()
                     if key not in ["order", "device-type", "name"]}
 
     # For M4, mac_address will not be sent
@@ -634,7 +633,7 @@ def sanitize_input_from_intersight(handle, boot_devices):
         fix_bootloader_options(handle, each)
 
         # Check for any other properties which are "None" and pop them out
-        each = {k: v for k, v in each.iteritems() if v != "None"}
+        each = {k: v for k, v in each.items() if v != "None"}
 
         bd.append({k.lower(): v for k, v in each.items()})
     log.debug("##### Sanitized boot devices %s" % bd)
