@@ -49,16 +49,10 @@ lint:
 	flake8 imcsdk tests
 
 test:
-
-	python setup.py test
-
-test-all:
-	tox
+	nosetests -w tests
 
 coverage:
-
 	coverage run --source imcsdk setup.py test
-
 	coverage report -m
 	coverage html
 	$(BROWSER) htmlcov/index.html
