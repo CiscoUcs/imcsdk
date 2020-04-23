@@ -65,7 +65,7 @@ def test_mo_to_xml():
     mo.pwd = 'abcd'
     xml = mo.to_xml()
     xml_str = xc.to_xml_str(xml)
-    new_mo = xc.from_xml_str(xml_str)
+    new_mo = xc.from_xml_str(xml_str.decode())
     assert_equal(len(mo.__dict__), len(new_mo.__dict__))
     for prop in mo.__dict__:
         if prop == '_dirty_mask':
