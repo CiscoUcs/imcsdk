@@ -20,7 +20,6 @@ import logging
 import re
 
 import imcsdk.imccoreutils as imccoreutils
-import imcsdk.imcgenutils as imcgenutils
 from imcsdk.imcexception import ImcOperationError, ImcOperationErrorDetail
 from imcsdk.mometa.lsboot.LsbootDevPrecision import LsbootDevPrecision
 
@@ -225,7 +224,7 @@ def _add_boot_device(handle, parent_mo_or_dn, boot_device):
 
     device.order = boot_device["order"]
     device_props = {key: str(value)
-                    for key, value in imcgenutils.iteritems(boot_device)
+                    for key, value in boot_device.items()
                     if key not in ["order", "device-type", "name"]}
 
     # For M4, mac_address will not be sent
