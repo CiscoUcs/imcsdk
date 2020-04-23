@@ -12,27 +12,11 @@
 # limitations under the License.
 
 from nose.tools import assert_equal
-from imcsdk.imccoremeta import ImcVersion
-from ..connection.info import custom_setup, custom_teardown
+from imcsdk.imchandle import ImcHandle
 
 
-def setup_module():
-    global handle
-    handle = custom_setup()
+def test_001_create_handle():
+    handle = ImcHandle("192.168.1.1", "admin", "my_extra_secure_password")
+    assert_equal(handle.username, "admin")
+    assert_equal(handle.ip, "192.168.1.1")
 
-
-def teardown_module():
-    global handle
-    custom_teardown(handle)
-
-
-def test_handle_version():
-    global handle
-    assert_equal(type(handle.version), ImcVersion)
-
-
-def test_handle_mo_version():
-    global handle
-    mos = handle.query_classid("BiosUnit")
-    mo_version = mos[0].get_version(platform=handle.platform)
-    assert_equal((handle.version < mo_version), False)
