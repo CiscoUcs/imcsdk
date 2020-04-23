@@ -57,8 +57,6 @@ def boot_order_precision_get(handle, dump=False, server_id=1):
     sorted_boot_order_list = sorted(
         boot_order_list, key=lambda item: item["order"])
 
-    log.debug("sorted_boot_order_list:\n%s" % sorted_boot_order_list)
-
     if dump:
         log.info("Precision Boot Order is [Order, Type, Name]:")
         log.info("--------------------------------------------")
