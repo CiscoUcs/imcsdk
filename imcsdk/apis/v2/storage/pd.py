@@ -44,8 +44,8 @@ def pd_get(handle,
         StorageLocalDisk object
 
     Examples:
-        mo = pd_get(handle, controller_type='SAS', controller_slot='HBA'',
-                    drive_slot=4')
+        mo = pd_get(handle, controller_type='SAS', controller_slot='HBA',
+                    drive_slot=4)
     """
     controller_dn = _get_controller_dn(handle,
                                        controller_type,
@@ -89,7 +89,7 @@ def pd_set_unconfigured_good(handle,
 
     Examples:
         pd_set_unconfigured_good(handle, controller_type='SAS',
-                                 controller_slot='HBA'', drive_slot=4')
+                                 controller_slot='HBA', drive_slot=4)
     """
     action = StorageLocalDiskConsts.ADMIN_ACTION_MAKE_UNCONFIGURED_GOOD
     return _pd_set_action(
@@ -121,8 +121,8 @@ def pd_set_jbod(handle,
         StorageLocalDisk object
 
     Examples:
-        pd_set_jbod(handle, controller_type='SAS', controller_slot='HBA'',
-                    drive_slot=4')
+        pd_set_jbod(handle, controller_type='SAS', controller_slot='HBA',
+                    drive_slot=4)
     """
     from imcsdk.apis.v2.storage.controller import controller_jbod_exists
 
@@ -148,7 +148,7 @@ def pd_set_global_hot_spare(handle,
                             controller_type, controller_slot, drive_slot,
                             server_id=1):
     """
-    Sets the physical drive as boot drive
+    Sets the physical drive as a global hot spare
 
     Args:
         handle (ImcHandle)
@@ -164,7 +164,7 @@ def pd_set_global_hot_spare(handle,
 
     Examples:
         pd_set_global_hot_spare(handle, controller_type='SAS',
-                                controller_slot='HBA'', drive_slot=4')
+                                controller_slot='HBA', drive_slot=4)
     """
     action = StorageLocalDiskConsts.ADMIN_ACTION_MAKE_GLOBAL_HOT_SPARE
     return _pd_set_action(
@@ -180,7 +180,7 @@ def pd_set_global_hot_spare(handle,
 def pd_set_dedicated_hot_spare(handle, controller_type, controller_slot,
                                drive_slot, vd_id, server_id=1):
     """
-    Sets the physical drive as boot drive
+    Sets the physical drive as dedicated hot spare
 
     Args:
         handle (ImcHandle)
@@ -189,6 +189,7 @@ def pd_set_dedicated_hot_spare(handle, controller_type, controller_slot,
         controller_slot (str): Controller slot name/number
                                 "MEZZ","0"-"9", "HBA"
         drive_slot (int): Slot in which the drive resides
+        vd_id (str): virtual drive id
         server_id (int): server_id for UCS 3260 platform
 
     Returns:
@@ -196,7 +197,7 @@ def pd_set_dedicated_hot_spare(handle, controller_type, controller_slot,
 
     Examples:
         pd_set_dedicated_hot_spare(handle, controller_type='SAS',
-                                   controller_slot='HBA'', drive_slot=4')
+                                   controller_slot='HBA', drive_slot=4, vd_id=4)
     """
     action = StorageLocalDiskConsts.ADMIN_ACTION_MAKE_DEDICATED_HOT_SPARE
     return _pd_set_action(
@@ -229,8 +230,8 @@ def pd_remove_hot_spare(handle,
         StorageLocalDisk object
 
     Examples:
-        pd_set_remove_hot_spare(handle, controller_type='SAS',
-                                controller_slot='HBA'', drive_slot=4')
+        pd_remove_hot_spare(handle, controller_type='SAS',
+                                controller_slot='HBA', drive_slot=4)
     """
     action = StorageLocalDiskConsts.ADMIN_ACTION_REMOVE_HOT_SPARE
     return _pd_set_action(
@@ -263,7 +264,7 @@ def pd_set_boot_drive(handle,
 
     Examples:
         pd_set_boot_drive(handle, controller_type='SAS',
-                          controller_slot='HBA'', drive_slot=4')
+                          controller_slot='HBA', drive_slot=4)
     """
     action = StorageLocalDiskConsts.ADMIN_ACTION_SET_BOOT_DRIVE
     return _pd_set_action(
@@ -290,7 +291,7 @@ def pd_set_removal_prepare(handle,
                            controller_type, controller_slot, drive_slot,
                            server_id=1):
     """
-    Sets the physical drive as boot drive
+    Prepare a drive for removal
 
     Args:
         handle (ImcHandle)
@@ -305,8 +306,8 @@ def pd_set_removal_prepare(handle,
         StorageLocalDisk object
 
     Examples:
-        pd_prepare_removal(handle, controller_type='SAS',
-                           controller_slot='HBA'', drive_slot=4')
+        pd_set_removal_prepare(handle, controller_type='SAS',
+                               controller_slot='HBA', drive_slot=4)
     """
     action = StorageLocalDiskConsts.ADMIN_ACTION_PREPARE_FOR_REMOVAL
     return _pd_set_action(
@@ -323,7 +324,7 @@ def pd_set_removal_undo(handle,
                         controller_type, controller_slot, drive_slot,
                         server_id=1):
     """
-    Sets the physical drive as boot drive
+    Undo a prepare for removal
 
     Args:
         handle (ImcHandle)
@@ -338,8 +339,8 @@ def pd_set_removal_undo(handle,
         StorageLocalDisk object
 
     Examples:
-        pd_undo_removal(handle, controller_type='SAS', controller_slot='HBA'',
-                        drive_slot=4')
+        pd_set_removal_undo(handle, controller_type='SAS',
+                            controller_slot='HBA', drive_slot=4)
     """
     action = StorageLocalDiskConsts.ADMIN_ACTION_UNDO_PREPARE_FOR_REMOVAL
     return _pd_set_action(
@@ -370,11 +371,8 @@ def pd_secure_erase_foreign_drives(handle, controller_type, controller_slot,
         StorageLocalDisk object
 
     Examples:
-        physical_drive_secure_erase_foreign_drives(
-                handle,
-                controller_type='SAS',
-                controller_slot='HBA'',
-                drive_slot=4')
+        pd_secure_erase_foreign_drives(handle, controller_type='SAS',
+                                       controller_slot='HBA', drive_slot=4)
     """
     action = StorageLocalDiskConsts.ADMIN_ACTION_DISABLE_SED_FOREIGN_DRIVES,
     return _pd_set_action(
@@ -412,8 +410,8 @@ def pd_state_set(handle,
         StorageLocalDisk object
 
     Examples:
-        pd_state_set(handle, controller_type='SAS', controller_slot='HBA'',
-                     drive_slot=4'i, drive_state="jbod")
+        pd_state_set(handle, controller_type='SAS', controller_slot='HBA',
+                     drive_slot=4, drive_state="jbod")
     """
 
     ds_map = {
@@ -452,7 +450,7 @@ def pd_state_exists(handle,
                     controller_type, controller_slot, drive_slot, drive_state,
                     vd_id=None, server_id=1):
     """
-    Sets the drive state of physical drive
+    Returns True if the drive state is drive_state else False
 
     Args:
         handle (ImcHandle)
@@ -473,8 +471,8 @@ def pd_state_exists(handle,
         StorageLocalDisk object
 
     Examples:
-        pd_undo_removal(handle, controller_type='SAS', controller_slot='HBA'',
-                        drive_slot=4')
+        pd_state_exists(handle, controller_type='SAS', controller_slot='HBA',
+                        drive_slot=4, drive_state='jbod', vd_id=0)
     """
 
     ds_map = {
@@ -527,11 +525,9 @@ def pd_encryption_capable(handle, controller_type, controller_slot, drive_slot,
         bool
 
     Examples:
-        capable = is_physical_drive_encryption_capable(
-                    handle,
-                    controller_type='SAS',
-                    controller_slot='HBA'',
-                    drive_slot=4')
+        capable = pd_encryption_capable(handle, controller_type='SAS',
+                                        controller_slot='HBA',
+                                        drive_slot=4)
     """
     mo = pd_get(handle, controller_type, controller_slot, drive_slot,
                 server_id)
@@ -561,7 +557,7 @@ def pd_encryption_enable(handle,
 
     Examples:
         pd_encryption_enable(handle, controller_type='SAS',
-                             controller_slot='HBA'', drive_slot=4')
+                             controller_slot='HBA', drive_slot=4)
     """
     # pre-requisite
     # 1) disk should be encryption capable
@@ -608,7 +604,7 @@ def pd_encryption_exists(handle, controller_type, controller_slot, drive_slot,
 
     Examples:
         enabled = pd_encryption_exists(handle, controller_type='SAS',
-                                       controller_slot='HBA'', drive_slot=4')
+                                       controller_slot='HBA', drive_slot=4)
     """
     mo = pd_get(handle, controller_type, controller_slot, drive_slot,
                 server_id)
@@ -639,11 +635,9 @@ def pd_encryption_disable(handle, controller_type, controller_slot, drive_slot,
         StorageLocalDisk object
 
     Examples:
-        physical_drive_encryption_disable(
-                handle,
-                controller_type='SAS',
-                controller_slot='HBA'',
-                drive_slot=4')
+        pd_encryption_disable(handle, controller_type='SAS',
+                              controller_slot='HBA',
+                              drive_slot=4)
     """
     action = StorageLocalDiskConsts.ADMIN_ACTION_DISABLE_SELF_ENCRYPT
     return _pd_set_action(
