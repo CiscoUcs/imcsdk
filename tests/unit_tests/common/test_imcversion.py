@@ -89,9 +89,7 @@ def test_gt_different_major_version():
 
 
 def test_patch_versions():
-    # when we don't see a patch version we use z
-    # so 2.0(12) will be considerde as 2.0(12z)
     version1 = ImcVersion("2.0(12b)")
     version2 = ImcVersion("2.0(12)")
-    assert_equal((version1 > version2), False)
+    assert_equal((version1 > version2), True)
 
