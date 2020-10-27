@@ -64,7 +64,7 @@ class StorageFlexFlashController(ManagedObject):
             "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["configure-cards", "configure-firmware-mode", "reset-flexflash-controller", "reset-partition-default", "sync-card-configuration"], []),
             "auto_sync": MoPropertyMeta("auto_sync", "autoSync", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["No", "Yes", "no", "yes"], []),
             "card_slot": MoPropertyMeta("card_slot", "cardSlot", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, 0, 510, None, ["none", "slot-1", "slot-2"], []),
-            "configured_mode": MoPropertyMeta("configured_mode", "configuredMode", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x10, None, None, None, ["mirror", "util"], []),
+            "configured_mode": MoPropertyMeta("configured_mode", "configuredMode", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["mirror", "util"], []),
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, None, [], []),
             "non_util_partition_name": MoPropertyMeta("non_util_partition_name", "nonUtilPartitionName", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, 0, 15, None, [], []),
             "partition_name": MoPropertyMeta("partition_name", "partitionName", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, 0, 15, None, [], []),

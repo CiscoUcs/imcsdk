@@ -52,6 +52,7 @@ class EquipmentTpm(ManagedObject):
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version201a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []),
             "enabled_status": MoPropertyMeta("enabled_status", "enabledStatus", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["NA", "disabled", "enabled", "unknown"], []),
+            "firmware_version": MoPropertyMeta("firmware_version", "firmwareVersion", "string", VersionMeta.Version412a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "model": MoPropertyMeta("model", "model", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "ownership": MoPropertyMeta("ownership", "ownership", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["NA", "owned", "unknown", "unowned"], []),
             "presence": MoPropertyMeta("presence", "presence", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["NA", "empty", "equipped", "equipped-identity-unestablishable", "equipped-not-primary", "equipped-with-malformed-fru", "inaccessible", "mismatch", "mismatch-identity-unestablishable", "missing", "not-supported", "unauthorized", "unknown"], []),
@@ -68,6 +69,7 @@ class EquipmentTpm(ManagedObject):
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []),
             "enabled_status": MoPropertyMeta("enabled_status", "enabledStatus", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["NA", "disabled", "enabled", "unknown"], []),
+            "firmware_version": MoPropertyMeta("firmware_version", "firmwareVersion", "string", VersionMeta.Version412a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "model": MoPropertyMeta("model", "model", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "ownership": MoPropertyMeta("ownership", "ownership", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["NA", "owned", "unknown", "unowned"], []),
             "presence": MoPropertyMeta("presence", "presence", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["NA", "empty", "equipped", "equipped-identity-unestablishable", "equipped-not-primary", "equipped-with-malformed-fru", "inaccessible", "mismatch", "mismatch-identity-unestablishable", "missing", "not-supported", "unauthorized", "unknown"], []),
@@ -88,6 +90,7 @@ class EquipmentTpm(ManagedObject):
             "childAction": "child_action", 
             "dn": "dn", 
             "enabledStatus": "enabled_status", 
+            "firmwareVersion": "firmware_version", 
             "model": "model", 
             "ownership": "ownership", 
             "presence": "presence", 
@@ -104,6 +107,7 @@ class EquipmentTpm(ManagedObject):
             "childAction": "child_action", 
             "dn": "dn", 
             "enabledStatus": "enabled_status", 
+            "firmwareVersion": "firmware_version", 
             "model": "model", 
             "ownership": "ownership", 
             "presence": "presence", 
@@ -122,6 +126,7 @@ class EquipmentTpm(ManagedObject):
         self.active_status = None
         self.child_action = None
         self.enabled_status = None
+        self.firmware_version = None
         self.model = None
         self.ownership = None
         self.presence = None
