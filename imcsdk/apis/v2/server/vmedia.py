@@ -17,9 +17,9 @@ This module implements all the kvm and sol related samples
 """
 import os
 import time
-import urlparse
 import re
 import logging
+from six.moves.urllib.parse import urlparse
 
 from imcsdk.mometa.comm.CommVMedia import CommVMedia
 from imcsdk.mometa.comm.CommVMediaMap import CommVMediaMap
@@ -542,7 +542,8 @@ def vmedia_mount_remove_all(handle, volumes= None, server_id=1):
 
     Args:
         handle (ImcHandle)
-        volumes(list): list of volumes which need to be removed from saved vmedia mapping lists
+        volumes(list): list of volumes which need to be removed from saved vmedia mapping lists. If no volumes provided
+                        then all volumes will be removed
         server_id (int): Server Id to be specified for C3260 platforms
 
     Raises:
@@ -562,7 +563,8 @@ def vmedia_mount_remove_all(handle, volumes= None, server_id=1):
     mos = []
     # Loop over each mapping
     for virt_media in virt_media_maps:
-        if virt_media.get_class_id() == 'CommSavedVMediaMap' and virt_media.volume_name in volumes:
+        if virt_media.get_class_id() == 'CommSavedVMediaMap' and \
+                (not volumes or virt_media.volume_name in volumes):
             virt_media.admin_action = CommSavedVMediaMapConsts.ADMIN_ACTION_DELETE_VOLUME
             mos.append(virt_media)
         elif virt_media.get_class_id() == 'CommVMediaMap':

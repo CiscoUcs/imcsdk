@@ -28,6 +28,7 @@ from imcsdk.mometa.adaptor.AdaptorUnit import AdaptorUnitConsts
 from imcsdk.mometa.adaptor.AdaptorExtEthIf import AdaptorExtEthIfConsts
 from imcsdk.apis.v2.server.serveractions import _wait_for_power_state, \
      server_power_cycle, server_power_state_get
+from imcsdk.mometa.compute.ComputeRackUnit import ComputeRackUnitConsts
 from imcsdk.apis.v2.server.adaptor import adaptor_properties_get
 
 log = logging.getLogger('imc')
@@ -38,6 +39,8 @@ class VicConst(object):
     VHBA_ERROR_MSG = "Create Virtual Fibre-Channel Interface Failed."
     DCE_IF_ERROR_MSG = "Configuration of DCE Interface Failed."
     CL74_UNSUPPORTED_ADAPTOR = ["UCSC-PCIE-C100-04", "UCSC-MLOM-C100-04"]
+    CONFIG_ADAPTOR_ERROR  = "Configure Adapter"
+    ADAPTOR_INIT_RETRY_COUNT = 12
 
 
 vic_map = {
@@ -117,25 +120,26 @@ def adaptor_set_all(handle, adaptors=None, server_id=1, **kwargs):
 
     api = 'adaptor_set_all'
     api_error_msg = VicConst.ADAPTOR_ERROR_MSG
+    config_adaptor_err = VicConst.CONFIG_ADAPTOR_ERROR
 
     if not adaptors:
         log.debug("No adapters present for configuration")
         return
 
     # fetch adaptors from end point, adaptor_ep_dict is dict {id, adaptor_mo}
-    adaptor_ep_dict = _prepare_ep_adaptor_dict(handle, api_error_msg)
+    adaptor_ep_dict = _prepare_ep_adaptor_dict(handle, config_adaptor_err)
 
     # validate input and checks if adaptor exists at end point
     for adaptor in adaptors:
         id = adaptor.get('id', None)
         if id is None:
             raise ImcOperationError(
-                api_error_msg,
+                config_adaptor_err,
                 'Provide adapter slot to configure')
 
         if id not in adaptor_ep_dict:
             raise ImcOperationError(
-                api_error_msg,
+                config_adaptor_err,
                 "Adaptor %s is not present at end point." % id)
 
     # configure adapter
@@ -143,6 +147,11 @@ def adaptor_set_all(handle, adaptors=None, server_id=1, **kwargs):
 
     restart_server = None
     adaptor_list = []
+
+    if server_power_state_get(handle) != ComputeRackUnitConsts.OPER_POWER_ON:
+        raise ImcOperationError(
+              config_adaptor_err,
+              "Server is powered off. Power on the server and retry.")
 
     #adaptors are the configured adaptors in intersight AdaptorConfiguration Policy
     for adaptor in adaptors:
@@ -157,7 +166,21 @@ def adaptor_set_all(handle, adaptors=None, server_id=1, **kwargs):
         # admin_state = adaptor.pop('admin_state', None)
 
         mo = adaptor_ep_dict[id]
-        adaptor_properties = adaptor_properties_get(handle, id, server_id=1)
+        retry = 0
+        adaptor_initialized = False
+        while not adaptor_initialized and retry < VicConst.ADAPTOR_INIT_RETRY_COUNT:
+            try:
+                adaptor_properties = adaptor_properties_get(handle, id, server_id=1)
+                adaptor_initialized= True
+            except ImcOperationError:
+                retry += 1
+                time.sleep(5)
+        if not adaptor_initialized:
+            log.debug("Adaptor initialisation failure for adaptor at slot %s", id)
+            raise ImcOperationError(
+                config_adaptor_err,
+                "Adaptor %s is not initialised. Please retry after sometime." % id)
+
         adaptor_list.append(adaptor_properties)
         #port_channel_capable  returns None for < Gen4 adapters and False for Gen4+ unsupported portchannel adapters.
         #Hence a check has to be done for both None and False
@@ -222,7 +245,8 @@ def adaptor_set_all(handle, adaptors=None, server_id=1, **kwargs):
         for adaptor in adaptor_list:
             adaptor_initialization_in_progress = True
             wait_count = 0
-            while adaptor_initialization_in_progress and wait_count < 5:
+            #VIC adaptor takes 30-40secs to get initialised. Hence, the time-out is set to 1 minute max with every 5 sec retry.
+            while adaptor_initialization_in_progress and wait_count < VicConst.ADAPTOR_INIT_RETRY_COUNT:
                 try:
                     adaptor = _get_mo(handle, dn=adaptor.dn)
                     adaptor_initialization_in_progress = False
@@ -234,7 +258,7 @@ def adaptor_set_all(handle, adaptors=None, server_id=1, **kwargs):
             if adaptor_initialization_in_progress:
                 log.debug("Adaptor initialisation failure for adaptor at slot %s", adaptor.pci_slot)
                 raise ImcOperationError(
-                    api_error_msg,
+                    config_adaptor_err,
                     "Adaptor %s is not initialised at end point." % adaptor.pci_slot)
         log.debug("Sleeping for 1 minute")
         time.sleep(60)
@@ -735,7 +759,7 @@ def vnic_create_all(handle, vnics=None, adaptors_to_reset=None,
     vnic_count_per_request = 3
     ret = []
 
-    vnic_children_classid_to_send_later = ["AdaptorEthUSNICProfile"]
+    vnic_children_classid_to_send_later = ["AdaptorEthUSNICProfile", "AdaptorEthMultiQueueProfile"]
 
     # create vnics mo with children
     vnics = _create_vics_with_children(handle, vic_type, api_error_msg, vnics,

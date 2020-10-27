@@ -28,6 +28,7 @@ log = logging.getLogger('imc')
 
 PXE_DELIMITER = "~~~"
 PXE_API_ERROR = "Cannot configure PXE device."
+pxe_devices_count_per_slot = {}
 
 
 class PxeBootDevice(object):
@@ -212,6 +213,16 @@ def _enable_pxe_boot_vnic(handle, slot_vnicname_map, ep_slot_vnicname_map):
             continue
         if missing_vnic_str:
             continue
+        
+        # check not to configure pxe for more than 4 interfaces, CIMC supports only 4 pxe enabled interfaces on a given slot.
+        slot_ep = slot_vnicname.split(PXE_DELIMITER)[0]
+        if slot_ep not in pxe_devices_count_per_slot:
+            pxe_devices_count_per_slot[slot_ep] = 0
+        pxe_devices_count_per_slot[slot_ep] += 1
+        
+        if pxe_devices_count_per_slot[slot_ep] > 4:
+            raise ImcOperationErrorDetail("","Cannot configure more than 4 pxe devices on slot %s."  %(slot_ep),"")
+
         vnic = ep_slot_vnicname_map[slot_vnicname]
         vnic.pxe_boot = "enabled"
         vnics_to_configure.append(vnic)
@@ -281,6 +292,16 @@ def _enable_pxe_boot_mac(handle, mac_address_map, ep_mac_map):
         if missing_mac_str:
             continue
         
+        # check not to configure pxe for more than 4 interfaces, CIMC supports only 4 pxe enabled interfaces on a given slot.
+        match = re.search(pattern, ep_mac_map[mac].dn)
+        slot_ep = match.groupdict()['slot']
+        if slot_ep not in pxe_devices_count_per_slot:
+            pxe_devices_count_per_slot[slot_ep] = 0
+        pxe_devices_count_per_slot[slot_ep] += 1
+        
+        if pxe_devices_count_per_slot[slot_ep] > 4:
+            raise ImcOperationErrorDetail("","Cannot configure more than 4 pxe devices on slot %s."  %(slot_ep),"")
+
         vnic = ep_mac_map[mac]
         vnic.pxe_boot = "enabled"
         vnics_to_configure.append(vnic)

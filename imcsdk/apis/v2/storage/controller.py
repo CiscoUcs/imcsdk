@@ -544,3 +544,27 @@ def controller_action_exists(handle, controller_type, controller_slot,
 
     execute_api = api_map[action]
     return execute_api(**params)
+
+def controller_m2_hwraid_exists(handle, controller_slot, server_id=1):
+    """
+    Checks if the controller in the controller_slot is a M.2 HWRAID Controller.
+    Args:
+        handle (ImcHandle)
+        controller_slot (str): Controller slot name/number
+            Example: "MSTOR-RAID", "0", "MSRAID", "HBA"
+        server_id (int): server_id for UCS3260 platform
+
+    Returns:
+        True/False
+
+    Examples:
+        controller_m2_hwraid_exists(handle, controller_slott="MSTOR-RAID")
+    """
+    if not controller_slot:
+        raise ImcOperationError("Get Storage controller MO object failed. controller slot is not specified.")
+    storage_controllers = handle.query_classid('storageController')
+    for mo in storage_controllers:
+        if mo.pci_slot == controller_slot:
+            if mo.pid == "UCS-M2-HWRAID":
+                return True
+    return False

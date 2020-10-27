@@ -18,9 +18,9 @@ This module provides APIs for physical drive configuration.
 
 import logging
 
-from imcsdk.imcexception import ImcOperationError
+from imcsdk.imcexception import ImcOperationError, ImcException
 from imcsdk.mometa.storage.StorageLocalDisk import StorageLocalDiskConsts
-from imcsdk.apis.v2.storage.controller import _get_controller_dn
+from imcsdk.apis.v2.storage.controller import _get_controller_dn, controller_m2_hwraid_exists
 
 log = logging.getLogger('imc')
 
@@ -197,7 +197,7 @@ def pd_set_dedicated_hot_spare(handle, controller_type, controller_slot,
 
     Examples:
         pd_set_dedicated_hot_spare(handle, controller_type='SAS',
-                                   controller_slot='HBA', drive_slot=4, vd_id=4)
+                                   controller_slot='HBA', drive_slot=4)
     """
     action = StorageLocalDiskConsts.ADMIN_ACTION_MAKE_DEDICATED_HOT_SPARE
     return _pd_set_action(
@@ -291,7 +291,7 @@ def pd_set_removal_prepare(handle,
                            controller_type, controller_slot, drive_slot,
                            server_id=1):
     """
-    Prepare a drive for removal
+    Sets the physical drive as boot drive
 
     Args:
         handle (ImcHandle)
@@ -306,8 +306,8 @@ def pd_set_removal_prepare(handle,
         StorageLocalDisk object
 
     Examples:
-        pd_set_removal_prepare(handle, controller_type='SAS',
-                               controller_slot='HBA', drive_slot=4)
+        pd_prepare_removal(handle, controller_type='SAS',
+                           controller_slot='HBA', drive_slot=4)
     """
     action = StorageLocalDiskConsts.ADMIN_ACTION_PREPARE_FOR_REMOVAL
     return _pd_set_action(
@@ -324,7 +324,7 @@ def pd_set_removal_undo(handle,
                         controller_type, controller_slot, drive_slot,
                         server_id=1):
     """
-    Undo a prepare for removal
+    Sets the physical drive as boot drive
 
     Args:
         handle (ImcHandle)
@@ -339,8 +339,8 @@ def pd_set_removal_undo(handle,
         StorageLocalDisk object
 
     Examples:
-        pd_set_removal_undo(handle, controller_type='SAS',
-                            controller_slot='HBA', drive_slot=4)
+        pd_undo_removal(handle, controller_type='SAS', controller_slot='HBA'',
+                        drive_slot=4')
     """
     action = StorageLocalDiskConsts.ADMIN_ACTION_UNDO_PREPARE_FOR_REMOVAL
     return _pd_set_action(
@@ -371,8 +371,11 @@ def pd_secure_erase_foreign_drives(handle, controller_type, controller_slot,
         StorageLocalDisk object
 
     Examples:
-        pd_secure_erase_foreign_drives(handle, controller_type='SAS',
-                                       controller_slot='HBA', drive_slot=4)
+        physical_drive_secure_erase_foreign_drives(
+                handle,
+                controller_type='SAS',
+                controller_slot='HBA'',
+                drive_slot=4')
     """
     action = StorageLocalDiskConsts.ADMIN_ACTION_DISABLE_SED_FOREIGN_DRIVES,
     return _pd_set_action(
@@ -383,6 +386,126 @@ def pd_secure_erase_foreign_drives(handle, controller_type, controller_slot,
             action=action,
             server_id=server_id
         )
+
+def sc_pd_state_set(handle, storage_controllers, drive_state, server_id=1, **kwargs):
+    """
+    Wrapper function for pd_state_set to handle multiple storage controllers.
+    sc_pd_state_set sets the physical disk state of each of the storage controller in storage_controllers list.
+
+    Args:
+        handle (ImcHandle)
+        storage_controllers (dictionary):
+        Key: Storage controller pciSlot (string)
+        Value: extravars of that storage controller.
+                    {
+          "storage_controllers": {
+            "MRAID": {
+              "controller_type": "SAS",
+              "virtual_drives_on_pd": [
+                {
+                  "self_encrypt": false,
+                  "read_policy": "no-read-ahead",
+                  "cache_policy": "direct-io",
+                  "disk_cache_policy": "unchanged",
+                  "virtual_drive_name": "vd1",
+                  "raid_level": 1,
+                  "drive_group": "[[1,2]]",
+                  "write_policy": "write-through",
+                  "access_policy": "read-write",
+                  "size": "1024 MB"
+                }
+              ],
+              "dedicated_hot_spares": [
+                {
+                  "slot": 3,
+                  "vd_id": "0"
+                }
+              ],
+              "controller_slot": "MRAID",
+              "virtual_drives_on_vd": [
+                {
+                  "read_policy": "no-read-ahead",
+                  "cache_policy": "direct-io",
+                  "disk_cache_policy": "unchanged",
+                  "virtual_drive_name": "vd2",
+                  "write_policy": "write-through",
+                  "shared_virtual_drive_name": "vd1",
+                  "access_policy": "read-write",
+                  "size": "1024 MB"
+                }
+              ],
+              "disks_state": [
+                {
+                  "slot": 4,
+                  "state": "global_hot_spare"
+                }
+              ],
+              "remove_all_vds": true
+            }
+          }
+        }
+
+    Example:
+        sc_pd_state_set(handle, storage_controllers, drive_state="dedicated_hot_spare",
+                     server_id=1)
+    """
+    if len(storage_controllers) == 0:
+        raise ImcOperationError("Setting physical disk state failed. ",
+                                "Storage controllers information is not specified.")
+    for sc_obj in storage_controllers:
+        sc = storage_controllers.get(sc_obj)
+
+        #Check for storage controller and ignore if it is M.2 HWRAID Storage Controller as
+        #setting physical disk state is invalid.
+        is_m2_controller = controller_m2_hwraid_exists(handle, sc["controller_slot"], server_id)
+
+        #Check for the physical disk state to configure its defined state.
+        disks_state = sc.get("disks_state")
+        if disks_state and not drive_state:
+            for disk in disks_state:
+                if disk.get("slot") is None or disk.get("state") is None:
+                    raise ImcOperationError("Setting physical disk state failed. "
+                                            "Drive slot/state is not found in controller: %s" % sc["controller_slot"])
+
+                if not is_m2_controller:
+                    try:
+                        pd_state_set(handle,
+                                 sc["controller_type"],
+                                 sc["controller_slot"],
+                                 disk["slot"],
+                                 disk["state"])
+                    except ImcException as e:
+                        # On deleting the VD, the pd state gets changed. If the end point state is same as configuration state,
+                        # CIMC throws an ImcException.
+                        # ignore errors because sometimes the previous operations will change the disk state to desired state
+                        # eg: removing virtual drives move online disks to unconfigured good and dedicated hot spares to
+                        # unconfigured good. Ignore this exception as our configuration state is same as end point state.
+                        log.debug(e)
+                        pass
+
+        #Check if any dedicated_hot_spare disk configuration exists.
+        dedicated_hot_spares = sc.get("dedicated_hot_spares")
+        if dedicated_hot_spares and drive_state:
+            for spare in dedicated_hot_spares:
+                if spare.get("slot") is None or spare.get("vd_id") is None:
+                    raise ImcOperationError("Setting physical disk as dedicated hot spare failed. "
+                                            "Drive slot or vd_id not found in controller: %s" % sc["controller_slot"])
+                if not is_m2_controller:
+                    try:
+                        pd_state_set(handle,
+                                 sc["controller_type"],
+                                 sc["controller_slot"],
+                                 spare["slot"],
+                                 drive_state,
+                                 spare["vd_id"])
+                    except ImcException as e:
+                        # On deleting the VD, the pd state gets changed. If the end point state is same as configuration state,
+                        # CIMC throws an ImcException.
+                        # ignore errors because sometimes the previous operations will change the disk state to desired state
+                        # eg: removing virtual drives move online disks to unconfigured good and dedicated hot spares to
+                        # unconfigured good. Ignore this exception as our configuration state is same as end point state.
+                        log.debug(e)
+                        pass
 
 
 def pd_state_set(handle,
@@ -410,10 +533,9 @@ def pd_state_set(handle,
         StorageLocalDisk object
 
     Examples:
-        pd_state_set(handle, controller_type='SAS', controller_slot='HBA',
-                     drive_slot=4, drive_state="jbod")
+        pd_state_set(handle, controller_type='SAS', controller_slot='HBA'',
+                     drive_slot=4'i, drive_state="jbod")
     """
-
     ds_map = {
         "unconfigured_good": pd_set_unconfigured_good,
         "jbod": pd_set_jbod,
@@ -445,12 +567,78 @@ def pd_state_set(handle,
     execute_api = ds_map[drive_state]
     return execute_api(**params)
 
+def sc_pd_state_exists(handle, storage_controllers, drive_state, server_id=1):
+    """
+    Wrapper function for pd_state_exists to handle multiple storage controllers.
+
+    Args:
+        handle (ImcHandle)
+        storage_controllers (dictionary):
+        Key: Storage controller pciSlot (string)
+        Value: config information of that storage controller.
+        drive_state (str)
+
+    Example:
+        sc_pd_state_exists(handle, storage_controllers, drive_state,
+                     server_id=1)
+
+    Return:
+        exists (bool):  False / True
+        mo : Physical Disks mos if it exists at end point.
+    """
+    error_msg = "Physical disk state check failed. "
+    if len(storage_controllers) == 0:
+        raise ImcOperationError(error_msg + "Storage controllers information is not specified.")
+
+    if storage_controllers.get("remove_all_vds"):
+        storage_controllers.pop("remove_all_vds")
+
+    not_exists_pds_mo = []
+    #If pd status at end point is same as the configuration state from policy, push the pd mo to a exists_pds list.
+    for sc_obj in storage_controllers:
+        sc = storage_controllers.get(sc_obj)
+
+        if not sc.get("controller_slot"):
+            raise ImcOperationError(error_msg + "controller_slot is not specified.")
+
+        if not sc.get("controller_type"):
+            raise ImcOperationError(error_msg + "controller_type is not specified for "
+                                                "controller at pci slot: %s" % sc["controller_slot"])
+        pds_to_set = []
+        #Check for the physical disk disk state to configure its defined state.
+        disks_state = sc.get("disks_state")
+        if disks_state and not drive_state:
+            for disk in disks_state:
+                if disk.get("slot")is None or disk.get("state") is None:
+                    raise ImcOperationError("Physical disk state check failed. drive slot/state not found.")
+
+                exists, mo = pd_state_exists(handle,sc["controller_type"],sc["controller_slot"],disk["slot"],disk["state"])
+                if not exists:
+                    not_exists_pds_mo.append(mo)
+                    pds_to_set.append(disk)
+            sc["disks_state"] = pds_to_set
+        hot_spares_pd = []
+        #Check for dedicated hot spares
+        dedicated_hot_spares = sc.get("dedicated_hot_spares")
+        if dedicated_hot_spares and drive_state:
+            for spare in dedicated_hot_spares:
+                if spare.get("slot") is None or spare.get("vd_id") is None:
+                    raise ImcOperationError("Physical disk state check failed. drive slot or vd id not found.")
+
+                exists, mo = pd_state_exists(handle,sc["controller_type"],sc["controller_slot"],spare["slot"],drive_state,spare["vd_id"])
+                if not exists:
+                    not_exists_pds_mo.append(mo)
+                    hot_spares_pd.append(spare)
+            sc["dedicated_hot_spares"] = hot_spares_pd
+    if len(not_exists_pds_mo) == 0:
+        return True, not_exists_pds_mo
+    return False, not_exists_pds_mo
 
 def pd_state_exists(handle,
                     controller_type, controller_slot, drive_slot, drive_state,
                     vd_id=None, server_id=1):
     """
-    Returns True if the drive state is drive_state else False
+    Sets the drive state of physical drive
 
     Args:
         handle (ImcHandle)
@@ -471,10 +659,9 @@ def pd_state_exists(handle,
         StorageLocalDisk object
 
     Examples:
-        pd_state_exists(handle, controller_type='SAS', controller_slot='HBA',
-                        drive_slot=4, drive_state='jbod', vd_id=0)
+        pd_undo_removal(handle, controller_type='SAS', controller_slot='HBA'',
+                        drive_slot=4')
     """
-
     ds_map = {
         "unconfigured_good": "Unconfigured Good",
         "jbod": "JBOD",
@@ -525,9 +712,11 @@ def pd_encryption_capable(handle, controller_type, controller_slot, drive_slot,
         bool
 
     Examples:
-        capable = pd_encryption_capable(handle, controller_type='SAS',
-                                        controller_slot='HBA',
-                                        drive_slot=4)
+        capable = is_physical_drive_encryption_capable(
+                    handle,
+                    controller_type='SAS',
+                    controller_slot='HBA'',
+                    drive_slot=4')
     """
     mo = pd_get(handle, controller_type, controller_slot, drive_slot,
                 server_id)
@@ -557,7 +746,7 @@ def pd_encryption_enable(handle,
 
     Examples:
         pd_encryption_enable(handle, controller_type='SAS',
-                             controller_slot='HBA', drive_slot=4)
+                             controller_slot='HBA'', drive_slot=4')
     """
     # pre-requisite
     # 1) disk should be encryption capable
@@ -604,7 +793,7 @@ def pd_encryption_exists(handle, controller_type, controller_slot, drive_slot,
 
     Examples:
         enabled = pd_encryption_exists(handle, controller_type='SAS',
-                                       controller_slot='HBA', drive_slot=4)
+                                       controller_slot='HBA'', drive_slot=4')
     """
     mo = pd_get(handle, controller_type, controller_slot, drive_slot,
                 server_id)
@@ -635,9 +824,11 @@ def pd_encryption_disable(handle, controller_type, controller_slot, drive_slot,
         StorageLocalDisk object
 
     Examples:
-        pd_encryption_disable(handle, controller_type='SAS',
-                              controller_slot='HBA',
-                              drive_slot=4)
+        physical_drive_encryption_disable(
+                handle,
+                controller_type='SAS',
+                controller_slot='HBA'',
+                drive_slot=4')
     """
     action = StorageLocalDiskConsts.ADMIN_ACTION_DISABLE_SELF_ENCRYPT
     return _pd_set_action(
