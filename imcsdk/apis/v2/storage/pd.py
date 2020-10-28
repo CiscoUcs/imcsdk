@@ -93,13 +93,13 @@ def pd_set_unconfigured_good(handle,
     """
     action = StorageLocalDiskConsts.ADMIN_ACTION_MAKE_UNCONFIGURED_GOOD
     return _pd_set_action(
-            handle,
-            controller_type=controller_type,
-            controller_slot=controller_slot,
-            drive_slot=drive_slot,
-            action=action,
-            server_id=server_id
-        )
+        handle,
+        controller_type=controller_type,
+        controller_slot=controller_slot,
+        drive_slot=drive_slot,
+        action=action,
+        server_id=server_id
+    )
 
 
 def pd_set_jbod(handle,
@@ -135,13 +135,13 @@ def pd_set_jbod(handle,
 
     action = StorageLocalDiskConsts.ADMIN_ACTION_MAKE_JBOD
     return _pd_set_action(
-            handle,
-            controller_type=controller_type,
-            controller_slot=controller_slot,
-            drive_slot=drive_slot,
-            action=action,
-            server_id=server_id
-        )
+        handle,
+        controller_type=controller_type,
+        controller_slot=controller_slot,
+        drive_slot=drive_slot,
+        action=action,
+        server_id=server_id
+    )
 
 
 def pd_set_global_hot_spare(handle,
@@ -168,13 +168,13 @@ def pd_set_global_hot_spare(handle,
     """
     action = StorageLocalDiskConsts.ADMIN_ACTION_MAKE_GLOBAL_HOT_SPARE
     return _pd_set_action(
-            handle,
-            controller_type=controller_type,
-            controller_slot=controller_slot,
-            drive_slot=drive_slot,
-            action=action,
-            server_id=server_id
-        )
+        handle,
+        controller_type=controller_type,
+        controller_slot=controller_slot,
+        drive_slot=drive_slot,
+        action=action,
+        server_id=server_id
+    )
 
 
 def pd_set_dedicated_hot_spare(handle, controller_type, controller_slot,
@@ -201,14 +201,14 @@ def pd_set_dedicated_hot_spare(handle, controller_type, controller_slot,
     """
     action = StorageLocalDiskConsts.ADMIN_ACTION_MAKE_DEDICATED_HOT_SPARE
     return _pd_set_action(
-            handle,
-            controller_type=controller_type,
-            controller_slot=controller_slot,
-            drive_slot=drive_slot,
-            action=action,
-            server_id=server_id,
-            dedicated_hot_spare_for_vd_id=vd_id
-        )
+        handle,
+        controller_type=controller_type,
+        controller_slot=controller_slot,
+        drive_slot=drive_slot,
+        action=action,
+        server_id=server_id,
+        dedicated_hot_spare_for_vd_id=vd_id
+    )
 
 
 def pd_remove_hot_spare(handle,
@@ -235,13 +235,13 @@ def pd_remove_hot_spare(handle,
     """
     action = StorageLocalDiskConsts.ADMIN_ACTION_REMOVE_HOT_SPARE
     return _pd_set_action(
-            handle,
-            controller_type=controller_type,
-            controller_slot=controller_slot,
-            drive_slot=drive_slot,
-            action=action,
-            server_id=server_id
-        )
+        handle,
+        controller_type=controller_type,
+        controller_slot=controller_slot,
+        drive_slot=drive_slot,
+        action=action,
+        server_id=server_id
+    )
 
 
 def pd_set_boot_drive(handle,
@@ -268,13 +268,13 @@ def pd_set_boot_drive(handle,
     """
     action = StorageLocalDiskConsts.ADMIN_ACTION_SET_BOOT_DRIVE
     return _pd_set_action(
-            handle,
-            controller_type=controller_type,
-            controller_slot=controller_slot,
-            drive_slot=drive_slot,
-            action=action,
-            server_id=server_id
-        )
+        handle,
+        controller_type=controller_type,
+        controller_slot=controller_slot,
+        drive_slot=drive_slot,
+        action=action,
+        server_id=server_id
+    )
 
 
 def _pd_exists_boot_drive(handle, pd_dn):
@@ -311,13 +311,13 @@ def pd_set_removal_prepare(handle,
     """
     action = StorageLocalDiskConsts.ADMIN_ACTION_PREPARE_FOR_REMOVAL
     return _pd_set_action(
-            handle,
-            controller_type=controller_type,
-            controller_slot=controller_slot,
-            drive_slot=drive_slot,
-            action=action,
-            server_id=server_id
-        )
+        handle,
+        controller_type=controller_type,
+        controller_slot=controller_slot,
+        drive_slot=drive_slot,
+        action=action,
+        server_id=server_id
+    )
 
 
 def pd_set_removal_undo(handle,
@@ -344,13 +344,13 @@ def pd_set_removal_undo(handle,
     """
     action = StorageLocalDiskConsts.ADMIN_ACTION_UNDO_PREPARE_FOR_REMOVAL
     return _pd_set_action(
-            handle,
-            controller_type=controller_type,
-            controller_slot=controller_slot,
-            drive_slot=drive_slot,
-            action=action,
-            server_id=server_id
-        )
+        handle,
+        controller_type=controller_type,
+        controller_slot=controller_slot,
+        drive_slot=drive_slot,
+        action=action,
+        server_id=server_id
+    )
 
 
 def pd_secure_erase_foreign_drives(handle, controller_type, controller_slot,
@@ -379,13 +379,14 @@ def pd_secure_erase_foreign_drives(handle, controller_type, controller_slot,
     """
     action = StorageLocalDiskConsts.ADMIN_ACTION_DISABLE_SED_FOREIGN_DRIVES,
     return _pd_set_action(
-            handle,
-            controller_type=controller_type,
-            controller_slot=controller_slot,
-            drive_slot=drive_slot,
-            action=action,
-            server_id=server_id
-        )
+        handle,
+        controller_type=controller_type,
+        controller_slot=controller_slot,
+        drive_slot=drive_slot,
+        action=action,
+        server_id=server_id
+    )
+
 
 def sc_pd_state_set(handle, storage_controllers, drive_state, server_id=1, **kwargs):
     """
@@ -455,11 +456,11 @@ def sc_pd_state_set(handle, storage_controllers, drive_state, server_id=1, **kwa
     for sc_obj in storage_controllers:
         sc = storage_controllers.get(sc_obj)
 
-        #Check for storage controller and ignore if it is M.2 HWRAID Storage Controller as
-        #setting physical disk state is invalid.
+        # Check for storage controller and ignore if it is M.2 HWRAID Storage Controller as
+        # setting physical disk state is invalid.
         is_m2_controller = controller_m2_hwraid_exists(handle, sc["controller_slot"], server_id)
 
-        #Check for the physical disk state to configure its defined state.
+        # Check for the physical disk state to configure its defined state.
         disks_state = sc.get("disks_state")
         if disks_state and not drive_state:
             for disk in disks_state:
@@ -471,9 +472,9 @@ def sc_pd_state_set(handle, storage_controllers, drive_state, server_id=1, **kwa
                     try:
                         pd_state_set(handle,
                                  sc["controller_type"],
-                                 sc["controller_slot"],
-                                 disk["slot"],
-                                 disk["state"])
+                            sc["controller_slot"],
+                            disk["slot"],
+                            disk["state"])
                     except ImcException as e:
                         # On deleting the VD, the pd state gets changed. If the end point state is same as configuration state,
                         # CIMC throws an ImcException.
@@ -483,7 +484,7 @@ def sc_pd_state_set(handle, storage_controllers, drive_state, server_id=1, **kwa
                         log.debug(e)
                         pass
 
-        #Check if any dedicated_hot_spare disk configuration exists.
+        # Check if any dedicated_hot_spare disk configuration exists.
         dedicated_hot_spares = sc.get("dedicated_hot_spares")
         if dedicated_hot_spares and drive_state:
             for spare in dedicated_hot_spares:
@@ -494,10 +495,10 @@ def sc_pd_state_set(handle, storage_controllers, drive_state, server_id=1, **kwa
                     try:
                         pd_state_set(handle,
                                  sc["controller_type"],
-                                 sc["controller_slot"],
-                                 spare["slot"],
-                                 drive_state,
-                                 spare["vd_id"])
+                            sc["controller_slot"],
+                            spare["slot"],
+                            drive_state,
+                            spare["vd_id"])
                     except ImcException as e:
                         # On deleting the VD, the pd state gets changed. If the end point state is same as configuration state,
                         # CIMC throws an ImcException.
@@ -567,6 +568,7 @@ def pd_state_set(handle,
     execute_api = ds_map[drive_state]
     return execute_api(**params)
 
+
 def sc_pd_state_exists(handle, storage_controllers, drive_state, server_id=1):
     """
     Wrapper function for pd_state_exists to handle multiple storage controllers.
@@ -594,7 +596,7 @@ def sc_pd_state_exists(handle, storage_controllers, drive_state, server_id=1):
         storage_controllers.pop("remove_all_vds")
 
     not_exists_pds_mo = []
-    #If pd status at end point is same as the configuration state from policy, push the pd mo to a exists_pds list.
+    # If pd status at end point is same as the configuration state from policy, push the pd mo to a exists_pds list.
     for sc_obj in storage_controllers:
         sc = storage_controllers.get(sc_obj)
 
@@ -605,27 +607,27 @@ def sc_pd_state_exists(handle, storage_controllers, drive_state, server_id=1):
             raise ImcOperationError(error_msg + "controller_type is not specified for "
                                                 "controller at pci slot: %s" % sc["controller_slot"])
         pds_to_set = []
-        #Check for the physical disk disk state to configure its defined state.
+        # Check for the physical disk disk state to configure its defined state.
         disks_state = sc.get("disks_state")
         if disks_state and not drive_state:
             for disk in disks_state:
-                if disk.get("slot")is None or disk.get("state") is None:
+                if disk.get("slot") is None or disk.get("state") is None:
                     raise ImcOperationError("Physical disk state check failed. drive slot/state not found.")
 
-                exists, mo = pd_state_exists(handle,sc["controller_type"],sc["controller_slot"],disk["slot"],disk["state"])
+                exists, mo = pd_state_exists(handle, sc["controller_type"], sc["controller_slot"], disk["slot"], disk["state"])
                 if not exists:
                     not_exists_pds_mo.append(mo)
                     pds_to_set.append(disk)
             sc["disks_state"] = pds_to_set
         hot_spares_pd = []
-        #Check for dedicated hot spares
+        # Check for dedicated hot spares
         dedicated_hot_spares = sc.get("dedicated_hot_spares")
         if dedicated_hot_spares and drive_state:
             for spare in dedicated_hot_spares:
                 if spare.get("slot") is None or spare.get("vd_id") is None:
                     raise ImcOperationError("Physical disk state check failed. drive slot or vd id not found.")
 
-                exists, mo = pd_state_exists(handle,sc["controller_type"],sc["controller_slot"],spare["slot"],drive_state,spare["vd_id"])
+                exists, mo = pd_state_exists(handle, sc["controller_type"], sc["controller_slot"], spare["slot"], drive_state, spare["vd_id"])
                 if not exists:
                     not_exists_pds_mo.append(mo)
                     hot_spares_pd.append(spare)
@@ -633,6 +635,7 @@ def sc_pd_state_exists(handle, storage_controllers, drive_state, server_id=1):
     if len(not_exists_pds_mo) == 0:
         return True, not_exists_pds_mo
     return False, not_exists_pds_mo
+
 
 def pd_state_exists(handle,
                     controller_type, controller_slot, drive_slot, drive_state,
@@ -765,13 +768,13 @@ def pd_encryption_enable(handle,
 
     action = StorageLocalDiskConsts.ADMIN_ACTION_ENABLE_SELF_ENCRYPT
     return _pd_set_action(
-            handle,
-            controller_type=controller_type,
-            controller_slot=controller_slot,
-            drive_slot=drive_slot,
-            action=action,
-            server_id=server_id
-        )
+        handle,
+        controller_type=controller_type,
+        controller_slot=controller_slot,
+        drive_slot=drive_slot,
+        action=action,
+        server_id=server_id
+    )
 
 
 def pd_encryption_exists(handle, controller_type, controller_slot, drive_slot,
@@ -832,10 +835,10 @@ def pd_encryption_disable(handle, controller_type, controller_slot, drive_slot,
     """
     action = StorageLocalDiskConsts.ADMIN_ACTION_DISABLE_SELF_ENCRYPT
     return _pd_set_action(
-            handle,
-            controller_type=controller_type,
-            controller_slot=controller_slot,
-            drive_slot=drive_slot,
-            action=action,
-            server_id=server_id
-        )
+        handle,
+        controller_type=controller_type,
+        controller_slot=controller_slot,
+        drive_slot=drive_slot,
+        action=action,
+        server_id=server_id
+    )

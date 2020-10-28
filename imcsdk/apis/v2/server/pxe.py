@@ -19,10 +19,7 @@ This module provides APIs for configuring PXE device under precison boot order
 import logging
 import re
 
-import imcsdk.imccoreutils as imccoreutils
-import imcsdk.imcgenutils as imcgenutils
 from imcsdk.imcexception import ImcOperationError, ImcOperationErrorDetail
-from imcsdk.mometa.lsboot.LsbootDevPrecision import LsbootDevPrecision
 
 log = logging.getLogger('imc')
 
@@ -91,7 +88,6 @@ def _parse_pxe_devices(devices):
                 "Interface source is incorrect. Correct values are \
                 ['name', 'mac', 'port'].")
 
-
         if interface_source == "name":
             # find the interface using given slot and interface name
             # enable pxe boot on respective interface
@@ -152,8 +148,8 @@ def _parse_pxe_devices(devices):
             if port is None:
                 slot_port_name = slot
             else:
-                slot_port_name = slot + PXE_DELIMITER + str(port)    
-            
+                slot_port_name = slot + PXE_DELIMITER + str(port)
+
             if slot_port_name in slot_port_map:
                 continue
             slot_port_map[slot_port_name] = device
@@ -206,22 +202,22 @@ def _enable_pxe_boot_vnic(handle, slot_vnicname_map, ep_slot_vnicname_map):
     for slot_vnicname in slot_vnicname_map:
         if slot_vnicname not in ep_slot_vnicname_map:
             device = slot_vnicname_map[slot_vnicname]
-            err_str = "PXE device at order '%s' has interface missing with slot '%s' and name '%s' on server." %(device['order'], device['slot'], device['interface_name'])
+            err_str = "PXE device at order '%s' has interface missing with slot '%s' and name '%s' on server." % (device['order'], device['slot'], device['interface_name'])
             if missing_vnic_str:
                 missing_vnic_str += "\n"
             missing_vnic_str += err_str
             continue
         if missing_vnic_str:
             continue
-        
+
         # check not to configure pxe for more than 4 interfaces, CIMC supports only 4 pxe enabled interfaces on a given slot.
         slot_ep = slot_vnicname.split(PXE_DELIMITER)[0]
         if slot_ep not in pxe_devices_count_per_slot:
             pxe_devices_count_per_slot[slot_ep] = 0
         pxe_devices_count_per_slot[slot_ep] += 1
-        
+
         if pxe_devices_count_per_slot[slot_ep] > 4:
-            raise ImcOperationErrorDetail("","Cannot configure more than 4 pxe devices on slot %s."  %(slot_ep),"")
+            raise ImcOperationErrorDetail("", "Cannot configure more than 4 pxe devices on slot %s." % (slot_ep), "")
 
         vnic = ep_slot_vnicname_map[slot_vnicname]
         vnic.pxe_boot = "enabled"
@@ -257,8 +253,8 @@ def _enable_pxe_boot_mac(handle, mac_address_map, ep_mac_map):
         match = re.search(pattern, ep_mac_map[mac].dn)
         if not match:
             raise ImcOperationError(PXE_API_ERROR,
-                                        "Invalid Interface.")
-        
+                                    "Invalid Interface.")
+
         slotEp = match.groupdict()['slot']
         if slotEp in ep_slot_map:
             continue
@@ -268,13 +264,13 @@ def _enable_pxe_boot_mac(handle, mac_address_map, ep_mac_map):
     # if slot is given in the pxe device check whether it is present on the end point
     # if slot is present on the end point check whether mac is present on the endpoint if present enable pxe on the respective vnic
     # if slot is present on the end point check whether mac is present on the endpoint if not present return an error
-    # 
+    #
     # if slot is not present on the end point consider it as non-vic adapter and enable pxe
     missing_mac_str = ""
     for mac in mac_address_map:
         slot = mac_address_map[mac].get('slot', None)
         # if slot is not given in the pxe device and if mac address not present on the end point, then enable pxe with provided mac considering non-vic adapter
-        if slot is None or slot =="":
+        if slot is None or slot == "":
             if mac not in ep_mac_map:
                 continue
         else:
@@ -285,22 +281,22 @@ def _enable_pxe_boot_mac(handle, mac_address_map, ep_mac_map):
                 # if slot is given in the pxe device and present on the end point but mac is not present on the endpoint then throw an error since it is a vic adpater
                 if mac not in ep_mac_map:
                     device = mac_address_map[mac]
-                    err_str = "PXE device at order '%s' has interface missing with MAC address '%s' on server." %(device['order'], device['mac_address'])
+                    err_str = "PXE device at order '%s' has interface missing with MAC address '%s' on server." % (device['order'], device['mac_address'])
                     if missing_mac_str:
                         missing_mac_str += "\n"
                     missing_mac_str += err_str
         if missing_mac_str:
             continue
-        
+
         # check not to configure pxe for more than 4 interfaces, CIMC supports only 4 pxe enabled interfaces on a given slot.
         match = re.search(pattern, ep_mac_map[mac].dn)
         slot_ep = match.groupdict()['slot']
         if slot_ep not in pxe_devices_count_per_slot:
             pxe_devices_count_per_slot[slot_ep] = 0
         pxe_devices_count_per_slot[slot_ep] += 1
-        
+
         if pxe_devices_count_per_slot[slot_ep] > 4:
-            raise ImcOperationErrorDetail("","Cannot configure more than 4 pxe devices on slot %s."  %(slot_ep),"")
+            raise ImcOperationErrorDetail("", "Cannot configure more than 4 pxe devices on slot %s." % (slot_ep), "")
 
         vnic = ep_mac_map[mac]
         vnic.pxe_boot = "enabled"
@@ -387,12 +383,12 @@ def _get_bootable_slot_vnicname(handle):
         if not match:
             raise ImcOperationError(PXE_API_ERROR,
                                     "Invalid Interface.")
-        slot_vnicname_dict = match.groupdict()
         slot = match.groupdict()['slot']
         vnicname = match.groupdict()['vnicname']
         bootable_vnics.append(slot + PXE_DELIMITER + vnicname)
 
     return bootable_vnics
+
 
 def _derive_logical_port(handle, affected_slots):
     # fetch the pcilink and order of all vnics at end point
@@ -416,7 +412,7 @@ def _derive_logical_port(handle, affected_slots):
 
     log.debug("Bootable Interfaces on all slots.....")
     for k in bootable_slot_vnicname_map:
-        log.debug("%s, %s" %(k, bootable_slot_vnicname_map[k].__dict__))
+        log.debug("%s, %s" % (k, bootable_slot_vnicname_map[k].__dict__))
 
     # segregate all bootable vnics per slot
     per_slot_map = {}
@@ -427,9 +423,9 @@ def _derive_logical_port(handle, affected_slots):
             continue
 
         if pxe_bd.order.lower() == "any":
-           raise ImcOperationError(PXE_API_ERROR,
-                                   "Interface '%s' on slot '%s' with order value 'ANY' is not supported. "\
-                                   "Configure order with numeric value." % (vnicname, slot))
+            raise ImcOperationError(PXE_API_ERROR,
+                                    "Interface '%s' on slot '%s' with order value 'ANY' is not supported. "
+                                    "Configure order with numeric value." % (vnicname, slot))
 
         if slot not in per_slot_map:
             per_slot_map[slot] = []
@@ -478,7 +474,7 @@ def prepare_pxe_devices(handle, boot_devices):
     if len(slot_vnicname_map) == 0:
         return
 
-    affected_slots = [ slot_vnicname.split(PXE_DELIMITER)[0] for slot_vnicname in slot_vnicname_map]
+    affected_slots = [slot_vnicname.split(PXE_DELIMITER)[0] for slot_vnicname in slot_vnicname_map]
     # slot_vnicname_port_map (dict)
     # key: slot~~~vnicname
     # value: PXEBootDevice Instance with port
@@ -503,5 +499,3 @@ def disable_pxeboot_vnics_all(handle):
     if disable_vnics:
         log.debug("Disabling bootable vnics.")
         handle.set_mos(disable_vnics)
-
-

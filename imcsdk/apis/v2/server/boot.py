@@ -17,10 +17,8 @@ This module provides APIs for bios related configuration like boot order
 """
 
 import logging
-import re
 
 import imcsdk.imccoreutils as imccoreutils
-from imcsdk.imcexception import ImcOperationError, ImcOperationErrorDetail
 from imcsdk.mometa.lsboot.LsbootDevPrecision import LsbootDevPrecision
 
 import imcsdk.apis.v2.server.pxe as pxe
@@ -330,7 +328,7 @@ def boot_order_precision_set(
     # Need to check if doing this everytime will have any adverse impact
     boot_order_child_mos = handle.query_children(in_dn=lsbootdev.dn)
 
-    #check the version as CSCvh47929 fix is applied to later versions
+    # check the version as CSCvh47929 fix is applied to later versions
     for mo in boot_order_child_mos:
         if str(handle.version) < "3.1(3a)" and mo.get_class_id() == "LsbootCdd":
             # Deletion of LsbootCdd is not supported using XML API for older versions
@@ -346,9 +344,8 @@ def boot_order_precision_set(
     if secure_boot == "no":
         lsbootdev.configured_boot_mode = configured_boot_mode
 
-
     i = 0
-    #check the version and skip if the device is of type localcdd
+    # check the version and skip if the device is of type localcdd
     for device in boot_devices:
         if device["device-type"] == "cdd" and (is_platform_m4(handle) or str(handle.version) < "3.1(3a)"):
             i = i + 1
@@ -357,14 +354,13 @@ def boot_order_precision_set(
             i = i + 1
             continue
 
-        #if the list has cdd, reorder the policy types that are after cdd  as cdd will be skipped
-        #and CIMC expects the devices in sorted order.
+        # if the list has cdd, reorder the policy types that are after cdd  as cdd will be skipped
+        # and CIMC expects the devices in sorted order.
         if i != 0:
             device["order"] = str(int(device["order"]) - i)
         _add_boot_device(handle, lsbootdev, device)
     handle.set_mo(lsbootdev)
     return lsbootdev
-
 
 
 def boot_precision_configured_get(handle, server_id=1):
@@ -636,4 +632,3 @@ def sanitize_input_from_intersight(handle, boot_devices):
         bd.append({k.lower(): v for k, v in each.items()})
     log.debug("##### Sanitized boot devices %s" % bd)
     return bd
-

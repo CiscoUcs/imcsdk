@@ -171,7 +171,7 @@ def vmedia_mounts_callback(dn, dn_to_vmedia_dict):
     return dn_to_vmedia_dict.get(dn, "Unknown Virtual Media mapping: " + dn)
 
 
-def vmedia_mount_create_all(handle, mappings = None, server_id=1, timeout=60):
+def vmedia_mount_create_all(handle, mappings=None, server_id=1, timeout=60):
     """
         This method will make one request to create all the vmedia mappings
         Args:
@@ -209,17 +209,17 @@ def vmedia_mount_create_all(handle, mappings = None, server_id=1, timeout=60):
 
     for mapping in mappings:
 
-        volume_name  = mapping.get('volume_name')
-        map          = mapping.get('map')
+        volume_name = mapping.get('volume_name')
+        map = mapping.get('map')
         remote_share = mapping.get('remote_share')
-        remote_file  = mapping.get('remote_file')
+        remote_file = mapping.get('remote_file')
         _validate_api_prop('volume_name', volume_name, api)
-        _validate_api_prop('map',map, api)
+        _validate_api_prop('map', map, api)
         _validate_api_prop('remote_share', remote_share, api)
-        _validate_api_prop('remote_file', remote_file,api)
+        _validate_api_prop('remote_file', remote_file, api)
         params = {
-            'map':         map,
-            'remote_file':  remote_file,
+            'map': map,
+            'remote_file': remote_file,
             'remote_share': remote_share
         }
         if mapping.get('mount_options'):
@@ -227,9 +227,9 @@ def vmedia_mount_create_all(handle, mappings = None, server_id=1, timeout=60):
         if map != CommVMediaMapConsts.MAP_NFS:
             mount_options = mapping.get('mount_options')
 
-            #In CIMC, security context authentication protocol for CIFS Share, is always set to "ntlm" by default.
-            #If authentication protocol is set to none, CIMC rejects the mapping and the deployment fails.
-            #Hence, removing the security context from parameters mount_options if the authentication protocol is set to none.
+            # In CIMC, security context authentication protocol for CIFS Share, is always set to "ntlm" by default.
+            # If authentication protocol is set to none, CIMC rejects the mapping and the deployment fails.
+            # Hence, removing the security context from parameters mount_options if the authentication protocol is set to none.
 
             mount_options_array = mount_options.split(",")
             for option in mount_options_array:
@@ -253,8 +253,8 @@ def vmedia_mount_create_all(handle, mappings = None, server_id=1, timeout=60):
 
     response = handle.set_mos(mos)
     if response:
-        ret = process_conf_mos_response(response, api, False, 'Create Virtual Media mapping failed',vmedia_mounts_callback,
-                                               dn_to_vmedia_dict)
+        ret = process_conf_mos_response(response, api, False, 'Create Virtual Media mapping failed', vmedia_mounts_callback,
+                                        dn_to_vmedia_dict)
         if len(ret) != 0:
             error_msg = 'Create Virtual Media mapping failed:\n'
             for item in ret:
@@ -277,20 +277,20 @@ def vmedia_mount_create_all(handle, mappings = None, server_id=1, timeout=60):
                 if existing_mapping_status.lower() == "ok":
                     break
                 elif re.match(r"error", existing_mapping_status.lower()):
-                    mapping_error_msg += "[Virtual Media mapping "+ mo.volume_name + "] " +existing_mapping_status + "\n"
+                    mapping_error_msg += "[Virtual Media mapping " + mo.volume_name + "] " + existing_mapping_status + "\n"
                     break
 
             time.sleep(interval)
             wait_time += interval
 
         if wait_time >= timeout:
-            timeout_error_msg += "[Virtual Media mapping "+ mo.volume_name +"] \n"
+            timeout_error_msg += "[Virtual Media mapping " + mo.volume_name + "] \n"
 
     if len(mapping_error_msg) != 0:
-        raise ImcOperationErrorDetail(api,"Create Virtual Media mapping failed: "+ mapping_error_msg,[])
+        raise ImcOperationErrorDetail(api, "Create Virtual Media mapping failed: " + mapping_error_msg, [])
 
     if len(timeout_error_msg) != 0:
-        raise ImcOperationErrorDetail(api,"Create Virtual Media mapping timed out: "+ timeout_error_msg,[])
+        raise ImcOperationErrorDetail(api, "Create Virtual Media mapping timed out: " + timeout_error_msg, [])
 
     results = {}
     results["changed"] = True
@@ -302,8 +302,7 @@ def vmedia_mount_create_all(handle, mappings = None, server_id=1, timeout=60):
 
 def _validate_api_prop(prop, value, api):
     if value is None:
-        raise ImcOperationError(api, "Required property '%s' missing." % (
-           api, prop))
+        raise ImcOperationError(api, "Required property '%s' missing." % prop)
 
 
 def vmedia_mount_create(handle, volume_name, remote_share, remote_file,
@@ -483,9 +482,7 @@ def vmedia_mount_iso_uri(handle, uri, user_id=None, password=None,
             if wait_time > timeout:
                 raise ImcOperationError(
                     'Mount Virtual Media',
-                    '{0}: ERROR - Mapped ISO status stuck at ' +
-                    '[In Progress]'.format(handle.ip)
-                )
+                    '{0}: ERROR - Mapped ISO status stuck at [In Progress]'.format(handle.ip))
             # Wait interval sec between checks
             time.sleep(interval)
             status_list = vmedia_get_existing_status(handle, server_id)
@@ -497,9 +494,7 @@ def vmedia_mount_iso_uri(handle, uri, user_id=None, password=None,
             else:
                 raise ImcOperationError(
                     'Mount Virtual Media',
-                    '{0}: ERROR - Mapped ISO status ' +
-                    'is {1}'.format(handle.ip, status_list)
-                )
+                    '{0}: ERROR - Mapped ISO status is {1}'.format(handle.ip, status_list))
     else:
         raise ImcOperationError(
             'Mount Virtual Media',
@@ -536,7 +531,7 @@ def vmedia_mount_delete(handle, volume_name, server_id=1):
     handle.remove_mo(vmediamap_mo)
 
 
-def vmedia_mount_remove_all(handle, volumes= None, server_id=1):
+def vmedia_mount_remove_all(handle, volumes=None, server_id=1):
     """
     This method will remove all the mapped vmedia mappings and saved vmedia mappings with the specified volumes
 
@@ -574,8 +569,6 @@ def vmedia_mount_remove_all(handle, volumes= None, server_id=1):
     response = handle.set_mos(mos)
     if response:
         process_conf_mos_response(response, 'vmedia_mount_remove_all')
-
-
 
 
 def vmedia_mount_remove_image(handle, image_type, server_id=1):

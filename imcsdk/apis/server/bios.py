@@ -111,7 +111,7 @@ def bios_profile_upload(handle, remote_server, remote_file, protocol='tftp',
     from imcsdk.mometa.upload.UploadBiosProfile import UploadBiosProfile
     bios_dn = _get_bios_dn(handle, server_id=server_id)
     mo = UploadBiosProfile(
-            parent_mo_or_dn=bios_dn + '/profile-mgmt')
+        parent_mo_or_dn=bios_dn + '/profile-mgmt')
     params = {
         'remote_server': remote_server,
         'remote_file': remote_file,

@@ -300,8 +300,8 @@ def controller_encryption_key_id_generate(handle, controller_type,
     dn = _get_controller_dn(handle, controller_type, controller_slot,
                             server_id)
     mos = handle.query_children(
-                in_dn=dn,
-                class_id='GeneratedStorageControllerKeyId')
+        in_dn=dn,
+        class_id='GeneratedStorageControllerKeyId')
     return mos[0].generated_key_id if mos else ""
 
 
@@ -330,8 +330,8 @@ def controller_encryption_key_generate(handle, controller_type,
     dn = _get_controller_dn(handle, controller_type, controller_slot,
                             server_id)
     mos = handle.query_children(
-                in_dn=dn,
-                class_id='SuggestedStorageControllerSecurityKey')
+        in_dn=dn,
+        class_id='SuggestedStorageControllerSecurityKey')
     return mos[0].suggested_security_key if mos else ""
 
 
@@ -396,11 +396,11 @@ def controller_import_foreign_config(handle, controller_type,
     """
     action = StorageControllerConsts.ADMIN_ACTION_IMPORT_FOREIGN_CONFIG
     return _controller_action_set(
-                handle,
-                controller_type,
-                controller_slot,
-                action=action,
-                server_id=server_id)
+        handle,
+        controller_type,
+        controller_slot,
+        action=action,
+        server_id=server_id)
 
 
 def controller_clear_boot_drive(handle, controller_type, controller_slot,
@@ -425,11 +425,11 @@ def controller_clear_boot_drive(handle, controller_type, controller_slot,
     """
     action = StorageControllerConsts.ADMIN_ACTION_CLEAR_BOOT_DRIVE
     return _controller_action_set(
-                handle,
-                controller_type,
-                controller_slot,
-                action=action,
-                server_id=server_id)
+        handle,
+        controller_type,
+        controller_slot,
+        action=action,
+        server_id=server_id)
 
 
 def controller_clear_boot_drive_exists(handle, controller_type,
@@ -544,6 +544,7 @@ def controller_action_exists(handle, controller_type, controller_slot,
 
     execute_api = api_map[action]
     return execute_api(**params)
+
 
 def controller_m2_hwraid_exists(handle, controller_slot, server_id=1):
     """

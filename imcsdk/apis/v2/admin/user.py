@@ -182,6 +182,7 @@ def password_expire_disable(handle):
     handle.set_mo(mo)
     return mo
 
+
 def password_properties_exists(handle, **kwargs):
     """
     This method will check if the password expiration policy exists
@@ -348,6 +349,7 @@ def local_user_create(handle, name, pwd, priv="read-only",
     handle.set_mo(new_user)
     return new_user
 
+
 def _delete_users(handle, users=None, endpoint_users=None):
     """
     This method deactivates those IMC users that are NOT part of input list of users.
@@ -382,7 +384,7 @@ def _delete_users(handle, users=None, endpoint_users=None):
         if delete_user and endpoint_user.name != 'admin':
             endpoint_user.account_status = AaaUserConsts.ACCOUNT_STATUS_INACTIVE
             endpoint_user.admin_action = AaaUserConsts.ADMIN_ACTION_CLEAR
-            dn_to_user_dict[aaa_user_prefix+str(endpoint_user.id)] = endpoint_user.name
+            dn_to_user_dict[aaa_user_prefix + str(endpoint_user.id)] = endpoint_user.name
             user_mos.append(endpoint_user)
             delete_users = True
             # print("Need to delete:", endpoint_user.name)
@@ -437,7 +439,7 @@ def local_users_update(handle, users=None):
     create_users = False
     endpoint_users = _get_local_users(handle)
     used_ids, delete_users = _delete_users(handle, users, endpoint_users)
-    all_ids= list(range(2, MAX_USERS + 1))
+    all_ids = list(range(2, MAX_USERS + 1))
     free_ids = list(set(all_ids) - set(used_ids))
     create_mos = []
     modify_mos = []
@@ -460,7 +462,7 @@ def local_users_update(handle, users=None):
         else:
             change_password = user['change_password']
         name = user['name']
-        pwd  = user['pwd']
+        pwd = user['pwd']
         priv = user['priv']
         args = {"name": name,
                 "pwd": pwd,
@@ -478,15 +480,15 @@ def local_users_update(handle, users=None):
                 args.pop('pwd', None)
             if not found_user.check_prop_match(**args):
                 update_users = True
-            dn_to_user_dict[aaa_user_prefix+str(found_user.id)] = name
+            dn_to_user_dict[aaa_user_prefix + str(found_user.id)] = name
             found_user.set_prop_multiple(**args)
             modify_mos.append(found_user)
             continue
         if len(free_ids) == 0 or id >= len(free_ids):
-            raise ImcOperationError(api,"Cannot configure more users than allowed limit on IMC")
+            raise ImcOperationError(api, "Cannot configure more users than allowed limit on IMC")
         create_users = True
         free_id = free_ids[id]
-        dn_to_user_dict[aaa_user_prefix+str(free_id)] = name
+        dn_to_user_dict[aaa_user_prefix + str(free_id)] = name
         mo = AaaUser(parent_mo_or_dn="sys/user-ext", id=str(free_id))
         mo.set_prop_multiple(**args)
         create_mos.append(mo)

@@ -95,7 +95,7 @@ def _bytes_to_human(size, output_format=None):
                'PB': 5, 'EB': 6, 'ZB': 7, 'YB': 8}
     unit = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
     if output_format is None:
-        output_format = unit[int(math.floor(math.log(size, 2))/10)]
+        output_format = unit[int(math.floor(math.log(size, 2)) / 10)]
     if output_format not in convert:
         raise "unknown output format" + output_format
     return str(size >> (10 * convert[output_format])) + ' ' + output_format
@@ -132,10 +132,10 @@ def _vd_span_depth_get(drive_list):
 
 def _raid_max_size_get(raid_level, total_size, min_size, span_depth):
     size = {0: total_size,
-            1: total_size/2,
+            1: total_size / 2,
             5: total_size - (span_depth * 1 * min_size),
             6: total_size - (span_depth * 2 * min_size),
-            10: total_size/2,
+            10: total_size / 2,
             50: total_size - (span_depth * 1 * min_size),
             60: total_size - (span_depth * 2 * min_size)}
 
@@ -185,7 +185,7 @@ def _get_controller(handle, controller_type, controller_slot, server_id=1):
                                             server_id))
     if mo is None:
         raise ImcOperationError("Get Controller Type:%s Slot:%s" %
-                                    (controller_type, controller_slot),
+                                (controller_type, controller_slot),
                                 "Managed Object not found")
     return mo
 
@@ -406,6 +406,7 @@ def virtual_drive_set_boot_drive(handle, controller_type, controller_slot, name,
     handle.set_mo(vd)
     return handle.query_dn(vd.dn)
 
+
 def _controller_action_set(handle, controller_type, controller_slot, action,
                            server_id=1):
     controller_mo = _get_controller(handle,
@@ -444,7 +445,7 @@ def controller_jbod_mode_enable(handle, controller_type,
 
 
 def controller_jbod_mode_disable(handle, controller_type,
-                                    controller_slot, server_id=1):
+                                 controller_slot, server_id=1):
     """
     Disables jbod mode on the controller
 
@@ -569,10 +570,10 @@ def controller_encryption_disable(handle, controller_type,
                                   controller_slot='HBA'')
     """
     dn = _get_controller_dn(
-                handle,
-                controller_type,
-                controller_slot,
-                server_id)
+        handle,
+        controller_type,
+        controller_slot,
+        server_id)
 
     mo = SelfEncryptStorageController(parent_mo_or_dn=dn)
     mo.admin_action = \
@@ -681,8 +682,8 @@ def controller_encryption_key_id_generate(handle, controller_type,
     """
     dn = _get_controller_dn(handle, controller_type, controller_slot, server_id)
     mos = handle.query_children(
-                in_dn=dn,
-                class_id='GeneratedStorageControllerKeyId')
+        in_dn=dn,
+        class_id='GeneratedStorageControllerKeyId')
     return mos[0].generated_key_id if mos else ""
 
 
@@ -710,8 +711,8 @@ def controller_encryption_key_generate(handle, controller_type,
     """
     dn = _get_controller_dn(handle, controller_type, controller_slot, server_id)
     mos = handle.query_children(
-                in_dn=dn,
-                class_id='SuggestedStorageControllerSecurityKey')
+        in_dn=dn,
+        class_id='SuggestedStorageControllerSecurityKey')
     return mos[0].suggested_security_key if mos else ""
 
 
@@ -772,11 +773,11 @@ def controller_import_foreign_config(handle, controller_type,
                 controller_slot='HBA'')
     """
     return _controller_action_set(
-                handle,
-                controller_type,
-                controller_slot,
-                action=StorageControllerConsts.ADMIN_ACTION_IMPORT_FOREIGN_CONFIG,
-                server_id=server_id)
+        handle,
+        controller_type,
+        controller_slot,
+        action=StorageControllerConsts.ADMIN_ACTION_IMPORT_FOREIGN_CONFIG,
+        server_id=server_id)
 
 
 def physical_drive_get(handle,
@@ -858,8 +859,8 @@ def is_physical_drive_encryption_capable(handle, controller_type,
 
 
 def is_physical_drive_encryption_enabled(handle, controller_type,
-                                             controller_slot, drive_slot,
-                                             server_id=1):
+                                         controller_slot, drive_slot,
+                                         server_id=1):
     """
     Checks if encryption is enabled on the physical drive
 
@@ -919,13 +920,13 @@ def physical_drive_set_jbod_mode(handle, controller_type,
         raise ImcOperationError("Physical Drive: %s JBOD Mode Enable",
                                 "Controller JBOD mode is not enabled")
     return _physical_drive_action_set(
-            handle,
-            controller_type=controller_type,
-            controller_slot=controller_slot,
-            drive_slot=drive_slot,
-            action=StorageLocalDiskConsts.ADMIN_ACTION_MAKE_JBOD,
-            server_id=server_id
-        )
+        handle,
+        controller_type=controller_type,
+        controller_slot=controller_slot,
+        drive_slot=drive_slot,
+        action=StorageLocalDiskConsts.ADMIN_ACTION_MAKE_JBOD,
+        server_id=server_id
+    )
 
 
 def physical_drive_set_unconfigured_good(handle,
@@ -956,13 +957,13 @@ def physical_drive_set_unconfigured_good(handle,
                 drive_slot=4')
     """
     return _physical_drive_action_set(
-            handle,
-            controller_type=controller_type,
-            controller_slot=controller_slot,
-            drive_slot=drive_slot,
-            action=StorageLocalDiskConsts.ADMIN_ACTION_MAKE_UNCONFIGURED_GOOD,
-            server_id=server_id
-        )
+        handle,
+        controller_type=controller_type,
+        controller_slot=controller_slot,
+        drive_slot=drive_slot,
+        action=StorageLocalDiskConsts.ADMIN_ACTION_MAKE_UNCONFIGURED_GOOD,
+        server_id=server_id
+    )
 
 
 def physical_drive_encryption_enable(handle, controller_type,
@@ -990,13 +991,13 @@ def physical_drive_encryption_enable(handle, controller_type,
                 drive_slot=4')
     """
     return _physical_drive_action_set(
-            handle,
-            controller_type=controller_type,
-            controller_slot=controller_slot,
-            drive_slot=drive_slot,
-            action=StorageLocalDiskConsts.ADMIN_ACTION_ENABLE_SELF_ENCRYPT,
-            server_id=server_id
-        )
+        handle,
+        controller_type=controller_type,
+        controller_slot=controller_slot,
+        drive_slot=drive_slot,
+        action=StorageLocalDiskConsts.ADMIN_ACTION_ENABLE_SELF_ENCRYPT,
+        server_id=server_id
+    )
 
 
 def physical_drive_encryption_disable(handle, controller_type,
@@ -1024,21 +1025,21 @@ def physical_drive_encryption_disable(handle, controller_type,
                 drive_slot=4')
     """
     return _physical_drive_action_set(
-            handle,
-            controller_type=controller_type,
-            controller_slot=controller_slot,
-            drive_slot=drive_slot,
-            action=StorageLocalDiskConsts.ADMIN_ACTION_DISABLE_SELF_ENCRYPT,
-            server_id=server_id
-        )
+        handle,
+        controller_type=controller_type,
+        controller_slot=controller_slot,
+        drive_slot=drive_slot,
+        action=StorageLocalDiskConsts.ADMIN_ACTION_DISABLE_SELF_ENCRYPT,
+        server_id=server_id
+    )
 
 
 def physical_drive_secure_erase_foreign_drives(
-                handle,
-                controller_type,
-                controller_slot,
-                drive_slot,
-                server_id=1):
+        handle,
+        controller_type,
+        controller_slot,
+        drive_slot,
+        server_id=1):
     """
     Erases foreign configuration from the physical drive. Drive data is lost.
 
@@ -1062,10 +1063,10 @@ def physical_drive_secure_erase_foreign_drives(
                 drive_slot=4')
     """
     return _physical_drive_action_set(
-            handle,
-            controller_type=controller_type,
-            controller_slot=controller_slot,
-            drive_slot=drive_slot,
-            action=StorageLocalDiskConsts.ADMIN_ACTION_DISABLE_SED_FOREIGN_DRIVES,
-            server_id=server_id
-        )
+        handle,
+        controller_type=controller_type,
+        controller_slot=controller_slot,
+        drive_slot=drive_slot,
+        action=StorageLocalDiskConsts.ADMIN_ACTION_DISABLE_SED_FOREIGN_DRIVES,
+        server_id=server_id
+    )

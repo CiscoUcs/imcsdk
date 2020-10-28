@@ -37,7 +37,7 @@ def strong_password_set(handle, enable=True):
     mos = handle.query_classid("AaaUserPolicy")
     user_policy = mos[0]
 
-    user_policy.user_password_policy = ("disabled", "enabled") [enable]
+    user_policy.user_password_policy = ("disabled", "enabled")[enable]
 
     handle.set_mo(user_policy)
     return user_policy
@@ -88,11 +88,11 @@ def password_expiration_set(handle,
 
     mo = AaaUserPasswordExpiration(parent_mo_or_dn="sys/user-ext")
     args = {
-            "password_expiry_duration": str(password_expiry_duration),
-            "password_history": str(password_history),
-            "password_notification_period": str(password_notification_period),
-            "password_grace_period": str(password_grace_period)
-            }
+        "password_expiry_duration": str(password_expiry_duration),
+        "password_history": str(password_history),
+        "password_notification_period": str(password_notification_period),
+        "password_grace_period": str(password_grace_period)
+    }
     mo.set_prop_multiple(**args)
     handle.set_mo(mo)
     return handle.query_dn(mo.dn)

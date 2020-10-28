@@ -112,7 +112,7 @@ def bios_profile_upload(handle, remote_server, remote_file, protocol='tftp',
     from imcsdk.mometa.upload.UploadBiosProfile import UploadBiosProfile
     bios_dn = _get_bios_dn(handle, server_id=server_id)
     mo = UploadBiosProfile(
-            parent_mo_or_dn=bios_dn + '/profile-mgmt')
+        parent_mo_or_dn=bios_dn + '/profile-mgmt')
     params = {
         'remote_server': remote_server,
         'remote_file': remote_file,
@@ -466,7 +466,7 @@ def bios_tokens_set(handle, tokens={}, server_id=1):
 
     if len(messages) != 0:
         message = "Following issues were seen during application of BIOS " \
-                "tokens: \n"
+            "tokens: \n"
         for m in messages:
             message += m["Object"] + ": " + m["Error"] + "\n"
 

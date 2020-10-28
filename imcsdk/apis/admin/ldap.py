@@ -19,7 +19,6 @@ This module implements apis to configure ldap
 import logging
 from imcsdk.imcexception import ImcOperationError
 from imcsdk.apis.utils import _get_mo, _is_valid_arg, _is_invalid_value
-from imcsdk.mometa.aaa.AaaLdap import AaaLdap
 from imcsdk.mometa.aaa.AaaLdapRoleGroup import AaaLdapRoleGroup
 
 log = logging.getLogger('imc')
@@ -165,7 +164,7 @@ def ldap_enable(handle,
         'dns_domain_source': dns_domain_source,
         'dns_search_domain': dns_search_domain,
         'dns_search_forest': dns_search_forest
-        }
+    }
 
     mo.set_prop_multiple(**params)
 

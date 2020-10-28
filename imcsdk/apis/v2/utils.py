@@ -45,8 +45,7 @@ def _is_valid_arg(param, kwargs):
 def _validate_api_prop(prop, value, api, validate_value=False,
                        valid_values=None):
     if value is None:
-        raise ImcOperationError(api, "Required property '%s' missing." % (
-           api, prop))
+        raise ImcOperationError(api, "Required property '%s' missing." % prop)
     if validate_value and value not in valid_values:
         raise ImcOperationError(
             api, "['%s'] Invalid value '%s'. Valid values are %s" % (

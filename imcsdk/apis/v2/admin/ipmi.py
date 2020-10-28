@@ -61,8 +61,8 @@ def ipmi_enable(handle, priv=None, key=None, server_id=1):
     mos = handle.query_classid(class_id="AaaUserPolicy")
     userPolicy = mos[0]
 
-    if userPolicy.user_mode != None and userPolicy.user_mode == 'non-ipmi':
-        raise ImcOperationError("Enable IPMI over LAN", 
+    if userPolicy.user_mode is not None and userPolicy.user_mode == 'non-ipmi':
+        raise ImcOperationError("Enable IPMI over LAN",
                                 "IPMI user mode is disabled on the endpoint.")
 
     # Verify key is a hex number
@@ -70,8 +70,7 @@ def ipmi_enable(handle, priv=None, key=None, server_id=1):
         if key:
             hex(int(key, 16))[2:]
     except ValueError:
-        raise ValueError('{0}: ERROR: Encryption key is not hex number: ' +
-                         '"{1}"'.format(handle.ip, key))
+        raise ValueError('{0}: ERROR: Encryption key is not hex number: "{1}"'.format(handle.ip, key))
 
     # Create enabled IPMI object
     mo = CommIpmiLan(parent_mo_or_dn=_get_comm_mo_dn(handle, server_id))

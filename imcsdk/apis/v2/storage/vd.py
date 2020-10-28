@@ -21,7 +21,7 @@ import math
 import logging
 import json
 
-from imcsdk.imcexception import ImcOperationError, ImcException, ImcOperationErrorDetail
+from imcsdk.imcexception import ImcOperationError, ImcException
 from imcsdk.apis.v2.storage.controller import _get_controller_dn
 from imcsdk.apis.v2.storage.controller import controller_m2_hwraid_exists
 from imcsdk.apis.v2.storage.pd import pd_get
@@ -97,7 +97,7 @@ def _bytes_to_human(size, output_format=None):
                'PB': 5, 'EB': 6, 'ZB': 7, 'YB': 8}
     unit = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
     if output_format is None:
-        output_format = unit[int(math.floor(math.log(size, 2))/10)]
+        output_format = unit[int(math.floor(math.log(size, 2)) / 10)]
     if output_format not in convert:
         raise "unknown output format" + output_format
     return str(size >> (10 * convert[output_format])) + ' ' + output_format
@@ -138,10 +138,10 @@ def _vd_span_depth_get(drive_list):
 
 def _raid_max_size_get(raid_level, total_size, min_size, span_depth):
     size = {0: total_size,
-            1: total_size/2,
+            1: total_size / 2,
             5: total_size - (span_depth * 1 * min_size),
             6: total_size - (span_depth * 2 * min_size),
-            10: total_size/2,
+            10: total_size / 2,
             50: total_size - (span_depth * 1 * min_size),
             60: total_size - (span_depth * 2 * min_size)}
 
@@ -186,10 +186,11 @@ def _existing_vd_maxsize_get(handle, vd_carve, id):
     mo = handle.query_dn(dn)
     if mo is None:
         raise ImcOperationError("Create Virtual drive using existing Virtual drives",
-                                "Existing Drive: %s does not exist OR " \
-                                "No space is available to create another Virtual " \
+                                "Existing Drive: %s does not exist OR "
+                                "No space is available to create another Virtual "
                                 "drive." % id)
     return mo.max_available_space
+
 
 def sc_vd_create_using_unused_pds(handle, storage_controllers, **kwargs):
     """
@@ -251,13 +252,14 @@ def sc_vd_create_using_unused_pds(handle, storage_controllers, **kwargs):
             for vd in virtual_drives_on_pd:
                 if vd.get("drive_group") is None:
                     raise ImcOperationError(error_msg +
-                                            "drive_group is not found in controller at pci slot: %s" % sc["controller_slot"] )
+                                            "drive_group is not found in controller at pci slot: %s" % sc["controller_slot"])
                 drive_group = json.loads(vd.pop("drive_group"))
                 vd_create_using_unused_pds(handle,
                                            drive_group,
                                            sc["controller_type"],
                                            sc["controller_slot"],
                                            **vd)
+
 
 def vd_create_using_unused_pds(handle,
                                drive_group,
@@ -349,15 +351,15 @@ def vd_create_using_unused_pds(handle,
 
     is_m2_controller = controller_m2_hwraid_exists(handle, controller_slot, server_id)
 
-    #Set 32k/64k as the virtual drive strip_size for M.2 RAID Storage Controller.
-    #For any other values of strip_size, set to 64k as default as M.2 Raid Storage Controller supports only 32k/64k.
+    # Set 32k/64k as the virtual drive strip_size for M.2 RAID Storage Controller.
+    # For any other values of strip_size, set to 64k as default as M.2 Raid Storage Controller supports only 32k/64k.
     if is_m2_controller:
         if strip_size in ("32k", "64k"):
             params["strip_size"] = strip_size
         else:
             params["strip_size"] = "64k"
 
-    #Donot add size property if the controller is M.2 RAID Storage Controller
+    # Donot add size property if the controller is M.2 RAID Storage Controller
     if not is_m2_controller:
         params["size"] = (_vd_max_size_get(handle=handle,
                                        controller_type=controller_type,
@@ -370,6 +372,7 @@ def vd_create_using_unused_pds(handle,
     mo = vd_creator(**params)
     mo.admin_state = "trigger"
     handle.add_mo(mo)
+
 
 def sc_vd_create_using_existing_vd(handle, storage_controllers, server_id=1):
     """
@@ -447,7 +450,6 @@ def sc_vd_create_using_existing_vd(handle, storage_controllers, server_id=1):
                                                         "controller at pci slot: %s" % sc["controller_slot"])
 
                 vd_create_using_existing_vd(handle, sc["controller_type"], sc["controller_slot"], **vd)
-
 
 
 def vd_create_using_existing_vd(handle,
@@ -537,6 +539,7 @@ def vd_get(handle, controller_type, controller_slot, id, server_id=1):
                                 "Not found")
     return mo
 
+
 def sc_vd_update(handle, storage_controllers, **kwargs):
     """
      Wrapper function for vd_update
@@ -603,6 +606,7 @@ def sc_vd_update(handle, storage_controllers, **kwargs):
                 vd_update(handle, sc["controller_type"], sc["controller_slot"], **vd)
     return True
 
+
 def vd_update(handle,
             controller_type,
             controller_slot,
@@ -636,20 +640,20 @@ def vd_update(handle,
     if write_policy is not None:
         mo.requested_write_cache_policy = write_policy
 
-    #update_boot_vd property is used to set/unset the virtual drive as a boot drive.
+    # update_boot_vd property is used to set/unset the virtual drive as a boot drive.
     if update_boot_vd is not None:
-        #If update_boot_vd is False, it will clear the boot drive without deleting the virtual drive.
+        # If update_boot_vd is False, it will clear the boot drive without deleting the virtual drive.
         if update_boot_vd is False:
             vd_boot_drive_disable(handle, controller_type, controller_slot, id, server_id)
+        # If update_boot_vd is True, it will set the virtual drive as a boot drive without deleting the virtual drive.
         else:
-        #If update_boot_vd is True, it will set the virtual drive as a boot drive without deleting the virtual drive.
             vd_boot_drive_enable(handle, controller_type, controller_slot, id, server_id)
     if vd_name is not None:
         mo.virtual_drive_name = vd_name
 
     # If no change in in mo, then do not send request to server.
-    if not (access_policy is None and read_policy is None and cache_policy is None and disk_cache_policy is None
-            and write_policy is None and update_boot_vd is None and vd_name is None):
+    if not (access_policy is None and read_policy is None and cache_policy is None and disk_cache_policy is None and
+            write_policy is None and update_boot_vd is None and vd_name is None):
         handle.set_mo(mo)
     return mo
 
@@ -665,6 +669,7 @@ def _vd_set_action(handle, controller_type, controller_slot, id,
     mo.set_prop_multiple(**kwargs)
     handle.set_mo(mo)
     return mo
+
 
 def sc_vd_exists(handle, storage_controllers, server_id=1, **kwargs):
     """
@@ -719,7 +724,7 @@ def sc_vd_exists(handle, storage_controllers, server_id=1, **kwargs):
 
         if not sc.get("controller_type"):
             raise ImcOperationError(error_msg + "controller_type is not specified for "
-                                            "controller at pci slot: %s" % sc["controller_slot"])
+                                    "controller at pci slot: %s" % sc["controller_slot"])
         update_virtual_drives = sc.get("update_virtual_drives")
         if update_virtual_drives:
             for vd in update_virtual_drives:
@@ -796,6 +801,7 @@ def vd_delete(handle, controller_type, controller_slot, id, server_id=1,
 
     handle.remove_mo(mo)
 
+
 def sc_vd_delete_all(handle, sc_vds_list, **kwargs):
     """
     Delete all the virtual drives specified in sc_vds
@@ -856,6 +862,7 @@ def vd_delete_all(handle, controller_type, controller_slot, server_id=1,
         raise ImcOperationError("Delete all Virtual drives on controller: %s" % controller_slot,
                                 error_msg)
 
+
 def sc_vd_exists_any(handle, storage_controllers, server_id=1, **kwargs):
     """
     Iterates on each storage controller and checks if any virtual drive exists.
@@ -896,13 +903,14 @@ def sc_vd_exists_any(handle, storage_controllers, server_id=1, **kwargs):
             for sc in sc_list:
                 exists = vd_exists_any(handle,
                                    sc["controller_type"],
-                                   sc["controller_slot"],
-                                   server_id)
+                    sc["controller_slot"],
+                    server_id)
                 if exists:
                     sc_vds_delete.append(sc)
     if len(sc_vds_delete) > 0:
         return sc_vds_delete, True
     return sc_vds_delete, False
+
 
 def vd_exists_any(handle, controller_type, controller_slot, server_id=1,
                   **kwargs):
@@ -930,6 +938,7 @@ def vd_exists_any(handle, controller_type, controller_slot, server_id=1,
     if mos and len(mos) > 0:
         return True
     return False
+
 
 def sc_vd_boot_drive_enable(handle, storage_controllers, server_id=1, **kwargs):
     """
@@ -969,7 +978,7 @@ def sc_vd_boot_drive_enable(handle, storage_controllers, server_id=1, **kwargs):
 
         is_m2_controller = controller_m2_hwraid_exists(handle, sc["controller_slot"], server_id)
 
-        #Set Boot Drive option is invalid for M.2 HWRAID Controller as the VD is bootDrive by default.
+        # Set Boot Drive option is invalid for M.2 HWRAID Controller as the VD is bootDrive by default.
         if id and not is_m2_controller:
             vd_boot_drive_enable(handle,
                                  sc["controller_type"],
@@ -978,7 +987,6 @@ def sc_vd_boot_drive_enable(handle, storage_controllers, server_id=1, **kwargs):
                                  server_id,
                                  **kwargs)
     return True
-
 
 
 def vd_boot_drive_enable(handle, controller_type, controller_slot, id,
@@ -1006,13 +1014,14 @@ def vd_boot_drive_enable(handle, controller_type, controller_slot, id,
 
     action = StorageVirtualDriveConsts.ADMIN_ACTION_SET_BOOT_DRIVE
     return _vd_set_action(
-            handle,
-            controller_type=controller_type,
-            controller_slot=controller_slot,
-            id=id,
-            action=action,
-            server_id=server_id
-        )
+        handle,
+        controller_type=controller_type,
+        controller_slot=controller_slot,
+        id=id,
+        action=action,
+        server_id=server_id
+    )
+
 
 def sc_vd_boot_drive_exists(handle, storage_controllers, server_id=1, **kwargs):
     """
@@ -1044,7 +1053,7 @@ def sc_vd_boot_drive_exists(handle, storage_controllers, server_id=1, **kwargs):
    sc_vd_boot_drive_exists(handle, storage_controllers, **kwargs)
 
     """
-    error_msg= "Check for virtual boot drives failed. "
+    error_msg = "Check for virtual boot drives failed. "
 
     if len(storage_controllers) == 0:
         raise ImcOperationError(error_msg + "Storage controllers information is not specified.")
@@ -1066,16 +1075,17 @@ def sc_vd_boot_drive_exists(handle, storage_controllers, server_id=1, **kwargs):
         if id:
             exists, mo = vd_boot_drive_exists(handle,
                                           sc["controller_type"],
-                                          sc["controller_slot"],
-                                          id,
-                                          server_id)
+                sc["controller_slot"],
+                id,
+                server_id)
             if not exists:
                 mos["boot_drive_disabled_vds"].append(mo)
             else:
                 mos["boot_drive_enabled_vds"].append(mo)
     if len(mos["boot_drive_disabled_vds"]) > 0:
         return False, mos
-    return  True, mos
+    return True, mos
+
 
 def vd_boot_drive_exists(handle, controller_type, controller_slot, id,
                          server_id=1):
@@ -1169,13 +1179,13 @@ def vd_encryption_enable(handle, controller_type, controller_slot, id,
 
     action = StorageVirtualDriveConsts.ADMIN_ACTION_ENABLE_SELF_ENCRYPT
     return _vd_set_action(
-            handle,
-            controller_type=controller_type,
-            controller_slot=controller_slot,
-            id=id,
-            action=action,
-            server_id=server_id
-        )
+        handle,
+        controller_type=controller_type,
+        controller_slot=controller_slot,
+        id=id,
+        action=action,
+        server_id=server_id
+    )
 
 
 def vd_encryption_exists(handle, controller_type, controller_slot, id,
@@ -1206,6 +1216,7 @@ def vd_encryption_exists(handle, controller_type, controller_slot, id,
         return False, mo
 
     return True, mo
+
 
 def sc_vd_get_by_name(handle, storage_controllers, server_id=1, **kwargs):
     """
@@ -1370,6 +1381,7 @@ def sc_boot_vd_get_by_name(handle, storage_controllers, server_id=1):
     if len(mos) > 0:
         return mos
     return None
+
 
 def sc_dhs_get_by_name(handle, storage_controllers, server_id=1, **kwargs):
     """

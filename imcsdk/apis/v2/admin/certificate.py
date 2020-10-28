@@ -361,25 +361,25 @@ def certificate_exists(handle, **kwargs):
     state="California", locality="San Francisco")
     """
     return False, None
-   # TBD: How to handle self-signed vs ca-signed certificate?
-   #  current_certificate = current_certificate_get(handle)
-   #  if current_certificate is None:
-   #      return False, None
+    # TBD: How to handle self-signed vs ca-signed certificate?
+    #  current_certificate = current_certificate_get(handle)
+    #  if current_certificate is None:
+    #      return False, None
 
-   #  params = {
-   #      "common_name": kwargs['name'],
-   #      "organization": kwargs['org'],
-   #      "locality": kwargs['locality'],
-   #      "state": kwargs['state'],
-   #      "country_code": country_codes[kwargs['country']]
-   #  }
+    #  params = {
+    #      "common_name": kwargs['name'],
+    #      "organization": kwargs['org'],
+    #      "locality": kwargs['locality'],
+    #      "state": kwargs['state'],
+    #      "country_code": country_codes[kwargs['country']]
+    #  }
 
-   #  if 'org_unit' in kwargs and kwargs['org_unit']:
-   #      params['organizational_unit'] = kwargs['org_unit']
+    #  if 'org_unit' in kwargs and kwargs['org_unit']:
+    #      params['organizational_unit'] = kwargs['org_unit']
 
-   #  if current_certificate.check_prop_match(**params):
-   #      return True, current_certificate
-   #  return False, None
+    #  if current_certificate.check_prop_match(**params):
+    #      return True, current_certificate
+    #  return False, None
 
 
 def certificate_signing_status_get(handle):

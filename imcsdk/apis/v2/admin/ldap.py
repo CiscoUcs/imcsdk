@@ -20,7 +20,6 @@ import logging
 from imcsdk.imcexception import ImcOperationError
 from imcsdk.imcexception import ImcOperationErrorDetail
 from imcsdk.imccoreutils import process_conf_mos_response
-from imcsdk.imccoreutils import ConfigConfMosConstants as ccmconst
 from imcsdk.imccoreutils import sanitize_message
 from imcsdk.apis.v2.utils import _get_mo, _is_valid_arg, _is_invalid_value,\
     _validate_api_prop
@@ -167,9 +166,9 @@ def ldap_enable(handle,
         'group_auth': group_auth,
         'locate_directory_using_dns': locate_directory_using_dns,
         'dns_domain_source': dns_domain_source,
-        'dns_search_domain': None if dns_search_domain == "" else dns_search_domain, #IMC XML API issue : CSCvg92190
+        'dns_search_domain': None if dns_search_domain == "" else dns_search_domain,  # IMC XML API issue : CSCvg92190
         'dns_search_forest': None if dns_search_forest == "" else dns_search_forest
-        }
+    }
 
     mo.set_prop_multiple(**params)
 
@@ -514,7 +513,7 @@ def ldap_role_group_create_all(handle, groups=None):
 
 
 def ldap_role_group_callback(dn, dn_to_group_dict):
-        return dn_to_group_dict.get(dn, "Unknown LDAP Role Group:" + dn)
+    return dn_to_group_dict.get(dn, "Unknown LDAP Role Group:" + dn)
 
 
 def ldap_role_group_delete_all(handle):
