@@ -20,4 +20,4 @@ jobs:
         pip install -r requirements_dev.txt
     - name: Run linter on apis
       run: |
-        flake8 --ignore=E501,E128 imcsdk/apis
+        flake8 --ignore=E501,E128,W504,W605,E722 imcsdk/apis
