@@ -55,11 +55,15 @@ def vmedia_enable(handle, encryption_state=None, low_power_usb=None,
         vmedia_enable(handle, True, True)
     """
 
-    if encryption_state: encryption_state = 'enabled'
-    else: encryption_state = 'disabled'
+    if encryption_state:
+        encryption_state = 'enabled'
+    else:
+        encryption_state = 'disabled'
 
-    if low_power_usb: low_power_usb = 'enabled'
-    else: low_power_usb = 'disabled'
+    if low_power_usb:
+        low_power_usb = 'enabled'
+    else:
+        low_power_usb = 'disabled'
 
     mo = CommVMedia(parent_mo_or_dn=_get_comm_mo_dn(handle, server_id))
     params = {
@@ -340,9 +344,7 @@ def vmedia_mount_iso_uri(handle, uri, volume_name=None, user_id=None,
             if wait_time > timeout:
                 raise ImcOperationError(
                     'Mount Virtual Media',
-                    '{0}: ERROR - Mapped ISO status stuck at ' +
-                    '[In Progress]'.format(handle.ip)
-                )
+                    '{0}: ERROR - Mapped ISO status stuck at [In Progress]'.format(handle.ip))
             # Wait interval sec between checks
             time.sleep(interval)
             status_list = vmedia_get_existing_status(handle, server_id)
@@ -354,9 +356,7 @@ def vmedia_mount_iso_uri(handle, uri, volume_name=None, user_id=None,
             else:
                 raise ImcOperationError(
                     'Mount Virtual Media',
-                    '{0}: ERROR - Mapped ISO status ' +
-                    'is {1}'.format(handle.ip, status_list)
-                )
+                    '{0}: ERROR - Mapped ISO status is {1}'.format(handle.ip, status_list))
     else:
         raise ImcOperationError(
             'Mount Virtual Media',
@@ -421,8 +421,7 @@ def vmedia_mount_remove_all(handle, server_id=1):
     # Raise error if all mappings not removed
     if len(handle.query_children(in_dn="sys/svc-ext/vmedia-svc")) > 0:
         raise ImcOperationError('Remove Virtual Media',
-                                '{0}: ERROR - Unable remove all virtual' +
-                                'media mappings'.format(handle.ip))
+                                '{0}: ERROR - Unable remove all virtual media mappings'.format(handle.ip))
     # Return True if all mappings removed
     return True
 

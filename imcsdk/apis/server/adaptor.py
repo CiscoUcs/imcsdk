@@ -71,8 +71,8 @@ def adaptor_properties_get(handle, adaptor_slot, server_id=1, **kwargs):
 
 
 def adaptor_properties_set(handle, adaptor_slot, lldp=None, fip_mode=None,
-                                 vntag_mode=None, num_vmfex_ifs=None,
-                                 server_id=1, **kwargs):
+                           vntag_mode=None, num_vmfex_ifs=None,
+                           server_id=1, **kwargs):
     """
     This method setups the vic adaptor properties.
     A reboot will be required when these properties are changed

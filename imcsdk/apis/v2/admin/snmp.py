@@ -45,8 +45,7 @@ def _set_snmp(handle, mo, timeout=90):
             if engine_id_error not in e.error_descr.lower():
                 raise
         if (datetime.datetime.now() - start).total_seconds() > timeout:
-            raise ImcOperationError("SNMP Enable",
-                                    "Error: %s" % str(e))
+            raise ImcOperationError("SNMP Enable", "Error: Timeout")
         time.sleep(10)
 
 
@@ -142,7 +141,7 @@ def snmp_enable(handle, port=None, community=None,
         'sys_contact': sys_contact,
         'sys_location': sys_location,
         'engine_id_key': engine_id_key
-        }
+    }
 
     mo.set_prop_multiple(**params)
     mo.set_prop_multiple(**kwargs)
@@ -264,7 +263,7 @@ def snmp_trap_add(handle, hostname, version, notification_type,
         'admin_state': admin_state,
         'port': str(port) if port is not None else None,
         'user': user
-        }
+    }
 
     mo.set_prop_multiple(**params)
     mo.set_prop_multiple(**kwargs)
@@ -433,7 +432,7 @@ def snmp_trap_add_all(handle, traps=None):
             'admin_state': admin_state,
             'port': str(port) if port else None,
             'user': user
-            }
+        }
 
         id += 1
         mo = CommSnmpTrap(parent_mo_or_dn=parent_mo, id=str(id))
@@ -634,7 +633,7 @@ def snmp_user_add(handle, name, security_level,
         params = {
             'name': name,
             'security_level': security_level
-            }
+        }
 
     if mo is None:
         raise ImcOperationError("Add SNMP user",
@@ -766,8 +765,7 @@ def snmp_user_delete(handle, name):
 def _validate_api_prop(prop, value, api, validate_value=False,
                        valid_values=None):
     if value is None:
-        raise ImcOperationError(api, "Required property '%s' missing." % (
-           api, prop))
+        raise ImcOperationError(api, "Required property '%s' missing." % prop)
     if validate_value and value not in valid_values:
         raise ImcOperationError(
             api, "['%s'] Invalid value '%s'. Valid values are %s" % (
@@ -838,7 +836,7 @@ def snmp_user_add_all(handle, users=None):
         params = {
             'name': name,
             'security_level': security_level
-            }
+        }
 
         if security_level == CommSnmpUserConsts.SECURITY_LEVEL_AUTHNOPRIV:
             _validate_api_prop('auth_pwd', auth_pwd, api)

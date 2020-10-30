@@ -27,10 +27,12 @@ from imcsdk.imccoreutils import process_conf_mos_response, sanitize_message
 from imcsdk.mometa.adaptor.AdaptorUnit import AdaptorUnitConsts
 from imcsdk.mometa.adaptor.AdaptorExtEthIf import AdaptorExtEthIfConsts
 from imcsdk.apis.v2.server.serveractions import _wait_for_power_state, \
-     server_power_cycle, server_power_state_get
+    server_power_cycle, server_power_state_get
+from imcsdk.mometa.compute.ComputeRackUnit import ComputeRackUnitConsts
 from imcsdk.apis.v2.server.adaptor import adaptor_properties_get
 
 log = logging.getLogger('imc')
+
 
 class VicConst(object):
     ADAPTOR_ERROR_MSG = "Configure Adapter Failed."
@@ -38,6 +40,8 @@ class VicConst(object):
     VHBA_ERROR_MSG = "Create Virtual Fibre-Channel Interface Failed."
     DCE_IF_ERROR_MSG = "Configuration of DCE Interface Failed."
     CL74_UNSUPPORTED_ADAPTOR = ["UCSC-PCIE-C100-04", "UCSC-MLOM-C100-04"]
+    CONFIG_ADAPTOR_ERROR = "Configure Adapter"
+    ADAPTOR_INIT_RETRY_COUNT = 12
 
 
 vic_map = {
@@ -94,6 +98,7 @@ def adaptor_unit_get(handle, adaptor_slot, server_id=1, **kwargs):
     """
     return _get_mo(handle, dn=_get_adaptor_dn(handle, adaptor_slot, server_id))
 
+
 def adaptor_get_all(handle):
     from imcsdk.imcconstants import NamingId
     return handle.query_classid(class_id=NamingId.ADAPTOR_UNIT)
@@ -117,25 +122,26 @@ def adaptor_set_all(handle, adaptors=None, server_id=1, **kwargs):
 
     api = 'adaptor_set_all'
     api_error_msg = VicConst.ADAPTOR_ERROR_MSG
+    config_adaptor_err = VicConst.CONFIG_ADAPTOR_ERROR
 
     if not adaptors:
         log.debug("No adapters present for configuration")
         return
 
     # fetch adaptors from end point, adaptor_ep_dict is dict {id, adaptor_mo}
-    adaptor_ep_dict = _prepare_ep_adaptor_dict(handle, api_error_msg)
+    adaptor_ep_dict = _prepare_ep_adaptor_dict(handle, config_adaptor_err)
 
     # validate input and checks if adaptor exists at end point
     for adaptor in adaptors:
         id = adaptor.get('id', None)
         if id is None:
             raise ImcOperationError(
-                api_error_msg,
+                config_adaptor_err,
                 'Provide adapter slot to configure')
 
         if id not in adaptor_ep_dict:
             raise ImcOperationError(
-                api_error_msg,
+                config_adaptor_err,
                 "Adaptor %s is not present at end point." % id)
 
     # configure adapter
@@ -144,7 +150,12 @@ def adaptor_set_all(handle, adaptors=None, server_id=1, **kwargs):
     restart_server = None
     adaptor_list = []
 
-    #adaptors are the configured adaptors in intersight AdaptorConfiguration Policy
+    if server_power_state_get(handle) != ComputeRackUnitConsts.OPER_POWER_ON:
+        raise ImcOperationError(
+            config_adaptor_err,
+            "Server is powered off. Power on the server and retry.")
+
+    # adaptors are the configured adaptors in intersight AdaptorConfiguration Policy
     for adaptor in adaptors:
         id = adaptor['id']
         lldp = adaptor.pop('lldp', None)
@@ -157,18 +168,32 @@ def adaptor_set_all(handle, adaptors=None, server_id=1, **kwargs):
         # admin_state = adaptor.pop('admin_state', None)
 
         mo = adaptor_ep_dict[id]
-        adaptor_properties = adaptor_properties_get(handle, id, server_id=1)
+        retry = 0
+        adaptor_initialized = False
+        while not adaptor_initialized and retry < VicConst.ADAPTOR_INIT_RETRY_COUNT:
+            try:
+                adaptor_properties = adaptor_properties_get(handle, id, server_id=1)
+                adaptor_initialized = True
+            except ImcOperationError:
+                retry += 1
+                time.sleep(5)
+        if not adaptor_initialized:
+            log.debug("Adaptor initialisation failure for adaptor at slot %s", id)
+            raise ImcOperationError(
+                config_adaptor_err,
+                "Adaptor %s is not initialised. Please retry after sometime." % id)
+
         adaptor_list.append(adaptor_properties)
-        #port_channel_capable  returns None for < Gen4 adapters and False for Gen4+ unsupported portchannel adapters.
-        #Hence a check has to be done for both None and False
-        #for backward compatibility in deploying Adapter Configuration Policy.
-        if adaptor_properties.port_channel_capable == None or adaptor_properties.port_channel_capable == "False":
+        # port_channel_capable  returns None for < Gen4 adapters and False for Gen4+ unsupported portchannel adapters.
+        # Hence a check has to be done for both None and False
+        # for backward compatibility in deploying Adapter Configuration Policy.
+        if adaptor_properties.port_channel_capable is None or adaptor_properties.port_channel_capable == "False":
             log.debug("Port Channel is not supported for the adapter at slot: %s", adaptor_properties.pci_slot)
             port_channel_enable = None
 
         if adaptor_properties.port_channel_capable == "True" and port_channel_enable == "disabled":
             log.debug("Port Channel is disabled by user for adapter at slot %s. Server restart initiated", adaptor_properties.pci_slot)
-            restart_server=True
+            restart_server = True
 
         mo.admin_state = AdaptorUnitConsts.ADMIN_STATE_ADAPTOR_RESET_DEFAULT
 
@@ -179,7 +204,7 @@ def adaptor_set_all(handle, adaptors=None, server_id=1, **kwargs):
                               port_channel_enable="disabled",
                               vntag_mode="disabled")
         else:
-            #port_channel_enable value is set to enabled by default.
+            # port_channel_enable value is set to enabled by default.
             # Hence, its not required to send the default value.
             AdaptorGenProfile(parent_mo_or_dn=mo,
                           lldp=lldp,
@@ -213,7 +238,7 @@ def adaptor_set_all(handle, adaptors=None, server_id=1, **kwargs):
     results["msg"] = ""
     results["msg_params"] = ret
 
-    #Power Cycle Host for the changes to take effect.
+    # Power Cycle Host for the changes to take effect.
     if restart_server:
         log.debug("Restarting server...")
         server_power_cycle(handle, timeout=180)
@@ -222,7 +247,8 @@ def adaptor_set_all(handle, adaptors=None, server_id=1, **kwargs):
         for adaptor in adaptor_list:
             adaptor_initialization_in_progress = True
             wait_count = 0
-            while adaptor_initialization_in_progress and wait_count < 5:
+            # VIC adaptor takes 30-40secs to get initialised. Hence, the time-out is set to 1 minute max with every 5 sec retry.
+            while adaptor_initialization_in_progress and wait_count < VicConst.ADAPTOR_INIT_RETRY_COUNT:
                 try:
                     adaptor = _get_mo(handle, dn=adaptor.dn)
                     adaptor_initialization_in_progress = False
@@ -234,12 +260,13 @@ def adaptor_set_all(handle, adaptors=None, server_id=1, **kwargs):
             if adaptor_initialization_in_progress:
                 log.debug("Adaptor initialisation failure for adaptor at slot %s", adaptor.pci_slot)
                 raise ImcOperationError(
-                    api_error_msg,
+                    config_adaptor_err,
                     "Adaptor %s is not initialised at end point." % adaptor.pci_slot)
         log.debug("Sleeping for 1 minute")
         time.sleep(60)
         log.debug("Returning results")
     return results
+
 
 def _ext_ethif_set_all(handle, ext_ethifs, adaptor_mo):
     """
@@ -252,7 +279,6 @@ def _ext_ethif_set_all(handle, ext_ethifs, adaptor_mo):
                            fec_mode: "Off"}],
                            adaptor_mo=<adaptor obj>)
     """
-    from imcsdk.mometa.adaptor.AdaptorExtEthIf import AdaptorExtEthIf
 
     # configure ext_ethifs on adaptor
     mos = []
@@ -261,18 +287,16 @@ def _ext_ethif_set_all(handle, ext_ethifs, adaptor_mo):
     # FEC mode 'cl74' is not supported for Cisco VIC 1495/1497 adaptors
     # Ignore setting 'cl74' for those adaptors
     if adaptor_mo.model in VicConst.CL74_UNSUPPORTED_ADAPTOR:
-       cl74_unsupported = True
+        cl74_unsupported = True
     for ext_ethif in ext_ethifs:
         if ext_ethif["port_id"] in ext_ethif_mos_dict:
             # FEC mode configuration is supported only for Bodega adapters
             fec_mode_supported = \
-                    ext_ethif_mos_dict[ext_ethif["port_id"]].admin_fec_mode
+                ext_ethif_mos_dict[ext_ethif["port_id"]].admin_fec_mode
             if fec_mode_supported:
-                if (cl74_unsupported and ext_ethif["fec_mode"] == \
-                       AdaptorExtEthIfConsts.ADMIN_FEC_MODE_CL74):
+                if (cl74_unsupported and ext_ethif["fec_mode"] == AdaptorExtEthIfConsts.ADMIN_FEC_MODE_CL74):
                     continue
-                ext_ethif_mos_dict[ext_ethif["port_id"]].admin_fec_mode = \
-                        ext_ethif["fec_mode"]
+                ext_ethif_mos_dict[ext_ethif["port_id"]].admin_fec_mode = ext_ethif["fec_mode"]
                 mos.append(ext_ethif_mos_dict[ext_ethif["port_id"]])
             else:
                 log.debug("FEC mode configuration is not supported on adaptor")
@@ -281,6 +305,8 @@ def _ext_ethif_set_all(handle, ext_ethifs, adaptor_mo):
     return mos
 
 # VNIC & VHBA APIs
+
+
 def _process_mo_prop_str(prop_str, api_error_msg):
     '''
     prop_str = "AdaptorFcGenProfile.PciLink"
@@ -333,6 +359,7 @@ def _vic_get(handle, adaptor_slot, name, vic_type, server_id=1):
     vic_mo = vic_mo_class(parent_mo_or_dn=parent_mo, name=name)
     return handle.query_dn(vic_mo.dn)
 
+
 def _vic_get_all(handle, vic_adaptor_slot, vic_type):
     """
     Method to fetch all the  vic's (vnics/vhbas) from the adaptor slot at the end point.
@@ -356,6 +383,7 @@ def _vic_get_all(handle, vic_adaptor_slot, vic_type):
 
     return vic_mo
 
+
 def _ext_ethif_get_all(handle, adaptor_mo):
     """
     Method to fetch all the  external ethernet interfaces from the adaptor slot at the end point.
@@ -370,6 +398,7 @@ def _ext_ethif_get_all(handle, adaptor_mo):
         ext_ethifs[mo.port_id] = mo
 
     return ext_ethifs
+
 
 def _validate_vic(vic_type, api_error_msg, vic):
     '''
@@ -452,7 +481,7 @@ def _create_vic_object(adaptor_mo, vic_name, vic_type, api_error_msg,
 
         # Allow vHBA Type Configuration for Generation4+ adaptor only. Else, set the vhbaType to None as they are not supported.
         adaptorModel = adaptor_mo.model.split("-")
-        genVersion = adaptorModel[len(adaptorModel)-1]
+        genVersion = adaptorModel[len(adaptorModel) - 1]
         if genVersion < "04" and mo_name == "AdaptorFcGenProfile" and prop_name == "vhba_type":
             prop_value = None
 
@@ -477,6 +506,7 @@ def _create_vic_object(adaptor_mo, vic_name, vic_type, api_error_msg,
         setattr(mo, prop_name, prop_value)
 
     return vic_mo
+
 
 def _vic_delete_all_under_adaptors(handle, vic_type, adaptor_slots):
     import re
@@ -735,7 +765,7 @@ def vnic_create_all(handle, vnics=None, adaptors_to_reset=None,
     vnic_count_per_request = 3
     ret = []
 
-    vnic_children_classid_to_send_later = ["AdaptorEthUSNICProfile"]
+    vnic_children_classid_to_send_later = ["AdaptorEthUSNICProfile", "AdaptorEthMultiQueueProfile"]
 
     # create vnics mo with children
     vnics = _create_vics_with_children(handle, vic_type, api_error_msg, vnics,
@@ -756,7 +786,7 @@ def vnic_create_all(handle, vnics=None, adaptors_to_reset=None,
 
     # sending request to add/modify vnic with its children
     for i in range(0, len(vnics), vnic_count_per_request):
-        vnics_ = vnics[i: i+vnic_count_per_request]
+        vnics_ = vnics[i: i + vnic_count_per_request]
         response = handle.set_mos(vnics_)
         if response:
             ret.append(_process_response(response, api, api_error_msg))
@@ -777,7 +807,6 @@ def vnic_create_all(handle, vnics=None, adaptors_to_reset=None,
 
 
 def vnic_delete_all(handle, adaptor_slots=None):
-
     """
     delete all vnics.
 

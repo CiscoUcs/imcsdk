@@ -438,8 +438,6 @@ def mgmt_if_exists(handle, **kwargs):
     if 'vlan_priority' in kwargs:
         kwargs['vlan_priority'] = str(kwargs['vlan_priority']) if kwargs['vlan_priority'] is not None else None
 
-
-
     return mo.check_prop_match(**kwargs), mo
 
 

@@ -19,6 +19,7 @@ from imcsdk.imcexception import ImcOperationError
 
 SYSLOG_DN = 'sys/svc-ext/syslog'
 
+
 def syslog_get(handle, caller="syslog_get"):
     """
     Gets syslog.
@@ -74,7 +75,7 @@ def syslog_configure(handle,
     params = {
         'local_severity': local_severity,
         'remote_severity': remote_severity
-        }
+    }
 
     mo.set_prop_multiple(**params)
     mo.set_prop_multiple(**kwargs)

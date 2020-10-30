@@ -425,7 +425,7 @@ def util_vds_disable_all_m5(handle, mos_dict):
         mos.append(vd)
     response = handle.set_mos(mos)
     if response:
-        _process_response(response, api,  vd_callback, dn_to_vd_dict)
+        _process_response(response, api, vd_callback, dn_to_vd_dict)
 
 
 def os_vd_disable_m5(handle, mos_dict):
@@ -475,7 +475,7 @@ def vd_callback(dn, dn_to_vd_dict):
     return dn_to_vd_dict.get(dn, "Unknown VD:" + dn)
 
 
-def _process_response(response, api,  callback, dn_to_vd_dict):
+def _process_response(response, api, callback, dn_to_vd_dict):
     ret = process_conf_mos_response(response, api, False,
                                     'sd card config set m5',
                                     callback,
@@ -575,7 +575,7 @@ def _sd_card_config_set_m4(handle, expected_vds, existing_vds, mos_dict=None):
                     dn_to_vd_dict[existing_vd.vd_mo.dn] = expected_vd.vd_type
             response = handle.set_mos(mos)
             if response:
-                return _process_response(response, api,  vd_callback,
+                return _process_response(response, api, vd_callback,
                                          dn_to_vd_dict)
             return
 
@@ -658,7 +658,7 @@ def _sd_card_config_set_m5(handle, expected_vds, existing_vds, mos_dict):
             log.debug("%s: %s" % (vd_type_, admin_action))
         response = handle.set_mos(mos_disable)
         if response:
-            _process_response(response, api,  vd_callback, dn_to_vd_dict)
+            _process_response(response, api, vd_callback, dn_to_vd_dict)
 
     if mos_enable:
         dn_to_vd_dict = {}
@@ -668,7 +668,7 @@ def _sd_card_config_set_m5(handle, expected_vds, existing_vds, mos_dict):
             log.debug("%s: %s" % (vd_type_, admin_action))
         response = handle.set_mos(mos_enable)
         if response:
-            _process_response(response, api,  vd_callback, dn_to_vd_dict)
+            _process_response(response, api, vd_callback, dn_to_vd_dict)
 
 
 def _get_existing_vds_m4(mos_dict):

@@ -25,8 +25,8 @@ class AaaLdap(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("AaaLdap", "aaaLdap", "ldap-ext", VersionMeta.Version151f, "InputOutput", 0x3ffffffff, [], ["admin", "read-only", "user"], ['topSystem'], ['aaaLdapRoleGroup', 'ldapCACertificateManagement'], ["Get", "Set"]),
-        "modular": MoMeta("AaaLdap", "aaaLdap", "ldap-ext", VersionMeta.Version2013e, "InputOutput", 0x3ffffffff, [], ["admin", "read-only", "user"], ['topSystem'], ['aaaLdapRoleGroup', 'ldapCACertificateManagement'], ["Get", "Set"])
+        "classic": MoMeta("AaaLdap", "aaaLdap", "ldap-ext", VersionMeta.Version151f, "InputOutput", 0x3ffffffff, [], ["admin", "read-only", "user"], ['topSystem'], ['aaaLdapRoleGroup', 'ldapCACertificateManagement', 'secureLdap'], ["Get", "Set"]),
+        "modular": MoMeta("AaaLdap", "aaaLdap", "ldap-ext", VersionMeta.Version2013e, "InputOutput", 0x3ffffffff, [], ["admin", "read-only", "user"], ['topSystem'], ['aaaLdapRoleGroup', 'ldapCACertificateManagement', 'secureLdap'], ["Get", "Set"])
     }
 
 
@@ -42,7 +42,7 @@ class AaaLdap(ManagedObject):
             "dns_domain_source": MoPropertyMeta("dns_domain_source", "dnsDomainSource", "string", VersionMeta.Version151x, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["configured-domain", "extracted-configured-domain", "extracted-domain"], []),
             "dns_search_domain": MoPropertyMeta("dns_search_domain", "dnsSearchDomain", "string", VersionMeta.Version151x, MoPropertyMeta.READ_WRITE, 0x100, 0, 64, r"""(([a-zA-Z0-9])|([a-zA-Z0-9][a-zA-Z0-9\.\-]*[a-zA-Z0-9]){0,64})""", [], []),
             "dns_search_forest": MoPropertyMeta("dns_search_forest", "dnsSearchForest", "string", VersionMeta.Version151x, MoPropertyMeta.READ_WRITE, 0x200, 0, 64, r"""(([a-zA-Z0-9])|([a-zA-Z0-9][a-zA-Z0-9\.\-]*[a-zA-Z0-9]){0,64})""", [], []),
-            "domain": MoPropertyMeta("domain", "domain", "string", VersionMeta.Version151x, MoPropertyMeta.READ_WRITE, 0x400, 0, 255, None, [], []),
+            "domain": MoPropertyMeta("domain", "domain", "string", VersionMeta.Version151x, MoPropertyMeta.READ_WRITE, 0x400, 0, 254, None, [], []),
             "encryption": MoPropertyMeta("encryption", "encryption", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x800, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []),
             "filter": MoPropertyMeta("filter", "filter", "string", VersionMeta.Version151x, MoPropertyMeta.READ_WRITE, 0x1000, 0, 20, r"""[a-zA-Z0-9][a-zA-Z0-9_#@$%&\-\^]*[a-zA-Z0-9\-]""", [], []),
             "group_attribute": MoPropertyMeta("group_attribute", "groupAttribute", "string", VersionMeta.Version151x, MoPropertyMeta.READ_WRITE, 0x2000, 0, 254, r"""[a-zA-Z0-9][a-zA-Z0-9_#@$%&\-\^]*[a-zA-Z0-9\-]""", [], []),
@@ -78,7 +78,7 @@ class AaaLdap(ManagedObject):
             "dns_domain_source": MoPropertyMeta("dns_domain_source", "dnsDomainSource", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["configured-domain", "extracted-configured-domain", "extracted-domain"], []),
             "dns_search_domain": MoPropertyMeta("dns_search_domain", "dnsSearchDomain", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x100, 0, 64, r"""(([a-zA-Z0-9])|([a-zA-Z0-9][a-zA-Z0-9\.\-]*[a-zA-Z0-9]){0,64})""", [], []),
             "dns_search_forest": MoPropertyMeta("dns_search_forest", "dnsSearchForest", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x200, 0, 64, r"""(([a-zA-Z0-9])|([a-zA-Z0-9][a-zA-Z0-9\.\-]*[a-zA-Z0-9]){0,64})""", [], []),
-            "domain": MoPropertyMeta("domain", "domain", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x400, 0, 255, None, [], []),
+            "domain": MoPropertyMeta("domain", "domain", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x400, 0, 254, None, [], []),
             "encryption": MoPropertyMeta("encryption", "encryption", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x800, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []),
             "filter": MoPropertyMeta("filter", "filter", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x1000, 0, 20, r"""[a-zA-Z0-9][a-zA-Z0-9_#@$%&\-\^]*[a-zA-Z0-9\-]""", [], []),
             "group_attribute": MoPropertyMeta("group_attribute", "groupAttribute", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2000, 0, 254, r"""[a-zA-Z0-9][a-zA-Z0-9_#@$%&\-\^]*[a-zA-Z0-9\-]""", [], []),

@@ -36,7 +36,7 @@ def _get_comm_mo_dn(handle, server_id=1):
 
 
 def ipmi_enable(handle, priv=CommIpmiLanConsts.PRIV_ADMIN,
-                key='0'*40, server_id=1):
+                key='0' * 40, server_id=1):
     """
     Enable IPMI over LAN.
 
@@ -61,8 +61,7 @@ def ipmi_enable(handle, priv=CommIpmiLanConsts.PRIV_ADMIN,
     try:
         hex(int(key, 16))[2:]
     except ValueError:
-        raise ValueError('{0}: ERROR: Encryption key is not hex number: ' +
-                         '"{1}"'.format(handle.ip, key))
+        raise ValueError('{0}: ERROR: Encryption key is not hex number: "{1}"'.format(handle.ip, key))
 
     # Create enabled IPMI object
     ipmi_mo = CommIpmiLan(parent_mo_or_dn=_get_comm_mo_dn(handle, server_id))

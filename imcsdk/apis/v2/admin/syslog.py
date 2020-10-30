@@ -20,6 +20,7 @@ from imcsdk.mometa.comm.CommSyslogClient import CommSyslogClientConsts
 
 SYSLOG_DN = 'sys/svc-ext/syslog'
 
+
 def syslog_get(handle, caller="syslog_get"):
     """
     Gets syslog.
@@ -75,7 +76,7 @@ def syslog_configure(handle,
     params = {
         'local_severity': local_severity,
         'remote_severity': remote_severity
-        }
+    }
 
     mo.set_prop_multiple(**params)
     mo.set_prop_multiple(**kwargs)
@@ -189,7 +190,7 @@ def syslog_remote_disable(handle, name, **kwargs):
     mo.admin_state = CommSyslogClientConsts.ADMIN_STATE_DISABLED
     kwargs.pop('state', None)
     if 'hostname' in kwargs:
-        if not kwargs['hostname'] or kwargs['hostname'] == "0.0.0.0" :
+        if not kwargs['hostname'] or kwargs['hostname'] == "0.0.0.0":
             kwargs.pop('hostname')
     mo.set_prop_multiple(**kwargs)
     handle.set_mo(mo)
@@ -304,5 +305,3 @@ def syslog_remote_exists(handle, name, **kwargs):
         kwargs['admin_state'] = CommSyslogClientConsts.ADMIN_STATE_DISABLED
     mo_exists = mo.check_prop_match(**kwargs)
     return (mo_exists, mo)
-
-

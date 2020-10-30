@@ -19,7 +19,7 @@ This module implements all the server actions
 import time
 from imcsdk.imcexception import ImcOperationError
 from imcsdk.mometa.compute.ComputeRackUnit import ComputeRackUnit,\
-        ComputeRackUnitConsts
+    ComputeRackUnitConsts
 from imcsdk.mometa.equipment.EquipmentChassis import EquipmentChassis
 from imcsdk.mometa.compute.ComputeServerNode import ComputeServerNodeConsts
 from imcsdk.mometa.equipment.EquipmentLocatorLed \
@@ -256,8 +256,7 @@ def _set_chassis_locator_led_state(handle, enabled, kwargs):
     chassis_dn = "sys/chassis-" + chassis_id
     led_mo = EquipmentChassisLocatorLed(parent_mo_or_dn=chassis_dn)
     led_mo.admin_state = (EquipmentChassisLocatorLedConsts.ADMIN_STATE_OFF,
-                          EquipmentChassisLocatorLedConsts.ADMIN_STATE_ON)\
-                            [enabled]
+                          EquipmentChassisLocatorLedConsts.ADMIN_STATE_ON)[enabled]
     handle.set_mo(led_mo)
 
 

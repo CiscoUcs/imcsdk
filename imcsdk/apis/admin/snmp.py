@@ -62,7 +62,7 @@ def snmp_enable(handle, community=None,
         'sys_contact': sys_contact,
         'sys_location': sys_location,
         'port': port,
-        }
+    }
 
     mo.set_prop_multiple(**params)
     mo.set_prop_multiple(**kwargs)
@@ -120,7 +120,6 @@ def is_snmp_enabled(handle, **kwargs):
     return (mo_exists, mo if mo_exists else None)
 
 
-
 def _get_free_snmp_trap_obj(handle):
 
     from imcsdk.mometa.comm.CommSnmpTrap import CommSnmpTrapConsts
@@ -176,7 +175,7 @@ def snmp_trap_add(handle, hostname, port, version="v3",
         'port': port,
         'version': version,
         'notification_type': notification_type,
-        }
+    }
 
     mo.set_prop_multiple(**params)
     mo.set_prop_multiple(**kwargs)
@@ -322,14 +321,14 @@ def snmp_user_add(handle, name, security_level="authpriv",
     params = {
         'name': name,
         'security_level': security_level
-        }
+    }
     mo.set_prop_multiple(**params)
     params = {}
     if security_level == CommSnmpUserConsts.SECURITY_LEVEL_AUTHNOPRIV:
         params = {
             'auth': auth,
             'auth_pwd': auth_pwd
-            }
+        }
 
     if security_level == CommSnmpUserConsts.SECURITY_LEVEL_AUTHPRIV:
         params = {
@@ -337,7 +336,7 @@ def snmp_user_add(handle, name, security_level="authpriv",
             'auth_pwd': auth_pwd,
             'privacy': privacy,
             'privacy_pwd': privacy_pwd
-            }
+        }
 
     mo.set_prop_multiple(**params)
     mo.set_prop_multiple(**kwargs)

@@ -980,7 +980,7 @@ def process_conf_mos_response(response, api='process_conf_mos_response',
 
 
 def sanitize_message(message):
-    message = message.lstrip('Operation failed. ')
+    message = re.sub("^Operation failed. ", "", message.strip())
 
     return message
 

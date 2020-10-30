@@ -16,7 +16,6 @@ This module implements all the ssh related functionality
 """
 
 from imcsdk.apis.v2.utils import _get_mo
-from imcsdk.imcexception import ImcOperationError
 
 import logging
 
@@ -104,4 +103,3 @@ def ssh_exists(handle, **kwargs):
 
     kwargs['admin_state'] = CommSshConsts.ADMIN_STATE_ENABLED
     return mo.check_prop_match(**kwargs), mo
-

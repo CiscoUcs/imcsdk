@@ -24,7 +24,7 @@ class StorageControllerNVMe(ManagedObject):
     prop_meta = {
 
         "classic": {
-            "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, 0x2, None, None, None, ["recover-pcie-switch"], []),
+            "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["recover-pcie-switch"], []),
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
             "component_id": MoPropertyMeta("component_id", "componentId", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "controller_chip_temp_celsius": MoPropertyMeta("controller_chip_temp_celsius", "controllerChipTempCelsius", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
