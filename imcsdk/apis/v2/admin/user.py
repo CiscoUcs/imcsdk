@@ -472,9 +472,9 @@ def local_users_update(handle, users=None):
         # Existing users are not touched and hence we can safely check the
         # endpoint users list if there is
         found_user = None
-        l = [x for x in endpoint_users if x.name == name]
-        if len(l) != 0:
-            found_user = l[0]
+        found_users = [x for x in endpoint_users if x.name == name]
+        if len(found_users) != 0:
+            found_user = found_users[0]
         if found_user:
             if not change_password:
                 args.pop('pwd', None)
