@@ -468,7 +468,14 @@ class ImcSession(object):
                     return False
                 return True
             else:
-                self._logout()
+                try:
+                    self._logout()
+                except Exception as e:
+                    # Logout can fail when the cookie is stale.
+                    # Cookie can be stale when CIMC has restarted.
+                    # Empty the cookie here.
+                    self.__cookie = None
+                    raise
         return False
 
     def _validate_model(self, model):
@@ -712,6 +719,8 @@ class ImcSession(object):
         # Blindly assign the model passed
         self.__model = model
 
+    def add_header(self, header_prop, header_value):
+        self.__driver.add_header(header_prop, header_value)
 
 def _get_port(port, secure):
     if port:

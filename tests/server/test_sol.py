@@ -17,6 +17,7 @@ from ..connection.info import custom_setup, custom_teardown
 from imcsdk.apis.server.sol import sol_enable
 from imcsdk.apis.server.sol import sol_disable
 from imcsdk.apis.server.sol import sol_exists
+from imcsdk.apis.server.sol import sol_validate_inputs
 
 handle = None
 
@@ -39,3 +40,15 @@ def test_sol_enable():
 def test_sol_disable():
     sol_disable(handle)
     assert_equal(sol_exists(handle)[0], False)
+
+
+def test_sol_validation():
+    params = {
+        "admin_state": "enable",
+        "speed": "115200",
+        "comport": "com0",
+        "ssh_port": "3000"
+    }
+
+    validation_errors = sol_validate_inputs(params)
+    print(validation_errors)

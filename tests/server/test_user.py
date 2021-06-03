@@ -58,7 +58,7 @@ def test_unset_password_expiration():
 
 
 def test_local_user_create():
-    local_user_create(handle, "nosetest", "Nbv-12345", "admin")
+    local_user_create(handle, "nosetest", "****", "admin")
     exists, mo = local_user_exists(handle, name="nosetest", priv="admin")
     assert_equal(exists, True)
 
@@ -80,22 +80,22 @@ def test_snmp_enable():
 def test_snmp_user_create():
     snmp_user = snmp_user_add(handle, name="test-snmp-user",
                               security_level="authpriv",
-                              auth_pwd="Nbv-12345", auth="MD5",
-                              privacy_pwd="Nbv-12345", privacy="AES")
+                              auth_pwd="****", auth="MD5",
+                              privacy_pwd="****", privacy="AES")
     match, mo = snmp_user_exists(handle, name="test-snmp-user")
     assert_equal(match, True)
 
     snmp_user = snmp_user_add(handle, name="test-snmp-user2",
                               security_level="authnopriv",
-                              auth_pwd="Nbv-12345", auth="MD5",
-                              privacy_pwd="Nbv-12345", privacy="AES")
+                              auth_pwd="****", auth="MD5",
+                              privacy_pwd="****", privacy="AES")
     match, mo = snmp_user_exists(handle, name="test-snmp-user2")
     assert_equal(match, True)
 
     snmp_user = snmp_user_add(handle, name="test-snmp-user3",
                               security_level="noauthnopriv",
-                              auth_pwd="Nbv-12345", auth="MD5",
-                              privacy_pwd="Nbv-12345", privacy="AES")
+                              auth_pwd="****", auth="MD5",
+                              privacy_pwd="****", privacy="AES")
     match, mo = snmp_user_exists(handle, name="test-snmp-user3")
     assert_equal(match, True)
 
@@ -103,7 +103,7 @@ def test_snmp_user_create():
 def test_snmp_user_modify():
     match, mo = snmp_user_exists(handle, name="test-snmp-user")
     snmp_user = snmp_user_modify(handle, user_id=mo.id,
-                                 auth_pwd="Nbv-56789",
+                                 auth_pwd="****",
                                  security_level="authnopriv")
     assert_equal(snmp_user.security_level, "authnopriv")
 

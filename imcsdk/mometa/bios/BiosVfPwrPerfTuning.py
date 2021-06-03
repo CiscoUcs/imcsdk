@@ -8,6 +8,7 @@ from ...imcmeta import VersionMeta
 class BiosVfPwrPerfTuningConsts:
     VP_PWR_PERF_TUNING_BIOS = "bios"
     VP_PWR_PERF_TUNING_OS = "os"
+    VP_PWR_PERF_TUNING_PECI = "peci"
     VP_PWR_PERF_TUNING_PLATFORM_DEFAULT = "platform-default"
 
 
@@ -29,7 +30,8 @@ class BiosVfPwrPerfTuning(ManagedObject):
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []),
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
-            "vp_pwr_perf_tuning": MoPropertyMeta("vp_pwr_perf_tuning", "vpPwrPerfTuning", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["bios", "os", "platform-default"], []),
+            "vp_pwr_perf_tuning": MoPropertyMeta("vp_pwr_perf_tuning", "vpPwrPerfTuning", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["bios", "os", "peci", "platform-default"], []),
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version421a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
         },
 
         "modular": {
@@ -48,6 +50,7 @@ class BiosVfPwrPerfTuning(ManagedObject):
             "rn": "rn", 
             "status": "status", 
             "vpPwrPerfTuning": "vp_pwr_perf_tuning", 
+            "childAction": "child_action", 
         },
 
         "modular": {
@@ -63,6 +66,7 @@ class BiosVfPwrPerfTuning(ManagedObject):
         self._dirty_mask = 0
         self.status = None
         self.vp_pwr_perf_tuning = None
+        self.child_action = None
 
         ManagedObject.__init__(self, "BiosVfPwrPerfTuning", parent_mo_or_dn, **kwargs)
 

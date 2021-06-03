@@ -10,6 +10,10 @@ class CommSnmpUserConsts:
     AUTH_ = ""
     AUTH_MD5 = "MD5"
     AUTH_SHA = "SHA"
+    AUTH_SHA_224 = "SHA-224"
+    AUTH_SHA_256 = "SHA-256"
+    AUTH_SHA_384 = "SHA-384"
+    AUTH_SHA_512 = "SHA-512"
     CONFIG_CHANGE_COMMIT = "commit"
     CONFIG_CHANGE_NO_COMMIT = "no-commit"
     PRIVACY_ = ""
@@ -38,7 +42,7 @@ class CommSnmpUser(ManagedObject):
 
         "classic": {
             "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version208d, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["clear"], []),
-            "auth": MoPropertyMeta("auth", "auth", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["", "MD5", "SHA"], []),
+            "auth": MoPropertyMeta("auth", "auth", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["", "MD5", "SHA", "SHA-224", "SHA-256", "SHA-384", "SHA-512"], []),
             "auth_pwd": MoPropertyMeta("auth_pwd", "authPwd", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, r"""(.{8,64})?""", [], []),
             "config_change": MoPropertyMeta("config_change", "configChange", "string", VersionMeta.Version401a, MoPropertyMeta.READ_WRITE, 0x10, 0, 510, None, ["commit", "no-commit"], []),
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, None, [], []),

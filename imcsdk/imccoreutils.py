@@ -15,8 +15,6 @@
 This module contains the ImcSdk Core utilities.
 """
 
-from __future__ import print_function
-
 import os
 import re
 import logging
@@ -406,9 +404,9 @@ def write_mo_tree(mo, level=0, depth=None, show_level=[],
 
     if print_tree:
         if not show_level:
-            print("%s %s (%s)" % (level_indent, mo.dn, mo.class_id))
+            print(("%s %s (%s)" % (level_indent, mo.dn, mo.class_id)))
         elif level in show_level:
-            print("%s %s (%s)" % (level_indent, mo.dn, mo.class_id))
+            print(("%s %s (%s)" % (level_indent, mo.dn, mo.class_id)))
 
     for child in mo.child:
         child.mark_clean()
@@ -487,10 +485,10 @@ def print_mo_hierarchy(class_id, level=0, depth=None,
     if level == 0:
         parents = [imcgenutils.word_u(parent) for parent in
                    MO_CLASS_META[platform][class_id].parents]
-        print("[%s]" % (", ".join(sorted(parents))))
+        print(("[%s]" % (", ".join(sorted(parents)))))
 
     if level == 0 or not show_level or level in show_level:
-        print("%s%s" % (level_indent, imcgenutils.word_u(class_id)))
+        print(("%s%s" % (level_indent, imcgenutils.word_u(class_id))))
 
     children = sorted(MO_CLASS_META[platform][class_id].children)
 
@@ -723,12 +721,12 @@ def get_meta_info(class_id, include_prop=True,
 def prop_exists(mo, prop_name, platform=None):
 
     if platform:
-        return(platform in mo.prop_meta.keys() and
-               prop_name in mo.prop_meta[platform].keys())
+        return(platform in list(mo.prop_meta.keys()) and
+               prop_name in list(mo.prop_meta[platform].keys()))
 
     for platform in IMC_PLATFORM_LIST:
-        if platform in mo.prop_meta.keys() and \
-                prop_name in mo.prop_meta[platform].keys():
+        if platform in list(mo.prop_meta.keys()) and \
+                prop_name in list(mo.prop_meta[platform].keys()):
             return True
 
     return False
@@ -736,8 +734,8 @@ def prop_exists(mo, prop_name, platform=None):
 
 def _get_property_from_prop_meta_for_platform(mo, prop, platform):
 
-    if platform in mo.prop_meta.keys() and \
-            prop in mo.prop_meta[platform].keys():
+    if platform in list(mo.prop_meta.keys()) and \
+            prop in list(mo.prop_meta[platform].keys()):
         return mo.prop_meta[platform][prop]
 
     return None
@@ -802,8 +800,8 @@ def is_writable_prop(mo, prop, platform=None):
 def property_exists_in_prop_map(mo, prop_name):
 
     for platform in IMC_PLATFORM_LIST:
-        if platform in mo.prop_map.keys() and \
-                prop_name in mo.prop_map[platform].keys():
+        if platform in list(mo.prop_map.keys()) and \
+                prop_name in list(mo.prop_map[platform].keys()):
             return True
 
     return False
@@ -811,8 +809,8 @@ def property_exists_in_prop_map(mo, prop_name):
 
 def _get_property_from_prop_map_for_platform(mo, prop, platform):
 
-    if platform in mo.prop_map.keys() and \
-            prop in mo.prop_map[platform].keys():
+    if platform in list(mo.prop_map.keys()) and \
+            prop in list(mo.prop_map[platform].keys()):
         return mo.prop_map[platform][prop]
 
     return None
@@ -845,7 +843,7 @@ def get_mo_meta(mo, platform=None):
                                          % (mo.__class__.__name__))
 
     for platform in IMC_PLATFORM_LIST:
-        if platform in mo.mo_meta.keys():
+        if platform in list(mo.mo_meta.keys()):
             return mo.mo_meta[platform]
 
     return None
@@ -980,7 +978,7 @@ def process_conf_mos_response(response, api='process_conf_mos_response',
 
 
 def sanitize_message(message):
-    message = message.lstrip('Operation failed. ')
+    message = re.sub("^Operation failed. ", "", message.strip())
 
     return message
 

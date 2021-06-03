@@ -13,11 +13,13 @@
 
 from nose.tools import assert_equal, raises
 from ..connection.info import custom_setup, custom_teardown
+from imcsdk.imcexception import ImcOperationError
 
 from imcsdk.apis.admin.ldap import ldap_enable, ldap_exists,\
         ldap_role_group_create, ldap_role_group_exists, ldap_role_group_delete,\
         ldap_certificate_management_enable, ldap_certificate_management_disable,\
-        is_ldap_certificate_management_enabled
+        ldap_certificate_management_exists, ldap_role_group_create_all,\
+        ldap_role_group_delete_all
 
 handle = None
 
@@ -114,14 +116,44 @@ def test_ldap_role_group_delete():
     assert_equal(match, False)
 
 
+def test_ldap_role_group_delete_all_pre():
+    ldap_role_group_delete_all(handle)
+
+
+def test_ldap_role_group_create_all():
+    groups = [
+        {'name': 'test1', 'domain': 'test1.com', 'role': 'read-only'},
+        {'name': 'test2', 'domain': 'test2.com', 'role': 'read-only'},
+        {'name': 'test3', 'domain': 'test3.com', 'role': 'read-only'},
+    ]
+
+    result = ldap_role_group_create_all(handle, groups)
+    assert_equal(result["changed"], True)
+
+
+@raises(ImcOperationError)
+def test_ldap_role_group_create_all_duplicate():
+    groups = [
+        {'name': 'test1', 'domain': 'test1.com', 'role': 'read-only'},
+        {'name': 'test1', 'domain': 'test1.com', 'role': 'read-only'},
+    ]
+
+    mos = ldap_role_group_create_all(handle, groups)
+    assert_equal(len(mos), 2)
+
+
+def test_ldap_role_group_delete_all_post():
+    ldap_role_group_delete_all(handle)
+
+
 def test_ldap_cert_mgmt_enable():
     ldap_certificate_management_enable(handle)
-    assert_equal(is_ldap_certificate_management_enabled(handle), True)
+    assert_equal(ldap_certificate_management_exists(handle), True)
 
 
 def test_ldap_cert_mgmt_disable():
     ldap_certificate_management_disable(handle)
-    assert_equal(is_ldap_certificate_management_enabled(handle), False)
+    assert_equal(ldap_certificate_management_exists(handle), False)
 
 
 def test_ldap_disable():

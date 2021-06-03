@@ -12,13 +12,12 @@
 # limitations under the License.
 
 import os
-from six.moves import configparser
 
 CONNECTION_CFG_FILEPATH = os.path.join(os.path.dirname(__file__), '..', 'connection',
                           'connection.cfg')
 
-
 def custom_setup(host="imc"):
+    import configparser
     from imcsdk.imchandle import ImcHandle
 
     config = configparser.RawConfigParser()

@@ -28,6 +28,7 @@ class StorageNVMePhysicalDrive(ManagedObject):
             "controller_temperature": MoPropertyMeta("controller_temperature", "controllerTemperature", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []),
             "drive_life_used": MoPropertyMeta("drive_life_used", "driveLifeUsed", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
+            "drive_slot_status": MoPropertyMeta("drive_slot_status", "driveSlotStatus", "string", VersionMeta.Version421a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "firmware_version": MoPropertyMeta("firmware_version", "firmwareVersion", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version401a, MoPropertyMeta.NAMING, None, 0, 510, None, [], []),
             "led_fault_status": MoPropertyMeta("led_fault_status", "ledFaultStatus", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
@@ -76,6 +77,7 @@ class StorageNVMePhysicalDrive(ManagedObject):
             "controllerTemperature": "controller_temperature", 
             "dn": "dn", 
             "driveLifeUsed": "drive_life_used", 
+            "driveSlotStatus": "drive_slot_status", 
             "firmwareVersion": "firmware_version", 
             "id": "id", 
             "ledFaultStatus": "led_fault_status", 
@@ -123,6 +125,7 @@ class StorageNVMePhysicalDrive(ManagedObject):
         self.child_action = None
         self.controller_temperature = None
         self.drive_life_used = None
+        self.drive_slot_status = None
         self.firmware_version = None
         self.led_fault_status = None
         self.lifeleftin_days = None

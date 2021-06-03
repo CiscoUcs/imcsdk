@@ -10,6 +10,7 @@ class CommVMediaMapConsts:
     DRIVE_TYPE_CD = "cd"
     DRIVE_TYPE_FLOPPY = "floppy"
     MAP_CIFS = "cifs"
+    MAP_LOCAL = "local"
     MAP_NFS = "nfs"
     MAP_WWW = "www"
 
@@ -31,7 +32,7 @@ class CommVMediaMap(ManagedObject):
         "classic": {
             "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["save-unmapped-volume"], []),
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
-            "map": MoPropertyMeta("map", "map", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["cifs", "nfs", "www"], []),
+            "map": MoPropertyMeta("map", "map", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["cifs", "local", "nfs", "www"], []),
             "mount_options": MoPropertyMeta("mount_options", "mountOptions", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, 1, 248, None, [], []),
             "password": MoPropertyMeta("password", "password", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, None, [], []),
             "remote_file": MoPropertyMeta("remote_file", "remoteFile", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x40, None, None, r"""[ !#$=%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}~a-zA-Z0-9]{1,768}""", [], []),

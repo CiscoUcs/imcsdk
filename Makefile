@@ -9,7 +9,7 @@ except:
 webbrowser.open("file://" + pathname2url(os.path.abspath(sys.argv[1])))
 endef
 export BROWSER_PYSCRIPT
-BROWSER := python -c "$$BROWSER_PYSCRIPT"
+BROWSER := python3 -c "$$BROWSER_PYSCRIPT"
 
 help:
 	@echo "clean - remove all build, test, coverage and Python artifacts"
@@ -39,6 +39,7 @@ clean-pyc:
 	find . -name '*.pyo' -exec rm -f {} +
 	find . -name '*~' -exec rm -f {} +
 	find . -name '__pycache__' -exec rm -fr {} +
+	find . -name '*.bak' -exec rm -fr {} +
 
 clean-test:
 	rm -fr .tox/
@@ -51,8 +52,13 @@ lint:
 test:
 	nosetests -w tests
 
+test-all:
+	tox
+
 coverage:
+
 	coverage run --source imcsdk setup.py test
+
 	coverage report -m
 	coverage html
 	$(BROWSER) htmlcov/index.html
@@ -72,8 +78,8 @@ release: dist
 	twine upload dist/*
 
 dist: clean
-	python setup.py sdist
+	python3 setup.py sdist
 	ls -l dist
 
 install: clean
-	python setup.py install
+	python3 setup.py install

@@ -33,6 +33,7 @@ class BiosVfSubNumaClustering(ManagedObject):
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
             "vp_snc": MoPropertyMeta("vp_snc", "vpSNC", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Auto", "Disabled", "Enabled", "disabled", "enabled", "platform-default"], []),
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version421a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
         },
 
         "modular": {
@@ -51,6 +52,7 @@ class BiosVfSubNumaClustering(ManagedObject):
             "rn": "rn", 
             "status": "status", 
             "vpSNC": "vp_snc", 
+            "childAction": "child_action", 
         },
 
         "modular": {
@@ -66,6 +68,7 @@ class BiosVfSubNumaClustering(ManagedObject):
         self._dirty_mask = 0
         self.status = None
         self.vp_snc = None
+        self.child_action = None
 
         ManagedObject.__init__(self, "BiosVfSubNumaClustering", parent_mo_or_dn, **kwargs)
 

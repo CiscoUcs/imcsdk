@@ -25,7 +25,7 @@ class CommSnmpTrap(ManagedObject):
     naming_props = set(['id'])
 
     mo_meta = {
-        "classic": MoMeta("CommSnmpTrap", "commSnmpTrap", "snmp-trap-[id]", VersionMeta.Version151f, "InputOutput", 0x1fff, [], ["admin", "read-only", "user"], ['commSnmp'], [], ["Get", "Set"]),
+        "classic": MoMeta("CommSnmpTrap", "commSnmpTrap", "snmp-trap-[id]", VersionMeta.Version151f, "InputOutput", 0x3fff, [], ["admin", "read-only", "user"], ['commSnmp'], [], ["Get", "Set"]),
         "modular": MoMeta("CommSnmpTrap", "commSnmpTrap", "snmp-trap-[id]", VersionMeta.Version2013e, "InputOutput", 0x1fff, [], ["admin", "read-only", "user"], ['commSnmp'], [], ["Get", "Set"])
     }
 
@@ -47,6 +47,7 @@ class CommSnmpTrap(ManagedObject):
             "version": MoPropertyMeta("version", "version", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x1000, None, None, None, ["v1", "v2c", "v3"], []),
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
             "community": MoPropertyMeta("community", "community", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, r"""[!#$%\)\*\+,\-\./:<=\[\]\^_\{\}~a-zA-Z0-9]{1,32}""", [], []),
+            "trap_community_string": MoPropertyMeta("trap_community_string", "trapCommunityString", "string", VersionMeta.Version421a, MoPropertyMeta.READ_WRITE, 0x2000, 1, 18, None, [], []),
         },
 
         "modular": {
@@ -85,6 +86,7 @@ class CommSnmpTrap(ManagedObject):
             "version": "version", 
             "childAction": "child_action", 
             "community": "community", 
+            "trapCommunityString": "trap_community_string", 
         },
 
         "modular": {
@@ -120,6 +122,7 @@ class CommSnmpTrap(ManagedObject):
         self.version = None
         self.child_action = None
         self.community = None
+        self.trap_community_string = None
 
         ManagedObject.__init__(self, "CommSnmpTrap", parent_mo_or_dn, **kwargs)
 

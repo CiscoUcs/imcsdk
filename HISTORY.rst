@@ -1,60 +1,50 @@
+=======
 History
 =======
-
-0.9.10 (2020-04-23)
----------------------
-* More python3 compatibility fixes
-
-0.9.9 (2020-04-22)
----------------------
-* Fixes an issue with version meta 
-
-0.9.8 (2020-04-22)
----------------------
-* Adds support for IMC version 4.1(1c), 4.1(1d)
-
-0.9.7 (2019-07-08)
----------------------
-* Adds support for IMC version 4.0(1c), 4.0(2b)
-
-0.9.6 (2018-10-10)
----------------------
-* Updated requirements to include setuptools
-
-0.9.5 (2018-08-24)
+0.9.4.0 (2021-05-26)
 --------------------
-* Fixed an issue with missed requirement files
-* Added Python 3.6,3.7 to package meta
+* Adds support for IMC version 4.2(1a) for M6 servers
+* Adds support for IMC version 4.1(3a) for M5 servers
+* New API for following
+    * AaaTacacsPlus
+    * AaaTacacsPlusServer
+    * AaaUserAuthPrecedence
+    * AaaUserSSHKey
+    * EndPoint
+    * EndPointCertificateChain
+    * EndPointRootCACertificate
+    * EndPointRootCACertificateInfo
+    * LsbootEmbeddedStorage
+    * LsbootHttp
+    * MctpCertificateManagement
+    * RackUnitPersonality
+    * SecureLdap
+    * StorageFlexMMC
+    * StorageFlexMMCDownloadFile
+    * StorageFlexMMCFile
+    * UploadEndPointRootCACertificate
+    * UploadExternalCertificate
+    * UploadExternalPrivateKey
 
-0.9.4 (2018-08-24)
+
+0.9.3.0 (2020-02-25)
 --------------------
-* Support for Python3
+* Adds support for IMC version 4.1(1a)
+* New APIs for the following
+    * Select Ppr Type
+    * Partial Mirror Mode Config
+    * Partial Mirror Percent
+    * Pc Ie Ras Support
+    * IPV4PXE
+    * Partial Mirror Value 4
+    * Partial Mirror Value 3
+    * Partial Mirror Value 2
+    * Partial Mirror Value
+    * Network Stack
+    * Memory Size Limit
 
-0.9.3.1 (2018-05-27)
---------------------
-* Support for more APIs
-* Misc bug fixes
 
-0.9.3.0 (2017-09-19)
---------------------
-* Adds support for IMC version 3.0(2b), 3.0(3a) and 3.1(1d)
-* Adds support for HX platform
-* Fixes sync_mo
-* Containerizes imcsdk support for CIMC 3.0 using Docker
-* Adds context manager support for ImcHandle
-* Redesigned APIs for the following,
-
-  * BIOS
-  * Boot Order
-  * Certificate
-  * KVM
-  * LDAP
-  * NTP
-  * SNMP
-  * SOL
-  * Syslog
-  * Storage
-  * vMedia
+* Improved regular expressions validations for token values
 
 0.9.2.0 (2017-02-10)
 --------------------

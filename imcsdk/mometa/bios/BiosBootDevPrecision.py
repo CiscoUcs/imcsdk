@@ -11,15 +11,21 @@ class BiosBootDevPrecisionConsts:
     SUBTYPE_CIMC_MAPPED_HDD = "cimc-mapped-hdd"
     SUBTYPE_FLEX_FLASH = "flex-flash"
     SUBTYPE_FLEX_UTIL = "flex-util"
+    SUBTYPE_FLEXMMC_MAPPED_DVD = "flexmmc-mapped-dvd"
+    SUBTYPE_FLEXMMC_MAPPED_HDD = "flexmmc-mapped-hdd"
     SUBTYPE_KVM_MAPPED_DVD = "kvm-mapped-dvd"
     SUBTYPE_KVM_MAPPED_FDD = "kvm-mapped-fdd"
     SUBTYPE_KVM_MAPPED_HDD = "kvm-mapped-hdd"
     SUBTYPE_USB_CD = "usb-cd"
     SUBTYPE_USB_FDD = "usb-fdd"
     SUBTYPE_USB_HDD = "usb-hdd"
+    TYPE_ = ""
     TYPE_EFI = "EFI"
+    TYPE_FLEX_MMC = "FlexMMC"
     TYPE_HDD = "HDD"
+    TYPE_HTTP = "HTTP"
     TYPE_ISCSI = "ISCSI"
+    TYPE_NVME = "NVMe"
     TYPE_PCHSTORAGE = "PCHSTORAGE"
     TYPE_PXE = "PXE"
     TYPE_SAN = "SAN"
@@ -53,8 +59,8 @@ class BiosBootDevPrecision(ManagedObject):
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []),
             "slot": MoPropertyMeta("slot", "slot", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, 0x8, None, None, r"""((removed|created|modified|deleted),){0,3}(removed|created|modified|deleted){0,1}""", [], []),
-            "subtype": MoPropertyMeta("subtype", "subtype", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["Any", "cimc-mapped-dvd", "cimc-mapped-hdd", "flex-flash", "flex-util", "kvm-mapped-dvd", "kvm-mapped-fdd", "kvm-mapped-hdd", "usb-cd", "usb-fdd", "usb-hdd"], []),
-            "type": MoPropertyMeta("type", "type", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["EFI", "HDD", "ISCSI", "PCHSTORAGE", "PXE", "SAN", "SDCARD", "USB", "VMEDIA"], []),
+            "subtype": MoPropertyMeta("subtype", "subtype", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["Any", "cimc-mapped-dvd", "cimc-mapped-hdd", "flex-flash", "flex-util", "flexmmc-mapped-dvd", "flexmmc-mapped-hdd", "kvm-mapped-dvd", "kvm-mapped-fdd", "kvm-mapped-hdd", "usb-cd", "usb-fdd", "usb-hdd"], []),
+            "type": MoPropertyMeta("type", "type", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["", "EFI", "FlexMMC", "HDD", "HTTP", "ISCSI", "NVMe", "PCHSTORAGE", "PXE", "SAN", "SDCARD", "USB", "VMEDIA"], []),
         },
 
         "modular": {
@@ -69,7 +75,7 @@ class BiosBootDevPrecision(ManagedObject):
             "slot": MoPropertyMeta("slot", "slot", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x8, None, None, r"""((removed|created|modified|deleted),){0,3}(removed|created|modified|deleted){0,1}""", [], []),
             "subtype": MoPropertyMeta("subtype", "subtype", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["cimc-mapped-dvd", "cimc-mapped-hdd", "kvm-mapped-dvd", "kvm-mapped-fdd", "kvm-mapped-hdd", "usb-cd", "usb-fdd", "usb-hdd"], []),
-            "type": MoPropertyMeta("type", "type", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["EFI", "HDD", "ISCSI", "PCHSTORAGE", "PXE", "SAN", "SDCARD", "USB", "VMEDIA"], []),
+            "type": MoPropertyMeta("type", "type", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, ["", "EFI", "HDD", "HTTP", "ISCSI", "NVMe", "PCHSTORAGE", "PXE", "SAN", "SDCARD", "USB", "VMEDIA"], []),
         },
 
     }

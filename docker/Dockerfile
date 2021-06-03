@@ -4,8 +4,8 @@
 # interact with CIMC 3.0 using Python.  This Dockerfile installs the
 # following CentOS packages needed to interact with 3.0:
 #
-#   1. Python 2.7.13 (Python >= 2.7.9 is needed for CIMC 3.0)
-#   2. pip with Python 2.7.13
+#   1. Python 3.6.8 (Python >= 2.7.9 is needed for CIMC 3.0)
+#   2. pip3 with Python 3.6.8
 #   3. OpenSSL 1.0.1
 #   4. Cisco's Python imcsdk library
 #   5. DMTF's Python RedFish library (python-redfish-library)
@@ -25,39 +25,39 @@ RUN yum -y update && yum -y upgrade && yum clean all
 RUN yum -y install which wget gcc zlib-devel openssl-devel
 RUN yum -y groupinstall "Development tools"
 
-# Install Python 2.7.13
-RUN wget https://www.python.org/ftp/python/2.7.13/Python-2.7.13.tgz && \
-    tar xzf Python-2.7.13.tgz && \
-    cd Python-2.7.13 && \
+# Install Python 3.6.8
+RUN wget https://www.python.org/ftp/python/3.6.8/Python-3.6.8.tgz && \
+    tar xzf Python-3.6.8.tgz && \
+    cd Python-3.6.8 && \
     ./configure --prefix=/usr/local && \
     make && \
     make altinstall && \
-    ln -s /usr/local/bin/python2.7 /usr/bin/python2.7.13 && \
+    ln -s /usr/local/bin/python3.6 /usr/bin/python3.6.8 && \
     cd .. && \
-    rm -rf Python-2.7.13.tgz && \
-    rm -rf Python-2.7.13 && \
-    python2.7.13 -V
+    rm -rf Python-3.6.8.tgz && \
+    rm -rf Python-3.6.8 && \
+    python3.6.8 -V
 
-# Install pip with Python 2.7.13
+# Install pip3 with Python 3.6.8
 RUN wget https://bootstrap.pypa.io/get-pip.py && \
-    python2.7.13 get-pip.py && \
+    python3.6.8 get-pip.py && \
     rm -rf get-pip.py && \
-    pip --version
+    pip3 --version
 
 # Install OpenSSL 1.0.1
 RUN yum -y install openssl && \
     openssl version
 
 # Install imcsdk
-RUN pip install imcsdk
+RUN pip3 install imcsdk
 
 # Install RedFish Python SDK
 RUN git clone https://github.com/DMTF/python-redfish-library.git && \
     cd python-redfish-library && \
-    python2.7.13 setup.py sdist --formats=zip && \
+    python3.6.8 setup.py sdist --formats=zip && \
     cd dist && \
     z=`ls *.zip` && \
-    pip install $z && \
+    pip3 install $z && \
     cd ../.. && \
     rm -rf python-redfish-library
 
@@ -67,6 +67,6 @@ RUN yum -y install epel-release && \
     ansible --version
 
 # Install Python requests library
-RUN pip install requests
+RUN pip3 install requests
 
 CMD ["sleep", "infinity"]

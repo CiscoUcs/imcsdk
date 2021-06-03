@@ -30,6 +30,7 @@ class SystemBoardUnit(ManagedObject):
             "cpu4_pkg_id": MoPropertyMeta("cpu4_pkg_id", "cpu4PkgId", "string", VersionMeta.Version312b, MoPropertyMeta.READ_ONLY, None, 0, 255, None, [], []),
             "cpu_module1": MoPropertyMeta("cpu_module1", "cpuModule1", "string", VersionMeta.Version312b, MoPropertyMeta.READ_ONLY, None, 0, 255, None, [], []),
             "cpu_module2": MoPropertyMeta("cpu_module2", "cpuModule2", "string", VersionMeta.Version312b, MoPropertyMeta.READ_ONLY, None, 0, 255, None, [], []),
+            "cpu_type": MoPropertyMeta("cpu_type", "cpuType", "string", VersionMeta.Version421a, MoPropertyMeta.READ_ONLY, None, 0, 255, None, [], []),
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []),
             "hdd_backplane": MoPropertyMeta("hdd_backplane", "hddBackplane", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 255, None, [], []),
             "hdd_module1": MoPropertyMeta("hdd_module1", "hddModule1", "string", VersionMeta.Version312b, MoPropertyMeta.READ_ONLY, None, 0, 255, None, [], []),
@@ -40,6 +41,7 @@ class SystemBoardUnit(ManagedObject):
             "rear_bp_sku_type": MoPropertyMeta("rear_bp_sku_type", "rearBpSkuType", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 255, None, [], []),
             "riser1": MoPropertyMeta("riser1", "riser1", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 255, None, [], []),
             "riser2": MoPropertyMeta("riser2", "riser2", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 255, None, [], []),
+            "riser3": MoPropertyMeta("riser3", "riser3", "string", VersionMeta.Version421a, MoPropertyMeta.READ_ONLY, None, 0, 255, None, [], []),
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []),
             "sas_expander": MoPropertyMeta("sas_expander", "sasExpander", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 255, None, [], []),
             "sata_nv_me": MoPropertyMeta("sata_nv_me", "sataNVMe", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 255, None, [], []),
@@ -59,6 +61,7 @@ class SystemBoardUnit(ManagedObject):
             "cpu4PkgId": "cpu4_pkg_id", 
             "cpuModule1": "cpu_module1", 
             "cpuModule2": "cpu_module2", 
+            "cpuType": "cpu_type", 
             "dn": "dn", 
             "hddBackplane": "hdd_backplane", 
             "hddModule1": "hdd_module1", 
@@ -69,6 +72,7 @@ class SystemBoardUnit(ManagedObject):
             "rearBpSkuType": "rear_bp_sku_type", 
             "riser1": "riser1", 
             "riser2": "riser2", 
+            "riser3": "riser3", 
             "rn": "rn", 
             "sasExpander": "sas_expander", 
             "sataNVMe": "sata_nv_me", 
@@ -87,6 +91,7 @@ class SystemBoardUnit(ManagedObject):
         self.cpu4_pkg_id = None
         self.cpu_module1 = None
         self.cpu_module2 = None
+        self.cpu_type = None
         self.hdd_backplane = None
         self.hdd_module1 = None
         self.hdd_module2 = None
@@ -96,6 +101,7 @@ class SystemBoardUnit(ManagedObject):
         self.rear_bp_sku_type = None
         self.riser1 = None
         self.riser2 = None
+        self.riser3 = None
         self.sas_expander = None
         self.sata_nv_me = None
         self.sd_controller = None

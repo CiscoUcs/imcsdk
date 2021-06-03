@@ -17,7 +17,10 @@ from ..connection.info import custom_setup, custom_teardown
 from imcsdk.apis.server.vmedia import vmedia_enable
 from imcsdk.apis.server.vmedia import vmedia_disable
 from imcsdk.apis.server.vmedia import vmedia_exists
+from imcsdk.apis.server.vmedia import vmedia_mount_create_all
+import logging
 
+log = logging.getLogger('imc')
 handle = None
 
 
@@ -39,4 +42,26 @@ def test_vmedia_setup():
 def test_vmedia_disable():
     vmedia_disable(handle)
     assert_equal(vmedia_exists(handle)[0], False)
+
+def test_vmedia_mount_create_all_sec_ntlm():
+    mappings=[{"volume_name": "test_sec_ntlm",
+               "map": "cifs",
+               "mount_options": "sec=ntlm",
+               "remote_share": "//[2001:420:5446:2014::206:ca]/file",
+               "remote_file": "esx65u3.iso",
+               "username": "user",
+               "password": ""}]
+    results = vmedia_mount_create_all(handle, mappings)
+    assert_equal(results["changed"], True)
+
+def test_vmedia_mount_create_all_sec_none():
+    mappings=[{"volume_name": "test_sec_none",
+               "map": "cifs",
+               "mount_options": "sec=none",
+               "remote_share": "//[2001:420:5446:2014::206:ca]/file",
+               "remote_file": "esx65u3.iso",
+               "username": "user",
+               "password": ""}]
+    results = vmedia_mount_create_all(handle, mappings)
+    assert_equal(results["changed"], True)
 

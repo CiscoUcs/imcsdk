@@ -34,6 +34,7 @@ class BiosVfExtendedAPIC(ManagedObject):
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
             "vp_extended_apic": MoPropertyMeta("vp_extended_apic", "vpExtendedAPIC", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "X2APIC", "XAPIC", "disabled", "enabled", "platform-default"], []),
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version421a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
         },
 
         "modular": {
@@ -52,6 +53,7 @@ class BiosVfExtendedAPIC(ManagedObject):
             "rn": "rn", 
             "status": "status", 
             "vpExtendedAPIC": "vp_extended_apic", 
+            "childAction": "child_action", 
         },
 
         "modular": {
@@ -67,6 +69,7 @@ class BiosVfExtendedAPIC(ManagedObject):
         self._dirty_mask = 0
         self.status = None
         self.vp_extended_apic = None
+        self.child_action = None
 
         ManagedObject.__init__(self, "BiosVfExtendedAPIC", parent_mo_or_dn, **kwargs)
 

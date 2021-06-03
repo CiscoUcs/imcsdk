@@ -15,8 +15,10 @@
 import time
 import datetime
 import logging
-from imcsdk.imcgenutils import *
+import re
+
 from imcsdk.imccoreutils import IMC_PLATFORM, get_server_dn
+from imcsdk.imcexception import ImcOperationError
 from imcsdk.mometa.huu.HuuFirmwareUpdater import HuuFirmwareUpdater, \
     HuuFirmwareUpdaterConsts
 from imcsdk.mometa.huu.HuuFirmwareUpdateStatus import HuuFirmwareUpdateStatus
@@ -24,6 +26,52 @@ from imcsdk.mometa.top.TopSystem import TopSystem
 from imcsdk.mometa.huu.HuuController import HuuController
 
 log = logging.getLogger('imc')
+
+
+def version_extract(remote_share):
+    version = re.match(r"^.*-huu-(.*)\.iso$", remote_share).groups()[0]
+    version = re.sub(r"(\..*?){1}\.", r"\1(", version).strip() + ")"
+    log.debug("check for version <%s>" % str(version))
+    return version
+
+
+def firmware_exists(handle, version, server_id=1, force=False, backup_fw=False):
+    if force:
+        return False, None
+
+    server_dn = get_server_dn(handle, server_id)
+    dn = server_dn + "/mgmt/fw-system"
+    if backup_fw:
+        dn = server_dn + "/mgmt/fw-updatable"
+    mo = handle.query_dn(dn)
+    if mo is None:
+        return False, None
+
+    mo_ver = mo.version.strip().lower()
+    ver = version.strip().lower()
+    if mo.version.strip().lower() != version.strip().lower():
+        log.debug("%s | %s " % (mo_ver, ver))
+        return False, None
+    return True, mo
+
+
+def firmware_update(handle, remote_share, share_type, remote_ip,
+                    username="", password="", update_component="all",
+                    stop_on_error="yes", timeout=60,
+                    verify_update="yes", cimc_secure_boot="no",
+                    server_id=1, force=False, interval=60, backup_fw=False):
+
+    version = version_extract(remote_share)
+    if not force and firmware_exists(handle, version, force=force,
+            backup_fw=backup_fw)[0]:
+        return
+
+    firmware_huu_update(handle, remote_share, share_type, remote_ip,
+                        username, password, update_component, stop_on_error,
+                        timeout, verify_update, cimc_secure_boot, server_id)
+
+    firmware_huu_update_monitor(handle, timeout, interval, server_id)
+
 
 def firmware_huu_update(handle, remote_share, share_type, remote_ip,
                         username="", password="", update_component="all",
@@ -102,7 +150,14 @@ def _has_upgrade_started(update):
 
 # Tracks if upgrade is over, not necessarily successful
 def _has_upgrade_finished(update):
-    return update.update_end_time != "NA"
+    return update.update_end_time != "NA" and update.update_end_time != ""
+
+
+def _has_upgrade_successful(update):
+    if re.search(r"error", update.overall_status.lower()) or \
+       re.search(r"mapping has gone bad", update.overall_status.lower()):
+        return False
+    return True
 
 
 def _print_component_upgrade_summary(handle):
@@ -142,6 +197,8 @@ def firmware_huu_update_monitor(handle, timeout=60, interval=10, server_id=1):
     update_obj = HuuFirmwareUpdateStatus(
             parent_mo_or_dn=huu_firmware_updater.dn)
 
+    error_flag = False
+    error_msg = None
     while True:
         try:
             update_obj = handle.query_dn(update_obj.dn)
@@ -151,6 +208,10 @@ def firmware_huu_update_monitor(handle, timeout=60, interval=10, server_id=1):
             if _has_upgrade_finished(update_obj):
                 log_progress("Firmware upgrade has finished",
                              update_obj.overall_status)
+                if not _has_upgrade_successful(update_obj):
+                    error_flag = True
+                    error_msg = "Error: %s" % update_obj.overall_status
+                    break
                 _print_component_upgrade_summary(handle)
                 break
             elif update_obj.overall_status not in current_status:
@@ -163,9 +224,14 @@ def firmware_huu_update_monitor(handle, timeout=60, interval=10, server_id=1):
             if int(secs / 60) > timeout:
                 log_progress("Monitor API timeout",
                              "rerun firmware_huu_update_monitor")
+                error_flag = True
+                error_msg = "Error: Monitor API timeout"
                 break
         except:
             _validate_connection(handle)
+
+    if error_flag:
+        raise ImcOperationError("firmware_huu_update_monitor", error_msg)
 
 
 def _validate_connection(handle, timeout=15 * 60):

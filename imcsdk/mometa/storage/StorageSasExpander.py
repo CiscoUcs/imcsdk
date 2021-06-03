@@ -34,6 +34,7 @@ class StorageSasExpander(ManagedObject):
             "id": MoPropertyMeta("id", "id", "uint", VersionMeta.Version2013e, MoPropertyMeta.NAMING, None, None, None, None, [], ["0-999"]),
             "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []),
+            "sas_address": MoPropertyMeta("sas_address", "sasAddress", "string", VersionMeta.Version421a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
         },
 
@@ -42,6 +43,7 @@ class StorageSasExpander(ManagedObject):
             "current_fw_version": MoPropertyMeta("current_fw_version", "currentFwVersion", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "description": MoPropertyMeta("description", "description", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []),
+            "enclosure_id": MoPropertyMeta("enclosure_id", "enclosureId", "string", VersionMeta.Version413a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "id": MoPropertyMeta("id", "id", "uint", VersionMeta.Version2013e, MoPropertyMeta.NAMING, None, None, None, None, [], ["0-999"]),
             "mixed6_g12_g_drive_support": MoPropertyMeta("mixed6_g12_g_drive_support", "mixed6G12GDriveSupport", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []),
             "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
@@ -62,6 +64,7 @@ class StorageSasExpander(ManagedObject):
             "id": "id", 
             "name": "name", 
             "rn": "rn", 
+            "sasAddress": "sas_address", 
             "status": "status", 
         },
 
@@ -70,6 +73,7 @@ class StorageSasExpander(ManagedObject):
             "currentFwVersion": "current_fw_version", 
             "description": "description", 
             "dn": "dn", 
+            "enclosureId": "enclosure_id", 
             "id": "id", 
             "mixed6G12GDriveSupport": "mixed6_g12_g_drive_support", 
             "name": "name", 
@@ -87,9 +91,10 @@ class StorageSasExpander(ManagedObject):
         self.current_fw_version = None
         self.description = None
         self.name = None
-        self.status = None
-        self.mixed6_g12_g_drive_support = None
         self.sas_address = None
+        self.status = None
+        self.enclosure_id = None
+        self.mixed6_g12_g_drive_support = None
 
         ManagedObject.__init__(self, "StorageSasExpander", parent_mo_or_dn, **kwargs)
 

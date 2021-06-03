@@ -31,21 +31,75 @@ from imcsdk.apis.server.storage import controller_encryption_enable, \
     controller_encryption_disable, controller_encryption_exists, \
     controller_encryption_modify_security_key, \
     controller_encryption_key_id_generate, controller_encryption_key_generate
+
 from imcsdk.apis.server.storage import \
     is_physical_drive_encryption_capable, physical_drive_set_jbod_mode, \
     physical_drive_encryption_enable, physical_drive_encryption_disable, \
     is_physical_drive_encryption_enabled, physical_drive_get, \
     physical_drive_set_unconfigured_good
 
+from imcsdk.apis.storage.vd import vd_create_using_existing_vd, sc_vd_create_using_unused_pds, \
+    sc_vd_create_using_existing_vd, sc_vd_get_by_name, sc_vd_update, sc_vd_exists, \
+    sc_vd_delete_all, sc_vd_exists_any, sc_vd_boot_drive_enable,  sc_vd_delete_all, \
+    sc_boot_vd_get_by_name, sc_dhs_get_by_name, sc_vd_boot_drive_exists
 
 from imcsdk.imccoreutils import get_server_dn
 
+from imcsdk.apis.storage.controller import controller_m2_hwraid_exists
+
 CONTROLLER_TYPE="SAS"
-CONTROLLER_SLOT="SLOT-HBA"
+CONTROLLER_SLOT="SAS"
+#CONTROLLER_SLOT="SLOT-HBA"
 PD_DRIVE_SLOT=4
 is_pd_capable = False
 
+def get_storage_controllers():
+    storage_controllers = {}
 
+    controller1_slot = "MRAID"
+
+    controller1 = {}
+
+    virtual_drives_on_pd = []
+    vdConfig = {}
+    vdConfig["self_encrypt"] = False
+    vdConfig["read_policy"] = "always-read-ahead"
+    vdConfig["cache_policy"] = "direct-io"
+    vdConfig["disk_cache_policy"] = "unchanged"
+    vdConfig["virtual_drive_name"] = "vd1"
+    vdConfig["raid_level"] = 1
+    vdConfig["drive_group"] = "[[1,5]]"
+    vdConfig["write_policy"] = "write-through"
+    vdConfig["access_policy"] = "read-write"
+    vdConfig["size"] = "285148 MB"
+    virtual_drives_on_pd.append(vdConfig)
+
+    dedicated_hot_spares = []
+    dhsConfig = {"slot": 3, "vd_name":"vd1"}
+    dedicated_hot_spares.append(dhsConfig)
+
+    virtual_drives_on_vd = []
+    vdConfig2 = {}
+    vdConfig2["read_policy"] = "no-read-ahead"
+    vdConfig2["cache_policy"] = "direct-io"
+    vdConfig2["disk_cache_policy"] = "unchanged"
+    vdConfig2["virtual_drive_name"] = "vd2"
+    vdConfig2["write_policy"] = "write-through"
+    vdConfig2["shared_virtual_drive_name"] = "vd_test"
+    vdConfig2["access_policy"] = "read-write"
+    vdConfig2["size"] = "1024 MB"
+    virtual_drives_on_vd.append(vdConfig2)
+
+    controller1["controller_type"] = "SAS"
+    controller1["controller_slot"] = "MRAID"
+    controller1["remove_all_vds"] = True
+    controller1["dedicated_hot_spares"] = dedicated_hot_spares
+    controller1["virtual_drives_on_vd"] = virtual_drives_on_vd
+    controller1["virtual_drives_on_pd"] = virtual_drives_on_pd
+
+    storage_controllers[controller1_slot] = controller1
+
+    return storage_controllers
 
 def test_list_to_string():
     tests = [{"input": [[1]], "expected": '[1]'},
@@ -226,7 +280,7 @@ def test_controller_encryption_enable():
     controller_encryption_enable(handle,
                                  controller_type=CONTROLLER_TYPE,
                                  controller_slot=CONTROLLER_SLOT,
-                                 key_id='Nbv12345', security_key='Nbv12345')
+                                 key_id='****', security_key='****')
     assert_equal(controller_encryption_exists(handle,
                                               CONTROLLER_TYPE,
                                               CONTROLLER_SLOT)[0],
@@ -238,8 +292,8 @@ def test_controller_encryption_modify():
                      handle,
                      controller_type=CONTROLLER_TYPE,
                      controller_slot=CONTROLLER_SLOT,
-                     existing_security_key='Nbv12345',
-                     security_key='Nbv123456')
+                     existing_security_key='****',
+                     security_key='****')
 
 
 def test_controller_generated_keys():
@@ -259,7 +313,7 @@ def test_controller_generated_keys():
         handle,
         controller_type=CONTROLLER_TYPE,
         controller_slot=CONTROLLER_SLOT,
-        existing_security_key='Nbv123456',
+        existing_security_key='****',
         security_key=key)
 
 
@@ -397,3 +451,155 @@ def test_controller_encryption_disable():
                                         controller_type=CONTROLLER_TYPE,
                                         controller_slot=CONTROLLER_SLOT)[0],
                  False)
+
+
+def test_vd_create_using_existing_vd():
+    vd_create_using_existing_vd(handle,
+                                controller_type=CONTROLLER_TYPE,
+                                controller_slot=CONTROLLER_SLOT,
+                                shared_virtual_drive_id="0",
+                                virtual_drive_name='newvd')
+
+def test_sc_vd_create_using_unused_pds():
+    storage_controllers = get_storage_controllers()
+    print(storage_controllers)
+    sc_vd_create_using_unused_pds(handle, storage_controllers)
+
+
+def test_sc_vd_create_using_existing_vd():
+    storage_controllers = get_storage_controllers()
+    sc_vd_create_using_existing_vd(handle, storage_controllers)
+
+
+def test_sc_vd_update():
+    storage_controllers = {'MRAID': {'controller_type': 'SAS',
+                                     'update_virtual_drives': [{'read_policy': 'no-read-ahead',
+                                                                'cache_policy': 'direct-io',
+                                                                'disk_cache_policy': 'unchanged',
+                                                                'write_policy': 'write-through',
+                                                                'id': 0, 'access_policy': 'read-write'}],
+                                     'controller_slot': 'MRAID', 'boot_vd_name': 'vd1'}}
+    assert_equal(sc_vd_update(handle, storage_controllers), True)
+
+def test_sc_vd_update_boot():
+    storage_controllers = {'MRAID': {'controller_type': 'SAS',
+                                     'update_virtual_drives': [{'read_policy': 'no-read-ahead',
+                                                                'cache_policy': 'direct-io',
+                                                                'disk_cache_policy': 'unchanged',
+                                                                'write_policy': 'write-through',
+                                                                'id': 0, 'access_policy': 'read-write',
+                                                                'update_boot_vd': True}],
+                                     'controller_slot': 'MRAID', 'boot_vd_name': 'vd1'}}
+    assert_equal(sc_vd_update(handle, storage_controllers), True)
+
+def test_sc_vd_exists():
+    storage_controllers = {'MRAID': {'controller_type': 'SAS',
+                                     'update_virtual_drives': [{'read_policy': 'no-read-ahead',
+                                                                'cache_policy': 'direct-io',
+                                                                'disk_cache_policy': 'unchanged',
+                                                                'write_policy': 'write-through',
+                                                                'id': 0, 'access_policy': 'read-write'}],
+                                     'controller_slot': 'MRAID', 'boot_vd_name': 'vd1'}}
+    exists, mos = sc_vd_exists(handle, storage_controllers)
+    assert_equal(exists, True)
+    assert_equal(not mos, False)
+
+def test_sc_vd_exists_any():
+    storage_controllers = {'remove_all_vds': {'sc_list': [{'controller_type': 'SAS',
+                                                          'controller_slot': 'MRAID'},
+                                                         {'controller_type': 'SATA',
+                                                          'controller_slot': 'MSTOR-RAID'}]}}
+    mos, exists = sc_vd_exists_any(handle, storage_controllers)
+    if not mos:
+        assert_equal(exists, False)
+    else:
+        assert_equal(exists, True)
+
+def test_controller_m2_hwraid_exists():
+    isM2Controller = controller_m2_hwraid_exists(handle, CONTROLLER_SLOT)
+    assert_equal(isM2Controller, False)
+
+@raises(Exception)
+def test_sc_vd_boot_drive_enable():
+    storage_controllers = {'MRAID': {'controller_type': 'SAS',
+                                     'controller_slot': 'MRAID',
+                                     'id': '1000'}}
+    #Negative testcase. VD ID  1000 should not be present in the endpoint.
+    sc_vd_boot_drive_enable(handle, storage_controllers)
+
+@raises(Exception)
+def test_sc_vd_boot_drive_enable2():
+    storage_controllers = {'MRAID': {'controller_type': 'SAS',
+                                     'controller_slot': 'MRAID',
+                                     'id': '0'}}
+    #Negative testcase. VD ID  0 should already be a bootDrive.
+    sc_vd_boot_drive_enable(handle, storage_controllers)
+
+
+def test_sc_vd_boot_drive_enable3():
+    storage_controllers = {'MRAID': {'controller_type': 'SAS',
+                                     'controller_slot': 'MRAID',
+                                     'id': '0'}}
+    #Positive testcase. VD ID  0 should be present in the endpoint and should not be a bootDrive.
+    enabled = sc_vd_boot_drive_enable(handle, storage_controllers)
+    assert_equal(enabled, True)
+
+def test_sc_vd_delete_all():
+    sc_vds_list = {[{'controller_type': 'SAS',
+                               'controller_slot': 'MRAID'},
+                              {'controller_type': 'SATA',
+                               'controller_slot': 'MSTOR-RAID'}]}
+    isDeleted = sc_vd_delete_all(handle, sc_vds_list, delete_boot_drive=True)
+    assert_equal(isDeleted, True)
+
+def test_sc_vd_get_by_name():
+    storage_controllers = get_storage_controllers()
+    mos = sc_vd_get_by_name(handle, storage_controllers)
+    assert_equal(mos, None)
+
+def test_sc_boot_vd_get_by_name():
+    storage_controllers = {'MRAID': {'controller_type': 'SAS',
+                                     'controller_slot': 'MRAID',
+                                     'boot_vd_name': 'vd1'
+                                     }}
+    #Positive Testcase. Ensure 'vd1' VD is a bootdrive in the end point.
+    mos = sc_boot_vd_get_by_name(handle, storage_controllers)
+    assert_equal(not mos, False)
+    for mo in mos:
+        assert_equal(hasattr(mo, 'id'), True)
+
+def test_sc_boot_vd_get_by_name2():
+    storage_controllers = {'MRAID': {'controller_type': 'SAS',
+                                     'controller_slot': 'MRAID',
+                                     'boot_vd_name': 'testvd123'
+                                     }}
+    #Negative Testcase. 'testvd123' VD is not present.
+    mos = sc_boot_vd_get_by_name(handle, storage_controllers)
+    assert_equal(not mos, True)
+
+def test_sc_vd_boot_drive_exists():
+    storage_controllers = {'MRAID': {'controller_type': 'SAS', 'controller_slot': 'MRAID', 'id': '1'}}
+    exits, mos = sc_vd_boot_drive_exists(handle, storage_controllers)
+    assert_equal(exits, True)
+
+def test_sc_dhs_get_by_name():
+    storage_controllers = {"MRAID": {"controller_type": "SAS",
+                                     "dedicated_hot_spares": [{"slot": 3, "vd_name": "0"}],
+                                     "controller_slot": "MRAID"
+                                     }}
+    #Negative Testcase. slot 3 is not a dedicated hot spare or pd doesn't exist.
+    mos = sc_dhs_get_by_name(handle, storage_controllers)
+    assert_equal(mos, None)
+
+def test_sc_dhs_get_by_name2():
+    storage_controllers = {"MRAID": {"controller_type": "SAS",
+                                     "dedicated_hot_spares": [{"slot": 3, "vd_name": "0"}],
+                                     "controller_slot": "MRAID"
+                                     }}
+    #Positive Testcase. slot 3 is configured as dedicated hot spare.
+    mos = sc_dhs_get_by_name(handle, storage_controllers)
+    assert_equal(not mos, False)
+    for mo in mos:
+        assert_equal(hasattr(mo, 'vd_id'), True)
+
+

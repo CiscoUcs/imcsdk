@@ -1,14 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from setuptools import setup
 
+try:
+    from setuptools import setup
+except ImportError:
+    from distutils.core import setup
 
-with open('requirements.txt') as rf:
-    requirements = rf.readlines()
-
-with open('test-requirements.txt') as rf:
-    test_requirements = rf.readlines()
 
 with open('README.rst') as readme_file:
     readme = readme_file.read()
@@ -16,12 +14,19 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
+requirements = [
+    # TODO: put package requirements here
+]
+
+test_requirements = [
+    # TODO: put package test requirements here
+]
+
 setup(
     name='imcsdk',
-    version='0.9.10',
+    version='0.9.40',
     description="python SDK for Cisco UCS IMC",
     long_description=readme + '\n\n' + history,
-    long_description_content_type='text/x-rst',
     author="Cisco Systems",
     author_email='ucs-python@cisco.com',
     url='https://github.com/ciscoucs/imcsdk',
@@ -31,7 +36,7 @@ setup(
     package_dir={'imcsdk':
                  'imcsdk'},
     include_package_data=True,
-    install_requires=requirements,
+    install_requires=['pyparsing'],
     license="http://www.apache.org/licenses/LICENSE-2.0",
     zip_safe=False,
     keywords='imcsdk',
@@ -48,9 +53,8 @@ setup(
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
     ],
-    tests_require=test_requirements,
+    tests_require=['nose'],
     test_suite='nose.collector',
     extras_require={
         'ssl': ['pyOpenSSL'],

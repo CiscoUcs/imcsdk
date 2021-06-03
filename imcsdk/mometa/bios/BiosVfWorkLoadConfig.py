@@ -32,6 +32,7 @@ class BiosVfWorkLoadConfig(ManagedObject):
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
             "vp_work_load_config": MoPropertyMeta("vp_work_load_config", "vpWorkLoadConfig", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Balanced", "I/O Sensitive", "NUMA", "UMA", "platform-default"], []),
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version421a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
         },
 
         "modular": {
@@ -50,6 +51,7 @@ class BiosVfWorkLoadConfig(ManagedObject):
             "rn": "rn", 
             "status": "status", 
             "vpWorkLoadConfig": "vp_work_load_config", 
+            "childAction": "child_action", 
         },
 
         "modular": {
@@ -65,6 +67,7 @@ class BiosVfWorkLoadConfig(ManagedObject):
         self._dirty_mask = 0
         self.status = None
         self.vp_work_load_config = None
+        self.child_action = None
 
         ManagedObject.__init__(self, "BiosVfWorkLoadConfig", parent_mo_or_dn, **kwargs)
 

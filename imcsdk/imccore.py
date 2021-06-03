@@ -187,7 +187,7 @@ class BaseObject(ImcBase):
 
         self._handle = handle
         if elem.attrib:
-            for attr_name, attr_value in elem.attrib.items():
+            for attr_name, attr_value in list(elem.attrib.items()):
                 self.attr_set(imcgenutils.convert_to_python_var_name(attr_name),
                               str(attr_value))
 
@@ -227,5 +227,5 @@ class OperationStatus(ImcCustomMethod):
     def __init__(self, **kwargs):
         ImcCustomMethod.__init__(self, "OperationStatus", "operationStatus")
         if kwargs:
-            for n, v in kwargs.items():
+            for n, v in list(kwargs.items()):
                 self.attr_set(n, v)

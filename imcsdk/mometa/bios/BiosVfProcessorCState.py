@@ -20,7 +20,7 @@ class BiosVfProcessorCState(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("BiosVfProcessorCState", "biosVfProcessorCState", "Processor-C-State", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], ['biosPlatformDefaults', 'biosSettings'], [], ["Get", "Set"]),
+        "classic": MoMeta("BiosVfProcessorCState", "biosVfProcessorCState", "Processor-C-State", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], ["Get", "Set"]),
         "modular": MoMeta("BiosVfProcessorCState", "biosVfProcessorCState", "Processor-C-State", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], ['biosPlatformDefaults', 'biosSettings'], [], ["Get", "Set"])
     }
 

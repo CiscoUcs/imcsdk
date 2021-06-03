@@ -79,7 +79,7 @@ def test_imc_no_timeout():
 @raises(Exception)
 def test_imc_timeout():
 
-    from six.moves import urllib
+    import urllib.request, urllib.error, urllib.parse
 
     global handle
     server_dn = get_server_dn(handle)
@@ -88,13 +88,13 @@ def test_imc_timeout():
     mo.usr_lbl = usr_lbl
     try:
         handle.set_mo(mo, timeout=1)
-    except urllib.error.URLError:
+    except urllib.error.URLError as e:
         print("Hit expected error")
         raise Exception
 
 
 def test_imc_context_manager_no_timeout():
-    from six.moves import configparser
+    import configparser
     from imcsdk.imchandle import ImcHandle
     from ..connection import info
 

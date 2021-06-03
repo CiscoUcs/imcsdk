@@ -30,7 +30,7 @@ class AaaLdapRoleGroup(ManagedObject):
         "classic": {
             "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["clear"], []),
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
-            "domain": MoPropertyMeta("domain", "domain", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, 1, 255, None, [], []),
+            "domain": MoPropertyMeta("domain", "domain", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, 1, 254, None, [], []),
             "id": MoPropertyMeta("id", "id", "uint", VersionMeta.Version151f, MoPropertyMeta.NAMING, 0x10, None, None, None, [], ["1-28"]),
             "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x20, 0, 127, r"""([^+\-][a-zA-Z0-9=!#$%()*+,-.:;@ _{|}~?&]*){0,127}""", [], []),
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x40, 0, 255, None, [], []),
@@ -42,7 +42,7 @@ class AaaLdapRoleGroup(ManagedObject):
         "modular": {
             "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["clear"], []),
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
-            "domain": MoPropertyMeta("domain", "domain", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, 1, 255, None, [], []),
+            "domain": MoPropertyMeta("domain", "domain", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x8, 1, 254, None, [], []),
             "id": MoPropertyMeta("id", "id", "uint", VersionMeta.Version2013e, MoPropertyMeta.NAMING, 0x10, None, None, None, [], ["1-28"]),
             "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, 0, 127, r"""([^+\-][a-zA-Z0-9=!#$%()*+,-.:;@ _{|}~?&]*){0,127}""", [], []),
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, 0, 255, None, [], []),
