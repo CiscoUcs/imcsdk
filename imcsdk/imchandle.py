@@ -708,7 +708,7 @@ class ImcHandle(ImcSession):
             Const.RESPONSE_MOS: {}
         }
 
-        mos = mo_dict.values()
+        mos = list(mo_dict.values())
         for i in range(0, len(mos), CONFIG_CONF_MOS_BUFFER_SIZE):
             # Configure the mo list received in batches of 10 on the endpoint
             mos_ = list(mos)[i: i + CONFIG_CONF_MOS_BUFFER_SIZE]

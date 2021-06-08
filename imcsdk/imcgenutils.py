@@ -16,9 +16,6 @@
 This module contains the SDK general utilities.
 """
 
-from __future__ import print_function
-from __future__ import unicode_literals
-
 import os
 import sys
 import platform
@@ -185,7 +182,7 @@ def download_file(driver, file_url, file_dir, file_name, progress=Progress()):
         # Python 2 code in this block
         file_size = int(response.info().getheaders("Content-Length")[0])
 
-    print("Downloading: %s Bytes: %s" % (file_name, file_size))
+    print(("Downloading: %s Bytes: %s" % (file_name, file_size)))
 
     file_handle = open(destination_file, 'wb')
     block_sz = 64
@@ -226,12 +223,8 @@ def upload_file(driver, uri, file_dir, file_name, progress=Progress()):
 
 def check_registry_key(java_key):
     """ Method checks for the java in the registry entries. """
-    try:
-        from _winreg import ConnectRegistry, HKEY_LOCAL_MACHINE, OpenKey, \
-            QueryValueEx
-    except:
-        from winreg import ConnectRegistry, HKEY_LOCAL_MACHINE, OpenKey, \
-            QueryValueEx
+    from winreg import ConnectRegistry, HKEY_LOCAL_MACHINE, OpenKey, \
+             QueryValueEx
 
     path = None
     try:

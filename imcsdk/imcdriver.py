@@ -11,9 +11,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from __future__ import print_function
-from __future__ import unicode_literals
-
 import sys
 import socket
 import ssl
@@ -161,7 +158,7 @@ class ImcDriver(object):
         tls_handler = (TLSHandler, TLS1Handler)[tls_proto == "tlsv1"]
         handlers = [SmartRedirectHandler, tls_handler]
         if self.__proxy:
-            proxy_handler = urllib2.ProxyHandler(
+            proxy_handler = urllib.request.ProxyHandler(
                 {'http': self.__proxy, 'https': self.__proxy})
             handlers.append(proxy_handler)
         return handlers
