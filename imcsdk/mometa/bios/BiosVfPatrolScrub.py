@@ -7,6 +7,7 @@ from ...imcmeta import VersionMeta
 
 class BiosVfPatrolScrubConsts:
     VP_PATROL_SCRUB_DISABLED = "Disabled"
+    VP_PATROL_SCRUB_ENABLE_AT_END_OF_POST = "Enable at End of POST"
     VP_PATROL_SCRUB_ENABLED = "Enabled"
     _VP_PATROL_SCRUB_DISABLED = "disabled"
     _VP_PATROL_SCRUB_ENABLED = "enabled"
@@ -31,7 +32,7 @@ class BiosVfPatrolScrub(ManagedObject):
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []),
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
-            "vp_patrol_scrub": MoPropertyMeta("vp_patrol_scrub", "vpPatrolScrub", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []),
+            "vp_patrol_scrub": MoPropertyMeta("vp_patrol_scrub", "vpPatrolScrub", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enable at End of POST", "Enabled", "disabled", "enabled", "platform-default"], []),
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
         },
 

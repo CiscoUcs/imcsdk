@@ -8,6 +8,7 @@ from ...imcmeta import VersionMeta
 class BiosVfSelectPprTypeConsts:
     VP_SELECT_PPR_TYPE_DISABLED = "Disabled"
     VP_SELECT_PPR_TYPE_HARD_PPR = "Hard PPR"
+    VP_SELECT_PPR_TYPE_SOFT_PPR = "Soft PPR"
     _VP_SELECT_PPR_TYPE_DISABLED = "disabled"
     VP_SELECT_PPR_TYPE_PLATFORM_DEFAULT = "platform-default"
 
@@ -30,7 +31,7 @@ class BiosVfSelectPprType(ManagedObject):
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version411c, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []),
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version411c, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version411c, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
-            "vp_select_ppr_type": MoPropertyMeta("vp_select_ppr_type", "vpSelectPprType", "string", VersionMeta.Version411c, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Hard PPR", "disabled", "platform-default"], []),
+            "vp_select_ppr_type": MoPropertyMeta("vp_select_ppr_type", "vpSelectPprType", "string", VersionMeta.Version411c, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Hard PPR", "Soft PPR", "disabled", "platform-default"], []),
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version411c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
         },
 

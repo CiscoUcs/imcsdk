@@ -16,8 +16,8 @@ class AaaUserEp(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("AaaUserEp", "aaaUserEp", "user-ext", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['topSystem'], ['aaaSession', 'aaaUser', 'aaaUserPasswordExpiration', 'aaaUserPolicy', 'generateRandomPassword'], ["Get"]),
-        "modular": MoMeta("AaaUserEp", "aaaUserEp", "user-ext", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['topSystem'], ['aaaSession', 'aaaUser', 'aaaUserPasswordExpiration', 'aaaUserPolicy', 'generateRandomPassword'], ["Get"])
+        "classic": MoMeta("AaaUserEp", "aaaUserEp", "user-ext", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['topSystem'], ['aaaSession', 'aaaUser', 'aaaUserAuthPrecedence', 'aaaUserPasswordExpiration', 'aaaUserPolicy', 'generateRandomPassword'], ["Get"]),
+        "modular": MoMeta("AaaUserEp", "aaaUserEp", "user-ext", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['topSystem'], ['aaaSession', 'aaaUser', 'aaaUserAuthPrecedence', 'aaaUserPasswordExpiration', 'aaaUserPolicy', 'generateRandomPassword'], ["Get"])
     }
 
 

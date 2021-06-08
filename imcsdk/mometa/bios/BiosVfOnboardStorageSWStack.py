@@ -30,6 +30,7 @@ class BiosVfOnboardStorageSWStack(ManagedObject):
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151x, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151x, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
             "vp_onboard_scu_storage_sw_stack": MoPropertyMeta("vp_onboard_scu_storage_sw_stack", "vpOnboardSCUStorageSWStack", "string", VersionMeta.Version151x, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Intel RSTe", "LSI SW RAID", "platform-default"], []),
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version421a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
         },
 
         "modular": {
@@ -48,6 +49,7 @@ class BiosVfOnboardStorageSWStack(ManagedObject):
             "rn": "rn", 
             "status": "status", 
             "vpOnboardSCUStorageSWStack": "vp_onboard_scu_storage_sw_stack", 
+            "childAction": "child_action", 
         },
 
         "modular": {
@@ -63,6 +65,7 @@ class BiosVfOnboardStorageSWStack(ManagedObject):
         self._dirty_mask = 0
         self.status = None
         self.vp_onboard_scu_storage_sw_stack = None
+        self.child_action = None
 
         ManagedObject.__init__(self, "BiosVfOnboardStorageSWStack", parent_mo_or_dn, **kwargs)
 

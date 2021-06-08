@@ -12,6 +12,7 @@ class AaaSessionConsts:
     UI_SECURELOGIN = "securelogin"
     UI_SERIAL = "serial"
     UI_SHELL = "shell"
+    UI_SOL = "sol"
     UI_V_MEDIA = "vMedia"
     UI_WEB = "web"
     UI_SERVER_1_SOL = "server-1:SOL"
@@ -43,7 +44,7 @@ class AaaSession(ManagedObject):
             "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version151f, MoPropertyMeta.NAMING, None, 1, 32, None, [], []),
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x8, None, None, r"""((removed|created|modified|deleted),){0,3}(removed|created|modified|deleted){0,1}""", [], []),
-            "ui": MoPropertyMeta("ui", "ui", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["ep", "none", "redfish", "securelogin", "serial", "shell", "vMedia", "web"], []),
+            "ui": MoPropertyMeta("ui", "ui", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["ep", "none", "redfish", "securelogin", "serial", "shell", "sol", "vMedia", "web"], []),
             "user": MoPropertyMeta("user", "user", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 255, None, [], []),
         },
 

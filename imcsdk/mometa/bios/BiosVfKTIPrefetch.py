@@ -6,6 +6,7 @@ from ...imcmeta import VersionMeta
 
 
 class BiosVfKTIPrefetchConsts:
+    VP_KTIPREFETCH_AUTO = "Auto"
     VP_KTIPREFETCH_DISABLED = "Disabled"
     VP_KTIPREFETCH_ENABLED = "Enabled"
     _VP_KTIPREFETCH_DISABLED = "disabled"
@@ -31,7 +32,8 @@ class BiosVfKTIPrefetch(ManagedObject):
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []),
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
-            "vp_kti_prefetch": MoPropertyMeta("vp_kti_prefetch", "vpKTIPrefetch", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []),
+            "vp_kti_prefetch": MoPropertyMeta("vp_kti_prefetch", "vpKTIPrefetch", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Auto", "Disabled", "Enabled", "disabled", "enabled", "platform-default"], []),
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version421a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
         },
 
         "modular": {
@@ -50,6 +52,7 @@ class BiosVfKTIPrefetch(ManagedObject):
             "rn": "rn", 
             "status": "status", 
             "vpKTIPrefetch": "vp_kti_prefetch", 
+            "childAction": "child_action", 
         },
 
         "modular": {
@@ -65,6 +68,7 @@ class BiosVfKTIPrefetch(ManagedObject):
         self._dirty_mask = 0
         self.status = None
         self.vp_kti_prefetch = None
+        self.child_action = None
 
         ManagedObject.__init__(self, "BiosVfKTIPrefetch", parent_mo_or_dn, **kwargs)
 

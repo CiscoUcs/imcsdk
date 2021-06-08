@@ -58,7 +58,7 @@ class FaultInst(ManagedObject):
     naming_props = set(['code'])
 
     mo_meta = {
-        "classic": MoMeta("FaultInst", "faultInst", "fault-[code]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['adaptorUnit', 'cloudDeviceConnectorEp', 'computeBoard', 'computeRackUnit', 'equipmentFan', 'equipmentPsu', 'memoryArray', 'memoryUnit', 'mgmtIf', 'pciEquipSlot', 'pciSwitch', 'powerBudget', 'processorUnit', 'storageController', 'storageControllerNVMe', 'storageFlexFlashController', 'storageFlexFlashPhysicalDrive', 'storageFlexFlashVirtualDrive', 'storageLocalDisk', 'storageNVMePhysicalDrive', 'storageRaidBattery', 'storageVirtualDrive', 'sysdebugMEpLog'], [], ["Get"]),
+        "classic": MoMeta("FaultInst", "faultInst", "fault-[code]", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['adaptorUnit', 'cloudDeviceConnectorEp', 'computeBoard', 'computeRackUnit', 'equipmentFan', 'equipmentPsu', 'memoryArray', 'memoryUnit', 'mgmtIf', 'pciEquipSlot', 'pciSwitch', 'powerBudget', 'processorUnit', 'storageController', 'storageControllerNVMe', 'storageFlexFlashController', 'storageFlexFlashPhysicalDrive', 'storageFlexFlashVirtualDrive', 'storageFlexUtilController', 'storageFlexUtilPhysicalDrive', 'storageFlexUtilVirtualDrive', 'storageLocalDisk', 'storageNVMePhysicalDrive', 'storageRaidBattery', 'storageVirtualDrive', 'sysdebugMEpLog'], [], ["Get"]),
         "modular": MoMeta("FaultInst", "faultInst", "fault-[code]", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['adaptorUnit', 'cloudDeviceConnectorEp', 'computeBoard', 'computeServerNode', 'equipmentChassis', 'equipmentFan', 'equipmentPsu', 'equipmentSystemIOController', 'ioControllerNVMePhysicalDrive', 'memoryArray', 'memoryUnit', 'pciEquipSlot', 'powerBudget', 'processorUnit', 'storageController', 'storageControllerNVMe', 'storageEnclosureDiskSlotEp', 'storageFlexFlashController', 'storageFlexFlashPhysicalDrive', 'storageFlexFlashVirtualDrive', 'storageLocalDisk', 'storageLocalDiskEp', 'storageNVMePhysicalDrive', 'storageRaidBattery', 'storageSasExpander', 'storageVirtualDrive', 'sysdebugMEpLog', 'systemIOControllerNVMe'], [], ["Get"])
     }
 
@@ -73,7 +73,7 @@ class FaultInst(ManagedObject):
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
             "code": MoPropertyMeta("code", "code", "string", VersionMeta.Version151f, MoPropertyMeta.NAMING, None, None, None, None, [], []),
             "created": MoPropertyMeta("created", "created", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []),
-            "descr": MoPropertyMeta("descr", "descr", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 384, None, [], []),
+            "descr": MoPropertyMeta("descr", "descr", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 1024, None, [], []),
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []),
             "highest_severity": MoPropertyMeta("highest_severity", "highestSeverity", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["cleared", "condition", "critical", "info", "major", "minor", "warning"], []),
             "id": MoPropertyMeta("id", "id", "ulong", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []),

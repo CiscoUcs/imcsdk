@@ -37,6 +37,7 @@ class StorageLocalDiskProps(ManagedObject):
             "health": MoPropertyMeta("health", "health", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "interface_type": MoPropertyMeta("interface_type", "interfaceType", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "link_speed": MoPropertyMeta("link_speed", "linkSpeed", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
+            "maximum_operating_temperature": MoPropertyMeta("maximum_operating_temperature", "maximumOperatingTemperature", "string", VersionMeta.Version421a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "media_error_count": MoPropertyMeta("media_error_count", "mediaErrorCount", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "media_type": MoPropertyMeta("media_type", "mediaType", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "non_coerced_size": MoPropertyMeta("non_coerced_size", "nonCoercedSize", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
@@ -119,6 +120,7 @@ class StorageLocalDiskProps(ManagedObject):
             "health": "health", 
             "interfaceType": "interface_type", 
             "linkSpeed": "link_speed", 
+            "maximumOperatingTemperature": "maximum_operating_temperature", 
             "mediaErrorCount": "media_error_count", 
             "mediaType": "media_type", 
             "nonCoercedSize": "non_coerced_size", 
@@ -199,6 +201,7 @@ class StorageLocalDiskProps(ManagedObject):
         self.health = None
         self.interface_type = None
         self.link_speed = None
+        self.maximum_operating_temperature = None
         self.media_error_count = None
         self.media_type = None
         self.non_coerced_size = None

@@ -444,8 +444,8 @@ class TopSystem(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("TopSystem", "topSystem", "sys", VersionMeta.Version151f, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], ['topRoot'], ['aaaLdap', 'aaaUserEp', 'certificateManagement', 'cloudMgmtSvc', 'commSvcEp', 'computeRackUnit', 'equipmentRackEnclosure', 'huuController', 'iodController', 'kmipManagement', 'mgmtBackup', 'mgmtImporter', 'mgmtInventory', 'osiController', 'storageSasExpander', 'systemBoardUnit', 'vicBackupAll', 'vicImporterAll'], ["Get", "Set"]),
-        "modular": MoMeta("TopSystem", "topSystem", "sys", VersionMeta.Version2013e, "InputOutput", 0xff, [], ["admin", "read-only", "user"], ['topRoot'], ['aaaLdap', 'aaaUserEp', 'certificateManagement', 'cloudMgmtSvc', 'commSvcEp', 'equipmentChassis', 'sysdebugTechSupportExport'], ["Get", "Set"])
+        "classic": MoMeta("TopSystem", "topSystem", "sys", VersionMeta.Version151f, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], ['topRoot'], ['aaaLdap', 'aaaTacacsPlus', 'aaaUserEp', 'certificateManagement', 'cloudMgmtSvc', 'commSvcEp', 'computeRackUnit', 'equipmentRackEnclosure', 'huuController', 'iodController', 'kmipManagement', 'mctpCertificateManagement', 'mgmtBackup', 'mgmtImporter', 'mgmtInventory', 'osiController', 'storageSasExpander', 'systemBoardUnit', 'vicBackupAll', 'vicImporterAll'], ["Get", "Set"]),
+        "modular": MoMeta("TopSystem", "topSystem", "sys", VersionMeta.Version2013e, "InputOutput", 0xff, [], ["admin", "read-only", "user"], ['topRoot'], ['aaaLdap', 'aaaTacacsPlus', 'aaaUserEp', 'certificateManagement', 'cloudMgmtSvc', 'commSvcEp', 'equipmentChassis', 'sysdebugTechSupportExport'], ["Get", "Set"])
     }
 
 

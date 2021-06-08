@@ -16,7 +16,7 @@ class StorageFlexUtilController(ManagedObject):
     naming_props = set(['id'])
 
     mo_meta = {
-        "classic": MoMeta("StorageFlexUtilController", "storageFlexUtilController", "storage-flexutil-[id]", VersionMeta.Version304a, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], ['computeBoard'], ['storageFlexUtilHealth', 'storageFlexUtilOperationalProfile', 'storageFlexUtilPhysicalDrive', 'storageFlexUtilVirtualDrive', 'storageFlexUtilVirtualDriveImageMap'], ["Get", "Set"]),
+        "classic": MoMeta("StorageFlexUtilController", "storageFlexUtilController", "storage-flexutil-[id]", VersionMeta.Version304a, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], ['computeBoard'], ['faultInst', 'storageFlexUtilHealth', 'storageFlexUtilOperationalProfile', 'storageFlexUtilPhysicalDrive', 'storageFlexUtilVirtualDrive', 'storageFlexUtilVirtualDriveImageMap'], ["Get", "Set"]),
     }
 
 
