@@ -34,6 +34,7 @@ class BiosVfQpiSnoopMode(ManagedObject):
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
             "vp_qpi_snoop_mode": MoPropertyMeta("vp_qpi_snoop_mode", "vpQpiSnoopMode", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["auto", "cluster-on-die", "early-snoop", "home-directory-snoop", "home-directory-snoop-with-osb", "home-snoop", "platform-default"], []),
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version421a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
         },
 
         "modular": {
@@ -52,6 +53,7 @@ class BiosVfQpiSnoopMode(ManagedObject):
             "rn": "rn", 
             "status": "status", 
             "vpQpiSnoopMode": "vp_qpi_snoop_mode", 
+            "childAction": "child_action", 
         },
 
         "modular": {
@@ -67,6 +69,7 @@ class BiosVfQpiSnoopMode(ManagedObject):
         self._dirty_mask = 0
         self.status = None
         self.vp_qpi_snoop_mode = None
+        self.child_action = None
 
         ManagedObject.__init__(self, "BiosVfQpiSnoopMode", parent_mo_or_dn, **kwargs)
 

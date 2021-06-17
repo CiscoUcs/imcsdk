@@ -101,10 +101,16 @@ class MemoryPersistentMemoryUnitConsts:
     SOCKET_ID_3 = "3"
     SOCKET_ID_4 = "4"
     SOCKET_LOCAL_DIMM_NUMBER_10 = "10"
+    SOCKET_LOCAL_DIMM_NUMBER_11 = "11"
     SOCKET_LOCAL_DIMM_NUMBER_12 = "12"
+    SOCKET_LOCAL_DIMM_NUMBER_14 = "14"
+    SOCKET_LOCAL_DIMM_NUMBER_15 = "15"
+    SOCKET_LOCAL_DIMM_NUMBER_16 = "16"
     SOCKET_LOCAL_DIMM_NUMBER_2 = "2"
+    SOCKET_LOCAL_DIMM_NUMBER_3 = "3"
     SOCKET_LOCAL_DIMM_NUMBER_4 = "4"
     SOCKET_LOCAL_DIMM_NUMBER_6 = "6"
+    SOCKET_LOCAL_DIMM_NUMBER_7 = "7"
     SOCKET_LOCAL_DIMM_NUMBER_8 = "8"
     TYPE_3_DRAM = "3DRAM"
     TYPE_CDRAM = "CDRAM"
@@ -177,7 +183,7 @@ class MemoryPersistentMemoryUnit(ManagedObject):
             "security_status": MoPropertyMeta("security_status", "securityStatus", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "serial": MoPropertyMeta("serial", "serial", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "socket_id": MoPropertyMeta("socket_id", "socketId", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, None, None, None, None, ["1", "2", "3", "4"], []),
-            "socket_local_dimm_number": MoPropertyMeta("socket_local_dimm_number", "socketLocalDimmNumber", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, None, None, None, None, ["10", "12", "2", "4", "6", "8"], []),
+            "socket_local_dimm_number": MoPropertyMeta("socket_local_dimm_number", "socketLocalDimmNumber", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, None, None, None, None, ["10", "11", "12", "14", "15", "16", "2", "3", "4", "6", "7", "8"], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, 0x8, None, None, r"""((removed|created|modified|deleted),){0,3}(removed|created|modified|deleted){0,1}""", [], []),
             "total_capacity": MoPropertyMeta("total_capacity", "totalCapacity", "long", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []),
             "type": MoPropertyMeta("type", "type", "string", VersionMeta.Version404b, MoPropertyMeta.READ_ONLY, None, None, None, None, ["3DRAM", "CDRAM", "DDR", "DDR2", "DDR2 FB-DIMM", "DDR3", "DDR4", "DRAM", "EDRAM", "EEPROM", "EPROM", "FBD2", "FEPROM", "FLASH", "Logical non-volatile device", "Other", "RAM", "RDRAM", "ROM", "SDRAM", "SGRAM", "SRAM", "Unknown", "VRAM", "undiscovered"], []),

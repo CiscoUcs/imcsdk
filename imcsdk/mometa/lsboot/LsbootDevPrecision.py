@@ -32,8 +32,8 @@ class LsbootDevPrecision(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("LsbootDevPrecision", "lsbootDevPrecision", "boot-precision", VersionMeta.Version201a, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], ['computeRackUnit'], ['lsbootCdd', 'lsbootHdd', 'lsbootIscsi', 'lsbootNVMe', 'lsbootPchStorage', 'lsbootPxe', 'lsbootSan', 'lsbootSd', 'lsbootUefiShell', 'lsbootUsb', 'lsbootVMedia'], ["Get", "Set"]),
-        "modular": MoMeta("LsbootDevPrecision", "lsbootDevPrecision", "boot-precision", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], ['computeServerNode'], ['lsbootHdd', 'lsbootIscsi', 'lsbootNVMe', 'lsbootPchStorage', 'lsbootPxe', 'lsbootSan', 'lsbootSd', 'lsbootUefiShell', 'lsbootUsb', 'lsbootVMedia'], ["Get", "Set"])
+        "classic": MoMeta("LsbootDevPrecision", "lsbootDevPrecision", "boot-precision", VersionMeta.Version201a, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], ['computeRackUnit'], ['lsbootCdd', 'lsbootEmbeddedStorage', 'lsbootHdd', 'lsbootHttp', 'lsbootIscsi', 'lsbootNVMe', 'lsbootPchStorage', 'lsbootPxe', 'lsbootSan', 'lsbootSd', 'lsbootUefiShell', 'lsbootUsb', 'lsbootVMedia'], ["Get", "Set"]),
+        "modular": MoMeta("LsbootDevPrecision", "lsbootDevPrecision", "boot-precision", VersionMeta.Version2013e, "InputOutput", 0x7f, [], ["admin", "read-only", "user"], ['computeServerNode'], ['lsbootHdd', 'lsbootHttp', 'lsbootIscsi', 'lsbootNVMe', 'lsbootPchStorage', 'lsbootPxe', 'lsbootSan', 'lsbootSd', 'lsbootUefiShell', 'lsbootUsb', 'lsbootVMedia'], ["Get", "Set"])
     }
 
 

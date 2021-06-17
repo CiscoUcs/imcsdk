@@ -8,6 +8,7 @@ from ...imcmeta import VersionMeta
 class HuuFirmwareUpdaterConsts:
     ADMIN_STATE_TRIGGER = "trigger"
     ADMIN_STATE_TRIGGERED = "triggered"
+    BOOT_MEDIUM_FLEX_MMC = "FlexMMC"
     BOOT_MEDIUM_MICROSD = "microsd"
     BOOT_MEDIUM_PXEBOOT = "pxeboot"
     BOOT_MEDIUM_SD = "sd"
@@ -15,6 +16,7 @@ class HuuFirmwareUpdaterConsts:
     DO_FORCE_DOWN_NO = "no"
     DO_FORCE_DOWN_YES = "yes"
     MAP_TYPE_CIFS = "cifs"
+    MAP_TYPE_EMMC = "emmc"
     MAP_TYPE_NFS = "nfs"
     MAP_TYPE_WWW = "www"
     SKIP_MEMORY_TEST_DISABLED = "Disabled"
@@ -44,10 +46,10 @@ class HuuFirmwareUpdater(ManagedObject):
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []),
             "do_force_down": MoPropertyMeta("do_force_down", "doForceDown", "string", VersionMeta.Version401a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["no", "yes"], []),
             "graceful_timeout": MoPropertyMeta("graceful_timeout", "gracefulTimeout", "uint", VersionMeta.Version401a, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, [], ["0-60"]),
-            "map_type": MoPropertyMeta("map_type", "mapType", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["cifs", "nfs", "www"], []),
+            "map_type": MoPropertyMeta("map_type", "mapType", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["cifs", "emmc", "nfs", "www"], []),
             "mount_option": MoPropertyMeta("mount_option", "mountOption", "string", VersionMeta.Version208d, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, [], []),
             "password": MoPropertyMeta("password", "password", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, [], []),
-            "remote_ip": MoPropertyMeta("remote_ip", "remoteIp", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x200, 0, 255, r"""((https?://)?(([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6})|(https?://)?(([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?)+)|(https?://)?([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]))(:([1-9]|[1-5]?[0-9]{2,4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5]))?""", [], []),
+            "remote_ip": MoPropertyMeta("remote_ip", "remoteIp", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x200, 0, 255, r"""((https?://)?(([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,63})|(https?://)?(([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?)+)|(https?://)?([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]))(:([1-9]|[1-5]?[0-9]{2,4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5]))?""", [], []),
             "remote_share": MoPropertyMeta("remote_share", "remoteShare", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x400, 0, 510, r"""[ !#$=%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}~a-zA-Z0-9]{1,255}""", [], []),
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x800, 0, 255, None, [], []),
             "skip_memory_test": MoPropertyMeta("skip_memory_test", "skipMemoryTest", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x1000, 0, 10, None, ["Disabled", "Enabled"], []),
@@ -58,7 +60,7 @@ class HuuFirmwareUpdater(ManagedObject):
             "update_type": MoPropertyMeta("update_type", "updateType", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x20000, 0, 510, None, ["delay", "delay_reboot", "immediate"], []),
             "username": MoPropertyMeta("username", "username", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x40000, None, None, None, [], []),
             "verify_update": MoPropertyMeta("verify_update", "verifyUpdate", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x80000, None, None, None, ["No", "Yes", "false", "no", "true", "yes"], []),
-            "boot_medium": MoPropertyMeta("boot_medium", "bootMedium", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x100000, 0, 510, None, ["microsd", "pxeboot", "sd", "vmedia"], []),
+            "boot_medium": MoPropertyMeta("boot_medium", "bootMedium", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x100000, 0, 510, None, ["FlexMMC", "microsd", "pxeboot", "sd", "vmedia"], []),
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
             "remote_share_file": MoPropertyMeta("remote_share_file", "remoteShareFile", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "remote_share_path": MoPropertyMeta("remote_share_path", "remoteSharePath", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),

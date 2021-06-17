@@ -21,7 +21,7 @@ class EquipmentChassis(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "modular": MoMeta("EquipmentChassis", "equipmentChassis", "chassis-1", VersionMeta.Version2013e, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], ['topSystem'], ['chassisPIDCatalog', 'chassisPowerBudget', 'chassisPowerMonitor', 'chassisPowerUtilization', 'computeServerNode', 'equipmentChassisLocatorLed', 'equipmentFanModule', 'equipmentIndicatorLed', 'equipmentPsu', 'equipmentSystemIOController', 'eventManagement', 'faultInst', 'mgmtBackup', 'mgmtIf', 'mgmtImporter', 'mgmtInventory', 'storageEnclosure', 'storageSasExpander', 'sysdebugTechSupportExport', 'vicBackupAll', 'vicImporterAll'], ["Get"])
+        "modular": MoMeta("EquipmentChassis", "equipmentChassis", "chassis-1", VersionMeta.Version2013e, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], ['topSystem'], ['chassisPIDCatalog', 'chassisPowerBudget', 'chassisPowerMonitor', 'chassisPowerUtilization', 'computeServerNode', 'equipmentChassisLocatorLed', 'equipmentFanModule', 'equipmentIndicatorLed', 'equipmentPsu', 'equipmentSystemIOController', 'eventManagement', 'faultInst', 'mgmtBackup', 'mgmtIf', 'mgmtImporter', 'mgmtInventory', 'storageEnclosure', 'storageSasExpander', 'sysdebugTechSupportExport', 'vicBackupAll', 'vicImporterAll'], ["Get"])
     }
 
 
@@ -34,17 +34,18 @@ class EquipmentChassis(ManagedObject):
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version2013e, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
             "cmc_reset_status": MoPropertyMeta("cmc_reset_status", "cmcResetStatus", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
+            "dual_enclosure_id_enable": MoPropertyMeta("dual_enclosure_id_enable", "dualEnclosureIdEnable", "string", VersionMeta.Version413a, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["No", "Yes", "no", "yes"], []),
             "model": MoPropertyMeta("model", "model", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []),
-            "reboot_host": MoPropertyMeta("reboot_host", "rebootHost", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["No", "Yes", "no", "yes"], []),
-            "reset_components": MoPropertyMeta("reset_components", "resetComponents", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x10, 0, 510, None, [], []),
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, None, [], []),
+            "reboot_host": MoPropertyMeta("reboot_host", "rebootHost", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["No", "Yes", "no", "yes"], []),
+            "reset_components": MoPropertyMeta("reset_components", "resetComponents", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x20, 0, 510, None, [], []),
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, 0, 255, None, [], []),
             "serial": MoPropertyMeta("serial", "serial", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
-            "server_sioc_connectivity": MoPropertyMeta("server_sioc_connectivity", "serverSIOCConnectivity", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["single-server-dual-sioc", "single-server-single-sioc"], []),
+            "server_sioc_connectivity": MoPropertyMeta("server_sioc_connectivity", "serverSIOCConnectivity", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["single-server-dual-sioc", "single-server-single-sioc"], []),
             "sioc_reset_status": MoPropertyMeta("sioc_reset_status", "siocResetStatus", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
             "storage_reset_status": MoPropertyMeta("storage_reset_status", "storageResetStatus", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
-            "usr_lbl": MoPropertyMeta("usr_lbl", "usrLbl", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x100, 0, 64, r"""[ !#$%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}~a-zA-Z0-9]{0,64}""", [], []),
+            "usr_lbl": MoPropertyMeta("usr_lbl", "usrLbl", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x200, 0, 64, r"""[ !#$%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}~a-zA-Z0-9]{0,64}""", [], []),
         },
 
     }
@@ -58,6 +59,7 @@ class EquipmentChassis(ManagedObject):
             "childAction": "child_action", 
             "cmcResetStatus": "cmc_reset_status", 
             "dn": "dn", 
+            "dualEnclosureIdEnable": "dual_enclosure_id_enable", 
             "model": "model", 
             "name": "name", 
             "rebootHost": "reboot_host", 
@@ -80,6 +82,7 @@ class EquipmentChassis(ManagedObject):
         self.bmc2_reset_status = None
         self.child_action = None
         self.cmc_reset_status = None
+        self.dual_enclosure_id_enable = None
         self.model = None
         self.name = None
         self.reboot_host = None

@@ -32,6 +32,7 @@ class BiosVfOutOfBandMgmtPort(ManagedObject):
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version154, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version154, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
             "vp_out_of_band_mgmt_port": MoPropertyMeta("vp_out_of_band_mgmt_port", "vpOutOfBandMgmtPort", "string", VersionMeta.Version154, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []),
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version421a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
         },
 
         "modular": {
@@ -50,6 +51,7 @@ class BiosVfOutOfBandMgmtPort(ManagedObject):
             "rn": "rn", 
             "status": "status", 
             "vpOutOfBandMgmtPort": "vp_out_of_band_mgmt_port", 
+            "childAction": "child_action", 
         },
 
         "modular": {
@@ -65,6 +67,7 @@ class BiosVfOutOfBandMgmtPort(ManagedObject):
         self._dirty_mask = 0
         self.status = None
         self.vp_out_of_band_mgmt_port = None
+        self.child_action = None
 
         ManagedObject.__init__(self, "BiosVfOutOfBandMgmtPort", parent_mo_or_dn, **kwargs)
 

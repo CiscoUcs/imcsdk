@@ -16,8 +16,6 @@ This module is responsible for event handling of the events exposed by
 IMC server.
 """
 
-from __future__ import print_function
-
 import datetime
 import logging
 import time
@@ -86,10 +84,10 @@ class WatchBlock(object):
         """Default callback method."""
         tab_size = 8
         print("\n")
-        print('EventId'.ljust(tab_size * 2) + ':' + str(mce.event_id))
-        print('ChangeList'.ljust(tab_size * 2) + ':' + str(mce.change_list))
-        print('ClassId'.ljust(tab_size * 2) + ':' + str(mce.mo.get_class_id()))
-        print('MoDn'.ljust(tab_size * 2) + ':' + str(mce.mo.dn))
+        print(('EventId'.ljust(tab_size * 2) + ':' + str(mce.event_id)))
+        print(('ChangeList'.ljust(tab_size * 2) + ':' + str(mce.change_list)))
+        print(('ClassId'.ljust(tab_size * 2) + ':' + str(mce.mo.get_class_id())))
+        print(('MoDn'.ljust(tab_size * 2) + ':' + str(mce.mo.dn)))
 
 
 class ImcEventHandle(object):
@@ -154,7 +152,7 @@ class ImcEventHandle(object):
                     gmo = imcmo.generic_mo_from_xml_elem(mo_elem[0])
                     mce = MoChangeEvent(event_id=mo_elem[1],
                                         mo=gmo.to_mo(),
-                                        change_list=gmo.properties.keys())
+                                        change_list=list(gmo.properties.keys()))
 
                     for watch_block in self.__wbs:
                         if watch_block.fmce(mce):

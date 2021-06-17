@@ -31,6 +31,7 @@ class BiosVfIMCInterleave(ManagedObject):
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
             "vp_imc_interleave": MoPropertyMeta("vp_imc_interleave", "vpIMCInterleave", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["1-way Interleave", "2-way Interleave", "Auto", "platform-default"], []),
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version421a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
         },
 
         "modular": {
@@ -49,6 +50,7 @@ class BiosVfIMCInterleave(ManagedObject):
             "rn": "rn", 
             "status": "status", 
             "vpIMCInterleave": "vp_imc_interleave", 
+            "childAction": "child_action", 
         },
 
         "modular": {
@@ -64,6 +66,7 @@ class BiosVfIMCInterleave(ManagedObject):
         self._dirty_mask = 0
         self.status = None
         self.vp_imc_interleave = None
+        self.child_action = None
 
         ManagedObject.__init__(self, "BiosVfIMCInterleave", parent_mo_or_dn, **kwargs)
 

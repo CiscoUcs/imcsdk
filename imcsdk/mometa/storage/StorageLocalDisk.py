@@ -54,6 +54,7 @@ class StorageLocalDisk(ManagedObject):
             "coerced_size": MoPropertyMeta("coerced_size", "coercedSize", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "drive_firmware": MoPropertyMeta("drive_firmware", "driveFirmware", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "drive_serial_number": MoPropertyMeta("drive_serial_number", "driveSerialNumber", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
+            "drive_slot_status": MoPropertyMeta("drive_slot_status", "driveSlotStatus", "string", VersionMeta.Version413a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "drive_state": MoPropertyMeta("drive_state", "driveState", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "enclosure_association": MoPropertyMeta("enclosure_association", "enclosureAssociation", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "enclosure_logical_id": MoPropertyMeta("enclosure_logical_id", "enclosureLogicalId", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
@@ -74,6 +75,7 @@ class StorageLocalDisk(ManagedObject):
             "predictive_failure_count": MoPropertyMeta("predictive_failure_count", "predictiveFailureCount", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "product_id": MoPropertyMeta("product_id", "productId", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "secured": MoPropertyMeta("secured", "secured", "string", VersionMeta.Version209c, MoPropertyMeta.READ_ONLY, None, None, None, None, ["No", "Yes", "false", "no", "true", "yes"], []),
+            "ucs_product_id": MoPropertyMeta("ucs_product_id", "ucsProductId", "string", VersionMeta.Version421a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "vendor": MoPropertyMeta("vendor", "vendor", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
         },
 
@@ -89,6 +91,7 @@ class StorageLocalDisk(ManagedObject):
             "coerced_size": MoPropertyMeta("coerced_size", "coercedSize", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "drive_firmware": MoPropertyMeta("drive_firmware", "driveFirmware", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "drive_serial_number": MoPropertyMeta("drive_serial_number", "driveSerialNumber", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
+            "drive_slot_status": MoPropertyMeta("drive_slot_status", "driveSlotStatus", "string", VersionMeta.Version413a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "drive_state": MoPropertyMeta("drive_state", "driveState", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "enclosure_association": MoPropertyMeta("enclosure_association", "enclosureAssociation", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "enclosure_logical_id": MoPropertyMeta("enclosure_logical_id", "enclosureLogicalId", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
@@ -128,6 +131,7 @@ class StorageLocalDisk(ManagedObject):
             "coercedSize": "coerced_size", 
             "driveFirmware": "drive_firmware", 
             "driveSerialNumber": "drive_serial_number", 
+            "driveSlotStatus": "drive_slot_status", 
             "driveState": "drive_state", 
             "enclosureAssociation": "enclosure_association", 
             "enclosureLogicalId": "enclosure_logical_id", 
@@ -148,6 +152,7 @@ class StorageLocalDisk(ManagedObject):
             "predictiveFailureCount": "predictive_failure_count", 
             "productId": "product_id", 
             "secured": "secured", 
+            "ucsProductId": "ucs_product_id", 
             "vendor": "vendor", 
         },
 
@@ -163,6 +168,7 @@ class StorageLocalDisk(ManagedObject):
             "coercedSize": "coerced_size", 
             "driveFirmware": "drive_firmware", 
             "driveSerialNumber": "drive_serial_number", 
+            "driveSlotStatus": "drive_slot_status", 
             "driveState": "drive_state", 
             "enclosureAssociation": "enclosure_association", 
             "enclosureLogicalId": "enclosure_logical_id", 
@@ -199,6 +205,7 @@ class StorageLocalDisk(ManagedObject):
         self.coerced_size = None
         self.drive_firmware = None
         self.drive_serial_number = None
+        self.drive_slot_status = None
         self.drive_state = None
         self.enclosure_association = None
         self.enclosure_logical_id = None
@@ -219,6 +226,7 @@ class StorageLocalDisk(ManagedObject):
         self.predictive_failure_count = None
         self.product_id = None
         self.secured = None
+        self.ucs_product_id = None
         self.vendor = None
 
         ManagedObject.__init__(self, "StorageLocalDisk", parent_mo_or_dn, **kwargs)

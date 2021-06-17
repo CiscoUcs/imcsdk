@@ -15,7 +15,6 @@
 This module contains the ImcSdk Core classes.
 """
 
-from __future__ import absolute_import
 from .imccore import ImcBase
 from . import imccoreutils
 
@@ -130,7 +129,7 @@ class ExternalMethod(ImcBase):
 
         self._handle = handle
         if elem.attrib:
-            for attr_name, attr_value in elem.attrib.items():
+            for attr_name, attr_value in list(elem.attrib.items()):
                 if attr_name in self.__property_map:
                     attr = self.__property_map[attr_name]
                     method_prop_meta = self.__property_meta[attr]

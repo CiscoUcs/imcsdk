@@ -15,8 +15,6 @@
 This module contains the ManagedObject and GenericManagedObject Class.
 """
 
-from __future__ import print_function
-
 import logging
 import os
 
@@ -93,7 +91,7 @@ class ManagedObject(ImcBase):
             self.__parent_mo.child_add(self)
 
         if kwargs:
-            for prop_name, prop_value in kwargs.items():
+            for prop_name, prop_value in list(kwargs.items()):
                 if prop_name not in self.__internal_prop and \
                         not imccoreutils.prop_exists(self, prop_name):
                     log.debug("Unknown property %s" % prop_name)
@@ -223,7 +221,7 @@ class ManagedObject(ImcBase):
                 continue
             if not kwargs[prop]:
                 continue
-            print("prop ", prop)
+            print(("prop ", prop))
             is_valid, msg = imccoreutils.validate_property_value(self, prop, kwargs[prop])
             if not is_valid:
                 validation_errors.append({"prop": prop, "error": "Invalid value error", "msg": msg})
@@ -342,7 +340,8 @@ class ManagedObject(ImcBase):
                             self._dirty_mask & prop.mask != 0)):
                     value = getattr(self, key)
                     if value is not None:
-                        if handle:
+                        #Skip version validation for Bios Tokens. For other MOs continue to do version validation.
+                        if handle and not (mo_meta.name.startswith("BiosVf") and prop.name.startswith("vp")):
                             if prop.version <= handle.version:
                                 xml_obj.set(prop.xml_attribute, value)
                             else:
@@ -392,7 +391,7 @@ class ManagedObject(ImcBase):
         self._handle = handle
         if elem.attrib:
             if self.__class__.__name__ != "ManagedObject":
-                for attr_name, attr_value in elem.attrib.items():
+                for attr_name, attr_value in list(elem.attrib.items()):
                     if imccoreutils.property_exists_in_prop_map(self,
                                                                 attr_name):
                         attr_name = \
@@ -405,7 +404,7 @@ class ManagedObject(ImcBase):
                             False)
                     object.__setattr__(self, attr_name, attr_value)
             else:
-                for attr_name, attr_value in elem.attrib.items():
+                for attr_name, attr_value in list(elem.attrib.items()):
                     object.__setattr__(self, attr_name, attr_value)
 
         if hasattr(self, 'rn') and not hasattr(self, 'dn'):
@@ -452,7 +451,7 @@ class ManagedObject(ImcBase):
 
         indent = "  "
         level_indent = "%s%s)" % (indent * level, level)
-        print("%s %s[%s]" % (level_indent, self._class_id, self.dn))
+        print(("%s %s[%s]" % (level_indent, self._class_id, self.dn)))
         for ch_ in self.children:
             level += 1
             ch_.show_tree(level)
@@ -533,7 +532,7 @@ class GenericMo(ImcBase):
         ImcBase.__init__(self, class_id)
 
         if kwargs:
-            for key, value in kwargs.items():
+            for key, value in list(kwargs.items()):
                 self.__dict__[key] = str(value)
                 self.__properties[key] = str(value)
 
@@ -621,7 +620,7 @@ class GenericMo(ImcBase):
         self._handle = handle
         self._class_id = elem.tag
         if elem.attrib:
-            for name, value in elem.attrib.items():
+            for name, value in list(elem.attrib.items()):
                 self.__dict__[name] = value
                 self.__properties[name] = str(value)
 

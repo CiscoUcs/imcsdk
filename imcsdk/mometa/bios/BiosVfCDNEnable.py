@@ -32,6 +32,7 @@ class BiosVfCDNEnable(ManagedObject):
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
             "vp_cdn_enable": MoPropertyMeta("vp_cdn_enable", "vpCDNEnable", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []),
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version421a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
         },
 
         "modular": {
@@ -50,6 +51,7 @@ class BiosVfCDNEnable(ManagedObject):
             "rn": "rn", 
             "status": "status", 
             "vpCDNEnable": "vp_cdn_enable", 
+            "childAction": "child_action", 
         },
 
         "modular": {
@@ -65,6 +67,7 @@ class BiosVfCDNEnable(ManagedObject):
         self._dirty_mask = 0
         self.status = None
         self.vp_cdn_enable = None
+        self.child_action = None
 
         ManagedObject.__init__(self, "BiosVfCDNEnable", parent_mo_or_dn, **kwargs)
 
