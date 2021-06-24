@@ -23,7 +23,7 @@ import imcsdk.imccoreutils as imccoreutils
 from imcsdk.imcexception import ImcOperationError, ImcOperationErrorDetail
 from imcsdk.mometa.lsboot.LsbootDevPrecision import LsbootDevPrecision
 
-import imcsdk.apis.server.pxe as pxe
+import imcsdk.apis.v2.server.pxe as pxe
 
 log = logging.getLogger('imc')
 
@@ -636,4 +636,3 @@ def sanitize_input_from_intersight(handle, boot_devices):
         bd.append({k.lower(): v for k, v in each.items()})
     log.debug("##### Sanitized boot devices %s" % bd)
     return bd
-
