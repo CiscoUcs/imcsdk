@@ -1,6 +1,12 @@
 History
 =======
 
+0.9.11 (2021-07-12)
+---------------------
+* Adds support for IMC version 4.2(1a) for M6 servers
+* Adds support for IMC version 4.1(3a) for M5 servers
+* Adds APIs for AaaTacacsPlus
+
 0.9.10 (2020-04-23)
 ---------------------
 * More python3 compatibility fixes
