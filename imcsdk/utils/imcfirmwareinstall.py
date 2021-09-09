@@ -89,7 +89,8 @@ def firmware_huu_update(handle, remote_share, share_type, remote_ip,
         username (string): username
         password (string): password
         update_component (string): component to be updated.
-            "all" for upgrading all components
+            "all" for upgrading all components but the hard drives
+            To upgrade all components and hdd's specify "all,hdd"
             Refer release notes for individual component names
         stop_on_error (string): "yes", "no"
         timeout (int): Timeout value. Range is 30-240 mins.
