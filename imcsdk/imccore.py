@@ -191,7 +191,7 @@ class BaseObject(ImcBase):
                 self.attr_set(imcgenutils.convert_to_python_var_name(attr_name),
                               str(attr_value))
 
-        child_elems = elem.getchildren()
+        child_elems = list(elem)
         if child_elems:
             for child_elem in child_elems:
                 if not Et.iselement(child_elem):

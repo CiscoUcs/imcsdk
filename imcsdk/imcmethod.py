@@ -142,7 +142,7 @@ class ExternalMethod(ImcBase):
                         ExternalMethod._external_method_attrs[attr_name],
                         str(attr_value))
 
-        child_elems = elem.getchildren()
+        child_elems = list(elem)
         if child_elems:
             for child_elem in child_elems:
                 if not ET.iselement(child_elem):
