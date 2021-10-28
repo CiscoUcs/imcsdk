@@ -141,7 +141,7 @@ def _raid_max_size_get(raid_level, total_size, min_size, span_depth):
 
     if raid_level not in size:
         raise ValueError("Unsupported Raid level - {0}".format(raid_level))
-    return size[raid_level]
+    return int(size[raid_level])
 
 
 def _vd_max_size_get(handle,
