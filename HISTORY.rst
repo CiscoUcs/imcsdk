@@ -1,6 +1,10 @@
 History
 =======
 
+0.9.12 (2021-10-28)
+---------------------
+* Bug fixes
+
 0.9.11 (2021-07-12)
 ---------------------
 * Adds support for IMC version 4.2(1a) for M6 servers
