@@ -122,13 +122,13 @@ class ImcVersion(object):
 
         # for spin builds 4.0(1S52), the patch version will be None
         # In this scenario assume the version to be highest patch z
-        if self.__patch is None:
+        if self.__spin is not None and self.__patch is None:
             self.__patch = 'z'
-        elif self.__patch.isdigit() and self.__mr.isdigit():
+        elif self.__patch is not None and self.__mr is not None and self.__patch.isdigit() and self.__mr.isdigit():
             log.debug("Interim version encountered: %s. MR version has been bumped up." % self.version)
             self.__mr = str(int(self.__mr) + 1)
             self.__patch = 'a'
-        elif self.__patch.isalpha() and self.__spin:
+        elif self.__patch is not None and self.__patch.isalpha() and self.__spin:
             log.debug("Interim version encountered: %s. patch version has been bumped up." % self.version)
             self.__patch = str(chr(ord(self.__patch)+1))
         return True
