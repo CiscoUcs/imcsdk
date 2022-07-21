@@ -9,11 +9,15 @@ class CommSyslogClientConsts:
     ADMIN_ACTION_CLEAR = "clear"
     ADMIN_STATE_DISABLED = "disabled"
     ADMIN_STATE_ENABLED = "enabled"
+    CERTIFICATE_PRESENCE_NO = "no"
+    CERTIFICATE_PRESENCE_YES = "yes"
     NAME_PRIMARY = "primary"
     NAME_SECONDARY = "secondary"
     NAME_TERTIARY = "tertiary"
     PROTO_TCP = "tcp"
     PROTO_UDP = "udp"
+    SECURE_ENABLED_DISABLED = "disabled"
+    SECURE_ENABLED_ENABLED = "enabled"
 
 
 class CommSyslogClient(ManagedObject):
@@ -40,7 +44,10 @@ class CommSyslogClient(ManagedObject):
             "proto": MoPropertyMeta("proto", "proto", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x80, None, None, None, ["tcp", "udp"], []),
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x100, 0, 255, None, [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
+            "certificate_presence": MoPropertyMeta("certificate_presence", "certificatePresence", "string", VersionMeta.Version422a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["no", "yes"], []),
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
+            "secure_enabled": MoPropertyMeta("secure_enabled", "secureEnabled", "string", VersionMeta.Version422a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["disabled", "enabled"], []),
+            "ssl_handshake_status": MoPropertyMeta("ssl_handshake_status", "sslHandshakeStatus", "string", VersionMeta.Version422a, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []),
         },
 
         "modular": {
@@ -70,7 +77,10 @@ class CommSyslogClient(ManagedObject):
             "proto": "proto", 
             "rn": "rn", 
             "status": "status", 
+            "certificatePresence": "certificate_presence", 
             "childAction": "child_action", 
+            "secureEnabled": "secure_enabled", 
+            "sslHandshakeStatus": "ssl_handshake_status", 
         },
 
         "modular": {
@@ -97,7 +107,10 @@ class CommSyslogClient(ManagedObject):
         self.port = None
         self.proto = None
         self.status = None
+        self.certificate_presence = None
         self.child_action = None
+        self.secure_enabled = None
+        self.ssl_handshake_status = None
 
         ManagedObject.__init__(self, "CommSyslogClient", parent_mo_or_dn, **kwargs)
 

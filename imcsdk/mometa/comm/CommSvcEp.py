@@ -16,7 +16,7 @@ class CommSvcEp(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("CommSvcEp", "commSvcEp", "svc-ext", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['topSystem'], ['commHttp', 'commHttps', 'commIpmiLan', 'commKvm', 'commMailAlert', 'commNtpProvider', 'commRedfish', 'commSnmp', 'commSsh', 'commSyslog', 'commVMedia'], ["Get"]),
+        "classic": MoMeta("CommSvcEp", "commSvcEp", "svc-ext", VersionMeta.Version151f, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['topSystem'], ['commHttp', 'commHttps', 'commIpmiLan', 'commKvm', 'commMailAlert', 'commNtpProvider', 'commRedfish', 'commSnmp', 'commSsh', 'commSyslog', 'commTlsConfig', 'commVMedia'], ["Get"]),
         "modular": MoMeta("CommSvcEp", "commSvcEp", "svc-ext", VersionMeta.Version2013e, "OutputOnly", 0xf, [], ["admin", "read-only", "user"], ['topSystem'], ['commHttp', 'commHttps', 'commMailAlert', 'commNtpProvider', 'commRedfish', 'commSnmp', 'commSsh', 'commSyslog'], ["Get"])
     }
 

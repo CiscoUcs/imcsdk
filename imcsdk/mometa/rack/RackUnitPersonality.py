@@ -25,7 +25,7 @@ class RackUnitPersonality(ManagedObject):
         "classic": {
             "additional_info": MoPropertyMeta("additional_info", "additionalInfo", "string", VersionMeta.Version421a, MoPropertyMeta.READ_WRITE, 0x2, 0, 2000, None, [], []),
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version421a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
-            "id": MoPropertyMeta("id", "id", "uint", VersionMeta.Version421a, MoPropertyMeta.NAMING, 0x8, None, None, None, [], ["1-1"]),
+            "id": MoPropertyMeta("id", "id", "uint", VersionMeta.Version421a, MoPropertyMeta.NAMING, 0x8, None, None, None, [], ["1-4"]),
             "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version421a, MoPropertyMeta.READ_WRITE, 0x10, 1, 100, None, [], []),
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version421a, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, None, [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version421a, MoPropertyMeta.READ_WRITE, 0x40, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
