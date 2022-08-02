@@ -33,6 +33,7 @@ class StorageLocalDiskProps(ManagedObject):
             "copyback_percent_complete": MoPropertyMeta("copyback_percent_complete", "copybackPercentComplete", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "device_id": MoPropertyMeta("device_id", "deviceId", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []),
+            "emulated_block_size": MoPropertyMeta("emulated_block_size", "emulatedBlockSize", "string", VersionMeta.Version422a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "enclosure_device_id": MoPropertyMeta("enclosure_device_id", "enclosureDeviceId", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "health": MoPropertyMeta("health", "health", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "interface_type": MoPropertyMeta("interface_type", "interfaceType", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
@@ -116,6 +117,7 @@ class StorageLocalDiskProps(ManagedObject):
             "copybackPercentComplete": "copyback_percent_complete", 
             "deviceId": "device_id", 
             "dn": "dn", 
+            "emulatedBlockSize": "emulated_block_size", 
             "enclosureDeviceId": "enclosure_device_id", 
             "health": "health", 
             "interfaceType": "interface_type", 
@@ -197,6 +199,7 @@ class StorageLocalDiskProps(ManagedObject):
         self.copyback_operation_status = None
         self.copyback_percent_complete = None
         self.device_id = None
+        self.emulated_block_size = None
         self.enclosure_device_id = None
         self.health = None
         self.interface_type = None

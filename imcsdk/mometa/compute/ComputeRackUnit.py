@@ -52,7 +52,7 @@ class ComputeRackUnit(ManagedObject):
     naming_props = set(['serverId'])
 
     mo_meta = {
-        "classic": MoMeta("ComputeRackUnit", "computeRackUnit", "rack-unit-[server_id]", VersionMeta.Version151f, "InputOutput", 0x3ff, [], ["admin", "user"], ['topSystem'], ['adaptorUnit', 'biosUnit', 'computeBoard', 'equipmentFanModule', 'equipmentIndicatorLed', 'equipmentLocatorLed', 'equipmentPsu', 'equipmentPsuColdRedundancy', 'eventManagement', 'faultInst', 'lsbootDef', 'lsbootDevPrecision', 'mgmtController', 'moKvInvHolder', 'networkAdapterUnit', 'oneTimeBootDevice', 'oneTimePrecisionBootDevice', 'pciEquipSlot', 'powerBudget', 'powerMonitor', 'rackUnitPersonality', 'serverUtilization', 'solIf', 'sysdebugTechSupportExport', 'systemIOController', 'x86LiveDebug'], ["Get", "Set"]),
+        "classic": MoMeta("ComputeRackUnit", "computeRackUnit", "rack-unit-[server_id]", VersionMeta.Version151f, "InputOutput", 0x3ff, [], ["admin", "user"], ['topSystem'], ['adaptorUnit', 'biosUnit', 'computeBoard', 'equipmentFanModule', 'equipmentIndicatorLed', 'equipmentLocatorLed', 'equipmentPsu', 'equipmentPsuColdRedundancy', 'eventManagement', 'faultInst', 'lsbootDef', 'lsbootDevPrecision', 'mgmtController', 'moKvInvHolder', 'networkAdapterUnit', 'oneTimeBootDevice', 'oneTimePrecisionBootDevice', 'pciAdapterFruInventory', 'pciEquipSlot', 'powerBudget', 'powerMonitor', 'rackUnitPersonality', 'serverUtilization', 'solIf', 'sysdebugTechSupportExport', 'systemIOController', 'x86LiveDebug'], ["Get", "Set"]),
     }
 
 

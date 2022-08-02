@@ -36,12 +36,14 @@ class StorageControllerProps(ManagedObject):
             "controller_status": MoPropertyMeta("controller_status", "controllerStatus", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "critical_physical_drive_count": MoPropertyMeta("critical_physical_drive_count", "criticalPhysicalDriveCount", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "date_of_manufacture": MoPropertyMeta("date_of_manufacture", "dateOfManufacture", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
+            "default_strip_size": MoPropertyMeta("default_strip_size", "defaultStripSize", "string", VersionMeta.Version422a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "degraded_virtual_drive_count": MoPropertyMeta("degraded_virtual_drive_count", "degradedVirtualDriveCount", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []),
             "failed_physical_drive_count": MoPropertyMeta("failed_physical_drive_count", "failedPhysicalDriveCount", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "firmware_package_build": MoPropertyMeta("firmware_package_build", "firmwarePackageBuild", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "flash_present": MoPropertyMeta("flash_present", "flashPresent", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "health": MoPropertyMeta("health", "health", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
+            "max_virtual_drive_count": MoPropertyMeta("max_virtual_drive_count", "maxVirtualDriveCount", "string", VersionMeta.Version422a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "memory_correctable_errors": MoPropertyMeta("memory_correctable_errors", "memoryCorrectableErrors", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "memory_present": MoPropertyMeta("memory_present", "memoryPresent", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "memory_size": MoPropertyMeta("memory_size", "memorySize", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
@@ -66,6 +68,7 @@ class StorageControllerProps(ManagedObject):
             "serial": MoPropertyMeta("serial", "serial", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "serial_debugger_present": MoPropertyMeta("serial_debugger_present", "serialDebuggerPresent", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
+            "supported_strip_sizes": MoPropertyMeta("supported_strip_sizes", "supportedStripSizes", "string", VersionMeta.Version422a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "supports_raid0": MoPropertyMeta("supports_raid0", "supportsRaid0", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "supports_raid00": MoPropertyMeta("supports_raid00", "supportsRaid00", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "supports_raid1": MoPropertyMeta("supports_raid1", "supportsRaid1", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
@@ -164,12 +167,14 @@ class StorageControllerProps(ManagedObject):
             "controllerStatus": "controller_status", 
             "criticalPhysicalDriveCount": "critical_physical_drive_count", 
             "dateOfManufacture": "date_of_manufacture", 
+            "defaultStripSize": "default_strip_size", 
             "degradedVirtualDriveCount": "degraded_virtual_drive_count", 
             "dn": "dn", 
             "failedPhysicalDriveCount": "failed_physical_drive_count", 
             "firmwarePackageBuild": "firmware_package_build", 
             "flashPresent": "flash_present", 
             "health": "health", 
+            "maxVirtualDriveCount": "max_virtual_drive_count", 
             "memoryCorrectableErrors": "memory_correctable_errors", 
             "memoryPresent": "memory_present", 
             "memorySize": "memory_size", 
@@ -194,6 +199,7 @@ class StorageControllerProps(ManagedObject):
             "serial": "serial", 
             "serialDebuggerPresent": "serial_debugger_present", 
             "status": "status", 
+            "supportedStripSizes": "supported_strip_sizes", 
             "supportsRaid0": "supports_raid0", 
             "supportsRaid00": "supports_raid00", 
             "supportsRaid1": "supports_raid1", 
@@ -291,11 +297,13 @@ class StorageControllerProps(ManagedObject):
         self.controller_status = None
         self.critical_physical_drive_count = None
         self.date_of_manufacture = None
+        self.default_strip_size = None
         self.degraded_virtual_drive_count = None
         self.failed_physical_drive_count = None
         self.firmware_package_build = None
         self.flash_present = None
         self.health = None
+        self.max_virtual_drive_count = None
         self.memory_correctable_errors = None
         self.memory_present = None
         self.memory_size = None
@@ -319,6 +327,7 @@ class StorageControllerProps(ManagedObject):
         self.serial = None
         self.serial_debugger_present = None
         self.status = None
+        self.supported_strip_sizes = None
         self.supports_raid0 = None
         self.supports_raid00 = None
         self.supports_raid1 = None

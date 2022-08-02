@@ -38,6 +38,9 @@ class SystemBoardUnit(ManagedObject):
             "hdd_module3": MoPropertyMeta("hdd_module3", "hddModule3", "string", VersionMeta.Version312b, MoPropertyMeta.READ_ONLY, None, 0, 255, None, [], []),
             "hdd_module4": MoPropertyMeta("hdd_module4", "hddModule4", "string", VersionMeta.Version312b, MoPropertyMeta.READ_ONLY, None, 0, 255, None, [], []),
             "intrusion_sensor": MoPropertyMeta("intrusion_sensor", "intrusionSensor", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 255, None, [], []),
+            "mid_back_plane": MoPropertyMeta("mid_back_plane", "midBackPlane", "string", VersionMeta.Version422a, MoPropertyMeta.READ_ONLY, None, 0, 255, None, [], []),
+            "rear_back_plane_riser1": MoPropertyMeta("rear_back_plane_riser1", "rearBackPlaneRiser1", "string", VersionMeta.Version422a, MoPropertyMeta.READ_ONLY, None, 0, 255, None, [], []),
+            "rear_back_plane_riser3": MoPropertyMeta("rear_back_plane_riser3", "rearBackPlaneRiser3", "string", VersionMeta.Version422a, MoPropertyMeta.READ_ONLY, None, 0, 255, None, [], []),
             "rear_bp_sku_type": MoPropertyMeta("rear_bp_sku_type", "rearBpSkuType", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 255, None, [], []),
             "riser1": MoPropertyMeta("riser1", "riser1", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 255, None, [], []),
             "riser2": MoPropertyMeta("riser2", "riser2", "string", VersionMeta.Version311d, MoPropertyMeta.READ_ONLY, None, 0, 255, None, [], []),
@@ -69,6 +72,9 @@ class SystemBoardUnit(ManagedObject):
             "hddModule3": "hdd_module3", 
             "hddModule4": "hdd_module4", 
             "intrusionSensor": "intrusion_sensor", 
+            "midBackPlane": "mid_back_plane", 
+            "rearBackPlaneRiser1": "rear_back_plane_riser1", 
+            "rearBackPlaneRiser3": "rear_back_plane_riser3", 
             "rearBpSkuType": "rear_bp_sku_type", 
             "riser1": "riser1", 
             "riser2": "riser2", 
@@ -98,6 +104,9 @@ class SystemBoardUnit(ManagedObject):
         self.hdd_module3 = None
         self.hdd_module4 = None
         self.intrusion_sensor = None
+        self.mid_back_plane = None
+        self.rear_back_plane_riser1 = None
+        self.rear_back_plane_riser3 = None
         self.rear_bp_sku_type = None
         self.riser1 = None
         self.riser2 = None

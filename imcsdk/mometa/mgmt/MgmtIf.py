@@ -21,6 +21,8 @@ class MgmtIfConsts:
     NIC_MODE_SHARED_LOM = "shared_lom"
     NIC_MODE_SHARED_LOM_10G = "shared_lom_10g"
     NIC_MODE_SHARED_LOM_EXT = "shared_lom_ext"
+    NIC_MODE_SHARED_OCP = "shared_ocp"
+    NIC_MODE_SHARED_OCP_EXT = "shared_ocp_ext"
     NIC_MODE_SHIPPING = "shipping"
     NIC_REDUNDANCY_ACTIVE_ACTIVE = "active-active"
     NIC_REDUNDANCY_ACTIVE_STANDBY = "active-standby"
@@ -81,7 +83,7 @@ class MgmtIf(ManagedObject):
             "ext_ip": MoPropertyMeta("ext_ip", "extIp", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2000, 0, 255, r"""(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)""", [], []),
             "ext_mask": MoPropertyMeta("ext_mask", "extMask", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4000, 0, 255, r"""(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)""", [], []),
             "hostname": MoPropertyMeta("hostname", "hostname", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8000, 0, 63, r"""(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])""", [], []),
-            "nic_mode": MoPropertyMeta("nic_mode", "nicMode", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10000, None, None, None, ["cisco_card", "dedicated", "shared_lom", "shared_lom_10g", "shared_lom_ext", "shipping"], []),
+            "nic_mode": MoPropertyMeta("nic_mode", "nicMode", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10000, None, None, None, ["cisco_card", "dedicated", "shared_lom", "shared_lom_10g", "shared_lom_ext", "shared_ocp", "shared_ocp_ext", "shipping"], []),
             "nic_redundancy": MoPropertyMeta("nic_redundancy", "nicRedundancy", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x20000, None, None, None, ["active-active", "active-standby", "none"], []),
             "port_profile": MoPropertyMeta("port_profile", "portProfile", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x40000, None, None, r"""(([a-zA-Z0-9_]{1})|([a-zA-Z0-9_]{1}[a-zA-Z0-9_\-]{0,79}))""", [], []),
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x80000, 0, 255, None, [], []),

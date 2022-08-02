@@ -44,7 +44,7 @@ class AaaLdap(ManagedObject):
             "dns_search_forest": MoPropertyMeta("dns_search_forest", "dnsSearchForest", "string", VersionMeta.Version151x, MoPropertyMeta.READ_WRITE, 0x200, 0, 64, r"""(([a-zA-Z0-9])|([a-zA-Z0-9][a-zA-Z0-9\.\-]*[a-zA-Z0-9]){0,64})""", [], []),
             "domain": MoPropertyMeta("domain", "domain", "string", VersionMeta.Version151x, MoPropertyMeta.READ_WRITE, 0x400, 0, 254, None, [], []),
             "encryption": MoPropertyMeta("encryption", "encryption", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x800, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []),
-            "filter": MoPropertyMeta("filter", "filter", "string", VersionMeta.Version151x, MoPropertyMeta.READ_WRITE, 0x1000, 0, 20, r"""[a-zA-Z0-9][a-zA-Z0-9_#@$%&\-\^]*[a-zA-Z0-9\-]""", [], []),
+            "filter": MoPropertyMeta("filter", "filter", "string", VersionMeta.Version151x, MoPropertyMeta.READ_WRITE, 0x1000, 0, 19, r"""[a-zA-Z0-9][a-zA-Z0-9_#@$%&\-\^]*[a-zA-Z0-9\-]""", [], []),
             "group_attribute": MoPropertyMeta("group_attribute", "groupAttribute", "string", VersionMeta.Version151x, MoPropertyMeta.READ_WRITE, 0x2000, 0, 254, r"""[a-zA-Z0-9][a-zA-Z0-9_#@$%&\-\^]*[a-zA-Z0-9\-]""", [], []),
             "group_auth": MoPropertyMeta("group_auth", "groupAuth", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4000, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []),
             "group_nested_search": MoPropertyMeta("group_nested_search", "groupNestedSearch", "uint", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x8000, None, None, None, [], ["1-128"]),
