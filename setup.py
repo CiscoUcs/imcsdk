@@ -17,14 +17,13 @@ with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
 setup(
-    name='imcsdk',
+    name='imcsdk_ecoen66',
     version='0.9.12',
     description="python SDK for Cisco UCS IMC",
     long_description=readme + '\n\n' + history,
     long_description_content_type='text/x-rst',
-    author="Cisco Systems",
-    author_email='ucs-python@cisco.com',
-    url='https://github.com/ciscoucs/imcsdk',
+    author="Ed Coen",
+    url='https://github.com/ecoen66/imcsdk',
     packages=[
         'imcsdk',
     ],
