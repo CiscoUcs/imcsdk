@@ -8,6 +8,10 @@ History
 * Added support for CNR server
 * Added support for Python 3.11
 
+0.9.13 (2022-07-21)
+---------------------
+* Adds support for IMC version 4.2(2a)
+
 0.9.12 (2021-10-28)
 ---------------------
 * Bug fixes
