@@ -17,7 +17,7 @@ with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
 setup(
-    name='imcsdk_ecoen66',
+    name='imcsdk',
     version='0.9.12',
     description="python SDK for Cisco UCS IMC",
     long_description=readme + '\n\n' + history,
