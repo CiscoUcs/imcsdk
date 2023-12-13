@@ -22,8 +22,9 @@ setup(
     description="python SDK for Cisco UCS IMC",
     long_description=readme + '\n\n' + history,
     long_description_content_type='text/x-rst',
-    author="Ed Coen",
-    url='https://github.com/ecoen66/imcsdk',
+    author="Cisco Systems",
+    author_email='ucs-python@cisco.com',
+    url='https://github.com/ciscoucs/imcsdk',
     packages=[
         'imcsdk',
     ],
