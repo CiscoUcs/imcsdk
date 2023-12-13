@@ -1,6 +1,13 @@
 History
 =======
 
+0.9.14 (2023-12-13)
+---------------------
+* Added support for ancient IMCs
+* Added support for DNAC DN1 - DN3 servers
+* Added support for CNR server
+* Added support for Python 3.11
+
 0.9.12 (2021-10-28)
 ---------------------
 * Bug fixes
@@ -17,7 +24,7 @@ History
 
 0.9.9 (2020-04-22)
 ---------------------
-* Fixes an issue with version meta 
+* Fixes an issue with version meta
 
 0.9.8 (2020-04-22)
 ---------------------

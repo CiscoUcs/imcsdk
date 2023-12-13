@@ -76,7 +76,7 @@ def get_imc_obj(class_id, elem, mo_obj=None):
         return imcmethod.ExternalMethod(class_id)
     elif class_id in MO_CLASS_ID:
         mo_class = load_class(class_id)
-        mo_class_params = inspect.getargspec(mo_class.__init__)[0][2:]
+        mo_class_params = inspect.getfullargspec(mo_class.__init__)[0][2:]
         mo_class_param_dict = {}
         for param in mo_class_params:
             mo_class_param_dict[param] = None

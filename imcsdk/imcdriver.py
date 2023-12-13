@@ -21,8 +21,7 @@ from six.moves import http_client as httplib
 from six.moves.urllib import request as Request
 from six.moves.urllib.error import HTTPError
 from six.moves.urllib.request import HTTPRedirectHandler, HTTPSHandler
-
-
+#ssl._create_default_https_context = ssl._create_unverified_context
 log = logging.getLogger('imc')
 
 
@@ -75,7 +74,7 @@ class TLS1Connection(httplib.HTTPSConnection):
 
         # This is the only difference; default wrap_socket uses SSLv23
         self.sock = ssl.wrap_socket(sock, self.key_file, self.cert_file,
-                                    ssl_version=ssl.PROTOCOL_TLSv1)
+                                    cert_reqs=ssl.CERT_NONE, ssl_version=ssl.PROTOCOL_TLSv1_2)
 
 
 class TLSHandler(HTTPSHandler):
@@ -115,6 +114,7 @@ class TLSConnection(httplib.HTTPSConnection):
             # Since python 2.7.9, tls 1.1 and 1.2 are supported via
             # SSLContext
             ssl_context = ssl.SSLContext(ssl.PROTOCOL_SSLv23)
+            ssl_context.set_ciphers('DEFAULT')
             ssl_context.options |= ssl.OP_NO_SSLv2
             ssl_context.options |= ssl.OP_NO_SSLv3
             if self.key_file and self.cert_file:
@@ -124,7 +124,7 @@ class TLSConnection(httplib.HTTPSConnection):
         else:
             # This is the only difference; default wrap_socket uses SSLv23
             self.sock = ssl.wrap_socket(sock, self.key_file, self.cert_file,
-                                        ssl_version=ssl.PROTOCOL_TLSv1)
+                                        ssl_version=ssl.PROTOCOL_TLSv1_2)
 
 
 class ImcDriver(object):
