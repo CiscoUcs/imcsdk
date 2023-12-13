@@ -479,7 +479,7 @@ class ImcSession(object):
         return False
 
     def _validate_model(self, model):
-        valid_model_prefixes = ["UCSC", "UCS-E", "UCSS", "HX", "APIC-SERVER-"]
+        valid_model_prefixes = ["UCSC", "UCS-E", "UCSS", "HX", "APIC-SERVER-", "DN1", "DN2", "DN3"]
         valid_models = ["R460-4640810", "C260-BASE-2646"]
 
         if model in valid_models:
@@ -541,8 +541,11 @@ class ImcSession(object):
         if response.error_code != 0:
             raise ImcException(response.error_code,
                                response.error_descr)
-        firmware = response.out_config.child[0]
-        self._set_version(firmware.version)
+        if len(response.out_config.child) > 0:
+            firmware = response.out_config.child[0]
+            self._set_version(firmware.version)
+        else:
+            self._set_version("ancient")
 
     def _update_domain_name_and_ip(self):
         from .imcmethodfactory import config_resolve_dn
