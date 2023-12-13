@@ -1,5 +1,3 @@
-|image0| |Code Health| |Code Climate| |rtd|
-
 Python SDK for Cisco IMC
 ========================
 
@@ -48,12 +46,3 @@ Community:
    is open invitation to anyone to register
    `here <https://ucspython.herokuapp.com>`__
 
-.. |image0| image:: https://ucspython.herokuapp.com/badge.svg
-   :target: https://ucspython.herokuapp.com
-.. |Code Health| image:: https://landscape.io/github/CiscoUcs/imcsdk/master/landscape.svg?style=flat
-   :target: https://landscape.io/github/CiscoUcs/imcsdk/master
-.. |Code Climate| image:: https://codeclimate.com/github/CiscoUcs/imcsdk/badges/gpa.svg
-   :target: https://codeclimate.com/github/CiscoUcs/imcsdk
-.. |rtd| image:: https://readthedocs.org/projects/imcsdk/badge/?version=latest
-   :target: http://imcsdk.readthedocs.io/en/latest/?badge=latest
-   :alt: Documentation Status 
