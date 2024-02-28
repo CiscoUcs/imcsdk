@@ -48,21 +48,11 @@ class ImcVersion(object):
         self.__patch = None
         self.__spin = None
 
-        # Matches major.minor(mr.patch), example 4.3(2.240002), new style of release numbering
+        # Matches major.minor(mr.patch), example 4.3(2.4) as well as 4.3(2.240002)
         match_pattern = re.compile("^(?P<major>[1-9][0-9]{0,2})\."
                                    "(?P<minor>(([0-9])|([1-9][0-9]{0,1})))\("
                                    "(?P<mr>(([0-9])|([1-9][0-9]{0,2})))\."
-                                   "(?P<patch>(([0-9]){6}))\)$")
-        match_obj = re.match(match_pattern, version)
-        if self._set_versions(match_obj):
-            return
-
-
-        # Matches major.minor(mr.patch), example 4.3(2.4)
-        match_pattern = re.compile("^(?P<major>[1-9][0-9]{0,2})\."
-                                   "(?P<minor>(([0-9])|([1-9][0-9]{0,1})))\("
-                                   "(?P<mr>(([0-9])|([1-9][0-9]{0,2})))\."
-                                   "(?P<patch>(([0-9])|([1-9][0-9]{0,4})))\)$")
+                                   "(?P<patch>(([0-9])|([1-9][0-9]{0,5})))\)$")
         match_obj = re.match(match_pattern, version)
         if self._set_versions(match_obj):
             return
