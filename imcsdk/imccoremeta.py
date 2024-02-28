@@ -48,14 +48,16 @@ class ImcVersion(object):
         self.__patch = None
         self.__spin = None
 
+        # Matches major.minor(mr.patch), example 4.3(2.4) as well as 4.3(2.240002)
         match_pattern = re.compile("^(?P<major>[1-9][0-9]{0,2})\."
                                    "(?P<minor>(([0-9])|([1-9][0-9]{0,1})))\("
                                    "(?P<mr>(([0-9])|([1-9][0-9]{0,2})))\."
-                                   "(?P<patch>(([0-9])|([1-9][0-9]{0,4})))\)$")
+                                   "(?P<patch>(([0-9])|([1-9][0-9]{0,5})))\)$")
         match_obj = re.match(match_pattern, version)
         if self._set_versions(match_obj):
             return
 
+        # Matches major.minor(mrpatch), example 4.3(2a)
         match_pattern = re.compile("^(?P<major>[1-9][0-9]{0,2})\."
                                    "(?P<minor>(([0-9])|([1-9][0-9]{0,1})))\("
                                    "(?P<mr>(([0-9])|([1-9][0-9]{0,2})))"
@@ -64,6 +66,7 @@ class ImcVersion(object):
         if self._set_versions(match_obj):
             return
 
+        # Matches major.minor(mr), example 4.3(2)
         match_pattern = re.compile("^(?P<major>[1-9][0-9]{0,2})\."
                                    "(?P<minor>(([0-9])|([1-9][0-9]{0,1})))\("
                                    "(?P<mr>(([0-9])|([1-9][0-9]{0,2})))\)$")
@@ -124,7 +127,11 @@ class ImcVersion(object):
         # In this scenario assume the version to be highest patch z
         if self.__spin is not None and self.__patch is None:
             self.__patch = 'z'
-        elif self.__patch is not None and self.__mr is not None and self.__patch.isdigit() and self.__mr.isdigit():
+        elif (self.__patch is not None
+              and self.__mr is not None
+              and self.__patch.isdigit()
+              and self.__mr.isdigit()
+              and len(self.__patch) < 6):
             log.debug("Interim version encountered: %s. MR version has been bumped up." % self.version)
             self.__mr = str(int(self.__mr) + 1)
             self.__patch = 'a'
