@@ -131,7 +131,7 @@ class ImcVersion(object):
               and self.__mr is not None
               and self.__patch.isdigit()
               and self.__mr.isdigit()
-              and len(self.__patch) > 6):
+              and len(self.__patch) < 6):
             log.debug("Interim version encountered: %s. MR version has been bumped up." % self.version)
             self.__mr = str(int(self.__mr) + 1)
             self.__patch = 'a'
