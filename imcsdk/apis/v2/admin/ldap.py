@@ -17,14 +17,14 @@ This module implements apis to configure ldap
 """
 
 import logging
-from imcsdk.imcexception import ImcOperationError
-from imcsdk.imcexception import ImcOperationErrorDetail
-from imcsdk.imccoreutils import process_conf_mos_response
-from imcsdk.imccoreutils import ConfigConfMosConstants as ccmconst
-from imcsdk.imccoreutils import sanitize_message
-from imcsdk.apis.v2.utils import _get_mo, _is_valid_arg, _is_invalid_value,\
+from imcsdk_ecoen66.imcexception import ImcOperationError
+from imcsdk_ecoen66.imcexception import ImcOperationErrorDetail
+from imcsdk_ecoen66.imccoreutils import process_conf_mos_response
+from imcsdk_ecoen66.imccoreutils import ConfigConfMosConstants as ccmconst
+from imcsdk_ecoen66.imccoreutils import sanitize_message
+from imcsdk_ecoen66.apis.v2.utils import _get_mo, _is_valid_arg, _is_invalid_value,\
     _validate_api_prop
-from imcsdk.mometa.aaa.AaaLdapRoleGroup import AaaLdapRoleGroup
+from imcsdk_ecoen66.mometa.aaa.AaaLdapRoleGroup import AaaLdapRoleGroup
 
 log = logging.getLogger('imc')
 

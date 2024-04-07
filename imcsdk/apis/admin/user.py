@@ -17,7 +17,7 @@ This module implements apis to create/delete/modify local users
 """
 
 import logging
-from imcsdk.imcexception import ImcOperationError
+from imcsdk_ecoen66.imcexception import ImcOperationError
 
 log = logging.getLogger('imc')
 
@@ -83,7 +83,7 @@ def password_expiration_set(handle,
         AaaUserPasswordExpiration object
     """
 
-    from imcsdk.mometa.aaa.AaaUserPasswordExpiration import \
+    from imcsdk_ecoen66.mometa.aaa.AaaUserPasswordExpiration import \
         AaaUserPasswordExpiration
 
     mo = AaaUserPasswordExpiration(parent_mo_or_dn="sys/user-ext")
@@ -110,7 +110,7 @@ def password_expiration_exists(handle, **kwargs):
         (True, AaaUserPasswordExpiration) is policy exists, else (False, None)
 
     """
-    from imcsdk.mometa.aaa.AaaUserPasswordExpiration import \
+    from imcsdk_ecoen66.mometa.aaa.AaaUserPasswordExpiration import \
         AaaUserPasswordExpiration
 
     mo = AaaUserPasswordExpiration(parent_mo_or_dn="sys/user-ext")
@@ -164,7 +164,7 @@ def _get_local_user(handle, name):
 
 
 def _get_free_user_id(handle):
-    from imcsdk.mometa.aaa.AaaUser import AaaUserConsts
+    from imcsdk_ecoen66.mometa.aaa.AaaUser import AaaUserConsts
     users = _get_local_users(handle)
     for user in users:
         if user.account_status == AaaUserConsts.ACCOUNT_STATUS_INACTIVE and \
@@ -192,7 +192,7 @@ def local_user_create(handle, name, pwd, priv="read-only"):
         Exception when limit on the number of users has exceeded
     """
 
-    from imcsdk.mometa.aaa.AaaUser import AaaUser, AaaUserConsts
+    from imcsdk_ecoen66.mometa.aaa.AaaUser import AaaUser, AaaUserConsts
 
     # (1) local_user_exists(handle, name, pwd, priv) would be used by Ansible.
     # (2) local_user_exists(handle, name) would be used by user scripts.
@@ -278,7 +278,7 @@ def local_user_delete(handle, name):
         ImcOperationError if the user is not found
     """
 
-    from imcsdk.mometa.aaa.AaaUser import AaaUserConsts
+    from imcsdk_ecoen66.mometa.aaa.AaaUser import AaaUserConsts
 
     found_user = _get_local_user(handle, name=name)
     if found_user is None:

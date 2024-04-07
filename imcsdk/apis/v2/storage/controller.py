@@ -18,11 +18,11 @@ This module provides APIs for storage controller configuration.
 
 import logging
 
-import imcsdk.imccoreutils as imccoreutils
-from imcsdk.imcexception import ImcOperationError
-from imcsdk.mometa.self.SelfEncryptStorageController import \
+import imcsdk_ecoen66.imccoreutils as imccoreutils
+from imcsdk_ecoen66.imcexception import ImcOperationError
+from imcsdk_ecoen66.mometa.self.SelfEncryptStorageController import \
     SelfEncryptStorageController, SelfEncryptStorageControllerConsts
-from imcsdk.mometa.storage.StorageController import StorageControllerConsts
+from imcsdk_ecoen66.mometa.storage.StorageController import StorageControllerConsts
 
 log = logging.getLogger('imc')
 
@@ -171,7 +171,7 @@ def controller_encryption_enable(handle, controller_type, controller_slot,
                                      controller_slot='HBA'',
                                      key_id='ABCD12345', security_key='12345')
     """
-    from imcsdk.mometa.self.SelfEncryptStorageController import \
+    from imcsdk_ecoen66.mometa.self.SelfEncryptStorageController import \
         SelfEncryptStorageController, SelfEncryptStorageControllerConsts
 
     controller_mo = _get_controller(handle, controller_type, controller_slot,

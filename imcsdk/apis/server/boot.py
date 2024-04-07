@@ -17,8 +17,8 @@ This module provides APIs for bios related configuration like boot order
 """
 
 import logging
-import imcsdk.imccoreutils as imccoreutils
-from imcsdk.mometa.lsboot.LsbootDevPrecision import LsbootDevPrecision
+import imcsdk_ecoen66.imccoreutils as imccoreutils
+from imcsdk_ecoen66.mometa.lsboot.LsbootDevPrecision import LsbootDevPrecision
 
 log = logging.getLogger('imc')
 
@@ -143,7 +143,7 @@ def _get_device_type(policy_type, in_device):
 
 
 def _get_device(parent_dn, device_type, device_name):
-    from imcsdk.imccoreutils import load_class
+    from imcsdk_ecoen66.imccoreutils import load_class
 
     if _is_boot_order_precision(parent_dn):
         if device_type not in precision_device_dict:
@@ -277,7 +277,7 @@ def boot_order_precision_set(
 
 
 def boot_precision_configured_get(handle, server_id=1):
-    from imcsdk.imccoreutils import get_server_dn
+    from imcsdk_ecoen66.imccoreutils import get_server_dn
 
     configured_boot_order = []
 
@@ -297,8 +297,8 @@ def boot_precision_configured_get(handle, server_id=1):
 
 
 def boot_order_precision_exists(handle, **kwargs):
-    from imcsdk.imccoreutils import _set_server_dn
-    from imcsdk.apis.utils import _is_valid_arg
+    from imcsdk_ecoen66.imccoreutils import _set_server_dn
+    from imcsdk_ecoen66.apis.utils import _is_valid_arg
 
     server_dn = _set_server_dn(handle, kwargs)
     mos = handle.query_children(in_dn=server_dn,
@@ -351,7 +351,7 @@ def boot_order_policy_get(handle, dump=False, server_id=1):
         boot_order_policy_get(handle, dump=False)
     """
 
-    from imcsdk.mometa.lsboot.LsbootBootSecurity import LsbootBootSecurity
+    from imcsdk_ecoen66.mometa.lsboot.LsbootBootSecurity import LsbootBootSecurity
 
     server_dn = imccoreutils.get_server_dn(handle, server_id)
     parent_dn = server_dn + "/boot-policy"
@@ -432,8 +432,8 @@ def boot_order_policy_set(handle, reboot_on_update="no",
     # IMC expects the devices to be configured in sorted order
     boot_devices = sorted(boot_devices, key=lambda x: x["order"])
 
-    from imcsdk.mometa.lsboot.LsbootDef import LsbootDef
-    from imcsdk.mometa.lsboot.LsbootBootSecurity import LsbootBootSecurity
+    from imcsdk_ecoen66.mometa.lsboot.LsbootDef import LsbootDef
+    from imcsdk_ecoen66.mometa.lsboot.LsbootBootSecurity import LsbootBootSecurity
 
     server_dn = imccoreutils.get_server_dn(handle, server_id)
 

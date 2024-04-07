@@ -16,8 +16,8 @@
 This module implements all the kmip related config
 """
 
-from imcsdk.imcexception import ImcOperationError
-from imcsdk.imccoreutils import IMC_PLATFORM
+from imcsdk_ecoen66.imcexception import ImcOperationError
+from imcsdk_ecoen66.imccoreutils import IMC_PLATFORM
 
 
 def _get_server_dn(handle, server_id="1"):
@@ -137,7 +137,7 @@ def _get_free_kmip_server_id(handle, server_id=1):
 
 
 def kmip_server_add(handle, ip_address, port=None, timeout=None, server_id=1):
-    from imcsdk.mometa.kmip.KmipServer import KmipServer
+    from imcsdk_ecoen66.mometa.kmip.KmipServer import KmipServer
 
     args = {
         "ip_address": ip_address,
@@ -165,7 +165,7 @@ def kmip_server_exists(handle, ip_address, server_id=1, **kwargs):
 
 
 def kmip_server_remove(handle, ip_address, server_id=1):
-    from imcsdk.mometa.kmip.KmipServer import KmipServerConsts
+    from imcsdk_ecoen66.mometa.kmip.KmipServer import KmipServerConsts
 
     mo = _get_kmip_server(handle, ip_address, server_id)
     if mo is None:

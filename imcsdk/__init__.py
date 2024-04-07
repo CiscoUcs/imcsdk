@@ -40,7 +40,7 @@ def set_log_level(level=logging.DEBUG):
         None
 
     Example:
-        from imcsdk import set_log_level
+        from imcsdk_ecoen66 import set_log_level
         import logging
 
         set_log_level(logging.INFO)
@@ -55,6 +55,5 @@ log.addHandler(console)
 if os.path.exists('/tmp/imcsdk_debug'):
     enable_file_logging()
 
-__author__ = 'Cisco Systems'
-__email__ = 'ucs-python@cisco.com'
-__version__ = '0.9.14'
+__author__ = '@ecoen66'
+__version__ = '0.9.28'

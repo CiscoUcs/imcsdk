@@ -16,17 +16,17 @@
 This module implements the APIs for IP Blocking and IP Filtering
 """
 import logging
-from imcsdk.mometa.ip.IpBlocking import IpBlocking
-from imcsdk.mometa.ip.IpFiltering import IpFiltering, IpFilteringConsts
-from imcsdk.apis.utils import _get_mo, _is_valid_arg, _is_invalid_value
-from imcsdk.imccoreutils import get_server_dn, IMC_PLATFORM
-from imcsdk.imcexception import ImcOperationError
+from imcsdk_ecoen66.mometa.ip.IpBlocking import IpBlocking
+from imcsdk_ecoen66.mometa.ip.IpFiltering import IpFiltering, IpFilteringConsts
+from imcsdk_ecoen66.apis.utils import _get_mo, _is_valid_arg, _is_invalid_value
+from imcsdk_ecoen66.imccoreutils import get_server_dn, IMC_PLATFORM
+from imcsdk_ecoen66.imcexception import ImcOperationError
 
 log = logging.getLogger('imc')
 
 
 def _get_mgmt_if_dn(handle, id=1):
-    from imcsdk.mometa.mgmt.MgmtIf import MgmtIf
+    from imcsdk_ecoen66.mometa.mgmt.MgmtIf import MgmtIf
 
     if handle.platform == IMC_PLATFORM.TYPE_CLASSIC:
         parent_dn = get_server_dn(handle) + '/mgmt'

@@ -17,18 +17,17 @@ with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
 setup(
-    name='imcsdk',
-    version='0.9.14',
+    name='imcsdk_ecoen66',
+    version='0.9.29',
     description="python SDK for Cisco UCS IMC",
     long_description=readme + '\n\n' + history,
     long_description_content_type='text/x-rst',
-    author="Cisco Systems",
-    author_email='ucs-python@cisco.com',
-    url='https://github.com/ciscoucs/imcsdk',
+    author_email='ecoen@yahoo.com',
+    url='https://github.com/ecoen66/imcsdk',
     packages=[
-        'imcsdk',
+        'imcsdk_ecoen66',
     ],
-    package_dir={'imcsdk':
+    package_dir={'imcsdk_ecoen66':
                  'imcsdk'},
     include_package_data=True,
     install_requires=requirements,
@@ -50,6 +49,7 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.11',
+        'Programming Language :: Python :: 3.12',
     ],
     tests_require=test_requirements,
     test_suite='nose.collector',

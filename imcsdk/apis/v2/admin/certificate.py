@@ -314,7 +314,7 @@ def certificate_signing_request_generate(handle, name, org, locality, state,
     state="California", locality="San Francisco", self_signed=True)
     """
 
-    from imcsdk.mometa.generate.GenerateCertificateSigningRequest import \
+    from imcsdk_ecoen66.mometa.generate.GenerateCertificateSigningRequest import \
         GenerateCertificateSigningRequest
 
     mo = GenerateCertificateSigningRequest(parent_mo_or_dn="sys/cert-mgmt")
@@ -415,7 +415,7 @@ def certificate_upload(handle, username, password, server, file_name, protocol):
         None
     """
 
-    from imcsdk.mometa.upload.UploadCertificate import UploadCertificate, \
+    from imcsdk_ecoen66.mometa.upload.UploadCertificate import UploadCertificate, \
         UploadCertificateConsts
 
     mo = UploadCertificate(parent_mo_or_dn="sys/cert-mgmt")

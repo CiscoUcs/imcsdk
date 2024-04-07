@@ -18,10 +18,10 @@ This module provides APIs for bios related configuration like boot order
 
 import logging
 import json
-import imcsdk.imccoreutils as imccoreutils
-from imcsdk.imccoreutils import is_platform_m4, is_platform_m5
-from imcsdk.imcexception import ImcOperationError, ImcException
-from imcsdk.apis.v2.utils import _is_valid_arg
+import imcsdk_ecoen66.imccoreutils as imccoreutils
+from imcsdk_ecoen66.imccoreutils import is_platform_m4, is_platform_m5
+from imcsdk_ecoen66.imcexception import ImcOperationError, ImcException
+from imcsdk_ecoen66.apis.v2.utils import _is_valid_arg
 
 log = logging.getLogger('imc')
 
@@ -71,8 +71,8 @@ def bios_profile_backup_running(handle, server_id=1, **kwargs):
         bios_profile_backup_running(handle, server_id=1)
     """
 
-    from imcsdk.mometa.bios.BiosProfileManagement import BiosProfileManagement
-    from imcsdk.mometa.bios.BiosProfileManagement import \
+    from imcsdk_ecoen66.mometa.bios.BiosProfileManagement import BiosProfileManagement
+    from imcsdk_ecoen66.mometa.bios.BiosProfileManagement import \
         BiosProfileManagementConsts
 
     mo = BiosProfileManagement(parent_mo_or_dn=_get_bios_dn(handle, server_id))
@@ -109,7 +109,7 @@ def bios_profile_upload(handle, remote_server, remote_file, protocol='tftp',
                         user='abcd', pwd='pqrs')
     """
 
-    from imcsdk.mometa.upload.UploadBiosProfile import UploadBiosProfile
+    from imcsdk_ecoen66.mometa.upload.UploadBiosProfile import UploadBiosProfile
     bios_dn = _get_bios_dn(handle, server_id=server_id)
     mo = UploadBiosProfile(
             parent_mo_or_dn=bios_dn + '/profile-mgmt')
@@ -180,7 +180,7 @@ def bios_profile_activate(handle, name, backup_on_activate=True,
                               reboot_on_activate=False)
     """
 
-    from imcsdk.mometa.bios.BiosProfile import BiosProfileConsts
+    from imcsdk_ecoen66.mometa.bios.BiosProfile import BiosProfileConsts
     mo = _get_bios_profile(handle, name=name, server_id=server_id)
     params = {
         'backup_on_activate': ('no', 'yes')[backup_on_activate],
@@ -214,7 +214,7 @@ def bios_profile_delete(handle, name, server_id=1):
     Examples:
         bios_profile_delete(handle, name='simple', server_id=2)
     """
-    from imcsdk.mometa.bios.BiosProfile import BiosProfileConsts
+    from imcsdk_ecoen66.mometa.bios.BiosProfile import BiosProfileConsts
     mo = _get_bios_profile(handle, name=name, server_id=server_id)
     mo.admin_action = BiosProfileConsts.ADMIN_ACTION_DELETE
     handle.set_mo(mo)
@@ -347,9 +347,9 @@ def bios_tokens_set(handle, tokens={}, server_id=1):
                         server_id=2)
     """
 
-    from imcsdk.imccoreutils import load_class, sanitize_xml_parsing_error
-    from imcsdk.mometa.bios.BiosSettings import BiosSettings
-    from imcsdk.imccoremeta import ImcVersion
+    from imcsdk_ecoen66.imccoreutils import load_class, sanitize_xml_parsing_error
+    from imcsdk_ecoen66.mometa.bios.BiosSettings import BiosSettings
+    from imcsdk_ecoen66.imccoremeta import ImcVersion
 
     messages = []
     ret = {}
@@ -500,7 +500,7 @@ def bios_tokens_exist(handle, tokens={}, server_id=1):
                           server_id=2)
 """
 
-    from imcsdk.imcexception import ImcException
+    from imcsdk_ecoen66.imcexception import ImcException
     parent_dn = _get_bios_dn(handle, server_id) + "/bios-settings"
     mo_table = _get_bios_mo_table(handle, tokens, server_id)
 
@@ -535,7 +535,7 @@ def bios_tokens_exist(handle, tokens={}, server_id=1):
 
 
 def _get_bios_mo_table(handle, tokens={}, server_id=1):
-    from imcsdk.imcbiostables import bios_tokens_table
+    from imcsdk_ecoen66.imcbiostables import bios_tokens_table
 
     mo_table = {}
 

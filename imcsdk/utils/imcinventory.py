@@ -17,13 +17,13 @@ This module contains APIs to download inventory to a remote location
 
 import time
 import logging
-from imcsdk.mometa.mgmt.MgmtInventory import MgmtInventory
+from imcsdk_ecoen66.mometa.mgmt.MgmtInventory import MgmtInventory
 
 log = logging.getLogger('imc')
 
 
 def _get_parent_dn(handle):
-    from imcsdk.imccoreutils import IMC_PLATFORM
+    from imcsdk_ecoen66.imccoreutils import IMC_PLATFORM
     if handle.platform == IMC_PLATFORM.TYPE_CLASSIC:
         return 'sys'
     elif handle.platform == IMC_PLATFORM.TYPE_MODULAR:

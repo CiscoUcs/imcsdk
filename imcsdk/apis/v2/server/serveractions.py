@@ -17,17 +17,17 @@ This module implements all the server actions
 """
 
 import time
-from imcsdk.imcexception import ImcOperationError
-from imcsdk.mometa.compute.ComputeRackUnit import ComputeRackUnit,\
+from imcsdk_ecoen66.imcexception import ImcOperationError
+from imcsdk_ecoen66.mometa.compute.ComputeRackUnit import ComputeRackUnit,\
         ComputeRackUnitConsts
-from imcsdk.mometa.equipment.EquipmentChassis import EquipmentChassis
-from imcsdk.mometa.compute.ComputeServerNode import ComputeServerNodeConsts
-from imcsdk.mometa.equipment.EquipmentLocatorLed \
+from imcsdk_ecoen66.mometa.equipment.EquipmentChassis import EquipmentChassis
+from imcsdk_ecoen66.mometa.compute.ComputeServerNode import ComputeServerNodeConsts
+from imcsdk_ecoen66.mometa.equipment.EquipmentLocatorLed \
     import EquipmentLocatorLed, EquipmentLocatorLedConsts
-from imcsdk.mometa.equipment.EquipmentChassisLocatorLed \
+from imcsdk_ecoen66.mometa.equipment.EquipmentChassisLocatorLed \
     import EquipmentChassisLocatorLed, EquipmentChassisLocatorLedConsts
-from imcsdk.imccoreutils import get_server_dn, IMC_PLATFORM, _set_server_dn
-from imcsdk.apis.v2.utils import _is_valid_arg
+from imcsdk_ecoen66.imccoreutils import get_server_dn, IMC_PLATFORM, _set_server_dn
+from imcsdk_ecoen66.apis.v2.utils import _is_valid_arg
 
 
 def _set_power_state(handle, server_dn, state):

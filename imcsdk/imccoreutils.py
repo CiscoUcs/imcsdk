@@ -67,6 +67,7 @@ def get_imc_obj(class_id, elem, mo_obj=None):
     """
 
     import inspect
+    import sys
 
     from . import imcmethod
     from . import imcmo
@@ -964,7 +965,7 @@ def process_conf_mos_response(response, api='process_conf_mos_response',
                               raise_exception=True,
                               error_msg='Configuration Error',
                               callback=default_cb, *cbargs):
-    from imcsdk.imccoreutils import ConfigConfMosConstants as Const
+    from imcsdk_ecoen66.imccoreutils import ConfigConfMosConstants as Const
     messages = []
     if response[Const.RESPONSE_STATUS] != Const.RESPONSE_STATUS_SUCCESS:
         for dn, error in sorted(response[Const.RESPONSE_MOS][

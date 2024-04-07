@@ -611,7 +611,7 @@ class GenericMo(ImcBase):
             print type(obj)\n
 
         Outputs:
-            <class 'imcsdk.imcmo.GenericMo'>
+            <class 'imcsdk_ecoen66.imcmo.GenericMo'>
         """
 
         if elem is None:

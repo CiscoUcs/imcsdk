@@ -19,10 +19,10 @@ This module provides APIs for configuring PXE device under precison boot order
 import logging
 import re
 
-import imcsdk.imccoreutils as imccoreutils
-import imcsdk.imcgenutils as imcgenutils
-from imcsdk.imcexception import ImcOperationError, ImcOperationErrorDetail
-from imcsdk.mometa.lsboot.LsbootDevPrecision import LsbootDevPrecision
+import imcsdk_ecoen66.imccoreutils as imccoreutils
+import imcsdk_ecoen66.imcgenutils as imcgenutils
+from imcsdk_ecoen66.imcexception import ImcOperationError, ImcOperationErrorDetail
+from imcsdk_ecoen66.mometa.lsboot.LsbootDevPrecision import LsbootDevPrecision
 
 log = logging.getLogger('imc')
 
@@ -48,7 +48,7 @@ def _filter_pxe_device(boot_devices):
 
 
 def _remove_pxe_with_mac_for_m4(handle, pxe_devices):
-    from imcsdk.imccoreutils import is_platform_m4
+    from imcsdk_ecoen66.imccoreutils import is_platform_m4
 
     if not is_platform_m4(handle):
         return pxe_devices
@@ -151,8 +151,8 @@ def _parse_pxe_devices(devices):
             if port is None:
                 slot_port_name = slot
             else:
-                slot_port_name = slot + PXE_DELIMITER + str(port)    
-            
+                slot_port_name = slot + PXE_DELIMITER + str(port)
+
             if slot_port_name in slot_port_map:
                 continue
             slot_port_map[slot_port_name] = device
@@ -247,7 +247,7 @@ def _enable_pxe_boot_mac(handle, mac_address_map, ep_mac_map):
         if not match:
             raise ImcOperationError(PXE_API_ERROR,
                                         "Invalid Interface.")
-        
+
         slotEp = match.groupdict()['slot']
         if slotEp in ep_slot_map:
             continue
@@ -257,7 +257,7 @@ def _enable_pxe_boot_mac(handle, mac_address_map, ep_mac_map):
     # if slot is given in the pxe device check whether it is present on the end point
     # if slot is present on the end point check whether mac is present on the endpoint if present enable pxe on the respective vnic
     # if slot is present on the end point check whether mac is present on the endpoint if not present return an error
-    # 
+    #
     # if slot is not present on the end point consider it as non-vic adapter and enable pxe
     missing_mac_str = ""
     for mac in mac_address_map:
@@ -280,7 +280,7 @@ def _enable_pxe_boot_mac(handle, mac_address_map, ep_mac_map):
                     missing_mac_str += err_str
         if missing_mac_str:
             continue
-        
+
         vnic = ep_mac_map[mac]
         vnic.pxe_boot = "enabled"
         vnics_to_configure.append(vnic)

@@ -17,9 +17,9 @@ This module implements all the sd card config
 """
 import logging
 
-from imcsdk.imcexception import ImcOperationError, ImcOperationErrorDetail
-from imcsdk.imcconstants import NamingId
-from imcsdk.imccoreutils import process_conf_mos_response, sanitize_message
+from imcsdk_ecoen66.imcexception import ImcOperationError, ImcOperationErrorDetail
+from imcsdk_ecoen66.imcconstants import NamingId
+from imcsdk_ecoen66.imccoreutils import process_conf_mos_response, sanitize_message
 
 log = logging.getLogger('imc')
 
@@ -142,7 +142,7 @@ def flexflash_controller_set(handle, admin_action=None, auto_sync=None,
 def flexflash_controller_mode_mirror_set(handle, card_slot,
                                          partition_name="Hypervisor",
                                          auto_sync=None):
-    from imcsdk.mometa.storage.StorageFlexFlashController import \
+    from imcsdk_ecoen66.mometa.storage.StorageFlexFlashController import \
         StorageFlexFlashControllerConsts as const
 
     return flexflash_controller_set(
@@ -160,7 +160,7 @@ def flexflash_controller_mode_util_set(
         card_slot,
         partition_name="Hypervisor",
         non_util_partition_name="UserPartition"):
-    from imcsdk.mometa.storage.StorageFlexFlashController import \
+    from imcsdk_ecoen66.mometa.storage.StorageFlexFlashController import \
         StorageFlexFlashControllerConsts as const
 
     return flexflash_controller_set(
@@ -267,7 +267,7 @@ def _get_available_slots(pds):
 
 def _set_admin_action_flash_vd(handle, partition_id, admin_action,
                                controller_dn):
-    from imcsdk.mometa.storage.StorageFlexFlashVirtualDrive import \
+    from imcsdk_ecoen66.mometa.storage.StorageFlexFlashVirtualDrive import \
         StorageFlexFlashVirtualDrive
 
     mo = StorageFlexFlashVirtualDrive(parent_mo_or_dn=controller_dn,
@@ -277,7 +277,7 @@ def _set_admin_action_flash_vd(handle, partition_id, admin_action,
 
 
 def _apply_config_card_action_mirror(handle, mos_dict, vd):
-    from imcsdk.mometa.storage.StorageFlexFlashVirtualDrive import \
+    from imcsdk_ecoen66.mometa.storage.StorageFlexFlashVirtualDrive import \
         StorageFlexFlashVirtualDriveConsts
     # slot = _choose_slot(mos_dict['flexflash_pds'])
 
@@ -323,7 +323,7 @@ def _apply_config_card_action_mirror(handle, mos_dict, vd):
 
 
 def _apply_config_card_action_util(handle, mos_dict, vds):
-    from imcsdk.mometa.storage.StorageFlexFlashVirtualDrive import \
+    from imcsdk_ecoen66.mometa.storage.StorageFlexFlashVirtualDrive import \
         StorageFlexFlashVirtualDriveConsts
     # slot = _choose_slot(mos_dict['flexflash_pds'])
 

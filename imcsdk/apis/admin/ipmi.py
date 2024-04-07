@@ -15,8 +15,8 @@
 """
 This module implements all the communication services
 """
-from imcsdk.mometa.comm.CommIpmiLan import CommIpmiLan, CommIpmiLanConsts
-from imcsdk.imccoreutils import get_server_dn, IMC_PLATFORM
+from imcsdk_ecoen66.mometa.comm.CommIpmiLan import CommIpmiLan, CommIpmiLanConsts
+from imcsdk_ecoen66.imccoreutils import get_server_dn, IMC_PLATFORM
 
 
 def _get_comm_mo_dn(handle, server_id=1):
@@ -24,7 +24,7 @@ def _get_comm_mo_dn(handle, server_id=1):
     Internal method to get the IPMI mo's parent_dn based \
             on the type of platform
     """
-    from imcsdk.imcexception import ImcValidationException
+    from imcsdk_ecoen66.imcexception import ImcValidationException
 
     if handle.platform == IMC_PLATFORM.TYPE_CLASSIC:
         return("sys/svc-ext")

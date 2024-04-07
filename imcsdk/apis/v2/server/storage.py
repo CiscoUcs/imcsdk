@@ -19,14 +19,14 @@ disk groups.
 
 import math
 import logging
-import imcsdk.imccoreutils as imccoreutils
-from imcsdk.imcexception import ImcOperationError
-from imcsdk.mometa.storage.StorageVirtualDriveCreatorUsingUnusedPhysicalDrive \
+import imcsdk_ecoen66.imccoreutils as imccoreutils
+from imcsdk_ecoen66.imcexception import ImcOperationError
+from imcsdk_ecoen66.mometa.storage.StorageVirtualDriveCreatorUsingUnusedPhysicalDrive \
     import StorageVirtualDriveCreatorUsingUnusedPhysicalDrive as vd_creator
-from imcsdk.mometa.self.SelfEncryptStorageController import \
+from imcsdk_ecoen66.mometa.self.SelfEncryptStorageController import \
     SelfEncryptStorageController, SelfEncryptStorageControllerConsts
-from imcsdk.mometa.storage.StorageLocalDisk import StorageLocalDiskConsts
-from imcsdk.mometa.storage.StorageController import StorageControllerConsts
+from imcsdk_ecoen66.mometa.storage.StorageLocalDisk import StorageLocalDiskConsts
+from imcsdk_ecoen66.mometa.storage.StorageController import StorageControllerConsts
 
 log = logging.getLogger('imc')
 
@@ -364,7 +364,7 @@ def virtual_drive_encryption_enable(handle, controller_type,
     Examples:
         virtual_drive_encryption_enable(handle, 'SAS', 'HBA', 'test_vd')
     """
-    from imcsdk.mometa.storage.StorageVirtualDrive import \
+    from imcsdk_ecoen66.mometa.storage.StorageVirtualDrive import \
         StorageVirtualDriveConsts
     vd = vd_query_by_name(handle=handle,
                           controller_type=controller_type,
@@ -395,7 +395,7 @@ def virtual_drive_set_boot_drive(handle, controller_type, controller_slot, name,
     Examples:
         virtual_drive_set_boot_drive(handle, 'SAS', 'HBA', 'test_vd')
     """
-    from imcsdk.mometa.storage.StorageVirtualDrive import \
+    from imcsdk_ecoen66.mometa.storage.StorageVirtualDrive import \
         StorageVirtualDriveConsts
     vd = vd_query_by_name(handle=handle,
                           controller_type=controller_type,
@@ -523,7 +523,7 @@ def controller_encryption_enable(handle, controller_type,
                                  controller_slot='HBA'',
                                  key_id='ABCD12345', security_key='12345')
     """
-    from imcsdk.mometa.self.SelfEncryptStorageController import \
+    from imcsdk_ecoen66.mometa.self.SelfEncryptStorageController import \
         SelfEncryptStorageController, SelfEncryptStorageControllerConsts
 
     enabled, mo = controller_encryption_exists(handle,

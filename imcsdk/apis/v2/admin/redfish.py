@@ -17,7 +17,7 @@ This module implements apis to setup redfish support
 """
 
 import logging
-from imcsdk.mometa.comm.CommRedfish import CommRedfish, CommRedfishConsts
+from imcsdk_ecoen66.mometa.comm.CommRedfish import CommRedfish, CommRedfishConsts
 
 log = logging.getLogger('imc')
 

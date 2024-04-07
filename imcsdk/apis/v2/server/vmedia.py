@@ -21,12 +21,12 @@ import urlparse
 import re
 import logging
 
-from imcsdk.mometa.comm.CommVMedia import CommVMedia
-from imcsdk.mometa.comm.CommVMediaMap import CommVMediaMap
-from imcsdk.apis.v2.admin.ipmi import _get_comm_mo_dn
-from imcsdk.mometa.comm.CommVMediaMap import CommVMediaMapConsts
-from imcsdk.imccoreutils import process_conf_mos_response, sanitize_message
-from imcsdk.imcexception import ImcOperationError, ImcOperationErrorDetail
+from imcsdk_ecoen66.mometa.comm.CommVMedia import CommVMedia
+from imcsdk_ecoen66.mometa.comm.CommVMediaMap import CommVMediaMap
+from imcsdk_ecoen66.apis.v2.admin.ipmi import _get_comm_mo_dn
+from imcsdk_ecoen66.mometa.comm.CommVMediaMap import CommVMediaMapConsts
+from imcsdk_ecoen66.imccoreutils import process_conf_mos_response, sanitize_message
+from imcsdk_ecoen66.imcexception import ImcOperationError, ImcOperationErrorDetail
 
 log = logging.getLogger('imc')
 
@@ -554,7 +554,7 @@ def vmedia_mount_remove_all(handle, volumes= None, server_id=1):
     Examples:
         vmedia_mount_remove_all(handle,[a,b])
     """
-    from imcsdk.mometa.comm.CommSavedVMediaMap import CommSavedVMediaMapConsts
+    from imcsdk_ecoen66.mometa.comm.CommSavedVMediaMap import CommSavedVMediaMapConsts
 
     # Get all current virtually mapped and saved mappings
     virt_media_maps = handle.query_children(in_dn=_get_vmedia_mo_dn(handle,

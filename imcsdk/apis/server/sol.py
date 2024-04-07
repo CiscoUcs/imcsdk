@@ -16,9 +16,9 @@
 This module implements all the sol related config
 """
 
-from imcsdk.imcexception import ImcOperationError
-from imcsdk.imccoreutils import get_server_dn
-from imcsdk.mometa.sol.SolIf import SolIfConsts
+from imcsdk_ecoen66.imcexception import ImcOperationError
+from imcsdk_ecoen66.imccoreutils import get_server_dn
+from imcsdk_ecoen66.mometa.sol.SolIf import SolIfConsts
 
 
 def sol_get(handle, server_id=1, caller="sol_get"):

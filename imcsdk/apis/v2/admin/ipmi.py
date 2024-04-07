@@ -15,8 +15,8 @@
 """
 This module implements all the communication services
 """
-from imcsdk.mometa.comm.CommIpmiLan import CommIpmiLan
-from imcsdk.imccoreutils import get_server_dn, IMC_PLATFORM
+from imcsdk_ecoen66.mometa.comm.CommIpmiLan import CommIpmiLan
+from imcsdk_ecoen66.imccoreutils import get_server_dn, IMC_PLATFORM
 
 
 def _get_comm_mo_dn(handle, server_id=1):
@@ -24,7 +24,7 @@ def _get_comm_mo_dn(handle, server_id=1):
     Internal method to get the IPMI mo's parent_dn based \
             on the type of platform
     """
-    from imcsdk.imcexception import ImcValidationException
+    from imcsdk_ecoen66.imcexception import ImcValidationException
 
     if handle.platform == IMC_PLATFORM.TYPE_CLASSIC:
         return("sys/svc-ext")
@@ -56,13 +56,13 @@ def ipmi_enable(handle, priv=None, key=None, server_id=1):
             print("IPMI Enabled")
     """
 
-    from imcsdk.imcexception import ImcOperationError
+    from imcsdk_ecoen66.imcexception import ImcOperationError
     # Enable policy if only user mode is ipmi
     mos = handle.query_classid(class_id="AaaUserPolicy")
     userPolicy = mos[0]
 
     if userPolicy.user_mode != None and userPolicy.user_mode == 'non-ipmi':
-        raise ImcOperationError("Enable IPMI over LAN", 
+        raise ImcOperationError("Enable IPMI over LAN",
                                 "IPMI user mode is disabled on the endpoint.")
 
     # Verify key is a hex number

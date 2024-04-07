@@ -35,7 +35,7 @@ def faults_get(handle, parent_class_id=None, dump=False):
         faults_get(handle, dump=True)
     """
 
-    from imcsdk.imccoreutils import write_object
+    from imcsdk_ecoen66.imccoreutils import write_object
 
     if parent_class_id:
         fault_list = []

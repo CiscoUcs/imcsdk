@@ -13,7 +13,7 @@
 
 
 import logging
-from imcsdk.imcexception import ImcOperationError
+from imcsdk_ecoen66.imcexception import ImcOperationError
 
 log = logging.getLogger('imc')
 

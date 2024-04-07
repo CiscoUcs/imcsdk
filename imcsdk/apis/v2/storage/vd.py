@@ -20,12 +20,12 @@ disk groups.
 import math
 import logging
 
-from imcsdk.imcexception import ImcOperationError, ImcException, ImcOperationErrorDetail
-from imcsdk.apis.v2.storage.controller import _get_controller_dn
-from imcsdk.apis.v2.storage.pd import pd_get
-from imcsdk.mometa.storage.StorageVirtualDriveCreatorUsingUnusedPhysicalDrive \
+from imcsdk_ecoen66.imcexception import ImcOperationError, ImcException, ImcOperationErrorDetail
+from imcsdk_ecoen66.apis.v2.storage.controller import _get_controller_dn
+from imcsdk_ecoen66.apis.v2.storage.pd import pd_get
+from imcsdk_ecoen66.mometa.storage.StorageVirtualDriveCreatorUsingUnusedPhysicalDrive \
     import StorageVirtualDriveCreatorUsingUnusedPhysicalDrive as vd_creator
-from imcsdk.mometa.storage.StorageVirtualDriveCreatorUsingVirtualDriveGroup \
+from imcsdk_ecoen66.mometa.storage.StorageVirtualDriveCreatorUsingVirtualDriveGroup \
     import StorageVirtualDriveCreatorUsingVirtualDriveGroup as vd_carve
 
 log = logging.getLogger('imc')
@@ -468,7 +468,7 @@ def vd_delete(handle, controller_type, controller_slot, id, server_id=1,
         vd_delete(handle=imc, controller_type='SAS', controller_slot='MEZZ',
                   id=1)
     """
-    from imcsdk.apis.v2.storage.controller import controller_clear_boot_drive
+    from imcsdk_ecoen66.apis.v2.storage.controller import controller_clear_boot_drive
 
     mo = vd_get(handle=handle,
                 controller_type=controller_type,
@@ -499,7 +499,7 @@ def vd_delete_all(handle, controller_type, controller_slot, server_id=1,
         vd_delete_all(handle=imc, controller_type='SAS',
                       controller_slot='MEZZ', id=1)
     """
-    from imcsdk.apis.v2.storage.controller import controller_clear_boot_drive
+    from imcsdk_ecoen66.apis.v2.storage.controller import controller_clear_boot_drive
 
     controller_dn = _get_controller_dn(handle, controller_type,
                                        controller_slot, server_id)
@@ -568,7 +568,7 @@ def vd_boot_drive_enable(handle, controller_type, controller_slot, id,
     Examples:
         vd_set_boot_drive(handle, 'SAS', 'HBA', 'test_vd')
     """
-    from imcsdk.mometa.storage.StorageVirtualDrive import \
+    from imcsdk_ecoen66.mometa.storage.StorageVirtualDrive import \
         StorageVirtualDriveConsts
 
     action = StorageVirtualDriveConsts.ADMIN_ACTION_SET_BOOT_DRIVE
@@ -636,7 +636,7 @@ def vd_boot_drive_disable(handle, controller_type, controller_slot, id,
     Examples:
         vd_set_boot_drive(handle, 'SAS', 'HBA', 'test_vd')
     """
-    from imcsdk.apis.v2.storage.controller import controller_clear_boot_drive
+    from imcsdk_ecoen66.apis.v2.storage.controller import controller_clear_boot_drive
 
     vd = vd_get(handle, controller_type, controller_slot, id, server_id)
     if vd.boot_drive.lower() not in ('true', 'yes'):
@@ -669,7 +669,7 @@ def vd_encryption_enable(handle, controller_type, controller_slot, id,
     Examples:
         vd_encryption_enable(handle, 'SAS', 'HBA', 1)
     """
-    from imcsdk.mometa.storage.StorageVirtualDrive import \
+    from imcsdk_ecoen66.mometa.storage.StorageVirtualDrive import \
         StorageVirtualDriveConsts
 
     action = StorageVirtualDriveConsts.ADMIN_ACTION_ENABLE_SELF_ENCRYPT

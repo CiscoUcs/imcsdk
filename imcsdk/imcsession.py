@@ -545,7 +545,8 @@ class ImcSession(object):
             firmware = response.out_config.child[0]
             self._set_version(firmware.version)
         else:
-            self._set_version("ancient")
+            # Default to 1.5(1f) for ancient firmware
+            self._set_version("1.5(1f)")
 
     def _update_domain_name_and_ip(self):
         from .imcmethodfactory import config_resolve_dn
@@ -683,7 +684,7 @@ class ImcSession(object):
         Internal method to set the platform type
         Not to be exposed at the handle
         """
-        from imcsdk.imccoreutils import IMC_PLATFORM
+        from imcsdk_ecoen66.imccoreutils import IMC_PLATFORM
         modular_platform_prefixes = ["UCSC-C3X", "UCSS-S32"]
         if platform:
             self.__platform = platform

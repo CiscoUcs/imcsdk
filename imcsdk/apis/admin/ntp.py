@@ -16,8 +16,8 @@
 This module implements all the ntp related functionality
 """
 
-from imcsdk.imcexception import ImcOperationError
-from imcsdk.apis.utils import _get_mo, _is_invalid_value, _is_valid_arg
+from imcsdk_ecoen66.imcexception import ImcOperationError
+from imcsdk_ecoen66.apis.utils import _get_mo, _is_invalid_value, _is_valid_arg
 
 import logging
 

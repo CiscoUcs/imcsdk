@@ -17,8 +17,8 @@ This module provides apis to setup cisco vic adaptor properties \
 and create vnics and vhbas
 """
 
-from imcsdk.imccoreutils import get_server_dn
-from imcsdk.apis.utils import _get_mo
+from imcsdk_ecoen66.imccoreutils import get_server_dn
+from imcsdk_ecoen66.apis.utils import _get_mo
 
 
 def _get_adaptor_dn(handle, adaptor_slot, server_id=1):
@@ -104,7 +104,7 @@ def adaptor_properties_set(handle, adaptor_slot, lldp=None, fip_mode=None,
         AdaptorGenProfile object
     """
 
-    from imcsdk.mometa.adaptor.AdaptorGenProfile import AdaptorGenProfile
+    from imcsdk_ecoen66.mometa.adaptor.AdaptorGenProfile import AdaptorGenProfile
     adaptor = adaptor_unit_get(handle, adaptor_slot, server_id, **kwargs)
     mo = AdaptorGenProfile(parent_mo_or_dn=adaptor.dn)
     # VMFEX feature support is discontinued since 3.0(1c) release
@@ -135,7 +135,7 @@ def adaptor_reset(handle, adaptor_slot, server_id=1, **kwargs):
         AdaptorUnit object
 
     """
-    from imcsdk.mometa.adaptor.AdaptorUnit import AdaptorUnitConsts
+    from imcsdk_ecoen66.mometa.adaptor.AdaptorUnit import AdaptorUnitConsts
     mo = adaptor_unit_get(handle, adaptor_slot, server_id, **kwargs)
     mo.admin_state = AdaptorUnitConsts.ADMIN_STATE_ADAPTOR_RESET
     handle.set_mo(mo)
@@ -156,7 +156,7 @@ def vnic_get(handle, adaptor_slot, name, server_id=1, **kwargs):
         AdaptorHostEthIf object
     """
 
-    from imcsdk.mometa.adaptor.AdaptorHostEthIf import AdaptorHostEthIf
+    from imcsdk_ecoen66.mometa.adaptor.AdaptorHostEthIf import AdaptorHostEthIf
 
     mo = adaptor_unit_get(handle, adaptor_slot, server_id, **kwargs)
     vnic_mo = AdaptorHostEthIf(parent_mo_or_dn=mo.dn, name=name)
@@ -206,7 +206,7 @@ def vnic_create(handle,
         AdaptorHostEthIf object
     """
 
-    from imcsdk.mometa.adaptor.AdaptorHostEthIf import AdaptorHostEthIf
+    from imcsdk_ecoen66.mometa.adaptor.AdaptorHostEthIf import AdaptorHostEthIf
 
     mo = adaptor_unit_get(handle, adaptor_slot, server_id, **kwargs)
     vnic = AdaptorHostEthIf(parent_mo_or_dn=mo.dn, name=name)
@@ -260,7 +260,7 @@ def vhba_get(handle, adaptor_slot, name, server_id=1, **kwargs):
         AdaptorHostEthIf object
     """
 
-    from imcsdk.mometa.adaptor.AdaptorHostFcIf import AdaptorHostFcIf
+    from imcsdk_ecoen66.mometa.adaptor.AdaptorHostFcIf import AdaptorHostFcIf
 
     mo = adaptor_unit_get(handle, adaptor_slot, server_id, **kwargs)
     vhba_mo = AdaptorHostFcIf(parent_mo_or_dn=mo.dn, name=name)
@@ -299,7 +299,7 @@ def vhba_create(handle, adaptor_slot, name, channel_number, wwnn, wwpn,
                     san_boot=True, uplink_port=0, server_id=2)
     """
 
-    from imcsdk.mometa.adaptor.AdaptorHostFcIf import AdaptorHostFcIf
+    from imcsdk_ecoen66.mometa.adaptor.AdaptorHostFcIf import AdaptorHostFcIf
 
     mo = adaptor_unit_get(handle, adaptor_slot, server_id, **kwargs)
     vhba_mo = AdaptorHostFcIf(parent_mo_or_dn=mo.dn, name=name)

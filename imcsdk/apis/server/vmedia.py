@@ -20,10 +20,10 @@ import time
 import re
 import logging
 
-from imcsdk.mometa.comm.CommVMedia import CommVMedia
-from imcsdk.mometa.comm.CommVMediaMap import CommVMediaMap
-from imcsdk.imcexception import ImcOperationError
-from imcsdk.apis.admin.ipmi import _get_comm_mo_dn
+from imcsdk_ecoen66.mometa.comm.CommVMedia import CommVMedia
+from imcsdk_ecoen66.mometa.comm.CommVMediaMap import CommVMediaMap
+from imcsdk_ecoen66.imcexception import ImcOperationError
+from imcsdk_ecoen66.apis.admin.ipmi import _get_comm_mo_dn
 
 from six.moves import urllib
 

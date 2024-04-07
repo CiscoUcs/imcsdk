@@ -17,13 +17,13 @@ import datetime
 import logging
 import re
 
-from imcsdk.imccoreutils import IMC_PLATFORM, get_server_dn
-from imcsdk.imcexception import ImcOperationError
-from imcsdk.mometa.huu.HuuFirmwareUpdater import HuuFirmwareUpdater, \
+from imcsdk_ecoen66.imccoreutils import IMC_PLATFORM, get_server_dn
+from imcsdk_ecoen66.imcexception import ImcOperationError
+from imcsdk_ecoen66.mometa.huu.HuuFirmwareUpdater import HuuFirmwareUpdater, \
     HuuFirmwareUpdaterConsts
-from imcsdk.mometa.huu.HuuFirmwareUpdateStatus import HuuFirmwareUpdateStatus
-from imcsdk.mometa.top.TopSystem import TopSystem
-from imcsdk.mometa.huu.HuuController import HuuController
+from imcsdk_ecoen66.mometa.huu.HuuFirmwareUpdateStatus import HuuFirmwareUpdateStatus
+from imcsdk_ecoen66.mometa.top.TopSystem import TopSystem
+from imcsdk_ecoen66.mometa.huu.HuuController import HuuController
 
 log = logging.getLogger('imc')
 

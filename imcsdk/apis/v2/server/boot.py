@@ -19,11 +19,11 @@ This module provides APIs for bios related configuration like boot order
 import logging
 import re
 
-import imcsdk.imccoreutils as imccoreutils
-from imcsdk.imcexception import ImcOperationError, ImcOperationErrorDetail
-from imcsdk.mometa.lsboot.LsbootDevPrecision import LsbootDevPrecision
+import imcsdk_ecoen66.imccoreutils as imccoreutils
+from imcsdk_ecoen66.imcexception import ImcOperationError, ImcOperationErrorDetail
+from imcsdk_ecoen66.mometa.lsboot.LsbootDevPrecision import LsbootDevPrecision
 
-import imcsdk.apis.v2.server.pxe as pxe
+import imcsdk_ecoen66.apis.v2.server.pxe as pxe
 
 log = logging.getLogger('imc')
 
@@ -151,7 +151,7 @@ def _get_device_type(policy_type, in_device):
 
 
 def _get_device(parent_mo_or_dn, device_type, device_name):
-    from imcsdk.imccoreutils import load_class
+    from imcsdk_ecoen66.imccoreutils import load_class
 
     # precision boot order supports hierarchy in configConfMO
     # legacy boot order does not
@@ -209,7 +209,7 @@ def _add_boot_device(handle, parent_mo_or_dn, boot_device):
         None
     """
 
-    from imcsdk.imccoreutils import is_platform_m4
+    from imcsdk_ecoen66.imccoreutils import is_platform_m4
 
     log.debug("######### %s" % boot_device)
     device = _get_device(parent_mo_or_dn,
@@ -296,9 +296,9 @@ def boot_order_precision_set(
                             "name":"vmedia"},
                             {"order":'2', "device-type":"hdd", "name":"hdd"}]
     """
-    from imcsdk.mometa.lsboot.LsbootDef import LsbootDef
-    from imcsdk.mometa.lsboot.LsbootBootSecurity import LsbootBootSecurity
-    from imcsdk.imccoreutils import is_platform_m4
+    from imcsdk_ecoen66.mometa.lsboot.LsbootDef import LsbootDef
+    from imcsdk_ecoen66.mometa.lsboot.LsbootBootSecurity import LsbootBootSecurity
+    from imcsdk_ecoen66.imccoreutils import is_platform_m4
 
     boot_devices = sanitize_input_from_intersight(handle, boot_devices)
 
@@ -368,7 +368,7 @@ def boot_order_precision_set(
 
 
 def boot_precision_configured_get(handle, server_id=1):
-    from imcsdk.imccoreutils import get_server_dn
+    from imcsdk_ecoen66.imccoreutils import get_server_dn
 
     configured_boot_order = []
 
@@ -391,8 +391,8 @@ def boot_precision_configured_get(handle, server_id=1):
 
 
 def boot_order_precision_exists(handle, **kwargs):
-    from imcsdk.imccoreutils import _set_server_dn
-    from imcsdk.apis.v2.utils import _is_valid_arg
+    from imcsdk_ecoen66.imccoreutils import _set_server_dn
+    from imcsdk_ecoen66.apis.v2.utils import _is_valid_arg
 
     server_dn = _set_server_dn(handle, kwargs)
     mos = handle.query_children(in_dn=server_dn,
@@ -448,7 +448,7 @@ def boot_order_policy_get(handle, dump=False, server_id=1):
         boot_order_policy_get(handle, dump=False)
     """
 
-    from imcsdk.mometa.lsboot.LsbootBootSecurity import LsbootBootSecurity
+    from imcsdk_ecoen66.mometa.lsboot.LsbootBootSecurity import LsbootBootSecurity
 
     server_dn = imccoreutils.get_server_dn(handle, server_id)
     parent_dn = server_dn + "/boot-policy"
@@ -529,8 +529,8 @@ def boot_order_policy_set(handle, reboot_on_update="no",
     # IMC expects the devices to be configured in sorted order
     boot_devices = sorted(boot_devices, key=lambda x: int(x["order"]))
 
-    from imcsdk.mometa.lsboot.LsbootDef import LsbootDef
-    from imcsdk.mometa.lsboot.LsbootBootSecurity import LsbootBootSecurity
+    from imcsdk_ecoen66.mometa.lsboot.LsbootDef import LsbootDef
+    from imcsdk_ecoen66.mometa.lsboot.LsbootBootSecurity import LsbootBootSecurity
 
     server_dn = imccoreutils.get_server_dn(handle, server_id)
 
@@ -586,7 +586,7 @@ def sanitize_input_from_intersight(handle, boot_devices):
         We also convert from intersight device type to sdk device type
     """
     import copy
-    from imcsdk.apis.v2.versionconstraints.boot import fix_bootloader_options
+    from imcsdk_ecoen66.apis.v2.versionconstraints.boot import fix_bootloader_options
     log.debug("##### Input boot devices %s" % boot_devices)
     # if order is present, then it is not an input from intersight
     if len(boot_devices) > 0 and "order" in boot_devices[0]:

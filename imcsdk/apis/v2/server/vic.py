@@ -20,15 +20,15 @@ and create vnics and vhbas
 import logging
 import time
 
-from imcsdk.imccoreutils import get_server_dn
-from imcsdk.apis.v2.utils import _get_mo
-from imcsdk.imcexception import ImcOperationError, ImcOperationErrorDetail
-from imcsdk.imccoreutils import process_conf_mos_response, sanitize_message
-from imcsdk.mometa.adaptor.AdaptorUnit import AdaptorUnitConsts
-from imcsdk.mometa.adaptor.AdaptorExtEthIf import AdaptorExtEthIfConsts
-from imcsdk.apis.v2.server.serveractions import _wait_for_power_state, \
+from imcsdk_ecoen66.imccoreutils import get_server_dn
+from imcsdk_ecoen66.apis.v2.utils import _get_mo
+from imcsdk_ecoen66.imcexception import ImcOperationError, ImcOperationErrorDetail
+from imcsdk_ecoen66.imccoreutils import process_conf_mos_response, sanitize_message
+from imcsdk_ecoen66.mometa.adaptor.AdaptorUnit import AdaptorUnitConsts
+from imcsdk_ecoen66.mometa.adaptor.AdaptorExtEthIf import AdaptorExtEthIfConsts
+from imcsdk_ecoen66.apis.v2.server.serveractions import _wait_for_power_state, \
      server_power_cycle, server_power_state_get
-from imcsdk.apis.v2.server.adaptor import adaptor_properties_get
+from imcsdk_ecoen66.apis.v2.server.adaptor import adaptor_properties_get
 
 log = logging.getLogger('imc')
 
@@ -95,7 +95,7 @@ def adaptor_unit_get(handle, adaptor_slot, server_id=1, **kwargs):
     return _get_mo(handle, dn=_get_adaptor_dn(handle, adaptor_slot, server_id))
 
 def adaptor_get_all(handle):
-    from imcsdk.imcconstants import NamingId
+    from imcsdk_ecoen66.imcconstants import NamingId
     return handle.query_classid(class_id=NamingId.ADAPTOR_UNIT)
 
 
@@ -113,7 +113,7 @@ def adaptor_set_all(handle, adaptors=None, server_id=1, **kwargs):
                             ]
                         )
     """
-    from imcsdk.mometa.adaptor.AdaptorGenProfile import AdaptorGenProfile
+    from imcsdk_ecoen66.mometa.adaptor.AdaptorGenProfile import AdaptorGenProfile
 
     api = 'adaptor_set_all'
     api_error_msg = VicConst.ADAPTOR_ERROR_MSG
@@ -252,7 +252,7 @@ def _ext_ethif_set_all(handle, ext_ethifs, adaptor_mo):
                            fec_mode: "Off"}],
                            adaptor_mo=<adaptor obj>)
     """
-    from imcsdk.mometa.adaptor.AdaptorExtEthIf import AdaptorExtEthIf
+    from imcsdk_ecoen66.mometa.adaptor.AdaptorExtEthIf import AdaptorExtEthIf
 
     # configure ext_ethifs on adaptor
     mos = []
@@ -288,7 +288,7 @@ def _process_mo_prop_str(prop_str, api_error_msg):
     separates mo and prop name
     Return mo - AdaptorFcGenProfile, prop - PciLink
     '''
-    from imcsdk.imcgenutils import to_python_propname
+    from imcsdk_ecoen66.imcgenutils import to_python_propname
     props = prop_str.split(".")
     if len(props) != 2:
         raise ImcOperationError(
@@ -304,8 +304,8 @@ def _create_child_mo(parent_mo_or_dn, mo_name):
     '''
     creates child object of vnic and vhba
     '''
-    from imcsdk.imccoreutils import load_class
-    from imcsdk.imccoreutils import find_class_id_in_mo_meta_ignore_case
+    from imcsdk_ecoen66.imccoreutils import load_class
+    from imcsdk_ecoen66.imccoreutils import find_class_id_in_mo_meta_ignore_case
 
     class_id = find_class_id_in_mo_meta_ignore_case(mo_name)
     if class_id is None:
@@ -321,7 +321,7 @@ def _vic_get(handle, adaptor_slot, name, vic_type, server_id=1):
     """
     Internal method to get vnic and vhba
     """
-    from imcsdk.imccoreutils import load_class
+    from imcsdk_ecoen66.imccoreutils import load_class
 
     parent_mo = adaptor_unit_get(handle, adaptor_slot, server_id)
     if parent_mo is None:
@@ -424,8 +424,8 @@ def _validate_vics(vic_type, api_error_msg, vics, adaptor_ep_dict):
 
 def _create_vic_object(adaptor_mo, vic_name, vic_type, api_error_msg,
                        **kwargs):
-    from imcsdk.imccoreutils import load_class
-    from imcsdk.imccoreutils import find_class_id_in_mo_meta_ignore_case
+    from imcsdk_ecoen66.imccoreutils import load_class
+    from imcsdk_ecoen66.imccoreutils import find_class_id_in_mo_meta_ignore_case
 
     vic_mo_name = vic_map[vic_type]
     vic_mo_class = load_class(vic_mo_name)

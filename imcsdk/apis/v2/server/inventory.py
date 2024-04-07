@@ -16,7 +16,7 @@ This module provides apis to query server inventory
 """
 
 import json
-from imcsdk.imcexception import ImcOperationError
+from imcsdk_ecoen66.imcexception import ImcOperationError
 
 inventory_spec = {
     "cpu": {

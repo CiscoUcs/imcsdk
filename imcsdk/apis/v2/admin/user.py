@@ -17,8 +17,8 @@ This module implements apis to create/delete/modify local users
 """
 
 import logging
-from imcsdk.imcexception import ImcOperationError, ImcOperationErrorDetail
-from imcsdk.imccoreutils import process_conf_mos_response
+from imcsdk_ecoen66.imcexception import ImcOperationError, ImcOperationErrorDetail
+from imcsdk_ecoen66.imccoreutils import process_conf_mos_response
 
 log = logging.getLogger('imc')
 MAX_USERS = 15
@@ -107,7 +107,7 @@ def password_expire_enable(handle,
         AaaUserPasswordExpiration object
     """
 
-    from imcsdk.mometa.aaa.AaaUserPasswordExpiration import \
+    from imcsdk_ecoen66.mometa.aaa.AaaUserPasswordExpiration import \
         AaaUserPasswordExpiration
 
     mo = AaaUserPasswordExpiration(parent_mo_or_dn="sys/user-ext")
@@ -141,7 +141,7 @@ def password_expire_exists(handle, **kwargs):
         (True, AaaUserPasswordExpiration) is policy exists, else (False, None)
 
     """
-    from imcsdk.mometa.aaa.AaaUserPasswordExpiration import \
+    from imcsdk_ecoen66.mometa.aaa.AaaUserPasswordExpiration import \
         AaaUserPasswordExpiration
 
     mo = AaaUserPasswordExpiration(parent_mo_or_dn="sys/user-ext")
@@ -169,7 +169,7 @@ def password_expire_disable(handle):
         AaaUserPasswordExpiration object
     """
 
-    from imcsdk.mometa.aaa.AaaUserPasswordExpiration import \
+    from imcsdk_ecoen66.mometa.aaa.AaaUserPasswordExpiration import \
         AaaUserPasswordExpiration
 
     mo = AaaUserPasswordExpiration(parent_mo_or_dn="sys/user-ext")
@@ -194,7 +194,7 @@ def password_properties_exists(handle, **kwargs):
         (True, AaaUserPasswordExpiration) is policy exists, else (False, None)
 
     """
-    from imcsdk.mometa.aaa.AaaUserPasswordExpiration import \
+    from imcsdk_ecoen66.mometa.aaa.AaaUserPasswordExpiration import \
         AaaUserPasswordExpiration
 
     mo = AaaUserPasswordExpiration(parent_mo_or_dn="sys/user-ext")
@@ -232,7 +232,7 @@ def password_properties_set(handle,
         AaaUserPasswordExpiration object
     """
 
-    from imcsdk.mometa.aaa.AaaUserPasswordExpiration import \
+    from imcsdk_ecoen66.mometa.aaa.AaaUserPasswordExpiration import \
         AaaUserPasswordExpiration
 
     mo = AaaUserPasswordExpiration(parent_mo_or_dn="sys/user-ext")
@@ -290,7 +290,7 @@ def _get_local_user(handle, name):
 
 
 def _get_free_user_id(handle):
-    from imcsdk.mometa.aaa.AaaUser import AaaUserConsts
+    from imcsdk_ecoen66.mometa.aaa.AaaUser import AaaUserConsts
     users = _get_local_users(handle)
     for user in users:
         if user.account_status == AaaUserConsts.ACCOUNT_STATUS_INACTIVE and \
@@ -320,7 +320,7 @@ def local_user_create(handle, name, pwd, priv="read-only",
         Exception when limit on the number of users has exceeded
     """
 
-    from imcsdk.mometa.aaa.AaaUser import AaaUser
+    from imcsdk_ecoen66.mometa.aaa.AaaUser import AaaUser
 
     # (1) local_user_exists(handle, name, pwd, priv) would be used by Ansible.
     # (2) local_user_exists(handle, name) would be used by user scripts.
@@ -363,7 +363,7 @@ def _delete_users(handle, users=None, endpoint_users=None):
         ImcOperationError if the user is not found
     """
 
-    from imcsdk.mometa.aaa.AaaUser import AaaUserConsts
+    from imcsdk_ecoen66.mometa.aaa.AaaUser import AaaUserConsts
 
     api = "Update Local Users"
     user_mos = []
@@ -426,8 +426,8 @@ def local_users_update(handle, users=None):
     Note: This error msg format is being used in Cisco Intersight to map error messages to respective users. Please excercise caution before changing it in the API.
     """
 
-    from imcsdk.mometa.aaa.AaaUser import AaaUser
-    from imcsdk.imccoreutils import sanitize_message
+    from imcsdk_ecoen66.mometa.aaa.AaaUser import AaaUser
+    from imcsdk_ecoen66.imccoreutils import sanitize_message
     api = "Update Local Users"
     if users is None:
         users = []
@@ -590,7 +590,7 @@ def local_user_delete(handle, name):
         ImcOperationError if the user is not found
     """
 
-    from imcsdk.mometa.aaa.AaaUser import AaaUserConsts
+    from imcsdk_ecoen66.mometa.aaa.AaaUser import AaaUserConsts
 
     found_user = _get_local_user(handle, name=name)
     if found_user is None:
@@ -616,7 +616,7 @@ def local_user_delete_all(handle):
         ImcOperationError if the user is not found
     """
 
-    from imcsdk.mometa.aaa.AaaUser import AaaUserConsts
+    from imcsdk_ecoen66.mometa.aaa.AaaUser import AaaUserConsts
 
     users = _get_local_users(handle)
     for user in users:
@@ -655,7 +655,7 @@ def user_validate_inputs(**kwargs):
     """
     This method will check if the input parameters are valid
     """
-    from imcsdk.mometa.aaa.AaaUser import AaaUser
+    from imcsdk_ecoen66.mometa.aaa.AaaUser import AaaUser
     np = {}
     for prop in AaaUser.naming_props:
         if prop in kwargs:

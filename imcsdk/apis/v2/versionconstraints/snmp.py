@@ -72,8 +72,8 @@ def snmp_commit_explicitly_for_hp_and_above(handle, parent_dn):
     if we send multiple user or trap request earlier as no-commit.
     '''
 
-    from imcsdk.mometa.comm.CommSnmpConfigCommit import CommSnmpConfigCommit
-    from imcsdk.mometa.comm.CommSnmpConfigCommit import \
+    from imcsdk_ecoen66.mometa.comm.CommSnmpConfigCommit import CommSnmpConfigCommit
+    from imcsdk_ecoen66.mometa.comm.CommSnmpConfigCommit import \
         CommSnmpConfigCommitConsts
 
     # if version is less than HP then return

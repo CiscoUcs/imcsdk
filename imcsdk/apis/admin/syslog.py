@@ -15,7 +15,7 @@
 This module performs the operations related to system logs
 """
 
-from imcsdk.imcexception import ImcOperationError
+from imcsdk_ecoen66.imcexception import ImcOperationError
 
 SYSLOG_DN = 'sys/svc-ext/syslog'
 
@@ -152,7 +152,7 @@ def syslog_remote_enable(handle, hostname, name="primary", port="514",
         mo = syslog_remote_enable(handle, hostname="10.10.10.10",
                                   name="primary")
     """
-    from imcsdk.mometa.comm.CommSyslogClient import CommSyslogClientConsts
+    from imcsdk_ecoen66.mometa.comm.CommSyslogClient import CommSyslogClientConsts
 
     mo = syslog_remote_get(handle, name, caller="syslog_remote_enable")
 
@@ -184,7 +184,7 @@ def syslog_remote_disable(handle, name):
     Example:
         syslog_remote_disable(handle, name)
     """
-    from imcsdk.mometa.comm.CommSyslogClient import CommSyslogClientConsts
+    from imcsdk_ecoen66.mometa.comm.CommSyslogClient import CommSyslogClientConsts
 
     mo = syslog_remote_get(handle, name)
     mo.admin_state = CommSyslogClientConsts.ADMIN_STATE_DISABLED
@@ -207,7 +207,7 @@ def is_syslog_remote_enabled(handle, name, **kwargs):
     Example:
         is_syslog_remote_enabled(handle, name)
     """
-    from imcsdk.mometa.comm.CommSyslogClient import CommSyslogClientConsts
+    from imcsdk_ecoen66.mometa.comm.CommSyslogClient import CommSyslogClientConsts
 
     try:
         mo = syslog_remote_get(handle, name)
@@ -236,7 +236,7 @@ def is_syslog_remote_clear(handle, name):
     Example:
         issyslog_remote_clear(handle, name)
     """
-    from imcsdk.mometa.comm.CommSyslogClient import CommSyslogClientConsts
+    from imcsdk_ecoen66.mometa.comm.CommSyslogClient import CommSyslogClientConsts
 
     try:
         mo = syslog_remote_get(handle, name)
@@ -269,7 +269,7 @@ def syslog_remote_clear(handle, name):
     Example:
         syslog_remote_clear(handle, name)
     """
-    from imcsdk.mometa.comm.CommSyslogClient import CommSyslogClientConsts
+    from imcsdk_ecoen66.mometa.comm.CommSyslogClient import CommSyslogClientConsts
 
     mo = syslog_remote_get(handle, name)
     mo.admin_action = CommSyslogClientConsts.ADMIN_ACTION_CLEAR

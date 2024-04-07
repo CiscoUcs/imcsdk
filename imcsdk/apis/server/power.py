@@ -15,10 +15,10 @@
 This module implements apis for power policy and power cap related config
 """
 
-from imcsdk.imccoreutils import get_server_dn
-from imcsdk.imcexception import ImcOperationError
-from imcsdk.mometa.power.PowerBudget import PowerBudget, PowerBudgetConsts
-from imcsdk.mometa.standard.StandardPowerProfile import StandardPowerProfile
+from imcsdk_ecoen66.imccoreutils import get_server_dn
+from imcsdk_ecoen66.imcexception import ImcOperationError
+from imcsdk_ecoen66.mometa.power.PowerBudget import PowerBudget, PowerBudgetConsts
+from imcsdk_ecoen66.mometa.standard.StandardPowerProfile import StandardPowerProfile
 
 import logging
 log = logging.getLogger('imc')

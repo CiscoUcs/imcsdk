@@ -122,6 +122,7 @@ class TLSConnection(httplib.HTTPSConnection):
                                             certfile=self.cert_file)
             self.sock = ssl_context.wrap_socket(sock)
         else:
+            raise
             # This is the only difference; default wrap_socket uses SSLv23
             self.sock = ssl.wrap_socket(sock, self.key_file, self.cert_file,
                                         ssl_version=ssl.PROTOCOL_TLSv1_2)

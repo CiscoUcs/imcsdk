@@ -15,8 +15,8 @@
 This module performs the operations related to system logs
 """
 
-from imcsdk.imcexception import ImcOperationError
-from imcsdk.mometa.comm.CommSyslogClient import CommSyslogClientConsts
+from imcsdk_ecoen66.imcexception import ImcOperationError
+from imcsdk_ecoen66.mometa.comm.CommSyslogClient import CommSyslogClientConsts
 
 SYSLOG_DN = 'sys/svc-ext/syslog'
 

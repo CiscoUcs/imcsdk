@@ -18,13 +18,13 @@ import time
 import datetime
 import logging
 
-from imcsdk.imcexception import ImcOperationError, ImcOperationErrorDetail
-from imcsdk.imcexception import ImcException
-from imcsdk.apis.v2.utils import _get_mo
-from imcsdk.imccoreutils import process_conf_mos_response, sanitize_message
-from imcsdk.apis.v2.versionconstraints.snmp import \
+from imcsdk_ecoen66.imcexception import ImcOperationError, ImcOperationErrorDetail
+from imcsdk_ecoen66.imcexception import ImcException
+from imcsdk_ecoen66.apis.v2.utils import _get_mo
+from imcsdk_ecoen66.imccoreutils import process_conf_mos_response, sanitize_message
+from imcsdk_ecoen66.apis.v2.versionconstraints.snmp import \
     snmp_multiple_config_with_configcommit_for_hp_and_above
-from imcsdk.apis.v2.versionconstraints.snmp import \
+from imcsdk_ecoen66.apis.v2.versionconstraints.snmp import \
     snmp_commit_explicitly_for_hp_and_above
 
 
@@ -70,7 +70,7 @@ def _reset(handle, local_mo, community, trap_community, engine_id_key):
     '''
 
     import random
-    from imcsdk.mometa.comm.CommSnmp import CommSnmpConsts
+    from imcsdk_ecoen66.mometa.comm.CommSnmp import CommSnmpConsts
 
     input_params = locals()
     mo = _get_mo(handle, dn=SNMP_DN)
@@ -125,7 +125,7 @@ def snmp_enable(handle, port=None, community=None,
                     sys_contact="user contact",
                     sys_location="user location")
     """
-    from imcsdk.mometa.comm.CommSnmp import CommSnmpConsts
+    from imcsdk_ecoen66.mometa.comm.CommSnmp import CommSnmpConsts
 
     mo = _get_mo(handle, dn=SNMP_DN)
 
@@ -167,7 +167,7 @@ def snmp_disable(handle):
     Example:
         snmp_disable(handle)
     """
-    from imcsdk.mometa.comm.CommSnmp import CommSnmpConsts
+    from imcsdk_ecoen66.mometa.comm.CommSnmp import CommSnmpConsts
 
     mo = _get_mo(handle, dn=SNMP_DN)
     mo.admin_state = CommSnmpConsts.ADMIN_STATE_DISABLED
@@ -189,7 +189,7 @@ def snmp_exists(handle, **kwargs):
     Example:
         snmp_exists(handle)
     """
-    from imcsdk.mometa.comm.CommSnmp import CommSnmpConsts
+    from imcsdk_ecoen66.mometa.comm.CommSnmp import CommSnmpConsts
 
     mo = _get_mo(handle, dn=SNMP_DN)
     kwargs['admin_state'] = CommSnmpConsts.ADMIN_STATE_ENABLED
@@ -245,7 +245,7 @@ def snmp_trap_add(handle, hostname, version, notification_type,
                       version="v2c",
                       notification_type="informs")
     """
-    from imcsdk.mometa.comm.CommSnmpTrap import CommSnmpTrapConsts
+    from imcsdk_ecoen66.mometa.comm.CommSnmpTrap import CommSnmpTrapConsts
 
     if version == CommSnmpTrapConsts.VERSION_V2C and user:
         user = None
@@ -291,7 +291,7 @@ def snmp_trap_exists(handle, hostname, **kwargs):
                       user="username")
 
     """
-    from imcsdk.mometa.comm.CommSnmpTrap import CommSnmpTrapConsts
+    from imcsdk_ecoen66.mometa.comm.CommSnmpTrap import CommSnmpTrapConsts
 
     mo = snmp_trap_get(handle, hostname)
     if mo is None:
@@ -350,7 +350,7 @@ def snmp_trap_delete(handle, hostname):
     Example:
         snmp_trap_delete(handle, trap_id=6)
     """
-    from imcsdk.mometa.comm.CommSnmpTrap import CommSnmpTrapConsts
+    from imcsdk_ecoen66.mometa.comm.CommSnmpTrap import CommSnmpTrapConsts
 
     mo = snmp_trap_get(handle, hostname)
     mo.admin_state = CommSnmpTrapConsts.ADMIN_STATE_DISABLED
@@ -385,9 +385,9 @@ def snmp_trap_add_all(handle, traps=None):
                                  notification_type:"informs"}]
                          )
     """
-    from imcsdk.mometa.comm.CommSnmp import CommSnmpConsts
-    from imcsdk.mometa.comm.CommSnmpTrap import CommSnmpTrap
-    from imcsdk.mometa.comm.CommSnmpTrap import CommSnmpTrapConsts
+    from imcsdk_ecoen66.mometa.comm.CommSnmp import CommSnmpConsts
+    from imcsdk_ecoen66.mometa.comm.CommSnmpTrap import CommSnmpTrap
+    from imcsdk_ecoen66.mometa.comm.CommSnmpTrap import CommSnmpTrapConsts
 
     api = 'snmp_trap_add_all'
     parent_mo = _get_mo(handle, dn=SNMP_DN)
@@ -493,8 +493,8 @@ def snmp_trap_delete_all(handle):
     Example:
         snmp_trap_delete_all(handle)
     """
-    from imcsdk.mometa.comm.CommSnmpTrap import CommSnmpTrapConsts
-    from imcsdk.mometa.comm.CommSnmp import CommSnmpConsts
+    from imcsdk_ecoen66.mometa.comm.CommSnmpTrap import CommSnmpTrapConsts
+    from imcsdk_ecoen66.mometa.comm.CommSnmp import CommSnmpConsts
 
     api = 'snmp_trap_delete_all'
     parent_mo = _get_mo(handle, dn=SNMP_DN)
@@ -613,7 +613,7 @@ def snmp_user_add(handle, name, security_level,
             auth="MD5", privacy_pwd="xyz", privacy="DES")
     """
 
-    from imcsdk.mometa.comm.CommSnmpUser import CommSnmpUserConsts
+    from imcsdk_ecoen66.mometa.comm.CommSnmpUser import CommSnmpUserConsts
 
     auth_type = (
         CommSnmpUserConsts.SECURITY_LEVEL_AUTHNOPRIV,
@@ -678,7 +678,7 @@ def snmp_user_exists(handle, name, security_level, change_auth_pwd=False,
     Example:
         snmp_user_exists(handle, name="snmpuser")
     """
-    from imcsdk.mometa.comm.CommSnmpUser import CommSnmpUserConsts
+    from imcsdk_ecoen66.mometa.comm.CommSnmpUser import CommSnmpUserConsts
 
     mo = snmp_user_get(handle, name)
     if mo is None:
@@ -751,7 +751,7 @@ def snmp_user_delete(handle, name):
         snmp_user_delete(handle, name="snmpuser")
 
     """
-    from imcsdk.mometa.comm.CommSnmpUser import CommSnmpUserConsts
+    from imcsdk_ecoen66.mometa.comm.CommSnmpUser import CommSnmpUserConsts
 
     mo = snmp_user_get(handle, name=name)
     if mo is None:
@@ -812,9 +812,9 @@ def snmp_user_add_all(handle, users=None):
                             'auth': 'MD5', 'auth_pwd': 'password',
                             'privacy': 'AES', 'privacy_pwd': 'password'])
     """
-    from imcsdk.mometa.comm.CommSnmpUser import CommSnmpUser
-    from imcsdk.mometa.comm.CommSnmpUser import CommSnmpUserConsts
-    from imcsdk.mometa.comm.CommSnmp import CommSnmpConsts
+    from imcsdk_ecoen66.mometa.comm.CommSnmpUser import CommSnmpUser
+    from imcsdk_ecoen66.mometa.comm.CommSnmpUser import CommSnmpUserConsts
+    from imcsdk_ecoen66.mometa.comm.CommSnmp import CommSnmpConsts
 
     api = 'snmp_user_add_all'
     parent_mo = _get_mo(handle, dn=SNMP_DN)
@@ -913,8 +913,8 @@ def snmp_user_delete_all(handle):
         snmp_user_delete_all(handle)
 
     """
-    from imcsdk.mometa.comm.CommSnmpUser import CommSnmpUserConsts
-    from imcsdk.mometa.comm.CommSnmp import CommSnmpConsts
+    from imcsdk_ecoen66.mometa.comm.CommSnmpUser import CommSnmpUserConsts
+    from imcsdk_ecoen66.mometa.comm.CommSnmp import CommSnmpConsts
 
     api = 'snmp_user_delete_all'
     parent_mo = _get_mo(handle, dn=SNMP_DN)

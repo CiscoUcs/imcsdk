@@ -15,8 +15,8 @@
 This module implements all the ssh related functionality
 """
 
-from imcsdk.apis.v2.utils import _get_mo
-from imcsdk.imcexception import ImcOperationError
+from imcsdk_ecoen66.apis.v2.utils import _get_mo
+from imcsdk_ecoen66.imcexception import ImcOperationError
 
 import logging
 
@@ -43,7 +43,7 @@ def ssh_enable(handle, port=None, session_timeout=None, **kwargs):
        Example:
            ssh_enable(handle, 22, 120)
        """
-    from imcsdk.mometa.comm.CommSsh import CommSshConsts
+    from imcsdk_ecoen66.mometa.comm.CommSsh import CommSshConsts
 
     mo = _get_mo(handle, dn=_SSH_DN)
     params = {
@@ -73,7 +73,7 @@ def ssh_disable(handle):
     Example:
         ssh_disable(handle)
     """
-    from imcsdk.mometa.comm.CommSsh import CommSshConsts
+    from imcsdk_ecoen66.mometa.comm.CommSsh import CommSshConsts
 
     mo = _get_mo(handle, dn=_SSH_DN)
     mo.admin_state = CommSshConsts.ADMIN_STATE_DISABLED
@@ -95,7 +95,7 @@ def ssh_exists(handle, **kwargs):
     Example:
         ssh_exists(handle)
     """
-    from imcsdk.mometa.comm.CommSsh import CommSshConsts
+    from imcsdk_ecoen66.mometa.comm.CommSsh import CommSshConsts
 
     try:
         mo = _get_mo(handle, dn=_SSH_DN)

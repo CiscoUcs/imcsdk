@@ -15,8 +15,8 @@
 This module performs the operations related to snmp server, user and traps.
 """
 
-from imcsdk.imcexception import ImcOperationError
-from imcsdk.apis.utils import _get_mo
+from imcsdk_ecoen66.imcexception import ImcOperationError
+from imcsdk_ecoen66.apis.utils import _get_mo
 
 SNMP_DN = 'sys/svc-ext/snmp-svc'
 
@@ -50,7 +50,7 @@ def snmp_enable(handle, community=None,
                     sys_location="user location")
     """
 
-    from imcsdk.mometa.comm.CommSnmp import CommSnmpConsts
+    from imcsdk_ecoen66.mometa.comm.CommSnmp import CommSnmpConsts
 
     mo = _get_mo(handle, dn=SNMP_DN)
 
@@ -87,7 +87,7 @@ def snmp_disable(handle):
         snmp_disable(handle)
     """
 
-    from imcsdk.mometa.comm.CommSnmp import CommSnmpConsts
+    from imcsdk_ecoen66.mometa.comm.CommSnmp import CommSnmpConsts
 
     mo = _get_mo(handle, dn=SNMP_DN)
 
@@ -110,7 +110,7 @@ def is_snmp_enabled(handle, **kwargs):
     Example:
         is_snmp_enabled(handle)
     """
-    from imcsdk.mometa.comm.CommSnmp import CommSnmpConsts
+    from imcsdk_ecoen66.mometa.comm.CommSnmp import CommSnmpConsts
 
     mo = _get_mo(handle, dn=SNMP_DN)
 
@@ -123,7 +123,7 @@ def is_snmp_enabled(handle, **kwargs):
 
 def _get_free_snmp_trap_obj(handle):
 
-    from imcsdk.mometa.comm.CommSnmpTrap import CommSnmpTrapConsts
+    from imcsdk_ecoen66.mometa.comm.CommSnmpTrap import CommSnmpTrapConsts
     traps = handle.query_children(in_dn=SNMP_DN,
                                   class_id="CommSnmpTrap")
     for trap in traps:
@@ -162,7 +162,7 @@ def snmp_trap_add(handle, hostname, port, version="v3",
                       notification_type="informs")
     """
 
-    from imcsdk.mometa.comm.CommSnmpTrap import CommSnmpTrapConsts
+    from imcsdk_ecoen66.mometa.comm.CommSnmpTrap import CommSnmpTrapConsts
 
     mo = _get_free_snmp_trap_obj(handle)
 
@@ -267,7 +267,7 @@ def snmp_trap_remove(handle, trap_id):
         snmp_trap_remove(handle, trap_id=6)
     """
 
-    from imcsdk.mometa.comm.CommSnmpTrap import CommSnmpTrapConsts
+    from imcsdk_ecoen66.mometa.comm.CommSnmpTrap import CommSnmpTrapConsts
 
     dn = SNMP_DN + '/snmp-trap-' + str(trap_id)
     mo = _get_mo(handle, dn=dn)
@@ -315,7 +315,7 @@ def snmp_user_add(handle, name, security_level="authpriv",
             auth="MD5", privacy_pwd="xyz", privacy="DES")
     """
 
-    from imcsdk.mometa.comm.CommSnmpUser import CommSnmpUserConsts
+    from imcsdk_ecoen66.mometa.comm.CommSnmpUser import CommSnmpUserConsts
 
     mo = _get_free_snmp_user(handle)
 
@@ -439,7 +439,7 @@ def snmp_user_remove(handle, name):
 
     """
 
-    from imcsdk.mometa.comm.CommSnmpUser import CommSnmpUserConsts
+    from imcsdk_ecoen66.mometa.comm.CommSnmpUser import CommSnmpUserConsts
 
     found_user = snmp_user_get(handle, name=name)
     if found_user is None:
