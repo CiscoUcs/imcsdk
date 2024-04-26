@@ -17,6 +17,7 @@ This module contains the ManagedObject and GenericManagedObject Class.
 
 import logging
 import os
+import sys
 
 from . import imcgenutils
 from . import imccoreutils
@@ -658,7 +659,12 @@ class GenericMo(ImcBase):
         import inspect
 
         mo_class = imccoreutils.load_class(class_id)
-        mo_class_params = inspect.getargspec(mo_class.__init__)[0][2:]
+        if sys.version_info > (3, 0):
+            # Python 3 code in this block
+            mo_class_params = inspect.getfullargspec(mo_class.__init__)[0][2:]
+        else:
+            # Python 2 code in this block
+            mo_class_params = inspect.getargspec(mo_class.__init__)[0][2:]
         mo_class_param_dict = {}
         for param in mo_class_params:
             prop = imccoreutils.get_prop_meta(mo_class, param)
