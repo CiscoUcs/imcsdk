@@ -65,6 +65,7 @@ class StorageControllerProps(ManagedObject):
             "sas_address5": MoPropertyMeta("sas_address5", "sasAddress5", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "sas_address6": MoPropertyMeta("sas_address6", "sasAddress6", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "sas_address7": MoPropertyMeta("sas_address7", "sasAddress7", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
+            "sas_address_c": MoPropertyMeta("sas_address_c", "sasAddressC", "string", VersionMeta.Version433_240024, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "serial": MoPropertyMeta("serial", "serial", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "serial_debugger_present": MoPropertyMeta("serial_debugger_present", "serialDebuggerPresent", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
@@ -196,6 +197,7 @@ class StorageControllerProps(ManagedObject):
             "sasAddress5": "sas_address5", 
             "sasAddress6": "sas_address6", 
             "sasAddress7": "sas_address7", 
+            "sasAddressC": "sas_address_c", 
             "serial": "serial", 
             "serialDebuggerPresent": "serial_debugger_present", 
             "status": "status", 
@@ -324,6 +326,7 @@ class StorageControllerProps(ManagedObject):
         self.sas_address5 = None
         self.sas_address6 = None
         self.sas_address7 = None
+        self.sas_address_c = None
         self.serial = None
         self.serial_debugger_present = None
         self.status = None

@@ -100,6 +100,7 @@ class EquipmentFanModule(ManagedObject):
             "operability": MoPropertyMeta("operability", "operability", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["accessibility-problem", "auto-upgrade", "bios-post-timeout", "chassis-limit-exceeded", "config", "decomissioning", "degraded", "disabled", "discovery", "discovery-failed", "equipment-problem", "fabric-conn-problem", "fabric-unsupported-conn", "identify", "identity-unestablishable", "inoperable", "malformed-fru", "not-supported", "operable", "peer-comm-problem", "performance-problem", "post-failure", "power-problem", "powered-off", "removed", "thermal-problem", "unknown", "upgrade-problem", "voltage-problem"], []),
             "power": MoPropertyMeta("power", "power", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["degraded", "error", "not-supported", "off", "offduty", "offline", "on", "online", "power-save", "test", "unknown"], []),
             "presence": MoPropertyMeta("presence", "presence", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["empty", "equipped", "equipped-identity-unestablishable", "equipped-not-primary", "equipped-with-malformed-fru", "inaccessible", "mismatch", "mismatch-identity-unestablishable", "missing", "not-supported", "unauthorized", "unknown"], []),
+            "pwm": MoPropertyMeta("pwm", "pwm", "uint", VersionMeta.Version435_241008, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []),
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []),
             "serial": MoPropertyMeta("serial", "serial", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x8, None, None, r"""((removed|created|modified|deleted),){0,3}(removed|created|modified|deleted){0,1}""", [], []),
@@ -138,6 +139,7 @@ class EquipmentFanModule(ManagedObject):
             "operability": "operability", 
             "power": "power", 
             "presence": "presence", 
+            "pwm": "pwm", 
             "rn": "rn", 
             "serial": "serial", 
             "status": "status", 
@@ -175,6 +177,7 @@ class EquipmentFanModule(ManagedObject):
         self.operability = None
         self.power = None
         self.presence = None
+        self.pwm = None
         self.serial = None
         self.status = None
         self.thermal = None

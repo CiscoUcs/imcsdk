@@ -10,6 +10,7 @@ class BiosVfCRQosConsts:
     VP_CRQOS_MODE_0_DISABLE_THE_PMEM_QO_S_FEATURE = "Mode 0 - Disable the PMem QoS Feature"
     VP_CRQOS_MODE_1_M2_M_QO_S_ENABLE_AND_CHA_QO_S_DISABLE = "Mode 1 - M2M QoS Enable and CHA QoS Disable"
     VP_CRQOS_MODE_2_M2_M_QO_S_ENABLE_AND_CHA_QO_S_ENABLE = "Mode 2 - M2M QoS Enable and CHA QoS Enable"
+    VP_CRQOS_PROFILE_1 = "Profile 1"
     VP_CRQOS_RECIPE_1 = "Recipe 1"
     VP_CRQOS_RECIPE_2 = "Recipe 2"
     VP_CRQOS_RECIPE_3 = "Recipe 3"
@@ -34,7 +35,7 @@ class BiosVfCRQos(ManagedObject):
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version412a, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []),
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version412a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version412a, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
-            "vp_cr_qos": MoPropertyMeta("vp_cr_qos", "vpCRQos", "string", VersionMeta.Version412a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Mode 0 - Disable the PMem QoS Feature", "Mode 1 - M2M QoS Enable and CHA QoS Disable", "Mode 2 - M2M QoS Enable and CHA QoS Enable", "Recipe 1", "Recipe 2", "Recipe 3", "platform-default"], []),
+            "vp_cr_qos": MoPropertyMeta("vp_cr_qos", "vpCRQos", "string", VersionMeta.Version412a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Mode 0 - Disable the PMem QoS Feature", "Mode 1 - M2M QoS Enable and CHA QoS Disable", "Mode 2 - M2M QoS Enable and CHA QoS Enable", "Profile 1", "Recipe 1", "Recipe 2", "Recipe 3", "platform-default"], []),
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version412a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
         },
 

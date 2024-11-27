@@ -95,6 +95,7 @@ class MemoryUnitConsts:
     TYPE_DDR2_FB_DIMM = "DDR2 FB-DIMM"
     TYPE_DDR3 = "DDR3"
     TYPE_DDR4 = "DDR4"
+    TYPE_DDR5 = "DDR5"
     TYPE_DRAM = "DRAM"
     TYPE_EDRAM = "EDRAM"
     TYPE_EEPROM = "EEPROM"
@@ -102,6 +103,7 @@ class MemoryUnitConsts:
     TYPE_FBD2 = "FBD2"
     TYPE_FEPROM = "FEPROM"
     TYPE_FLASH = "FLASH"
+    TYPE_LOGICAL = "Logical"
     TYPE_LOGICAL_NON_VOLATILE_DEVICE = "Logical non-volatile device"
     TYPE_OTHER = "Other"
     TYPE_RAM = "RAM"
@@ -151,7 +153,7 @@ class MemoryUnit(ManagedObject):
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []),
             "serial": MoPropertyMeta("serial", "serial", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x8, None, None, r"""((removed|created|modified|deleted),){0,3}(removed|created|modified|deleted){0,1}""", [], []),
-            "type": MoPropertyMeta("type", "type", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["3DRAM", "CDRAM", "DDR", "DDR2", "DDR2 FB-DIMM", "DDR3", "DDR4", "DRAM", "EDRAM", "EEPROM", "EPROM", "FBD2", "FEPROM", "FLASH", "Logical non-volatile device", "Other", "RAM", "RDRAM", "ROM", "SDRAM", "SGRAM", "SRAM", "Unknown", "VRAM", "undiscovered"], []),
+            "type": MoPropertyMeta("type", "type", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["3DRAM", "CDRAM", "DDR", "DDR2", "DDR2 FB-DIMM", "DDR3", "DDR4", "DDR5", "DRAM", "EDRAM", "EEPROM", "EPROM", "FBD2", "FEPROM", "FLASH", "Logical", "Logical non-volatile device", "Other", "RAM", "RDRAM", "ROM", "SDRAM", "SGRAM", "SRAM", "Unknown", "VRAM", "undiscovered"], []),
             "vendor": MoPropertyMeta("vendor", "vendor", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "visibility": MoPropertyMeta("visibility", "visibility", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["no", "unknown", "yes"], []),
             "width": MoPropertyMeta("width", "width", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["unspecified"], ["0-4294967295"]),

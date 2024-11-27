@@ -7,7 +7,7 @@ method_meta = MethodMeta("ConfigResolveChildren", "configResolveChildren", "Vers
 prop_meta = {
     "class_id": MethodPropertyMeta("ClassId", "classId", "NamingClassId", "Version142b", "Input", False),
     "cookie": MethodPropertyMeta("Cookie", "cookie", "StringMin0Max47", "Version142b", "InputOutput", False),
-    "dn": MethodPropertyMeta("Dn", "dn", "ReferenceObject", "Version142b", "Output", False),
+    "dn": MethodPropertyMeta("Dn", "dn", "ReferenceObject", "Version142b", "InputOutput", False),
     "in_dn": MethodPropertyMeta("InDn", "inDn", "ReferenceObject", "Version142b", "Input", False),
     "in_hierarchical": MethodPropertyMeta("InHierarchical", "inHierarchical", "Xs:string", "Version142b", "Input", False),
     "out_configs": MethodPropertyMeta("OutConfigs", "outConfigs", "ConfigSet", "Version142b", "Output", True),

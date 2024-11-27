@@ -16,7 +16,7 @@ class AdaptorGenProfile(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("AdaptorGenProfile", "adaptorGenProfile", "general", VersionMeta.Version151f, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], ['adaptorUnit'], [], ["Get", "Set"]),
+        "classic": MoMeta("AdaptorGenProfile", "adaptorGenProfile", "general", VersionMeta.Version151f, "InputOutput", 0x3ff, [], ["admin", "read-only", "user"], ['adaptorUnit'], [], ["Get", "Set"]),
         "modular": MoMeta("AdaptorGenProfile", "adaptorGenProfile", "general", VersionMeta.Version2013e, "InputOutput", 0x1ff, [], ["admin", "read-only", "user"], ['adaptorUnit'], [], ["Get", "Set"])
     }
 
@@ -42,6 +42,7 @@ class AdaptorGenProfile(ManagedObject):
             "product_name": MoPropertyMeta("product_name", "productName", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "revision": MoPropertyMeta("revision", "revision", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []),
             "serial": MoPropertyMeta("serial", "serial", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
+            "transmit_enhanced_mode": MoPropertyMeta("transmit_enhanced_mode", "transmitEnhancedMode", "string", VersionMeta.Version434_240077, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []),
             "usnic_supported": MoPropertyMeta("usnic_supported", "usnicSupported", "string", VersionMeta.Version151x, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []),
             "vendor": MoPropertyMeta("vendor", "vendor", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "vendor_id": MoPropertyMeta("vendor_id", "vendorId", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []),
@@ -94,6 +95,7 @@ class AdaptorGenProfile(ManagedObject):
             "productName": "product_name", 
             "revision": "revision", 
             "serial": "serial", 
+            "transmitEnhancedMode": "transmit_enhanced_mode", 
             "usnicSupported": "usnic_supported", 
             "vendor": "vendor", 
             "vendorId": "vendor_id", 
@@ -143,6 +145,7 @@ class AdaptorGenProfile(ManagedObject):
         self.product_name = None
         self.revision = None
         self.serial = None
+        self.transmit_enhanced_mode = None
         self.usnic_supported = None
         self.vendor = None
         self.vendor_id = None

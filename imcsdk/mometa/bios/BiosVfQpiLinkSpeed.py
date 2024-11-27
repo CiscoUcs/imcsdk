@@ -8,6 +8,10 @@ from ...imcmeta import VersionMeta
 class BiosVfQpiLinkSpeedConsts:
     VP_QPI_LINK_SPEED_10_4_GT_S = "10.4GT/s"
     VP_QPI_LINK_SPEED_11_2_GT_S = "11.2GT/s"
+    VP_QPI_LINK_SPEED_12_8_GT_S = "12.8GT/s"
+    VP_QPI_LINK_SPEED_14_4_GT_S = "14.4GT/s"
+    VP_QPI_LINK_SPEED_16_0_GT_S = "16.0GT/s"
+    VP_QPI_LINK_SPEED_20_0_GT_S = "20.0GT/s"
     VP_QPI_LINK_SPEED_9_6_GT_S = "9.6GT/s"
     VP_QPI_LINK_SPEED_AUTO = "Auto"
     VP_QPI_LINK_SPEED_PLATFORM_DEFAULT = "platform-default"
@@ -31,7 +35,7 @@ class BiosVfQpiLinkSpeed(ManagedObject):
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version412a, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []),
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version412a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version412a, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
-            "vp_qpi_link_speed": MoPropertyMeta("vp_qpi_link_speed", "vpQpiLinkSpeed", "string", VersionMeta.Version412a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["10.4GT/s", "11.2GT/s", "9.6GT/s", "Auto", "platform-default"], []),
+            "vp_qpi_link_speed": MoPropertyMeta("vp_qpi_link_speed", "vpQpiLinkSpeed", "string", VersionMeta.Version412a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["10.4GT/s", "11.2GT/s", "12.8GT/s", "14.4GT/s", "16.0GT/s", "20.0GT/s", "9.6GT/s", "Auto", "platform-default"], []),
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version412a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
         },
 

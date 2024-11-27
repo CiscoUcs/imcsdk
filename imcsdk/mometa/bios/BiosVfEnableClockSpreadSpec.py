@@ -6,8 +6,12 @@ from ...imcmeta import VersionMeta
 
 
 class BiosVfEnableClockSpreadSpecConsts:
+    VP_ENABLE_CLOCK_SPREAD_SPEC_0_P3_PERCENT = "0P3_Percent"
+    VP_ENABLE_CLOCK_SPREAD_SPEC_0_P5_PERCENT = "0P5_Percent"
     VP_ENABLE_CLOCK_SPREAD_SPEC_DISABLED = "Disabled"
     VP_ENABLE_CLOCK_SPREAD_SPEC_ENABLED = "Enabled"
+    VP_ENABLE_CLOCK_SPREAD_SPEC_HARDWARE = "Hardware"
+    VP_ENABLE_CLOCK_SPREAD_SPEC_OFF = "Off"
     _VP_ENABLE_CLOCK_SPREAD_SPEC_DISABLED = "disabled"
     _VP_ENABLE_CLOCK_SPREAD_SPEC_ENABLED = "enabled"
     VP_ENABLE_CLOCK_SPREAD_SPEC_PLATFORM_DEFAULT = "platform-default"
@@ -31,7 +35,7 @@ class BiosVfEnableClockSpreadSpec(ManagedObject):
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version412a, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []),
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version412a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version412a, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
-            "vp_enable_clock_spread_spec": MoPropertyMeta("vp_enable_clock_spread_spec", "vpEnableClockSpreadSpec", "string", VersionMeta.Version412a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []),
+            "vp_enable_clock_spread_spec": MoPropertyMeta("vp_enable_clock_spread_spec", "vpEnableClockSpreadSpec", "string", VersionMeta.Version412a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["0P3_Percent", "0P5_Percent", "Disabled", "Enabled", "Hardware", "Off", "disabled", "enabled", "platform-default"], []),
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version412a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
         },
 

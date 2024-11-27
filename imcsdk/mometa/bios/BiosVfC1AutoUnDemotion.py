@@ -6,6 +6,7 @@ from ...imcmeta import VersionMeta
 
 
 class BiosVfC1AutoUnDemotionConsts:
+    VP_C1_AUTO_UN_DEMOTION_AUTO = "Auto"
     VP_C1_AUTO_UN_DEMOTION_DISABLED = "Disabled"
     VP_C1_AUTO_UN_DEMOTION_ENABLED = "Enabled"
     _VP_C1_AUTO_UN_DEMOTION_DISABLED = "disabled"
@@ -31,7 +32,7 @@ class BiosVfC1AutoUnDemotion(ManagedObject):
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version421b, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []),
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version421b, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version421b, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
-            "vp_c1_auto_un_demotion": MoPropertyMeta("vp_c1_auto_un_demotion", "vpC1AutoUnDemotion", "string", VersionMeta.Version421b, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []),
+            "vp_c1_auto_un_demotion": MoPropertyMeta("vp_c1_auto_un_demotion", "vpC1AutoUnDemotion", "string", VersionMeta.Version421b, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Auto", "Disabled", "Enabled", "disabled", "enabled", "platform-default"], []),
         },
 
     }

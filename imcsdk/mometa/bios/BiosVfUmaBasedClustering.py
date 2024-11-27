@@ -8,6 +8,7 @@ from ...imcmeta import VersionMeta
 class BiosVfUmaBasedClusteringConsts:
     VP_UMA_BASED_CLUSTERING_DISABLE_ALL2_ALL = "Disable (All2All)"
     VP_UMA_BASED_CLUSTERING_HEMISPHERE_2_CLUSTERS = "Hemisphere (2-clusters)"
+    VP_UMA_BASED_CLUSTERING_QUADRANT_4_CLUSTERS = "Quadrant (4-clusters)"
     VP_UMA_BASED_CLUSTERING_PLATFORM_DEFAULT = "platform-default"
 
 
@@ -29,7 +30,7 @@ class BiosVfUmaBasedClustering(ManagedObject):
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version421a, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []),
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version421a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version421a, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
-            "vp_uma_based_clustering": MoPropertyMeta("vp_uma_based_clustering", "vpUmaBasedClustering", "string", VersionMeta.Version421a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disable (All2All)", "Hemisphere (2-clusters)", "platform-default"], []),
+            "vp_uma_based_clustering": MoPropertyMeta("vp_uma_based_clustering", "vpUmaBasedClustering", "string", VersionMeta.Version421a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disable (All2All)", "Hemisphere (2-clusters)", "Quadrant (4-clusters)", "platform-default"], []),
         },
 
     }

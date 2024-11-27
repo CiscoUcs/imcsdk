@@ -7,6 +7,7 @@ from ...imcmeta import VersionMeta
 
 class StorageVirtualDriveConsts:
     ACCESS_POLICY_ = ""
+    ACCESS_POLICY_N_A = "N/A"
     ACCESS_POLICY_TRANSPORT_READY = "Transport Ready"
     ACCESS_POLICY_BLOCKED = "blocked"
     ACCESS_POLICY_DEFAULT = "default"
@@ -24,10 +25,12 @@ class StorageVirtualDriveConsts:
     ADMIN_ACTION_START_FULL_INITIALIZATION = "start-full-initialization"
     ADMIN_ACTION_UNHIDE_VIRTUAL_DRIVE = "unhide-virtual-drive"
     CACHE_POLICY_ = ""
+    CACHE_POLICY_N_A = "N/A"
     CACHE_POLICY_CACHED_IO = "cached-io"
     CACHE_POLICY_DEFAULT = "default"
     CACHE_POLICY_DIRECT_IO = "direct-io"
     DISK_CACHE_POLICY_ = ""
+    DISK_CACHE_POLICY_N_A = "N/A"
     DISK_CACHE_POLICY_DEFAULT = "default"
     DISK_CACHE_POLICY_DISABLED = "disabled"
     DISK_CACHE_POLICY_ENABLED = "enabled"
@@ -35,6 +38,9 @@ class StorageVirtualDriveConsts:
     HOTSPARE_ACTION_EXCLUDE_ALL = "exclude-all"
     HOTSPARE_ACTION_INCLUDE_ALL = "include-all"
     HOTSPARE_ACTION_INCLUDE_DHSP = "include-dhsp"
+    IO_PERF_MODE_ENABLED_N_A = "N/A"
+    IO_PERF_MODE_ENABLED_DISABLED = "disabled"
+    IO_PERF_MODE_ENABLED_ENABLED = "enabled"
     RAID_LEVEL_0 = "0"
     RAID_LEVEL_1 = "1"
     RAID_LEVEL_5 = "5"
@@ -71,7 +77,7 @@ class StorageVirtualDrive(ManagedObject):
     naming_props = set(['id'])
 
     mo_meta = {
-        "classic": MoMeta("StorageVirtualDrive", "storageVirtualDrive", "vd-[id]", VersionMeta.Version151f, "InputOutput", 0x7fff, [], ["admin", "read-only", "user"], ['storageController'], ['faultInst', 'storageLocalDiskUsage', 'storageOperation'], ["Get", "Remove", "Set"]),
+        "classic": MoMeta("StorageVirtualDrive", "storageVirtualDrive", "vd-[id]", VersionMeta.Version151f, "InputOutput", 0xffff, [], ["admin", "read-only", "user"], ['storageController'], ['faultInst', 'storageLocalDiskUsage', 'storageOperation'], ["Get", "Remove", "Set"]),
         "modular": MoMeta("StorageVirtualDrive", "storageVirtualDrive", "vd-[id]", VersionMeta.Version2013e, "InputOutput", 0x7fff, [], ["admin", "read-only", "user"], ['storageController'], ['faultInst', 'storageLocalDiskUsage', 'storageOperation'], ["Get", "Remove", "Set"])
     }
 
@@ -79,10 +85,10 @@ class StorageVirtualDrive(ManagedObject):
     prop_meta = {
 
         "classic": {
-            "access_policy": MoPropertyMeta("access_policy", "accessPolicy", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["", "Transport Ready", "blocked", "default", "hidden", "read-only", "read-write"], []),
+            "access_policy": MoPropertyMeta("access_policy", "accessPolicy", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["", "N/A", "Transport Ready", "blocked", "default", "hidden", "read-only", "read-write"], []),
             "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x4, 0, 510, None, ["cancel-initialization", "clear-transport-ready", "enable-self-encrypt", "hide-virtual-drive", "reconstruct-virtual-drive", "set-boot-drive", "set-transport-ready", "start-fast-initialization", "start-full-initialization", "unhide-virtual-drive"], []),
-            "cache_policy": MoPropertyMeta("cache_policy", "cachePolicy", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "cached-io", "default", "direct-io"], []),
-            "disk_cache_policy": MoPropertyMeta("disk_cache_policy", "diskCachePolicy", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "default", "disabled", "enabled", "unchanged"], []),
+            "cache_policy": MoPropertyMeta("cache_policy", "cachePolicy", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "N/A", "cached-io", "default", "direct-io"], []),
+            "disk_cache_policy": MoPropertyMeta("disk_cache_policy", "diskCachePolicy", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "N/A", "default", "disabled", "enabled", "unchanged"], []),
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x20, 0, 255, None, [], []),
             "hotspare_action": MoPropertyMeta("hotspare_action", "hotspareAction", "string", VersionMeta.Version2013e, MoPropertyMeta.READ_WRITE, 0x40, 0, 510, None, ["exclude-all", "include-all", "include-dhsp"], []),
             "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version151f, MoPropertyMeta.NAMING, 0x80, 0, 510, None, [], ["0-4294967295"]),
@@ -104,6 +110,7 @@ class StorageVirtualDrive(ManagedObject):
             "fde_capable": MoPropertyMeta("fde_capable", "fdeCapable", "string", VersionMeta.Version209c, MoPropertyMeta.READ_ONLY, None, None, None, None, ["No", "Yes", "false", "no", "true", "yes"], []),
             "fde_enabled": MoPropertyMeta("fde_enabled", "fdeEnabled", "string", VersionMeta.Version209c, MoPropertyMeta.READ_ONLY, None, None, None, None, ["No", "Yes", "false", "no", "true", "yes"], []),
             "health": MoPropertyMeta("health", "health", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
+            "io_perf_mode_enabled": MoPropertyMeta("io_perf_mode_enabled", "ioPerfModeEnabled", "string", VersionMeta.Version435_241008, MoPropertyMeta.READ_WRITE, 0x8000, None, None, None, ["N/A", "disabled", "enabled"], []),
             "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "size": MoPropertyMeta("size", "size", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "span_depth": MoPropertyMeta("span_depth", "spanDepth", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
@@ -179,6 +186,7 @@ class StorageVirtualDrive(ManagedObject):
             "fdeCapable": "fde_capable", 
             "fdeEnabled": "fde_enabled", 
             "health": "health", 
+            "ioPerfModeEnabled": "io_perf_mode_enabled", 
             "name": "name", 
             "size": "size", 
             "spanDepth": "span_depth", 
@@ -251,6 +259,7 @@ class StorageVirtualDrive(ManagedObject):
         self.fde_capable = None
         self.fde_enabled = None
         self.health = None
+        self.io_perf_mode_enabled = None
         self.name = None
         self.size = None
         self.span_depth = None

@@ -29,6 +29,7 @@ class StorageFlexMMCFile(ManagedObject):
         "classic": {
             "admin_action": MoPropertyMeta("admin_action", "adminAction", "string", VersionMeta.Version421a, MoPropertyMeta.READ_WRITE, 0x2, 0, 510, None, ["delete-file", "map-file", "unmap-file"], []),
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version421a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
+            "description": MoPropertyMeta("description", "description", "string", VersionMeta.Version433_240024, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []),
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version421a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
             "file_id": MoPropertyMeta("file_id", "fileId", "uint", VersionMeta.Version421a, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, [], []),
             "file_name": MoPropertyMeta("file_name", "fileName", "string", VersionMeta.Version421a, MoPropertyMeta.READ_ONLY, None, 1, 1024, None, [], []),
@@ -48,6 +49,7 @@ class StorageFlexMMCFile(ManagedObject):
         "classic": {
             "adminAction": "admin_action", 
             "childAction": "child_action", 
+            "description": "description", 
             "dn": "dn", 
             "fileId": "file_id", 
             "fileName": "file_name", 
@@ -67,6 +69,7 @@ class StorageFlexMMCFile(ManagedObject):
         self.file_id = file_id
         self.admin_action = None
         self.child_action = None
+        self.description = None
         self.file_name = None
         self.file_size = None
         self.file_type = None

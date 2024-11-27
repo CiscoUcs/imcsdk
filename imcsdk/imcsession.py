@@ -25,6 +25,11 @@ from .imcgenutils import Progress
 log = logging.getLogger('imc')
 
 
+class ImcSessionConstants:
+    # single quote is not properly handled in ElementTree. Hence special handling required.
+    SQ_HACK_STRING = "%%##sq##%%"
+
+
 class ImcSession(object):
     """
     ImcSession class is session interface for any Imc related communication.
@@ -276,6 +281,13 @@ class ImcSession(object):
 
         self.dump_xml_request(elem)
         xml_str = xc.to_xml_str(elem)
+        if isinstance(ImcSessionConstants.SQ_HACK_STRING, str):
+            hack_string = ImcSessionConstants.SQ_HACK_STRING.encode('utf-8')
+        else:
+            hack_string = ImcSessionConstants.SQ_HACK_STRING
+        if hack_string in xml_str:
+            xml_str = xml_str.replace(bytes(ImcSessionConstants.SQ_HACK_STRING, 'utf-8'), b'&apos;')
+            log.debug("QUERY after SQ_HACK_REPLACE:" + str(xml_str))
 
         response_str = self.post_xml(xml_str, timeout=timeout)
         self.dump_xml_response(response_str)
@@ -479,7 +491,7 @@ class ImcSession(object):
         return False
 
     def _validate_model(self, model):
-        valid_model_prefixes = ["UCSC", "UCS-E", "UCSS", "HX", "APIC-SERVER-", "DN1", "DN2", "DN3"]
+        valid_model_prefixes = ["UCSC", "UCS-E", "UCSS", "HX", "APIC-SERVER-", "DN1", "DN2", "DN3", "ULTM"]
         valid_models = ["R460-4640810", "C260-BASE-2646"]
 
         if model in valid_models:

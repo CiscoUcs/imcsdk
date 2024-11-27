@@ -248,16 +248,22 @@ class GenerateCertificateSigningRequestConsts:
     COUNTRY_CODE_ZAIRE = "Zaire"
     COUNTRY_CODE_ZAMBIA = "Zambia"
     COUNTRY_CODE_ZIMBABWE = "Zimbabwe"
+    KEY_BIT_LENGTH_1024 = "1024"
+    KEY_BIT_LENGTH_2048 = "2048"
+    KEY_BIT_LENGTH_4096 = "4096"
+    KEY_CURVE_ID_P256 = "p256"
+    KEY_CURVE_ID_P384 = "p384"
+    KEY_CURVE_ID_P521 = "p521"
     PROTOCOL_FTP = "ftp"
     PROTOCOL_HTTP = "http"
     PROTOCOL_NONE = "none"
     PROTOCOL_SCP = "scp"
     PROTOCOL_SFTP = "sftp"
     PROTOCOL_TFTP = "tftp"
-    SELF_SIGNED_NO = "No"
-    SELF_SIGNED_YES = "Yes"
-    _SELF_SIGNED_NO = "no"
-    _SELF_SIGNED_YES = "yes"
+    SELF_SIGNED_NO = "no"
+    SELF_SIGNED_YES = "yes"
+    SIGNATURE_ALGORITHM_ECDSA = "ecdsa"
+    SIGNATURE_ALGORITHM_RSA = "rsa"
     SIGNATURE_ALGORITHM_SHA1 = "sha1"
     SIGNATURE_ALGORITHM_SHA256 = "sha256"
     SIGNATURE_ALGORITHM_SHA384 = "sha384"
@@ -367,7 +373,7 @@ class GenerateCertificateSigningRequest(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("GenerateCertificateSigningRequest", "generateCertificateSigningRequest", "gen-csr-req", VersionMeta.Version209c, "InputOutput", 0x1ffffffffff, [], ["admin", "read-only", "user"], ['certificateManagement'], [], [None]),
+        "classic": MoMeta("GenerateCertificateSigningRequest", "generateCertificateSigningRequest", "gen-csr-req", VersionMeta.Version209c, "InputOutput", 0x7ffffffffff, [], ["admin", "read-only", "user"], ['certificateManagement'], [], [None]),
         "modular": MoMeta("GenerateCertificateSigningRequest", "generateCertificateSigningRequest", "gen-csr-req", VersionMeta.Version2013e, "InputOutput", 0x1ffffffffff, [], ["admin", "read-only", "user"], ['certificateManagement'], [], [None])
     }
 
@@ -389,8 +395,8 @@ class GenerateCertificateSigningRequest(ManagedObject):
             "remote_file": MoPropertyMeta("remote_file", "remoteFile", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x1000, None, None, r"""[^\(\)~`'\?\\"";<>\|&\*\^$%]{1,255}""", [], []),
             "remote_server": MoPropertyMeta("remote_server", "remoteServer", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x2000, 0, 255, r"""(([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:) |((([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6})|(([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?)+)|([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]))""", [], []),
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x4000, 0, 255, None, [], []),
-            "self_signed": MoPropertyMeta("self_signed", "selfSigned", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x8000, None, None, None, ["No", "Yes", "no", "yes"], []),
-            "signature_algorithm": MoPropertyMeta("signature_algorithm", "signatureAlgorithm", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x10000, 0, 510, None, ["sha1", "sha256", "sha384", "sha512"], []),
+            "self_signed": MoPropertyMeta("self_signed", "selfSigned", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x8000, None, None, None, ["No", "Yes", "false", "no", "true", "yes"], []),
+            "signature_algorithm": MoPropertyMeta("signature_algorithm", "signatureAlgorithm", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x10000, 0, 510, None, ["ecdsa", "rsa", "sha1", "sha256", "sha384", "sha512"], []),
             "state": MoPropertyMeta("state", "state", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x20000, 1, 128, r"""[^""#]{1,128}""", [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x40000, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
             "string_mask": MoPropertyMeta("string_mask", "stringMask", "string", VersionMeta.Version401a, MoPropertyMeta.READ_WRITE, 0x80000, 0, 8, None, ["default", "nombstr", "pkix", "utf8only"], []),
@@ -417,6 +423,8 @@ class GenerateCertificateSigningRequest(ManagedObject):
             "user": MoPropertyMeta("user", "user", "string", VersionMeta.Version209c, MoPropertyMeta.READ_WRITE, 0x10000000000, 0, 255, None, [], []),
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version209c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
             "csr_status": MoPropertyMeta("csr_status", "csrStatus", "string", VersionMeta.Version209c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
+            "key_bit_length": MoPropertyMeta("key_bit_length", "keyBitLength", "string", VersionMeta.Version431a, MoPropertyMeta.READ_WRITE, 0x20000000000, 0, 8, None, ["1024", "2048", "4096"], []),
+            "key_curve_id": MoPropertyMeta("key_curve_id", "keyCurveId", "string", VersionMeta.Version431a, MoPropertyMeta.READ_WRITE, 0x40000000000, 0, 8, None, ["p256", "p384", "p521"], []),
         },
 
         "modular": {
@@ -511,6 +519,8 @@ class GenerateCertificateSigningRequest(ManagedObject):
             "user": "user", 
             "childAction": "child_action", 
             "csrStatus": "csr_status", 
+            "keyBitLength": "key_bit_length", 
+            "keyCurveId": "key_curve_id", 
         },
 
         "modular": {
@@ -602,6 +612,8 @@ class GenerateCertificateSigningRequest(ManagedObject):
         self.user = None
         self.child_action = None
         self.csr_status = None
+        self.key_bit_length = None
+        self.key_curve_id = None
 
         ManagedObject.__init__(self, "GenerateCertificateSigningRequest", parent_mo_or_dn, **kwargs)
 

@@ -16,7 +16,7 @@ class BiosUnit(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("BiosUnit", "biosUnit", "bios", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], ['computeRackUnit'], ['biosBOT', 'biosPlatformDefaults', 'biosProfileManagement', 'biosSettings', 'firmwareBootDefinition', 'firmwareRunning', 'firmwareUpdatable', 'secureBootCertificateManagement'], ["Get", "Set"]),
+        "classic": MoMeta("BiosUnit", "biosUnit", "bios", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], ['computeRackUnit'], ['biosBOT', 'biosPlatformDefaults', 'biosProfileManagement', 'biosSettings', 'biosf2Password', 'firmwareBootDefinition', 'firmwareRunning', 'firmwareUpdatable', 'secureBootCertificateManagement'], ["Get", "Set"]),
         "modular": MoMeta("BiosUnit", "biosUnit", "bios", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], ['computeServerNode'], ['biosBOT', 'biosPlatformDefaults', 'biosProfileManagement', 'biosSettings', 'firmwareBootDefinition', 'firmwareRunning', 'firmwareUpdatable'], ["Get", "Set"])
     }
 

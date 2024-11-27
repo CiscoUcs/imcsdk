@@ -26,6 +26,7 @@ class StorageVirtualDriveCreatorUsingUnusedPhysicalDriveConsts:
     DISK_CACHE_POLICY_UNCHANGED = "unchanged"
     RAID_LEVEL_ = ""
     RAID_LEVEL_0 = "0"
+    RAID_LEVEL_00 = "00"
     RAID_LEVEL_1 = "1"
     RAID_LEVEL_10 = "10"
     RAID_LEVEL_5 = "5"
@@ -36,6 +37,7 @@ class StorageVirtualDriveCreatorUsingUnusedPhysicalDriveConsts:
     READ_POLICY_ALWAYS_READ_AHEAD = "always-read-ahead"
     READ_POLICY_DEFAULT = "default"
     READ_POLICY_NO_READ_AHEAD = "no-read-ahead"
+    SECURE_VD_ENABLE = "enable"
     STRIP_SIZE_ = ""
     STRIP_SIZE_1024K = "1024k"
     STRIP_SIZE_128K = "128k"
@@ -46,6 +48,8 @@ class StorageVirtualDriveCreatorUsingUnusedPhysicalDriveConsts:
     STRIP_SIZE_64K = "64k"
     STRIP_SIZE_8K = "8k"
     STRIP_SIZE_DEFAULT = "default"
+    VD_INIT_TYPE_FAST = "fast"
+    VD_INIT_TYPE_FULL = "full"
     WRITE_POLICY_ = ""
     WRITE_POLICY_ALWAYS_WRITE_BACK = "Always Write Back"
     WRITE_POLICY_WRITE_BACK_GOOD_BBU = "Write Back Good BBU"
@@ -63,7 +67,7 @@ class StorageVirtualDriveCreatorUsingUnusedPhysicalDrive(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("StorageVirtualDriveCreatorUsingUnusedPhysicalDrive", "storageVirtualDriveCreatorUsingUnusedPhysicalDrive", "virtual-drive-create", VersionMeta.Version201a, "InputOutput", 0xffff, [], ["admin"], ['storageController'], ['storageUnusedLocalDisk'], ["Get", "Set"]),
+        "classic": MoMeta("StorageVirtualDriveCreatorUsingUnusedPhysicalDrive", "storageVirtualDriveCreatorUsingUnusedPhysicalDrive", "virtual-drive-create", VersionMeta.Version201a, "InputOutput", 0x3ffff, [], ["admin"], ['storageController'], ['storageUnusedLocalDisk'], ["Get", "Set"]),
         "modular": MoMeta("StorageVirtualDriveCreatorUsingUnusedPhysicalDrive", "storageVirtualDriveCreatorUsingUnusedPhysicalDrive", "virtual-drive-create", VersionMeta.Version2013e, "InputOutput", 0xffff, [], ["admin"], ['storageController'], ['storageUnusedLocalDisk'], ["Get", "Set"])
     }
 
@@ -78,7 +82,7 @@ class StorageVirtualDriveCreatorUsingUnusedPhysicalDrive(ManagedObject):
             "disk_cache_policy": MoPropertyMeta("disk_cache_policy", "diskCachePolicy", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["", "default", "disabled", "enabled", "unchanged"], []),
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x40, 0, 255, None, [], []),
             "drive_group": MoPropertyMeta("drive_group", "driveGroup", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x80, 1, 512, r"""((\[\d+(,\d+)*\])(\[\d+(,\d+)*\])*)""", [], []),
-            "raid_level": MoPropertyMeta("raid_level", "raidLevel", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["", "0", "1", "10", "5", "50", "6", "60"], []),
+            "raid_level": MoPropertyMeta("raid_level", "raidLevel", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x100, None, None, None, ["", "0", "00", "1", "10", "5", "50", "6", "60"], []),
             "read_policy": MoPropertyMeta("read_policy", "readPolicy", "string", VersionMeta.Version204c, MoPropertyMeta.READ_WRITE, 0x200, None, None, None, ["", "always-read-ahead", "default", "no-read-ahead"], []),
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x400, 0, 255, None, [], []),
             "size": MoPropertyMeta("size", "size", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x800, 1, 20, r"""(\d+\s?([MGT]B)?)""", [], []),
@@ -90,6 +94,8 @@ class StorageVirtualDriveCreatorUsingUnusedPhysicalDrive(ManagedObject):
             "description": MoPropertyMeta("description", "description", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "min_required_physical_drives": MoPropertyMeta("min_required_physical_drives", "minRequiredPhysicalDrives", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "oper_status": MoPropertyMeta("oper_status", "operStatus", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
+            "secure_vd": MoPropertyMeta("secure_vd", "secureVd", "string", VersionMeta.Version435_241008, MoPropertyMeta.READ_WRITE, 0x10000, None, None, None, ["enable"], []),
+            "vd_init_type": MoPropertyMeta("vd_init_type", "vdInitType", "string", VersionMeta.Version435_241008, MoPropertyMeta.READ_WRITE, 0x20000, None, None, None, ["fast", "full"], []),
         },
 
         "modular": {
@@ -138,6 +144,8 @@ class StorageVirtualDriveCreatorUsingUnusedPhysicalDrive(ManagedObject):
             "description": "description", 
             "minRequiredPhysicalDrives": "min_required_physical_drives", 
             "operStatus": "oper_status", 
+            "secureVd": "secure_vd", 
+            "vdInitType": "vd_init_type", 
         },
 
         "modular": {
@@ -183,6 +191,8 @@ class StorageVirtualDriveCreatorUsingUnusedPhysicalDrive(ManagedObject):
         self.description = None
         self.min_required_physical_drives = None
         self.oper_status = None
+        self.secure_vd = None
+        self.vd_init_type = None
 
         ManagedObject.__init__(self, "StorageVirtualDriveCreatorUsingUnusedPhysicalDrive", parent_mo_or_dn, **kwargs)
 

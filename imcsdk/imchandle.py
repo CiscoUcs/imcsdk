@@ -394,6 +394,7 @@ class ImcHandle(ImcSession):
 
         elem = config_resolve_children(cookie=self.cookie,
                                        class_id=meta_class_id,
+                                       dn=None,  # Extra attribute added by schema. duplicate of in_dn, hence dn will always be none.
                                        in_dn=parent_dn,
                                        in_hierarchical=hierarchy)
 

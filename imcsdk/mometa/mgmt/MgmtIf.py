@@ -47,6 +47,7 @@ class MgmtIfConsts:
     VIC_SLOT_9 = "9"
     VIC_SLOT_FLEX_LOM = "flex-lom"
     VIC_SLOT_MLOM = "mlom"
+    VIC_SLOT_NONE = "none"
     VIC_SLOT_RISER1 = "riser1"
     VIC_SLOT_RISER2 = "riser2"
     VIC_SLOT_RISER3 = "riser3"
@@ -96,9 +97,9 @@ class MgmtIf(ManagedObject):
             "v6ext_gw": MoPropertyMeta("v6ext_gw", "v6extGw", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x4000000, 0, 255, r"""(https?://)?([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:""", [], []),
             "v6ext_ip": MoPropertyMeta("v6ext_ip", "v6extIp", "string", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x8000000, 0, 255, r"""(https?://)?([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:""", [], []),
             "v6prefix": MoPropertyMeta("v6prefix", "v6prefix", "uint", VersionMeta.Version201a, MoPropertyMeta.READ_WRITE, 0x10000000, None, None, None, [], ["1-128"]),
-            "vic_slot": MoPropertyMeta("vic_slot", "vicSlot", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x20000000, None, None, None, ["0", "1", "10", "11", "12", "2", "4", "5", "9", "flex-lom", "mlom", "riser1", "riser2", "riser3"], []),
+            "vic_slot": MoPropertyMeta("vic_slot", "vicSlot", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x20000000, None, None, None, ["0", "1", "10", "11", "12", "2", "4", "5", "9", "flex-lom", "mlom", "none", "riser1", "riser2", "riser3"], []),
             "vlan_enable": MoPropertyMeta("vlan_enable", "vlanEnable", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x40000000, None, None, None, ["No", "Yes", "false", "no", "true", "yes"], []),
-            "vlan_id": MoPropertyMeta("vlan_id", "vlanId", "uint", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x80000000, None, None, None, [], ["1-4094"]),
+            "vlan_id": MoPropertyMeta("vlan_id", "vlanId", "uint", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x80000000, None, None, None, [], ["0-4094", "1-4094"]),
             "vlan_priority": MoPropertyMeta("vlan_priority", "vlanPriority", "uint", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x100000000, None, None, None, [], ["0-7"]),
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
             "description": MoPropertyMeta("description", "description", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []),

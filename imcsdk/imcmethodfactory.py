@@ -102,7 +102,7 @@ def config_conf_mos(cookie, in_configs, in_hierarchical=YesOrNo.FALSE):
     return xml_request
 
 
-def config_resolve_children(cookie, class_id, in_dn, in_hierarchical=YesOrNo.FALSE):
+def config_resolve_children(cookie, class_id, dn, in_dn, in_hierarchical=YesOrNo.FALSE):
     """ Auto-generated IMC XML API Method. """
     method = ExternalMethod("ConfigResolveChildren")
 
@@ -111,6 +111,7 @@ def config_resolve_children(cookie, class_id, in_dn, in_hierarchical=YesOrNo.FAL
         class_id = imcgenutils.word_l(meta_class_id)
     method.class_id = class_id
     method.cookie = cookie
+    method.dn = dn
     method.in_dn = in_dn
     method.in_hierarchical = (("false", "true")[in_hierarchical in imcgenutils.AFFIRMATIVE_LIST])
 
@@ -145,12 +146,13 @@ def config_resolve_dn(cookie, dn, in_hierarchical=YesOrNo.FALSE):
     return xml_request
 
 
-def config_resolve_parent(cookie, dn, in_hierarchical=YesOrNo.FALSE):
+def config_resolve_parent(cookie, dn, in_dn, in_hierarchical=YesOrNo.FALSE):
     """ Auto-generated IMC XML API Method. """
     method = ExternalMethod("ConfigResolveParent")
 
     method.cookie = cookie
     method.dn = dn
+    method.in_dn = in_dn
     method.in_hierarchical = (("false", "true")[in_hierarchical in imcgenutils.AFFIRMATIVE_LIST])
 
     xml_request = method.to_xml(option=WriteXmlOption.DIRTY)

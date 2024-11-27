@@ -49,8 +49,24 @@ class BiosVfCoreMultiProcessingConsts:
     VP_CORE_MULTI_PROCESSING_46 = "46"
     VP_CORE_MULTI_PROCESSING_47 = "47"
     VP_CORE_MULTI_PROCESSING_48 = "48"
+    VP_CORE_MULTI_PROCESSING_49 = "49"
     VP_CORE_MULTI_PROCESSING_5 = "5"
+    VP_CORE_MULTI_PROCESSING_50 = "50"
+    VP_CORE_MULTI_PROCESSING_51 = "51"
+    VP_CORE_MULTI_PROCESSING_52 = "52"
+    VP_CORE_MULTI_PROCESSING_53 = "53"
+    VP_CORE_MULTI_PROCESSING_54 = "54"
+    VP_CORE_MULTI_PROCESSING_55 = "55"
+    VP_CORE_MULTI_PROCESSING_56 = "56"
+    VP_CORE_MULTI_PROCESSING_57 = "57"
+    VP_CORE_MULTI_PROCESSING_58 = "58"
+    VP_CORE_MULTI_PROCESSING_59 = "59"
     VP_CORE_MULTI_PROCESSING_6 = "6"
+    VP_CORE_MULTI_PROCESSING_60 = "60"
+    VP_CORE_MULTI_PROCESSING_61 = "61"
+    VP_CORE_MULTI_PROCESSING_62 = "62"
+    VP_CORE_MULTI_PROCESSING_63 = "63"
+    VP_CORE_MULTI_PROCESSING_64 = "64"
     VP_CORE_MULTI_PROCESSING_7 = "7"
     VP_CORE_MULTI_PROCESSING_8 = "8"
     VP_CORE_MULTI_PROCESSING_9 = "9"
@@ -76,7 +92,7 @@ class BiosVfCoreMultiProcessing(ManagedObject):
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []),
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
-            "vp_core_multi_processing": MoPropertyMeta("vp_core_multi_processing", "vpCoreMultiProcessing", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["1", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "2", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "3", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "4", "40", "41", "42", "43", "44", "45", "46", "47", "48", "5", "6", "7", "8", "9", "all", "platform-default"], []),
+            "vp_core_multi_processing": MoPropertyMeta("vp_core_multi_processing", "vpCoreMultiProcessing", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["1", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "2", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "3", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "4", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "5", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "6", "60", "61", "62", "63", "64", "7", "8", "9", "all", "platform-default"], []),
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
         },
 
