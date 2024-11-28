@@ -1,23 +1,25 @@
-name: Run Tests
-on: [push]
+name: Python Tests
+on:
+  pull_request:
+    branches:
 jobs:
-  unit-tests:
+  test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: [2.7, 3.5, 3.6, 3.7, 3.8]
-
+        python-version: ['3.8', '3.9', '3.10']
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.version }}
-      uses: actions/setup-python@v1
-      with:
-        python-version: ${{ matrix.version }}
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        pip install -r requirements_dev.txt
-    - name: Test with nosetests
-      run: |
-        nosetests tests/unit_tests
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -r requirements_dev.txt
+      - name: Run tests
+        run: |
+          PYTHONPATH=$(pwd) pytest tests/unit_tests
