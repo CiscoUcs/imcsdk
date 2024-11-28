@@ -11,32 +11,32 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from nose.tools import assert_equal
+import unittest
 
 import imcsdk.imccoreutils as cutil
 
-
-def test_001_get_naming_props():
-    rn_pattern = "fault-[code]-[name]-[type]-xyz-[state]"
-    rn_str = "fault-F35275-fault-c2-xyz-on"
-    np = cutil.get_naming_props(rn_str, rn_pattern)
-    assert_equal(np['code'], 'F35275')
-    assert_equal(np['name'], 'fault')
-    assert_equal(np['type'], 'c2')
-    assert_equal(np['state'], 'on')
-
-
-def test_002_get_naming_props():
-    rn_pattern = "[suport_type][card_param_type]"
-    rn_str = "11"
-    np = cutil.get_naming_props(rn_str, rn_pattern)
-    assert_equal(np['suport_type'], '1')
-    assert_equal(np['card_param_type'], '1')
+class TestImcCoreUtils(unittest.TestCase):
+    def test_001_get_naming_props(self):
+        rn_pattern = "fault-[code]-[name]-[type]-xyz-[state]"
+        rn_str = "fault-F35275-fault-c2-xyz-on"
+        np = cutil.get_naming_props(rn_str, rn_pattern)
+        assert np['code'] == 'F35275'
+        assert np['name'] == 'fault'
+        assert np['type'] == 'c2'
+        assert np['state'] == 'on'
 
 
-def test_003_get_naming_props():
-    rn_pattern = "[suport_type][card_param_type]"
-    rn_str = "1122"
-    np = cutil.get_naming_props(rn_str, rn_pattern)
-    assert_equal(np['suport_type'], '112')
-    assert_equal(np['card_param_type'], '2')
+    def test_002_get_naming_props(self):
+        rn_pattern = "[suport_type][card_param_type]"
+        rn_str = "11"
+        np = cutil.get_naming_props(rn_str, rn_pattern)
+        assert np['suport_type'] == '1'
+        assert np['card_param_type'] == '1'
+
+
+    def test_003_get_naming_props(self):
+        rn_pattern = "[suport_type][card_param_type]"
+        rn_str = "1122"
+        np = cutil.get_naming_props(rn_str, rn_pattern)
+        assert np['suport_type'] == '112'
+        assert np['card_param_type'] == '2'
