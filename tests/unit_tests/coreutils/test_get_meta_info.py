@@ -10,35 +10,35 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import unittest
 
-from nose.tools import assert_equal, assert_not_equal
 from imcsdk.imccoreutils import get_meta_info
 
-
-def test_known_class():
-    meta = get_meta_info(class_id="aaaUser")
-    xml_attribute = meta.xml_attribute
-    assert_equal(xml_attribute, "aaaUser")
-
-
-def test_unknown_class():
-    meta = get_meta_info(class_id="unknown")
-    assert_equal(meta, None)
+class TestGetMetaInfo(unittest.TestCase):
+    def test_known_class(self):
+        meta = get_meta_info(class_id="aaaUser")
+        xml_attribute = meta.xml_attribute
+        assert xml_attribute == "aaaUser"
 
 
-def test_known_class_props():
-    meta = get_meta_info(class_id="aaaUser")
-    properties = len(meta.props)
-    assert_not_equal(properties, 0)
+    def test_unknown_class(self):
+        meta = get_meta_info(class_id="unknown")
+        assert meta == None
 
 
-def test_known_class_props_meta():
-    meta = get_meta_info(class_id="aaaUser")
-    xml_attribute = meta.props['name'].xml_attribute
-    assert_equal(xml_attribute, 'name')
+    def test_known_class_props(self):
+        meta = get_meta_info(class_id="aaaUser")
+        properties = len(meta.props)
+        assert properties != 0
 
 
-def test_include_prop_false():
-    meta = get_meta_info(class_id="aaaUser", include_prop=False)
-    properties = len(meta.props)
-    assert_equal(properties, 0)
+    def test_known_class_props_meta(self):
+        meta = get_meta_info(class_id="aaaUser")
+        xml_attribute = meta.props['name'].xml_attribute
+        assert xml_attribute == 'name'
+
+
+    def test_include_prop_false(self):
+        meta = get_meta_info(class_id="aaaUser", include_prop=False)
+        properties = len(meta.props)
+        assert properties == 0
