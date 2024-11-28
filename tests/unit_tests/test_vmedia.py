@@ -11,7 +11,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from mock import patch, call, MagicMock
+try:
+    from unittest.mock import patch, call, MagicMock
+except ImportError:
+    from mock import patch, call, MagicMock
+
 from nose.tools import assert_raises
 from imcsdk.imchandle import ImcHandle
 from imcsdk.imcexception import ImcOperationError
