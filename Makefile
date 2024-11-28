@@ -49,7 +49,7 @@ lint:
 	flake8 imcsdk tests
 
 test:
-	nosetests -w tests
+	pytest tests/unit_tests
 
 coverage:
 	coverage run --source imcsdk setup.py test
