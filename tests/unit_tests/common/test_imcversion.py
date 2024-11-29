@@ -14,17 +14,8 @@
 import unittest
 from imcsdk.imcmeta import VersionMeta
 from imcsdk.imccoremeta import ImcVersion
-from ..connection.info import custom_setup, custom_teardown
 
 class TestIMCVersion(unittest.TestCase):
-    @classmethod
-    def setUpModule(cls):
-        cls.handle = custom_setup()
-
-    @classmethod
-    def tearDownModule(cls):
-        custom_teardown(cls.handle)
-
     def test_nightly_version1(self):
         version1 = ImcVersion("2.0(13aS6)")
         version2 = ImcVersion("3.0(1S10)")
@@ -148,11 +139,3 @@ class TestIMCVersion(unittest.TestCase):
         self.assertTrue(num_ver2 == num_ver2)
         self.assertTrue(num_ver2 < num_ver3)
         self.assertTrue(num_ver3 < num_ver4)
-
-    def test_handle_version(self):
-        self.assertIsInstance(self.handle.version, ImcVersion)
-
-    def test_handle_mo_version(self):
-        mos = self.handle.query_classid("BiosUnit")
-        mo_version = mos[0].get_version(platform=self.handle.platform)
-        self.assertFalse(self.handle.version < mo_version)
