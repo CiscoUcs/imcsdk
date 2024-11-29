@@ -130,7 +130,7 @@ class TestIMCVersion(unittest.TestCase):
         self.assertTrue(num_ver2 >= num_ver2)
         self.assertFalse(num_ver1 >= num_ver2)
         self.assertTrue(num_ver2 <= num_ver2)
-        self.assertTrue(num_ver2 <= num_ver1)
+        self.assertFalse(num_ver2 <= num_ver1)
         self.assertTrue(num_ver1 <= num_ver2)
         self.assertTrue(num_ver1 <= num_ver1)
         self.assertFalse(num_ver1 > num_ver2)
