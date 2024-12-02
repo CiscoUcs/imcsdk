@@ -117,14 +117,20 @@ class TLSConnection(httplib.HTTPSConnection):
             ssl_context = ssl.SSLContext(ssl.PROTOCOL_SSLv23)
             ssl_context.options |= ssl.OP_NO_SSLv2
             ssl_context.options |= ssl.OP_NO_SSLv3
-            if self.key_file and self.cert_file:
-                ssl_context.load_cert_chain(keyfile=self.key_file,
-                                            certfile=self.cert_file)
+            #Since python 3.6 key_file and cert_file was deprecated
+            #latest one for create ssl context is create_default_context
+            if hasattr(self, 'key_file') and hasattr(self, 'cert_file') and self.key_file and self.cert_file: 
+                ssl_context.load_cert_chain(keyfile=self.key_file, certfile=self.cert_file)
+            else:
+                ssl.create_default_context()
             self.sock = ssl_context.wrap_socket(sock)
         else:
             # This is the only difference; default wrap_socket uses SSLv23
-            self.sock = ssl.wrap_socket(sock, self.key_file, self.cert_file,
-                                        ssl_version=ssl.PROTOCOL_TLSv1)
+            if hasattr(self, 'key_file') and hasattr(self, 'cert_file') and self.key_file and self.cert_file:
+                self.sock = ssl.wrap_socket(sock, self.key_file, self.cert_file,ssl_version=ssl.PROTOCOL_TLSv1)
+            else:
+                self.sock = ssl.wrap_socket(sock,ssl_version=ssl.PROTOCOL_TLSv1)
+
 
 
 class ImcDriver(object):
@@ -158,7 +164,7 @@ class ImcDriver(object):
         tls_handler = (TLSHandler, TLS1Handler)[tls_proto == "tlsv1"]
         handlers = [SmartRedirectHandler, tls_handler]
         if self.__proxy:
-            proxy_handler = urllib.request.ProxyHandler(
+            proxy_handler = urllib2.request.ProxyHandler(
                 {'http': self.__proxy, 'https': self.__proxy})
             handlers.append(proxy_handler)
         return handlers

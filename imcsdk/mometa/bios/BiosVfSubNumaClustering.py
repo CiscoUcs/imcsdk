@@ -9,6 +9,8 @@ class BiosVfSubNumaClusteringConsts:
     VP_SNC_AUTO = "Auto"
     VP_SNC_DISABLED = "Disabled"
     VP_SNC_ENABLED = "Enabled"
+    VP_SNC_SNC2 = "SNC2"
+    VP_SNC_SNC4 = "SNC4"
     _VP_SNC_DISABLED = "disabled"
     _VP_SNC_ENABLED = "enabled"
     VP_SNC_PLATFORM_DEFAULT = "platform-default"
@@ -32,7 +34,7 @@ class BiosVfSubNumaClustering(ManagedObject):
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []),
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
-            "vp_snc": MoPropertyMeta("vp_snc", "vpSNC", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Auto", "Disabled", "Enabled", "disabled", "enabled", "platform-default"], []),
+            "vp_snc": MoPropertyMeta("vp_snc", "vpSNC", "string", VersionMeta.Version304a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Auto", "Disabled", "Enabled", "SNC2", "SNC4", "disabled", "enabled", "platform-default"], []),
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version421a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
         },
 

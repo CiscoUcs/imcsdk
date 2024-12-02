@@ -10,6 +10,7 @@ class FanPolicyConsts:
     CONFIGURED_FAN_POLICY_BALANCED = "Balanced"
     CONFIGURED_FAN_POLICY_HIGH_POWER = "High Power"
     CONFIGURED_FAN_POLICY_LOW_POWER = "Low Power"
+    CONFIGURED_FAN_POLICY_MAXIMUM_COOLING = "Maximum Cooling"
     CONFIGURED_FAN_POLICY_MAXIMUM_POWER = "Maximum Power"
     CONFIGURED_FAN_POLICY_PERFORMANCE = "Performance"
 
@@ -32,7 +33,7 @@ class FanPolicy(ManagedObject):
             "applied_fan_policy": MoPropertyMeta("applied_fan_policy", "appliedFanPolicy", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version301c, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
             "configuration_status": MoPropertyMeta("configuration_status", "configurationStatus", "string", VersionMeta.Version301c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
-            "configured_fan_policy": MoPropertyMeta("configured_fan_policy", "configuredFanPolicy", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["Acoustic", "Balanced", "High Power", "Low Power", "Maximum Power", "Performance"], []),
+            "configured_fan_policy": MoPropertyMeta("configured_fan_policy", "configuredFanPolicy", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x4, None, None, None, ["Acoustic", "Balanced", "High Power", "Low Power", "Maximum Cooling", "Maximum Power", "Performance"], []),
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []),
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x10, 0, 255, None, [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version301c, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["", "created", "deleted", "modified", "removed"], []),

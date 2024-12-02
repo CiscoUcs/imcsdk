@@ -6,16 +6,6 @@ from ...imcmeta import VersionMeta
 
 
 class ProcessorUnitConsts:
-    ARCH_DUAL_CORE_OPTERON = "Dual-Core_Opteron"
-    ARCH_EPYC = "Epyc"
-    ARCH_INTEL_P4_C = "Intel_P4_C"
-    ARCH_OPTERON = "Opteron"
-    ARCH_PENTIUM_4 = "Pentium_4"
-    ARCH_TURION_64 = "Turion_64"
-    ARCH_XEON = "Xeon"
-    ARCH_XEON_MP = "Xeon_MP"
-    ARCH_ZEN = "Zen"
-    ARCH_ANY = "any"
     CORES_UNSPECIFIED = "unspecified"
     CORES_ENABLED_UNSPECIFIED = "unspecified"
     OPER_STATE_ACCESSIBILITY_PROBLEM = "accessibility-problem"
@@ -62,6 +52,14 @@ class ProcessorUnitConsts:
     SPEED_UNSPECIFIED = "unspecified"
     STEPPING_UNSPECIFIED = "unspecified"
     THREADS_UNSPECIFIED = "unspecified"
+    ARCH_DUAL_CORE_OPTERON = "Dual-Core_Opteron"
+    ARCH_INTEL_P4_C = "Intel_P4_C"
+    ARCH_OPTERON = "Opteron"
+    ARCH_PENTIUM_4 = "Pentium_4"
+    ARCH_TURION_64 = "Turion_64"
+    ARCH_XEON = "Xeon"
+    ARCH_XEON_MP = "Xeon_MP"
+    ARCH_ANY = "any"
 
 
 class ProcessorUnit(ManagedObject):
@@ -79,7 +77,7 @@ class ProcessorUnit(ManagedObject):
     prop_meta = {
 
         "classic": {
-            "arch": MoPropertyMeta("arch", "arch", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["Dual-Core_Opteron", "Epyc", "Intel_P4_C", "Opteron", "Pentium_4", "Turion_64", "Xeon", "Xeon_MP", "Zen", "any"], []),
+            "arch": MoPropertyMeta("arch", "arch", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []),
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
             "cores": MoPropertyMeta("cores", "cores", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["unspecified"], ["0-65535"]),
             "cores_enabled": MoPropertyMeta("cores_enabled", "coresEnabled", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["unspecified"], ["0-65535"]),

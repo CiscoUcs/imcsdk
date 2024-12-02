@@ -8,7 +8,9 @@ from ...imcmeta import VersionMeta
 class BiosVfCbsCmnMemMapBankInterleaveDdr4Consts:
     VP_CBS_CMN_MEM_MAP_BANK_INTERLEAVE_DDR4_AUTO = "Auto"
     VP_CBS_CMN_MEM_MAP_BANK_INTERLEAVE_DDR4_DISABLED = "Disabled"
+    VP_CBS_CMN_MEM_MAP_BANK_INTERLEAVE_DDR4_ENABLED = "Enabled"
     _VP_CBS_CMN_MEM_MAP_BANK_INTERLEAVE_DDR4_DISABLED = "disabled"
+    _VP_CBS_CMN_MEM_MAP_BANK_INTERLEAVE_DDR4_ENABLED = "enabled"
     VP_CBS_CMN_MEM_MAP_BANK_INTERLEAVE_DDR4_PLATFORM_DEFAULT = "platform-default"
 
 
@@ -30,7 +32,7 @@ class BiosVfCbsCmnMemMapBankInterleaveDdr4(ManagedObject):
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version401a, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []),
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version401a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version401a, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
-            "vp_cbs_cmn_mem_map_bank_interleave_ddr4": MoPropertyMeta("vp_cbs_cmn_mem_map_bank_interleave_ddr4", "vpCbsCmnMemMapBankInterleaveDdr4", "string", VersionMeta.Version401a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Auto", "Disabled", "disabled", "platform-default"], []),
+            "vp_cbs_cmn_mem_map_bank_interleave_ddr4": MoPropertyMeta("vp_cbs_cmn_mem_map_bank_interleave_ddr4", "vpCbsCmnMemMapBankInterleaveDdr4", "string", VersionMeta.Version401a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Auto", "Disabled", "Enabled", "disabled", "enabled", "platform-default"], []),
         },
 
     }

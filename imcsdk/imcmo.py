@@ -342,11 +342,12 @@ class ManagedObject(ImcBase):
                     if value is not None:
                         #Skip version validation for Bios Tokens. For other MOs continue to do version validation.
                         if handle and not (mo_meta.name.startswith("BiosVf") and prop.name.startswith("vp")):
-                            if prop.version <= handle.version:
-                                xml_obj.set(prop.xml_attribute, value)
-                            else:
-                                log.debug('## Not sending property: %s' % prop.name)
-                                log.debug('## handle.version:%s prop.version:%s', handle.version, prop.version)
+                            xml_obj.set(prop.xml_attribute, value)
+                            # if prop.version <= handle.version:
+                            #     xml_obj.set(prop.xml_attribute, value)
+                            # else:
+                            #     log.debug('## Not sending property: %s' % prop.name)
+                            #     log.debug('## handle.version:%s prop.version:%s', handle.version, prop.version)
                         else:
                             xml_obj.set(prop.xml_attribute, value)
                         # xml_obj.set(prop.xml_attribute, value)
@@ -658,7 +659,14 @@ class GenericMo(ImcBase):
         import inspect
 
         mo_class = imccoreutils.load_class(class_id)
-        mo_class_params = inspect.getargspec(mo_class.__init__)[0][2:]
+        '''
+            In the version of python 3.12 later getargspec function is removed from inspect. Added condition to allow older python versions
+            to continue to use getargspec
+        '''
+        if hasattr(inspect, 'getargspec'):
+            mo_class_params = inspect.getargspec(mo_class.__init__)[0][2:]
+        else:
+            mo_class_params = inspect.getfullargspec(mo_class.__init__)[0][2:]
         mo_class_param_dict = {}
         for param in mo_class_params:
             prop = imccoreutils.get_prop_meta(mo_class, param)

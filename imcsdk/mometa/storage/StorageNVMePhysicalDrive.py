@@ -33,6 +33,7 @@ class StorageNVMePhysicalDrive(ManagedObject):
             "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version401a, MoPropertyMeta.NAMING, None, 0, 510, None, [], []),
             "led_fault_status": MoPropertyMeta("led_fault_status", "ledFaultStatus", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "lifeleftin_days": MoPropertyMeta("lifeleftin_days", "lifeleftinDays", "string", VersionMeta.Version402c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
+            "model": MoPropertyMeta("model", "model", "string", VersionMeta.Version432_230190, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "pd_chip_temp_celsius": MoPropertyMeta("pd_chip_temp_celsius", "pdChipTempCelsius", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "pd_status": MoPropertyMeta("pd_status", "pdStatus", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "percentage_total_power_on_hour": MoPropertyMeta("percentage_total_power_on_hour", "percentageTotalPowerOnHour", "string", VersionMeta.Version401a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
@@ -82,6 +83,7 @@ class StorageNVMePhysicalDrive(ManagedObject):
             "id": "id", 
             "ledFaultStatus": "led_fault_status", 
             "lifeleftinDays": "lifeleftin_days", 
+            "model": "model", 
             "pdChipTempCelsius": "pd_chip_temp_celsius", 
             "pdStatus": "pd_status", 
             "percentageTotalPowerOnHour": "percentage_total_power_on_hour", 
@@ -129,6 +131,7 @@ class StorageNVMePhysicalDrive(ManagedObject):
         self.firmware_version = None
         self.led_fault_status = None
         self.lifeleftin_days = None
+        self.model = None
         self.pd_chip_temp_celsius = None
         self.pd_status = None
         self.percentage_total_power_on_hour = None
@@ -139,7 +142,6 @@ class StorageNVMePhysicalDrive(ManagedObject):
         self.status = None
         self.throttle_start_temperature = None
         self.vendor = None
-        self.model = None
 
         ManagedObject.__init__(self, "StorageNVMePhysicalDrive", parent_mo_or_dn, **kwargs)
 

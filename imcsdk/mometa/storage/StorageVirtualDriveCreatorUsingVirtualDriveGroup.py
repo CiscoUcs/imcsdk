@@ -38,6 +38,8 @@ class StorageVirtualDriveCreatorUsingVirtualDriveGroupConsts:
     STRIP_SIZE_64K = "64k"
     STRIP_SIZE_8K = "8k"
     STRIP_SIZE_DEFAULT = "default"
+    VD_INIT_TYPE_FAST = "fast"
+    VD_INIT_TYPE_FULL = "full"
     WRITE_POLICY_ = ""
     WRITE_POLICY_ALWAYS_WRITE_BACK = "Always Write Back"
     WRITE_POLICY_WRITE_BACK_GOOD_BBU = "Write Back Good BBU"
@@ -55,7 +57,7 @@ class StorageVirtualDriveCreatorUsingVirtualDriveGroup(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("StorageVirtualDriveCreatorUsingVirtualDriveGroup", "storageVirtualDriveCreatorUsingVirtualDriveGroup", "virtual-drive-carve", VersionMeta.Version201a, "InputOutput", 0x3fff, [], ["admin"], ['storageController'], ['storageVirtualDriveWithDriveGroupSpace'], ["Get", "Set"]),
+        "classic": MoMeta("StorageVirtualDriveCreatorUsingVirtualDriveGroup", "storageVirtualDriveCreatorUsingVirtualDriveGroup", "virtual-drive-carve", VersionMeta.Version201a, "InputOutput", 0x7fff, [], ["admin"], ['storageController'], ['storageVirtualDriveWithDriveGroupSpace'], ["Get", "Set"]),
         "modular": MoMeta("StorageVirtualDriveCreatorUsingVirtualDriveGroup", "storageVirtualDriveCreatorUsingVirtualDriveGroup", "virtual-drive-carve", VersionMeta.Version2013e, "InputOutput", 0x3fff, [], ["admin"], ['storageController'], ['storageVirtualDriveWithDriveGroupSpace'], ["Get", "Set"])
     }
 
@@ -79,6 +81,7 @@ class StorageVirtualDriveCreatorUsingVirtualDriveGroup(ManagedObject):
             "created_virtual_drive_dn": MoPropertyMeta("created_virtual_drive_dn", "createdVirtualDriveDn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "description": MoPropertyMeta("description", "description", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "oper_status": MoPropertyMeta("oper_status", "operStatus", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
+            "vd_init_type": MoPropertyMeta("vd_init_type", "vdInitType", "string", VersionMeta.Version435_241008, MoPropertyMeta.READ_WRITE, 0x4000, None, None, None, ["fast", "full"], []),
         },
 
         "modular": {
@@ -121,6 +124,7 @@ class StorageVirtualDriveCreatorUsingVirtualDriveGroup(ManagedObject):
             "createdVirtualDriveDn": "created_virtual_drive_dn", 
             "description": "description", 
             "operStatus": "oper_status", 
+            "vdInitType": "vd_init_type", 
         },
 
         "modular": {
@@ -160,6 +164,7 @@ class StorageVirtualDriveCreatorUsingVirtualDriveGroup(ManagedObject):
         self.created_virtual_drive_dn = None
         self.description = None
         self.oper_status = None
+        self.vd_init_type = None
 
         ManagedObject.__init__(self, "StorageVirtualDriveCreatorUsingVirtualDriveGroup", parent_mo_or_dn, **kwargs)
 

@@ -120,17 +120,20 @@ class ImcVersion(object):
         self.__patch = match_dict.get("patch")
         self.__spin = match_dict.get("spin")
 
-        # for spin builds 4.0(1S52), the patch version will be None
-        # In this scenario assume the version to be highest patch z
-        if self.__spin is not None and self.__patch is None:
-            self.__patch = 'z'
-        elif self.__patch is not None and self.__mr is not None and self.__patch.isdigit() and self.__mr.isdigit():
-            log.debug("Interim version encountered: %s. MR version has been bumped up." % self.version)
-            self.__mr = str(int(self.__mr) + 1)
-            self.__patch = 'a'
-        elif self.__patch is not None and self.__patch.isalpha() and self.__spin:
-            log.debug("Interim version encountered: %s. patch version has been bumped up." % self.version)
-            self.__patch = str(chr(ord(self.__patch)+1))
+        # Starting LB release, Spin builds only are released.
+        # Spin builds version is not converted to patch build version, hence there is no need of
+        # handling of patch none values or spin none values while processing version.
+        # Patch and Spin will now be used in comparision function, and none values are handled accordingly.
+        # For this reason, below code is being commented out.
+        # if self.__patch is None:
+        #     self.__patch = 'z'
+        # elif self.__patch.isdigit() and self.__mr.isdigit():
+        #     log.debug("Interim version encountered: %s. MR version has been bumped up." % self.version)
+        #     self.__mr = str(int(self.__mr) + 1)
+        #     self.__patch = 'a'
+        # elif self.__patch.isalpha() and self.__spin:
+        #     log.debug("Interim version encountered: %s. patch version has been bumped up." % self.version)
+        #     self.__patch = str(chr(ord(self.__patch)+1))
         return True
 
     @property
@@ -154,6 +157,11 @@ class ImcVersion(object):
         return self.__patch
 
     @property
+    def spin(self):
+        """Getter Method of ImcVersion Class"""
+        return self.__spin
+
+    @property
     def version(self):
         """Getter Method of UcsVersion Class"""
         return self.__version
@@ -175,14 +183,54 @@ class ImcVersion(object):
             return 1
 
         ret = 0
+
+        # From LB release spin builds are processed.
+        # Hence spin comparision needs to be included
         versions = [(self.__major, version.major),
                     (self.__minor, version.minor),
-                    (self.__mr, version.mr),
-                    (self.__patch, version.patch)]
+                    (self.__mr, version.mr)]
         for item in versions:
             ret = self._compare(item[0], item[1])
             if ret:
+                # If major, minor or mr are not equal then return from here only, further check not required.
                 return ret
+        # Compare Patch if patch available in both.
+        if self.__patch and version.patch:
+            if self.__patch == version.patch:
+                ret = 0
+                # If patch is also same, then nightly builds [4.0(234bS3)] have patch and spin both
+                # So in that case compare spin as well.
+                # This comparison is actually not required
+                # (as nightly builds are not released, and are for internal purpose only)
+                # but for completeness we are adding this.
+                if self.__spin and version.spin:
+                    ret = self._compare(self.__spin, version.spin)
+                elif self.__spin:
+                    ret = 1
+                elif version.spin:
+                    ret = -1
+            elif self.__patch < version.patch:
+                ret = -1
+            else:
+                ret = 1
+        elif self.__spin and version.spin:
+            # compare spin if spin available in both.
+            ret = self._compare(self.__spin, version.spin)
+        elif (not self.__patch and self.__spin) and (version.patch and not version.spin):
+            # if spin available in self, and patch available in version, then consider self as greater.
+            # We consider spin builds as greater than patch builds, as spin builds started from LB release.
+            ret = 1
+        elif (self.__patch and not self.__spin) and (not version.patch and version.spin):
+            # if spin available in version, and patch available in self, then consider version as greater.
+            # We consider spin builds as greater than patch builds, as spin builds started from LB release.
+            ret = -1
+        elif not self.__spin and version.spin:
+            # If we reached here, then there is no patch, and only one have spin, consider that as greater.
+            ret = 1
+        elif self.__spin and not version.spin:
+            # If we reached here, then there is no patch, and only one have spin, consider that as greater.
+            ret = -1
+
         return ret
 
     def __gt__(self, version):

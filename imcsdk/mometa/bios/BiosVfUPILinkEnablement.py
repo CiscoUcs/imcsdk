@@ -8,6 +8,7 @@ from ...imcmeta import VersionMeta
 class BiosVfUPILinkEnablementConsts:
     VP_UPILINK_ENABLEMENT_1 = "1"
     VP_UPILINK_ENABLEMENT_2 = "2"
+    VP_UPILINK_ENABLEMENT_3 = "3"
     VP_UPILINK_ENABLEMENT_AUTO = "Auto"
     VP_UPILINK_ENABLEMENT_PLATFORM_DEFAULT = "platform-default"
 
@@ -30,7 +31,7 @@ class BiosVfUPILinkEnablement(ManagedObject):
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version421b, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []),
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version421b, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version421b, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
-            "vp_upi_link_enablement": MoPropertyMeta("vp_upi_link_enablement", "vpUPILinkEnablement", "string", VersionMeta.Version421b, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["1", "2", "Auto", "platform-default"], []),
+            "vp_upi_link_enablement": MoPropertyMeta("vp_upi_link_enablement", "vpUPILinkEnablement", "string", VersionMeta.Version421b, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["1", "2", "3", "Auto", "platform-default"], []),
         },
 
     }

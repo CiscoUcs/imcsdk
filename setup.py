@@ -18,7 +18,7 @@ with open('HISTORY.rst') as history_file:
 
 setup(
     name='imcsdk',
-    version='0.9.13',
+    version='0.9.50',
     description="python SDK for Cisco UCS IMC",
     long_description=readme + '\n\n' + history,
     long_description_content_type='text/x-rst',
@@ -49,6 +49,7 @@ setup(
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.12',
     ],
     tests_require=test_requirements,
     test_suite='nose.collector',

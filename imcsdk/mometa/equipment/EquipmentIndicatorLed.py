@@ -13,6 +13,7 @@ class EquipmentIndicatorLedConsts:
     COLOR_UNKNOWN = "unknown"
     OPER_STATE_BLINKING = "blinking"
     OPER_STATE_ETH = "eth"
+    OPER_STATE_FAST_BLINK = "fast blink"
     OPER_STATE_FC = "fc"
     OPER_STATE_OFF = "off"
     OPER_STATE_ON = "on"
@@ -39,7 +40,7 @@ class EquipmentIndicatorLed(ManagedObject):
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []),
             "id": MoPropertyMeta("id", "id", "uint", VersionMeta.Version151f, MoPropertyMeta.NAMING, None, None, None, None, [], []),
             "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, r"""[\-\.:_a-zA-Z0-9]{0,25}""", [], []),
-            "oper_state": MoPropertyMeta("oper_state", "operState", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["blinking", "eth", "fc", "off", "on", "unknown"], []),
+            "oper_state": MoPropertyMeta("oper_state", "operState", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["blinking", "eth", "fast blink", "fc", "off", "on", "unknown"], []),
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, 0x8, None, None, r"""((removed|created|modified|deleted),){0,3}(removed|created|modified|deleted){0,1}""", [], []),
         },

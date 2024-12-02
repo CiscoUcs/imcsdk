@@ -16,7 +16,7 @@ class OsiController(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("OsiController", "osiController", "osi", VersionMeta.Version301c, "OutputOnly", 0xf, [], ["read-only"], ['topSystem'], ['osiCancel', 'osiStart', 'osiStatus'], ["Get"]),
+        "classic": MoMeta("OsiController", "osiController", "osi", VersionMeta.Version301c, "OutputOnly", 0xf, [], ["read-only"], ['topSystem'], ['niosInstall', 'osiCancel', 'osiStart', 'osiStatus'], ["Get"]),
         "modular": MoMeta("OsiController", "osiController", "osi", VersionMeta.Version301c, "OutputOnly", 0xf, [], ["read-only"], ['computeServerNode'], ['osiCancel', 'osiStart', 'osiStatus'], ["Get"])
     }
 

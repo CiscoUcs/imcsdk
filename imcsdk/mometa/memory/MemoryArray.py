@@ -13,6 +13,12 @@ class MemoryArrayConsts:
     _DIMM_BLACK_LIST_DISABLED = "disabled"
     DIMM_BLACK_LIST_ENABLE = "enable"
     _DIMM_BLACK_LIST_ENABLED = "enabled"
+    DIMM_BLOCK_LIST_DISABLED = "Disabled"
+    DIMM_BLOCK_LIST_ENABLED = "Enabled"
+    DIMM_BLOCK_LIST_DISABLE = "disable"
+    _DIMM_BLOCK_LIST_DISABLED = "disabled"
+    DIMM_BLOCK_LIST_ENABLE = "enable"
+    _DIMM_BLOCK_LIST_ENABLED = "enabled"
     FAILED_MEMORY_UNSPECIFIED = "unspecified"
     IGNORED_MEMORY_UNSPECIFIED = "unspecified"
     MAX_DEVICES_UNSPECIFIED = "unspecified"
@@ -44,7 +50,7 @@ class MemoryArray(ManagedObject):
     naming_props = set(['id'])
 
     mo_meta = {
-        "classic": MoMeta("MemoryArray", "memoryArray", "memarray-[id]", VersionMeta.Version151f, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], ['computeBoard'], ['faultInst', 'memoryPersistentMemoryUnit', 'memoryUnit'], ["Get", "Set"]),
+        "classic": MoMeta("MemoryArray", "memoryArray", "memarray-[id]", VersionMeta.Version151f, "InputOutput", 0x3f, [], ["admin", "read-only", "user"], ['computeBoard'], ['faultInst', 'memoryPersistentMemoryUnit', 'memoryUnit'], ["Get", "Set"]),
         "modular": MoMeta("MemoryArray", "memoryArray", "memarray-[id]", VersionMeta.Version2013e, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], ['computeBoard'], ['faultInst', 'memoryPersistentMemoryUnit', 'memoryUnit'], ["Get", "Set"])
     }
 
@@ -58,6 +64,7 @@ class MemoryArray(ManagedObject):
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
             "curr_capacity": MoPropertyMeta("curr_capacity", "currCapacity", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["unspecified"], ["0-4294967295"]),
+            "dimm_block_list": MoPropertyMeta("dimm_block_list", "dimmBlockList", "string", VersionMeta.Version432_230190, MoPropertyMeta.READ_WRITE, 0x20, None, None, None, ["Disabled", "Enabled", "disable", "disabled", "enable", "enabled"], []),
             "failed_memory": MoPropertyMeta("failed_memory", "failedMemory", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["unspecified"], ["0-4294967295"]),
             "id": MoPropertyMeta("id", "id", "uint", VersionMeta.Version151f, MoPropertyMeta.NAMING, None, None, None, None, [], ["1-8"]),
             "ignored_memory": MoPropertyMeta("ignored_memory", "ignoredMemory", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["unspecified"], ["0-4294967295"]),
@@ -104,6 +111,7 @@ class MemoryArray(ManagedObject):
             "status": "status", 
             "childAction": "child_action", 
             "currCapacity": "curr_capacity", 
+            "dimmBlockList": "dimm_block_list", 
             "failedMemory": "failed_memory", 
             "id": "id", 
             "ignoredMemory": "ignored_memory", 
@@ -148,6 +156,7 @@ class MemoryArray(ManagedObject):
         self.status = None
         self.child_action = None
         self.curr_capacity = None
+        self.dimm_block_list = None
         self.failed_memory = None
         self.ignored_memory = None
         self.max_devices = None

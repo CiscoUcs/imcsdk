@@ -45,6 +45,7 @@ class AdaptorUnit(ManagedObject):
             "presence": MoPropertyMeta("presence", "presence", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["empty", "equipped", "missing", "not-supported", "unknown"], []),
             "serial": MoPropertyMeta("serial", "serial", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "vendor": MoPropertyMeta("vendor", "vendor", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
+            "vic_communicable": MoPropertyMeta("vic_communicable", "vicCommunicable", "string", VersionMeta.Version423a, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []),
         },
 
         "modular": {
@@ -83,6 +84,7 @@ class AdaptorUnit(ManagedObject):
             "presence": "presence", 
             "serial": "serial", 
             "vendor": "vendor", 
+            "vicCommunicable": "vic_communicable", 
         },
 
         "modular": {
@@ -118,6 +120,7 @@ class AdaptorUnit(ManagedObject):
         self.presence = None
         self.serial = None
         self.vendor = None
+        self.vic_communicable = None
 
         ManagedObject.__init__(self, "AdaptorUnit", parent_mo_or_dn, **kwargs)
 

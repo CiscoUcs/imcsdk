@@ -17,6 +17,8 @@ class StorageControllerConsts:
     ADMIN_ACTION_IMPORT_FOREIGN_CONFIG = "import-foreign-config"
     ADMIN_ACTION_RESET_DEFAULT_CONFIG = "reset-default-config"
     ADMIN_ACTION_SET_PHYSICAL_DRIVE_STATUS_AUTO_CONFIG_MODE = "set-physical-drive-status-auto-config-mode"
+    PHYSICAL_DRIVE_STATUS_AUTO_CONFIG_CAPABLE_N_A = "N/A"
+    _PHYSICAL_DRIVE_STATUS_AUTO_CONFIG_CAPABLE_N_A = "n/a"
     PHYSICAL_DRIVE_STATUS_AUTO_CONFIG_CAPABLE_NO = "no"
     PHYSICAL_DRIVE_STATUS_AUTO_CONFIG_CAPABLE_YES = "yes"
     PHYSICAL_DRIVE_STATUS_AUTO_CONFIG_MODE_JBOD = "jbod"
@@ -61,7 +63,7 @@ class StorageController(ManagedObject):
             "foreign_config_physical_drive_count": MoPropertyMeta("foreign_config_physical_drive_count", "foreignConfigPhysicalDriveCount", "string", VersionMeta.Version421a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "model": MoPropertyMeta("model", "model", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "pci_slot": MoPropertyMeta("pci_slot", "pciSlot", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
-            "physical_drive_status_auto_config_capable": MoPropertyMeta("physical_drive_status_auto_config_capable", "physicalDriveStatusAutoConfigCapable", "string", VersionMeta.Version421a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["no", "yes"], []),
+            "physical_drive_status_auto_config_capable": MoPropertyMeta("physical_drive_status_auto_config_capable", "physicalDriveStatusAutoConfigCapable", "string", VersionMeta.Version421a, MoPropertyMeta.READ_ONLY, None, None, None, None, ["N/A", "n/a", "no", "yes"], []),
             "physical_drive_status_auto_config_mode": MoPropertyMeta("physical_drive_status_auto_config_mode", "physicalDriveStatusAutoConfigMode", "string", VersionMeta.Version421a, MoPropertyMeta.READ_WRITE, 0x40, 0, 510, None, ["jbod", "raid0-writeback", "unconfigured-good"], []),
             "pid": MoPropertyMeta("pid", "pid", "string", VersionMeta.Version402c, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "presence": MoPropertyMeta("presence", "presence", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, None, None, None, ["empty", "equipped", "equipped-identity-unestablishable", "equipped-not-primary", "equipped-with-malformed-fru", "inaccessible", "mismatch", "mismatch-identity-unestablishable", "missing", "not-supported", "unauthorized", "unknown"], []),

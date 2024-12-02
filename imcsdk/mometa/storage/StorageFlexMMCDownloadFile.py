@@ -42,7 +42,7 @@ class StorageFlexMMCDownloadFile(ManagedObject):
             "password": MoPropertyMeta("password", "password", "string", VersionMeta.Version421a, MoPropertyMeta.READ_WRITE, 0x40, 0, 255, None, [], []),
             "progress": MoPropertyMeta("progress", "progress", "string", VersionMeta.Version421a, MoPropertyMeta.READ_ONLY, None, 1, 256, None, [], []),
             "remote_file": MoPropertyMeta("remote_file", "remoteFile", "string", VersionMeta.Version421a, MoPropertyMeta.READ_WRITE, 0x80, None, None, r"""[ !#$=%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}~a-zA-Z0-9]{1,768}""", [], []),
-            "remote_share": MoPropertyMeta("remote_share", "remoteShare", "string", VersionMeta.Version421a, MoPropertyMeta.READ_WRITE, 0x100, None, None, r"""[ !#$=%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}~a-zA-Z0-9]{1,768}""", [], []),
+            "remote_share": MoPropertyMeta("remote_share", "remoteShare", "string", VersionMeta.Version421a, MoPropertyMeta.READ_WRITE, 0x100, None, None, r"""[ !#$=%&\(\)\*\+,\-\./:;\?@\[\]_\{\|\}~a-zA-Z0-9]{1,1792}""", [], []),
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version421a, MoPropertyMeta.READ_WRITE, 0x200, 0, 255, None, [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version421a, MoPropertyMeta.READ_WRITE, 0x400, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
             "username": MoPropertyMeta("username", "username", "string", VersionMeta.Version421a, MoPropertyMeta.READ_WRITE, 0x800, 0, 255, None, [], []),

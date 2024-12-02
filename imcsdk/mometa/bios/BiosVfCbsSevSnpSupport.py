@@ -6,6 +6,7 @@ from ...imcmeta import VersionMeta
 
 
 class BiosVfCbsSevSnpSupportConsts:
+    VP_CBS_SEV_SNP_SUPPORT_AUTO = "Auto"
     VP_CBS_SEV_SNP_SUPPORT_DISABLED = "Disabled"
     VP_CBS_SEV_SNP_SUPPORT_ENABLED = "Enabled"
     _VP_CBS_SEV_SNP_SUPPORT_DISABLED = "disabled"
@@ -31,7 +32,7 @@ class BiosVfCbsSevSnpSupport(ManagedObject):
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version421a, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []),
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version421a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version421a, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
-            "vp_cbs_sev_snp_support": MoPropertyMeta("vp_cbs_sev_snp_support", "vpCbsSevSnpSupport", "string", VersionMeta.Version421a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []),
+            "vp_cbs_sev_snp_support": MoPropertyMeta("vp_cbs_sev_snp_support", "vpCbsSevSnpSupport", "string", VersionMeta.Version421a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Auto", "Disabled", "Enabled", "disabled", "enabled", "platform-default"], []),
         },
 
     }
