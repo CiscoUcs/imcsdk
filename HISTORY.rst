@@ -1,5 +1,9 @@
 History
 =======
+0.9.14 (2024-12-01)
+--------------------
+* Adds support for IMC version 4.3(1a) for M7 servers
+* Adds support for IMC version 4.2(3a) for M6 servers
 
 0.9.13 (2022-07-21)
 ---------------------
