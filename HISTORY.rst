@@ -1,5 +1,9 @@
 History
 =======
+0.9.15 (2024-12-09)
+--------------------
+* Bug fixes
+
 0.9.14 (2024-12-01)
 --------------------
 * Adds support for IMC version 4.3(1a) for M7 servers
