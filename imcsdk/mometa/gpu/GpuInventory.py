@@ -24,7 +24,7 @@ class GpuInventory(ManagedObject):
 
         "classic": {
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, 0x2, 0, 255, None, [], []),
-            "hbm_temperature": MoPropertyMeta("hbm_temperature", "hbmTemperature", "string", VersionMeta.Version435_241008, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
+            "hbm_temperature": MoPropertyMeta("hbm_temperature", "hbmTemperature", "string", VersionMeta.Version435_240037, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "id": MoPropertyMeta("id", "id", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, 0x4, 0, 255, None, [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version303a, MoPropertyMeta.READ_ONLY, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),

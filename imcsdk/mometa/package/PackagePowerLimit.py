@@ -18,23 +18,23 @@ class PackagePowerLimit(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("PackagePowerLimit", "packagePowerLimit", "power-limit", VersionMeta.Version435_241008, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], ['computeBoard'], [], [None]),
+        "classic": MoMeta("PackagePowerLimit", "packagePowerLimit", "power-limit", VersionMeta.Version435_240037, "InputOutput", 0x1f, [], ["admin", "read-only", "user"], ['computeBoard'], [], [None]),
     }
 
 
     prop_meta = {
 
         "classic": {
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version435_241008, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
-            "config_status": MoPropertyMeta("config_status", "configStatus", "string", VersionMeta.Version435_241008, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []),
-            "configured_ppl": MoPropertyMeta("configured_ppl", "configuredPPL", "string", VersionMeta.Version435_241008, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["Default", "Max", "Min"], []),
-            "current_ppl": MoPropertyMeta("current_ppl", "currentPPL", "string", VersionMeta.Version435_241008, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []),
-            "default_ppl": MoPropertyMeta("default_ppl", "defaultPPL", "string", VersionMeta.Version435_241008, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []),
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version435_241008, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
-            "max_ppl": MoPropertyMeta("max_ppl", "maxPPL", "string", VersionMeta.Version435_241008, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []),
-            "min_ppl": MoPropertyMeta("min_ppl", "minPPL", "string", VersionMeta.Version435_241008, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []),
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version435_241008, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []),
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version435_241008, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version435_240037, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
+            "config_status": MoPropertyMeta("config_status", "configStatus", "string", VersionMeta.Version435_240037, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []),
+            "configured_ppl": MoPropertyMeta("configured_ppl", "configuredPPL", "string", VersionMeta.Version435_240037, MoPropertyMeta.READ_WRITE, 0x2, None, None, None, ["Default", "Max", "Min"], []),
+            "current_ppl": MoPropertyMeta("current_ppl", "currentPPL", "string", VersionMeta.Version435_240037, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []),
+            "default_ppl": MoPropertyMeta("default_ppl", "defaultPPL", "string", VersionMeta.Version435_240037, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []),
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version435_240037, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
+            "max_ppl": MoPropertyMeta("max_ppl", "maxPPL", "string", VersionMeta.Version435_240037, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []),
+            "min_ppl": MoPropertyMeta("min_ppl", "minPPL", "string", VersionMeta.Version435_240037, MoPropertyMeta.READ_ONLY, None, None, None, None, [], []),
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version435_240037, MoPropertyMeta.READ_WRITE, 0x8, 0, 255, None, [], []),
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version435_240037, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
         },
 
     }

@@ -8,6 +8,8 @@ from ...imcmeta import VersionMeta
 class BiosVfUFSDisableConsts:
     VP_UFSDISABLE_DISABLED = "Disabled"
     VP_UFSDISABLE_ENABLED = "Enabled"
+    VP_UFSDISABLE_MODE_0 = "Mode 0"
+    VP_UFSDISABLE_MODE_1 = "Mode 1"
     _VP_UFSDISABLE_DISABLED = "disabled"
     _VP_UFSDISABLE_ENABLED = "enabled"
     VP_UFSDISABLE_PLATFORM_DEFAULT = "platform-default"
@@ -31,7 +33,7 @@ class BiosVfUFSDisable(ManagedObject):
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version412a, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []),
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version412a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version412a, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
-            "vp_ufs_disable": MoPropertyMeta("vp_ufs_disable", "vpUFSDisable", "string", VersionMeta.Version412a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []),
+            "vp_ufs_disable": MoPropertyMeta("vp_ufs_disable", "vpUFSDisable", "string", VersionMeta.Version412a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "Mode 0", "Mode 1", "disabled", "enabled", "platform-default"], []),
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version412a, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
         },
 

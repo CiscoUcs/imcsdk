@@ -62,7 +62,7 @@ class AdaptorEthGenProfile(ManagedObject):
             "vmq": MoPropertyMeta("vmq", "vmq", "string", VersionMeta.Version202c, MoPropertyMeta.READ_WRITE, 0x10000, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []),
             "vxlan": MoPropertyMeta("vxlan", "vxlan", "string", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x20000, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []),
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
-            "ether_channel_pinning": MoPropertyMeta("ether_channel_pinning", "etherChannelPinning", "string", VersionMeta.Version435_241008, MoPropertyMeta.READ_WRITE, 0x40000, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []),
+            "ether_channel_pinning": MoPropertyMeta("ether_channel_pinning", "etherChannelPinning", "string", VersionMeta.Version435_240037, MoPropertyMeta.READ_WRITE, 0x40000, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []),
             "pci_link": MoPropertyMeta("pci_link", "pciLink", "uint", VersionMeta.Version303a, MoPropertyMeta.READ_WRITE, 0x80000, None, None, None, [], ["0-1"]),
             "ptp": MoPropertyMeta("ptp", "ptp", "string", VersionMeta.Version421a, MoPropertyMeta.READ_WRITE, 0x100000, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []),
             "qinq_offload": MoPropertyMeta("qinq_offload", "qinqOffload", "string", VersionMeta.Version432_230190, MoPropertyMeta.READ_WRITE, 0x200000, None, None, None, ["Disabled", "Enabled", "disabled", "enabled"], []),
