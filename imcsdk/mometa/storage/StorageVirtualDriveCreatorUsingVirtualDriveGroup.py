@@ -81,7 +81,7 @@ class StorageVirtualDriveCreatorUsingVirtualDriveGroup(ManagedObject):
             "created_virtual_drive_dn": MoPropertyMeta("created_virtual_drive_dn", "createdVirtualDriveDn", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "description": MoPropertyMeta("description", "description", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "oper_status": MoPropertyMeta("oper_status", "operStatus", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
-            "vd_init_type": MoPropertyMeta("vd_init_type", "vdInitType", "string", VersionMeta.Version435_241008, MoPropertyMeta.READ_WRITE, 0x4000, None, None, None, ["fast", "full"], []),
+            "vd_init_type": MoPropertyMeta("vd_init_type", "vdInitType", "string", VersionMeta.Version435_240037, MoPropertyMeta.READ_WRITE, 0x4000, None, None, None, ["fast", "full"], []),
         },
 
         "modular": {

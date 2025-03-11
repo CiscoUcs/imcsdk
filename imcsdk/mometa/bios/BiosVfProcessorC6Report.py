@@ -6,6 +6,7 @@ from ...imcmeta import VersionMeta
 
 
 class BiosVfProcessorC6ReportConsts:
+    VP_PROCESSOR_C6_REPORT_AUTO = "Auto"
     VP_PROCESSOR_C6_REPORT_DISABLED = "Disabled"
     VP_PROCESSOR_C6_REPORT_ENABLED = "Enabled"
     _VP_PROCESSOR_C6_REPORT_DISABLED = "disabled"
@@ -31,7 +32,7 @@ class BiosVfProcessorC6Report(ManagedObject):
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []),
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
-            "vp_processor_c6_report": MoPropertyMeta("vp_processor_c6_report", "vpProcessorC6Report", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []),
+            "vp_processor_c6_report": MoPropertyMeta("vp_processor_c6_report", "vpProcessorC6Report", "string", VersionMeta.Version151f, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Auto", "Disabled", "Enabled", "disabled", "enabled", "platform-default"], []),
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version151f, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
         },
 

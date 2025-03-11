@@ -12,6 +12,11 @@ class BiosVfIntelSpeedSelectConsts:
     VP_INTEL_SPEED_SELECT_CONFIG_2 = "Config 2"
     VP_INTEL_SPEED_SELECT_CONFIG_3 = "Config 3"
     VP_INTEL_SPEED_SELECT_CONFIG_4 = "Config 4"
+    VP_INTEL_SPEED_SELECT_LEVEL_0 = "Level 0"
+    VP_INTEL_SPEED_SELECT_LEVEL_1 = "Level 1"
+    VP_INTEL_SPEED_SELECT_LEVEL_2 = "Level 2"
+    VP_INTEL_SPEED_SELECT_LEVEL_3 = "Level 3"
+    VP_INTEL_SPEED_SELECT_LEVEL_4 = "Level 4"
     VP_INTEL_SPEED_SELECT_PLATFORM_DEFAULT = "platform-default"
 
 
@@ -33,7 +38,7 @@ class BiosVfIntelSpeedSelect(ManagedObject):
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []),
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
-            "vp_intel_speed_select": MoPropertyMeta("vp_intel_speed_select", "vpIntelSpeedSelect", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Auto", "Base", "Config 1", "Config 2", "Config 3", "Config 4", "platform-default"], []),
+            "vp_intel_speed_select": MoPropertyMeta("vp_intel_speed_select", "vpIntelSpeedSelect", "string", VersionMeta.Version404b, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Auto", "Base", "Config 1", "Config 2", "Config 3", "Config 4", "Level 0", "Level 1", "Level 2", "Level 3", "Level 4", "platform-default"], []),
             "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version404b, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
         },
 

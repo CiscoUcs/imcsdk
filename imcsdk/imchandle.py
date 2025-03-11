@@ -432,13 +432,7 @@ class ImcHandle(ImcSession):
 
         validate_mo_version(self, mo)
 
-        if modify_present in imcgenutils.AFFIRMATIVE_LIST:
-            if self.query_dn(mo.dn) is None:
-                mo.status = "created"
-            else:
-                mo.status = "modified"
-        else:
-            mo.status = "created"
+        mo.status = self._get_mo_status(mo, "add", modify_present)
 
         self.__to_commit[mo.dn] = mo
         self._commit(timeout=timeout)
@@ -463,7 +457,7 @@ class ImcHandle(ImcSession):
 
         validate_mo_version(self, mo)
 
-        mo.status = "modified"
+        mo.status = self._get_mo_status(mo, "set")
         self.__to_commit[mo.dn] = mo
         self._commit(timeout=timeout)
 
@@ -583,14 +577,7 @@ class ImcHandle(ImcSession):
             obj = handle.set_mos(mos)
         """
         for mo in mos:
-            if modify_present in imcgenutils.AFFIRMATIVE_LIST:
-                if self.query_dn(mo.dn) is None:
-                    mo.status = "created"
-                else:
-                    mo.status = "modified"
-            else:
-                mo.status = "created"
-
+            mo.status = self._get_mo_status(mo, "add", modify_present)
             self.__to_commit[mo.dn] = mo
 
         return self._commit_mos(timeout)
@@ -743,3 +730,22 @@ class ImcHandle(ImcSession):
         # Always cleanup the commit buffer
         self.__to_commit.clear()
         return ret
+
+    def _get_mo_status(self, mo, operation, modify_present=True):
+        """Method to get mo status based on the type of operation"""
+        status = None
+        if operation == "set":
+            status = "modified"
+            # When processing vmedia with admin_action="save-unmapped-volume",
+            # ensure the status is set to an empty string ("").
+            # This prevents the XML API from throwing an exception due to 
+            # "Invalid request: adminAction and status are not expected in the same configConfMo request of commVMediaMap".
+            # Keep the default status as "modified" for other admin actions.
+            from imcsdk.mometa.comm.CommVMediaMap import CommVMediaMap, CommVMediaMapConsts
+            if all([isinstance(mo, CommVMediaMap), hasattr(mo, 'admin_action'), mo.admin_action == CommVMediaMapConsts.ADMIN_ACTION_SAVE_UNMAPPED_VOLUME]):
+                status = ""
+        elif operation == "add":
+            status = "created"
+            if modify_present in imcgenutils.AFFIRMATIVE_LIST and self.query_dn(mo.dn) is not None:
+                status = "modified"
+        return status

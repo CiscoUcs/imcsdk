@@ -94,8 +94,8 @@ class StorageVirtualDriveCreatorUsingUnusedPhysicalDrive(ManagedObject):
             "description": MoPropertyMeta("description", "description", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "min_required_physical_drives": MoPropertyMeta("min_required_physical_drives", "minRequiredPhysicalDrives", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "oper_status": MoPropertyMeta("oper_status", "operStatus", "string", VersionMeta.Version201a, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
-            "secure_vd": MoPropertyMeta("secure_vd", "secureVd", "string", VersionMeta.Version435_241008, MoPropertyMeta.READ_WRITE, 0x10000, None, None, None, ["enable"], []),
-            "vd_init_type": MoPropertyMeta("vd_init_type", "vdInitType", "string", VersionMeta.Version435_241008, MoPropertyMeta.READ_WRITE, 0x20000, None, None, None, ["fast", "full"], []),
+            "secure_vd": MoPropertyMeta("secure_vd", "secureVd", "string", VersionMeta.Version435_240037, MoPropertyMeta.READ_WRITE, 0x10000, None, None, None, ["enable"], []),
+            "vd_init_type": MoPropertyMeta("vd_init_type", "vdInitType", "string", VersionMeta.Version435_240037, MoPropertyMeta.READ_WRITE, 0x20000, None, None, None, ["fast", "full"], []),
         },
 
         "modular": {

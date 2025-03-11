@@ -20,18 +20,18 @@ class BiosVfEnableTdx(ManagedObject):
     naming_props = set([])
 
     mo_meta = {
-        "classic": MoMeta("BiosVfEnableTdx", "biosVfEnableTdx", "Trust-Domain-Extension", VersionMeta.Version433_240024, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], [None]),
+        "classic": MoMeta("BiosVfEnableTdx", "biosVfEnableTdx", "Trust-Domain-Extension", VersionMeta.Version432_230285, "InputOutput", 0x1f, [], ["admin"], ['biosPlatformDefaults', 'biosSettings'], [], [None]),
     }
 
 
     prop_meta = {
 
         "classic": {
-            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version433_240024, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
-            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version433_240024, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []),
-            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version433_240024, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
-            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version433_240024, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
-            "vp_enable_tdx": MoPropertyMeta("vp_enable_tdx", "vpEnableTdx", "string", VersionMeta.Version433_240024, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []),
+            "child_action": MoPropertyMeta("child_action", "childAction", "string", VersionMeta.Version432_230285, MoPropertyMeta.INTERNAL, None, None, None, None, [], []),
+            "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version432_230285, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []),
+            "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version432_230285, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
+            "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version432_230285, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
+            "vp_enable_tdx": MoPropertyMeta("vp_enable_tdx", "vpEnableTdx", "string", VersionMeta.Version432_230285, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Disabled", "Enabled", "disabled", "enabled", "platform-default"], []),
         },
 
     }

@@ -110,7 +110,7 @@ class StorageVirtualDrive(ManagedObject):
             "fde_capable": MoPropertyMeta("fde_capable", "fdeCapable", "string", VersionMeta.Version209c, MoPropertyMeta.READ_ONLY, None, None, None, None, ["No", "Yes", "false", "no", "true", "yes"], []),
             "fde_enabled": MoPropertyMeta("fde_enabled", "fdeEnabled", "string", VersionMeta.Version209c, MoPropertyMeta.READ_ONLY, None, None, None, None, ["No", "Yes", "false", "no", "true", "yes"], []),
             "health": MoPropertyMeta("health", "health", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
-            "io_perf_mode_enabled": MoPropertyMeta("io_perf_mode_enabled", "ioPerfModeEnabled", "string", VersionMeta.Version435_241008, MoPropertyMeta.READ_WRITE, 0x8000, None, None, None, ["N/A", "disabled", "enabled"], []),
+            "io_perf_mode_enabled": MoPropertyMeta("io_perf_mode_enabled", "ioPerfModeEnabled", "string", VersionMeta.Version435_240037, MoPropertyMeta.READ_WRITE, 0x8000, None, None, None, ["N/A", "disabled", "enabled"], []),
             "name": MoPropertyMeta("name", "name", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "size": MoPropertyMeta("size", "size", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),
             "span_depth": MoPropertyMeta("span_depth", "spanDepth", "string", VersionMeta.Version151f, MoPropertyMeta.READ_ONLY, None, 0, 510, None, [], []),

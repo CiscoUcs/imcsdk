@@ -9,6 +9,7 @@ class BiosVfEpochUpdateConsts:
     VP_EPOCH_UPDATE_CHANGE_TO_NEW_RANDOM_OWNER_EPOCHS = "Change to New Random Owner EPOCHs"
     VP_EPOCH_UPDATE_MANUAL_USER_DEFINED_OWNER_EPOCHS = "Manual User Defined Owner EPOCHs"
     VP_EPOCH_UPDATE_SGX_OWNER_EPOCH_ACTIVATED = "SGX Owner EPOCH activated"
+    VP_EPOCH_UPDATE_SGX_OWNER_EPOCH_DEACTIVATED = "SGX Owner EPOCH deactivated"
     VP_EPOCH_UPDATE_PLATFORM_DEFAULT = "platform-default"
 
 
@@ -30,7 +31,7 @@ class BiosVfEpochUpdate(ManagedObject):
             "dn": MoPropertyMeta("dn", "dn", "string", VersionMeta.Version421a, MoPropertyMeta.READ_WRITE, 0x2, 0, 255, None, [], []),
             "rn": MoPropertyMeta("rn", "rn", "string", VersionMeta.Version421a, MoPropertyMeta.READ_WRITE, 0x4, 0, 255, None, [], []),
             "status": MoPropertyMeta("status", "status", "string", VersionMeta.Version421a, MoPropertyMeta.READ_WRITE, 0x8, None, None, None, ["", "created", "deleted", "modified", "removed"], []),
-            "vp_epoch_update": MoPropertyMeta("vp_epoch_update", "vpEpochUpdate", "string", VersionMeta.Version421a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Change to New Random Owner EPOCHs", "Manual User Defined Owner EPOCHs", "SGX Owner EPOCH activated", "platform-default"], []),
+            "vp_epoch_update": MoPropertyMeta("vp_epoch_update", "vpEpochUpdate", "string", VersionMeta.Version421a, MoPropertyMeta.READ_WRITE, 0x10, None, None, None, ["Change to New Random Owner EPOCHs", "Manual User Defined Owner EPOCHs", "SGX Owner EPOCH activated", "SGX Owner EPOCH deactivated", "platform-default"], []),
         },
 
     }
