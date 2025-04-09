@@ -742,8 +742,9 @@ class ImcHandle(ImcSession):
             # "Invalid request: adminAction and status are not expected in the same configConfMo request of commVMediaMap".
             # Keep the default status as "modified" for other admin actions.
             from imcsdk.mometa.comm.CommVMediaMap import CommVMediaMap, CommVMediaMapConsts
-            if all([isinstance(mo, CommVMediaMap), hasattr(mo, 'admin_action'), mo.admin_action == CommVMediaMapConsts.ADMIN_ACTION_SAVE_UNMAPPED_VOLUME]):
-                status = ""
+            if isinstance(mo, CommVMediaMap):
+                if hasattr(mo, 'admin_action') and mo.admin_action == CommVMediaMapConsts.ADMIN_ACTION_SAVE_UNMAPPED_VOLUME:
+                    status = ""
         elif operation == "add":
             status = "created"
             if modify_present in imcgenutils.AFFIRMATIVE_LIST and self.query_dn(mo.dn) is not None:
