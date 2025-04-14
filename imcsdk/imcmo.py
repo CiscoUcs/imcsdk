@@ -95,6 +95,7 @@ class ManagedObject(ImcBase):
                 if prop_name not in self.__internal_prop and \
                         not imccoreutils.prop_exists(self, prop_name):
                     log.debug("Unknown property %s" % prop_name)
+                    continue
                 self.__set_prop(prop_name, prop_value)
 
         if not from_xml_response:
