@@ -211,7 +211,7 @@ def boot_order_precision_set(
         handle,
         reboot_on_update="no",
         reapply="no",
-        configured_boot_mode="Legacy",
+        configured_boot_mode=None,
         boot_devices=[],
         server_id=1):
     """
