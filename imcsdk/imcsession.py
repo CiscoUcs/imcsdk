@@ -37,7 +37,7 @@ class ImcSession(object):
     """
 
     def __init__(self, ip, username, password, port=None, secure=None,
-                 proxy=None, auto_refresh=False, force=False, timeout=None):
+                 proxy=None, auto_refresh=False, force=False, timeout=None, logger=None):
         self.__ip = ip
         self.__username = username
         self.__password = password
@@ -67,6 +67,19 @@ class ImcSession(object):
         self.__dump_xml = False
         self.__redirect = False
         self.__driver = ImcDriver(proxy=self.__proxy)
+        
+        """
+        Use the user-supplied logger if available, else fallback to default logger.
+        This logging feature is provided to log the ImcSession logs and it will
+        capture the xml request and xml response only. Logging level is changed from
+        log.debug to self.logger.info to ensure request/response logs are always
+        captured at INFO level. Logging level changes are made in dump_xml_request(),
+        dump_xml_response() and post_elem() methods.
+        """
+        if logger:
+            self.logger = logger
+        else:
+            self.logger = log
 
         # In debug mode, log the XMLs to a file
         if os.path.exists('/tmp/imcsdk_debug'):
@@ -247,16 +260,16 @@ class ImcSession(object):
         if elem.tag == "aaaLogin":
             elem.attrib['inPassword'] = "*********"
             xml_str = xc.to_xml_str(elem)
-            log.debug('%s ====> %s' % (self.__uri, xml_str))
+            self.logger.info('%s ====> %s' % (self.__uri, xml_str))
             elem.attrib['inPassword'] = self.__password
             xml_str = xc.to_xml_str(elem)
         else:
             xml_str = xc.to_xml_str(elem)
-            log.debug('%s ====> %s' % (self.__uri, xml_str))
+            self.logger.info('%s ====> %s' % (self.__uri, xml_str))
 
     def dump_xml_response(self, resp):
         if self.__dump_xml:
-            log.debug('%s <==== %s' % (self.__uri, resp))
+            self.logger.info('%s <==== %s' % (self.__uri, resp))
 
     def post_elem(self, elem, timeout=None):
         """
@@ -287,7 +300,7 @@ class ImcSession(object):
             hack_string = ImcSessionConstants.SQ_HACK_STRING
         if hack_string in xml_str:
             xml_str = xml_str.replace(bytes(ImcSessionConstants.SQ_HACK_STRING, 'utf-8'), b'&apos;')
-            log.debug("QUERY after SQ_HACK_REPLACE:" + str(xml_str))
+            self.logger.info("QUERY after SQ_HACK_REPLACE:" + str(xml_str))
 
         response_str = self.post_xml(xml_str, timeout=timeout)
         self.dump_xml_response(response_str)
