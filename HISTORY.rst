@@ -1,5 +1,10 @@
 History
 =======
+0.9.18 (2025-08-28)
+--------------------
+* Add the custom logger to ImcSession and ImcHandle class
+* To capture the xml request and xml response for ImcSession
+
 0.9.17 (2025-03-28)
 --------------------
 * Bug fixes
