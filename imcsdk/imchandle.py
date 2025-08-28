@@ -41,6 +41,10 @@ class ImcHandle(ImcSession):
         force (bool): if set to True it'll reconnect even if cookie exists
             and is valid for the respective connection.
         timeout (int): timeout value in secs
+        logger (logging.Logger): Custom logger instance.
+                - If provided, all session logs (including XML request/response dumps)
+                  will use this logger.
+                - If not provided, defaults to the module-level logger `log`.
 
     Example:
         handle = ImcHandle("192.168.1.1","admin","password")\n
@@ -55,12 +59,12 @@ class ImcHandle(ImcSession):
     """
 
     def __init__(self, ip, username, password, port=None, secure=None,
-                 proxy=None, auto_refresh=False, force=False, timeout=None):
+                 proxy=None, auto_refresh=False, force=False, timeout=None, logger=None):
 
         ImcSession.__init__(self, ip=ip, username=username, password=password,
                             port=port, secure=secure, proxy=proxy,
                             auto_refresh=auto_refresh, force=force,
-                            timeout=timeout)
+                            timeout=timeout, logger=logger)
         self.__to_commit = OrderedDict()
 
     def __enter__(self):
