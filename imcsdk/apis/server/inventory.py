@@ -216,7 +216,7 @@ def _get_inventory_csv(inventory, file_name, spec=inventory_spec):
     if file_name is None:
         raise ImcOperationError("Inventory collection",
                                 "file_name is a required parameter")
-    f = csv.writer(open(file_name, "w"))
+    f = csv.writer(open(file_name, "w", newline=""))
 
     x = inventory
     for comp in spec:
